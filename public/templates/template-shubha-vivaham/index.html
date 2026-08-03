@@ -1,6 +1,21 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>
+      (function () {
+        // Resolve assets from this template folder on any host/path.
+        var dir = new URL("./", location.href).href;
+        var existing = document.querySelector("base");
+        if (existing) existing.remove();
+        var b = document.createElement("base");
+        b.href = dir;
+        document.head.prepend(b);
+        try {
+          // Keep SPA routers matching their root route inside the iframe.
+          history.replaceState(null, "", "/");
+        } catch (e) {}
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- data-invitestory-meta -->

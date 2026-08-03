@@ -19,12 +19,20 @@
     <meta name="twitter:image" content="./og-cover.webp" />
 
 <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-    <script>
-      // Run inside the iframe so the template boots at its logical root.
-      var b = document.createElement("base");
-      b.href = "/templates/template-kerala-sands/";
-      document.head.appendChild(b);
-      try { window.history.replaceState(null, "", "/"); } catch (e) {}
+        <script>
+      (function () {
+        // Resolve assets from this template folder on any host/path.
+        var dir = new URL("./", location.href).href;
+        var existing = document.querySelector("base");
+        if (existing) existing.remove();
+        var b = document.createElement("base");
+        b.href = dir;
+        document.head.prepend(b);
+        try {
+          // Keep SPA routers matching their root route inside the iframe.
+          history.replaceState(null, "", "/");
+        } catch (e) {}
+      })();
     </script>
     
     <script type="module" crossorigin src="./assets/index-LvwATz0d.js"></script>

@@ -25,15 +25,20 @@
       rel="stylesheet"
     />
 <link rel="icon" type="image/x-icon" href="./favicon.ico" />
-<script>
-      // Keep assets resolvable from the templates folder, but rewrite the
-      // browser URL to "/" so react-router's <Route path="/"> matches.
-      var base = document.createElement("base");
-      base.href = "/templates/template-rajmahal-palace/";
-      document.head.prepend(base);
-      try {
-        window.history.replaceState(null, "", "/");
-      } catch (e) {}
+    <script>
+      (function () {
+        // Resolve assets from this template folder on any host/path.
+        var dir = new URL("./", location.href).href;
+        var existing = document.querySelector("base");
+        if (existing) existing.remove();
+        var b = document.createElement("base");
+        b.href = dir;
+        document.head.prepend(b);
+        try {
+          // Keep SPA routers matching their root route inside the iframe.
+          history.replaceState(null, "", "/");
+        } catch (e) {}
+      })();
     </script>
     <script type="module" crossorigin src="./assets/index-C3wYBBK7.js"></script>
     <link rel="stylesheet" crossorigin href="./assets/index-DnBXbGkD.css">

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
   ArrowLeft,
@@ -21,14 +21,49 @@ function previewHref(folder: string) {
 }
 
 /* ── Full-page template viewer + floating buy CTA ────────────────── */
+const PREVIEW_MIN_MS = 3000;
+const PREVIEW_MAX_MS = 12000;
+
 function TemplateViewer({ template }: { template: Template }) {
   const src = `${BASE}templates/${template.folder}/index.html`;
   const previewUrl = absoluteTemplateUrl(template.folder, BASE);
   const wa = whatsappForTemplate(template.name, previewUrl);
+  const reduce = useReducedMotion();
+
+  const [iframeReady, setIframeReady] = useState(false);
+  const [minElapsed, setMinElapsed] = useState(false);
+  const [forceDone, setForceDone] = useState(false);
+  const [exit, setExit] = useState(false);
+  const showSplash = !(iframeReady && minElapsed) && !forceDone && !exit;
+
+  useEffect(() => {
+    const minTimer = window.setTimeout(() => setMinElapsed(true), PREVIEW_MIN_MS);
+    const maxTimer = window.setTimeout(() => setForceDone(true), PREVIEW_MAX_MS);
+    return () => {
+      window.clearTimeout(minTimer);
+      window.clearTimeout(maxTimer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!((iframeReady && minElapsed) || forceDone)) return;
+    if (reduce) {
+      setExit(true);
+      return;
+    }
+    const t = window.setTimeout(() => setExit(true), 480);
+    return () => window.clearTimeout(t);
+  }, [iframeReady, minElapsed, forceDone, reduce]);
+
+  const revealing = ((iframeReady && minElapsed) || forceDone) && !exit;
 
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-night">
-      <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-line bg-night/95 px-4 backdrop-blur-md md:h-16 md:px-6">
+      <header
+        className={`flex h-14 shrink-0 items-center justify-between gap-3 border-b border-line bg-night/95 px-4 backdrop-blur-md transition-opacity duration-500 md:h-16 md:px-6 ${
+          showSplash ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
         <a
           href="./"
           className="inline-flex items-center gap-2 text-caption font-medium uppercase tracking-eyebrow text-bone/70 transition-colors hover:text-bone"
@@ -45,15 +80,49 @@ function TemplateViewer({ template }: { template: Template }) {
       <iframe
         title={`${template.name} full preview`}
         src={src}
+        onLoad={() => setIframeReady(true)}
         className="min-h-0 w-full flex-1 border-0 bg-night"
       />
 
-      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[80] flex justify-center px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-16">
+      {!exit && (
+        <div
+          className={`invite-splash fixed inset-0 z-[90] flex flex-col items-center justify-center bg-night px-6 text-center ${
+            revealing ? "invite-splash--out" : ""
+          }`}
+          aria-busy={showSplash}
+          aria-live="polite"
+        >
+          <div className="invite-splash__glow" aria-hidden />
+          <div className="invite-splash__rings" aria-hidden>
+            <span />
+            <span />
+            <span />
+          </div>
+          <p className="relative text-caption uppercase tracking-eyebrow text-emerald-soft">
+            InviteStory
+          </p>
+          <p className="relative mt-4 max-w-sm text-2xl font-semibold tracked-display text-bone md:text-3xl">
+            {template.name}
+          </p>
+          <p className="relative mt-3 text-sm text-bone/55">
+            Preparing your invitation
+          </p>
+          <div className="invite-splash__bar relative mt-10" aria-hidden>
+            <span />
+          </div>
+        </div>
+      )}
+
+      <div
+        className={`pointer-events-none fixed inset-x-0 bottom-0 z-[80] flex justify-center px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-16 transition-opacity duration-500 ${
+          showSplash ? "opacity-0" : "opacity-100"
+        }`}
+      >
         <a
           href={wa}
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto inline-flex max-w-full items-center gap-2.5 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:bg-emerald-soft hover:scale-[1.02] active:scale-[0.98]"
+          className="pointer-events-auto inline-flex max-w-full items-center gap-2.5 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-soft active:scale-[0.98]"
         >
           <WhatsappLogo weight="fill" className="h-5 w-5 shrink-0" />
           <span className="truncate">Make this mine</span>
@@ -63,94 +132,66 @@ function TemplateViewer({ template }: { template: Template }) {
   );
 }
 
-/* ── Lazy iframe preview ─────────────────────────────────────────── */
+/* ── Gallery card: static poster (no live iframe - avoids load failures) ─ */
 function TemplatePreview({ template }: { template: Template }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
   const [hover, setHover] = useState(false);
-  const src = `${BASE}templates/${template.folder}/index.html`;
+  const poster = `${BASE}templates/${template.folder}/${template.poster}`;
   const openHref = previewHref(template.folder);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setActive(true);
-          io.disconnect();
-        }
-      },
-      { rootMargin: "200px 0px" },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   return (
-    <figure
-      ref={ref}
+    <a
+      href={openHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block focus-visible:outline-none"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      className="group relative overflow-hidden rounded-card bg-night-card shadow-calm"
     >
-      <div className="aspect-[9/16] w-full">
-        {active ? (
-          <iframe
-            title={`${template.name} preview`}
-            src={src}
-            className="h-full w-full border-0"
+      <figure className="group relative overflow-hidden rounded-card bg-night-card shadow-calm">
+        <div className="aspect-[9/16] w-full overflow-hidden bg-night-soft">
+          <img
+            src={poster}
+            alt=""
+            width={720}
+            height={1280}
             loading="lazy"
+            decoding="async"
+            className={`h-full w-full object-cover transition-transform duration-500 ease-soft ${
+              hover ? "scale-[1.04]" : "scale-100"
+            }`}
           />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-night-soft">
-            <div className="flex gap-1.5">
-              {template.palette.map((c) => (
-                <span
-                  key={c}
-                  className="h-2.5 w-2.5 rounded-full opacity-70"
-                  style={{ background: c }}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="absolute left-4 top-4 flex gap-1.5">
-        {template.palette.map((c) => (
-          <span
-            key={c}
-            className="h-2.5 w-2.5 rounded-full ring-1 ring-bone/30"
-            style={{ background: c }}
-          />
-        ))}
-      </div>
-
-      <figcaption
-        className={`absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 bg-gradient-to-t from-night/90 to-transparent px-5 pb-5 pt-12 text-bone transition-opacity duration-300 ${
-          hover ? "opacity-100" : "opacity-0 md:opacity-0"
-        } max-md:opacity-100`}
-      >
-        <div>
-          <p className="text-h3 font-medium tracked-display leading-none">
-            {template.name}
-          </p>
-          <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/65">
-            {template.weddingType}
-          </p>
         </div>
-        <a
-          href={openHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night transition-transform duration-200 ease-soft hover:scale-[1.03] active:scale-[0.98]"
+
+        <div className="absolute left-4 top-4 flex gap-1.5">
+          {template.palette.map((c) => (
+            <span
+              key={c}
+              className="h-2.5 w-2.5 rounded-full ring-1 ring-bone/30"
+              style={{ background: c }}
+            />
+          ))}
+        </div>
+
+        <figcaption
+          className={`absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 bg-gradient-to-t from-night/90 to-transparent px-5 pb-5 pt-12 text-bone transition-opacity duration-300 ${
+            hover ? "opacity-100" : "opacity-0 md:opacity-0"
+          } max-md:opacity-100`}
         >
-          Open
-          <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
-        </a>
-      </figcaption>
-    </figure>
+          <div>
+            <p className="text-h3 font-medium tracked-display leading-none">
+              {template.name}
+            </p>
+            <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/65">
+              {template.weddingType}
+            </p>
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night">
+            Open
+            <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
+          </span>
+        </figcaption>
+      </figure>
+    </a>
   );
 }
 
@@ -376,7 +417,7 @@ function Gallery() {
               {filtered.length} of {templates.length} live templates
             </h2>
             <p className="mt-4 max-w-[48ch] text-body text-bone/60">
-              Every card is a working invitation. Open any to feel the motion on your phone.
+              Every card is a real template. Open any to explore the full animated invite.
             </p>
           </div>
           <div className="md:w-80">
