@@ -67,8 +67,7 @@ Leave `"youtube": ""` to hide the control.
 After rebuilding templates into `public/templates/`, re-run:
 
 ```bash
-npm run inject:music
-npm run inject:fonts
+npm run inject:all
 ```
 
-That copies `yt-bg-music.js`, re-injects the music script tag if needed, and restores Google Fonts on SPA-converted template shells.
+That restores music, Google Fonts, and professional OG/Twitter meta (title = template name | InviteStory) after a rebuild.
