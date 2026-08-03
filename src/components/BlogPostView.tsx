@@ -226,11 +226,12 @@ export function BlogPostView({ post }: BlogPostViewProps) {
               {recommendedTemplates.map((t) => (
                 <div key={t.id} className="group relative overflow-hidden rounded-lg border border-line bg-night-soft p-4 flex flex-col justify-between">
                   <div>
-                    <div className="aspect-[9/16] w-full overflow-hidden rounded bg-night">
-                      <img
-                        src={`templates/${t.folder}/${t.poster}`}
-                        alt={t.name}
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    <div className="aspect-[9/16] w-full overflow-hidden rounded bg-night relative">
+                      <iframe
+                        title={`${t.name} live preview`}
+                        src={`templates/${t.folder}/index.html`}
+                        loading="lazy"
+                        className="h-full w-full border-0 pointer-events-none transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                     <h4 className="mt-3 text-base font-semibold text-bone">{t.name}</h4>
@@ -243,7 +244,7 @@ export function BlogPostView({ post }: BlogPostViewProps) {
                     rel="noopener noreferrer"
                     className="mt-4 inline-flex items-center justify-center gap-1.5 rounded-pill bg-emerald/20 px-3 py-1.5 text-xs font-semibold uppercase tracking-eyebrow text-emerald-soft hover:bg-emerald hover:text-bone transition-colors"
                   >
-                    Live Preview <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
+                    Open Live Template <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
                   </a>
                 </div>
               ))}

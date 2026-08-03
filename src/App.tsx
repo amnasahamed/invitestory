@@ -136,9 +136,11 @@ function TemplateViewer({ template }: { template: Template }) {
   );
 }
 
-/* ── Gallery card: static poster (no live iframe - avoids load failures) ─ */
+/* ── Gallery card: real live template iframe preview ─ */
 function TemplatePreview({ template }: { template: Template }) {
   const [hover, setHover] = useState(false);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const iframeSrc = `${BASE}templates/${template.folder}/index.html`;
   const poster = `${BASE}templates/${template.folder}/${template.poster}`;
   const openHref = previewHref(template.folder);
 
@@ -151,8 +153,9 @@ function TemplatePreview({ template }: { template: Template }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <figure className="group relative overflow-hidden rounded-card bg-night-card shadow-calm">
-        <div className="aspect-[9/16] w-full overflow-hidden bg-night-soft">
+      <figure className="group relative overflow-hidden rounded-card bg-night-card shadow-calm border border-line/60 hover:border-bone/30 transition-all">
+        <div className="aspect-[9/16] w-full overflow-hidden bg-night-soft relative">
+          {/* Static poster shown as background placeholder until iframe finishes loading */}
           <img
             src={poster}
             alt=""
@@ -160,24 +163,40 @@ function TemplatePreview({ template }: { template: Template }) {
             height={1280}
             loading="lazy"
             decoding="async"
-            className={`h-full w-full object-cover transition-transform duration-500 ease-soft ${
-              hover ? "scale-[1.04]" : "scale-100"
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${
+              iframeLoaded ? "opacity-0 pointer-events-none" : "opacity-100"
+            }`}
+          />
+
+          {/* Real Live Template loaded in iframe */}
+          <iframe
+            title={`${template.name} live preview`}
+            src={iframeSrc}
+            loading="lazy"
+            onLoad={() => setIframeLoaded(true)}
+            className={`h-full w-full border-0 pointer-events-none transition-transform duration-500 ease-soft ${
+              hover ? "scale-[1.02]" : "scale-100"
             }`}
           />
         </div>
 
-        <div className="absolute left-4 top-4 flex gap-1.5">
-          {template.palette.map((c) => (
-            <span
-              key={c}
-              className="h-2.5 w-2.5 rounded-full ring-1 ring-bone/30"
-              style={{ background: c }}
-            />
-          ))}
+        <div className="absolute left-4 top-4 z-20 flex items-center gap-2">
+          <div className="flex gap-1.5">
+            {template.palette.map((c) => (
+              <span
+                key={c}
+                className="h-2.5 w-2.5 rounded-full ring-1 ring-bone/30"
+                style={{ background: c }}
+              />
+            ))}
+          </div>
+          <span className="rounded-pill bg-night/80 border border-line px-2.5 py-0.5 text-[10px] uppercase tracking-eyebrow text-emerald-soft backdrop-blur-md font-medium">
+            Live Template
+          </span>
         </div>
 
         <figcaption
-          className={`absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 bg-gradient-to-t from-night/90 to-transparent px-5 pb-5 pt-12 text-bone transition-opacity duration-300 ${
+          className={`absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-4 bg-gradient-to-t from-night/95 via-night/70 to-transparent px-5 pb-5 pt-16 text-bone transition-opacity duration-300 ${
             hover ? "opacity-100" : "opacity-0 md:opacity-0"
           } max-md:opacity-100`}
         >
@@ -189,8 +208,8 @@ function TemplatePreview({ template }: { template: Template }) {
               {template.weddingType}
             </p>
           </div>
-          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night">
-            Open
+          <span className="inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night shadow-calm">
+            Open Full
             <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
           </span>
         </figcaption>
