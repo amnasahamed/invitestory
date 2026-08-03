@@ -1,6 +1,6 @@
 # InviteStory — Handcrafted Digital Wedding Invitations for Indian Couples
 
-> InviteStory (https://invitestory.in) builds single-event, single-link interactive web wedding invitations designed specifically for Indian weddings. Couples select from 20 culturally-curated templates (Royal Palace, South Indian, Nikah, Walima, Hindu Muhurtham, Ghibli Animation, Beach, Garden), send their event details over WhatsApp, and receive a live custom web invite link within 24 hours.
+> InviteStory (https://invitestory.in) builds single-event, single-link interactive web wedding invitations designed specifically for Indian weddings. Couples select from 21 culturally-curated templates (Royal Palace, South Indian, Nikah, Walima, Hindu Muhurtham, Ghibli Animation, Beach, Garden), send their event details over WhatsApp, and receive a live custom web invite link within 24 hours.
 
 ## Core Principles & Ethos
 - **One Day, One Wedding Event:** Focuses strictly on the main wedding event. Sub-moments (Baraat, Pheras, Jaimala, Nikah ceremony) fit inside the single-day timeline to eliminate multi-day schedule clutter.
@@ -10,7 +10,7 @@
 
 ## Pricing Tiers
 - **Classic Tier (₹999):** Includes Sage Parchment, Marigold Bhavan, Kalyana Mandapam. Standard 24-hour turnaround with couple names, muhurtham, venue maps, calendar integration.
-- **Signature Tier (₹1,999):** Includes Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal. Includes custom domain options, photo swap, and 24-hour delivery.
+- **Signature Tier (₹1,999):** Includes Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal, Ivory Waltz. Includes custom domain options, photo swap, and 24-hour delivery.
 - **Royale Tier (₹2,999):** Includes Rajwada Royale, Rajmahal Palace, Ghibli Selfie, Grand Line Voyage. Includes priority WhatsApp support, custom image hand-edits, and premium opening door / shutter animations.
 
 ## High-Value Knowledge Articles & 30-Post Blog Directory

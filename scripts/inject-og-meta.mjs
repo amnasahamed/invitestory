@@ -37,6 +37,9 @@ const CATALOGUE = [
   ["template-kalyana-mandapam", "Kalyana Mandapam", "The sacred muhurtham, beautifully told", "Telugu mandapam invitation"],
   ["template-tamil-thirumana", "Tamil Thirumana", "The sacred knot at dawn", "Tamil wedding invitation"],
   ["template-lake-pichola", "Lake Pichola Royal", "Palace reflections on Lake Pichola", "Royal lake palace invitation"],
+  ["template-petal-path", "Petal Path Palace", "Walk the petal aisle into forever", "Layered parallax palace wedding invitation"],
+  ["template-lakeview-lanterns", "Lakeview Lanterns", "Twilight vows by the glowing backwaters", "Kerala lakeside lantern wedding invitation"],
+  ["template-ivory-waltz", "Ivory Waltz", "A soft dance into forever", "Cream linen Nikah invitation"],
 ];
 
 function escapeAttr(s) {
@@ -51,6 +54,7 @@ function findOgImage(dir) {
     "assets/og-image.jpg",
     "assets/og-image.png",
     "assets/og-image.webp",
+    "assets/layers/hero-composite.jpg",
     "og-image.jpg",
     "og-cover.webp",
   ];

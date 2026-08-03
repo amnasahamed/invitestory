@@ -52,7 +52,7 @@
   <url><loc>https://invitestory.in/llms.txt</loc><lastmod>2026-08-03</lastmod><priority>0.8</priority></url>
   <url><loc>https://invitestory.in/llms-full.txt</loc><lastmod>2026-08-03</lastmod><priority>0.8</priority></url>
 
-  <!-- 20 Template Routes -->
+  <!-- 21 Template Routes -->
   <url><loc>https://invitestory.in/?preview=template-rajwada-royale</loc><priority>0.7</priority></url>
   <url><loc>https://invitestory.in/?preview=template-marigold-bhavan</loc><priority>0.7</priority></url>
   <url><loc>https://invitestory.in/?preview=template-toran-telugu</loc><priority>0.7</priority></url>
@@ -71,4 +71,7 @@
   <url><loc>https://invitestory.in/?preview=template-kalyana-mandapam</loc><priority>0.7</priority></url>
   <url><loc>https://invitestory.in/?preview=template-tamil-thirumana</loc><priority>0.7</priority></url>
   <url><loc>https://invitestory.in/?preview=template-lake-pichola</loc><priority>0.7</priority></url>
+  <url><loc>https://invitestory.in/?preview=template-petal-path</loc><priority>0.7</priority></url>
+  <url><loc>https://invitestory.in/?preview=template-lakeview-lanterns</loc><priority>0.7</priority></url>
+  <url><loc>https://invitestory.in/?preview=template-ivory-waltz</loc><priority>0.7</priority></url>
 </urlset>

@@ -1,6 +1,6 @@
 # InviteStory Landing Page
 
-A standalone Vite + React + Tailwind site that showcases all 20 wedding invitation templates. Share this URL with enquiries so they can browse samples in one place.
+A standalone Vite + React + Tailwind site that showcases all live wedding invitation templates. Share this URL with enquiries so they can browse samples in one place.
 
 ## Run locally
 
@@ -23,7 +23,7 @@ The output goes to `dist/`. Drag the folder into Netlify Drop, or push to a Netl
 Each template card embeds an `<iframe>` that points at:
 
 - **Placeholder mode (default):** a `data:` URL with a soft "Live preview" pill - works without any deployment.
-- **Live mode:** set `USE_PLACEHOLDER = false` in `src/App.tsx` once the 20 template folders are deployed next to this landing page (e.g. each at `/{folder}/index.html`). The iframes will then load each template directly.
+- **Live mode:** set `USE_PLACEHOLDER = false` in `src/App.tsx` once the template folders are deployed next to this landing page (e.g. each at `/{folder}/index.html`). The iframes will then load each template directly.
 
 ## Where the previews should live
 

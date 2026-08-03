@@ -1,4 +1,4 @@
-// Catalogue of all 20 wedding invitation templates.
+// Catalogue of wedding invitation templates.
 // Folders must match public/templates/<folder>/ exactly.
 
 export type Template = {
@@ -241,6 +241,39 @@ export const templates: Template[] = [
     weddingType: "Royal Palace",
     highlight: "Gold floral texture, illustrated couple",
     poster: "assets/couple.webp",
+  },
+  {
+    id: "petal-path",
+    folder: "template-petal-path",
+    name: "Petal Path Palace",
+    tagline: "Walk the petal aisle into forever",
+    vibe: "Layered parallax Sikh palace wedding",
+    palette: ["#2A1830", "#C45A7A", "#F2C4D0", "#C9A86A"],
+    weddingType: "Royal Palace",
+    highlight: "5-layer parallax, floral arch, falling petals",
+    poster: "assets/layers/source-full.png",
+  },
+  {
+    id: "ivory-waltz",
+    folder: "template-ivory-waltz",
+    name: "Ivory Waltz",
+    tagline: "A soft dance into forever",
+    vibe: "Cream linen faceless couple parallax",
+    palette: ["#F3EDE3", "#1A1814", "#FFFFFF", "#8A7A68"],
+    weddingType: "Muslim Nikah",
+    highlight: "Layered parallax dance, calla lilies, soft paper gate",
+    poster: "assets/layers/hero-composite.jpg",
+  },
+  {
+    id: "lakeview-lanterns",
+    folder: "template-lakeview-lanterns",
+    name: "Lakeview Lanterns",
+    tagline: "Twilight vows by the glowing backwaters",
+    vibe: "Kerala lakeside lantern night",
+    palette: ["#1A0B24", "#8E2856", "#D4AF37"],
+    weddingType: "South Indian",
+    highlight: "Parallax layers, flying lanterns, illustrated couple",
+    poster: "assets/reference.png",
   },
 ];
 

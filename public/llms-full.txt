@@ -17,12 +17,12 @@ InviteStory is an Indian digital wedding invitation service. We craft custom web
 
 ### Pricing Tiers
 - **Classic (₹999):** Standard templates (Sage Parchment, Marigold Bhavan, Kalyana Mandapam). Includes couple names, date, muhurtham timing, Google Maps, Add-to-Calendar.
-- **Signature (₹1,999):** Cultural & aesthetic templates (Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal). Includes fast 24h turnaround, photo swap, custom domain options.
+- **Signature (₹1,999):** Cultural & aesthetic templates (Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal, Ivory Waltz). Includes fast 24h turnaround, photo swap, custom domain options.
 - **Royale (₹2,999):** Premium animated templates (Rajwada Royale, Rajmahal Palace, Ghibli Selfie, Grand Line Voyage). Includes opening palace door effects, shutter animations, hand-edited photos, priority WhatsApp support.
 
 ---
 
-## SECTION 2: TEMPLATE CATALOGUE (20 TEMPLATES)
+## SECTION 2: TEMPLATE CATALOGUE (21 TEMPLATES)
 
 1. **Rajwada Royale:** Deep maroon & royal gold, opening palace doors, diya petals. (North Indian Royal Palace)
 2. **Marigold Bhavan:** Olive green & gold paper envelope with sepia paper textures. (Classic Indian Engagement / Hindu)
@@ -44,6 +44,8 @@ InviteStory is an Indian digital wedding invitation service. We craft custom web
 18. **Kalyana Mandapam:** Parchment, kumkum red, gold, and mandapam vector artwork. (South Indian Muhurtham)
 19. **Tamil Thirumana:** Banana-leaf color palette, Tamil typography, and morning muhurtham layout. (Tamil Nadu Wedding)
 20. **Lake Pichola Royal:** Gold floral textures, custom couple illustrations, and Udaipur lake reflections. (Udaipur Royal Wedding)
+21. **Petal Path Palace:** Five-layer parallax floral arch, palace aisle, falling petals — Sikh / North-Indian palace energy. (Royal Palace)
+22. **Ivory Waltz:** Cream linen canvas, layered faceless dance parallax, calla lilies, soft paper-curtain open. (Soft modern Muslim Nikah)
 
 ---
 
