@@ -1,0 +1,612 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import {
+  ArrowLeft,
+  ArrowUpRight,
+  InstagramLogo,
+  WhatsappLogo,
+} from "@phosphor-icons/react";
+import {
+  WHATSAPP_URL,
+  INSTAGRAM_URL,
+  whatsappForTemplate,
+  absoluteTemplateUrl,
+} from "./contact";
+import { templates, type Template } from "./templates";
+
+const BASE = import.meta.env.BASE_URL || "./";
+
+function previewHref(folder: string) {
+  return `?preview=${encodeURIComponent(folder)}`;
+}
+
+/* ── Full-page template viewer + floating buy CTA ────────────────── */
+function TemplateViewer({ template }: { template: Template }) {
+  const src = `${BASE}templates/${template.folder}/index.html`;
+  const previewUrl = absoluteTemplateUrl(template.folder, BASE);
+  const wa = whatsappForTemplate(template.name, previewUrl);
+
+  return (
+    <div className="fixed inset-0 z-[70] flex flex-col bg-night">
+      <header className="flex h-14 shrink-0 items-center justify-between gap-3 border-b border-line bg-night/95 px-4 backdrop-blur-md md:h-16 md:px-6">
+        <a
+          href="./"
+          className="inline-flex items-center gap-2 text-caption font-medium uppercase tracking-eyebrow text-bone/70 transition-colors hover:text-bone"
+        >
+          <ArrowLeft weight="bold" className="h-4 w-4" />
+          Gallery
+        </a>
+        <p className="truncate text-sm font-medium text-bone md:text-base">
+          {template.name}
+        </p>
+        <span className="w-16 md:w-20" aria-hidden />
+      </header>
+
+      <iframe
+        title={`${template.name} full preview`}
+        src={src}
+        className="min-h-0 w-full flex-1 border-0 bg-night"
+      />
+
+      <div className="pointer-events-none fixed inset-x-0 bottom-0 z-[80] flex justify-center px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-16">
+        <a
+          href={wa}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pointer-events-auto inline-flex max-w-full items-center gap-2.5 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:bg-emerald-soft hover:scale-[1.02] active:scale-[0.98]"
+        >
+          <WhatsappLogo weight="fill" className="h-5 w-5 shrink-0" />
+          <span className="truncate">Make this mine</span>
+        </a>
+      </div>
+    </div>
+  );
+}
+
+/* ── Lazy iframe preview ─────────────────────────────────────────── */
+function TemplatePreview({ template }: { template: Template }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(false);
+  const [hover, setHover] = useState(false);
+  const src = `${BASE}templates/${template.folder}/index.html`;
+  const openHref = previewHref(template.folder);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActive(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <figure
+      ref={ref}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="group relative overflow-hidden rounded-card bg-night-card shadow-calm"
+    >
+      <div className="aspect-[9/16] w-full">
+        {active ? (
+          <iframe
+            title={`${template.name} preview`}
+            src={src}
+            className="h-full w-full border-0"
+            loading="lazy"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-night-soft">
+            <div className="flex gap-1.5">
+              {template.palette.map((c) => (
+                <span
+                  key={c}
+                  className="h-2.5 w-2.5 rounded-full opacity-70"
+                  style={{ background: c }}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="absolute left-4 top-4 flex gap-1.5">
+        {template.palette.map((c) => (
+          <span
+            key={c}
+            className="h-2.5 w-2.5 rounded-full ring-1 ring-bone/30"
+            style={{ background: c }}
+          />
+        ))}
+      </div>
+
+      <figcaption
+        className={`absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 bg-gradient-to-t from-night/90 to-transparent px-5 pb-5 pt-12 text-bone transition-opacity duration-300 ${
+          hover ? "opacity-100" : "opacity-0 md:opacity-0"
+        } max-md:opacity-100`}
+      >
+        <div>
+          <p className="text-h3 font-medium tracked-display leading-none">
+            {template.name}
+          </p>
+          <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/65">
+            {template.weddingType}
+          </p>
+        </div>
+        <a
+          href={openHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night transition-transform duration-200 ease-soft hover:scale-[1.03] active:scale-[0.98]"
+        >
+          Open
+          <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
+        </a>
+      </figcaption>
+    </figure>
+  );
+}
+
+/* ── Filters ─────────────────────────────────────────────────────── */
+const FILTERS = [
+  { key: "all", label: "All" },
+  { key: "Royal Palace", label: "Royal Palace" },
+  { key: "South Indian", label: "South Indian" },
+  { key: "Muslim Nikah", label: "Nikah" },
+  { key: "Muslim Walima", label: "Walima" },
+  { key: "Hindu", label: "Hindu" },
+  { key: "Garden", label: "Garden" },
+  { key: "Beach", label: "Beach" },
+] as const;
+type FilterKey = (typeof FILTERS)[number]["key"];
+
+/* ── Top bar ─────────────────────────────────────────────────────── */
+function TopBar() {
+  return (
+    <header className="sticky top-0 z-40 border-b border-line bg-night/80 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-[72px] md:px-8">
+        <a href="#" className="text-lg font-semibold tracked-display text-bone md:text-xl">
+          InviteStory
+        </a>
+        <nav className="hidden items-center gap-8 md:flex">
+          <a
+            href="#gallery"
+            className="text-caption uppercase tracking-eyebrow text-bone/60 transition-colors hover:text-bone"
+          >
+            Templates
+          </a>
+          <a
+            href="#process"
+            className="text-caption uppercase tracking-eyebrow text-bone/60 transition-colors hover:text-bone"
+          >
+            How it works
+          </a>
+        </nav>
+        <a
+          href={WHATSAPP_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-pill bg-emerald px-4 py-2.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:bg-emerald-soft active:scale-[0.98] md:px-5"
+        >
+          <WhatsappLogo weight="fill" className="h-4 w-4" />
+          WhatsApp
+        </a>
+      </div>
+    </header>
+  );
+}
+
+/* ── Hero ────────────────────────────────────────────────────────── */
+function Hero() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section className="relative min-h-[100dvh] overflow-hidden">
+      <img
+        src={`${BASE}images/hero-invite.webp`}
+        alt=""
+        width={1920}
+        height={1080}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-night/90 via-night/55 to-night/15"
+        aria-hidden
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-night/25"
+        aria-hidden
+      />
+
+      <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-5 pb-16 pt-24 md:justify-center md:px-8 md:pb-24 md:pt-20">
+        <motion.div
+          className="max-w-xl"
+          initial={reduce ? false : { opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <p className="text-3xl font-semibold tracked-display text-bone md:text-5xl lg:text-6xl">
+            InviteStory
+          </p>
+          <h1 className="mt-4 text-2xl font-medium leading-[1.15] tracked-display text-bone/95 md:mt-6 md:text-4xl lg:text-5xl">
+            Pick a template.
+            <br />
+            We shape it to your day.
+          </h1>
+          <p className="mt-5 max-w-md text-base leading-relaxed text-bone/70 md:mt-6 md:text-body">
+            Hand-built digital wedding invites for Indian couples. Share one link on WhatsApp.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4">
+            <a
+              href="#gallery"
+              className="rounded-pill bg-bone px-6 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-night transition-transform duration-200 ease-soft hover:scale-[1.02] active:scale-[0.98]"
+            >
+              Browse samples
+            </a>
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-pill border border-bone/25 px-6 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:border-bone/50 active:scale-[0.98]"
+            >
+              <WhatsappLogo weight="fill" className="h-4 w-4" />
+              WhatsApp
+            </a>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+/* ── Why it fits ─────────────────────────────────────────────────── */
+const WHY_POINTS = [
+  {
+    title: "One day",
+    body: "A single wedding event. No mehndi or haldi schedule clutter on the invite.",
+  },
+  {
+    title: "No RSVP form",
+    body: "Your family handles invitations out-of-band. The link is the announcement.",
+  },
+  {
+    title: "Calendar and maps",
+    body: "Add to Calendar and Open in Maps are wired into every template.",
+  },
+  {
+    title: "Mobile-first",
+    body: "Smooth scroll, calm motion, and layouts tested on real phones.",
+  },
+] as const;
+
+function WhyItFits() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section className="bg-night-soft py-20 md:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-12 md:gap-16 md:px-8">
+        <div className="md:col-span-5">
+          <motion.div
+            initial={reduce ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2 className="text-h1 font-semibold tracked-display text-bone md:text-display">
+              Built for how you actually invite.
+            </h2>
+            <p className="mt-5 max-w-[42ch] text-body text-bone/65">
+              One event. One config. A link that fits in a WhatsApp chat.
+            </p>
+          </motion.div>
+          <div className="mt-10 overflow-hidden rounded-card">
+            <img
+              src={`${BASE}images/why-share.webp`}
+              alt="Sharing a digital wedding invitation on a phone"
+              width={1200}
+              height={900}
+              loading="lazy"
+              decoding="async"
+              className="aspect-[4/3] w-full object-cover"
+            />
+          </div>
+        </div>
+
+        <ul className="grid content-center gap-8 md:col-span-7 md:grid-cols-2 md:gap-x-10 md:gap-y-12">
+          {WHY_POINTS.map((item, i) => (
+            <motion.li
+              key={item.title}
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{
+                duration: 0.5,
+                delay: reduce ? 0 : i * 0.06,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="border-t border-line pt-6"
+            >
+              <h3 className="text-h3 font-medium tracked-display text-bone">
+                {item.title}
+              </h3>
+              <p className="mt-3 text-body text-bone/60">{item.body}</p>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+/* ── Gallery ─────────────────────────────────────────────────────── */
+function Gallery() {
+  const [filter, setFilter] = useState<FilterKey>("all");
+  const [query, setQuery] = useState("");
+  const reduce = useReducedMotion();
+
+  const filtered = useMemo(() => {
+    return templates.filter((t) => {
+      if (filter !== "all" && t.weddingType !== filter) return false;
+      if (query.trim().length === 0) return true;
+      const q = query.toLowerCase();
+      return (
+        t.name.toLowerCase().includes(q) ||
+        t.tagline.toLowerCase().includes(q) ||
+        t.highlight.toLowerCase().includes(q) ||
+        t.vibe.toLowerCase().includes(q)
+      );
+    });
+  }, [filter, query]);
+
+  return (
+    <section id="gallery" className="bg-night py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <header className="flex flex-col gap-6 pb-12 md:flex-row md:items-end md:justify-between md:pb-16">
+          <div className="max-w-xl">
+            <h2 className="text-h1 font-semibold tracked-display text-bone md:text-display">
+              {filtered.length} of {templates.length} live templates
+            </h2>
+            <p className="mt-4 max-w-[48ch] text-body text-bone/60">
+              Every card is a working invitation. Open any to feel the motion on your phone.
+            </p>
+          </div>
+          <div className="md:w-80">
+            <label className="sr-only" htmlFor="template-search">
+              Search templates
+            </label>
+            <input
+              id="template-search"
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search by name or vibe"
+              className="w-full rounded-pill border border-line bg-night-card px-5 py-3 text-body text-bone placeholder:text-bone/35 focus:border-emerald focus:outline-none"
+            />
+          </div>
+        </header>
+
+        <div className="scrollbar-thin -mx-1 mb-12 flex gap-2 overflow-x-auto pb-1">
+          {FILTERS.map((f) => (
+            <button
+              key={f.key}
+              type="button"
+              aria-pressed={filter === f.key}
+              onClick={() => setFilter(f.key)}
+              className={`shrink-0 rounded-pill px-5 py-2 text-caption uppercase tracking-eyebrow transition-colors duration-200 ease-soft active:scale-[0.98] ${
+                filter === f.key
+                  ? "bg-emerald text-bone"
+                  : "border border-line bg-night-card text-bone/65 hover:border-bone/25 hover:text-bone"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((t, i) => (
+            <motion.article
+              key={t.id}
+              className="flex flex-col gap-5"
+              initial={reduce ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{
+                duration: 0.5,
+                delay: reduce ? 0 : Math.min(i % 3, 2) * 0.05,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            >
+              <TemplatePreview template={t} />
+              <div>
+                <h3 className="text-h3 font-medium tracked-display text-bone">
+                  {t.name}
+                </h3>
+                <p className="mt-2 text-body leading-relaxed text-bone/60">
+                  {t.tagline}
+                </p>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+
+        {filtered.length === 0 && (
+          <p className="py-24 text-center text-body text-bone/50">
+            No templates match. Try a different filter or search term.
+          </p>
+        )}
+      </div>
+    </section>
+  );
+}
+
+/* ── Process ─────────────────────────────────────────────────────── */
+const STEPS = [
+  {
+    title: "Pick a template",
+    body: "Browse the gallery. Every card is a fully working invitation you can open and feel.",
+  },
+  {
+    title: "Send your details",
+    body: "Couple names, date, muhurtham time, venue, Maps link, and a few photos of you both.",
+  },
+  {
+    title: "We customise",
+    body: "We update the config and send a preview link within 24 hours.",
+  },
+  {
+    title: "Share the link",
+    body: "Approve, get your live link, and send it to family on WhatsApp.",
+  },
+] as const;
+
+function Process() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section id="process" className="bg-night-soft py-20 md:py-28">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <h2 className="max-w-2xl text-h1 font-semibold tracked-display text-bone md:text-display">
+          From template to live invite in one conversation.
+        </h2>
+
+        <ol className="mt-14 grid gap-0 border-t border-line md:mt-16 md:grid-cols-4">
+          {STEPS.map((s, i) => (
+            <motion.li
+              key={s.title}
+              initial={reduce ? false : { opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{
+                duration: 0.5,
+                delay: reduce ? 0 : i * 0.07,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="border-b border-line py-8 md:border-b-0 md:border-r md:px-6 md:py-10 md:last:border-r-0 md:first:pl-0"
+            >
+              <h3 className="text-h3 font-medium tracked-display text-bone">
+                {s.title}
+              </h3>
+              <p className="mt-3 text-body text-bone/60">{s.body}</p>
+            </motion.li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+/* ── Contact ─────────────────────────────────────────────────────── */
+function Contact() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section id="contact" className="bg-night py-20 md:py-28">
+      <motion.div
+        className="mx-auto max-w-3xl px-5 text-center md:px-8"
+        initial={reduce ? false : { opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <h2 className="text-h1 font-semibold tracked-display text-bone md:text-display">
+          Tell us your date. We will send the next steps.
+        </h2>
+        <p className="mt-5 text-body text-bone/60">
+          One wedding. One day. One invitation that fits in a WhatsApp message.
+        </p>
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-pill bg-emerald px-7 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:bg-emerald-soft active:scale-[0.98]"
+          >
+            <WhatsappLogo weight="fill" className="h-4 w-4" />
+            WhatsApp
+          </a>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-pill border border-bone/25 px-7 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:border-bone/50 active:scale-[0.98]"
+          >
+            <InstagramLogo weight="regular" className="h-4 w-4" />
+            @invitestory.in
+          </a>
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-line py-10 text-center">
+      <p className="text-caption uppercase tracking-eyebrow text-bone/40">
+        Handcrafted in India - InviteStory - {templates.length} live templates
+      </p>
+      <a
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-3 inline-block text-caption uppercase tracking-eyebrow text-emerald-soft transition-opacity hover:opacity-70"
+      >
+        @invitestory.in
+      </a>
+    </footer>
+  );
+}
+
+export default function App() {
+  const previewFolder = useMemo(() => {
+    if (typeof window === "undefined") return null;
+    return new URLSearchParams(window.location.search).get("preview");
+  }, []);
+
+  const previewTemplate = useMemo(() => {
+    if (!previewFolder) return null;
+    return templates.find((t) => t.folder === previewFolder) ?? null;
+  }, [previewFolder]);
+
+  if (previewTemplate) {
+    return <TemplateViewer template={previewTemplate} />;
+  }
+
+  if (previewFolder) {
+    return (
+      <div className="flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-night px-6 text-center text-bone">
+        <p className="text-body text-bone/70">That template could not be found.</p>
+        <a
+          href="./"
+          className="rounded-pill bg-emerald px-5 py-2.5 text-caption font-medium uppercase tracking-eyebrow text-bone"
+        >
+          Back to gallery
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="page-grain min-h-[100dvh] bg-night text-bone antialiased">
+      <TopBar />
+      <main>
+        <Hero />
+        <WhyItFits />
+        <Gallery />
+        <Process />
+        <Contact />
+      </main>
+      <Footer />
+    </div>
+  );
+}
