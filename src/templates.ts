@@ -31,7 +31,7 @@ export const templates: Template[] = [
     palette: ["#7B1E2B", "#C9A84C", "#F4E6CC"],
     weddingType: "Royal Palace",
     highlight: "Maroon + gold, diya petals, opening doors",
-    poster: "assets/couple-vzDcWLv2.png",
+    poster: "assets/couple-vzDcWLv2.webp",
   },
   {
     id: "marigold-bhavan",
@@ -42,7 +42,7 @@ export const templates: Template[] = [
     palette: ["#7A6E2A", "#D9A441", "#F1E6C4"],
     weddingType: "Hindu",
     highlight: "Olive + gold, paper envelope, sepia texture",
-    poster: "assets/couple-YnNIeptm.png",
+    poster: "assets/couple-YnNIeptm.webp",
   },
   {
     id: "toran-telugu",
@@ -64,7 +64,7 @@ export const templates: Template[] = [
     palette: ["#E2A89E", "#F4D9B5", "#7FB3A8"],
     weddingType: "Muslim Nikah",
     highlight: "Selfie shutter finale, paper-cut clouds",
-    poster: "assets/couple-DN8lYpms.png",
+    poster: "assets/couple-DN8lYpms.webp",
   },
   {
     id: "emerald-nikah",
@@ -108,7 +108,7 @@ export const templates: Template[] = [
     palette: ["#F6EFD9", "#C29A48", "#7A6E40"],
     weddingType: "South Indian",
     highlight: "Ivory + gold coastal ceremony",
-    poster: "images/couple-hero.png",
+    poster: "images/couple-hero.webp",
   },
   {
     id: "meadow-nikah",
@@ -130,7 +130,7 @@ export const templates: Template[] = [
     palette: ["#1F8FCE", "#E0A82E", "#F5DC95"],
     weddingType: "Beach",
     highlight: "Ocean voyage, sunset Goa energy",
-    poster: "op-hero-ship.png",
+    poster: "op-hero-ship.webp",
   },
   {
     id: "sage-parchment",
@@ -152,7 +152,7 @@ export const templates: Template[] = [
     palette: ["#E3B89C", "#D6B47C", "#F2E1C5"],
     weddingType: "Garden",
     highlight: "Portrait journey, watercolor florals",
-    poster: "images/portrait-bride.png",
+    poster: "images/portrait-bride.webp",
   },
   {
     id: "rajwada-royale-alt",
@@ -163,7 +163,7 @@ export const templates: Template[] = [
     palette: ["#7B1E2B", "#C9A84C", "#F4E6CC"],
     weddingType: "Royal Palace",
     highlight: "Alternate demo of Rajwada Royale",
-    poster: "assets/couple-vzDcWLv2.png",
+    poster: "assets/couple-vzDcWLv2.webp",
   },
   {
     id: "marigold-bhavan-alt",
@@ -174,7 +174,7 @@ export const templates: Template[] = [
     palette: ["#7A6E2A", "#D9A441", "#F1E6C4"],
     weddingType: "Hindu",
     highlight: "Alternate demo of Marigold Bhavan",
-    poster: "assets/couple-YnNIeptm.png",
+    poster: "assets/couple-YnNIeptm.webp",
   },
   {
     id: "rajmahal-palace",
@@ -185,7 +185,7 @@ export const templates: Template[] = [
     palette: ["#3B0712", "#D9A441", "#F1DFB1"],
     weddingType: "Royal Palace",
     highlight: "Deep maroon + gold, opening doors",
-    poster: "assets/hero-bg.png",
+    poster: "assets/hero-bg.webp",
   },
   {
     id: "shubha-vivaham",
@@ -240,7 +240,7 @@ export const templates: Template[] = [
     palette: ["#F2E4C3", "#B8912F", "#8A6A1F"],
     weddingType: "Royal Palace",
     highlight: "Gold floral texture, illustrated couple",
-    poster: "assets/couple.png",
+    poster: "assets/couple.webp",
   },
 ];
 
