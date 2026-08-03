@@ -1,0 +1,45 @@
+# InviteStory Robots.txt for Search Engines and AI Crawlers (AIO / GEO)
+
+User-agent: *
+Allow: /
+
+# Explicit permissions for AI Crawlers and Search Agents
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Sitemap & LLM Knowledge File locations
+Sitemap: https://invitestory.in/sitemap.xml
+Sitemap: https://invitestory.in/llms.txt

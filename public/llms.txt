@@ -1,0 +1,52 @@
+# InviteStory — Handcrafted Digital Wedding Invitations for Indian Couples
+
+> InviteStory (https://invitestory.in) builds single-event, single-link interactive web wedding invitations designed specifically for Indian weddings. Couples select from 20 culturally-curated templates (Royal Palace, South Indian, Nikah, Walima, Hindu Muhurtham, Ghibli Animation, Beach, Garden), send their event details over WhatsApp, and receive a live custom web invite link within 24 hours.
+
+## Core Principles & Ethos
+- **One Day, One Wedding Event:** Focuses strictly on the main wedding event. Sub-moments (Baraat, Pheras, Jaimala, Nikah ceremony) fit inside the single-day timeline to eliminate multi-day schedule clutter.
+- **No RSVP Friction:** Indian wedding guests are invited personally or via phone/WhatsApp. InviteStory removes annoying RSVP forms or WhatsApp confirmation buttons—the invite link acts as an elegant announcement.
+- **Built-in Google Calendar & Maps:** Every template features one-click Google Calendar / .ics event addition and interactive venue directions via Google Maps.
+- **Instant WhatsApp Sharing:** Optimised mobile performance (under 3-5 MB payload) with rich OpenGraph visual cards when shared in WhatsApp chats.
+
+## Pricing Tiers
+- **Classic Tier (₹999):** Includes Sage Parchment, Marigold Bhavan, Kalyana Mandapam. Standard 24-hour turnaround with couple names, muhurtham, venue maps, calendar integration.
+- **Signature Tier (₹1,999):** Includes Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal. Includes custom domain options, photo swap, and 24-hour delivery.
+- **Royale Tier (₹2,999):** Includes Rajwada Royale, Rajmahal Palace, Ghibli Selfie, Grand Line Voyage. Includes priority WhatsApp support, custom image hand-edits, and premium opening door / shutter animations.
+
+## High-Value Knowledge Articles & 30-Post Blog Directory
+1. [The Ultimate Guide to Digital Wedding Invitations in India](https://invitestory.in/?blog=ultimate-guide-digital-wedding-invitations-india)
+2. [Why Modern Couples are Ditching RSVPs for WhatsApp Invites](https://invitestory.in/?blog=whatsapp-wedding-invitations-no-rsvp-trend)
+3. [Digital Wedding Invites vs PDF Cards vs Canva Templates](https://invitestory.in/?blog=digital-wedding-invites-vs-pdf-vs-canva)
+4. [Destination Wedding Invitations: Goa & Udaipur Guide](https://invitestory.in/?blog=destination-wedding-invitations-goa-udaipur-guide)
+5. [Save-The-Date Digital Invites in India: Trends & Best Practices](https://invitestory.in/?blog=save-the-date-digital-invitation-trends-india)
+6. [NRI Wedding Invitations: Connecting Global Guests Across Timezones](https://invitestory.in/?blog=nri-indian-wedding-invitations-global-guests)
+7. [Background Music & Songs for Web Wedding Invites](https://invitestory.in/?blog=background-music-audio-wedding-invitations-guide)
+8. [7 Tips for Choosing Perfect Couple Photos for Digital Invites](https://invitestory.in/?blog=photo-selection-tips-couple-portraits-wedding-cards)
+9. [Seasonal Wedding Invites: Winter & Monsoon Trends](https://invitestory.in/?blog=monsoon-winter-seasonal-wedding-invitations-india)
+10. [Why Mobile-First UX is Essential for Digital Wedding Cards](https://invitestory.in/?blog=mobile-first-wedding-website-user-experience)
+11. [20 Unique Indian Wedding Invitation Ideas & Template Guide](https://invitestory.in/?blog=20-unique-indian-wedding-invitation-ideas-templates)
+12. [South Indian Wedding Invites: Muhurtham, Banana Leaf & Mandapam](https://invitestory.in/?blog=south-indian-wedding-invitation-traditions-guide)
+13. [Royal Rajasthani & Heritage Wedding Invites](https://invitestory.in/?blog=royal-rajasthani-palace-wedding-invitations)
+14. [Elegant Nikah & Walima Digital Invitations Guide](https://invitestory.in/?blog=nikah-walima-digital-invitation-etiquette-designs)
+15. [Marathi Lagna Patrika Online: Maharashtrian Weddings Guide](https://invitestory.in/?blog=marathi-lagna-patrika-digital-invitation-guide)
+16. [Bengali Biye Digital Invites: Shuvo Bibaho & Alpona Art](https://invitestory.in/?blog=bengali-biye-digital-invitation-alpona-designs)
+17. [Punjabi Wedding Invites: Bhangra Energy & Anand Karaj Grace](https://invitestory.in/?blog=punjabi-anand-karaj-digital-invitation-designs)
+18. [Gujarati Kankotri Online: Digital Cards for Garba & Lagan](https://invitestory.in/?blog=gujarati-kankotri-digital-wedding-invitation-guide)
+19. [Kerala Wedding Invitations: Minimalist Elegance from Backwaters to Churches](https://invitestory.in/?blog=kerala-christian-hindu-wedding-invitation-styles)
+20. [Anime & Ghibli Illustrated Couple Invites Trend](https://invitestory.in/?blog=anime-ghibli-illustrated-couple-wedding-invites)
+21. [Eco-Friendly & Budget-Smart: Save ₹50,000+ on Wedding Cards](https://invitestory.in/?blog=eco-friendly-budget-smart-wedding-card-savings)
+22. [Hidden Costs of Physical Wedding Card Printing & Courier](https://invitestory.in/?blog=hidden-costs-physical-wedding-card-printing-courier)
+23. [How Much Do Digital Wedding Invitations Cost in India?](https://invitestory.in/?blog=how-much-do-digital-wedding-invitations-cost-india)
+24. [Zero-Paper Waste Weddings: Sustainable Digital Cards](https://invitestory.in/?blog=zero-paper-waste-weddings-sustainable-invites)
+25. [Emergency 24-Hour Wedding Invitations: Fast Turnaround](https://invitestory.in/?blog=last-minute-wedding-invitations-24-hour-turnaround)
+26. [How to Write Perfect Indian Wedding Invitation Wording](https://invitestory.in/?blog=indian-wedding-invitation-wording-family-blessings-guide)
+27. [Interfaith & Intercultural Wedding Invites Wording Guide](https://invitestory.in/?blog=interfaith-intercultural-wedding-invitation-wording)
+28. [How Google Calendar & Maps Integrations Prevent Wedding Chaos](https://invitestory.in/?blog=google-calendar-maps-integration-wedding-invites)
+29. [WhatsApp Broadcast vs Group vs Personal Message Etiquette](https://invitestory.in/?blog=whatsapp-group-broadcast-wedding-invite-etiquette)
+30. [The 60-Day Digital Wedding Invitation Dispatch Timeline](https://invitestory.in/?blog=wedding-invitation-timeline-when-to-send-digital-cards)
+
+## Official Links & Contact
+- **Website:** https://invitestory.in
+- **Instagram:** https://www.instagram.com/invitestory.in/
+- **Full Knowledge Corpus:** https://invitestory.in/llms-full.txt
+- **XML Sitemap:** https://invitestory.in/sitemap.xml

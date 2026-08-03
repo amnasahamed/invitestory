@@ -13,6 +13,10 @@ import {
   absoluteTemplateUrl,
 } from "./contact";
 import { templates, type Template } from "./templates";
+import { BLOG_POSTS } from "./data/blogPosts";
+import { BlogHub } from "./components/BlogHub";
+import { BlogPostView } from "./components/BlogPostView";
+import { SeoHead } from "./components/SeoHead";
 
 const BASE = import.meta.env.BASE_URL || "./";
 
@@ -228,6 +232,12 @@ function TopBar() {
             className="text-caption uppercase tracking-eyebrow text-bone/60 transition-colors hover:text-bone"
           >
             How it works
+          </a>
+          <a
+            href="?blog=all"
+            className="text-caption uppercase tracking-eyebrow text-emerald-soft transition-colors hover:text-bone"
+          >
+            Blog & Guides
           </a>
         </nav>
         <a
@@ -592,33 +602,61 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-line py-10 text-center">
+    <footer className="border-t border-line py-12 text-center">
       <p className="text-caption uppercase tracking-eyebrow text-bone/40">
         Handcrafted in India - InviteStory - {templates.length} live templates
       </p>
-      <a
-        href={INSTAGRAM_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-3 inline-block text-caption uppercase tracking-eyebrow text-emerald-soft transition-opacity hover:opacity-70"
-      >
-        @invitestory.in
-      </a>
+      
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-6 text-caption uppercase tracking-eyebrow text-bone/60">
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-emerald-soft transition-opacity hover:opacity-70"
+        >
+          @invitestory.in
+        </a>
+        <span>•</span>
+        <a href="?blog=all" className="hover:text-bone transition-colors">
+          Blog & Guides
+        </a>
+        <span>•</span>
+        <a href="llms.txt" target="_blank" rel="noopener noreferrer" className="hover:text-bone transition-colors">
+          llms.txt
+        </a>
+        <span>•</span>
+        <a href="llms-full.txt" target="_blank" rel="noopener noreferrer" className="hover:text-bone transition-colors">
+          llms-full.txt
+        </a>
+        <span>•</span>
+        <a href="sitemap.xml" target="_blank" rel="noopener noreferrer" className="hover:text-bone transition-colors">
+          Sitemap
+        </a>
+      </div>
     </footer>
   );
 }
 
 export default function App() {
-  const previewFolder = useMemo(() => {
-    if (typeof window === "undefined") return null;
-    return new URLSearchParams(window.location.search).get("preview");
+  const searchParams = useMemo(() => {
+    if (typeof window === "undefined") return new URLSearchParams();
+    return new URLSearchParams(window.location.search);
   }, []);
+
+  const previewFolder = searchParams.get("preview");
+  const blogParam = searchParams.get("blog");
 
   const previewTemplate = useMemo(() => {
     if (!previewFolder) return null;
     return templates.find((t) => t.folder === previewFolder) ?? null;
   }, [previewFolder]);
 
+  const activeBlogPost = useMemo(() => {
+    if (!blogParam || blogParam === "all") return null;
+    return BLOG_POSTS.find((p) => p.slug === blogParam) ?? null;
+  }, [blogParam]);
+
+  // Render template preview viewer if ?preview=<folder>
   if (previewTemplate) {
     return <TemplateViewer template={previewTemplate} />;
   }
@@ -637,8 +675,34 @@ export default function App() {
     );
   }
 
+  // Render Blog Hub if ?blog=all
+  if (blogParam === "all") {
+    return <BlogHub />;
+  }
+
+  // Render Blog Article if ?blog=<slug>
+  if (activeBlogPost) {
+    return <BlogPostView post={activeBlogPost} />;
+  }
+
+  // Render 404 for unknown blog slug
+  if (blogParam) {
+    return (
+      <div className="flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-night px-6 text-center text-bone">
+        <p className="text-body text-bone/70">Article could not be found.</p>
+        <a
+          href="?blog=all"
+          className="rounded-pill bg-emerald px-5 py-2.5 text-caption font-medium uppercase tracking-eyebrow text-bone"
+        >
+          Back to Blog Directory
+        </a>
+      </div>
+    );
+  }
+
   return (
     <div className="page-grain min-h-[100dvh] bg-night text-bone antialiased">
+      <SeoHead />
       <TopBar />
       <main>
         <Hero />
