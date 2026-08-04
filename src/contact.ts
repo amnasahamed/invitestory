@@ -6,6 +6,12 @@ export const WHATSAPP_URL =
 
 export const INSTAGRAM_URL = "https://www.instagram.com/invitestory.in/";
 
+/** Flat price — every template. */
+export const PRICE_INR = 1999;
+export const PRICE_USD = 20;
+export const PRICE_LABEL = `₹${PRICE_INR.toLocaleString("en-IN")} / $${PRICE_USD}`;
+export const PRICE_PER_TEMPLATE = `${PRICE_LABEL} per template`;
+
 /** Prefill WhatsApp with the chosen template name + live preview link. */
 export function whatsappForTemplate(templateName: string, previewUrl: string) {
   const text =

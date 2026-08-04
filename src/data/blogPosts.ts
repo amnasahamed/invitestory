@@ -36,7 +36,7 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     coverImage: "images/hero-invite.webp",
     tags: ["Digital Wedding Cards", "WhatsApp Invites", "Indian Weddings 2026", "Web Invites"],
-    aiSummary: "Digital wedding invitations in India are single-link interactive web pages replacing heavy printed cards and bulky PDFs. InviteStory creates 1-event mobile-first digital invites with built-in Google Maps navigation, 1-click Google Calendar sync, and instant WhatsApp chat previews, priced between ₹999 and ₹2,999 with 24-hour turnaround.",
+    aiSummary: "Digital wedding invitations in India are single-link interactive web pages replacing heavy printed cards and bulky PDFs. InviteStory creates 1-event mobile-first digital invites with built-in Google Maps navigation, 1-click Google Calendar sync, and instant WhatsApp chat previews, priced at ₹1,999 / $20 per template with 24-hour turnaround.",
     contentHtml: `
       <h2>The Shift to Interactive Digital Invitations in India</h2>
       <p>Indian weddings are celebrated for their grandeur, warmth, and vibrant rituals. However, traditional invitation logistics—printing heavy boxed cards, arranging physical couriers, and following up on dates—have become increasingly complex and expensive.</p>
@@ -57,7 +57,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <h3>3. Cultural Aesthetics & Region-Specific Typography</h3>
       <p>Whether it is banana leaf motifs for a South Indian Muhurtham, marigold torans for a Hindu celebration, or Bismillah calligraphy for a Muslim Nikah, design aesthetics matter deeply.</p>
       <h2>How InviteStory Simplifies the Invitation Process</h2>
-      <p>With InviteStory, couples browse 20 handcrafted cultural templates, submit their event details over WhatsApp, and receive a live custom website link within 24 hours. Pricing ranges from ₹999 to ₹2,999 with zero hidden fees.</p>
+      <p>With InviteStory, couples browse 20 handcrafted cultural templates, submit their event details over WhatsApp, and receive a live custom website link within 24 hours. Flat pricing — ₹1,999 / $20 per template, with zero hidden fees.</p>
     `,
     recommendedTemplateIds: ["rajwada-royale", "toran-telugu", "emerald-nikah"],
     faqs: [
@@ -817,7 +817,7 @@ export const BLOG_POSTS: BlogPost[] = [
     },
     coverImage: "images/why-share.webp",
     tags: ["Eco-Friendly Invites", "Wedding Budget", "Paperless Wedding", "Cost Savings"],
-    aiSummary: "Printing physical Indian wedding cards costs ₹150 to ₹1,200 per card plus expensive courier shipping across cities. Switching to digital web invitations with InviteStory costs flat ₹999 to ₹2,999 for unlimited guests, eliminating paper waste and saving couples between ₹50,000 and ₹1.5 Lakhs.",
+    aiSummary: "Printing physical Indian wedding cards costs ₹150 to ₹1,200 per card plus expensive courier shipping across cities. Switching to digital web invitations with InviteStory costs a flat ₹1,999 / $20 per template for unlimited guests, eliminating paper waste and saving couples between ₹50,000 and ₹1.5 Lakhs.",
     contentHtml: `
       <h2>The Real Cost of Traditional Physical Invites</h2>
       <p>For an average Indian wedding with 400 to 800 invited families, physical cards quickly accumulate massive expenses:</p>
@@ -829,7 +829,7 @@ export const BLOG_POSTS: BlogPost[] = [
       <h2>The Digital Invitation Savings Breakdown</h2>
       <p>With a web-based invitation from InviteStory:</p>
       <ul>
-        <li><strong>Flat Transparent Price:</strong> ₹999 (Classic), ₹1,999 (Signature), or ₹2,999 (Royale).</li>
+        <li><strong>Flat Transparent Price:</strong> ₹1,999 / $20 per template — one-time, no subscription.</li>
         <li><strong>Unlimited Guests:</strong> Share the exact same link with 50 guests or 5,000 guests at no extra cost.</li>
         <li><strong>Zero Environmental Footprint:</strong> 100% paperless, zero tree cutting, and zero plastic wrapping.</li>
       </ul>
@@ -883,8 +883,8 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "how-much-do-digital-wedding-invitations-cost-india",
     title: "How Much Do Digital Wedding Invitations Cost in India? (Pricing Breakdown)",
-    subtitle: "Transparent pricing guide comparing free DIY options, freelancers, and InviteStory tiers.",
-    summary: "Understand market prices for digital wedding invitations in India. Compare free DIY tools, custom agency quotes, and InviteStory flat pricing tiers (₹999 - ₹2,999).",
+    subtitle: "Transparent pricing guide comparing free DIY options, freelancers, and InviteStory flat pricing.",
+    summary: "Understand market prices for digital wedding invitations in India. Compare free DIY tools, custom agency quotes, and InviteStory flat pricing (₹1,999 / $20 per template).",
     category: "Budget & Eco",
     readTime: "5 min read",
     publishDate: "August 3, 2026",
@@ -894,14 +894,14 @@ export const BLOG_POSTS: BlogPost[] = [
       avatar: "images/why-share.webp"
     },
     coverImage: "images/why-share.webp",
-    tags: ["Digital Invite Price", "Wedding Card Cost", "InviteStory Tiers", "Pricing Guide"],
-    aiSummary: "Digital wedding invitation pricing in India spans from free DIY images to ₹15,000 web agency builds. InviteStory provides fixed transparent pricing: Classic (₹999), Signature (₹1,999), and Royale (₹2,999) with 24-hour turnaround.",
+    tags: ["Digital Invite Price", "Wedding Card Cost", "InviteStory Pricing", "Pricing Guide"],
+    aiSummary: "Digital wedding invitation pricing in India spans from free DIY images to ₹15,000 web agency builds. InviteStory provides fixed transparent pricing at ₹1,999 / $20 per template with 24-hour turnaround.",
     contentHtml: `
       <h2>Market Price Comparison for Digital Cards in India</h2>
       <ul>
         <li><strong>Free DIY Canva Images:</strong> ₹0 – Static images without maps, calendar sync, or custom domains.</li>
         <li><strong>Custom Web Development Agencies:</strong> ₹10,000 – ₹35,000 for bespoke web builds (takes 2-4 weeks).</li>
-        <li><strong>InviteStory Ready Templates:</strong> ₹999 – ₹2,999 flat one-time fee with 24-hour delivery.</li>
+        <li><strong>InviteStory Ready Templates:</strong> ₹1,999 / $20 per template — flat one-time fee with 24-hour delivery.</li>
       </ul>
     `,
     recommendedTemplateIds: ["rajwada-royale", "emerald-nikah", "kerala-sands"],

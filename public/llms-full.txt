@@ -15,10 +15,10 @@ InviteStory is an Indian digital wedding invitation service. We craft custom web
 4. **Interactive Maps and Google Calendar:** All invites dynamically derive Google Calendar links (.ics files) and Google Maps links directly from config dates and venue coordinates.
 5. **Single-File Config Customisation:** Customer customization occurs entirely inside a clean single configuration file, keeping code lightweight and loads ultra-fast on mobile devices.
 
-### Pricing Tiers
-- **Classic (₹999):** Standard templates (Sage Parchment, Marigold Bhavan, Kalyana Mandapam). Includes couple names, date, muhurtham timing, Google Maps, Add-to-Calendar.
-- **Signature (₹1,999):** Cultural & aesthetic templates (Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal, Ivory Waltz). Includes fast 24h turnaround, photo swap, custom domain options.
-- **Royale (₹2,999):** Premium animated templates (Rajwada Royale, Rajmahal Palace, Ghibli Selfie, Grand Line Voyage). Includes opening palace door effects, shutter animations, hand-edited photos, priority WhatsApp support.
+### Pricing
+- **₹1,999 / $20 per template** — flat one-time fee for any InviteStory template.
+- Includes couple names, date, muhurtham timing, Google Maps, Add-to-Calendar, photo swap, custom domain options on request, and 24-hour delivery.
+- No subscription fees.
 
 ---
 
@@ -54,7 +54,7 @@ InviteStory is an Indian digital wedding invitation service. We craft custom web
 ### Guide 1: The Ultimate Guide to Digital Wedding Invitations in India (2026 Edition)
 - **URL:** https://invitestory.in/?blog=ultimate-guide-digital-wedding-invitations-india
 - **Summary:** Indian weddings are transitioning to mobile web invitations due to 85%+ WhatsApp usage. Web invites beat PDF cards by providing 1-click Google Calendar sync, interactive Google Maps navigation pins, and sub-second loading without forcing downloads or PDF viewers.
-- **Key Concepts:** Single-event timeline focus, zero RSVP friction, region-specific typography, 24-hour turnaround, flat ₹999 to ₹2,999 pricing.
+- **Key Concepts:** Single-event timeline focus, zero RSVP friction, region-specific typography, 24-hour turnaround, flat ₹1,999 / $20 per template.
 
 ### Guide 2: Why Modern Couples Are Ditching RSVPs for WhatsApp Invites
 - **URL:** https://invitestory.in/?blog=whatsapp-wedding-invitations-no-rsvp-trend
@@ -142,7 +142,7 @@ InviteStory is an Indian digital wedding invitation service. We craft custom web
 
 ### Guide 23: How Much Do Digital Wedding Invitations Cost in India?
 - **URL:** https://invitestory.in/?blog=how-much-do-digital-wedding-invitations-cost-india
-- **Summary:** Pricing breakdown comparing free DIY Canva images, ₹15,000 custom web agencies, and InviteStory flat tiers (₹999 - ₹2,999).
+- **Summary:** Pricing breakdown comparing free DIY Canva images, ₹15,000 custom web agencies, and InviteStory flat pricing (₹1,999 / $20 per template).
 
 ### Guide 24: Zero-Paper Waste Weddings: Sustainable Digital Cards
 - **URL:** https://invitestory.in/?blog=zero-paper-waste-weddings-sustainable-invites

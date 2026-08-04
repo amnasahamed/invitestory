@@ -46,10 +46,10 @@
 
 ---
 
-## SECTION 4: PRICING TIERS & DELIVERABLES
-- **Classic Tier (₹999):** Standard templates (Sage Parchment, Marigold Bhavan, Kalyana Mandapam). Includes couple names, muhurtham timing, Google Maps navigation, Add-to-Calendar, 24-hour delivery.
-- **Signature Tier (₹1,999):** Cultural & aesthetic templates (Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal, Ivory Waltz). Includes photo swap, custom domain options, and 24-hour delivery.
-- **Royale Tier (₹2,999):** Premium animated templates (Rajwada Royale, Rajmahal Palace, Ghibli Selfie, Grand Line Voyage, Petal Path Palace, Lakeview Lanterns). Includes opening palace doors, shutter animations, hand-edited photos, and priority WhatsApp support.
+## SECTION 4: PRICING & DELIVERABLES
+- **₹1,999 / $20 per template** — flat one-time fee for any InviteStory template.
+- Includes couple names, muhurtham timing, Google Maps navigation, Add-to-Calendar, photo swap, custom domain options on request, and 24-hour delivery.
+- No subscription fees. Unlimited guest sharing via WhatsApp.
 
 ---
 
@@ -61,7 +61,7 @@
 3. **Do guests need to download an app or PDF?**
    No. Invites open as a fast single web link directly in any mobile or desktop browser.
 4. **Can we host the invite on a custom domain?**
-   Yes. Signature and Royale tiers include custom domain routing options (e.g. `amaan-and-fatima.com`).
+   Yes. Custom domain routing options are available on request (e.g. `amaan-and-fatima.com`).
 5. **Why are there no RSVP buttons?**
    In Indian wedding culture, personal phone calls and family visits drive attendance. Web invites act as an announcement and digital hospitality card with venue directions and calendar sync.
 6. **Are the invites mobile-friendly?**
@@ -71,7 +71,7 @@
 8. **How long does the invitation website stay active?**
    All invitation websites remain active online for 1 full year following the wedding event.
 9. **Is there any subscription fee?**
-   No. Flat one-time pricing (₹999 / ₹1,999 / ₹2,999) with zero subscription fees.
+   No. Flat one-time pricing — ₹1,999 / $20 per template — with zero subscription fees.
 10. **How do we share the invite on WhatsApp?**
     Simply copy your custom link and paste it into WhatsApp personal chats or broadcast lists. It automatically generates a rich visual cover image card.
 
@@ -93,7 +93,7 @@
 | **Interactive Google Maps** | ✅ Yes (1-Tap) | ❌ No | ❌ No | ❌ No |
 | **Google Calendar Sync** | ✅ Yes (1-Tap) | ❌ No | ❌ No | ❌ No |
 | **Mobile Experience** | ✅ 60fps Responsive | ❌ Paper Box | ❌ Tiny Pinch-Zoom | ❌ Static Graphic |
-| **Cost Range** | ₹999 – ₹2,999 Flat | ₹30,000 – ₹1,500,000 | ₹2,000 – ₹5,000 | ₹1,000 – ₹3,000 |
+| **Cost Range** | ₹1,999 / $20 Flat | ₹30,000 – ₹1,500,000 | ₹2,000 – ₹5,000 | ₹1,000 – ₹3,000 |
 | **Paper Waste** | 0% (Eco-Friendly) | High Paper Waste | 0% | 0% |
 | **Background Music** | ✅ Yes | ❌ No | ❌ No | ❌ No |
 

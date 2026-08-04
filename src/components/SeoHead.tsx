@@ -90,7 +90,7 @@ export function SeoHead({
       "brand": { "@type": "Brand", "name": "InviteStory" },
       "offers": {
         "@type": "Offer",
-        "price": t.weddingType.includes("Royal") || t.id.includes("ghibli") ? "2999" : "1999",
+        "price": "1999",
         "priceCurrency": "INR",
         "availability": "https://schema.org/InStock",
         "url": `https://invitestory.in/templates/${t.id}`
@@ -163,37 +163,18 @@ export function SeoHead({
         "description": "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing.",
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
-          "name": "InviteStory Pricing Tiers",
+          "name": "InviteStory Templates",
           "itemListElement": [
             {
               "@type": "Offer",
               "itemOffered": {
                 "@type": "Service",
-                "name": "Classic Tier",
-                "description": "Standard templates (Sage Parchment, Marigold Bhavan, Kalyana Mandapam) with couple names, muhurtham, venue maps, calendar integration."
-              },
-              "price": "999",
-              "priceCurrency": "INR"
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Signature Tier",
-                "description": "Cultural & aesthetic templates with custom domain options, photo swap, and 24-hour delivery."
+                "name": "Custom Digital Wedding Invitation",
+                "description": "Any InviteStory template customised to your wedding day — names, date, venue maps, calendar sync, photos, and a live shareable link within 24 hours."
               },
               "price": "1999",
-              "priceCurrency": "INR"
-            },
-            {
-              "@type": "Offer",
-              "itemOffered": {
-                "@type": "Service",
-                "name": "Royale Tier",
-                "description": "Premium animated templates with opening palace doors, shutter animations, hand-edited photos, priority WhatsApp support."
-              },
-              "price": "2999",
-              "priceCurrency": "INR"
+              "priceCurrency": "INR",
+              "description": "₹1,999 / $20 per template"
             }
           ]
         }

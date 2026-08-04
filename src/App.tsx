@@ -9,6 +9,8 @@ import {
 import {
   WHATSAPP_URL,
   INSTAGRAM_URL,
+  PRICE_LABEL,
+  PRICE_PER_TEMPLATE,
   whatsappForTemplate,
   absoluteTemplateUrl,
 } from "./contact";
@@ -165,7 +167,7 @@ function TemplateViewer({ template }: { template: Template }) {
           className="pointer-events-auto inline-flex max-w-full items-center gap-2.5 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-soft active:scale-[0.98]"
         >
           <WhatsappLogo weight="fill" className="h-5 w-5 shrink-0" />
-          <span className="truncate">Make this mine</span>
+          <span className="truncate">Make this mine · {PRICE_LABEL}</span>
         </a>
       </div>
     </div>
@@ -380,7 +382,7 @@ function Hero() {
           </h1>
 
           <p className="mt-5 max-w-md text-base leading-relaxed text-bone/70 md:mt-6 md:text-body">
-            Pick a royal template. We customise it to your day and send a live link within 24 hours — ready to share with family.
+            Pick a template for {PRICE_LABEL}. We customise it to your day and send a live link within 24 hours — ready to share with family.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4">
@@ -596,7 +598,7 @@ function Gallery() {
               {filtered.length} of {templates.length} live templates
             </h2>
             <p className="mt-4 max-w-[48ch] text-body text-bone/60">
-              Every card is a real template. Open any to explore the full animated invite.
+              Every card is a real template — {PRICE_PER_TEMPLATE}. Open any to explore the full animated invite.
             </p>
           </div>
           <div className="md:w-80">
@@ -743,6 +745,7 @@ function Contact() {
         </h2>
         <p className="mt-5 text-body text-bone/60">
           One wedding. One day. One invitation that fits in a WhatsApp message.
+          Flat pricing — {PRICE_PER_TEMPLATE}, one-time, no subscription.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:gap-4">
           <a
