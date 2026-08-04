@@ -20,6 +20,41 @@ import { SeoHead } from "./components/SeoHead";
 
 const BASE = import.meta.env.BASE_URL || "./";
 
+function normalizeTemplateSlug(input: string) {
+  const normalized = input.replace(/^\/+|\/+$/g, "").toLowerCase();
+  if (!normalized) return "";
+
+  if (normalized.endsWith("/index.html")) {
+    return normalized.replace(/\/index\.html$/, "");
+  }
+
+  if (normalized.endsWith(".html")) {
+    return normalized.replace(/\.html$/, "");
+  }
+
+  return normalized;
+}
+
+function safeDecode(value: string) {
+  try {
+    return decodeURIComponent(value);
+  } catch {
+    return value;
+  }
+}
+
+function matchTemplateBySlug(slugInput: string) {
+  const slug = normalizeTemplateSlug(safeDecode(slugInput));
+  return (
+    templates.find((t) => {
+      const normalizedId = normalizeTemplateSlug(t.id);
+      const normalizedFolder = normalizeTemplateSlug(t.folder);
+      const normalizedFolderAlias = normalizeTemplateSlug(t.folder.replace(/^template-/, ""));
+      return slug === normalizedId || slug === normalizedFolder || slug === normalizedFolderAlias;
+    }) ?? null
+  );
+}
+
 function previewHref(folder: string) {
   const template = templates.find((t) => t.folder === folder || t.id === folder);
   return template ? `/templates/${template.id}` : `?preview=${encodeURIComponent(folder)}`;
@@ -670,11 +705,10 @@ export default function App() {
   // Determine active template from pathname (/templates/:id) or ?preview=<folder>
   const previewTemplate = useMemo(() => {
     if (pathname.startsWith("/templates/")) {
-      const slug = pathname.replace("/templates/", "");
-      return templates.find((t) => t.id === slug || t.folder === slug) ?? null;
+      return matchTemplateBySlug(pathname.replace("/templates/", ""));
     }
     if (previewParam) {
-      return templates.find((t) => t.folder === previewParam || t.id === previewParam) ?? null;
+      return matchTemplateBySlug(previewParam);
     }
     return null;
   }, [pathname, previewParam]);

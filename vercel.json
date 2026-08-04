@@ -4,7 +4,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!templates/template-|assets/|images/).*)",
+      "source": "/((?!templates/[^/]+/|assets/|images/).*)",
       "destination": "/index.html"
     }
   ],
