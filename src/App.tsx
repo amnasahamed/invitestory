@@ -272,8 +272,12 @@ function TopBar() {
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-night/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-[72px] md:px-8">
-        <a href="#" className="text-lg font-semibold tracked-display text-bone md:text-xl">
-          InviteStory
+        <a href="#" className="flex items-center">
+          <img
+            src={`${BASE}images/logo-full.png`}
+            alt="InviteStory – Digital Wedding Cards"
+            className="h-8 w-auto md:h-9"
+          />
         </a>
         <nav className="hidden items-center gap-8 md:flex">
           <a
@@ -658,9 +662,16 @@ function Contact() {
 function Footer() {
   return (
     <footer className="border-t border-line py-12 text-center">
-      <p className="text-caption uppercase tracking-eyebrow text-bone/40">
-        Handcrafted in India - InviteStory - {templates.length} live templates
-      </p>
+      <div className="mx-auto flex flex-col items-center gap-5">
+        <img
+          src={`${BASE}images/logo-mark.png`}
+          alt="InviteStory"
+          className="h-10 w-auto opacity-50"
+        />
+        <p className="text-caption uppercase tracking-eyebrow text-bone/40">
+          Handcrafted in India · {templates.length} live templates
+        </p>
+      </div>
       
       <div className="mt-4 flex flex-wrap items-center justify-center gap-6 text-caption uppercase tracking-eyebrow text-bone/60">
         <a
