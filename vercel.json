@@ -3,9 +3,9 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "routes": [
-    { "handle": "filesystem" },
     { "src": "^/templates/[^/]+/?$", "dest": "/index.html" },
     { "src": "^/blog/[^/]+/?$", "dest": "/index.html" },
+    { "handle": "filesystem" },
     { "src": "^/.*$", "dest": "/index.html" }
   ],
   "headers": [

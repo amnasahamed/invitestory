@@ -65,9 +65,9 @@ function previewHref(folder: string) {
   return template ? `/templates/${template.id}` : `?preview=${encodeURIComponent(folder)}`;
 }
 
-/* ── Full-page template viewer + floating buy CTA ────────────────── */
-const PREVIEW_MIN_MS = 3000;
-const PREVIEW_MAX_MS = 12000;
+/* ── Full-page template viewer + floating bottom chrome ──────────── */
+const PREVIEW_MIN_MS = 400;
+const PREVIEW_MAX_MS = 8000;
 
 function TemplateViewer({
   template,
@@ -101,7 +101,7 @@ function TemplateViewer({
     setMinElapsed(false);
     setForceDone(false);
     setExit(false);
-    const minMs = firstOpen.current ? PREVIEW_MIN_MS : 450;
+    const minMs = firstOpen.current ? PREVIEW_MIN_MS : 200;
     firstOpen.current = false;
     const minTimer = window.setTimeout(() => setMinElapsed(true), minMs);
     const maxTimer = window.setTimeout(() => setForceDone(true), PREVIEW_MAX_MS);
@@ -117,7 +117,7 @@ function TemplateViewer({
       setExit(true);
       return;
     }
-    const t = window.setTimeout(() => setExit(true), 480);
+    const t = window.setTimeout(() => setExit(true), 280);
     return () => window.clearTimeout(t);
   }, [iframeReady, minElapsed, forceDone, reduce]);
 
@@ -130,52 +130,11 @@ function TemplateViewer({
     onNavigate(href);
   };
 
-  const navBtnClass =
-    "inline-flex h-9 w-9 items-center justify-center rounded-pill border border-line bg-night-card text-bone transition-colors hover:border-bone/40 hover:bg-night-soft hover:text-bone focus-visible:outline-none";
+  const iconBtnClass =
+    "pointer-events-auto inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-pill border border-line bg-night/90 text-bone shadow-calm backdrop-blur-md transition-colors hover:border-bone/40 hover:bg-night-card focus-visible:outline-none";
 
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-night">
-      <header
-        className={`flex h-14 shrink-0 items-center justify-between gap-2 border-b border-line bg-night/95 px-3 backdrop-blur-md transition-opacity duration-500 md:h-16 md:gap-3 md:px-6 ${
-          showSplash ? "opacity-0 pointer-events-none" : "opacity-100"
-        }`}
-      >
-        <a
-          href="/"
-          className="inline-flex shrink-0 items-center gap-1.5 text-caption font-medium uppercase tracking-eyebrow text-bone/80 transition-colors hover:text-bone md:gap-2"
-        >
-          <ArrowLeft weight="bold" className="h-4 w-4" />
-          Home
-        </a>
-        <p className="min-w-0 flex-1 truncate text-center text-sm font-medium text-bone md:text-base">
-          {template.name}
-        </p>
-        <div className="flex shrink-0 items-center gap-1.5 md:gap-2">
-          {prev && (
-            <a
-              href={previewHref(prev.folder)}
-              className={navBtnClass}
-              aria-label={`Previous template: ${prev.name}`}
-              title={prev.name}
-              onClick={(e) => goTo(previewHref(prev.folder), e)}
-            >
-              <CaretLeft weight="bold" className="h-4 w-4" />
-            </a>
-          )}
-          {next && (
-            <a
-              href={previewHref(next.folder)}
-              className={navBtnClass}
-              aria-label={`Next template: ${next.name}`}
-              title={next.name}
-              onClick={(e) => goTo(previewHref(next.folder), e)}
-            >
-              <CaretRight weight="bold" className="h-4 w-4" />
-            </a>
-          )}
-        </div>
-      </header>
-
       <iframe
         key={template.id}
         title={`${template.name} full preview`}
@@ -214,19 +173,49 @@ function TemplateViewer({
       )}
 
       <div
-        className={`pointer-events-none fixed inset-x-0 bottom-0 z-[80] flex justify-center px-4 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-16 transition-opacity duration-500 ${
+        className={`pointer-events-none fixed inset-x-0 bottom-0 z-[80] px-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-20 transition-opacity duration-300 ${
           showSplash ? "opacity-0" : "opacity-100"
         }`}
       >
-        <a
-          href={wa}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pointer-events-auto inline-flex max-w-full items-center gap-2.5 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-deep active:scale-[0.98]"
-        >
-          <WhatsappLogo weight="fill" className="h-5 w-5 shrink-0" />
-          <span className="truncate">Make this mine · {PRICE_LABEL}</span>
-        </a>
+        <div className="mx-auto flex max-w-lg items-center justify-center gap-2 sm:gap-3">
+          <a href="/" className={iconBtnClass} aria-label="Back to home" title="Home">
+            <ArrowLeft weight="bold" className="h-5 w-5" />
+          </a>
+
+          {prev && (
+            <a
+              href={previewHref(prev.folder)}
+              className={iconBtnClass}
+              aria-label={`Previous template: ${prev.name}`}
+              title={prev.name}
+              onClick={(e) => goTo(previewHref(prev.folder), e)}
+            >
+              <CaretLeft weight="bold" className="h-5 w-5" />
+            </a>
+          )}
+
+          <a
+            href={wa}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto inline-flex min-w-0 flex-1 items-center justify-center gap-2 rounded-pill bg-emerald px-4 py-3 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-deep active:scale-[0.98] sm:px-5"
+          >
+            <WhatsappLogo weight="fill" className="h-5 w-5 shrink-0" />
+            <span className="truncate">Make this mine · {PRICE_LABEL}</span>
+          </a>
+
+          {next && (
+            <a
+              href={previewHref(next.folder)}
+              className={iconBtnClass}
+              aria-label={`Next template: ${next.name}`}
+              title={next.name}
+              onClick={(e) => goTo(previewHref(next.folder), e)}
+            >
+              <CaretRight weight="bold" className="h-5 w-5" />
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );
