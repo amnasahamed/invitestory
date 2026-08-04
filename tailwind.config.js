@@ -17,7 +17,7 @@ export default {
         bone: "#EDE8DF",
         emerald: {
           DEFAULT: "#3D7A5F",
-          soft: "#4E9474",
+          soft: "#6BB890",
           deep: "#2C5A46",
         },
         line: "#EDE8DF14",

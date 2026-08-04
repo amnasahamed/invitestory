@@ -1,8 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import type { MouseEvent as ReactMouseEvent } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import {
   ArrowLeft,
-  ArrowUpRight,
+  ArrowRight,
+  CaretLeft,
+  CaretRight,
   InstagramLogo,
   WhatsappLogo,
 } from "@phosphor-icons/react";
@@ -66,11 +69,26 @@ function previewHref(folder: string) {
 const PREVIEW_MIN_MS = 3000;
 const PREVIEW_MAX_MS = 12000;
 
-function TemplateViewer({ template }: { template: Template }) {
+function TemplateViewer({
+  template,
+  onNavigate,
+}: {
+  template: Template;
+  onNavigate?: (href: string) => void;
+}) {
   const src = `${BASE}templates/${template.folder}/index.html`;
   const previewUrl = absoluteTemplateUrl(template.folder, BASE);
   const wa = whatsappForTemplate(template.name, previewUrl);
   const reduce = useReducedMotion();
+  const firstOpen = useRef(true);
+
+  const index = templates.findIndex((t) => t.id === template.id);
+  const prev =
+    index >= 0
+      ? templates[(index - 1 + templates.length) % templates.length]
+      : null;
+  const next =
+    index >= 0 ? templates[(index + 1) % templates.length] : null;
 
   const [iframeReady, setIframeReady] = useState(false);
   const [minElapsed, setMinElapsed] = useState(false);
@@ -79,13 +97,19 @@ function TemplateViewer({ template }: { template: Template }) {
   const showSplash = !(iframeReady && minElapsed) && !forceDone && !exit;
 
   useEffect(() => {
-    const minTimer = window.setTimeout(() => setMinElapsed(true), PREVIEW_MIN_MS);
+    setIframeReady(false);
+    setMinElapsed(false);
+    setForceDone(false);
+    setExit(false);
+    const minMs = firstOpen.current ? PREVIEW_MIN_MS : 450;
+    firstOpen.current = false;
+    const minTimer = window.setTimeout(() => setMinElapsed(true), minMs);
     const maxTimer = window.setTimeout(() => setForceDone(true), PREVIEW_MAX_MS);
     return () => {
       window.clearTimeout(minTimer);
       window.clearTimeout(maxTimer);
     };
-  }, []);
+  }, [template.id]);
 
   useEffect(() => {
     if (!((iframeReady && minElapsed) || forceDone)) return;
@@ -99,27 +123,61 @@ function TemplateViewer({ template }: { template: Template }) {
 
   const revealing = ((iframeReady && minElapsed) || forceDone) && !exit;
 
+  const goTo = (href: string, event: ReactMouseEvent<HTMLAnchorElement>) => {
+    if (!onNavigate) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    onNavigate(href);
+  };
+
+  const navBtnClass =
+    "inline-flex h-9 w-9 items-center justify-center rounded-pill border border-line bg-night-card text-bone transition-colors hover:border-bone/40 hover:bg-night-soft hover:text-bone focus-visible:outline-none";
+
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-night">
       <header
-        className={`flex h-14 shrink-0 items-center justify-between gap-3 border-b border-line bg-night/95 px-4 backdrop-blur-md transition-opacity duration-500 md:h-16 md:px-6 ${
+        className={`flex h-14 shrink-0 items-center justify-between gap-2 border-b border-line bg-night/95 px-3 backdrop-blur-md transition-opacity duration-500 md:h-16 md:gap-3 md:px-6 ${
           showSplash ? "opacity-0 pointer-events-none" : "opacity-100"
         }`}
       >
         <a
-          href="./"
-          className="inline-flex items-center gap-2 text-caption font-medium uppercase tracking-eyebrow text-bone/70 transition-colors hover:text-bone"
+          href="/"
+          className="inline-flex shrink-0 items-center gap-1.5 text-caption font-medium uppercase tracking-eyebrow text-bone/80 transition-colors hover:text-bone md:gap-2"
         >
           <ArrowLeft weight="bold" className="h-4 w-4" />
-          Gallery
+          Home
         </a>
-        <p className="truncate text-sm font-medium text-bone md:text-base">
+        <p className="min-w-0 flex-1 truncate text-center text-sm font-medium text-bone md:text-base">
           {template.name}
         </p>
-        <span className="w-16 md:w-20" aria-hidden />
+        <div className="flex shrink-0 items-center gap-1.5 md:gap-2">
+          {prev && (
+            <a
+              href={previewHref(prev.folder)}
+              className={navBtnClass}
+              aria-label={`Previous template: ${prev.name}`}
+              title={prev.name}
+              onClick={(e) => goTo(previewHref(prev.folder), e)}
+            >
+              <CaretLeft weight="bold" className="h-4 w-4" />
+            </a>
+          )}
+          {next && (
+            <a
+              href={previewHref(next.folder)}
+              className={navBtnClass}
+              aria-label={`Next template: ${next.name}`}
+              title={next.name}
+              onClick={(e) => goTo(previewHref(next.folder), e)}
+            >
+              <CaretRight weight="bold" className="h-4 w-4" />
+            </a>
+          )}
+        </div>
       </header>
 
       <iframe
+        key={template.id}
         title={`${template.name} full preview`}
         src={src}
         onLoad={() => setIframeReady(true)}
@@ -146,7 +204,7 @@ function TemplateViewer({ template }: { template: Template }) {
           <p className="relative mt-4 max-w-sm text-2xl font-semibold tracked-display text-bone md:text-3xl">
             {template.name}
           </p>
-          <p className="relative mt-3 text-sm text-bone/55">
+          <p className="relative mt-3 text-sm text-bone/75">
             Preparing your invitation
           </p>
           <div className="invite-splash__bar relative mt-10" aria-hidden>
@@ -164,7 +222,7 @@ function TemplateViewer({ template }: { template: Template }) {
           href={wa}
           target="_blank"
           rel="noopener noreferrer"
-          className="pointer-events-auto inline-flex max-w-full items-center gap-2.5 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-soft active:scale-[0.98]"
+          className="pointer-events-auto inline-flex max-w-full items-center gap-2.5 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-deep active:scale-[0.98]"
         >
           <WhatsappLogo weight="fill" className="h-5 w-5 shrink-0" />
           <span className="truncate">Make this mine · {PRICE_LABEL}</span>
@@ -185,8 +243,6 @@ function TemplatePreview({ template }: { template: Template }) {
   return (
     <a
       href={openHref}
-      target="_blank"
-      rel="noopener noreferrer"
       className="block focus-visible:outline-none"
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
@@ -242,13 +298,13 @@ function TemplatePreview({ template }: { template: Template }) {
             <p className="text-h3 font-medium tracked-display leading-none">
               {template.name}
             </p>
-            <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/65">
+            <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/80">
               {template.weddingType}
             </p>
           </div>
           <span className="inline-flex shrink-0 items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night shadow-calm">
             Open Full
-            <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
+            <ArrowRight weight="bold" className="h-3.5 w-3.5" />
           </span>
         </figcaption>
       </figure>
@@ -285,13 +341,13 @@ function TopBar() {
         <nav className="hidden items-center gap-8 md:flex">
           <a
             href="#gallery"
-            className="text-caption uppercase tracking-eyebrow text-bone/60 transition-colors hover:text-bone"
+            className="text-caption uppercase tracking-eyebrow text-bone/80 transition-colors hover:text-bone"
           >
             Templates
           </a>
           <a
             href="#process"
-            className="text-caption uppercase tracking-eyebrow text-bone/60 transition-colors hover:text-bone"
+            className="text-caption uppercase tracking-eyebrow text-bone/80 transition-colors hover:text-bone"
           >
             How it works
           </a>
@@ -306,7 +362,7 @@ function TopBar() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-pill bg-emerald px-4 py-2.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:bg-emerald-soft active:scale-[0.98] md:px-5"
+          className="inline-flex items-center gap-2 rounded-pill bg-emerald px-4 py-2.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:bg-emerald-deep active:scale-[0.98] md:px-5"
         >
           <WhatsappLogo weight="fill" className="h-4 w-4" />
           WhatsApp
@@ -381,7 +437,7 @@ function Hero() {
             <span className="text-bone/90">made for WhatsApp.</span>
           </h1>
 
-          <p className="mt-5 max-w-md text-base leading-relaxed text-bone/70 md:mt-6 md:text-body">
+          <p className="mt-5 max-w-md text-base leading-relaxed text-bone/85 md:mt-6 md:text-body">
             Pick a template for {PRICE_LABEL}. We customise it to your day and send a live link within 24 hours — ready to share with family.
           </p>
 
@@ -390,7 +446,7 @@ function Hero() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-soft active:scale-[0.98]"
+              className="inline-flex items-center gap-2 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-deep active:scale-[0.98]"
             >
               <WhatsappLogo weight="fill" className="h-4 w-4" />
               WhatsApp
@@ -403,7 +459,7 @@ function Hero() {
             </a>
             <a
               href="#process"
-              className="text-caption font-medium uppercase tracking-eyebrow text-bone/55 transition-colors hover:text-bone"
+              className="text-caption font-medium uppercase tracking-eyebrow text-bone/75 transition-colors hover:text-bone"
             >
               How it works
             </a>
@@ -460,22 +516,20 @@ function Hero() {
                   <p className="text-h3 font-medium tracked-display leading-none text-bone">
                     {FEATURED_HERO.name}
                   </p>
-                  <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/65">
+                  <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/80">
                     {FEATURED_HERO.weddingType}
                   </p>
                   <div className="mt-4 flex flex-wrap items-center gap-2">
                     <a
                       href={featuredHref}
-                      target="_blank"
-                      rel="noopener noreferrer"
                       className="inline-flex items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] active:scale-[0.98]"
                     >
                       Open sample
-                      <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
+                      <ArrowRight weight="bold" className="h-3.5 w-3.5" />
                     </a>
                     <a
                       href="#gallery"
-                      className="rounded-pill border border-bone/25 px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-bone/80 transition-colors hover:border-bone/50 hover:text-bone"
+                      className="rounded-pill border border-bone/25 px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors hover:border-bone/50 hover:text-bone"
                     >
                       Browse all
                     </a>
@@ -526,7 +580,7 @@ function WhyItFits() {
             <h2 className="text-h1 font-semibold tracked-display text-bone md:text-display">
               Built for how you actually invite.
             </h2>
-            <p className="mt-5 max-w-[42ch] text-body text-bone/65">
+            <p className="mt-5 max-w-[42ch] text-body text-bone/80">
               One event. One config. A link that fits in a WhatsApp chat.
             </p>
           </motion.div>
@@ -560,7 +614,7 @@ function WhyItFits() {
               <h3 className="text-h3 font-medium tracked-display text-bone">
                 {item.title}
               </h3>
-              <p className="mt-3 text-body text-bone/60">{item.body}</p>
+              <p className="mt-3 text-body text-bone/80">{item.body}</p>
             </motion.li>
           ))}
         </ul>
@@ -597,7 +651,7 @@ function Gallery() {
             <h2 className="text-h1 font-semibold tracked-display text-bone md:text-display">
               {filtered.length} of {templates.length} live templates
             </h2>
-            <p className="mt-4 max-w-[48ch] text-body text-bone/60">
+            <p className="mt-4 max-w-[48ch] text-body text-bone/80">
               Every card is a real template — {PRICE_PER_TEMPLATE}. Open any to explore the full animated invite.
             </p>
           </div>
@@ -611,7 +665,7 @@ function Gallery() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by name or vibe"
-              className="w-full rounded-pill border border-line bg-night-card px-5 py-3 text-body text-bone placeholder:text-bone/35 focus:border-emerald focus:outline-none"
+              className="w-full rounded-pill border border-line bg-night-card px-5 py-3 text-body text-bone placeholder:text-bone/55 focus:border-emerald focus:outline-none"
             />
           </div>
         </header>
@@ -626,7 +680,7 @@ function Gallery() {
               className={`shrink-0 rounded-pill px-5 py-2 text-caption uppercase tracking-eyebrow transition-colors duration-200 ease-soft active:scale-[0.98] ${
                 filter === f.key
                   ? "bg-emerald text-bone"
-                  : "border border-line bg-night-card text-bone/65 hover:border-bone/25 hover:text-bone"
+                  : "border border-line bg-night-card text-bone/80 hover:border-bone/25 hover:text-bone"
               }`}
             >
               {f.label}
@@ -653,7 +707,7 @@ function Gallery() {
                 <h3 className="text-h3 font-medium tracked-display text-bone">
                   {t.name}
                 </h3>
-                <p className="mt-2 text-body leading-relaxed text-bone/60">
+                <p className="mt-2 text-body leading-relaxed text-bone/80">
                   {t.tagline}
                 </p>
               </div>
@@ -662,7 +716,7 @@ function Gallery() {
         </div>
 
         {filtered.length === 0 && (
-          <p className="py-24 text-center text-body text-bone/50">
+          <p className="py-24 text-center text-body text-bone/70">
             No templates match. Try a different filter or search term.
           </p>
         )}
@@ -718,7 +772,7 @@ function Process() {
               <h3 className="text-h3 font-medium tracked-display text-bone">
                 {s.title}
               </h3>
-              <p className="mt-3 text-body text-bone/60">{s.body}</p>
+              <p className="mt-3 text-body text-bone/80">{s.body}</p>
             </motion.li>
           ))}
         </ol>
@@ -743,7 +797,7 @@ function Contact() {
         <h2 className="text-h1 font-semibold tracked-display text-bone md:text-display">
           Tell us your date. We will send the next steps.
         </h2>
-        <p className="mt-5 text-body text-bone/60">
+        <p className="mt-5 text-body text-bone/80">
           One wedding. One day. One invitation that fits in a WhatsApp message.
           Flat pricing — {PRICE_PER_TEMPLATE}, one-time, no subscription.
         </p>
@@ -752,7 +806,7 @@ function Contact() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-pill bg-emerald px-7 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:bg-emerald-soft active:scale-[0.98]"
+            className="inline-flex items-center gap-2 rounded-pill bg-emerald px-7 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:bg-emerald-deep active:scale-[0.98]"
           >
             <WhatsappLogo weight="fill" className="h-4 w-4" />
             WhatsApp
@@ -782,12 +836,12 @@ function Footer() {
           className="h-12 w-auto opacity-40"
           style={{ filter: 'brightness(0) invert(1)' }}
         />
-        <p className="text-caption uppercase tracking-eyebrow text-bone/40">
+        <p className="text-caption uppercase tracking-eyebrow text-bone/60">
           Handcrafted in India · {templates.length} live templates
         </p>
       </div>
       
-      <div className="mt-4 flex flex-wrap items-center justify-center gap-6 text-caption uppercase tracking-eyebrow text-bone/60">
+      <div className="mt-4 flex flex-wrap items-center justify-center gap-6 text-caption uppercase tracking-eyebrow text-bone/75">
         <a
           href={INSTAGRAM_URL}
           target="_blank"
@@ -818,11 +872,24 @@ function Footer() {
 }
 
 export default function App() {
-  const pathname = typeof window !== "undefined" ? window.location.pathname.replace(/\/$/, "") : "";
+  const [pathname, setPathname] = useState(() =>
+    typeof window !== "undefined" ? window.location.pathname.replace(/\/$/, "") : ""
+  );
   const searchParams = useMemo(() => {
     if (typeof window === "undefined") return new URLSearchParams();
     return new URLSearchParams(window.location.search);
+  }, [pathname]);
+
+  useEffect(() => {
+    const sync = () => setPathname(window.location.pathname.replace(/\/$/, ""));
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
   }, []);
+
+  const navigateTemplate = (href: string) => {
+    window.history.pushState({}, "", href);
+    setPathname(href.replace(/\/$/, ""));
+  };
 
   const previewParam = searchParams.get("preview");
   const blogParam = searchParams.get("blog");
@@ -854,7 +921,12 @@ export default function App() {
 
   // Render template preview viewer if route matches /templates/:id or ?preview=<folder>
   if (previewTemplate) {
-    return <TemplateViewer template={previewTemplate} />;
+    return (
+      <TemplateViewer
+        template={previewTemplate}
+        onNavigate={navigateTemplate}
+      />
+    );
   }
 
   // Render Blog Hub if route is /blog or ?blog=all

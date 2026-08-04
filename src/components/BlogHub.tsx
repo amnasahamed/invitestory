@@ -74,7 +74,7 @@ export function BlogHub() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-pill bg-emerald px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors hover:bg-emerald-soft md:px-5"
+            className="inline-flex items-center gap-2 rounded-pill bg-emerald px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors hover:bg-emerald-deep md:px-5"
           >
             <WhatsappLogo weight="fill" className="h-4 w-4" />
             WhatsApp
