@@ -11,16 +11,25 @@ type SeoHeadProps = {
 };
 
 export function SeoHead({
-  title = "InviteStory | Digital Wedding Invitations for Indian Couples",
-  description = "Handcrafted digital wedding invitations for Indian couples. Browse 20 live templates - royal palace, South Indian, Nikah, garden, and beach - then customise yours.",
-  keywords = ["digital wedding invitation", "WhatsApp wedding invite", "Indian wedding cards", "wedding invitation templates"],
+  title = "InviteStory | Digital Wedding Invitations for Indian Weddings",
+  description = "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing.",
+  keywords = [
+    "digital wedding invitation",
+    "digital wedding invitations India",
+    "WhatsApp wedding invite",
+    "Indian wedding website",
+    "Muslim wedding invitations",
+    "Hindu wedding website",
+    "Save the date digital invite",
+    "online wedding card maker"
+  ],
   canonicalUrl = "https://invitestory.in",
   imageUrl = "https://invitestory.in/images/og-cover.webp",
   blogPost,
 }: SeoHeadProps) {
   useEffect(() => {
     // 1. Update Title
-    const finalTitle = blogPost ? `${blogPost.title} | InviteStory Blog` : title;
+    const finalTitle = blogPost ? `${blogPost.title} | InviteStory` : title;
     document.title = finalTitle;
 
     // Helper to set or create meta tag
@@ -59,7 +68,7 @@ export function SeoHead({
       : canonicalUrl;
     canonical.setAttribute("href", currentUrl);
 
-    // 2. Inject JSON-LD Schema
+    // 2. Inject Schema.org JSON-LD (Organization, WebSite, Product/Service, BreadcrumbList, FAQPage)
     const schemaId = "invitestory-jsonld-schema";
     let scriptEl = document.getElementById(schemaId) as HTMLScriptElement | null;
     if (!scriptEl) {
@@ -73,39 +82,100 @@ export function SeoHead({
       {
         "@context": "https://schema.org",
         "@type": "Organization",
+        "@id": "https://invitestory.in/#organization",
         "name": "InviteStory",
         "url": "https://invitestory.in",
-        "logo": "https://invitestory.in/favicon.ico",
+        "logo": "https://invitestory.in/images/og-cover.webp",
         "sameAs": ["https://www.instagram.com/invitestory.in/"],
-        "description": "Handcrafted digital web invitations for Indian couples with 1-event rule and zero RSVP friction."
+        "description": "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing."
       },
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "@id": "https://invitestory.in/#website",
         "name": "InviteStory",
         "url": "https://invitestory.in",
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": "https://invitestory.in/?blog=all&search={search_term_string}",
-          "query-input": "required name=search_term_string"
+        "description": "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing.",
+        "publisher": { "@id": "https://invitestory.in/#organization" }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "Digital Wedding Invitations India",
+        "serviceType": "Wedding Website & Digital Invitation Design",
+        "provider": { "@id": "https://invitestory.in/#organization" },
+        "description": "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing.",
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "InviteStory Pricing Tiers",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Classic Tier",
+                "description": "Standard templates (Sage Parchment, Marigold Bhavan, Kalyana Mandapam) with couple names, muhurtham, venue maps, calendar integration."
+              },
+              "price": "999",
+              "priceCurrency": "INR"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Signature Tier",
+                "description": "Cultural & aesthetic templates with custom domain options, photo swap, and 24-hour delivery."
+              },
+              "price": "1999",
+              "priceCurrency": "INR"
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Royale Tier",
+                "description": "Premium animated templates with opening palace doors, shutter animations, hand-edited photos, priority WhatsApp support."
+              },
+              "price": "2999",
+              "priceCurrency": "INR"
+            }
+          ]
         }
       },
       {
         "@context": "https://schema.org",
-        "@type": "Product",
-        "name": "InviteStory Digital Wedding Invitation",
-        "description": "Interactive web wedding invitation for Indian couples. Delivered in 24 hours with Google Calendar and Maps.",
-        "brand": {
-          "@type": "Brand",
-          "name": "InviteStory"
-        },
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "INR",
-          "lowPrice": "999",
-          "highPrice": "2999",
-          "offerCount": "20"
-        }
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://invitestory.in"
+          },
+          ...(blogPost
+            ? [
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Guides",
+                  "item": "https://invitestory.in/?blog=all"
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "name": blogPost.title,
+                  "item": currentUrl
+                }
+              ]
+            : [
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "name": "Digital Wedding Invitations",
+                  "item": "https://invitestory.in/#gallery"
+                }
+              ])
+        ]
       }
     ];
 
@@ -154,7 +224,6 @@ export function SeoHead({
     scriptEl.textContent = JSON.stringify(schemas);
 
     return () => {
-      // Clean up script on unmount
       if (scriptEl && scriptEl.parentNode) {
         scriptEl.parentNode.removeChild(scriptEl);
       }
