@@ -2,6 +2,9 @@
 /**
  * Rewrite absolute /templates/<folder>/ <base> tags to a location-relative
  * base so previews work on localhost, Netlify root, and project subpaths.
+ *
+ * NOTE: Never call history.replaceState inside iframe templates, as it breaks
+ * relative asset loading (e.g. yt-bg-music.js and dynamic CSS/JS chunks).
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -19,10 +22,6 @@ const NEW_SCRIPT = `    <script>
         var b = document.createElement("base");
         b.href = dir;
         document.head.prepend(b);
-        try {
-          // Keep SPA routers matching their root route inside the iframe.
-          history.replaceState(null, "", "/");
-        } catch (e) {}
       })();
     </script>`;
 
@@ -47,7 +46,6 @@ for (const folder of fs.readdirSync(templatesRoot)) {
   } else if (OLD_BASE_BLOCK2.test(html)) {
     html = html.replace(OLD_BASE_BLOCK2, NEW_SCRIPT);
   } else if (/href\s*=\s*["']\/templates\//.test(html)) {
-    // fallback: replace any remaining absolute base assignment
     html = html.replace(
       /b\.href\s*=\s*["']\/templates\/[^"']+["']\s*;?/,
       "b.href = new URL(\"./\", location.href).href;",
@@ -57,9 +55,11 @@ for (const folder of fs.readdirSync(templatesRoot)) {
       "base.href = new URL(\"./\", location.href).href;",
     );
   } else if (!html.includes("new URL(\"./\"") && html.includes("<head")) {
-    // templates with no base rewrite (e.g. shubha) - inject one for consistency
     html = html.replace(/<head[^>]*>/i, (m) => `${m}\n${NEW_SCRIPT}`);
   }
+
+  // Ensure history.replaceState is stripped if any remaining instances exist
+  html = html.replace(/try\s*\{\s*history\.replaceState\(null,\s*""\s*,\s*"\/?"\);\s*\}\s*catch\s*\(e\)\s*\{\}/g, "");
 
   if (html !== before) {
     fs.writeFileSync(indexPath, html);
