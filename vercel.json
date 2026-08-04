@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/templates/:slug",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/index.html"
+    },
+    {
       "source": "/((?!templates/[^/]+/|assets/|images/).*)",
       "destination": "/index.html"
     }
