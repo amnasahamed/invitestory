@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
- * Rewrite absolute /templates/<folder>/ <base> tags to a location-relative
- * base so previews work on localhost, Netlify root, and project subpaths.
+ * Rewrite template <base> tags using robust path normalization that handles:
+ * - Vercel cleanUrls (where /templates/folder/index.html becomes /templates/folder)
+ * - Trailing slashes vs no trailing slashes
+ * - Subpaths & localhost dev servers
  *
- * NOTE: Never call history.replaceState inside iframe templates, as it breaks
- * relative asset loading (e.g. yt-bg-music.js and dynamic CSS/JS chunks).
+ * Usage: node scripts/fix-template-base.mjs
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -15,8 +16,15 @@ const templatesRoot = path.resolve(__dirname, "../public/templates");
 
 const NEW_SCRIPT = `    <script>
       (function () {
-        // Resolve assets from this template folder on any host/path.
-        var dir = new URL("./", location.href).href;
+        var path = location.pathname;
+        if (!path.endsWith("/")) {
+          if (path.endsWith(".html")) {
+            path = path.substring(0, path.lastIndexOf("/") + 1);
+          } else {
+            path = path + "/";
+          }
+        }
+        var dir = location.origin + path;
         var existing = document.querySelector("base");
         if (existing) existing.remove();
         var b = document.createElement("base");
@@ -45,20 +53,11 @@ for (const folder of fs.readdirSync(templatesRoot)) {
     html = html.replace(OLD_BASE_BLOCK, NEW_SCRIPT);
   } else if (OLD_BASE_BLOCK2.test(html)) {
     html = html.replace(OLD_BASE_BLOCK2, NEW_SCRIPT);
-  } else if (/href\s*=\s*["']\/templates\//.test(html)) {
-    html = html.replace(
-      /b\.href\s*=\s*["']\/templates\/[^"']+["']\s*;?/,
-      "b.href = new URL(\"./\", location.href).href;",
-    );
-    html = html.replace(
-      /base\.href\s*=\s*["']\/templates\/[^"']+["']\s*;?/,
-      "base.href = new URL(\"./\", location.href).href;",
-    );
-  } else if (!html.includes("new URL(\"./\"") && html.includes("<head")) {
+  } else if (!html.includes("location.origin + path") && html.includes("<head")) {
     html = html.replace(/<head[^>]*>/i, (m) => `${m}\n${NEW_SCRIPT}`);
   }
 
-  // Ensure history.replaceState is stripped if any remaining instances exist
+  // Strip any legacy history.replaceState attempts
   html = html.replace(/try\s*\{\s*history\.replaceState\(null,\s*""\s*,\s*"\/?"\);\s*\}\s*catch\s*\(e\)\s*\{\}/g, "");
 
   if (html !== before) {

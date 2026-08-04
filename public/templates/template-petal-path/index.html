@@ -1,10 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-                            <script>
+                                    <script>
       (function () {
-        // Resolve assets from this template folder on any host/path.
-        var dir = new URL("./", location.href).href;
+        var path = location.pathname;
+        if (!path.endsWith("/")) {
+          if (path.endsWith(".html")) {
+            path = path.substring(0, path.lastIndexOf("/") + 1);
+          } else {
+            path = path + "/";
+          }
+        }
+        var dir = location.origin + path;
         var existing = document.querySelector("base");
         if (existing) existing.remove();
         var b = document.createElement("base");
