@@ -276,7 +276,8 @@ function TopBar() {
           <img
             src={`${BASE}images/logo-full.png`}
             alt="InviteStory – Digital Wedding Cards"
-            className="h-8 w-auto md:h-9"
+            className="h-9 w-auto md:h-10"
+            style={{ filter: 'brightness(0) invert(1)' }}
           />
         </a>
         <nav className="hidden items-center gap-8 md:flex">
@@ -666,7 +667,8 @@ function Footer() {
         <img
           src={`${BASE}images/logo-mark.png`}
           alt="InviteStory"
-          className="h-10 w-auto opacity-50"
+          className="h-12 w-auto opacity-40"
+          style={{ filter: 'brightness(0) invert(1)' }}
         />
         <p className="text-caption uppercase tracking-eyebrow text-bone/40">
           Handcrafted in India · {templates.length} live templates
