@@ -12,14 +12,6 @@
       "destination": "/index.html"
     },
     {
-      "source": "/templates/template-(.*)",
-      "destination": "/templates/template-$1/index.html"
-    },
-    {
-      "source": "/templates/(.*)",
-      "destination": "/index.html"
-    },
-    {
       "source": "/digital-wedding-invitations",
       "destination": "/index.html"
     },
@@ -57,6 +49,10 @@
     },
     {
       "source": "/wedding-invitation-website",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/templates/:slug((?!template-).*)",
       "destination": "/index.html"
     }
   ],

@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 /**
- * Inject hardcoded static <base href="/templates/<folder>/"> and clean history
- * replacement so that:
- * 1. All relative assets (assets/*.js, styles/*.css, yt-bg-music.js) load from
- *    /templates/<folder>/ without 404 errors, regardless of Vercel cleanUrls.
- * 2. React Router inside template SPAs sees location.pathname === "/" and does
- *    not crash with "No routes matched location /templates/...".
+ * Inject hardcoded static <base href="/templates/<folder>/"> into all template index.html files
+ * so that all relative assets (assets/*.js, assets/*.css, yt-bg-music.js) load cleanly
+ * from /templates/<folder>/ without 404 errors.
  *
  * Usage: node scripts/fix-template-base.mjs
  */
@@ -29,20 +26,14 @@ for (const folder of fs.readdirSync(templatesRoot)) {
   let html = fs.readFileSync(indexPath, "utf8");
   const before = html;
 
-  // Remove old base tags and old inline base scripts
+  // Remove old base tags and old inline scripts
   html = html.replace(/\s*<base[^>]*>\s*/gi, "\n");
   html = html.replace(/\s*<script>\s*\(function\s*\(\)\s*\{[\s\S]*?createElement\(["']base["']\)[\s\S]*?\}\)\(\);\s*<\/script>\s*/gi, "\n");
+  html = html.replace(/\s*<script>\s*try\s*\{\s*if\s*\([^)]*starts-With[^)]*\)[\s\S]*?<\/script>\s*/gi, "\n");
   html = html.replace(/\s*<!--\s*data-invitestory-base\s*-->[\s\S]*?(?=\s*<(?:meta|title|link|script))/gi, "\n");
 
   const baseBlock = `    <!-- ${BASE_MARKER} -->
-    <base href="/templates/${folder}/" />
-    <script>
-      try {
-        if (window.location.pathname.startsWith("/templates/")) {
-          history.replaceState(null, "", "/");
-        }
-      } catch (e) {}
-    </script>`;
+    <base href="/templates/${folder}/" />`;
 
   // Insert baseBlock right after <head>
   if (/<head[^>]*>/i.test(html)) {
