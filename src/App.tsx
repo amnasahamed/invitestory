@@ -315,63 +315,172 @@ function TopBar() {
 }
 
 /* ── Hero ────────────────────────────────────────────────────────── */
+const FEATURED_HERO = templates.find((t) => t.id === "rajwada-royale") ?? templates[0];
+
 function Hero() {
   const reduce = useReducedMotion();
+  const featuredPoster = `${BASE}templates/${FEATURED_HERO.folder}/${FEATURED_HERO.poster}`;
+  const featuredHref = previewHref(FEATURED_HERO.folder);
 
   return (
     <section className="relative min-h-[100dvh] overflow-hidden">
-      <img
-        src={`${BASE}images/hero-invite.webp`}
-        alt=""
-        width={1920}
-        height={1080}
-        fetchPriority="high"
-        decoding="async"
-        className="absolute inset-0 h-full w-full object-cover"
-      />
+      {/* Responsive background: light mobile asset, royal poster on md+ */}
+      <picture>
+        <source
+          media="(min-width: 768px)"
+          srcSet={featuredPoster}
+        />
+        <img
+          src={`${BASE}images/hero-invite.webp`}
+          alt=""
+          width={1920}
+          height={1080}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover object-[center_30%] md:object-center"
+          aria-hidden
+        />
+      </picture>
+
+      {/* Overlay gradients */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-night/90 via-night/55 to-night/15"
+        className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/75 to-night/40 md:to-night/25"
         aria-hidden
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-night/80 via-transparent to-night/25"
+        className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-night/30"
+        aria-hidden
+      />
+      {/* Radial spotlight on text column */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 60% at 20% 55%, rgba(61,122,95,0.22) 0%, transparent 65%)",
+        }}
         aria-hidden
       />
 
-      <div className="relative mx-auto flex min-h-[100dvh] max-w-7xl flex-col justify-end px-5 pb-16 pt-24 md:justify-center md:px-8 md:pb-24 md:pt-20">
+      <div className="relative mx-auto grid min-h-[100dvh] max-w-7xl grid-cols-1 items-end gap-10 px-5 pb-16 pt-24 md:grid-cols-12 md:items-center md:gap-12 md:px-8 md:pb-24 md:pt-20">
+        {/* Left: copy + CTAs */}
         <motion.div
-          className="max-w-xl"
+          className="md:col-span-6 lg:col-span-6"
           initial={reduce ? false : { opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          <p className="text-3xl font-semibold tracked-display text-bone md:text-5xl lg:text-6xl">
-            InviteStory
+          <p className="inline-flex items-center gap-2 rounded-pill border border-line bg-night/50 px-3.5 py-1.5 text-caption uppercase tracking-eyebrow text-emerald-soft backdrop-blur-md">
+            Handcrafted in India · {templates.length} live templates
           </p>
-          <h1 className="mt-4 text-2xl font-medium leading-[1.15] tracked-display text-bone/95 md:mt-6 md:text-4xl lg:text-5xl">
-            Pick a template.
+
+          <h1 className="mt-5 text-3xl font-semibold leading-[1.12] tracked-display text-bone md:mt-6 md:text-5xl lg:text-6xl">
+            Digital wedding invites
             <br />
-            We shape it to your day.
+            <span className="text-bone/90">made for WhatsApp.</span>
           </h1>
+
           <p className="mt-5 max-w-md text-base leading-relaxed text-bone/70 md:mt-6 md:text-body">
-            Hand-built digital wedding invites for Indian couples. Share one link on WhatsApp.
+            Pick a royal template. We customise it to your day and send a live link within 24 hours — ready to share with family.
           </p>
+
           <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4">
-            <a
-              href="#gallery"
-              className="rounded-pill bg-bone px-6 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-night transition-transform duration-200 ease-soft hover:scale-[1.02] active:scale-[0.98]"
-            >
-              Browse samples
-            </a>
             <a
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-pill border border-bone/25 px-6 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-bone transition-colors duration-200 ease-soft hover:border-bone/50 active:scale-[0.98]"
+              className="inline-flex items-center gap-2 rounded-pill bg-emerald px-6 py-3.5 text-caption font-semibold uppercase tracking-eyebrow text-bone shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] hover:bg-emerald-soft active:scale-[0.98]"
             >
               <WhatsappLogo weight="fill" className="h-4 w-4" />
               WhatsApp
             </a>
+            <a
+              href="#gallery"
+              className="rounded-pill border border-bone/25 bg-bone/5 px-6 py-3.5 text-caption font-medium uppercase tracking-eyebrow text-bone backdrop-blur-sm transition-colors duration-200 ease-soft hover:border-bone/50 hover:bg-bone/10 active:scale-[0.98]"
+            >
+              Browse samples
+            </a>
+            <a
+              href="#process"
+              className="text-caption font-medium uppercase tracking-eyebrow text-bone/55 transition-colors hover:text-bone"
+            >
+              How it works
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Right: featured template preview card */}
+        <motion.div
+          className="hidden md:col-span-6 md:block lg:col-span-5 lg:col-start-8"
+          initial={reduce ? false : { opacity: 0, y: 36, scale: 0.97 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.75, delay: reduce ? 0 : 0.12, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <div className="relative mx-auto max-w-sm">
+            {/* Soft gold frame glow */}
+            <div
+              className="pointer-events-none absolute -inset-3 rounded-[22px] opacity-60"
+              style={{
+                background:
+                  "radial-gradient(ellipse at center, rgba(201,168,76,0.18) 0%, transparent 70%)",
+              }}
+              aria-hidden
+            />
+            <figure className="relative overflow-hidden rounded-card border border-line/60 bg-night-card shadow-calm ring-1 ring-bone/10">
+              <div className="relative aspect-[9/14] w-full overflow-hidden bg-night-soft">
+                <img
+                  src={featuredPoster}
+                  alt={`${FEATURED_HERO.name} — ${FEATURED_HERO.tagline}`}
+                  width={720}
+                  height={1120}
+                  loading="eager"
+                  decoding="async"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-night/95 via-night/20 to-transparent"
+                  aria-hidden
+                />
+                <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
+                  <div className="flex gap-1.5">
+                    {FEATURED_HERO.palette.map((c) => (
+                      <span
+                        key={c}
+                        className="h-2.5 w-2.5 rounded-full ring-1 ring-bone/30"
+                        style={{ background: c }}
+                      />
+                    ))}
+                  </div>
+                  <span className="rounded-pill border border-line bg-night/80 px-2.5 py-0.5 text-[10px] font-medium uppercase tracking-eyebrow text-emerald-soft backdrop-blur-md">
+                    Live Template
+                  </span>
+                </div>
+                <figcaption className="absolute inset-x-0 bottom-0 z-10 px-5 pb-5 pt-12">
+                  <p className="text-h3 font-medium tracked-display leading-none text-bone">
+                    {FEATURED_HERO.name}
+                  </p>
+                  <p className="mt-2 text-caption uppercase tracking-eyebrow text-bone/65">
+                    {FEATURED_HERO.weddingType}
+                  </p>
+                  <div className="mt-4 flex flex-wrap items-center gap-2">
+                    <a
+                      href={featuredHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-pill bg-bone px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-night shadow-calm transition-transform duration-200 ease-soft hover:scale-[1.02] active:scale-[0.98]"
+                    >
+                      Open sample
+                      <ArrowUpRight weight="bold" className="h-3.5 w-3.5" />
+                    </a>
+                    <a
+                      href="#gallery"
+                      className="rounded-pill border border-bone/25 px-4 py-2 text-caption font-medium uppercase tracking-eyebrow text-bone/80 transition-colors hover:border-bone/50 hover:text-bone"
+                    >
+                      Browse all
+                    </a>
+                  </div>
+                </figcaption>
+              </div>
+            </figure>
           </div>
         </motion.div>
       </div>
