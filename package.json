@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "npm run inject:all && tsc -b && vite build",
     "preview": "vite preview --host",
     "inject:music": "node scripts/inject-yt-music.mjs",
     "inject:fonts": "node scripts/inject-template-fonts.mjs",
