@@ -10,8 +10,9 @@
     "inject:music": "node scripts/inject-yt-music.mjs",
     "inject:fonts": "node scripts/inject-template-fonts.mjs",
     "inject:meta": "node scripts/inject-og-meta.mjs",
+    "inject:template-clean-urls": "node scripts/generate-template-clean-url-pages.mjs",
     "fix:base": "node scripts/fix-template-base.mjs",
-    "inject:all": "npm run inject:music && npm run inject:fonts && npm run inject:meta && npm run fix:base"
+    "inject:all": "npm run inject:music && npm run inject:fonts && npm run inject:meta && npm run inject:template-clean-urls && npm run fix:base"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.4.0",
