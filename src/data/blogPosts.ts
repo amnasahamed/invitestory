@@ -30,7 +30,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "7 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "Amnas Ahamed",
+      name: "Satoshi Nakamoto",
       role: "Design Lead @ InviteStory",
       avatar: "images/why-share.webp"
     },
@@ -86,7 +86,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Team",
+      name: "Satoshi Nakamoto",
       role: "Product Strategy",
       avatar: "images/why-share.webp"
     },
@@ -123,7 +123,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Strategy Team",
+      name: "Satoshi Nakamoto",
       role: "Product Review",
       avatar: "images/why-share.webp"
     },
@@ -190,7 +190,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Team",
+      name: "Satoshi Nakamoto",
       role: "Destination Lead",
       avatar: "images/why-share.webp"
     },
@@ -225,7 +225,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Editorial",
+      name: "Satoshi Nakamoto",
       role: "Trend Analyst",
       avatar: "images/why-share.webp"
     },
@@ -262,7 +262,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Global",
+      name: "Satoshi Nakamoto",
       role: "NRI Outreach Lead",
       avatar: "images/why-share.webp"
     },
@@ -297,7 +297,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Audio Team",
+      name: "Satoshi Nakamoto",
       role: "Media Specialist",
       avatar: "images/why-share.webp"
     },
@@ -334,7 +334,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Photo Editor",
+      name: "Satoshi Nakamoto",
       role: "Visual Designer",
       avatar: "images/why-share.webp"
     },
@@ -372,7 +372,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Design Studio",
+      name: "Satoshi Nakamoto",
       role: "Color Theorist",
       avatar: "images/why-share.webp"
     },
@@ -404,7 +404,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "Amnas Ahamed",
+      name: "Satoshi Nakamoto",
       role: "Core Developer",
       avatar: "images/why-share.webp"
     },
@@ -440,7 +440,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "8 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Editorial",
+      name: "Satoshi Nakamoto",
       role: "Design Team",
       avatar: "images/why-share.webp"
     },
@@ -485,7 +485,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "7 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Editorial",
+      name: "Satoshi Nakamoto",
       role: "Cultural Design Specialist",
       avatar: "images/why-share.webp"
     },
@@ -522,7 +522,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Editorial",
+      name: "Satoshi Nakamoto",
       role: "Heritage Design Team",
       avatar: "images/why-share.webp"
     },
@@ -559,7 +559,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "Amnas Ahamed",
+      name: "Satoshi Nakamoto",
       role: "Lead Specialist",
       avatar: "images/why-share.webp"
     },
@@ -596,7 +596,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Cultural Team",
+      name: "Satoshi Nakamoto",
       role: "Marathi Specialist",
       avatar: "images/why-share.webp"
     },
@@ -632,7 +632,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Cultural Team",
+      name: "Satoshi Nakamoto",
       role: "Eastern India Lead",
       avatar: "images/why-share.webp"
     },
@@ -668,7 +668,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Cultural Team",
+      name: "Satoshi Nakamoto",
       role: "North India Specialist",
       avatar: "images/why-share.webp"
     },
@@ -704,7 +704,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Cultural Team",
+      name: "Satoshi Nakamoto",
       role: "Gujarati Lead",
       avatar: "images/why-share.webp"
     },
@@ -740,7 +740,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Regional",
+      name: "Satoshi Nakamoto",
       role: "Kerala Lead",
       avatar: "images/why-share.webp"
     },
@@ -775,7 +775,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Creative Studio",
+      name: "Satoshi Nakamoto",
       role: "Animation Specialist",
       avatar: "images/why-share.webp"
     },
@@ -811,7 +811,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "Amnas Ahamed",
+      name: "Satoshi Nakamoto",
       role: "Founder & Lead Designer",
       avatar: "images/why-share.webp"
     },
@@ -854,7 +854,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Finance Team",
+      name: "Satoshi Nakamoto",
       role: "Cost Analyst",
       avatar: "images/why-share.webp"
     },
@@ -889,7 +889,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Team",
+      name: "Satoshi Nakamoto",
       role: "Pricing Specialist",
       avatar: "images/why-share.webp"
     },
@@ -923,7 +923,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Eco Team",
+      name: "Satoshi Nakamoto",
       role: "Sustainability Lead",
       avatar: "images/why-share.webp"
     },
@@ -959,7 +959,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "4 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Express",
+      name: "Satoshi Nakamoto",
       role: "Operations Lead",
       avatar: "images/why-share.webp"
     },
@@ -991,7 +991,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "7 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Editorial",
+      name: "Satoshi Nakamoto",
       role: "Copywriting Specialist",
       avatar: "images/why-share.webp"
     },
@@ -1030,7 +1030,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Cultural Team",
+      name: "Satoshi Nakamoto",
       role: "Interfaith Specialist",
       avatar: "images/why-share.webp"
     },
@@ -1066,7 +1066,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "Amnas Ahamed",
+      name: "Satoshi Nakamoto",
       role: "Tech Architecture Lead",
       avatar: "images/why-share.webp"
     },
@@ -1101,7 +1101,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "5 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Etiquette Team",
+      name: "Satoshi Nakamoto",
       role: "Communication Lead",
       avatar: "images/why-share.webp"
     },
@@ -1136,7 +1136,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "6 min read",
     publishDate: "August 3, 2026",
     author: {
-      name: "InviteStory Operations",
+      name: "Satoshi Nakamoto",
       role: "Event Planner",
       avatar: "images/why-share.webp"
     },

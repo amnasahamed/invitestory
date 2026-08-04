@@ -246,7 +246,7 @@ export function SeoHead({
         "datePublished": "2026-08-03T00:00:00+05:30",
         "author": {
           "@type": "Person",
-          "name": blogPost.author.name || "Amaan Sahamed",
+          "name": blogPost.author.name || "Satoshi Nakamoto",
           "jobTitle": blogPost.author.role || "Lead Design Strategist",
           "worksFor": { "@id": "https://invitestory.in/#organization" },
           "sameAs": "https://www.instagram.com/invitestory.in/"
