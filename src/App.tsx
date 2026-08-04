@@ -6,6 +6,7 @@ import {
   ArrowRight,
   CaretLeft,
   CaretRight,
+  Check,
   InstagramLogo,
   WhatsappLogo,
 } from "@phosphor-icons/react";
@@ -335,6 +336,12 @@ function TopBar() {
             Templates
           </a>
           <a
+            href="#included"
+            className="text-caption uppercase tracking-eyebrow text-bone/80 transition-colors hover:text-bone"
+          >
+            Included
+          </a>
+          <a
             href="#process"
             className="text-caption uppercase tracking-eyebrow text-bone/80 transition-colors hover:text-bone"
           >
@@ -426,8 +433,12 @@ function Hero() {
             <span className="text-bone/90">made for WhatsApp.</span>
           </h1>
 
-          <p className="mt-5 max-w-md text-base leading-relaxed text-bone/85 md:mt-6 md:text-body">
-            Pick a template for {PRICE_LABEL}. We customise it to your day and send a live link within 24 hours — ready to share with family.
+          <p className="mt-5 max-w-md text-lg font-medium leading-snug text-bone md:mt-6 md:text-xl">
+            You pick. We build. You get a finished WhatsApp link in 24 hours.
+          </p>
+
+          <p className="mt-3 max-w-md text-base leading-relaxed text-bone/85 md:text-body">
+            Choose a template for {PRICE_LABEL}. Send your details — we customise everything. No editor. No design skills. No account.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4">
@@ -714,6 +725,70 @@ function Gallery() {
   );
 }
 
+/* ── What's included ─────────────────────────────────────────────── */
+const INCLUDED = [
+  "Couple names & family wording",
+  "Your photos in the template",
+  "Wedding date & muhurtham time",
+  "Venue name & full address",
+  "Google Maps open link",
+  "Add to Google Calendar",
+  "Your song (YouTube link)",
+  "Revisions until you approve",
+] as const;
+
+function WhatsIncluded() {
+  const reduce = useReducedMotion();
+
+  return (
+    <section id="included" className="bg-night py-20 md:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 md:grid-cols-12 md:gap-16 md:px-8">
+        <motion.div
+          className="md:col-span-5"
+          initial={reduce ? false : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <h2 className="text-h1 font-semibold tracked-display text-bone md:text-display">
+            What you get.
+          </h2>
+          <p className="mt-5 max-w-[42ch] text-body text-bone/80">
+            One finished invitation link — personalised to your day, ready to share on WhatsApp.
+          </p>
+          <p className="mt-4 text-caption uppercase tracking-eyebrow text-emerald-soft">
+            Flat {PRICE_PER_TEMPLATE} · no subscription
+          </p>
+        </motion.div>
+
+        <ul className="grid content-start gap-0 md:col-span-7 md:grid-cols-2 md:gap-x-10">
+          {INCLUDED.map((item, i) => (
+            <motion.li
+              key={item}
+              initial={reduce ? false : { opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{
+                duration: 0.45,
+                delay: reduce ? 0 : i * 0.04,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="flex items-start gap-3 border-t border-line py-4"
+            >
+              <Check
+                weight="bold"
+                className="mt-1 h-4 w-4 shrink-0 text-emerald-soft"
+                aria-hidden
+              />
+              <span className="text-body text-bone/90">{item}</span>
+            </motion.li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 /* ── Process ─────────────────────────────────────────────────────── */
 const STEPS = [
   {
@@ -935,6 +1010,7 @@ export default function App() {
       <main>
         <Hero />
         <WhyItFits />
+        <WhatsIncluded />
         <Gallery />
         <Process />
         <Contact />

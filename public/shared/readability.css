@@ -1,0 +1,70 @@
+/**
+ * InviteStory readability boost for live template previews.
+ * Raises muted text opacities and darkens light-theme accent tokens
+ * so venue/body/caption copy stays readable on phones.
+ */
+:root,
+:host {
+  --gold: oklch(0.58 0.1 82) !important;
+  --gold-soft: oklch(0.64 0.08 82) !important;
+  --sepia: oklch(0.48 0.045 62) !important;
+}
+
+@supports (color: color-mix(in lab, red, red)) {
+  .text-ink\/40,
+  .text-ink\/50,
+  .text-ink\/55,
+  .text-ink\/60,
+  .text-ink\/65 {
+    color: color-mix(in oklab, var(--ink) 84%, transparent) !important;
+  }
+
+  .text-sepia\/40,
+  .text-sepia\/50,
+  .text-sepia\/55,
+  .text-sepia\/60,
+  .text-sepia\/65,
+  .text-sepia\/70,
+  .text-sepia\/75,
+  .text-sepia\/80 {
+    color: color-mix(in oklab, var(--sepia, var(--ink)) 90%, transparent) !important;
+  }
+
+  .text-olive\/50,
+  .text-olive\/60,
+  .text-olive\/70,
+  .text-olive\/80 {
+    color: color-mix(in oklab, var(--olive, var(--ink)) 88%, transparent) !important;
+  }
+
+  .text-paper\/35,
+  .text-paper\/40,
+  .text-paper\/50,
+  .text-paper\/55,
+  .text-paper\/60 {
+    color: color-mix(in oklab, var(--paper, #ede8df) 84%, transparent) !important;
+  }
+
+  .text-cream\/40,
+  .text-cream\/50,
+  .text-cream\/55,
+  .text-cream\/60,
+  .text-cream\/65,
+  .text-cream\/70 {
+    color: color-mix(in oklab, var(--cream, #f3e7d3) 86%, transparent) !important;
+  }
+
+  .text-ivory\/35,
+  .text-ivory\/40,
+  .text-ivory\/50,
+  .text-ivory\/55,
+  .text-ivory\/60 {
+    color: color-mix(in oklab, var(--ivory, #f5efe4) 84%, transparent) !important;
+  }
+
+  .text-gold\/50,
+  .text-gold\/60,
+  .text-gold\/70 {
+    color: color-mix(in oklab, var(--gold) 92%, transparent) !important;
+  }
+}
