@@ -2,11 +2,11 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "routes": [
-    { "src": "^/templates/[^/]+/?$", "dest": "/index.html" },
-    { "src": "^/blog/[^/]+/?$", "dest": "/index.html" },
-    { "handle": "filesystem" },
-    { "src": "^/.*$", "dest": "/index.html" }
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index"
+    }
   ],
   "headers": [
     {
