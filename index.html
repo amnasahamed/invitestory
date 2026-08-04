@@ -14,29 +14,152 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0E1410" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <title>InviteStory | Digital Wedding Invitations</title>
+    <title>InviteStory | Digital Wedding Invitations for Indian Weddings</title>
     <meta
       name="description"
-      content="Handcrafted digital wedding invitations for Indian couples. Browse live templates - royal palace, South Indian, Nikah, garden, and beach - then customise yours."
+      content="Handcrafted digital wedding invitations for Indian couples. Browse 21 live templates - royal palace, South Indian, Nikah, garden, Ghibli, and beach - then customise yours within 24 hours."
     />
     <meta name="author" content="InviteStory" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    <link rel="alternate" type="text/plain" title="LLM Context" href="/llms.txt" />
+    <link rel="canonical" href="https://invitestory.in/" />
+
+    <!-- Open Graph / Social Sharing -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="InviteStory" />
-    <meta property="og:title" content="InviteStory | Digital Wedding Invitations" />
+    <meta property="og:url" content="https://invitestory.in/" />
+    <meta property="og:title" content="InviteStory | Digital Wedding Invitations for Indian Weddings" />
     <meta
       property="og:description"
-      content="Live wedding invitation templates. Pick a style, send your details, share one link on WhatsApp."
+      content="Live digital wedding invitation templates for Indian couples. Pick a style, send your details over WhatsApp, share one link with your guests."
     />
-    <meta property="og:image" content="/images/og-cover.webp" />
+    <meta property="og:image" content="https://invitestory.in/images/og-cover.webp" />
     <meta property="og:image:width" content="1536" />
     <meta property="og:image:height" content="1024" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="InviteStory | Digital Wedding Invitations" />
+    <meta name="twitter:title" content="InviteStory | Digital Wedding Invitations for Indian Weddings" />
     <meta
       name="twitter:description"
-      content="Live wedding invitation templates. Pick a style, send your details, share one link on WhatsApp."
+      content="Live digital wedding invitation templates for Indian couples. Pick a style, send your details over WhatsApp, share one link with your guests."
     />
-    <meta name="twitter:image" content="/images/og-cover.webp" />
+    <meta name="twitter:image" content="https://invitestory.in/images/og-cover.webp" />
+
+    <!-- Schema.org JSON-LD Structured Data for Search Engines & AI Crawlers (AIO / GEO) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://invitestory.in/#website",
+          "url": "https://invitestory.in/",
+          "name": "InviteStory",
+          "description": "Handcrafted digital wedding invitations for Indian couples. Single-link web invites with 24h turnaround, venue maps, and calendar integration.",
+          "publisher": { "@id": "https://invitestory.in/#organization" },
+          "inLanguage": "en-IN"
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://invitestory.in/#organization",
+          "name": "InviteStory",
+          "url": "https://invitestory.in/",
+          "logo": "https://invitestory.in/images/og-cover.webp",
+          "sameAs": ["https://www.instagram.com/invitestory.in/"],
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "availableLanguage": ["English", "Hindi", "Tamil", "Telugu", "Malayalam", "Bengali"]
+          }
+        },
+        {
+          "@type": "Service",
+          "name": "Digital Wedding Invitations India",
+          "serviceType": "Wedding Invitation Web Design",
+          "provider": { "@id": "https://invitestory.in/#organization" },
+          "areaServed": "IN",
+          "description": "Custom single-link digital wedding invitations with 24-hour turnaround, interactive venue maps, calendar integration, and zero RSVP clutter.",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "InviteStory Pricing Tiers",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Classic Tier",
+                  "description": "Standard templates (Sage Parchment, Marigold Bhavan, Kalyana Mandapam) with couple names, muhurtham, venue maps, calendar integration."
+                },
+                "price": "999",
+                "priceCurrency": "INR"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Signature Tier",
+                  "description": "Cultural & aesthetic templates with custom domain options, photo swap, and 24-hour delivery."
+                },
+                "price": "1999",
+                "priceCurrency": "INR"
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Royale Tier",
+                  "description": "Premium animated templates with opening palace doors, shutter animations, hand-edited photos, priority WhatsApp support."
+                },
+                "price": "2999",
+                "priceCurrency": "INR"
+              }
+            ]
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is InviteStory?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "InviteStory is a digital service building single-event, single-link interactive web wedding invitations for Indian couples. You choose a template, send your details over WhatsApp, and receive a custom web invite link within 24 hours."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much do digital wedding invitations cost on InviteStory?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "InviteStory offers flat pricing across three tiers: Classic (₹999), Signature (₹1,999), and Royale (₹2,999) with no hidden fees or subscriptions."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How are invites shared with guests?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Invites are delivered as a single web link optimized for instant sharing on WhatsApp with rich preview cards, title, image, and description."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does InviteStory include RSVP buttons?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. InviteStory intentionally excludes RSVP buttons. In Indian wedding culture, personal phone calls and family visits drive attendance; web invites act as an elegant announcement and hospitality card with venue directions and calendar sync."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
     <script>
       // Skip hero preload on template preview routes (hero is not shown).
       if (!new URLSearchParams(location.search).has("preview")) {
@@ -50,7 +173,105 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Pre-rendered Static HTML Content for AI Crawlers, Scrapers, and No-JS Browsers -->
+      <header style="padding: 2rem; max-width: 1200px; margin: 0 auto; font-family: sans-serif;">
+        <h1>InviteStory — Handcrafted Digital Wedding Invitations for Indian Couples</h1>
+        <p>Single-link interactive web wedding invitations with 24-hour turnaround, Google Maps venue navigation, 1-click Google Calendar sync, and zero RSVP clutter.</p>
+        <nav>
+          <a href="https://invitestory.in/">Home</a> |
+          <a href="https://invitestory.in/llms.txt">LLMs Summary (llms.txt)</a> |
+          <a href="https://invitestory.in/llms-full.txt">Full LLMs Knowledge Base (llms-full.txt)</a> |
+          <a href="https://invitestory.in/sitemap.xml">XML Sitemap</a> |
+          <a href="https://www.instagram.com/invitestory.in/">Instagram</a>
+        </nav>
+      </header>
+
+      <main style="padding: 2rem; max-width: 1200px; margin: 0 auto; font-family: sans-serif; line-height: 1.6;">
+        <section>
+          <h2>About InviteStory</h2>
+          <p>InviteStory (https://invitestory.in) crafts custom single-event, single-link web wedding invitations designed specifically for Indian weddings. Couples select from 21 culturally-curated templates (Royal Palace, South Indian, Nikah, Walima, Hindu Muhurtham, Ghibli Animation, Beach, Garden), send event details over WhatsApp, and receive a live custom web invite link within 24 hours.</p>
+          <ul>
+            <li><strong>One Day, One Wedding Event:</strong> Focuses strictly on the main wedding event. Sub-moments (Baraat, Pheras, Jaimala, Nikah ceremony) fit inside the single-day timeline.</li>
+            <li><strong>No RSVP Friction:</strong> Removes annoying RSVP forms and WhatsApp confirmation buttons—the invite link acts as an elegant announcement.</li>
+            <li><strong>Built-in Navigation & Sync:</strong> Every template features 1-click Google Calendar / .ics event addition and interactive venue directions via Google Maps.</li>
+            <li><strong>Instant WhatsApp Sharing:</strong> Fast mobile performance (under 3-5 MB payload) with rich visual cards when shared in WhatsApp chats.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Pricing Tiers</h2>
+          <ul>
+            <li><strong>Classic Tier (₹999):</strong> Includes Sage Parchment, Marigold Bhavan, Kalyana Mandapam. Standard 24-hour turnaround with couple names, muhurtham, venue maps, calendar integration.</li>
+            <li><strong>Signature Tier (₹1,999):</strong> Includes Royal Reception, Noor-e-Zahra, Kerala Sands, Shubha Vivaham, Toran Telugu, Tamil Thirumana, Emerald Nikah, Meadow Nikah, Midnight Stargaze, Ghibli Portrait, Lake Pichola Royal, Ivory Waltz. Includes custom domain options, photo swap, and 24-hour delivery.</li>
+            <li><strong>Royale Tier (₹2,999):</strong> Includes Rajwada Royale, Rajmahal Palace, Ghibli Selfie, Grand Line Voyage. Includes priority WhatsApp support, custom image hand-edits, and premium opening door / shutter animations.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Live Wedding Invitation Templates (21 Designs)</h2>
+          <ul>
+            <li><strong>Rajwada Royale:</strong> Deep maroon & royal gold, opening palace doors, diya petals. (North Indian Royal Palace)</li>
+            <li><strong>Marigold Bhavan:</strong> Olive green & gold paper envelope with sepia paper textures. (Classic Indian Engagement / Hindu)</li>
+            <li><strong>Toran Telugu:</strong> Maroon, brass lamps, and banana leaf accents with Telugu typography. (South Indian Telugu)</li>
+            <li><strong>Ghibli Selfie:</strong> Hand-painted soft pastel anime aesthetic with a shutter selfie finale. (Creative / Nikah)</li>
+            <li><strong>Emerald Nikah:</strong> Emerald green & cream parchment with floral roses & daisies. (Muslim Nikah)</li>
+            <li><strong>Noor-e-Zahra:</strong> Ivory, antique gold, and olive with moonlit mandala and Arabic calligraphy. (Muslim Nikah)</li>
+            <li><strong>Royal Reception:</strong> Deep royal blue, ivory, and gold aurora shimmer. (Muslim Walima / Reception)</li>
+            <li><strong>Kerala Sands:</strong> Ivory & gold coastal temple vibe with traditional bell accents. (Kerala South Indian)</li>
+            <li><strong>Meadow Nikah:</strong> Sky blue and blossom garden theme with animated envelope intro. (Outdoor Garden Nikah)</li>
+            <li><strong>Grand Line Voyage:</strong> Ocean blue, gold, and sunset Goa beach adventure energy. (Beach Wedding)</li>
+            <li><strong>Sage Parchment:</strong> Parchment texture with sage green tones and open-gate intro. (Classic Hindu)</li>
+            <li><strong>Ghibli Portrait:</strong> Watercolor floral parchment displaying a portrait journey from childhood to wedding aisle. (Garden / Creative)</li>
+            <li><strong>Rajmahal Palace:</strong> Dark maroon palace doors opening to giant gold outlined couple names. (Hindu Royal Palace)</li>
+            <li><strong>Shubha Vivaham:</strong> Telugu muhurtham theme featuring marigold toran and festive parchment. (South Indian)</li>
+            <li><strong>Midnight Stargaze:</strong> Navy blue & gold doors opening to a starlit night sky layout. (Evening Royal Reception)</li>
+            <li><strong>Kalyana Mandapam:</strong> Parchment, kumkum red, gold, and mandapam vector artwork. (South Indian Muhurtham)</li>
+            <li><strong>Tamil Thirumana:</strong> Banana-leaf color palette, Tamil typography, and morning muhurtham layout. (Tamil Nadu Wedding)</li>
+            <li><strong>Lake Pichola Royal:</strong> Gold floral textures, custom couple illustrations, and Udaipur lake reflections. (Udaipur Royal Wedding)</li>
+            <li><strong>Petal Path Palace:</strong> Five-layer parallax floral arch, palace aisle, falling petals. (Royal Palace)</li>
+            <li><strong>Ivory Waltz:</strong> Cream linen canvas, layered faceless dance parallax, calla lilies. (Soft Modern Nikah)</li>
+            <li><strong>Lakeview Lanterns:</strong> Starlit lake resort with floating lanterns. (Evening Reception)</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Complete Guide & Blog Directory (30 High SEO / AIO Knowledge Guides)</h2>
+          <ul>
+            <li><a href="https://invitestory.in/?blog=ultimate-guide-digital-wedding-invitations-india">1. The Ultimate Guide to Digital Wedding Invitations in India</a></li>
+            <li><a href="https://invitestory.in/?blog=whatsapp-wedding-invitations-no-rsvp-trend">2. Why Modern Couples are Ditching RSVPs for WhatsApp Invites</a></li>
+            <li><a href="https://invitestory.in/?blog=digital-wedding-invites-vs-pdf-vs-canva">3. Digital Wedding Invites vs PDF Cards vs Canva Templates</a></li>
+            <li><a href="https://invitestory.in/?blog=destination-wedding-invitations-goa-udaipur-guide">4. Destination Wedding Invitations: Goa & Udaipur Guide</a></li>
+            <li><a href="https://invitestory.in/?blog=save-the-date-digital-invitation-trends-india">5. Save-The-Date Digital Invites in India: Trends & Best Practices</a></li>
+            <li><a href="https://invitestory.in/?blog=nri-indian-wedding-invitations-global-guests">6. NRI Wedding Invitations: Connecting Global Guests Across Timezones</a></li>
+            <li><a href="https://invitestory.in/?blog=background-music-audio-wedding-invitations-guide">7. Background Music & Songs for Web Wedding Invites</a></li>
+            <li><a href="https://invitestory.in/?blog=photo-selection-tips-couple-portraits-wedding-cards">8. 7 Tips for Choosing Perfect Couple Photos for Digital Invites</a></li>
+            <li><a href="https://invitestory.in/?blog=monsoon-winter-seasonal-wedding-invitations-india">9. Seasonal Wedding Invites: Winter & Monsoon Trends</a></li>
+            <li><a href="https://invitestory.in/?blog=mobile-first-wedding-website-user-experience">10. Why Mobile-First UX is Essential for Digital Wedding Cards</a></li>
+            <li><a href="https://invitestory.in/?blog=20-unique-indian-wedding-invitation-ideas-templates">11. 20 Unique Indian Wedding Invitation Ideas & Template Guide</a></li>
+            <li><a href="https://invitestory.in/?blog=south-indian-wedding-invitation-traditions-guide">12. South Indian Wedding Invites: Muhurtham, Banana Leaf & Mandapam</a></li>
+            <li><a href="https://invitestory.in/?blog=royal-rajasthani-palace-wedding-invitations">13. Royal Rajasthani & Heritage Wedding Invites</a></li>
+            <li><a href="https://invitestory.in/?blog=nikah-walima-digital-invitation-etiquette-designs">14. Elegant Nikah & Walima Digital Invitations Guide</a></li>
+            <li><a href="https://invitestory.in/?blog=marathi-lagna-patrika-digital-invitation-guide">15. Marathi Lagna Patrika Online: Maharashtrian Weddings Guide</a></li>
+            <li><a href="https://invitestory.in/?blog=bengali-biye-digital-invitation-alpona-designs">16. Bengali Biye Digital Invites: Shuvo Bibaho & Alpona Art</a></li>
+            <li><a href="https://invitestory.in/?blog=punjabi-anand-karaj-digital-invitation-designs">17. Punjabi Wedding Invites: Bhangra Energy & Anand Karaj Grace</a></li>
+            <li><a href="https://invitestory.in/?blog=gujarati-kankotri-digital-wedding-invitation-guide">18. Gujarati Kankotri Online: Digital Cards for Garba & Lagan</a></li>
+            <li><a href="https://invitestory.in/?blog=kerala-christian-hindu-wedding-invitation-styles">19. Kerala Wedding Invitations: Minimalist Elegance from Backwaters to Churches</a></li>
+            <li><a href="https://invitestory.in/?blog=anime-ghibli-illustrated-couple-wedding-invites">20. Anime & Ghibli Illustrated Couple Invites Trend</a></li>
+            <li><a href="https://invitestory.in/?blog=eco-friendly-budget-smart-wedding-card-savings">21. Eco-Friendly & Budget-Smart: Save ₹50,000+ on Wedding Cards</a></li>
+            <li><a href="https://invitestory.in/?blog=hidden-costs-physical-wedding-card-printing-courier">22. Hidden Costs of Physical Wedding Card Printing & Courier</a></li>
+            <li><a href="https://invitestory.in/?blog=how-much-do-digital-wedding-invitations-cost-india">23. How Much Do Digital Wedding Invitations Cost in India?</a></li>
+            <li><a href="https://invitestory.in/?blog=zero-paper-waste-weddings-sustainable-invites">24. Zero-Paper Waste Weddings: Sustainable Digital Cards</a></li>
+            <li><a href="https://invitestory.in/?blog=last-minute-wedding-invitations-24-hour-turnaround">25. Emergency 24-Hour Wedding Invitations: Fast Turnaround</a></li>
+            <li><a href="https://invitestory.in/?blog=indian-wedding-invitation-wording-family-blessings-guide">26. How to Write Perfect Indian Wedding Invitation Wording</a></li>
+            <li><a href="https://invitestory.in/?blog=interfaith-intercultural-wedding-invitation-wording">27. Interfaith & Intercultural Wedding Invites Wording Guide</a></li>
+            <li><a href="https://invitestory.in/?blog=google-calendar-maps-integration-wedding-invites">28. How Google Calendar & Maps Integrations Prevent Wedding Chaos</a></li>
+            <li><a href="https://invitestory.in/?blog=whatsapp-group-broadcast-wedding-invite-etiquette">29. WhatsApp Broadcast vs Group vs Personal Message Etiquette</a></li>
+            <li><a href="https://invitestory.in/?blog=wedding-invitation-timeline-when-to-send-digital-cards">30. The 60-Day Digital Wedding Invitation Dispatch Timeline</a></li>
+          </ul>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
