@@ -3,75 +3,87 @@
   <!-- Core Landing Page -->
   <url>
     <loc>https://invitestory.in/</loc>
-    <lastmod>2026-08-03</lastmod>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Blog Index -->
+  <!-- High-Value Category Landing Pages -->
+  <url><loc>https://invitestory.in/digital-wedding-invitations</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/muslim-wedding-invitations</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/nikah-invitations</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/walima-invitations</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/hindu-wedding-websites</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/kerala-wedding-websites</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/tamil-wedding-invitations</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/save-the-date</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/wedding-website-india</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+  <url><loc>https://invitestory.in/wedding-invitation-website</loc><lastmod>2026-08-04</lastmod><priority>0.9</priority></url>
+
+  <!-- Blog Hub -->
   <url>
-    <loc>https://invitestory.in/?blog=all</loc>
-    <lastmod>2026-08-03</lastmod>
+    <loc>https://invitestory.in/blog</loc>
+    <lastmod>2026-08-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
 
-  <!-- 30 High SEO / AIO Blog Posts -->
-  <url><loc>https://invitestory.in/?blog=ultimate-guide-digital-wedding-invitations-india</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=whatsapp-wedding-invitations-no-rsvp-trend</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=digital-wedding-invites-vs-pdf-vs-canva</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=destination-wedding-invitations-goa-udaipur-guide</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=save-the-date-digital-invitation-trends-india</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=nri-indian-wedding-invitations-global-guests</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=background-music-audio-wedding-invitations-guide</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=photo-selection-tips-couple-portraits-wedding-cards</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=monsoon-winter-seasonal-wedding-invitations-india</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=mobile-first-wedding-website-user-experience</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=20-unique-indian-wedding-invitation-ideas-templates</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=south-indian-wedding-invitation-traditions-guide</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=royal-rajasthani-palace-wedding-invitations</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=nikah-walima-digital-invitation-etiquette-designs</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=marathi-lagna-patrika-digital-invitation-guide</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=bengali-biye-digital-invitation-alpona-designs</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=punjabi-anand-karaj-digital-invitation-designs</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=gujarati-kankotri-digital-wedding-invitation-guide</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=kerala-christian-hindu-wedding-invitation-styles</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=anime-ghibli-illustrated-couple-wedding-invites</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=eco-friendly-budget-smart-wedding-card-savings</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=hidden-costs-physical-wedding-card-printing-courier</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=how-much-do-digital-wedding-invitations-cost-india</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=zero-paper-waste-weddings-sustainable-invites</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=last-minute-wedding-invitations-24-hour-turnaround</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=indian-wedding-invitation-wording-family-blessings-guide</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=interfaith-intercultural-wedding-invitation-wording</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=google-calendar-maps-integration-wedding-invites</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=whatsapp-group-broadcast-wedding-invite-etiquette</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
-  <url><loc>https://invitestory.in/?blog=wedding-invitation-timeline-when-to-send-digital-cards</loc><lastmod>2026-08-03</lastmod><priority>0.85</priority></url>
+  <!-- 30 High SEO / AIO Blog Posts (Clean URLs) -->
+  <url><loc>https://invitestory.in/blog/ultimate-guide-digital-wedding-invitations-india</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/whatsapp-wedding-invitations-no-rsvp-trend</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/digital-wedding-invites-vs-pdf-vs-canva</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/destination-wedding-invitations-goa-udaipur-guide</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/save-the-date-digital-invitation-trends-india</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/nri-indian-wedding-invitations-global-guests</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/background-music-audio-wedding-invitations-guide</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/photo-selection-tips-couple-portraits-wedding-cards</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/monsoon-winter-seasonal-wedding-invitations-india</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/mobile-first-wedding-website-user-experience</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/20-unique-indian-wedding-invitation-ideas-templates</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/south-indian-wedding-invitation-traditions-guide</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/royal-rajasthani-palace-wedding-invitations</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/nikah-walima-digital-invitation-etiquette-designs</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/marathi-lagna-patrika-digital-invitation-guide</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/bengali-biye-digital-invitation-alpona-designs</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/punjabi-anand-karaj-digital-invitation-designs</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/gujarati-kankotri-digital-wedding-invitation-guide</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/kerala-christian-hindu-wedding-invitation-styles</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/anime-ghibli-illustrated-couple-wedding-invites</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/eco-friendly-budget-smart-wedding-card-savings</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/hidden-costs-physical-wedding-card-printing-courier</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/how-much-do-digital-wedding-invitations-cost-india</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/zero-paper-waste-weddings-sustainable-invites</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/last-minute-wedding-invitations-24-hour-turnaround</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/indian-wedding-invitation-wording-family-blessings-guide</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/interfaith-intercultural-wedding-invitation-wording</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/google-calendar-maps-integration-wedding-invites</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/whatsapp-group-broadcast-wedding-invite-etiquette</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+  <url><loc>https://invitestory.in/blog/wedding-invitation-timeline-when-to-send-digital-cards</loc><lastmod>2026-08-04</lastmod><priority>0.85</priority></url>
+
+  <!-- Individual Template Landing Pages (Clean URLs) -->
+  <url><loc>https://invitestory.in/templates/rajwada-royale</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/marigold-bhavan</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/toran-telugu</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/ghibli-selfie</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/emerald-nikah</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/noor-e-zahra</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/royal-reception</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/kerala-sands</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/meadow-nikah</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/grand-line-voyage</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/sage-parchment</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/ghibli-portrait</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/rajmahal-palace</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/shubha-vivaham</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/midnight-stargaze</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/kalyana-mandapam</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/tamil-thirumana</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/lake-pichola</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/petal-path</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/lakeview-lanterns</loc><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/templates/ivory-waltz</loc><priority>0.8</priority></url>
 
   <!-- LLM Discovery Documents -->
-  <url><loc>https://invitestory.in/llms.txt</loc><lastmod>2026-08-03</lastmod><priority>0.8</priority></url>
-  <url><loc>https://invitestory.in/llms-full.txt</loc><lastmod>2026-08-03</lastmod><priority>0.8</priority></url>
-
-  <!-- 21 Template Routes -->
-  <url><loc>https://invitestory.in/?preview=template-rajwada-royale</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-marigold-bhavan</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-toran-telugu</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-ghibli-selfie</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-emerald-nikah</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-noor-e-zahra</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-royal-reception</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-kerala-sands</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-meadow-nikah</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-grand-line-voyage</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-sage-parchment</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-ghibli-portrait</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-rajmahal-palace</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-shubha-vivaham</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-midnight-stargaze</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-kalyana-mandapam</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-tamil-thirumana</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-lake-pichola</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-petal-path</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-lakeview-lanterns</loc><priority>0.7</priority></url>
-  <url><loc>https://invitestory.in/?preview=template-ivory-waltz</loc><priority>0.7</priority></url>
+  <url><loc>https://invitestory.in/llms.txt</loc><lastmod>2026-08-04</lastmod><priority>0.8</priority></url>
+  <url><loc>https://invitestory.in/llms-full.txt</loc><lastmod>2026-08-04</lastmod><priority>0.8</priority></url>
 </urlset>

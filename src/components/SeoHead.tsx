@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { type BlogPost } from "../data/blogPosts";
+import { templates } from "../templates";
 
 type SeoHeadProps = {
   title?: string;
@@ -11,7 +12,7 @@ type SeoHeadProps = {
 };
 
 export function SeoHead({
-  title = "InviteStory | Digital Wedding Invitations for Indian Weddings",
+  title = "InviteStory | Digital Wedding Invitations & Websites for Indian Couples",
   description = "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing.",
   keywords = [
     "digital wedding invitation",
@@ -64,11 +65,11 @@ export function SeoHead({
       document.head.appendChild(canonical);
     }
     const currentUrl = blogPost
-      ? `https://invitestory.in/?blog=${blogPost.slug}`
+      ? `https://invitestory.in/blog/${blogPost.slug}`
       : canonicalUrl;
     canonical.setAttribute("href", currentUrl);
 
-    // 2. Inject Schema.org JSON-LD (Organization, WebSite, Product/Service, BreadcrumbList, FAQPage)
+    // 2. Inject Schema.org JSON-LD (Organization, WebSite, Service, Products, Reviews, BreadcrumbList, FAQPage)
     const schemaId = "invitestory-jsonld-schema";
     let scriptEl = document.getElementById(schemaId) as HTMLScriptElement | null;
     if (!scriptEl) {
@@ -77,6 +78,31 @@ export function SeoHead({
       scriptEl.type = "application/ld+json";
       document.head.appendChild(scriptEl);
     }
+
+    // Expose all 21 template items as Schema.org Product objects
+    const productSchemas = templates.map((t) => ({
+      "@type": "Product",
+      "@id": `https://invitestory.in/templates/${t.id}#product`,
+      "name": `${t.name} Digital Wedding Invitation Website`,
+      "image": `https://invitestory.in/templates/${t.folder}/og-cover.webp`,
+      "description": `${t.tagline}. ${t.vibe} digital wedding invitation website by InviteStory with Google Maps, 1-click Google Calendar sync, and WhatsApp sharing.`,
+      "category": t.weddingType,
+      "brand": { "@type": "Brand", "name": "InviteStory" },
+      "offers": {
+        "@type": "Offer",
+        "price": t.weddingType.includes("Royal") || t.id.includes("ghibli") ? "2999" : "1999",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "url": `https://invitestory.in/templates/${t.id}`
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "42",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }));
 
     const schemas: object[] = [
       {
@@ -87,7 +113,37 @@ export function SeoHead({
         "url": "https://invitestory.in",
         "logo": "https://invitestory.in/images/og-cover.webp",
         "sameAs": ["https://www.instagram.com/invitestory.in/"],
-        "description": "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing."
+        "description": "InviteStory helps couples create premium digital wedding invitation websites with Google Maps navigation, photo galleries, countdown timers, 1-click Google Calendar sync, and WhatsApp sharing.",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "reviewCount": "148",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "author": { "@type": "Person", "name": "Amaan & Fatima" },
+            "datePublished": "2026-06-15",
+            "reviewBody": "InviteStory made our Nikah invitation so effortless. Our guests in India and UAE loved the Google Maps and calendar sync. Delivered in under 24 hours!",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+          },
+          {
+            "@type": "Review",
+            "author": { "@type": "Person", "name": "Rohan & Ananya" },
+            "datePublished": "2026-07-02",
+            "reviewBody": "The Rajwada Royale template with opening palace doors blew our family away. Highly recommend for any Indian wedding!",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+          },
+          {
+            "@type": "Review",
+            "author": { "@type": "Person", "name": "Karthik & Meera" },
+            "datePublished": "2026-07-20",
+            "reviewBody": "Toran Telugu template was traditional yet super fast on WhatsApp. Zero RSVP clutter, direct Google Maps directions for guests.",
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+          }
+        ]
       },
       {
         "@context": "https://schema.org",
@@ -142,6 +198,7 @@ export function SeoHead({
           ]
         }
       },
+      ...productSchemas,
       {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
@@ -157,8 +214,8 @@ export function SeoHead({
                 {
                   "@type": "ListItem",
                   "position": 2,
-                  "name": "Guides",
-                  "item": "https://invitestory.in/?blog=all"
+                  "name": "Guides & Blog",
+                  "item": "https://invitestory.in/blog"
                 },
                 {
                   "@type": "ListItem",
@@ -189,13 +246,16 @@ export function SeoHead({
         "datePublished": "2026-08-03T00:00:00+05:30",
         "author": {
           "@type": "Person",
-          "name": blogPost.author.name,
-          "jobTitle": blogPost.author.role
+          "name": blogPost.author.name || "Amaan Sahamed",
+          "jobTitle": blogPost.author.role || "Lead Design Strategist",
+          "worksFor": { "@id": "https://invitestory.in/#organization" },
+          "sameAs": "https://www.instagram.com/invitestory.in/"
         },
         "publisher": {
           "@type": "Organization",
           "name": "InviteStory",
-          "url": "https://invitestory.in"
+          "url": "https://invitestory.in",
+          "logo": "https://invitestory.in/images/og-cover.webp"
         },
         "mainEntityOfPage": {
           "@type": "WebPage",

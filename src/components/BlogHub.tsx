@@ -136,7 +136,7 @@ export function BlogHub() {
             transition={{ duration: 0.5 }}
             className="group relative mt-10 overflow-hidden rounded-card border border-line bg-night-card shadow-calm transition-all hover:border-bone/20"
           >
-            <a href={`?blog=${featuredPost.slug}`} className="grid gap-6 md:grid-cols-12 md:items-center">
+            <a href={`/blog/${featuredPost.slug}`} className="grid gap-6 md:grid-cols-12 md:items-center">
               <div className="relative aspect-[16/9] w-full overflow-hidden bg-night-soft md:col-span-6 md:aspect-[4/3]">
                 <img
                   src={featuredPost.coverImage}
@@ -212,7 +212,7 @@ export function BlogHub() {
                     <span>{post.readTime}</span>
                   </div>
 
-                  <a href={`?blog=${post.slug}`} className="block">
+                  <a href={`/blog/${post.slug}`} className="block">
                     <h3 className="mt-2 text-xl font-semibold tracked-display leading-tight text-bone group-hover:text-emerald-soft transition-colors">
                       {post.title}
                     </h3>
@@ -234,7 +234,7 @@ export function BlogHub() {
                   </div>
 
                   <a
-                    href={`?blog=${post.slug}`}
+                    href={`/blog/${post.slug}`}
                     className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-eyebrow text-bone hover:text-emerald-soft transition-colors"
                   >
                     Read <ArrowRight weight="bold" className="h-3.5 w-3.5" />

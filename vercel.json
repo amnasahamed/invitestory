@@ -2,6 +2,64 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/blog",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/blog/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/templates/template-(.*)",
+      "destination": "/templates/template-$1/index.html"
+    },
+    {
+      "source": "/templates/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/digital-wedding-invitations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/muslim-wedding-invitations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/nikah-invitations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/walima-invitations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/kerala-wedding-websites",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/tamil-wedding-invitations",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/hindu-wedding-websites",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/save-the-date",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/wedding-website-india",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/wedding-invitation-website",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

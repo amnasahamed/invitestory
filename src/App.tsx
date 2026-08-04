@@ -21,7 +21,8 @@ import { SeoHead } from "./components/SeoHead";
 const BASE = import.meta.env.BASE_URL || "./";
 
 function previewHref(folder: string) {
-  return `?preview=${encodeURIComponent(folder)}`;
+  const template = templates.find((t) => t.folder === folder || t.id === folder);
+  return template ? `/templates/${template.id}` : `?preview=${encodeURIComponent(folder)}`;
 }
 
 /* ── Full-page template viewer + floating buy CTA ────────────────── */
@@ -657,66 +658,54 @@ function Footer() {
 }
 
 export default function App() {
+  const pathname = typeof window !== "undefined" ? window.location.pathname.replace(/\/$/, "") : "";
   const searchParams = useMemo(() => {
     if (typeof window === "undefined") return new URLSearchParams();
     return new URLSearchParams(window.location.search);
   }, []);
 
-  const previewFolder = searchParams.get("preview");
+  const previewParam = searchParams.get("preview");
   const blogParam = searchParams.get("blog");
 
+  // Determine active template from pathname (/templates/:id) or ?preview=<folder>
   const previewTemplate = useMemo(() => {
-    if (!previewFolder) return null;
-    return templates.find((t) => t.folder === previewFolder) ?? null;
-  }, [previewFolder]);
+    if (pathname.startsWith("/templates/")) {
+      const slug = pathname.replace("/templates/", "");
+      return templates.find((t) => t.id === slug || t.folder === slug) ?? null;
+    }
+    if (previewParam) {
+      return templates.find((t) => t.folder === previewParam || t.id === previewParam) ?? null;
+    }
+    return null;
+  }, [pathname, previewParam]);
 
+  // Determine active blog post from pathname (/blog/:slug) or ?blog=<slug>
   const activeBlogPost = useMemo(() => {
-    if (!blogParam || blogParam === "all") return null;
-    return BLOG_POSTS.find((p) => p.slug === blogParam) ?? null;
-  }, [blogParam]);
+    if (pathname.startsWith("/blog/")) {
+      const slug = pathname.replace("/blog/", "");
+      return BLOG_POSTS.find((p) => p.slug === slug) ?? null;
+    }
+    if (blogParam && blogParam !== "all") {
+      return BLOG_POSTS.find((p) => p.slug === blogParam) ?? null;
+    }
+    return null;
+  }, [pathname, blogParam]);
 
-  // Render template preview viewer if ?preview=<folder>
+  const isBlogHub = pathname === "/blog" || blogParam === "all";
+
+  // Render template preview viewer if route matches /templates/:id or ?preview=<folder>
   if (previewTemplate) {
     return <TemplateViewer template={previewTemplate} />;
   }
 
-  if (previewFolder) {
-    return (
-      <div className="flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-night px-6 text-center text-bone">
-        <p className="text-body text-bone/70">That template could not be found.</p>
-        <a
-          href="./"
-          className="rounded-pill bg-emerald px-5 py-2.5 text-caption font-medium uppercase tracking-eyebrow text-bone"
-        >
-          Back to gallery
-        </a>
-      </div>
-    );
-  }
-
-  // Render Blog Hub if ?blog=all
-  if (blogParam === "all") {
+  // Render Blog Hub if route is /blog or ?blog=all
+  if (isBlogHub) {
     return <BlogHub />;
   }
 
-  // Render Blog Article if ?blog=<slug>
+  // Render Blog Article if route is /blog/:slug or ?blog=<slug>
   if (activeBlogPost) {
     return <BlogPostView post={activeBlogPost} />;
-  }
-
-  // Render 404 for unknown blog slug
-  if (blogParam) {
-    return (
-      <div className="flex min-h-[100dvh] flex-col items-center justify-center gap-4 bg-night px-6 text-center text-bone">
-        <p className="text-body text-bone/70">Article could not be found.</p>
-        <a
-          href="?blog=all"
-          className="rounded-pill bg-emerald px-5 py-2.5 text-caption font-medium uppercase tracking-eyebrow text-bone"
-        >
-          Back to Blog Directory
-        </a>
-      </div>
-    );
   }
 
   return (

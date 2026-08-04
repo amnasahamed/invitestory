@@ -83,7 +83,7 @@ export function BlogPostView({ post }: BlogPostViewProps) {
       <header className="sticky top-0 z-40 border-b border-line bg-night/90 backdrop-blur-md">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 md:h-[72px] md:px-8">
           <a
-            href="?blog=all"
+            href="/blog"
             className="inline-flex items-center gap-2 text-caption uppercase tracking-eyebrow text-bone/70 transition-colors hover:text-bone"
           >
             <ArrowLeft weight="bold" className="h-4 w-4" />
@@ -290,7 +290,7 @@ export function BlogPostView({ post }: BlogPostViewProps) {
         <nav className="mt-14 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           {prevPost ? (
             <a
-              href={`?blog=${prevPost.slug}`}
+              href={`/blog/${prevPost.slug}`}
               className="group flex flex-col gap-1 rounded-card border border-line bg-night-card p-4 hover:border-bone/30 sm:max-w-[48%]"
             >
               <span className="flex items-center gap-1 text-caption uppercase tracking-eyebrow text-bone/50 group-hover:text-emerald-soft">
@@ -304,7 +304,7 @@ export function BlogPostView({ post }: BlogPostViewProps) {
 
           {nextPost ? (
             <a
-              href={`?blog=${nextPost.slug}`}
+              href={`/blog/${nextPost.slug}`}
               className="group flex flex-col items-end text-right gap-1 rounded-card border border-line bg-night-card p-4 hover:border-bone/30 sm:max-w-[48%]"
             >
               <span className="flex items-center gap-1 text-caption uppercase tracking-eyebrow text-bone/50 group-hover:text-emerald-soft">
