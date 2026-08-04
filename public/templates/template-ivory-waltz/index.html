@@ -1,25 +1,24 @@
 <!doctype html>
 <html lang="en">
   <head>
-                            <script>
-      (function () {
-        var path = location.pathname;
-        if (!path.endsWith("/")) {
-          if (path.endsWith(".html")) {
-            path = path.substring(0, path.lastIndexOf("/") + 1);
-          } else {
-            path = path + "/";
-          }
+    <!-- data-invitestory-base -->
+    <base href="/templates/template-ivory-waltz/" />
+    <script>
+      try {
+        if (window.location.pathname.startsWith("/templates/")) {
+          history.replaceState(null, "", "/");
         }
-        var dir = location.origin + path;
-        var existing = document.querySelector("base");
-        if (existing) existing.remove();
-        var b = document.createElement("base");
-        b.href = dir;
-        document.head.prepend(b);
-      })();
+      } catch (e) {}
     </script>
-    <meta charset="UTF-8" />
+
+<script>
+      try {
+        if (window.location.pathname.startsWith("/templates/")) {
+          history.replaceState(null, "", "/");
+        }
+      } catch (e) {}
+    </script>
+<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <!-- data-invitestory-meta -->
     <title>Ivory Waltz | InviteStory</title>
