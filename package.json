@@ -1,0 +1,10 @@
+{
+  "name": "invitestory",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node serve.mjs",
+    "start": "node serve.mjs",
+    "build": "echo 'No build required'"
+  }
+}

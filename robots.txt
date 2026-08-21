@@ -1,0 +1,6 @@
+# Robots.txt for InviteStory (https://invitestory.in)
+User-agent: *
+Allow: /
+
+# Sitemap URL
+Sitemap: https://invitestory.in/sitemap.xml

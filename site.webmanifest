@@ -1,0 +1,21 @@
+{
+  "name": "InviteStory – Digital Wedding Cards",
+  "short_name": "InviteStory",
+  "description": "Premium digital wedding invitation templates with live previews, venue maps & WhatsApp customization.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0714",
+  "theme_color": "#120c1f",
+  "icons": [
+    {
+      "src": "logo/noappicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo/noappicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
