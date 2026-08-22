@@ -865,36 +865,40 @@ function renderCatalogue() {
     const isPick = item.tags && item.tags.includes("our-picks");
 
     card.innerHTML = `
-      <div class="template-card-media">
+      <div class="template-card-media" data-preview-trigger="${item.id}" role="button" tabindex="0" title="Preview ${item.name}">
         <img src="${imgSrc}" alt="InviteStory - ${item.name} Digital Wedding Invitation Template" class="template-card-img" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="template-card-fallback-initial" style="display: none;">${initial}</div>
         <div class="template-card-overlay" aria-hidden="true"></div>
       </div>
 
       <div class="template-card-content">
-        <div class="template-card-header">
-          <h3 class="template-card-title">${item.name}</h3>
-          <div class="template-card-tags">
-            ${isPick ? '<span class="template-tag tag-pick">⭐ Our Pick</span>' : ''}
-            ${item.style ? `<span class="template-tag tag-style">${item.style}</span>` : ''}
+        <div class="template-card-info-side">
+          <div class="template-card-header">
+            <h3 class="template-card-title">${item.name}</h3>
+            <div class="template-card-tags">
+              ${isPick ? '<span class="template-tag tag-pick">⭐ Our Pick</span>' : ''}
+              ${item.style ? `<span class="template-tag tag-style">${item.style}</span>` : ''}
+            </div>
           </div>
+
+          <p class="template-card-desc">${item.desc}</p>
         </div>
 
-        <p class="template-card-desc">${item.desc}</p>
+        <div class="template-card-action-side">
+          <div class="template-card-price-wrap">
+            <span class="template-card-price card-base-price" data-inr="${prices.priceINR}" data-usd="${prices.priceUSD}">${priceText}</span>
+            <span class="template-card-tier-label">${tierName}</span>
+          </div>
 
-        <div class="template-card-price-wrap">
-          <span class="template-card-price card-base-price" data-inr="${prices.priceINR}" data-usd="${prices.priceUSD}">${priceText}</span>
-          <span class="template-card-tier-label">${tierName}</span>
-        </div>
-
-        <div class="template-card-actions">
-          <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
-            <span>Preview Invitation →</span>
-          </button>
-          <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); orderCustomTemplate(${item.id})" aria-label="Order ${item.name} on WhatsApp">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-            <span>Order on WhatsApp</span>
-          </a>
+          <div class="template-card-actions">
+            <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
+              <span>Preview <span class="btn-text-invitation">Invitation</span> →</span>
+            </button>
+            <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); orderCustomTemplate(${item.id})" aria-label="Order ${item.name} on WhatsApp" title="Order on WhatsApp">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              <span class="wa-text-label">Order on WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
     `;
@@ -1574,6 +1578,40 @@ function setupCatalogueHandlers() {
       const id = parseInt(trigger.getAttribute("data-preview-trigger"), 10);
       if (!Number.isNaN(id)) openPreview(id);
     });
+  }
+
+  // --- View Mode (Card Grid vs Compact List) ---
+  const viewModeGridBtn = document.getElementById("view-mode-grid");
+  const viewModeListBtn = document.getElementById("view-mode-list");
+
+  function setViewMode(mode) {
+    if (!templatesGrid) return;
+    if (mode === "list") {
+      templatesGrid.classList.add("view-list");
+      if (viewModeListBtn) viewModeListBtn.classList.add("active");
+      if (viewModeGridBtn) viewModeGridBtn.classList.remove("active");
+    } else {
+      templatesGrid.classList.remove("view-list");
+      if (viewModeGridBtn) viewModeGridBtn.classList.add("active");
+      if (viewModeListBtn) viewModeListBtn.classList.remove("active");
+    }
+    try {
+      localStorage.setItem("invitestory_view_mode", mode);
+    } catch(e) {}
+  }
+
+  try {
+    const savedMode = localStorage.getItem("invitestory_view_mode");
+    if (savedMode === "list") {
+      setViewMode("list");
+    }
+  } catch(e) {}
+
+  if (viewModeGridBtn) {
+    viewModeGridBtn.addEventListener("click", () => setViewMode("grid"));
+  }
+  if (viewModeListBtn) {
+    viewModeListBtn.addEventListener("click", () => setViewMode("list"));
   }
 }
 

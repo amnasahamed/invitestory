@@ -427,6 +427,12 @@ a {
   margin-bottom: 26px;
 }
 
+@media (max-width: 768px) {
+  .hero-action-wrapper {
+    display: none;
+  }
+}
+
 .hero-primary-cta {
   display: inline-flex;
   align-items: center;
@@ -752,25 +758,12 @@ a {
 }
 
 @media (max-width: 768px) {
-  .hero-showroom-showcase {
-    gap: 12px;
-    padding: 10px 0;
-    overflow-x: auto;
-    justify-content: flex-start;
-    scroll-snap-type: x mandatory;
-    padding-left: 16px;
-    padding-right: 16px;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-  .hero-showroom-showcase::-webkit-scrollbar {
+  .hero-showroom-showcase,
+  .hero-showroom-caption {
     display: none;
   }
-  .showroom-card {
-    flex: 0 0 68vw;
-    max-width: 250px;
-    scroll-snap-align: center;
-    transform: none !important;
+  .hero-proof-strip {
+    margin-bottom: 8px;
   }
 }
 
@@ -1318,6 +1311,12 @@ body:has(#glass-luxury:checked) .catalogue-section {
   background: none;
   border: none;
   box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .controls-card {
+    display: none;
+  }
 }
 
 .search-box-wrapper {
@@ -2076,45 +2075,45 @@ body:has(#glass-luxury:checked) .catalogue-section {
 }
 
 @media (max-width: 640px) {
-  .templates-grid {
+  .templates-grid:not(.view-list) {
     grid-template-columns: 1fr !important;
     gap: 20px !important;
     padding: 0 4px;
   }
 
-  .template-card {
+  .templates-grid:not(.view-list) .template-card {
     min-height: 480px !important;
     aspect-ratio: 4 / 5 !important;
     border-radius: 24px !important;
   }
 
-  .template-card-content {
+  .templates-grid:not(.view-list) .template-card-content {
     bottom: var(--card-padding-mobile) !important;
     left: var(--card-padding-mobile) !important;
     right: var(--card-padding-mobile) !important;
     gap: 10px !important;
   }
 
-  .template-card-title {
+  .templates-grid:not(.view-list) .template-card-title {
     font-size: 1.55rem !important;
   }
 
-  .template-card-desc {
+  .templates-grid:not(.view-list) .template-card-desc {
     font-size: 0.84rem !important;
   }
 
-  .template-card-price {
+  .templates-grid:not(.view-list) .template-card-price {
     font-size: 1.6rem !important;
   }
 
-  .template-btn-preview,
-  .template-btn-order,
-  .template-btn-wa {
+  .templates-grid:not(.view-list) .template-btn-preview,
+  .templates-grid:not(.view-list) .template-btn-order,
+  .templates-grid:not(.view-list) .template-btn-wa {
     height: 48px !important;
     font-size: 0.9rem !important;
   }
 
-  .template-card-overlay {
+  .templates-grid:not(.view-list) .template-card-overlay {
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 30%,
@@ -4931,6 +4930,237 @@ body.preview-modal-open {
   text-align: center;
 }
 
+/* ========================================================================== */
+/* 2026 compact hero art direction                                            */
+/* Keeps the existing hero footprint while restoring a visual hook on mobile. */
+/* ========================================================================== */
+.hero-showroom {
+  isolation: isolate;
+  padding: clamp(38px, 5vw, 62px) 0 clamp(34px, 4.5vw, 58px);
+  background: #0d0714;
+}
+
+.hero-showroom::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(13, 7, 20, 0.56), rgba(13, 7, 20, 0.9) 48%, rgba(13, 7, 20, 0.58)),
+    url("assets/hero-botanical-frame.png") center / cover no-repeat;
+  opacity: 0.7;
+}
+
+.hero-showroom::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(223, 184, 119, 0.14), transparent 34%),
+    linear-gradient(180deg, rgba(13, 7, 20, 0.05), #0d0714 94%);
+}
+
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0 0 14px;
+  color: rgba(243, 237, 218, 0.78);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.hero-kicker span {
+  width: 24px;
+  height: 1px;
+  background: #dfb877;
+  box-shadow: 0 0 10px rgba(223, 184, 119, 0.7);
+}
+
+.hero-headline {
+  margin-bottom: 12px;
+  text-wrap: balance;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.5);
+}
+
+.hero-headline-highlight {
+  background: linear-gradient(110deg, #fff0c7, #dfb877 48%, #f6dba5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-subheadline {
+  margin-bottom: 14px;
+}
+
+.hero-process-line {
+  margin: 0 0 18px;
+  color: rgba(236, 217, 172, 0.9);
+}
+
+.hero-action-wrapper {
+  margin-bottom: 18px;
+}
+
+.hero-proof-strip {
+  width: fit-content;
+  margin: 0 auto 28px;
+  padding: 9px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  background: rgba(13, 7, 20, 0.54);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.hero-showroom-showcase {
+  padding-top: 8px;
+}
+
+.showroom-card {
+  box-shadow: 0 18px 54px rgba(0, 0, 0, 0.52), 0 0 0 1px rgba(223, 184, 119, 0.08);
+}
+
+@media (max-width: 768px) {
+  .hero-showroom {
+    min-height: 0;
+    padding: 22px 0 18px;
+  }
+
+  .hero-showroom::before {
+    background:
+      linear-gradient(180deg, rgba(13, 7, 20, 0.62), rgba(13, 7, 20, 0.96)),
+      url("assets/hero-botanical-frame.png") 42% center / cover no-repeat;
+    opacity: 0.58;
+  }
+
+  .hero-showroom .container {
+    padding-inline: 18px;
+    padding-bottom: 78px;
+  }
+
+  .hero-kicker {
+    margin-bottom: 9px;
+    font-size: 0.58rem;
+    letter-spacing: 0.11em;
+  }
+
+  .hero-headline {
+    font-size: clamp(2rem, 10vw, 2.7rem);
+    line-height: 1.04;
+    margin-bottom: 10px;
+  }
+
+  .hero-subheadline {
+    max-width: 34ch;
+    margin: 0 auto 10px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+
+  .hero-process-line {
+    display: none;
+  }
+
+  .hero-action-wrapper {
+    display: flex;
+    margin-bottom: 12px;
+  }
+
+  .hero-primary-cta {
+    min-height: 44px;
+    padding: 11px 22px;
+    font-size: 0.88rem;
+  }
+
+  .hero-wa-cta {
+    display: none;
+  }
+
+  .hero-proof-strip {
+    position: absolute;
+    left: 18px;
+    bottom: 19px;
+    gap: 7px;
+    margin: 0;
+    padding: 8px 12px;
+    font-size: 0.68rem;
+    white-space: nowrap;
+  }
+
+  .hero-proof-strip > :nth-child(4),
+  .hero-proof-strip > :nth-child(5),
+  .hero-proof-item:first-child .hero-proof-text {
+    display: none;
+  }
+
+  .hero-showroom-showcase {
+    position: absolute;
+    right: 22px;
+    bottom: 5px;
+    display: flex;
+    width: 138px;
+    height: 82px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    gap: 0;
+  }
+
+  .showroom-card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 52px;
+    height: 74px;
+    border-radius: 8px;
+  }
+
+  .showroom-card-classic {
+    transform: translateX(-68px) rotate(-9deg) translateY(5px) !important;
+  }
+
+  .showroom-card-premium.is-hero-center {
+    width: 57px;
+    height: 80px;
+    transform: translateX(-29px) translateY(-2px) scale(1.04) !important;
+  }
+
+  .showroom-card-luxury {
+    transform: translateX(13px) rotate(9deg) translateY(5px) !important;
+  }
+
+  .showroom-card-media {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .showroom-card-footer,
+  .showroom-card-overlay,
+  .showroom-popular-pill {
+    display: none;
+  }
+
+  .hero-showroom-caption {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showroom-card,
+  .showroom-card-img,
+  .hero-cta-arrow {
+    transition: none;
+  }
+}
+
 /* --- Template Card: Primary Preview Button (Tier-Themed) --- */
 .template-btn-preview-primary {
   display: block;
@@ -5066,6 +5296,284 @@ body.preview-modal-open {
 .catalogue-section-header {
   text-align: center;
   margin-bottom: var(--space-5);
+}
+
+/* --- Catalogue View Mode Toggle (Card / List) --- */
+.view-mode-toggle-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.view-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(22, 22, 26, 0.06);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-border);
+  gap: 4px;
+}
+
+.view-mode-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 18px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  color: var(--color-text-soft);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.view-mode-btn:hover {
+  color: var(--color-text-dark);
+}
+
+.view-mode-btn.active {
+  background: var(--color-text-dark);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+.view-mode-btn svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+}
+
+/* ========================================================
+   TEMPLATES GRID — COMPACT LIST VIEW MODE (.view-list)
+   ======================================================== */
+.template-card-info-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.template-card-action-side {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.templates-grid.view-list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  max-width: 860px !important;
+  margin: 0 auto !important;
+}
+
+.templates-grid.view-list .template-card {
+  position: relative !important;
+  width: 100% !important;
+  aspect-ratio: auto !important;
+  min-height: unset !important;
+  height: auto !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 12px 16px !important;
+  gap: 14px !important;
+  background: #15141c !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22) !important;
+  justify-content: flex-start !important;
+}
+
+.templates-grid.view-list .template-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(212, 175, 55, 0.45) !important;
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.35) !important;
+}
+
+.templates-grid.view-list .template-card-media {
+  position: relative !important;
+  inset: auto !important;
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 12px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+.templates-grid.view-list .template-card-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transform: none !important;
+}
+
+.templates-grid.view-list .template-card-overlay {
+  display: none !important;
+}
+
+.templates-grid.view-list .template-card-content {
+  position: static !important;
+  inset: auto !important;
+  width: auto !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 0 !important;
+}
+
+.templates-grid.view-list .template-card-info-side {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 3px !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+.templates-grid.view-list .template-card-header {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+}
+
+.templates-grid.view-list .template-card-title {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  margin: 0 !important;
+  line-height: 1.25 !important;
+  text-shadow: none !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+}
+
+.templates-grid.view-list .template-card-tags {
+  display: inline-flex !important;
+  gap: 4px !important;
+}
+
+.templates-grid.view-list .template-tag {
+  padding: 2px 7px !important;
+  font-size: 0.65rem !important;
+  line-height: 1.1 !important;
+}
+
+.templates-grid.view-list .template-card-desc {
+  display: none !important;
+}
+
+.templates-grid.view-list .template-card-action-side {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 14px !important;
+  flex-shrink: 0 !important;
+}
+
+.templates-grid.view-list .template-card-price-wrap {
+  margin-top: 0 !important;
+  text-align: right !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 1px !important;
+}
+
+.templates-grid.view-list .template-card-price {
+  font-size: 1.1rem !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+}
+
+.templates-grid.view-list .template-card-tier-label {
+  font-size: 0.62rem !important;
+  margin-left: 0 !important;
+  opacity: 0.75 !important;
+  text-transform: uppercase !important;
+}
+
+.templates-grid.view-list .template-card-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-top: 0 !important;
+}
+
+.templates-grid.view-list .template-btn-preview-primary {
+  width: auto !important;
+  padding: 8px 16px !important;
+  font-size: 0.8rem !important;
+  min-height: unset !important;
+  height: auto !important;
+  border-radius: var(--radius-pill) !important;
+}
+
+.templates-grid.view-list .template-card-wa-link {
+  margin-top: 0 !important;
+  padding: 7px 12px !important;
+  border-radius: var(--radius-pill) !important;
+  background: rgba(37, 211, 102, 0.12) !important;
+  border: 1px solid rgba(37, 211, 102, 0.25) !important;
+  font-size: 0.78rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+}
+
+.templates-grid.view-list .template-card-wa-link:hover {
+  background: #25d366 !important;
+  color: #ffffff !important;
+}
+
+@media (max-width: 640px) {
+  .templates-grid.view-list .template-card {
+    padding: 10px 12px !important;
+    gap: 10px !important;
+    border-radius: 14px !important;
+  }
+  .templates-grid.view-list .template-card-media {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 10px !important;
+  }
+  .templates-grid.view-list .template-card-title {
+    font-size: 0.92rem !important;
+  }
+  .templates-grid.view-list .template-card-action-side {
+    gap: 8px !important;
+  }
+  .templates-grid.view-list .template-card-price {
+    font-size: 0.95rem !important;
+  }
+  .templates-grid.view-list .template-btn-preview-primary {
+    padding: 7px 11px !important;
+    font-size: 0.76rem !important;
+  }
+  .templates-grid.view-list .btn-text-invitation {
+    display: none !important;
+  }
+  .templates-grid.view-list .wa-text-label {
+    display: none !important;
+  }
+  .templates-grid.view-list .template-card-wa-link {
+    padding: 7px !important;
+    width: 32px !important;
+    height: 32px !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+  }
 }
 
 /* --- How It Works: Tagline --- */
