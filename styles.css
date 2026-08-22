@@ -420,9 +420,10 @@ a {
 /* Primary Action CTA + WhatsApp link */
 .hero-action-wrapper {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
   margin-bottom: 26px;
 }
 
@@ -448,6 +449,35 @@ a {
   transform: translateY(-2px);
   box-shadow: 0 14px 36px rgba(192, 149, 89, 0.45), 0 1px 0 rgba(255, 255, 255, 0.5) inset;
   color: #120c1f;
+}
+
+.hero-wa-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25d366;
+  color: #ffffff !important;
+  font-family: var(--font-header);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 15px 30px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 10px 28px rgba(37, 211, 102, 0.35);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
+}
+
+.hero-wa-cta:hover {
+  transform: translateY(-2px);
+  background: #22bf5b;
+  box-shadow: 0 14px 36px rgba(37, 211, 102, 0.5);
+  color: #ffffff !important;
+}
+
+.hero-wa-cta:active {
+  transform: scale(0.98);
 }
 
 .hero-cta-arrow {
@@ -623,16 +653,57 @@ a {
 }
 
 .showroom-play-badge {
-  background: rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  font-size: 0.76rem;
-  font-weight: 600;
-  padding: 5px 12px;
+  background: rgba(20, 14, 4, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #ffd166;
+  border: 1.5px solid rgba(255, 209, 102, 0.6);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 14px;
   border-radius: var(--radius-pill);
   letter-spacing: 0.02em;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 209, 102, 0.25);
+  transition: all 0.25s ease;
+}
+
+/* Classic Showroom Badge */
+.showroom-card-classic .showroom-play-badge {
+  color: #a7f3d0;
+  border-color: rgba(167, 243, 208, 0.6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(52, 211, 153, 0.25);
+}
+.showroom-card-classic:hover .showroom-play-badge {
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 100%);
+  color: #062419;
+  border-color: rgba(200, 250, 220, 0.95);
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.5), 0 0 14px rgba(52, 211, 153, 0.35);
+}
+
+/* Premium Showroom Badge */
+.showroom-card-premium .showroom-play-badge {
+  color: #fbcfe8;
+  border-color: rgba(251, 207, 232, 0.6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(244, 114, 182, 0.25);
+}
+.showroom-card-premium:hover .showroom-play-badge {
+  background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%);
+  color: #2b0818;
+  border-color: rgba(255, 225, 240, 0.95);
+  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.5), 0 0 14px rgba(244, 114, 182, 0.35);
+}
+
+/* Luxury Showroom Badge */
+.showroom-card-luxury .showroom-play-badge {
+  color: #ffd166;
+  border-color: rgba(255, 209, 102, 0.6);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4), 0 0 10px rgba(255, 209, 102, 0.25);
+}
+.showroom-card-luxury:hover .showroom-play-badge {
+  background: linear-gradient(135deg, #f5d77f 0%, #dfb877 100%);
+  color: #120c1f;
+  border-color: rgba(255, 240, 170, 0.95);
+  box-shadow: 0 4px 18px rgba(223, 184, 119, 0.5), 0 0 14px rgba(245, 215, 127, 0.35);
 }
 
 .showroom-card-footer {
@@ -1372,21 +1443,28 @@ body:has(#glass-luxury:checked) .catalogue-section {
 .tier-floating-nav {
   position: fixed;
   bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   z-index: 50;
   pointer-events: none;
   width: fit-content;
   max-width: calc(100vw - 24px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 480px) {
   .tier-floating-nav {
     bottom: 14px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     max-width: calc(100vw - 16px);
   }
   .glass-radio-group label {
-    min-width: 60px;
+    min-width: 56px;
     font-size: 0.70rem;
     padding: 0.5rem 0.6rem;
     gap: 4px;
@@ -1666,10 +1744,14 @@ body:has(#glass-luxury:checked) .catalogue-section {
   --card-padding-mobile: 20px;
 }
 
+.catalogue-section .container {
+  max-width: 1200px;
+}
+
 .templates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 32px 26px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px 22px;
   width: 100%;
 }
 
@@ -1677,7 +1759,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   position: relative;
   width: 100%;
   aspect-ratio: 4 / 5;
-  min-height: 540px;
+  min-height: 480px;
   border-radius: var(--card-radius);
   overflow: hidden;
   background-color: #16161a;
@@ -1957,19 +2039,19 @@ body:has(#glass-luxury:checked) .catalogue-section {
 }
 
 .template-btn-wa {
-  height: 52px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 7px;
   background: #25d366 !important;
   color: #ffffff !important;
   border: 1px solid #25d366 !important;
   border-radius: 9999px !important;
-  font-size: 0.95rem !important;
+  font-size: 0.88rem !important;
   font-weight: 700 !important;
   letter-spacing: -0.005em !important;
-  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.38) !important;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35) !important;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
@@ -1986,22 +2068,22 @@ body:has(#glass-luxury:checked) .catalogue-section {
 }
 
 /* Tablet & Mobile Responsiveness */
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .templates-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 24px 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 18px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .templates-grid {
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
+    gap: 20px !important;
     padding: 0 4px;
   }
 
   .template-card {
-    min-height: 520px !important;
+    min-height: 480px !important;
     aspect-ratio: 4 / 5 !important;
     border-radius: 24px !important;
   }
@@ -3410,31 +3492,60 @@ body:has(#glass-luxury:checked) .catalogue-section {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 14px;
   margin-bottom: 26px;
-  flex-wrap: nowrap;
-  max-width: 560px;
+  flex-wrap: wrap;
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-}
-
-.final-cta-buttons .btn-hero-primary,
-.final-cta-buttons .btn-hero-whatsapp {
-  flex: 1 1 50%;
-  min-width: 0;
-  width: auto;
 }
 
 .final-cta-buttons .btn-hero-primary {
   background: #ffffff;
   color: #1a1408;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.20);
+  font-family: var(--font-header);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
 }
 
 .final-cta-buttons .btn-hero-primary:hover {
   background: #f5ecd9;
   color: #1a1408;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30);
+  transform: translateY(-2px);
+}
+
+.final-cta-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #25d366;
+  color: #ffffff !important;
+  font-family: var(--font-header);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s ease;
+}
+
+.final-cta-wa-btn:hover {
+  transform: translateY(-2px);
+  background: #22bf5b;
+  box-shadow: 0 12px 32px rgba(37, 211, 102, 0.55);
+  color: #ffffff !important;
 }
 
 .final-cta-micro {
@@ -3831,6 +3942,24 @@ body:has(#glass-luxury:checked) .catalogue-section {
   border: 1px solid rgba(192, 149, 89, 0.35);
   padding: 2px 8px;
   border-radius: var(--border-radius-pill);
+  transition: all 0.3s ease;
+}
+
+/* Tier-specific Price Badge */
+.preview-modal[data-preview-tier="1"] .preview-price-badge {
+  color: #a7f3d0;
+  background: rgba(52, 211, 153, 0.14);
+  border-color: rgba(52, 211, 153, 0.4);
+}
+.preview-modal[data-preview-tier="2"] .preview-price-badge {
+  color: #fbcfe8;
+  background: rgba(244, 114, 182, 0.14);
+  border-color: rgba(244, 114, 182, 0.4);
+}
+.preview-modal[data-preview-tier="3"] .preview-price-badge {
+  color: #ffd166;
+  background: rgba(255, 209, 102, 0.14);
+  border-color: rgba(255, 209, 102, 0.4);
 }
 
 .preview-orig-price {
@@ -3856,13 +3985,13 @@ body:has(#glass-luxury:checked) .catalogue-section {
   font-size: 0.82rem;
   font-weight: 700;
   color: #120c1f;
-  background: linear-gradient(135deg, #f5d77f 0%, #d4af37 100%);
-  border: 1px solid #ffe899;
+  background: linear-gradient(135deg, #f5d77f 0%, #dfb877 100%);
+  border: 1px solid rgba(255, 225, 130, 0.85);
   padding: 6px 15px;
   border-radius: var(--border-radius-pill);
   transition: all 0.2s ease;
   text-decoration: none;
-  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.45);
+  box-shadow: 0 4px 14px rgba(223, 184, 119, 0.45);
   letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
@@ -3871,8 +4000,47 @@ body:has(#glass-luxury:checked) .catalogue-section {
 
 .preview-header-btn:hover {
   background: linear-gradient(135deg, #ffffff 0%, #f5d77f 100%);
-  color: #000000;
+  color: #0d0817;
   transform: translateY(-1px) scale(1.04);
+  box-shadow: 0 6px 18px rgba(255, 225, 120, 0.65);
+}
+
+/* Tier 1: Classic Full Demo Button (Sage Green) */
+.preview-modal[data-preview-tier="1"] .preview-header-btn {
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 100%);
+  color: #062419;
+  border-color: rgba(200, 250, 220, 0.9);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.45);
+}
+.preview-modal[data-preview-tier="1"] .preview-header-btn:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #a7f3d0 100%);
+  color: #021a11;
+  box-shadow: 0 6px 18px rgba(52, 211, 153, 0.65);
+}
+
+/* Tier 2: Premium Full Demo Button (Rose Pink) */
+.preview-modal[data-preview-tier="2"] .preview-header-btn {
+  background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%);
+  color: #2b0818;
+  border-color: rgba(255, 225, 240, 0.9);
+  box-shadow: 0 4px 14px rgba(236, 72, 153, 0.45);
+}
+.preview-modal[data-preview-tier="2"] .preview-header-btn:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #fbcfe8 100%);
+  color: #1f0410;
+  box-shadow: 0 6px 18px rgba(244, 114, 182, 0.65);
+}
+
+/* Tier 3: Luxury Full Demo Button (Amber Gold) */
+.preview-modal[data-preview-tier="3"] .preview-header-btn {
+  background: linear-gradient(135deg, #f5d77f 0%, #dfb877 100%);
+  color: #120c1f;
+  border-color: rgba(255, 225, 130, 0.9);
+  box-shadow: 0 4px 14px rgba(223, 184, 119, 0.45);
+}
+.preview-modal[data-preview-tier="3"] .preview-header-btn:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #f5d77f 100%);
+  color: #0d0817;
   box-shadow: 0 6px 18px rgba(255, 225, 120, 0.65);
 }
 
@@ -4661,19 +4829,395 @@ body.preview-modal-open {
 }
 
 .preview-toolbar-razorpay {
-  background: linear-gradient(135deg, #0c2340 0%, #1a365d 100%);
-  color: #ffffff;
-  border: 1px solid #3182ce;
-  padding: 11px 20px;
+  background: linear-gradient(135deg, #f5d77f 0%, #dfb877 50%, #c09559 100%);
+  color: #120c1f;
+  border: 1.5px solid rgba(255, 225, 130, 0.85);
+  padding: 12px 22px;
   border-radius: var(--border-radius-pill);
-  font-weight: 600;
-  font-size: 0.88rem;
+  font-weight: 700;
+  font-size: 0.94rem;
+  font-family: var(--font-header, sans-serif);
   cursor: pointer;
-  box-shadow: 0 4px 14px rgba(49, 130, 206, 0.3);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 18px rgba(223, 184, 119, 0.42), 0 0 14px rgba(245, 215, 127, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.01em;
 }
 
 .preview-toolbar-razorpay:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ffea9f 0%, #e8c687 50%, #cca062 100%);
+  border-color: rgba(255, 240, 170, 0.95);
+  box-shadow: 0 6px 22px rgba(223, 184, 119, 0.6), 0 0 20px rgba(245, 215, 127, 0.45);
+  color: #0d0817;
+}
+
+/* Tier 1: Classic Order CTA (Sage Green) */
+.preview-modal[data-preview-tier="1"] .preview-toolbar-razorpay {
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 45%, #059669 100%);
+  color: #062419;
+  border-color: rgba(167, 243, 208, 0.85);
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.38), 0 0 14px rgba(52, 211, 153, 0.28);
+}
+.preview-modal[data-preview-tier="1"] .preview-toolbar-razorpay:hover {
+  background: linear-gradient(135deg, #c6f6d5 0%, #48bb78 45%, #10b981 100%);
+  border-color: rgba(200, 250, 220, 0.95);
+  box-shadow: 0 6px 22px rgba(16, 185, 129, 0.55), 0 0 20px rgba(52, 211, 153, 0.4);
+  color: #021a11;
+}
+
+/* Tier 2: Premium Order CTA (Rose Pink) */
+.preview-modal[data-preview-tier="2"] .preview-toolbar-razorpay {
+  background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 45%, #db2777 100%);
+  color: #2b0818;
+  border-color: rgba(251, 207, 232, 0.85);
+  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.38), 0 0 14px rgba(244, 114, 182, 0.28);
+}
+.preview-modal[data-preview-tier="2"] .preview-toolbar-razorpay:hover {
+  background: linear-gradient(135deg, #fde2e4 0%, #f687b3 45%, #ec4899 100%);
+  border-color: rgba(255, 225, 240, 0.95);
+  box-shadow: 0 6px 22px rgba(236, 72, 153, 0.55), 0 0 20px rgba(244, 114, 182, 0.4);
+  color: #1f0410;
+}
+
+/* Tier 3: Luxury Order CTA (Amber Gold) */
+.preview-modal[data-preview-tier="3"] .preview-toolbar-razorpay {
+  background: linear-gradient(135deg, #f5d77f 0%, #dfb877 50%, #c09559 100%);
+  color: #120c1f;
+  border-color: rgba(255, 225, 130, 0.85);
+  box-shadow: 0 4px 18px rgba(223, 184, 119, 0.42), 0 0 14px rgba(245, 215, 127, 0.3);
+}
+.preview-modal[data-preview-tier="3"] .preview-toolbar-razorpay:hover {
+  background: linear-gradient(135deg, #ffea9f 0%, #e8c687 50%, #cca062 100%);
+  border-color: rgba(255, 240, 170, 0.95);
+  box-shadow: 0 6px 22px rgba(223, 184, 119, 0.6), 0 0 20px rgba(245, 215, 127, 0.45);
+  color: #0d0817;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* CONVERSION OPTIMIZATION — New Component Styles                     */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* --- Header WhatsApp Icon --- */
+.header-wa-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(37, 211, 102, 0.15);
+  color: #25d366;
+  transition: var(--transition-fast);
+  text-decoration: none;
+}
+.header-wa-icon:hover {
+  background: rgba(37, 211, 102, 0.25);
+  transform: scale(1.08);
+}
+.header-wa-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Hero Process Line --- */
+.hero-process-line {
+  font-family: var(--font-body);
+  font-size: clamp(0.88rem, 1.2vw, 1.05rem);
+  font-weight: 600;
+  color: rgba(236, 217, 172, 0.95);
+  letter-spacing: 0.02em;
+  margin-top: -4px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* --- Template Card: Primary Preview Button (Tier-Themed) --- */
+.template-btn-preview-primary {
+  display: block;
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-header, -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.01em;
+}
+
+/* Tier 1: Classic (Sage & Forest Green) */
+.tier-card-1 .template-btn-preview-primary,
+.template-btn-preview-primary.tier-btn-1 {
+  background: linear-gradient(135deg, #a7f3d0 0%, #34d399 45%, #059669 100%);
+  color: #062419;
+  border: 1.5px solid rgba(167, 243, 208, 0.85);
+  box-shadow:
+    0 4px 18px rgba(16, 185, 129, 0.38),
+    0 0 14px rgba(52, 211, 153, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.tier-card-1 .template-btn-preview-primary:hover,
+.template-btn-preview-primary.tier-btn-1:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #c6f6d5 0%, #48bb78 45%, #10b981 100%);
+  border-color: rgba(200, 250, 220, 0.95);
+  box-shadow:
+    0 8px 26px rgba(16, 185, 129, 0.55),
+    0 0 22px rgba(52, 211, 153, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  color: #021a11;
+}
+
+/* Tier 2: Premium (Rose, Blush & Berry) */
+.tier-card-2 .template-btn-preview-primary,
+.template-btn-preview-primary.tier-btn-2 {
+  background: linear-gradient(135deg, #fbcfe8 0%, #f472b6 45%, #db2777 100%);
+  color: #2b0818;
+  border: 1.5px solid rgba(251, 207, 232, 0.85);
+  box-shadow:
+    0 4px 18px rgba(236, 72, 153, 0.38),
+    0 0 14px rgba(244, 114, 182, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.tier-card-2 .template-btn-preview-primary:hover,
+.template-btn-preview-primary.tier-btn-2:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #fde2e4 0%, #f687b3 45%, #ec4899 100%);
+  border-color: rgba(255, 225, 240, 0.95);
+  box-shadow:
+    0 8px 26px rgba(236, 72, 153, 0.55),
+    0 0 22px rgba(244, 114, 182, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  color: #1f0410;
+}
+
+/* Tier 3: Luxury (Royal Amber Gold & Obsidian) */
+.tier-card-3 .template-btn-preview-primary,
+.template-btn-preview-primary.tier-btn-3 {
+  background: linear-gradient(135deg, #f5d77f 0%, #dfb877 50%, #c09559 100%);
+  color: #120c1f;
+  border: 1.5px solid rgba(255, 225, 130, 0.85);
+  box-shadow:
+    0 4px 18px rgba(223, 184, 119, 0.42),
+    0 0 14px rgba(245, 215, 127, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.tier-card-3 .template-btn-preview-primary:hover,
+.template-btn-preview-primary.tier-btn-3:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ffea9f 0%, #e8c687 50%, #cca062 100%);
+  border-color: rgba(255, 240, 170, 0.95);
+  box-shadow:
+    0 8px 26px rgba(223, 184, 119, 0.6),
+    0 0 22px rgba(245, 215, 127, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+  color: #0d0817;
+}
+
+.template-btn-preview-primary:active {
+  transform: scale(0.98);
+}
+
+/* --- Template Card: Secondary WhatsApp Link --- */
+.template-card-wa-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  padding: 6px 0 2px;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
+}
+.template-card-wa-link:hover {
+  color: #25d366;
+  text-decoration: none;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(49, 130, 206, 0.45);
+}
+.template-card-wa-link svg {
+  color: #25d366;
+  transition: transform 0.2s ease;
+}
+.template-card-wa-link:hover svg {
+  transform: scale(1.15);
+}
+
+/* --- Template Card: Tier Label (next to price) --- */
+.template-card-tier-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.template-card-price-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* --- Catalogue Section Header --- */
+.catalogue-section-header {
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+
+/* --- How It Works: Tagline --- */
+.how-steps-tagline {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  margin-top: var(--space-5);
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* POST-ORDER SECTION — "What happens after you order?"               */
+/* ═══════════════════════════════════════════════════════════════════ */
+.post-order-section {
+  padding: var(--section-y) 0;
+  background: linear-gradient(180deg, #0d1a14 0%, #0a1f16 50%, #0d1a14 100%);
+  color: #f3edda;
+}
+.post-order-section .section-title {
+  color: #fff;
+}
+.post-order-section .section-subtitle {
+  color: rgba(243, 237, 218, 0.7);
+}
+
+.post-order-steps {
+  max-width: 560px;
+  margin: var(--space-6) auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.post-order-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(243, 237, 218, 0.1);
+  position: relative;
+}
+.post-order-step:last-child {
+  border-bottom: none;
+}
+
+.post-order-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  background: rgba(176, 138, 74, 0.2);
+  border: 1.5px solid rgba(176, 138, 74, 0.5);
+  color: #ecd9ac;
+  font-family: var(--font-header);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.post-order-step-content h4 {
+  font-family: var(--font-header);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.post-order-step-content p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: rgba(243, 237, 218, 0.7);
+  margin: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* FINAL CTA — Secondary Link                                        */
+/* ═══════════════════════════════════════════════════════════════════ */
+.final-cta-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: rgba(243, 237, 218, 0.6);
+}
+.final-cta-wa-link {
+  color: #25d366;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
+}
+.final-cta-wa-link:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* PREVIEW MODAL — "Love this invitation?" Prompt + WhatsApp Button   */
+/* ═══════════════════════════════════════════════════════════════════ */
+.preview-love-prompt {
+  font-family: var(--font-header);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: rgba(243, 237, 218, 0.85);
+  letter-spacing: 0.02em;
+}
+
+.preview-toolbar-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: #25d366 !important;
+  color: #ffffff !important;
+  border: 1px solid #25d366 !important;
+  padding: 12px 20px;
+  border-radius: var(--border-radius-pill);
+  font-family: var(--font-header, sans-serif);
+  font-size: 0.90rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(37, 211, 102, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: 0.01em;
+}
+
+.preview-toolbar-wa:hover {
+  background: #22bf5b !important;
+  border-color: #22bf5b !important;
+  box-shadow: 0 6px 22px rgba(37, 211, 102, 0.55);
+  transform: translateY(-2px);
+}
+
+.preview-toolbar-wa:active {
+  transform: scale(0.98);
+}
+
+@media (max-width: 540px) {
+  .preview-actions-row {
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 8px !important;
+  }
+  .preview-toolbar-razorpay,
+  .preview-toolbar-wa {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }

@@ -188,11 +188,11 @@ const TEMPLATE_DATABASE = [
     id: 29,
     name: "Seashell Vows",
     image: "assets/preview/29.png",
-    tier: 1,
-    priceINR: 999,
-    priceUSD: 15,
-    originalPriceINR: 999,
-    originalPriceUSD: 15,
+    tier: 2,
+    priceINR: 1499,
+    priceUSD: 20,
+    originalPriceINR: 1499,
+    originalPriceUSD: 20,
     demoUrl: "https://template-seashell-vows.vercel.app/",
     style: "Goa Seaside Watercolor",
     accentColor: "#e07a5f",
@@ -286,11 +286,11 @@ const TEMPLATE_DATABASE = [
     id: 13,
     name: "Grand Line Voyage",
     image: "assets/preview/11.png",
-    tier: 2,
-    priceINR: 1499,
-    priceUSD: 20,
-    originalPriceINR: 1499,
-    originalPriceUSD: 20,
+    tier: 1,
+    priceINR: 999,
+    priceUSD: 15,
+    originalPriceINR: 999,
+    originalPriceUSD: 15,
     demoUrl: "https://invitestory-grand-line-voyage.vercel.app/",
     style: "Anime / One Piece",
     accentColor: "#0288d1",
@@ -334,11 +334,11 @@ const TEMPLATE_DATABASE = [
     id: 16,
     name: "Lake Pichola Royal",
     image: "assets/preview/14.png",
-    tier: 2,
-    priceINR: 1499,
-    priceUSD: 20,
-    originalPriceINR: 1499,
-    originalPriceUSD: 20,
+    tier: 1,
+    priceINR: 999,
+    priceUSD: 15,
+    originalPriceINR: 999,
+    originalPriceUSD: 15,
     demoUrl: "https://invitestory-lake-pichola.vercel.app/",
     style: "Udaipur Royal",
     accentColor: "#795548",
@@ -350,11 +350,11 @@ const TEMPLATE_DATABASE = [
     id: 17,
     name: "Ivory Waltz",
     image: "assets/preview/15.png",
-    tier: 2,
-    priceINR: 1499,
-    priceUSD: 20,
-    originalPriceINR: 1499,
-    originalPriceUSD: 20,
+    tier: 1,
+    priceINR: 999,
+    priceUSD: 15,
+    originalPriceINR: 999,
+    originalPriceUSD: 15,
     demoUrl: "https://invitestory-ivory-waltz.vercel.app/",
     style: "Modern Neutral",
     accentColor: "#a1887f",
@@ -374,7 +374,7 @@ const TEMPLATE_DATABASE = [
     demoUrl: "https://invitestory-ever-after-bloom.vercel.app/",
     style: "Watercolor Garden",
     accentColor: "#f06292",
-    tags: ["illustrated", "watercolor", "floral", "timeline"],
+    tags: ["illustrated", "watercolor", "floral", "timeline", "our-picks"],
     desc: "A bright watercolor floral garden layout featuring a romantic storyline timeline of the couple's relationship milestones.",
     promise: "Vibrant, floral, and deeply romantic."
   },
@@ -390,7 +390,7 @@ const TEMPLATE_DATABASE = [
     demoUrl: "https://invitestory-saga-of-love.vercel.app/",
     style: "Elegant Parchment",
     accentColor: "#b0bec5",
-    tags: ["modern", "minimalist", "timeline", "parchment"],
+    tags: ["modern", "minimalist", "timeline", "parchment", "our-picks"],
     desc: "Clean minimal parchment layout with a beautiful 'Love Timeline' highlighting how the couple first met and fell in love.",
     promise: "For couples whose love story is their biggest highlight."
   },
@@ -440,7 +440,7 @@ const TEMPLATE_DATABASE = [
     demoUrl: "https://invitestory-rajwada-royale-alt.vercel.app/",
     style: "Royal Palace Door (Alt)",
     accentColor: "#880e4f",
-    tags: ["royal", "cinematic", "palace", "opening-doors"],
+    tags: ["royal", "cinematic", "palace", "opening-doors", "our-picks"],
     desc: "Alternative layout for the Rajwada template, optimizing custom couple photographs and maroon accents for grand entry.",
     promise: "Make your grand wedding announcement truly monumental."
   },
@@ -552,7 +552,7 @@ const TEMPLATE_DATABASE = [
     demoUrl: "https://invitestory-wax-seal-royale.vercel.app/",
     style: "Interactive Envelope Wax Seal",
     accentColor: "#4e342e",
-    tags: ["cinematic", "envelope", "wax-seal", "minimalist"],
+    tags: ["cinematic", "envelope", "wax-seal", "minimalist", "our-picks"],
     desc: "A luxury envelope sealed with virtual golden wax. Click to break the seal and slide the elegant invite out of the screen.",
     promise: "A physical ritual, recreated flawlessly in the digital world."
   },
@@ -568,7 +568,7 @@ const TEMPLATE_DATABASE = [
     demoUrl: "https://template-diya-haveli.vercel.app/",
     style: "Jaipur Haveli Diya",
     accentColor: "#c62828",
-    tags: ["royal", "cinematic", "palace", "traditional"],
+    tags: ["royal", "cinematic", "palace", "traditional", "our-picks"],
     desc: "Rich vermilion red and heritage gold palette with an interactive diya lighting ceremony revealing a regal Jaipur haveli.",
     promise: "Light the auspicious diya to unveil your royal celebration."
   },
@@ -707,8 +707,9 @@ function renderPricingSection() {
 
   pricingSection.innerHTML = `
     <div class="container">
-      <div class="pricing-grid">
-        <!-- Tier 1: Classic -->
+      <h2 class="section-title">Beautiful doesn't have to be complicated.</h2>
+      <p class="section-subtitle">One-time payment. No subscription. Delivered in 24 hours.</p>
+      <div class="pricing-grid">        <!-- Tier 1: Classic -->
         <div class="pricing-card">
           <div class="pricing-card-header">
             <h3 class="pricing-card-name">🌿 Classic</h3>
@@ -876,7 +877,6 @@ function renderCatalogue() {
           <div class="template-card-tags">
             ${isPick ? '<span class="template-tag tag-pick">⭐ Our Pick</span>' : ''}
             ${item.style ? `<span class="template-tag tag-style">${item.style}</span>` : ''}
-            <span class="template-tag tag-tier tier-${item.tier}">${tierName} ${tierIcon}</span>
           </div>
         </div>
 
@@ -884,22 +884,17 @@ function renderCatalogue() {
 
         <div class="template-card-price-wrap">
           <span class="template-card-price card-base-price" data-inr="${prices.priceINR}" data-usd="${prices.priceUSD}">${priceText}</span>
+          <span class="template-card-tier-label">${tierName}</span>
         </div>
 
         <div class="template-card-actions">
-          <button type="button" class="btn template-btn-preview" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
-            <span>Preview 👁️</span>
+          <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
+            <span>Preview Invitation →</span>
           </button>
-          
-          <div class="template-card-btn-row">
-            <button type="button" class="btn template-btn-order" id="pay-btn-${item.id}" onclick="payRazorpayForTemplate(${item.id})" aria-label="Order ${item.name}">
-              <span>Order</span>
-            </button>
-            <button type="button" class="btn template-btn-wa" id="order-btn-${item.id}" onclick="orderCustomTemplate(${item.id})" aria-label="Order ${item.name} on WhatsApp">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-2px; margin-right:4px;" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-              <span>WhatsApp</span>
-            </button>
-          </div>
+          <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); orderCustomTemplate(${item.id})" aria-label="Order ${item.name} on WhatsApp">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+            <span>Order on WhatsApp</span>
+          </a>
         </div>
       </div>
     `;
@@ -1211,6 +1206,11 @@ function openPreview(id) {
   if (previewModalPrice) {
     previewModalPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
   }
+  // Update the "Make it yours — ₹X" CTA price
+  const previewCtaPrice = document.getElementById("preview-cta-price");
+  if (previewCtaPrice) {
+    previewCtaPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
+  }
   if (previewCounterBadge) {
     previewCounterBadge.textContent = `${idx + 1} of ${TEMPLATE_DATABASE.length}`;
   }
@@ -1223,6 +1223,7 @@ function openPreview(id) {
   const glowRgba = hexToRgba(accent, 0.45);
 
   if (previewModal) {
+    previewModal.setAttribute("data-preview-tier", item.tier);
     previewModal.style.setProperty('--theme-accent-color', accent);
     previewModal.style.setProperty('--theme-accent-glow', glowRgba);
   }
@@ -1273,6 +1274,10 @@ function updatePreviewScale() {
 // Close the preview modal and restore body scroll + focus.
 function closePreview() {
   if (!previewModal.classList.contains("is-open")) return;
+
+  if (document.activeElement && previewModal.contains(document.activeElement)) {
+    document.activeElement.blur();
+  }
 
   previewModal.classList.remove("is-open");
   previewModal.setAttribute("aria-hidden", "true");
@@ -1628,78 +1633,94 @@ function initAnimations() {
   gsap.registerPlugin(window.ScrollTrigger, window.Flip, window.ScrollToPlugin);
 
   // --- Hero entrance (runs once on page load) ---
-  gsap.from(".hero-title", {
-    y: 28, opacity: 0, duration: 1, ease: "power3.out"
-  });
-  gsap.from(".hero-desc", {
-    y: 18, opacity: 0, duration: 0.8, delay: 0.18, ease: "power3.out"
-  });
+  if (document.querySelector(".hero-headline")) {
+    gsap.from(".hero-headline", {
+      y: 28, opacity: 0, duration: 1, ease: "power3.out"
+    });
+  }
+  if (document.querySelector(".hero-subheadline")) {
+    gsap.from(".hero-subheadline", {
+      y: 18, opacity: 0, duration: 0.8, delay: 0.15, ease: "power3.out"
+    });
+  }
+  if (document.querySelector(".hero-process-line")) {
+    gsap.from(".hero-process-line", {
+      y: 14, opacity: 0, duration: 0.7, delay: 0.25, ease: "power3.out"
+    });
+  }
+  if (document.querySelector(".hero-action-wrapper")) {
+    gsap.from(".hero-action-wrapper", {
+      y: 16, opacity: 0, duration: 0.7, delay: 0.35, ease: "power3.out"
+    });
+  }
+  if (document.querySelector(".hero-proof-strip")) {
+    gsap.from(".hero-proof-strip", {
+      y: 14, opacity: 0, duration: 0.65, delay: 0.45, ease: "power3.out"
+    });
+  }
+  if (document.querySelector(".hero-showroom-showcase")) {
+    gsap.from(".showroom-card", {
+      y: 30, opacity: 0, duration: 0.8, stagger: 0.1, delay: 0.55, ease: "power3.out"
+    });
+  }
 
   // --- Pricing cards stagger as they scroll into view ---
   // immediateRender:false keeps cards visible if ScrollTrigger never fires
   // (e.g., the user already scrolled past before GSAP loaded).
-  gsap.from(".pricing-card", {
-    y: 36, opacity: 0, duration: 0.75, stagger: 0.12, ease: "power3.out",
-    immediateRender: false,
-    scrollTrigger: {
-      trigger: ".pricing-grid",
-      start: "top 85%",
-      once: true
-    }
-  });
-
-  // --- Catalogue controls fade in ---
-  gsap.from(".controls-card", {
-    y: 24, opacity: 0, duration: 0.7, ease: "power3.out",
-    immediateRender: false,
-    scrollTrigger: {
-      trigger: ".controls-card",
-      start: "top 88%",
-      once: true
-    }
-  });
+  if (document.querySelector(".pricing-grid")) {
+    gsap.from(".pricing-card", {
+      y: 36, opacity: 0, duration: 0.75, stagger: 0.12, ease: "power3.out",
+      immediateRender: false,
+      scrollTrigger: {
+        trigger: ".pricing-grid",
+        start: "top 85%",
+        once: true
+      }
+    });
+  }
 
   // --- Floating tier nav slides up from below on load ---
-  // Use fromTo with explicit xPercent in both states so the centering
-  // translateX is GSAP-managed (the inner .glass-radio-group carries the
-  // CSS scale(1.2), untouched by this animation).
-  gsap.fromTo(".tier-floating-nav",
-    { xPercent: -50, y: 60, opacity: 0 },
-    { xPercent: -50, y: 0,  opacity: 1, duration: 0.8, delay: 0.4, ease: "power3.out" }
-  );
+  // Horizontal centering is handled cleanly by CSS (left: 0; right: 0; margin: 0 auto)
+  if (document.querySelector(".tier-floating-nav")) {
+    gsap.fromTo(".tier-floating-nav",
+      { y: 60, opacity: 0 },
+      { y: 0,  opacity: 1, duration: 0.8, delay: 0.4, ease: "power3.out" }
+    );
+  }
 
   // --- Floating WhatsApp button pops in ---
-  gsap.from(".floating-whatsapp", {
-    scale: 0.8, opacity: 0, duration: 0.5, delay: 0.3, ease: "back.out(1.7)", immediateRender: false
-  });
+  if (document.querySelector(".floating-whatsapp")) {
+    gsap.from(".floating-whatsapp", {
+      scale: 0.8, opacity: 0, duration: 0.5, delay: 0.3, ease: "back.out(1.7)", immediateRender: false
+    });
+  }
 
   // --- "How it works" steps stagger in ---
-  gsap.from(".how-step", {
-    y: 24, opacity: 0, duration: 0.7, stagger: 0.12, ease: "power3.out",
-    immediateRender: false,
-    scrollTrigger: { trigger: ".how-steps", start: "top 88%", once: true }
-  });
+  if (document.querySelector(".how-steps")) {
+    gsap.from(".how-step", {
+      y: 24, opacity: 0, duration: 0.7, stagger: 0.12, ease: "power3.out",
+      immediateRender: false,
+      scrollTrigger: { trigger: ".how-steps", start: "top 88%", once: true }
+    });
+  }
 
   // --- Testimonials fade-up stagger ---
-  gsap.from(".testimonial-card", {
-    y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
-    immediateRender: false,
-    scrollTrigger: { trigger: ".testimonials-grid", start: "top 90%", once: true }
-  });
-
-  // --- Trust strip stagger ---
-  gsap.from(".trust-item", {
-    y: 16, opacity: 0, duration: 0.55, stagger: 0.08, ease: "power2.out",
-    immediateRender: false,
-    scrollTrigger: { trigger: ".trust-strip", start: "top 92%", once: true }
-  });
+  if (document.querySelector(".testimonials-grid")) {
+    gsap.from(".testimonial-card", {
+      y: 20, opacity: 0, duration: 0.6, stagger: 0.08, ease: "power2.out",
+      immediateRender: false,
+      scrollTrigger: { trigger: ".testimonials-grid", start: "top 90%", once: true }
+    });
+  }
 
   // --- FAQ section title + first item fade in ---
-  gsap.from(".faq-section .section-title, .faq-section .section-subtitle, .faq-list .faq-item", {
-    y: 16, opacity: 0, duration: 0.55, stagger: 0.06, ease: "power2.out",
-    immediateRender: false,
-    scrollTrigger: { trigger: ".faq-list", start: "top 90%", once: true }
-  });
+  if (document.querySelector(".faq-list")) {
+    gsap.from(".faq-section .section-title, .faq-section .section-subtitle, .faq-list .faq-item", {
+      y: 16, opacity: 0, duration: 0.55, stagger: 0.06, ease: "power2.out",
+      immediateRender: false,
+      scrollTrigger: { trigger: ".faq-list", start: "top 90%", once: true }
+    });
+  }
 
   // --- Template cards: animated in renderCatalogue() via gsap.from() ---
   // We intentionally do NOT use ScrollTrigger.batch here — see renderCatalogue()
@@ -1839,11 +1860,11 @@ const FAQS = [
   },
   {
     q: "Can I see a demo before I pay?",
-    a: "Absolutely. Tap any \"Preview ↗\" button on this page and the demo will load inside an in-page mobile-frame viewer — exactly as your guests will experience it. No payment needed to preview."
+    a: "Absolutely. Tap any \"Preview Invitation →\" button on this page and the demo will load inside an in-page mobile-frame viewer — exactly as your guests will experience it. No payment needed to preview."
   },
   {
     q: "Do you have budget options under ₹700?",
-    a: "Yes! If you are looking for simple budget-friendly single-page invitations, we have a dedicated collection at <a href=\"https://699.invitestory.in\" target=\"_blank\" rel=\"noopener\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">699.invitestory.in</a> with templates starting at just ₹699."
+    a: "Yes! If you are looking for simple budget-friendly single-page invitations, we have a dedicated collection at <a href=\"https://reveals.invitestory.in\" target=\"_blank\" rel=\"noopener\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">reveals.invitestory.in</a> with templates starting at just ₹699."
   }
 ];
 
@@ -1975,6 +1996,9 @@ function setupExitIntent() {
     sessionStorage.setItem("exit_intent_shown", "1");
   };
   const hideModal = () => {
+    if (document.activeElement && modal.contains(document.activeElement)) {
+      document.activeElement.blur();
+    }
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.classList.remove("preview-modal-open");
