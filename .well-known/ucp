@@ -1,0 +1,48 @@
+{
+  "protocol_version": "1.0.0",
+  "supported_versions": [
+    "1.0.0",
+    "2026-01-01"
+  ],
+  "merchant": {
+    "name": "InviteStory",
+    "url": "https://invitestory.in",
+    "description": "Interactive digital wedding invitation cards and online event stationery."
+  },
+  "services": [
+    {
+      "id": "dev.ucp.shopping",
+      "name": "Shopping & Customization Service",
+      "version": "1.0.0",
+      "description": "Digital wedding card templates catalog, customization, and checkout."
+    }
+  ],
+  "capabilities": [
+    {
+      "id": "dev.ucp.shopping.catalog",
+      "name": "Catalog Discovery",
+      "spec": "https://ucp.dev/specification/capabilities/catalog"
+    },
+    {
+      "id": "dev.ucp.shopping.cart",
+      "name": "Shopping Cart Management",
+      "spec": "https://ucp.dev/specification/capabilities/cart"
+    },
+    {
+      "id": "dev.ucp.shopping.checkout",
+      "name": "Checkout & Payment Settlement",
+      "spec": "https://ucp.dev/specification/capabilities/checkout"
+    },
+    {
+      "id": "dev.ucp.shopping.order",
+      "name": "Order Management & Delivery Tracking",
+      "spec": "https://ucp.dev/specification/capabilities/order"
+    }
+  ],
+  "endpoints": {
+    "catalog": "https://invitestory.in/api/commerce/catalog",
+    "cart": "https://invitestory.in/api/commerce/cart",
+    "checkout": "https://invitestory.in/api/commerce/checkout",
+    "orders": "https://invitestory.in/api/commerce/orders"
+  }
+}

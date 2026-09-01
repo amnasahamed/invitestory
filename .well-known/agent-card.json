@@ -1,0 +1,84 @@
+{
+  "name": "InviteStory Agent",
+  "description": "AI Agent for exploring, selecting, and customizing interactive digital wedding invitation cards, wedding planning resources, and processing digital invitation orders.",
+  "version": "1.0.0",
+  "protocolVersion": "1.0",
+  "supportedInterfaces": [
+    {
+      "url": "https://invitestory.in/api/agent",
+      "protocolBinding": "HTTP+JSON",
+      "protocolVersion": "1.0"
+    },
+    {
+      "url": "https://invitestory.in/api/agent/rpc",
+      "protocolBinding": "JSONRPC",
+      "protocolVersion": "1.0"
+    }
+  ],
+  "capabilities": {
+    "streaming": false,
+    "pushNotifications": false,
+    "extendedAgentCard": false
+  },
+  "extensions": [
+    {
+      "uri": "https://github.com/google-agentic-commerce/AP2/tree/v0.1.0",
+      "required": true,
+      "description": "Agent Payments Protocol (AP2) merchant role extension for processing transactions with cryptographically-signed mandates.",
+      "params": {
+        "roles": [
+          "merchant"
+        ]
+      }
+    }
+  ],
+  "skills": [
+    {
+      "id": "browse-wedding-templates",
+      "name": "Browse Wedding Invitation Templates",
+      "description": "Discover 30+ interactive digital wedding invitation cards and themes including Rajasthani Palace, Emerald Nikah, South Indian Kalyanam, and Minimalist designs.",
+      "tags": [
+        "wedding",
+        "invitation",
+        "templates",
+        "digital-cards"
+      ],
+      "examples": [
+        "Show me royal palace wedding invitations",
+        "Find minimalist botanical wedding e-invites",
+        "Browse Islamic Nikah invitation templates"
+      ]
+    },
+    {
+      "id": "wedding-planning-guides",
+      "name": "Wedding Planning & RSVP Guides",
+      "description": "Retrieve curated timelines, checklists, and guides for digital RSVPs, WhatsApp guest management, and wedding event schedules.",
+      "tags": [
+        "wedding-planning",
+        "rsvp",
+        "timeline",
+        "guides"
+      ],
+      "examples": [
+        "Show me the 30-day pre-wedding to-do list",
+        "How to manage digital RSVPs on WhatsApp",
+        "Order of events for multi-day wedding ceremonies"
+      ]
+    },
+    {
+      "id": "order-invitation-template",
+      "name": "Order and Customize Wedding Invitation",
+      "description": "Initiate customization orders and complete secure transactions for digital wedding invitation templates via AP2 payment mandates.",
+      "tags": [
+        "ecommerce",
+        "checkout",
+        "ap2",
+        "payment"
+      ],
+      "examples": [
+        "Order Diya Haveli invitation with express delivery",
+        "Purchase Emerald Nikah digital wedding card"
+      ]
+    }
+  ]
+}

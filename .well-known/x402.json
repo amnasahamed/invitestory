@@ -1,0 +1,33 @@
+{
+  "protocol": "x402",
+  "version": "1.0.0",
+  "facilitator": "https://facilitator.x402.org",
+  "merchant": {
+    "name": "InviteStory",
+    "walletAddress": "0x742d35Cc6634C0532925a3b844Bc454e4438f44e",
+    "network": "base",
+    "acceptedTokens": [
+      {
+        "symbol": "USDC",
+        "address": "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+        "decimals": 6
+      }
+    ]
+  },
+  "protectedRoutes": [
+    {
+      "path": "/api/commerce/order",
+      "method": "POST",
+      "amount": "25000000",
+      "currency": "USDC",
+      "description": "Premium interactive wedding invitation order delivery"
+    },
+    {
+      "path": "/api/x402/pay",
+      "method": "GET",
+      "amount": "25000000",
+      "currency": "USDC",
+      "description": "Instant agent payment endpoint"
+    }
+  ]
+}

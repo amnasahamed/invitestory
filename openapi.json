@@ -1,0 +1,136 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "InviteStory API",
+    "description": "API for InviteStory digital invitations, catalog discovery, template metadata, and autonomous agent payments.",
+    "version": "1.0.0"
+  },
+  "x-service-info": {
+    "categories": [
+      "ecommerce",
+      "events",
+      "invitations",
+      "wedding-planning"
+    ],
+    "provider": "InviteStory",
+    "termsOfService": "https://invitestory.in/terms.html"
+  },
+  "servers": [
+    {
+      "url": "https://invitestory.in",
+      "description": "Production Server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Get website catalog and invitation templates",
+        "description": "Returns HTML or Markdown content negotiation representation of InviteStory homepage and catalog.",
+        "responses": {
+          "200": {
+            "description": "Catalog and invitation details",
+            "content": {
+              "text/html": {},
+              "text/markdown": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/commerce/order": {
+      "post": {
+        "summary": "Order and customize digital wedding invitation",
+        "description": "Initiates payment and custom order generation for an interactive wedding card template.",
+        "x-payment-info": {
+          "intent": "charge",
+          "method": "stripe",
+          "amount": 1999,
+          "currency": "INR",
+          "description": "InviteStory interactive wedding invitation design, custom soundtrack, venue maps, and 1-year hosting."
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "templateId": {
+                    "type": "string",
+                    "example": "diya-haveli"
+                  },
+                  "coupleNames": {
+                    "type": "string",
+                    "example": "Aarav & Meera"
+                  },
+                  "eventDate": {
+                    "type": "string",
+                    "example": "2026-11-20"
+                  },
+                  "deliveryAddon": {
+                    "type": "string",
+                    "enum": ["standard_24h", "express_12h"],
+                    "default": "standard_24h"
+                  }
+                },
+                "required": ["templateId", "coupleNames", "eventDate"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Order confirmed and customization initiated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "orderId": { "type": "string" },
+                    "status": { "type": "string" },
+                    "estimatedDelivery": { "type": "string" }
+                  }
+                }
+              }
+            }
+          },
+          "402": {
+            "description": "Payment Required via Machine Payment Protocol (MPP)",
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string",
+                  "example": "Payment intent=\"charge\", method=\"stripe\", amount=\"1999\", currency=\"INR\""
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "summary": "Service health check",
+        "description": "Returns operational status of the service.",
+        "responses": {
+          "200": {
+            "description": "Health status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

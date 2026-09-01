@@ -1,0 +1,59 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/server-card/v1.json",
+  "serverInfo": {
+    "name": "invitestory-mcp-server",
+    "version": "1.0.0",
+    "description": "MCP server providing tools, resources, and prompts for InviteStory digital wedding card templates and wedding planning resources."
+  },
+  "endpoint": "https://invitestory.in/mcp",
+  "transport": {
+    "type": "streamable-http",
+    "url": "https://invitestory.in/mcp"
+  },
+  "capabilities": {
+    "tools": {
+      "listChanged": false,
+      "items": [
+        {
+          "name": "list_invitation_templates",
+          "description": "List available interactive digital wedding invitation card templates by style or cultural theme."
+        },
+        {
+          "name": "get_template_details",
+          "description": "Retrieve detailed metadata, music playlist options, and preview URLs for a specific wedding card template."
+        },
+        {
+          "name": "search_wedding_guides",
+          "description": "Search wedding planning checklists, timeline guides, and RSVP management documentation."
+        }
+      ]
+    },
+    "resources": {
+      "subscribe": false,
+      "listChanged": false,
+      "items": [
+        {
+          "uri": "invitestory://templates/catalog",
+          "name": "InviteStory Templates Catalog",
+          "mimeType": "application/json",
+          "description": "Complete list of 30+ interactive wedding invitation templates."
+        },
+        {
+          "uri": "invitestory://guides/planning-timeline",
+          "name": "Pre-Wedding Planning Timeline",
+          "mimeType": "text/markdown",
+          "description": "Step-by-step 12-month wedding planning countdown."
+        }
+      ]
+    },
+    "prompts": {
+      "listChanged": false,
+      "items": [
+        {
+          "name": "recommend_wedding_theme",
+          "description": "Suggest matching invitation designs based on couple preferences, cultural ceremonies, and color themes."
+        }
+      ]
+    }
+  }
+}

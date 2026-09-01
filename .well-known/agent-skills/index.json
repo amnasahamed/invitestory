@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "wedding-invitation-customization",
+      "type": "skill-md",
+      "description": "Guidelines and procedures for selecting, previewing, and customizing interactive digital wedding invitation cards on InviteStory.",
+      "url": "https://invitestory.in/.well-known/agent-skills/wedding-invitation-customization/SKILL.md",
+      "digest": "sha256:082c75cdf3b787f86fd4439e369aab061244624b7b2321b9c38a6d4a618b8cae"
+    },
+    {
+      "name": "digital-rsvp-management",
+      "type": "skill-md",
+      "description": "Procedures for setting up, tracking, and managing digital wedding guest RSVPs and WhatsApp invitations with InviteStory.",
+      "url": "https://invitestory.in/.well-known/agent-skills/digital-rsvp-management/SKILL.md",
+      "digest": "sha256:c2b0dce3d1a3c534d066f9950783091659dc60744266d7376345e4785089a7b1"
+    }
+  ]
+}

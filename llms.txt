@@ -1,0 +1,46 @@
+# InviteStory
+
+> Premium interactive digital wedding invitation cards and online invitation templates delivered as hosted web links with music, Google Maps integration, RSVP tracking, and 24-hour setup.
+
+## Core Pages
+
+- [Home & Catalog](https://invitestory.in/): Browse 30+ interactive wedding invitation templates across Rajasthani, South Indian, Islamic Nikah, Botanical, and Contemporary styles.
+- [Terms & Conditions & Delivery Policy](https://invitestory.in/terms.html): Details on digital service delivery (within 12-24 hours), pricing in INR/USD, and hosting terms.
+- [Privacy Policy](https://invitestory.in/privacy-policy.html): Information on customer data protection, order processing, and privacy.
+- [Refund and Editing Policy](https://invitestory.in/refund-and-editing-policy.html): Revisions, customization window, and cancellation policy.
+
+## Blog & Guides
+
+- [Ultimate Guide to Digital Wedding Invitations](https://invitestory.in/blog/ultimate-guide-digital-wedding-invitations.html): Complete guide to choosing, personalizing, and sharing digital e-invites.
+- [Best Online Wedding Invitations (2026 Review)](https://invitestory.in/blog/best-online-wedding-invitations-e-invite.html): Review of modern e-invite trends and interactive features.
+- [Digital Shadi Card WhatsApp Guide](https://invitestory.in/blog/digital-shadi-card-whatsapp-guide.html): Guide on sharing invitations seamlessly via WhatsApp.
+
+## API & Machine Discovery
+
+- [API Catalog (RFC 9727)](https://invitestory.in/.well-known/api-catalog): Machine-readable linkset catalog (`application/linkset+json`).
+- [x402 Payment Protocol](https://invitestory.in/.well-known/x402.json): Agent HTTP 402 payment specifications, wallet address, and facilitator details.
+- [Universal Commerce Protocol (UCP)](https://invitestory.in/.well-known/ucp): Universal commerce discovery manifest, capabilities, and shopping services.
+- [Agentic Commerce Protocol (ACP)](https://invitestory.in/.well-known/acp.json): Autonomous commerce, catalog, cart, and payment execution metadata.
+- [Web Bot Auth Signatures Directory](https://invitestory.in/.well-known/http-message-signatures-directory): JWKS public keys for verifying bot and agent HTTP message signatures (IETF WebBotAuth).
+- [MCP Server Card (SEP-1649)](https://invitestory.in/.well-known/mcp/server-card.json): Model Context Protocol server capabilities, tools, resources, and prompts.
+- [Agent Skills Discovery Index](https://invitestory.in/.well-known/agent-skills/index.json): Discovery index for autonomous agent skills per Cloudflare Agent Skills RFC.
+- [A2A Agent Card](https://invitestory.in/.well-known/agent-card.json): Agent-to-Agent discovery card and capability definitions.
+- [OAuth Protected Resource Metadata (RFC 9728)](https://invitestory.in/.well-known/oauth-protected-resource): Resource server metadata.
+- [OpenID Connect Discovery](https://invitestory.in/.well-known/openid-configuration): OIDC identity and authorization discovery metadata.
+- [OAuth 2.0 Authorization Server](https://invitestory.in/.well-known/oauth-authorization-server): RFC 8414 OAuth server metadata.
+- [OpenAPI Specification](https://invitestory.in/openapi.json): OpenAPI 3.0 descriptor for service capabilities.
+- [Health Status](https://invitestory.in/health): Operational health check endpoint.
+
+## DNS for AI Discovery (DNS-AID)
+
+- `_a2a._agents.invitestory.in`: SVCB record advertising A2A endpoint.
+- `_mcp._agents.invitestory.in`: SVCB record advertising MCP server endpoint.
+- `_index._agents.invitestory.in`: HTTPS record pointing to master API catalog.
+
+## Browser & Client Agent Tools (WebMCP)
+
+- [WebMCP Browser Tools](https://invitestory.in/webmcp.js): Browser tool registrations via `navigator.modelContext.registerTool()` for client-side search, template details, and planning guides.
+
+## Content Negotiation
+
+InviteStory supports markdown content negotiation for AI agents. Send `Accept: text/markdown` in your request headers to receive clean, token-efficient Markdown representations of any page.

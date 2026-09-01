@@ -1,0 +1,40 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://invitestory.in/api",
+      "service-desc": [
+        {
+          "href": "https://invitestory.in/openapi.json",
+          "type": "application/vnd.oai.openapi+json;version=3.0"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://invitestory.in/terms.html",
+          "type": "text/html"
+        }
+      ],
+      "status": [
+        {
+          "href": "https://invitestory.in/health",
+          "type": "application/json"
+        }
+      ]
+    },
+    {
+      "anchor": "https://invitestory.in/oauth",
+      "service-desc": [
+        {
+          "href": "https://invitestory.in/.well-known/openid-configuration",
+          "type": "application/json"
+        }
+      ],
+      "service-doc": [
+        {
+          "href": "https://invitestory.in/terms.html",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}

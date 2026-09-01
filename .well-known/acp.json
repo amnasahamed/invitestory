@@ -1,0 +1,39 @@
+{
+  "protocol": {
+    "name": "acp",
+    "version": "2026-01-30"
+  },
+  "api_base_url": "https://invitestory.in/api/commerce",
+  "transports": [
+    "http_rest",
+    "mcp"
+  ],
+  "capabilities": {
+    "services": [
+      "catalog",
+      "cart",
+      "checkout",
+      "orders",
+      "payment"
+    ]
+  },
+  "merchant": {
+    "name": "InviteStory",
+    "description": "Interactive digital wedding invitation cards and customizable website templates.",
+    "currency": "INR",
+    "supported_currencies": [
+      "INR",
+      "USD"
+    ],
+    "payment_methods": [
+      "razorpay",
+      "upi",
+      "card"
+    ]
+  },
+  "endpoints": {
+    "catalog": "https://invitestory.in/api/commerce/catalog",
+    "cart": "https://invitestory.in/api/commerce/cart",
+    "checkout": "https://invitestory.in/api/commerce/checkout"
+  }
+}

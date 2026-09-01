@@ -1,0 +1,21 @@
+{
+  "keys": [
+    {
+      "crv": "Ed25519",
+      "x": "lZkzFfyJCjpBa-9y1JGAjpNGOngamR5k-R09oCTNeGM",
+      "kty": "OKP",
+      "kid": "invitestory-ed25519-key",
+      "use": "sig",
+      "alg": "EdDSA"
+    },
+    {
+      "kty": "EC",
+      "x": "m4NDakkOQlNAxSPss5TyovT6NJaRUdqNhdtj4YcRLD8",
+      "y": "qxCA1isuKYwgdM3XAeMSAYr2ZVkkk-mxfZK0uRqrWd8",
+      "crv": "P-256",
+      "kid": "invitestory-es256-key",
+      "use": "sig",
+      "alg": "ES256"
+    }
+  ]
+}

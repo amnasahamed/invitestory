@@ -50,6 +50,12 @@
   <!-- Canonical Link -->
   <link rel="canonical" href="https://invitestory.in/">
 
+  <!-- Machine Discovery & Agent Link Relations (RFC 8288 / RFC 9727) -->
+  <link rel="api-catalog" href="/.well-known/api-catalog" type="application/linkset+json">
+  <link rel="service-desc" href="/openapi.json" type="application/vnd.oai.openapi+json;version=3.0">
+  <link rel="service-doc" href="/terms.html" type="text/html">
+  <link rel="describedby" href="/llms.txt" type="text/plain">
+
   <!-- Favicon & Touch Icons (Google SERP & Browsers) -->
   <link rel="icon" type="image/png" href="logo/noappicon.png">
   <link rel="shortcut icon" type="image/png" href="logo/noappicon.png">
@@ -876,7 +882,8 @@
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
 
-  <!-- JS Scripts -->
+  <!-- WebMCP Agent Tools & JS Scripts -->
+  <script src="webmcp.js"></script>
   <script src="scripts.js"></script>
 </body>
 </html>

@@ -1,0 +1,34 @@
+; ==============================================================================
+; DNS for AI Discovery (DNS-AID) Zone Configuration for invitestory.in
+; Specification: DNS for AI Discovery (DNS-AID) / RFC 9460 (SVCB/HTTPS)
+; ==============================================================================
+
+$ORIGIN invitestory.in.
+$TTL 3600
+
+; 1. A2A Protocol Agent Endpoint Discovery
+; Discovers the Agent2Agent communication interface
+_a2a._agents    3600 IN SVCB 1 invitestory.in. (
+    alpn="a2a"
+    port=443
+    mandatory=alpn,port
+    key65300="/.well-known/agent-card.json"
+)
+
+; 2. MCP (Model Context Protocol) Endpoint Discovery
+; Discovers the Model Context Protocol server interface
+_mcp._agents    3600 IN SVCB 1 invitestory.in. (
+    alpn="mcp"
+    port=443
+    mandatory=alpn,port
+    key65301="/.well-known/mcp/server-card.json"
+)
+
+; 3. Master Discovery Index & API Catalog (HTTPS Record)
+; Discovers the RFC 9727 API catalog and agent services
+_index._agents  3600 IN HTTPS 1 invitestory.in. (
+    alpn="h2,h3"
+    port=443
+    mandatory=alpn,port
+    key65302="/.well-known/api-catalog"
+)
