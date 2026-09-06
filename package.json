@@ -5,6 +5,10 @@
   "scripts": {
     "dev": "node serve.mjs",
     "start": "node serve.mjs",
-    "build": "echo 'No build required'"
+    "build": "echo 'No build required'",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.129.0"
   }
 }
