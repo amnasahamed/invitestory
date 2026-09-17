@@ -1324,10 +1324,33 @@ function payRazorpayForTemplate(id) {
 // --- Preview Modal functions ---
 
 // --- Deep Linking & Social Sharing Helpers ---
+function getDesignSlug(item) {
+  if (!item) return "";
+  if (item.slug) return item.slug;
+  if (item.demoUrl) {
+    const match = item.demoUrl.match(/https?:\/\/([^.]+)\.invitestory\.in/i);
+    if (match && match[1]) return match[1];
+  }
+  return (item.name || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
 function getDesignShareUrl(item) {
-  const origin = window.location.origin || "https://invitestory.in";
-  const path = window.location.pathname || "/";
-  return `${origin}${path}?design=${item.slug}`;
+  const slug = getDesignSlug(item);
+  return `https://www.invitestory.in/?design=${slug}`;
+}
+
+function getDesignShareContent(item) {
+  const shareUrl = getDesignShareUrl(item);
+  const priceDisplay = item.priceINR ? `₹${item.priceINR}` : "₹999";
+  
+  const title = `InviteStory – ${item.name} Wedding Invitation`;
+  const text = `We fell in love with this "${item.name}" interactive wedding invitation ✨\n\nIt features custom background music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP. Handcrafted & customized in 24 hours (starting at ${priceDisplay})!\n\nExperience the live invitation preview here:\n${shareUrl}`;
+
+  return {
+    title,
+    text,
+    url: shareUrl
+  };
 }
 
 function copyDesignShareLink(templateId, event) {
@@ -1338,18 +1361,21 @@ function copyDesignShareLink(templateId, event) {
   const item = TEMPLATE_DATABASE.find(x => x.id === templateId);
   if (!item) return;
 
-  const shareUrl = getDesignShareUrl(item);
+  const content = getDesignShareContent(item);
+  const textToCopy = content.text;
+
+  const onCopied = () => {
+    showToast(`✨ Link & invitation details copied! Ready to share.`);
+  };
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      showToast(`✨ Link copied! Share "${item.name}" with your family or partner.`);
-    }).catch(() => {
-      fallbackCopyText(shareUrl);
-      showToast(`✨ Link copied! Share "${item.name}" with your family or partner.`);
+    navigator.clipboard.writeText(textToCopy).then(onCopied).catch(() => {
+      fallbackCopyText(textToCopy);
+      onCopied();
     });
   } else {
-    fallbackCopyText(shareUrl);
-    showToast(`✨ Link copied! Share "${item.name}" with your family or partner.`);
+    fallbackCopyText(textToCopy);
+    onCopied();
   }
 
   trackMetaEvent("ShareContent", {
@@ -1368,15 +1394,17 @@ function shareCurrentPreview(event) {
   const item = TEMPLATE_DATABASE[previewState.currentIndex];
   if (!item) return;
 
-  const shareUrl = getDesignShareUrl(item);
+  const content = getDesignShareContent(item);
 
   if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
     navigator.share({
-      title: `InviteStory – ${item.name} Wedding Invitation`,
-      text: `Take a look at the "${item.name}" digital wedding invitation template on InviteStory:`,
-      url: shareUrl
-    }).catch(() => {
-      copyDesignShareLink(item.id);
+      title: content.title,
+      text: content.text,
+      url: content.url
+    }).catch((err) => {
+      if (err && err.name !== "AbortError") {
+        copyDesignShareLink(item.id);
+      }
     });
   } else {
     copyDesignShareLink(item.id);
@@ -1429,7 +1457,7 @@ function findTemplateByQuery(query) {
     const byId = TEMPLATE_DATABASE.find(x => x.id === numId);
     if (byId) return byId;
   }
-  const bySlug = TEMPLATE_DATABASE.find(x => x.slug === q);
+  const bySlug = TEMPLATE_DATABASE.find(x => (x.slug === q || getDesignSlug(x) === q));
   if (bySlug) return bySlug;
   const byName = TEMPLATE_DATABASE.find(x => x.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === q || x.name.toLowerCase() === q);
   if (byName) return byName;
@@ -1498,7 +1526,8 @@ function openPreview(id, updateUrl = true) {
   // Seamlessly update browser URL without refresh so user can share link directly
   if (updateUrl && window.history && window.history.replaceState) {
     const url = new URL(window.location.href);
-    url.searchParams.set("design", item.slug);
+    const slug = item.slug || getDesignSlug(item);
+    url.searchParams.set("design", slug);
     url.searchParams.delete("preview");
     url.searchParams.delete("id");
     window.history.replaceState({ modalOpen: true, templateId: item.id }, "", url.toString());
