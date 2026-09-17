@@ -1341,10 +1341,9 @@ function getDesignShareUrl(item) {
 
 function getDesignShareContent(item) {
   const shareUrl = getDesignShareUrl(item);
-  const priceDisplay = item.priceINR ? `₹${item.priceINR}` : "₹999";
   
   const title = `InviteStory – ${item.name} Wedding Invitation`;
-  const text = `We fell in love with this "${item.name}" interactive wedding invitation ✨\n\nIt features custom background music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP. Handcrafted & customized in 24 hours (starting at ${priceDisplay})!\n\nExperience the live invitation preview here:\n${shareUrl}`;
+  const text = `Look at this "${item.name}" interactive wedding invitation ✨\n\nIt has custom music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP.\n\nCheck out the live preview here and tell me what you think:\n${shareUrl}`;
 
   return {
     title,
