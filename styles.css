@@ -3895,66 +3895,6 @@ body:has(#glass-luxury:checked) .catalogue-section {
   white-space: nowrap;
 }
 
-.paypal-addons-list {
-  padding: 12px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.paypal-addons-title {
-  font-size: 0.74rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  font-weight: 700;
-  color: rgba(243, 237, 218, 0.65);
-  margin-bottom: 2px;
-}
-
-.paypal-addon-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255, 255, 255, 0.035);
-  padding: 8px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
-  border: 1px solid transparent;
-}
-
-.paypal-addon-item:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 196, 57, 0.25);
-}
-
-.paypal-addon-item input[type="checkbox"] {
-  accent-color: #ffc439;
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-}
-
-.paypal-addon-text {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  font-size: 0.84rem;
-}
-
-.paypal-addon-name {
-  color: rgba(243, 237, 218, 0.9);
-}
-
-.paypal-addon-rate {
-  color: #ecd9ac;
-  font-weight: 600;
-  font-size: 0.84rem;
-  white-space: nowrap;
-}
-
 .paypal-total-row {
   display: flex;
   justify-content: space-between;

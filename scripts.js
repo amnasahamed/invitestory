@@ -1399,15 +1399,11 @@ function openPayPalCheckout(id) {
   if (tierEl) tierEl.textContent = tierName;
   if (basePriceEl) basePriceEl.textContent = `$${prices.priceUSD}`;
 
-  // Reset checkboxes
-  const expressCb = document.getElementById("paypal-addon-express");
-  const domainCb = document.getElementById("paypal-addon-domain");
-  const langCb = document.getElementById("paypal-addon-lang");
-  if (expressCb) expressCb.checked = false;
-  if (domainCb) domainCb.checked = false;
-  if (langCb) langCb.checked = false;
+  const totalDisplay = document.getElementById("paypal-total-display");
+  if (totalDisplay) {
+    totalDisplay.textContent = `$${prices.priceUSD.toFixed(2)} USD`;
+  }
 
-  updatePayPalCheckoutTotal();
   renderPayPalButtons();
 
   modal.classList.add("is-open");
@@ -1421,35 +1417,10 @@ function closePayPalCheckout() {
   modal.setAttribute("aria-hidden", "true");
 }
 
-function getSelectedPayPalAddons() {
-  const addons = [];
-  if (document.getElementById("paypal-addon-express")?.checked) addons.push("express");
-  if (document.getElementById("paypal-addon-domain")?.checked) addons.push("domain");
-  if (document.getElementById("paypal-addon-lang")?.checked) addons.push("lang");
-  return addons;
-}
-
 function calculatePayPalTotal() {
   if (!currentPayPalCheckoutTemplate) return 15;
   const prices = getItemPrices(currentPayPalCheckoutTemplate);
-  let total = prices.priceUSD;
-  const addons = getSelectedPayPalAddons();
-  addons.forEach(key => {
-    if (ADDONS[key]) total += ADDONS[key].priceUSD;
-  });
-  return total;
-}
-
-function updatePayPalCheckoutTotal() {
-  const total = calculatePayPalTotal();
-  const totalDisplay = document.getElementById("paypal-total-display");
-  if (totalDisplay) {
-    totalDisplay.textContent = `$${total.toFixed(2)} USD`;
-  }
-}
-
-function onPayPalAddonChange() {
-  updatePayPalCheckoutTotal();
+  return prices.priceUSD;
 }
 
 function renderPayPalButtons() {
@@ -1485,8 +1456,7 @@ function renderPayPalButtons() {
       createOrder: function(data, actions) {
         const item = currentPayPalCheckoutTemplate || TEMPLATE_DATABASE[0];
         const total = calculatePayPalTotal();
-        const selectedAddons = getSelectedPayPalAddons();
-        const addonNames = selectedAddons.map(k => ADDONS[k]?.name).filter(Boolean);
+        const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : "Luxury";
 
         trackMetaEvent("InitiateCheckout", {
           content_name: item.name,
@@ -1499,7 +1469,7 @@ function renderPayPalButtons() {
 
         return actions.order.create({
           purchase_units: [{
-            description: `InviteStory: ${item.name} Wedding Invitation`,
+            description: `InviteStory: ${item.name} Wedding Invitation (${tierName} Tier)`,
             amount: {
               currency_code: "USD",
               value: total.toFixed(2),
@@ -1512,7 +1482,7 @@ function renderPayPalButtons() {
             },
             items: [{
               name: `${item.name} - Digital Wedding Invitation`,
-              description: addonNames.length > 0 ? `Add-ons: ${addonNames.join(", ")}` : "Standard Digital Invitation",
+              description: `${tierName} Tier Digital Wedding Invitation`,
               unit_amount: {
                 currency_code: "USD",
                 value: total.toFixed(2)
@@ -1542,13 +1512,7 @@ function renderPayPalButtons() {
 
           alert(`🎉 Payment Successful via PayPal!\n\nOrder ID: ${transactionId}\nTemplate: ${item.name}\nAmount: $${total} USD\n\nClick OK to open WhatsApp and send your wedding details for customization!`);
 
-          const selectedAddons = getSelectedPayPalAddons().map(k => ADDONS[k]?.name).filter(Boolean);
-          let waMsg = `Hi InviteStory! I have paid online via PayPal for '${item.name}' (Total: $${total} USD, Order ID: ${transactionId}).`;
-          if (selectedAddons.length > 0) {
-            waMsg += `\nAdd-ons: ${selectedAddons.join(", ")}`;
-          }
-          waMsg += `\n\nHere are my wedding details:`;
-
+          const waMsg = `Hi InviteStory! I have paid online via PayPal for '${item.name}' (Total: $${total} USD, Order ID: ${transactionId}). Here are our wedding details for customization:`;
           window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
         });
       },
