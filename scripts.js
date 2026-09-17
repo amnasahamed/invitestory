@@ -659,7 +659,7 @@ TEMPLATE_DATABASE.forEach(item => {
 const previewState = { 
   currentIndex: -1, 
   lastFocusedElement: null,
-  viewMode: "3d" // "3d" or "flat"
+  viewMode: "flat" // "3d" or "flat"
 };
 
 // --- Spring-Damped 3D Physics Engine (Heavy Solid Titanium Damping) ---
