@@ -648,7 +648,60 @@ const TIER_FIRST_INDEX = {
   2: TEMPLATE_DATABASE.findIndex(t => t.tier === 2),
   3: TEMPLATE_DATABASE.findIndex(t => t.tier === 3)
 };
-const previewState = { currentIndex: -1, lastFocusedElement: null };
+
+// Automatically generate clean URL slugs for every template in database
+TEMPLATE_DATABASE.forEach(item => {
+  if (!item.slug) {
+    item.slug = item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  }
+});
+
+const previewState = { 
+  currentIndex: -1, 
+  lastFocusedElement: null,
+  viewMode: "3d" // "3d" or "flat"
+};
+
+// --- Spring-Damped 3D Physics Engine (Heavy Solid Titanium Damping) ---
+const PhonePhysics = {
+  // Resting pose: elegant cinematic angle
+  REST: { rotY: -9, rotX: 4.5, rotZ: -0.6, scale: 1, translateY: 0, opacity: 1 },
+  // Entrance start pose: smooth glide
+  ENTRANCE: { rotY: -18, rotX: 8, rotZ: -0.9, scale: 0.96, translateY: 18, opacity: 0.7 },
+  // Responsiveness tracking factor
+  LERP_FACTOR: 0.12,
+  // Heavy solid damping factor (kills rubbery oscillation, settles authoritatively)
+  DAMPING: 0.74,
+  // Sleep threshold to stop animating when settled (saves CPU)
+  EPSILON: 0.005,
+
+  // Current interpolated values (what's rendered)
+  current: { rotY: -9, rotX: 4.5, rotZ: -0.6, scale: 1, translateY: 0, opacity: 1 },
+  // Target values (set by mouse/touch/gyro)
+  target: { rotY: -9, rotX: 4.5, rotZ: -0.6, scale: 1, translateY: 0, opacity: 1 },
+  // Velocity for overshoot damping
+  velocity: { rotY: 0, rotX: 0, rotZ: 0, scale: 0, translateY: 0, opacity: 0 },
+
+  // Glare layer targets (each layer responds at different speed)
+  glare: {
+    current: { highlightX: 0, highlightY: 0, rimX: 0, rimY: 0, ambientX: 0, ambientY: 0, highlightOp: 0.75, rimOp: 0.55, ambientOp: 0.5 },
+    target:  { highlightX: 0, highlightY: 0, rimX: 0, rimY: 0, ambientX: 0, ambientY: 0, highlightOp: 0.75, rimOp: 0.55, ambientOp: 0.5 }
+  },
+
+  // Shadow targets
+  shadow: {
+    current: { x: 0, blur: 14, opacity: 1 },
+    target:  { x: 0, blur: 14, opacity: 1 }
+  },
+
+  // rAF handle
+  rafId: null,
+  isRunning: false,
+  // DOM element refs (cached on first start)
+  els: {},
+  // Reduced motion preference
+  reducedMotion: false
+};
 
 const previewModal      = document.getElementById("preview-modal");
 const previewModalTitle = document.getElementById("preview-modal-title");
@@ -668,6 +721,7 @@ const previewFullscreenBtn = document.getElementById("preview-fullscreen-btn");
 const previewCounterBadge  = document.getElementById("preview-counter-badge");
 const previewSidePrev      = document.getElementById("preview-side-prev");
 const previewSideNext      = document.getElementById("preview-side-next");
+const previewPatternCanvas = document.getElementById("preview-pattern-canvas");
 
 // --- Helper Functions ---
 function getCurrencySymbol() {
@@ -694,6 +748,90 @@ function hexToRgba(hex, alpha = 0.4) {
 
 function tierEmoji(tier) {
   return tier === 1 ? "🌿" : tier === 2 ? "💎" : "👑";
+}
+
+// --- Distinct Luxury Pattern Engine for Preview Stage ---
+const LUXURY_PATTERNS = {
+  jali: (color) => ({
+    size: "60px 60px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'><path d='M30 0 L60 30 L30 60 L0 30 Z M30 10 C38 18 42 22 50 30 C42 38 38 42 30 50 C22 42 18 38 10 30 C18 22 22 18 30 10 Z' fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.4'/><circle cx='30' cy='30' r='3' fill='${color}' fill-opacity='0.45'/></svg>`
+  }),
+  kolam: (color) => ({
+    size: "70px 70px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'><g fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.4'><path d='M35 5 Q50 20 65 35 Q50 50 35 65 Q20 50 5 35 Q20 20 35 5 Z'/><circle cx='35' cy='35' r='14'/><circle cx='35' cy='35' r='3.5' fill='${color}' fill-opacity='0.45'/><path d='M0 35 Q17.5 17.5 35 35 Q17.5 52.5 0 35 Z M70 35 Q52.5 17.5 35 35 Q52.5 52.5 70 35 Z'/></g></svg>`
+  }),
+  mandala: (color) => ({
+    size: "80px 80px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='${color}' stroke-width='1.1' stroke-opacity='0.4'><circle cx='40' cy='40' r='24'/><circle cx='40' cy='40' r='12'/><circle cx='40' cy='40' r='3' fill='${color}' fill-opacity='0.4'/><path d='M40 0 L40 80 M0 40 L80 40 M12 12 L68 68 M12 68 L68 12'/><path d='M40 16 Q48 28 40 40 Q32 28 40 16 Z M40 40 Q48 52 40 64 Q32 52 40 40 Z M16 40 Q28 48 40 40 Q28 32 16 40 Z M40 40 Q52 48 64 40 Q52 32 40 40 Z'/></g></svg>`
+  }),
+  damask: (color) => ({
+    size: "74px 74px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='74' height='74' viewBox='0 0 74 74'><g fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.4'><path d='M37 10 C45 25 55 25 55 35 C55 45 42 55 37 65 C32 55 19 45 19 35 C19 25 29 25 37 10 Z'/><path d='M37 25 C42 32 46 35 46 40 C46 45 40 50 37 54 C34 50 28 45 28 40 C28 35 32 32 37 25 Z'/><circle cx='37' cy='37' r='3' fill='${color}' fill-opacity='0.4'/></g></svg>`
+  }),
+  arabesque: (color) => ({
+    size: "64px 64px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><g fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.4'><path d='M32 0 L42 22 L64 32 L42 42 L32 64 L22 42 L0 32 L22 22 Z'/><path d='M0 0 L15 15 M64 0 L49 15 M64 64 L49 49 M0 64 L15 49'/><rect x='24' y='24' width='16' height='16' transform='rotate(45 32 32)'/></g></svg>`
+  }),
+  botanical: (color) => ({
+    size: "68px 68px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='68' height='68' viewBox='0 0 68 68'><g fill='none' stroke='${color}' stroke-width='1.1' stroke-opacity='0.4'><path d='M10 58 Q34 34 58 10'/><path d='M25 43 Q32 37 34 44 Q28 48 25 43 Z M43 25 Q37 32 44 34 Q48 28 43 25 Z'/><path d='M15 53 Q22 47 24 54 Q18 58 15 53 Z M53 15 Q47 22 54 24 Q58 18 53 15 Z'/><circle cx='58' cy='10' r='2' fill='${color}' fill-opacity='0.5'/></g></svg>`
+  }),
+  waves: (color) => ({
+    size: "60px 40px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='60' height='40' viewBox='0 0 60 40'><g fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.4'><path d='M0 10 Q15 0 30 10 T60 10 M0 30 Q15 20 30 30 T60 30'/><path d='M-15 20 Q0 10 15 20 T45 20 T75 20' stroke-dasharray='3 3'/></g></svg>`
+  }),
+  artdeco: (color) => ({
+    size: "64px 64px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'><g fill='none' stroke='${color}' stroke-width='1.1' stroke-opacity='0.4'><path d='M32 0 L64 32 L32 64 L0 32 Z'/><path d='M32 10 L54 32 L32 54 L10 32 Z'/><path d='M32 20 L44 32 L32 44 L20 32 Z'/><line x1='0' y1='0' x2='64' y2='64'/><line x1='64' y1='0' x2='0' y2='64'/></g></svg>`
+  }),
+  celestial: (color) => ({
+    size: "72px 72px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'><g fill='none' stroke='${color}' stroke-width='1.1' stroke-opacity='0.4'><path d='M36 12 Q36 28 20 28 Q36 28 36 44 Q36 28 52 28 Q36 28 36 12 Z' fill='${color}' fill-opacity='0.12'/><circle cx='36' cy='28' r='2.5' fill='${color}' fill-opacity='0.5'/><circle cx='10' cy='60' r='1.5' fill='${color}' fill-opacity='0.4'/><circle cx='62' cy='58' r='1.5' fill='${color}' fill-opacity='0.4'/><path d='M10 56 L10 64 M6 60 L14 60'/><path d='M62 54 L62 62 M58 58 L66 58'/></g></svg>`
+  }),
+  whimsical: (color) => ({
+    size: "70px 70px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='70' height='70' viewBox='0 0 70 70'><g fill='none' stroke='${color}' stroke-width='1.1' stroke-opacity='0.4'><path d='M15 55 C25 55 35 48 35 38 C35 28 25 24 20 28 C15 32 18 40 25 40 C30 40 33 36 33 32'/><circle cx='48' cy='20' r='3' fill='${color}' fill-opacity='0.35'/><path d='M48 20 L58 14 M48 20 L60 20 M48 20 L56 26'/><circle cx='54' cy='52' r='2' fill='${color}' fill-opacity='0.4'/><circle cx='12' cy='18' r='1.5' fill='${color}' fill-opacity='0.4'/></g></svg>`
+  }),
+  paisley: (color) => ({
+    size: "76px 76px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='76' height='76' viewBox='0 0 76 76'><g fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.4'><path d='M38 14 C48 14 56 24 56 36 C56 50 44 60 36 64 C32 66 26 62 24 56 C22 50 26 44 32 42 C38 40 40 34 38 28 C36 22 28 24 26 28'/><circle cx='38' cy='36' r='3' fill='${color}' fill-opacity='0.4'/></g></svg>`
+  })
+};
+
+function getTemplatePatternKey(item) {
+  const str = `${item.name} ${item.style || ""} ${(item.tags || []).join(" ")} ${item.slug || ""}`.toLowerCase();
+  
+  if (/ghibli|anime|whimsical|fantasy|fairy/.test(str)) return "whimsical";
+  if (/beach|sea|ocean|coastal|seashell|goa|water/.test(str)) return "waves";
+  if (/nikah|emerald|islamic|noor|desert/.test(str)) return "arabesque";
+  if (/rajasthan|jodhpur|jaipur|udaipur|palace|royal|mewar|haveli/.test(str)) return "jali";
+  if (/telugu|kalyana|mandapam|banana|south-indian|toran/.test(str)) return "kolam";
+  if (/shubha|vivaham|muhurtham|vedic|lamp/.test(str)) return "mandala";
+  if (/sage|parchment|botanical|eucalyptus|minimal/.test(str)) return "botanical";
+  if (/floral|flower|bloom|rose|meadow|bougainvillea/.test(str)) return "damask";
+  if (/modern|contemporary|chic|glam|vogue|artdeco/.test(str)) return "artdeco";
+  if (/star|celestial|night|cosmic|midnight/.test(str)) return "celestial";
+  if (/marigold|bhavan|traditional|paisley/.test(str)) return "paisley";
+
+  const allKeys = Object.keys(LUXURY_PATTERNS);
+  return allKeys[Math.abs(item.id || 0) % allKeys.length];
+}
+
+function applyTemplateLuxuryPattern(item) {
+  const canvas = document.getElementById("preview-pattern-canvas");
+  if (!canvas) return;
+
+  const key = getTemplatePatternKey(item);
+  const generator = LUXURY_PATTERNS[key] || LUXURY_PATTERNS.jali;
+  const accent = item.accentColor || "#c09559";
+  
+  const patternData = generator(accent);
+  const encodedSvg = encodeURIComponent(patternData.svg);
+  const dataUri = `url("data:image/svg+xml,${encodedSvg}")`;
+
+  canvas.style.setProperty("--preview-pattern-size", patternData.size);
+  canvas.style.backgroundImage = dataUri;
+  canvas.setAttribute("data-pattern-key", key);
 }
 
 // --- Render Tiers Table in Pricing Section ---
@@ -893,6 +1031,10 @@ function renderCatalogue() {
           <div class="template-card-actions">
             <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
               <span>Preview <span class="btn-text-invitation">Invitation</span> →</span>
+            </button>
+            <button type="button" class="template-card-share-btn" onclick="copyDesignShareLink(${item.id}, event)" title="Copy direct link to ${item.name}" aria-label="Share link for ${item.name}">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              <span class="share-btn-text">Share</span>
             </button>
             <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); orderCustomTemplate(${item.id})" aria-label="Order ${item.name} on WhatsApp" title="Order on WhatsApp">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
@@ -1185,14 +1327,186 @@ function payRazorpayForTemplate(id) {
 
 // --- Preview Modal functions ---
 
+// --- Deep Linking & Social Sharing Helpers ---
+function getDesignShareUrl(item) {
+  const origin = window.location.origin || "https://invitestory.in";
+  const path = window.location.pathname || "/";
+  return `${origin}${path}?design=${item.slug}`;
+}
+
+function copyDesignShareLink(templateId, event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  const item = TEMPLATE_DATABASE.find(x => x.id === templateId);
+  if (!item) return;
+
+  const shareUrl = getDesignShareUrl(item);
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      showToast(`✨ Link copied! Share "${item.name}" with your family or partner.`);
+    }).catch(() => {
+      fallbackCopyText(shareUrl);
+      showToast(`✨ Link copied! Share "${item.name}" with your family or partner.`);
+    });
+  } else {
+    fallbackCopyText(shareUrl);
+    showToast(`✨ Link copied! Share "${item.name}" with your family or partner.`);
+  }
+
+  trackMetaEvent("ShareContent", {
+    content_name: item.name,
+    content_id: String(item.id),
+    content_type: "product"
+  });
+}
+
+function shareCurrentPreview(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  if (previewState.currentIndex < 0) return;
+  const item = TEMPLATE_DATABASE[previewState.currentIndex];
+  if (!item) return;
+
+  const shareUrl = getDesignShareUrl(item);
+
+  if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+    navigator.share({
+      title: `InviteStory – ${item.name} Wedding Invitation`,
+      text: `Take a look at the "${item.name}" digital wedding invitation template on InviteStory:`,
+      url: shareUrl
+    }).catch(() => {
+      copyDesignShareLink(item.id);
+    });
+  } else {
+    copyDesignShareLink(item.id);
+  }
+}
+
+function showToast(message) {
+  let toast = document.getElementById("toast-notification");
+  let msgEl = document.getElementById("toast-message");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast-notification";
+    toast.className = "toast-notification";
+    toast.setAttribute("role", "status");
+    toast.setAttribute("aria-live", "polite");
+    toast.innerHTML = `<span class="toast-icon">✨</span><span id="toast-message" class="toast-message"></span>`;
+    document.body.appendChild(toast);
+    msgEl = document.getElementById("toast-message");
+  }
+  if (msgEl) msgEl.textContent = message;
+  toast.classList.add("is-visible");
+  clearTimeout(window.__toastTimeout);
+  window.__toastTimeout = setTimeout(() => {
+    toast.classList.remove("is-visible");
+  }, 3400);
+}
+
+function fallbackCopyText(text) {
+  try {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    textArea.style.position = "fixed";
+    textArea.style.top = "-9999px";
+    textArea.style.left = "-9999px";
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+  } catch (err) {
+    console.warn("Fallback clipboard copy error:", err);
+  }
+}
+
+function findTemplateByQuery(query) {
+  if (!query) return null;
+  const q = String(query).trim().toLowerCase();
+  const numId = parseInt(q, 10);
+  if (!isNaN(numId)) {
+    const byId = TEMPLATE_DATABASE.find(x => x.id === numId);
+    if (byId) return byId;
+  }
+  const bySlug = TEMPLATE_DATABASE.find(x => x.slug === q);
+  if (bySlug) return bySlug;
+  const byName = TEMPLATE_DATABASE.find(x => x.name.toLowerCase().replace(/[^a-z0-9]+/g, "-") === q || x.name.toLowerCase() === q);
+  if (byName) return byName;
+  return null;
+}
+
+function handleInitialUrlRoute() {
+  const params = new URLSearchParams(window.location.search);
+  const designQuery = params.get("design") || params.get("preview") || params.get("id") || params.get("template");
+  if (designQuery) {
+    const matched = findTemplateByQuery(designQuery);
+    if (matched) {
+      setTimeout(() => {
+        openPreview(matched.id, false);
+        const card = document.getElementById(`template-card-${matched.id}`);
+        if (card) {
+          card.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+      }, 350);
+    }
+  }
+}
+
+// 3D View Angle vs Flat View Rig Switching
+function setPreviewViewMode(mode) {
+  previewState.viewMode = mode;
+  syncPreviewViewRig();
+}
+
+function syncPreviewViewRig() {
+  const rig = document.getElementById("preview-phone-3d-rig");
+  const btn3D = document.getElementById("view-mode-3d");
+  const btnFlat = document.getElementById("view-mode-flat");
+  if (!rig) return;
+
+  if (previewState.viewMode === "3d") {
+    rig.classList.add("is-3d-mode");
+    rig.classList.remove("is-flat-mode");
+    // Reset physics target to resting 3D pose
+    Object.assign(PhonePhysics.target, PhonePhysics.REST);
+    phonePhysicsResetGlare();
+    phonePhysicsStart();
+    if (btn3D) btn3D.classList.add("active");
+    if (btnFlat) btnFlat.classList.remove("active");
+  } else {
+    rig.classList.remove("is-3d-mode");
+    rig.classList.add("is-flat-mode");
+    // Flat mode: CSS transition handles the snap, pause physics
+    phonePhysicsStop();
+    if (btn3D) btn3D.classList.remove("active");
+    if (btnFlat) btnFlat.classList.add("active");
+  }
+}
+
+// --- Preview Modal functions ---
+
 // Open the in-page preview modal for a given template id.
-function openPreview(id) {
+function openPreview(id, updateUrl = true) {
   const idx = TEMPLATE_DATABASE.findIndex(x => x.id === id);
   if (idx === -1) return;
 
   const item = TEMPLATE_DATABASE[idx];
   previewState.currentIndex = idx;
   previewState.lastFocusedElement = document.activeElement;
+
+  // Seamlessly update browser URL without refresh so user can share link directly
+  if (updateUrl && window.history && window.history.replaceState) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("design", item.slug);
+    url.searchParams.delete("preview");
+    url.searchParams.delete("id");
+    window.history.replaceState({ modalOpen: true, templateId: item.id }, "", url.toString());
+  }
 
   const prices = getItemPrices(item);
   trackMetaEvent("ViewContent", {
@@ -1235,6 +1549,9 @@ function openPreview(id) {
     previewAmbientGlow.style.setProperty('--theme-accent-glow', glowRgba);
   }
 
+  // Apply distinct bespoke luxury pattern & palette for this template
+  applyTemplateLuxuryPattern(item);
+
   // Reset iframe load state and start loading the new demo
   previewIframe.classList.remove("is-loaded");
   previewLoader.classList.remove("is-hidden");
@@ -1244,18 +1561,24 @@ function openPreview(id) {
   // Sync tier-tab active state to current template
   updatePreviewTierTabs(item.tier);
 
+  // Sync view mode (3D or Flat)
+  syncPreviewViewRig();
+
   // Show modal & update device scale to fit available viewport seamlessly
   previewModal.classList.add("is-open");
   previewModal.setAttribute("aria-hidden", "false");
   document.body.classList.add("preview-modal-open");
   requestAnimationFrame(updatePreviewScale);
 
+  // Trigger cinematic entrance animation (spring from dramatic pose to rest)
+  phonePhysicsTriggerEntrance();
+
   // Move focus to the close button for keyboard users
   const closeBtn = previewModal.querySelector(".preview-modal-close");
   if (closeBtn) closeBtn.focus();
 }
 
-// Dynamically scale the 375x812 device mockup frame to fit available body height/width
+// Dynamically scale the iPhone 17 Pro mockup frame (405x864, 393x852 screen) to fit available body height/width
 function updatePreviewScale() {
   if (!previewIframeWrap || !previewModal || !previewModal.classList.contains("is-open")) return;
   const body = previewModal.querySelector(".preview-modal-body");
@@ -1264,8 +1587,9 @@ function updatePreviewScale() {
   const availWidth = body.clientWidth - 20;
   const availHeight = body.clientHeight - 12;
   
-  const targetWidth = 375;
-  const targetHeight = 812;
+  // Authentic iPhone 17 Pro 19.55:9 ratio (405x864 chassis, 393x852 active OLED)
+  const targetWidth = 405;
+  const targetHeight = 864;
 
   const scaleX = availWidth / targetWidth;
   const scaleY = availHeight / targetHeight;
@@ -1276,11 +1600,20 @@ function updatePreviewScale() {
 }
 
 // Close the preview modal and restore body scroll + focus.
-function closePreview() {
+function closePreview(updateUrl = true) {
   if (!previewModal.classList.contains("is-open")) return;
 
   if (document.activeElement && previewModal.contains(document.activeElement)) {
     document.activeElement.blur();
+  }
+
+  // Remove ?design= from browser URL cleanly without refreshing
+  if (updateUrl && window.history && window.history.replaceState) {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("design");
+    url.searchParams.delete("preview");
+    url.searchParams.delete("id");
+    window.history.replaceState({ modalOpen: false }, "", url.toString());
   }
 
   previewModal.classList.remove("is-open");
@@ -1298,9 +1631,251 @@ function closePreview() {
 
   previewState.currentIndex = -1;
 
+  // Stop 3D physics rAF loop
+  phonePhysicsStop();
+
   // Restore focus to the originating trigger
   if (previewState.lastFocusedElement && typeof previewState.lastFocusedElement.focus === "function") {
     previewState.lastFocusedElement.focus();
+  }
+
+  // Close FAQ popup if open
+  closePreviewFaq();
+}
+
+// --- Preview Modal FAQ Functions ---
+function openPreviewFaq(e) {
+  if (e && typeof e.stopPropagation === "function") e.stopPropagation();
+  const faqBackdrop = document.getElementById("preview-faq-backdrop");
+  if (faqBackdrop) {
+    faqBackdrop.classList.add("is-open");
+    faqBackdrop.setAttribute("aria-hidden", "false");
+  }
+}
+
+function closePreviewFaq() {
+  const faqBackdrop = document.getElementById("preview-faq-backdrop");
+  if (faqBackdrop) {
+    faqBackdrop.classList.remove("is-open");
+    faqBackdrop.setAttribute("aria-hidden", "true");
+  }
+}
+
+// --- Phone Physics Functions ---
+
+function phonePhysicsEnsureEls() {
+  if (!PhonePhysics.els.rig) {
+    const stage = document.getElementById("preview-3d-stage");
+    const rig = document.getElementById("preview-phone-3d-rig");
+    if (rig) {
+      PhonePhysics.els = {
+        stage: stage,
+        rig: rig,
+        shadow: rig.querySelector(".phone-shadow-3d"),
+        glareHighlight: document.getElementById("glare-highlight"),
+        glareRim: document.getElementById("glare-rim"),
+        glareAmbient: document.getElementById("glare-ambient")
+      };
+    }
+  }
+}
+
+function phonePhysicsStart() {
+  if (PhonePhysics.isRunning || PhonePhysics.reducedMotion) return;
+  phonePhysicsEnsureEls();
+  PhonePhysics.isRunning = true;
+  PhonePhysics.rafId = requestAnimationFrame(phonePhysicsLoop);
+}
+
+function phonePhysicsStop() {
+  PhonePhysics.isRunning = false;
+  if (PhonePhysics.rafId) {
+    cancelAnimationFrame(PhonePhysics.rafId);
+    PhonePhysics.rafId = null;
+  }
+}
+
+function phonePhysicsLoop() {
+  if (!PhonePhysics.isRunning) return;
+  if (previewState.viewMode !== "3d" || !previewModal || !previewModal.classList.contains("is-open")) {
+    phonePhysicsStop();
+    return;
+  }
+
+  const { current, target, velocity, LERP_FACTOR, DAMPING, glare, shadow, els } = PhonePhysics;
+
+  // Spring physics interpolation for phone rig with heavy titanium damping
+  const keys = ["rotY", "rotX", "rotZ", "scale", "translateY", "opacity"];
+  for (let i = 0; i < keys.length; i++) {
+    const k = keys[i];
+    const diff = target[k] - current[k];
+    velocity[k] = (velocity[k] + diff * LERP_FACTOR) * DAMPING;
+    current[k] += velocity[k];
+  }
+
+  // Interpolate glare values with smooth lag
+  const gKeys = ["highlightX", "highlightY", "rimX", "rimY", "ambientX", "ambientY", "highlightOp", "rimOp", "ambientOp"];
+  for (let i = 0; i < gKeys.length; i++) {
+    const gk = gKeys[i];
+    glare.current[gk] += (glare.target[gk] - glare.current[gk]) * 0.14;
+  }
+
+  // Interpolate shadow values
+  shadow.current.x += (shadow.target.x - shadow.current.x) * 0.14;
+  shadow.current.blur += (shadow.target.blur - shadow.current.blur) * 0.14;
+  shadow.current.opacity += (shadow.target.opacity - shadow.current.opacity) * 0.14;
+
+  // Apply to DOM
+  if (els.rig) {
+    els.rig.style.transform = `rotateY(${current.rotY.toFixed(2)}deg) rotateX(${current.rotX.toFixed(2)}deg) rotateZ(${current.rotZ.toFixed(2)}deg) scale(${current.scale.toFixed(3)}) translateY(${current.translateY.toFixed(1)}px)`;
+    els.rig.style.opacity = current.opacity.toFixed(2);
+  }
+
+  if (els.shadow) {
+    els.shadow.style.transform = `rotateX(85deg) translateZ(-40px) translateX(${shadow.current.x.toFixed(1)}px)`;
+    els.shadow.style.filter = `blur(${shadow.current.blur.toFixed(1)}px)`;
+    els.shadow.style.opacity = shadow.current.opacity.toFixed(2);
+  }
+
+  if (els.glareHighlight) {
+    els.glareHighlight.style.transform = `translateX(${glare.current.highlightX.toFixed(1)}px) translateY(${glare.current.highlightY.toFixed(1)}px)`;
+    els.glareHighlight.style.opacity = glare.current.highlightOp.toFixed(2);
+  }
+
+  if (els.glareRim) {
+    els.glareRim.style.transform = `translateX(${glare.current.rimX.toFixed(1)}px) translateY(${glare.current.rimY.toFixed(1)}px)`;
+    els.glareRim.style.opacity = glare.current.rimOp.toFixed(2);
+  }
+
+  if (els.glareAmbient) {
+    els.glareAmbient.style.transform = `translateX(${glare.current.ambientX.toFixed(1)}px) translateY(${glare.current.ambientY.toFixed(1)}px)`;
+    els.glareAmbient.style.opacity = glare.current.ambientOp.toFixed(2);
+  }
+
+  PhonePhysics.rafId = requestAnimationFrame(phonePhysicsLoop);
+}
+
+function phonePhysicsSetMouseTarget(normX, normY) {
+  // normX, normY are typically between -0.5 and 0.5
+  const clampedX = Math.max(-0.55, Math.min(0.55, normX));
+  const clampedY = Math.max(-0.55, Math.min(0.55, normY));
+
+  // Phone rig target angles: realistic titanium hardware weight, controlled range
+  PhonePhysics.target.rotY = PhonePhysics.REST.rotY + (clampedX * 11);
+  PhonePhysics.target.rotX = PhonePhysics.REST.rotX - (clampedY * 9);
+  PhonePhysics.target.rotZ = PhonePhysics.REST.rotZ + (clampedX * 0.8);
+  PhonePhysics.target.scale = 1;
+  PhonePhysics.target.translateY = 0;
+  PhonePhysics.target.opacity = 1;
+
+  // Glare multi-layer targets (subtle, authentic ceramic shield reflections)
+  PhonePhysics.glare.target.highlightX = clampedX * 65;
+  PhonePhysics.glare.target.highlightY = clampedY * 50;
+  PhonePhysics.glare.target.highlightOp = Math.max(0.25, Math.min(0.85, 0.65 - clampedX * 0.25));
+
+  PhonePhysics.glare.target.rimX = -clampedX * 45;
+  PhonePhysics.glare.target.rimY = -clampedY * 35;
+  PhonePhysics.glare.target.rimOp = Math.max(0.18, Math.min(0.75, 0.45 + clampedX * 0.25));
+
+  PhonePhysics.glare.target.ambientX = clampedX * 20;
+  PhonePhysics.glare.target.ambientY = clampedY * 16;
+
+  // Reactive shadow: moves opposite to tilt
+  PhonePhysics.shadow.target.x = -clampedX * 24;
+  PhonePhysics.shadow.target.blur = 16 + Math.abs(clampedX) * 8;
+  PhonePhysics.shadow.target.opacity = Math.max(0.6, 1 - Math.abs(clampedX) * 0.25);
+
+  phonePhysicsStart();
+}
+
+function phonePhysicsResetTarget() {
+  Object.assign(PhonePhysics.target, PhonePhysics.REST);
+  phonePhysicsResetGlare();
+  phonePhysicsStart();
+}
+
+function phonePhysicsResetGlare() {
+  PhonePhysics.glare.target.highlightX = 0;
+  PhonePhysics.glare.target.highlightY = 0;
+  PhonePhysics.glare.target.highlightOp = 0.65;
+
+  PhonePhysics.glare.target.rimX = 0;
+  PhonePhysics.glare.target.rimY = 0;
+  PhonePhysics.glare.target.rimOp = 0.45;
+
+  PhonePhysics.glare.target.ambientX = 0;
+  PhonePhysics.glare.target.ambientY = 0;
+  PhonePhysics.glare.target.ambientOp = 0.45;
+
+  PhonePhysics.shadow.target.x = 0;
+  PhonePhysics.shadow.target.blur = 16;
+  PhonePhysics.shadow.target.opacity = 1;
+}
+
+function phonePhysicsTriggerEntrance() {
+  if (previewState.viewMode !== "3d" || PhonePhysics.reducedMotion) {
+    Object.assign(PhonePhysics.current, PhonePhysics.REST);
+    Object.assign(PhonePhysics.target, PhonePhysics.REST);
+    return;
+  }
+
+  phonePhysicsEnsureEls();
+
+  // Smooth entrance without rubbery overshoot
+  Object.assign(PhonePhysics.current, PhonePhysics.ENTRANCE);
+  Object.assign(PhonePhysics.target, PhonePhysics.REST);
+
+  PhonePhysics.velocity = { rotY: 0, rotX: 0, rotZ: 0, scale: 0, translateY: 0, opacity: 0 };
+
+  phonePhysicsResetGlare();
+
+  // Initial glare light sweep
+  PhonePhysics.glare.current.highlightX = -90;
+  PhonePhysics.glare.current.highlightOp = 0;
+  PhonePhysics.glare.target.highlightX = 0;
+  PhonePhysics.glare.target.highlightOp = 0.65;
+
+  phonePhysicsStart();
+}
+
+function phonePhysicsInitGyroscope() {
+  if (typeof window === "undefined" || !("DeviceOrientationEvent" in window)) return;
+
+  let gyroActive = false;
+
+  const handleOrientation = (e) => {
+    if (!previewModal || !previewModal.classList.contains("is-open")) return;
+    if (previewState.viewMode !== "3d") return;
+    if (e.gamma === null || e.beta === null) return;
+
+    // gamma: left-to-right tilt in degrees [-90, 90]
+    // beta: front-to-back tilt in degrees [-180, 180], phone usually held at ~45deg
+    const normX = Math.max(-0.5, Math.min(0.5, e.gamma / 50));
+    const normY = Math.max(-0.5, Math.min(0.5, (e.beta - 45) / 50));
+
+    phonePhysicsSetMouseTarget(normX, normY);
+  };
+
+  // iOS 13+ permission flow
+  if (typeof DeviceOrientationEvent.requestPermission === "function") {
+    const requestGyro = () => {
+      if (gyroActive) return;
+      DeviceOrientationEvent.requestPermission()
+        .then((state) => {
+          if (state === "granted") {
+            gyroActive = true;
+            window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+          }
+        })
+        .catch(() => {});
+      window.removeEventListener("click", requestGyro);
+      window.removeEventListener("touchend", requestGyro);
+    };
+    window.addEventListener("click", requestGyro, { once: true });
+    window.addEventListener("touchend", requestGyro, { once: true });
+  } else {
+    // Non-iOS or older devices
+    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
   }
 }
 
@@ -1655,10 +2230,88 @@ function setupPreviewModal() {
   window.addEventListener("resize", updatePreviewScale);
   window.addEventListener("orientationchange", updatePreviewScale);
 
-  // Escape key closes the modal
+  // Escape key closes the modal or FAQ popup
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && previewModal.classList.contains("is-open")) {
-      closePreview();
+    if (e.key === "Escape") {
+      const faqBackdrop = document.getElementById("preview-faq-backdrop");
+      if (faqBackdrop && faqBackdrop.classList.contains("is-open")) {
+        closePreviewFaq();
+        return;
+      }
+      if (previewModal.classList.contains("is-open")) {
+        closePreview();
+      }
+    }
+  });
+
+  // --- Spring-Damped 3D Physics System ---
+  // Detect prefers-reduced-motion
+  PhonePhysics.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const stage = document.getElementById("preview-3d-stage");
+  const rig = document.getElementById("preview-phone-3d-rig");
+  if (stage && rig) {
+    // Cache DOM elements for the physics loop (avoid per-frame lookups)
+    PhonePhysics.els = {
+      stage: stage,
+      rig: rig,
+      shadow: rig.querySelector(".phone-shadow-3d"),
+      glareHighlight: document.getElementById("glare-highlight"),
+      glareRim: document.getElementById("glare-rim"),
+      glareAmbient: document.getElementById("glare-ambient")
+    };
+
+    // Mouse → set physics targets (NO direct DOM writes)
+    stage.addEventListener("mousemove", (e) => {
+      if (!previewModal.classList.contains("is-open")) return;
+      if (previewState.viewMode !== "3d") return;
+      const rect = stage.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      phonePhysicsSetMouseTarget(x, y);
+    });
+
+    stage.addEventListener("mouseleave", () => {
+      if (previewState.viewMode === "3d") {
+        phonePhysicsResetTarget();
+      }
+    });
+
+    // Touch parallax for mobile
+    let touchStartX = 0, touchStartY = 0;
+    stage.addEventListener("touchstart", (e) => {
+      if (previewState.viewMode !== "3d") return;
+      const t = e.touches[0];
+      touchStartX = t.clientX;
+      touchStartY = t.clientY;
+    }, { passive: true });
+
+    stage.addEventListener("touchmove", (e) => {
+      if (!previewModal.classList.contains("is-open")) return;
+      if (previewState.viewMode !== "3d") return;
+      const t = e.touches[0];
+      const rect = stage.getBoundingClientRect();
+      const x = (t.clientX - rect.left) / rect.width - 0.5;
+      const y = (t.clientY - rect.top) / rect.height - 0.5;
+      phonePhysicsSetMouseTarget(x * 0.7, y * 0.7); // slightly less sensitive for touch
+    }, { passive: true });
+
+    stage.addEventListener("touchend", () => {
+      if (previewState.viewMode === "3d") {
+        phonePhysicsResetTarget();
+      }
+    }, { passive: true });
+
+    // Gyroscope tilt for mobile (premium feel)
+    phonePhysicsInitGyroscope();
+  }
+
+  // Handle browser Back/Forward navigation smoothly
+  window.addEventListener("popstate", (e) => {
+    if (e.state && e.state.modalOpen && e.state.templateId) {
+      openPreview(e.state.templateId, false);
+    } else if (previewModal && previewModal.classList.contains("is-open")) {
+      closePreview(false);
     }
   });
 }
@@ -2017,72 +2670,6 @@ function setupUrgency() {
   }
 }
 
-// --- Exit-intent modal ---
-function setupExitIntent() {
-  const modal   = document.getElementById("exit-intent-modal");
-  const cta     = document.getElementById("exit-intent-cta");
-  if (!modal) return;
-  if (sessionStorage.getItem("exit_intent_shown")) return; // once per session
-
-  let shown = false;
-  const showModal = () => {
-    if (shown) return;
-    shown = true;
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-    document.body.classList.add("preview-modal-open");
-    sessionStorage.setItem("exit_intent_shown", "1");
-  };
-  const hideModal = () => {
-    if (document.activeElement && modal.contains(document.activeElement)) {
-      document.activeElement.blur();
-    }
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("preview-modal-open");
-  };
-
-  // Desktop: detect mouse leaving through the top of the viewport
-  document.addEventListener("mouseout", (e) => {
-    if (e.clientY <= 0 && !shown) showModal();
-  });
-
-  // Mobile fallback: after 60% scroll OR 45s on page, whichever first
-  let scrollTriggered = false;
-  const onScroll = () => {
-    if (scrollTriggered) return;
-    const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-    if (scrolled > 0.6) { scrollTriggered = true; showModal(); }
-  };
-  window.addEventListener("scroll", onScroll, { passive: true });
-  setTimeout(() => { if (!shown) showModal(); }, 45000);
-
-  // Close handlers
-  modal.addEventListener("click", (e) => {
-    if (e.target.closest("[data-exit-close]")) hideModal();
-  });
-
-  // CTA: open WhatsApp
-  if (cta) {
-    cta.addEventListener("click", (e) => {
-      e.preventDefault();
-      trackMetaEvent("Lead", {
-        content_name: "Exit Intent WhatsApp Inquiry",
-        content_category: "Catalog Inquiry",
-        value: currentCurrency === "INR" ? 999 : 15,
-        currency: currentCurrency
-      });
-      trackMetaEvent("InitiateCheckout", {
-        content_name: "Catalog Inquiry",
-        value: currentCurrency === "INR" ? 999 : 15,
-        currency: currentCurrency
-      });
-      const message = "Hi InviteStory! I'm interested in ordering a digital wedding invitation card. Please share details!";
-      window.open(`https://wa.me/918281583882?text=${encodeURIComponent(message)}`, "_blank");
-      hideModal();
-    });
-  }
-}
 
 function openCustomModal() {
   const modal = document.getElementById("custom-modal");
@@ -2150,7 +2737,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupFaqHandlers();
   setupHowItWorksToggle();
   setupUrgency();
-  setupExitIntent();
   setupTestimonialsNav();
   setupTrustMarquee();
   setupResponsivePlaceholder();
@@ -2160,6 +2746,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateTierLabels();
   renderPricingSection();
   renderCatalogue();
+  handleInitialUrlRoute();
   renderTestimonials();
   renderFaqs();
 

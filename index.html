@@ -194,6 +194,11 @@
   }
   </script>
 
+  <!-- Google Fonts: Cormorant Garamond luxury serif + Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -729,44 +734,85 @@
           <span class="preview-modal-style-tag" id="preview-modal-tag">Style tag</span>
         </div>
         <div class="preview-header-actions">
+          <button type="button" class="preview-header-btn preview-faq-header-btn" id="preview-faq-btn" onclick="openPreviewFaq(event)" title="Frequently Asked Questions" aria-label="Preview FAQ">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span>FAQ</span>
+          </button>
           <a href="#" id="preview-fullscreen-btn" target="_blank" rel="noopener" class="preview-header-btn" title="Open full screen demo in new tab">Full Demo ↗</a>
           <button type="button" class="preview-modal-close" data-preview-close aria-label="Close preview">&times;</button>
         </div>
       </header>
 
-      <!-- Main Canvas & Floating Device Frame -->
-      <div class="preview-modal-body">
+      <!-- Main Canvas & Living 3D Device Stage -->
+      <div class="preview-modal-body" id="preview-modal-body">
+        <!-- Distinct Luxury Ambient Pattern Canvas for each template -->
+        <div class="preview-pattern-canvas" id="preview-pattern-canvas" aria-hidden="true"></div>
+
         <!-- Floating Side Navigation Arrows (Story style) -->
         <button type="button" class="preview-side-arrow side-arrow-prev" id="preview-side-prev" aria-label="Previous template">&lsaquo;</button>
         <button type="button" class="preview-side-arrow side-arrow-next" id="preview-side-next" aria-label="Next template">&rsaquo;</button>
 
-        <div class="preview-modal-iframe-wrap" id="preview-modal-iframe-wrap">
-          <div class="preview-modal-loader" id="preview-modal-loader" aria-hidden="true">
-            <div class="preview-modal-loader-dot"></div>
-            <div class="preview-modal-loader-dot"></div>
-            <div class="preview-modal-loader-dot"></div>
+        <!-- 3D Perspective Stage -->
+        <div class="preview-3d-stage" id="preview-3d-stage">
+          <div class="preview-phone-3d-rig is-3d-mode" id="preview-phone-3d-rig">
+            <!-- 3D Floor Cast Shadow -->
+            <div class="phone-shadow-3d" aria-hidden="true"></div>
+
+            <!-- Phone Frame -->
+            <div class="preview-modal-iframe-wrap" id="preview-modal-iframe-wrap">
+              <!-- iPhone 17 Pro Precision Titanium Buttons & Camera Control -->
+              <div class="phone-button phone-action-btn" aria-hidden="true" title="Action Button"></div>
+              <div class="phone-button phone-vol-up" aria-hidden="true" title="Volume Up"></div>
+              <div class="phone-button phone-vol-down" aria-hidden="true" title="Volume Down"></div>
+              <div class="phone-button phone-power" aria-hidden="true" title="Side Button"></div>
+              <div class="phone-button phone-camera-control" aria-hidden="true" title="Camera Control"></div>
+
+              <!-- Titanium Chassis Antenna Separation Bands -->
+              <div class="phone-antenna phone-antenna-tl" aria-hidden="true"></div>
+              <div class="phone-antenna phone-antenna-tr" aria-hidden="true"></div>
+              <div class="phone-antenna phone-antenna-bl" aria-hidden="true"></div>
+              <div class="phone-antenna phone-antenna-br" aria-hidden="true"></div>
+
+              <!-- iPhone 17 Pro OLED Screen Viewport -->
+              <div class="phone-screen-viewport" id="phone-screen-viewport">
+                <!-- Multi-Layer Specular Glass Reflections -->
+                <div class="phone-glass-glare-stack" id="phone-glass-glare-stack" aria-hidden="true">
+                  <div class="glare-layer glare-highlight" id="glare-highlight"></div>
+                  <div class="glare-layer glare-rim" id="glare-rim"></div>
+                  <div class="glare-layer glare-ambient" id="glare-ambient"></div>
+                </div>
+
+                <div class="preview-modal-loader" id="preview-modal-loader" aria-hidden="true">
+                  <div class="preview-modal-loader-dot"></div>
+                  <div class="preview-modal-loader-dot"></div>
+                  <div class="preview-modal-loader-dot"></div>
+                </div>
+                <iframe
+                  id="preview-modal-iframe"
+                  class="preview-modal-iframe"
+                  title="Template preview"
+                  loading="eager"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allow="autoplay; fullscreen; clipboard-write; web-share; accelerometer; gyroscope"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+                  src="about:blank"></iframe>
+                <!-- iPhone 17 Pro Dynamic Island -->
+                <div class="preview-modal-phone-notch dynamic-island-17-pro" aria-hidden="true">
+                  <div class="dynamic-island-faceid"></div>
+                  <div class="dynamic-island-lens">
+                    <div class="dynamic-island-lens-flare"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <iframe
-            id="preview-modal-iframe"
-            class="preview-modal-iframe"
-            title="Template preview"
-            loading="eager"
-            referrerpolicy="no-referrer-when-downgrade"
-            allow="autoplay; fullscreen; clipboard-write; web-share; accelerometer; gyroscope"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
-            src="about:blank"></iframe>
-          <div class="preview-modal-phone-notch" aria-hidden="true"></div>
-          <!-- Device Side Buttons Mockup -->
-          <div class="phone-button phone-vol-up" aria-hidden="true"></div>
-          <div class="phone-button phone-vol-down" aria-hidden="true"></div>
-          <div class="phone-button phone-power" aria-hidden="true"></div>
         </div>
       </div>
 
       <!-- Dark Luxury Glass Footer Toolbar -->
       <footer class="preview-modal-toolbar">
         <div class="preview-toolbar-top-row">
-          <div class="preview-toolbar-left">
+          <div class="preview-toolbar-nav-group">
             <div class="preview-modal-nav">
               <button type="button" class="preview-nav-btn" id="preview-prev-btn" aria-label="Previous template">&larr;</button>
               <button type="button" class="preview-nav-btn" id="preview-next-btn" aria-label="Next template">&rarr;</button>
@@ -774,6 +820,13 @@
             <span class="preview-counter-badge" id="preview-counter-badge">1 of 25</span>
           </div>
 
+          <!-- 3D vs Flat View Toggle Switch -->
+          <div class="preview-view-toggle" id="preview-view-toggle" role="group" aria-label="Device view angle">
+            <button type="button" class="preview-view-btn active" id="view-mode-3d" onclick="setPreviewViewMode('3d')" title="Cinematic 3D Isometric View">✦ 3D</button>
+            <button type="button" class="preview-view-btn" id="view-mode-flat" onclick="setPreviewViewMode('flat')" title="Flat Front Reading View">▣ Flat</button>
+          </div>
+
+          <!-- Jump to Tier Pills -->
           <div class="preview-modal-tiers" id="preview-modal-tiers" role="tablist" aria-label="Jump to tier">
             <button type="button" class="preview-tier-tab" data-preview-tier="1" role="tab">Classic</button>
             <button type="button" class="preview-tier-tab" data-preview-tier="2" role="tab">Premium</button>
@@ -781,39 +834,98 @@
           </div>
         </div>
 
-        <div class="preview-modal-actions" style="display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; width: 100%;">
-          <span class="preview-love-prompt">Love this invitation?</span>
-          <div class="preview-actions-row" style="display: flex; gap: 10px; width: 100%; max-width: 440px; justify-content: center; align-items: center; flex-wrap: wrap;">
-            <button type="button" class="preview-toolbar-btn preview-toolbar-razorpay" id="preview-instant-pay-btn" onclick="payRazorpayForTemplate()">Make it yours — <span id="preview-cta-price">₹999</span></button>
+        <div class="preview-modal-actions">
+          <div class="preview-actions-row">
+            <button type="button" class="preview-toolbar-btn preview-toolbar-razorpay" id="preview-instant-pay-btn" onclick="payRazorpayForTemplate()">
+              <span>Make it yours — <span id="preview-cta-price">₹999</span></span>
+            </button>
             <button type="button" class="preview-toolbar-btn preview-toolbar-wa" id="preview-buy-btn">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-2px; margin-right:4px;" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
               <span>Order on WhatsApp</span>
             </button>
+            <button type="button" class="preview-toolbar-btn preview-toolbar-share" id="preview-footer-share-btn" onclick="shareCurrentPreview(event)" title="Share design link" aria-label="Share design link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              <span>Share</span>
+            </button>
           </div>
         </div>
       </footer>
-    </div>
-  </div>
 
-  <!-- Exit-intent Modal -->
-  <div id="exit-intent-modal" class="exit-intent-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="exit-intent-title">
-    <div class="exit-intent-scrim" data-exit-close></div>
-    <div class="exit-intent-panel exit-intent-fomo-panel">
-      <button type="button" class="exit-intent-close" data-exit-close aria-label="Close">&times;</button>
-      <div class="exit-intent-eyebrow">✨ HANDCRAFTED INVITATIONS</div>
-      <h3 id="exit-intent-title" class="exit-intent-title">Planning Your Wedding Invitation?</h3>
-      <p class="exit-intent-desc">Interactive digital wedding invitations starting at just <strong>₹999</strong> ($15). Delivered to WhatsApp in 24 hours.</p>
-      
-      <!-- Highlight Feature Box -->
-      <div class="exit-intent-timer-box">
-        <div class="exit-timer-label">⚡ EXPRESS 24H DELIVERY</div>
-        <div class="exit-timer-sub" style="font-size: 0.95rem; margin-top: 4px; color: #ecd9ac; font-weight: 600;">Includes Live Venue Map, Music & Countdown Timer</div>
+      <!-- Preview FAQ Sheet Modal Popup -->
+      <div class="preview-faq-backdrop" id="preview-faq-backdrop" aria-hidden="true" onclick="closePreviewFaq()">
+        <div class="preview-faq-sheet" onclick="event.stopPropagation()">
+          <div class="preview-faq-sheet-header">
+            <div class="preview-faq-sheet-title-wrap">
+              <span class="preview-faq-badge">Quick Guide</span>
+              <h3 class="preview-faq-sheet-title">Frequently Asked Questions</h3>
+            </div>
+            <button type="button" class="preview-faq-close" onclick="closePreviewFaq()" aria-label="Close FAQ">&times;</button>
+          </div>
+          
+          <div class="preview-faq-list">
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">⚡</span>
+                <h4>When will I get my invitation?</h4>
+              </div>
+              <p class="preview-faq-a">Delivered within <strong>48 hours</strong> of order confirmation.</p>
+            </div>
+
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">💌</span>
+                <h4>How many people can I send this to?</h4>
+              </div>
+              <p class="preview-faq-a"><strong>Unlimited.</strong> Share with as many guests, family, and friends as you need via WhatsApp, SMS, or email.</p>
+            </div>
+
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">✏️</span>
+                <h4>How much will you edit?</h4>
+              </div>
+              <p class="preview-faq-a">After we deliver your draft, you have a <strong>24-hour window</strong> to suggest all text and detail edits, and we'll update it for you.</p>
+            </div>
+
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">✨</span>
+                <h4>Can I get a custom design tailored to my ideas?</h4>
+              </div>
+              <p class="preview-faq-a">Yes! We create bespoke custom invitations starting from <strong>₹7,000</strong> upwards, based on design complexity.</p>
+            </div>
+
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">⏳</span>
+                <h4>How long is my invitation link active?</h4>
+              </div>
+              <p class="preview-faq-a">Your personalized link stays live and accessible until all your wedding events conclude <strong>+ 1 month</strong> after.</p>
+            </div>
+
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">🎵</span>
+                <h4>Can I add background music? Is it included?</h4>
+              </div>
+              <p class="preview-faq-a">Yes! Simply share your music link or audio track, and we’ll integrate it seamlessly at <strong>no extra charge</strong>.</p>
+            </div>
+          </div>
+
+          <div class="preview-faq-sheet-footer">
+            <button type="button" class="preview-faq-gotit-btn" onclick="closePreviewFaq()">Got it, back to preview</button>
+          </div>
+        </div>
       </div>
-
-      <a href="#" id="exit-intent-cta" class="exit-intent-cta">Chat on WhatsApp 💬</a>
-      <p class="exit-intent-fineprint">⚡ Handcrafted by InviteStory · Free revisions until you love it</p>
     </div>
   </div>
+
+  <!-- Toast Notification for Link Sharing -->
+  <div id="toast-notification" class="toast-notification" role="status" aria-live="polite">
+    <span class="toast-icon">✨</span>
+    <span id="toast-message" class="toast-message">Link copied to clipboard!</span>
+  </div>
+
 
   <!-- Exclusive Customization Info Modal (Starts from ₹4,999) -->
   <div id="custom-modal" class="exit-intent-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="custom-modal-title">
