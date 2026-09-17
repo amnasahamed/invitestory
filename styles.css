@@ -4438,13 +4438,15 @@ body:has(#glass-luxury:checked) .catalogue-section {
   transform: rotateX(85deg) translateZ(-40px);
   pointer-events: none;
   z-index: -2;
-  will-change: transform, filter, opacity;
+  will-change: transform, opacity;
 }
 
 .preview-phone-3d-rig.is-flat-mode .phone-shadow-3d {
-  transform: rotateX(85deg) translateZ(0);
-  opacity: 0.28;
-  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+  transform: rotateX(85deg) translateZ(0) !important;
+  opacity: 0.22;
+  filter: none !important;
+  background: radial-gradient(ellipse at center, rgba(30, 20, 10, 0.32) 0%, rgba(30, 20, 10, 0.12) 50%, transparent 75%) !important;
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
 /* --- Multi-Layer Specular Glass Glare System --- */
@@ -4510,10 +4512,10 @@ body:has(#glass-luxury:checked) .catalogue-section {
   opacity: 0.5;
 }
 
-/* Flat mode dims all glare layers */
+/* Flat mode completely hides glare layers to maximize iframe scrolling performance */
 .preview-phone-3d-rig.is-flat-mode .phone-glass-glare-stack {
-  opacity: 0.15;
-  transition: opacity 0.5s ease;
+  display: none !important;
+  opacity: 0 !important;
 }
 
 /* Entrance glare sweep animation */
@@ -5405,6 +5407,97 @@ body.preview-modal-open {
     white-space: nowrap !important;
     justify-content: center;
   }
+
+  /* Low-Power & Mobile GPU Rendering Optimizations */
+  .preview-modal-scrim {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(10, 8, 16, 0.94);
+  }
+
+  .preview-modal-panel {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  }
+
+  .preview-modal-header,
+  .preview-modal-toolbar {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff;
+  }
+
+  .preview-modal-body::before {
+    filter: none !important;
+    background: radial-gradient(circle, var(--theme-accent-color, #c09559) 0%, transparent 70%) !important;
+    opacity: 0.15;
+  }
+
+  .preview-modal-ambient-glow {
+    filter: none !important;
+    background: radial-gradient(circle, var(--theme-accent-glow, rgba(192, 149, 89, 0.35)) 0%, transparent 70%) !important;
+    opacity: 0.8;
+  }
+
+  .preview-pattern-canvas {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    opacity: 0.18;
+  }
+
+  .phone-shadow-3d {
+    filter: none !important;
+    background: radial-gradient(ellipse at center, rgba(30, 20, 10, 0.45) 0%, rgba(30, 20, 10, 0.15) 50%, transparent 75%) !important;
+  }
+
+  .glare-highlight,
+  .glare-rim,
+  .glare-ambient {
+    mix-blend-mode: normal !important;
+  }
+
+  .preview-phone-3d-rig,
+  .preview-modal-iframe-wrap,
+  .phone-screen-viewport,
+  .preview-modal-iframe {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+/* Dedicated Android Hardware Optimizations */
+.is-android .preview-modal-scrim,
+.is-android .preview-modal-panel,
+.is-android .preview-modal-header,
+.is-android .preview-modal-toolbar,
+.is-android .preview-faq-backdrop {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.is-android .preview-modal-body::before,
+.is-android .preview-modal-ambient-glow {
+  filter: none !important;
+}
+
+.is-android .phone-shadow-3d {
+  filter: none !important;
+  background: radial-gradient(ellipse at center, rgba(30, 20, 10, 0.45) 0%, rgba(30, 20, 10, 0.16) 50%, transparent 75%) !important;
+}
+
+.is-android .glare-highlight,
+.is-android .glare-rim,
+.is-android .glare-ambient {
+  mix-blend-mode: normal !important;
+}
+
+.is-android .preview-pattern-canvas {
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+  opacity: 0.16;
 }
 
 /* Policy & Terms Page Styles */

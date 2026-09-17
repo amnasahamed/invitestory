@@ -700,8 +700,17 @@ const PhonePhysics = {
   // DOM element refs (cached on first start)
   els: {},
   // Reduced motion preference
-  reducedMotion: false
+  reducedMotion: false,
+  // Low-power mobile & Android optimization flags
+  isAndroid: typeof navigator !== "undefined" && /Android/i.test(navigator.userAgent || ""),
+  isMobile: typeof window !== "undefined" && (window.matchMedia("(max-width: 768px)").matches || (typeof navigator !== "undefined" && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "")))
 };
+
+// Tag HTML root with .is-android or .is-mobile-device for high performance CSS rules
+if (typeof document !== "undefined" && document.documentElement) {
+  if (PhonePhysics.isAndroid) document.documentElement.classList.add("is-android");
+  if (PhonePhysics.isMobile) document.documentElement.classList.add("is-mobile-device");
+}
 
 const previewModal      = document.getElementById("preview-modal");
 const previewModalTitle = document.getElementById("preview-modal-title");
@@ -1504,8 +1513,18 @@ function syncPreviewViewRig() {
   } else {
     rig.classList.remove("is-3d-mode");
     rig.classList.add("is-flat-mode");
-    // Flat mode: CSS transition handles the snap, pause physics
+    // Flat mode: CSS transition handles the snap, pause physics immediately and clear inline transforms
     phonePhysicsStop();
+    phonePhysicsEnsureEls();
+    if (PhonePhysics.els.rig) {
+      PhonePhysics.els.rig.style.transform = "";
+      PhonePhysics.els.rig.style.opacity = "";
+    }
+    if (PhonePhysics.els.shadow) {
+      PhonePhysics.els.shadow.style.transform = "";
+      PhonePhysics.els.shadow.style.filter = "";
+      PhonePhysics.els.shadow.style.opacity = "";
+    }
     if (btn3D) btn3D.classList.remove("active");
     if (btnFlat) btnFlat.classList.add("active");
   }
@@ -1726,54 +1745,96 @@ function phonePhysicsLoop() {
     return;
   }
 
-  const { current, target, velocity, LERP_FACTOR, DAMPING, glare, shadow, els } = PhonePhysics;
+  const { current, target, velocity, LERP_FACTOR, DAMPING, EPSILON, glare, shadow, els } = PhonePhysics;
 
   // Spring physics interpolation for phone rig with heavy titanium damping
   const keys = ["rotY", "rotX", "rotZ", "scale", "translateY", "opacity"];
+  let maxDelta = 0;
+  let maxVel = 0;
+
   for (let i = 0; i < keys.length; i++) {
     const k = keys[i];
     const diff = target[k] - current[k];
     velocity[k] = (velocity[k] + diff * LERP_FACTOR) * DAMPING;
     current[k] += velocity[k];
+    
+    const absDiff = Math.abs(diff);
+    const absVel = Math.abs(velocity[k]);
+    if (absDiff > maxDelta) maxDelta = absDiff;
+    if (absVel > maxVel) maxVel = absVel;
   }
 
-  // Interpolate glare values with smooth lag
+  // Glare interpolation
   const gKeys = ["highlightX", "highlightY", "rimX", "rimY", "ambientX", "ambientY", "highlightOp", "rimOp", "ambientOp"];
+  let maxGlareDelta = 0;
   for (let i = 0; i < gKeys.length; i++) {
     const gk = gKeys[i];
-    glare.current[gk] += (glare.target[gk] - glare.current[gk]) * 0.14;
+    const gDiff = glare.target[gk] - glare.current[gk];
+    glare.current[gk] += gDiff * 0.14;
+    const absGDiff = Math.abs(gDiff);
+    if (absGDiff > maxGlareDelta) maxGlareDelta = absGDiff;
   }
 
-  // Interpolate shadow values
-  shadow.current.x += (shadow.target.x - shadow.current.x) * 0.14;
-  shadow.current.blur += (shadow.target.blur - shadow.current.blur) * 0.14;
-  shadow.current.opacity += (shadow.target.opacity - shadow.current.opacity) * 0.14;
+  // Shadow interpolation
+  const sXDiff = shadow.target.x - shadow.current.x;
+  const sBDiff = shadow.target.blur - shadow.current.blur;
+  const sODiff = shadow.target.opacity - shadow.current.opacity;
+  shadow.current.x += sXDiff * 0.14;
+  shadow.current.blur += sBDiff * 0.14;
+  shadow.current.opacity += sODiff * 0.14;
+  const maxShadowDelta = Math.max(Math.abs(sXDiff), Math.abs(sBDiff), Math.abs(sODiff));
+
+  // Check if system has settled into rest pose (Saves battery and GPU/CPU cycles on mobile)
+  const isSettled = maxDelta < EPSILON && maxVel < EPSILON && maxGlareDelta < 0.008 && maxShadowDelta < 0.008;
+  if (isSettled) {
+    // Snap to exact targets to prevent float drift
+    for (let i = 0; i < keys.length; i++) {
+      const k = keys[i];
+      current[k] = target[k];
+      velocity[k] = 0;
+    }
+    for (let i = 0; i < gKeys.length; i++) {
+      const gk = gKeys[i];
+      glare.current[gk] = glare.target[gk];
+    }
+    shadow.current.x = shadow.target.x;
+    shadow.current.blur = shadow.target.blur;
+    shadow.current.opacity = shadow.target.opacity;
+  }
 
   // Apply to DOM
   if (els.rig) {
-    els.rig.style.transform = `rotateY(${current.rotY.toFixed(2)}deg) rotateX(${current.rotX.toFixed(2)}deg) rotateZ(${current.rotZ.toFixed(2)}deg) scale(${current.scale.toFixed(3)}) translateY(${current.translateY.toFixed(1)}px)`;
+    els.rig.style.transform = `translate3d(0, ${current.translateY.toFixed(1)}px, 0) rotateY(${current.rotY.toFixed(2)}deg) rotateX(${current.rotX.toFixed(2)}deg) rotateZ(${current.rotZ.toFixed(2)}deg) scale(${current.scale.toFixed(3)})`;
     els.rig.style.opacity = current.opacity.toFixed(2);
   }
 
   if (els.shadow) {
     els.shadow.style.transform = `rotateX(85deg) translateZ(-40px) translateX(${shadow.current.x.toFixed(1)}px)`;
-    els.shadow.style.filter = `blur(${shadow.current.blur.toFixed(1)}px)`;
     els.shadow.style.opacity = shadow.current.opacity.toFixed(2);
+    // On non-Android or desktop, adjust blur filter; on Android, radial gradient handles blur without expensive filter
+    if (!PhonePhysics.isAndroid) {
+      els.shadow.style.filter = `blur(${shadow.current.blur.toFixed(1)}px)`;
+    }
   }
 
   if (els.glareHighlight) {
-    els.glareHighlight.style.transform = `translateX(${glare.current.highlightX.toFixed(1)}px) translateY(${glare.current.highlightY.toFixed(1)}px)`;
+    els.glareHighlight.style.transform = `translate3d(${glare.current.highlightX.toFixed(1)}px, ${glare.current.highlightY.toFixed(1)}px, 0)`;
     els.glareHighlight.style.opacity = glare.current.highlightOp.toFixed(2);
   }
 
   if (els.glareRim) {
-    els.glareRim.style.transform = `translateX(${glare.current.rimX.toFixed(1)}px) translateY(${glare.current.rimY.toFixed(1)}px)`;
+    els.glareRim.style.transform = `translate3d(${glare.current.rimX.toFixed(1)}px, ${glare.current.rimY.toFixed(1)}px, 0)`;
     els.glareRim.style.opacity = glare.current.rimOp.toFixed(2);
   }
 
   if (els.glareAmbient) {
-    els.glareAmbient.style.transform = `translateX(${glare.current.ambientX.toFixed(1)}px) translateY(${glare.current.ambientY.toFixed(1)}px)`;
+    els.glareAmbient.style.transform = `translate3d(${glare.current.ambientX.toFixed(1)}px, ${glare.current.ambientY.toFixed(1)}px, 0)`;
     els.glareAmbient.style.opacity = glare.current.ambientOp.toFixed(2);
+  }
+
+  if (isSettled) {
+    phonePhysicsStop();
+    return;
   }
 
   PhonePhysics.rafId = requestAnimationFrame(phonePhysicsLoop);
@@ -1866,16 +1927,32 @@ function phonePhysicsInitGyroscope() {
   if (typeof window === "undefined" || !("DeviceOrientationEvent" in window)) return;
 
   let gyroActive = false;
+  let lastGyroTime = 0;
+  let lastNormX = 0;
+  let lastNormY = 0;
 
   const handleOrientation = (e) => {
     if (!previewModal || !previewModal.classList.contains("is-open")) return;
     if (previewState.viewMode !== "3d") return;
     if (e.gamma === null || e.beta === null) return;
 
+    // Rate-limit gyro events to max ~30fps to avoid swamping main thread and rAF on Android
+    const now = performance.now();
+    const interval = PhonePhysics.isAndroid ? 45 : 30; // 22Hz on Android, 33Hz on iOS
+    if (now - lastGyroTime < interval) return;
+    lastGyroTime = now;
+
     // gamma: left-to-right tilt in degrees [-90, 90]
     // beta: front-to-back tilt in degrees [-180, 180], phone usually held at ~45deg
     const normX = Math.max(-0.5, Math.min(0.5, e.gamma / 50));
     const normY = Math.max(-0.5, Math.min(0.5, (e.beta - 45) / 50));
+
+    // Deadzone check: ignore tiny sensor jitter (crucial on noisy Android accelerometer/gyro)
+    if (Math.abs(normX - lastNormX) < 0.012 && Math.abs(normY - lastNormY) < 0.012) {
+      return;
+    }
+    lastNormX = normX;
+    lastNormY = normY;
 
     phonePhysicsSetMouseTarget(normX, normY);
   };
@@ -1898,7 +1975,7 @@ function phonePhysicsInitGyroscope() {
     window.addEventListener("click", requestGyro, { once: true });
     window.addEventListener("touchend", requestGyro, { once: true });
   } else {
-    // Non-iOS or older devices
+    // Android or non-iOS devices: add throttled orientation listener
     window.addEventListener("deviceorientation", handleOrientation, { passive: true });
   }
 }
@@ -2301,23 +2378,30 @@ function setupPreviewModal() {
       }
     });
 
-    // Touch parallax for mobile
-    let touchStartX = 0, touchStartY = 0;
+    // Touch parallax for mobile (outer stage only; does not interfere with template scrolling inside iframe)
+    let lastTouchTime = 0;
     stage.addEventListener("touchstart", (e) => {
       if (previewState.viewMode !== "3d") return;
-      const t = e.touches[0];
-      touchStartX = t.clientX;
-      touchStartY = t.clientY;
     }, { passive: true });
 
     stage.addEventListener("touchmove", (e) => {
       if (!previewModal.classList.contains("is-open")) return;
       if (previewState.viewMode !== "3d") return;
+      
+      // If user is interacting directly inside the iframe wrap, don't tilt the phone
+      if (e.target && (e.target.closest("#preview-modal-iframe-wrap") || e.target.closest(".phone-screen-viewport"))) {
+        return;
+      }
+
+      const now = performance.now();
+      if (now - lastTouchTime < 32) return; // limit to ~30Hz
+      lastTouchTime = now;
+
       const t = e.touches[0];
       const rect = stage.getBoundingClientRect();
       const x = (t.clientX - rect.left) / rect.width - 0.5;
       const y = (t.clientY - rect.top) / rect.height - 0.5;
-      phonePhysicsSetMouseTarget(x * 0.7, y * 0.7); // slightly less sensitive for touch
+      phonePhysicsSetMouseTarget(x * 0.65, y * 0.65); // comfortable mobile sensitivity
     }, { passive: true });
 
     stage.addEventListener("touchend", () => {
