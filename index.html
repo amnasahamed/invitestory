@@ -35,6 +35,8 @@
 
   <!-- Razorpay Checkout Standard SDK -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <!-- PayPal Checkout SDK for International Orders -->
+  <script id="paypal-sdk-script" src="https://www.paypal.com/sdk/js?client-id=BAAXdw4bek4C9gmaofxymnJjm8cpkjT61bXsJ3KzdtDpW14OKQd_ig8jKgi0I45orPLAZ64NvkBq2Qpu2M&currency=USD&components=buttons" async></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
@@ -839,6 +841,13 @@
             <button type="button" class="preview-toolbar-btn preview-toolbar-razorpay" id="preview-instant-pay-btn" onclick="payRazorpayForTemplate()">
               <span>Make it yours — <span id="preview-cta-price">₹999</span></span>
             </button>
+            <button type="button" class="preview-toolbar-btn preview-toolbar-paypal" id="preview-instant-paypal-btn" onclick="openPayPalCheckout()" style="display: none;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-2px; margin-right:4px;" aria-hidden="true">
+                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .77-.655h6.39c3.27 0 5.672 1.348 5.405 4.887-.276 3.655-2.613 5.437-5.748 5.437H9.28a.78.78 0 0 0-.77.656l-.884 5.602a.78.78 0 0 1-.55.69z"/>
+                <path d="M18.892 7.747c-.244 3.238-2.316 4.816-5.093 4.816h-2.197a.78.78 0 0 0-.77.656l-1.127 7.15a.547.547 0 0 0 .54.632h3.407a.684.684 0 0 0 .676-.576l.723-4.582a.78.78 0 0 1 .77-.657h1.025c3.088 0 5.503-1.254 6.2-4.908.411-2.152-.07-3.882-1.782-4.731-.58-.287-1.312-.468-2.371-.468z" opacity=".75"/>
+              </svg>
+              <span>Pay with PayPal — <span id="preview-paypal-cta-price">$15</span></span>
+            </button>
             <button type="button" class="preview-toolbar-btn preview-toolbar-wa" id="preview-buy-btn">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-2px; margin-right:4px;" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
               <span>Order on WhatsApp</span>
@@ -954,6 +963,82 @@
       </div>
 
       <p class="exit-intent-fineprint" style="margin-top: 14px; color: rgba(243, 237, 218, 0.6); font-size: 0.78rem;">⚡ Looking for standard templates? Pick any catalog template starting from ₹999!</p>
+    </div>
+  </div>
+
+  <!-- PayPal Checkout Modal for International Visitors -->
+  <div id="paypal-checkout-modal" class="exit-intent-modal paypal-checkout-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="paypal-modal-title">
+    <div class="exit-intent-scrim" onclick="closePayPalCheckout()"></div>
+    <div class="exit-intent-panel paypal-modal-panel">
+      <button type="button" class="exit-intent-close" onclick="closePayPalCheckout()" aria-label="Close checkout">&times;</button>
+      
+      <div class="paypal-modal-header">
+        <div class="paypal-modal-eyebrow">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .77-.655h6.39c3.27 0 5.672 1.348 5.405 4.887-.276 3.655-2.613 5.437-5.748 5.437H9.28a.78.78 0 0 0-.77.656l-.884 5.602a.78.78 0 0 1-.55.69z"/>
+            <path d="M18.892 7.747c-.244 3.238-2.316 4.816-5.093 4.816h-2.197a.78.78 0 0 0-.77.656l-1.127 7.15a.547.547 0 0 0 .54.632h3.407a.684.684 0 0 0 .676-.576l.723-4.582a.78.78 0 0 1 .77-.657h1.025c3.088 0 5.503-1.254 6.2-4.908.411-2.152-.07-3.882-1.782-4.731-.58-.287-1.312-.468-2.371-.468z" opacity=".75"/>
+          </svg>
+          SECURE PAYPAL CHECKOUT (USD)
+        </div>
+        <h3 id="paypal-modal-title" class="paypal-modal-title">Complete Your Invitation Order</h3>
+        <p class="paypal-modal-subtitle">Pay securely via PayPal, Credit/Debit Card, or Pay Later. Delivered in 24 hours.</p>
+      </div>
+
+      <!-- Item Overview Card -->
+      <div class="paypal-order-summary">
+        <div class="paypal-item-row">
+          <div class="paypal-item-info">
+            <span class="paypal-item-badge" id="paypal-item-tier">Luxury</span>
+            <h4 class="paypal-item-name" id="paypal-item-name">Royal Heritage</h4>
+            <span class="paypal-item-desc">Includes live RSVP, Google Maps venue direction & background music</span>
+          </div>
+          <div class="paypal-item-price" id="paypal-item-base-price">$35</div>
+        </div>
+
+        <!-- Optional Addons in Checkout -->
+        <div class="paypal-addons-list">
+          <div class="paypal-addons-title">Optional Add-ons:</div>
+          <label class="paypal-addon-item">
+            <input type="checkbox" id="paypal-addon-express" onchange="onPayPalAddonChange()">
+            <div class="paypal-addon-text">
+              <span class="paypal-addon-name">⚡ Express 12-Hour Turnaround</span>
+              <span class="paypal-addon-rate">+$6</span>
+            </div>
+          </label>
+          <label class="paypal-addon-item">
+            <input type="checkbox" id="paypal-addon-domain" onchange="onPayPalAddonChange()">
+            <div class="paypal-addon-text">
+              <span class="paypal-addon-name">🌐 Custom Domain (.com / .in)</span>
+              <span class="paypal-addon-rate">+$12</span>
+            </div>
+          </label>
+          <label class="paypal-addon-item">
+            <input type="checkbox" id="paypal-addon-lang" onchange="onPayPalAddonChange()">
+            <div class="paypal-addon-text">
+              <span class="paypal-addon-name">🎶 Extra Event Tab (Sangeet / Reception)</span>
+              <span class="paypal-addon-rate">+$4</span>
+            </div>
+          </label>
+        </div>
+
+        <!-- Total Price Breakdown -->
+        <div class="paypal-total-row">
+          <span class="paypal-total-label">Total to Pay (USD):</span>
+          <span class="paypal-total-amount" id="paypal-total-display">$35.00 USD</span>
+        </div>
+      </div>
+
+      <!-- PayPal Smart Buttons Container -->
+      <div class="paypal-buttons-wrapper">
+        <div id="paypal-button-container"></div>
+      </div>
+
+      <!-- Trust Reassurance Badges -->
+      <div class="paypal-trust-strip">
+        <span>🔒 256-Bit SSL</span>
+        <span>🛡️ Buyer Protection</span>
+        <span>⚡ 24h Delivery</span>
+      </div>
     </div>
   </div>
 

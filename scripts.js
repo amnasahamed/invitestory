@@ -5,6 +5,7 @@
 
 // --- PROMOTION CONFIGURATION ---
 window.RAZORPAY_KEY_ID = "rzp_live_TPCjiGiPIeo7SN";
+window.PAYPAL_CLIENT_ID = "BAAXdw4bek4C9gmaofxymnJjm8cpkjT61bXsJ3KzdtDpW14OKQd_ig8jKgi0I45orPLAZ64NvkBq2Qpu2M";
 
 const PROMO_CONFIG = {
   active: false,
@@ -1330,6 +1331,240 @@ function payRazorpayForTemplate(id) {
   }
 }
 
+// --- PayPal International Checkout Integration ---
+let currentPayPalCheckoutTemplate = null;
+let paypalSdkPromise = null;
+
+function loadPayPalSdk() {
+  if (typeof paypal !== "undefined") return Promise.resolve();
+  if (paypalSdkPromise) return paypalSdkPromise;
+
+  paypalSdkPromise = new Promise((resolve, reject) => {
+    const existing = document.getElementById("paypal-sdk-script");
+    if (existing) {
+      if (typeof paypal !== "undefined") {
+        resolve();
+        return;
+      }
+      existing.addEventListener("load", () => resolve());
+      existing.addEventListener("error", (err) => reject(err));
+      return;
+    }
+    const script = document.createElement("script");
+    script.id = "paypal-sdk-script";
+    script.src = `https://www.paypal.com/sdk/js?client-id=${window.PAYPAL_CLIENT_ID}&currency=USD&components=buttons`;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = (e) => reject(e);
+    document.head.appendChild(script);
+  });
+  return paypalSdkPromise;
+}
+
+function updatePaymentButtonsForCurrency() {
+  const rzpBtn = document.getElementById("preview-instant-pay-btn");
+  const paypalBtn = document.getElementById("preview-instant-paypal-btn");
+  if (rzpBtn && paypalBtn) {
+    if (currentCurrency === "USD") {
+      rzpBtn.style.display = "none";
+      paypalBtn.style.display = "inline-flex";
+    } else {
+      rzpBtn.style.display = "inline-flex";
+      paypalBtn.style.display = "none";
+    }
+  }
+}
+
+function openPayPalCheckout(id) {
+  let templateId = id;
+  if (!templateId && typeof previewState !== "undefined" && previewState.currentIndex >= 0) {
+    templateId = TEMPLATE_DATABASE[previewState.currentIndex]?.id;
+  }
+  const item = TEMPLATE_DATABASE.find(x => x.id === templateId) || TEMPLATE_DATABASE[0];
+  if (!item) return;
+
+  currentPayPalCheckoutTemplate = item;
+
+  const modal = document.getElementById("paypal-checkout-modal");
+  if (!modal) return;
+
+  const titleEl = document.getElementById("paypal-item-name");
+  const tierEl = document.getElementById("paypal-item-tier");
+  const basePriceEl = document.getElementById("paypal-item-base-price");
+
+  const prices = getItemPrices(item);
+  const tierName = item.tier === 1 ? "🌿 Classic" : item.tier === 2 ? "🌸 Premium" : "👑 Luxury";
+
+  if (titleEl) titleEl.textContent = item.name;
+  if (tierEl) tierEl.textContent = tierName;
+  if (basePriceEl) basePriceEl.textContent = `$${prices.priceUSD}`;
+
+  // Reset checkboxes
+  const expressCb = document.getElementById("paypal-addon-express");
+  const domainCb = document.getElementById("paypal-addon-domain");
+  const langCb = document.getElementById("paypal-addon-lang");
+  if (expressCb) expressCb.checked = false;
+  if (domainCb) domainCb.checked = false;
+  if (langCb) langCb.checked = false;
+
+  updatePayPalCheckoutTotal();
+  renderPayPalButtons();
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closePayPalCheckout() {
+  const modal = document.getElementById("paypal-checkout-modal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+function getSelectedPayPalAddons() {
+  const addons = [];
+  if (document.getElementById("paypal-addon-express")?.checked) addons.push("express");
+  if (document.getElementById("paypal-addon-domain")?.checked) addons.push("domain");
+  if (document.getElementById("paypal-addon-lang")?.checked) addons.push("lang");
+  return addons;
+}
+
+function calculatePayPalTotal() {
+  if (!currentPayPalCheckoutTemplate) return 15;
+  const prices = getItemPrices(currentPayPalCheckoutTemplate);
+  let total = prices.priceUSD;
+  const addons = getSelectedPayPalAddons();
+  addons.forEach(key => {
+    if (ADDONS[key]) total += ADDONS[key].priceUSD;
+  });
+  return total;
+}
+
+function updatePayPalCheckoutTotal() {
+  const total = calculatePayPalTotal();
+  const totalDisplay = document.getElementById("paypal-total-display");
+  if (totalDisplay) {
+    totalDisplay.textContent = `$${total.toFixed(2)} USD`;
+  }
+}
+
+function onPayPalAddonChange() {
+  updatePayPalCheckoutTotal();
+}
+
+function renderPayPalButtons() {
+  const container = document.getElementById("paypal-button-container");
+  if (!container) return;
+
+  if (typeof paypal === "undefined") {
+    container.innerHTML = `<div style="text-align:center; padding:18px; color:#ecd9ac; font-size:0.9rem;">Connecting to PayPal...</div>`;
+    loadPayPalSdk().then(() => {
+      container.innerHTML = "";
+      renderPayPalButtons();
+    }).catch(err => {
+      container.innerHTML = `<div style="text-align:center; padding:12px; color:#f87171; font-size:0.85rem;">Could not load PayPal SDK. Please check your connection or message us on WhatsApp.</div>`;
+    });
+    return;
+  }
+
+  // Avoid recreating buttons if already rendered, since createOrder evaluates dynamic amounts at click time
+  if (container.children.length > 0) {
+    return;
+  }
+
+  container.innerHTML = "";
+  try {
+    paypal.Buttons({
+      style: {
+        layout: 'vertical',
+        color:  'gold',
+        shape:  'pill',
+        label:  'paypal',
+        height: 42
+      },
+      createOrder: function(data, actions) {
+        const item = currentPayPalCheckoutTemplate || TEMPLATE_DATABASE[0];
+        const total = calculatePayPalTotal();
+        const selectedAddons = getSelectedPayPalAddons();
+        const addonNames = selectedAddons.map(k => ADDONS[k]?.name).filter(Boolean);
+
+        trackMetaEvent("InitiateCheckout", {
+          content_name: item.name,
+          content_ids: [String(item.id)],
+          content_type: "product",
+          content_category: item.style || "Digital Wedding Invitation",
+          value: total,
+          currency: "USD"
+        });
+
+        return actions.order.create({
+          purchase_units: [{
+            description: `InviteStory: ${item.name} Wedding Invitation`,
+            amount: {
+              currency_code: "USD",
+              value: total.toFixed(2),
+              breakdown: {
+                item_total: {
+                  currency_code: "USD",
+                  value: total.toFixed(2)
+                }
+              }
+            },
+            items: [{
+              name: `${item.name} - Digital Wedding Invitation`,
+              description: addonNames.length > 0 ? `Add-ons: ${addonNames.join(", ")}` : "Standard Digital Invitation",
+              unit_amount: {
+                currency_code: "USD",
+                value: total.toFixed(2)
+              },
+              quantity: "1",
+              category: "DIGITAL_GOODS"
+            }]
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          const item = currentPayPalCheckoutTemplate || TEMPLATE_DATABASE[0];
+          const total = calculatePayPalTotal();
+          const transactionId = details.id || (details.purchase_units && details.purchase_units[0]?.payments?.captures[0]?.id) || data.orderID;
+
+          trackMetaEvent("Purchase", {
+            content_name: item.name,
+            content_ids: [String(item.id)],
+            content_type: "product",
+            value: total,
+            currency: "USD",
+            transaction_id: transactionId
+          });
+
+          closePayPalCheckout();
+
+          alert(`🎉 Payment Successful via PayPal!\n\nOrder ID: ${transactionId}\nTemplate: ${item.name}\nAmount: $${total} USD\n\nClick OK to open WhatsApp and send your wedding details for customization!`);
+
+          const selectedAddons = getSelectedPayPalAddons().map(k => ADDONS[k]?.name).filter(Boolean);
+          let waMsg = `Hi InviteStory! I have paid online via PayPal for '${item.name}' (Total: $${total} USD, Order ID: ${transactionId}).`;
+          if (selectedAddons.length > 0) {
+            waMsg += `\nAdd-ons: ${selectedAddons.join(", ")}`;
+          }
+          waMsg += `\n\nHere are my wedding details:`;
+
+          window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
+        });
+      },
+      onCancel: function(data) {
+        console.log("PayPal checkout cancelled", data);
+      },
+      onError: function(err) {
+        console.error("PayPal checkout error", err);
+        alert("There was an issue processing your payment with PayPal. Please try again or message us on WhatsApp.");
+      }
+    }).render("#paypal-button-container");
+  } catch (err) {
+    console.error("Failed to render PayPal Buttons", err);
+  }
+}
+
 // --- Preview Modal functions ---
 
 // --- Deep Linking & Social Sharing Helpers ---
@@ -1572,6 +1807,11 @@ function openPreview(id, updateUrl = true) {
   if (previewCtaPrice) {
     previewCtaPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
   }
+  const previewPaypalCtaPrice = document.getElementById("preview-paypal-cta-price");
+  if (previewPaypalCtaPrice) {
+    previewPaypalCtaPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
+  }
+  updatePaymentButtonsForCurrency();
   if (previewCounterBadge) {
     previewCounterBadge.textContent = `${idx + 1} of ${TEMPLATE_DATABASE.length}`;
   }
@@ -2147,6 +2387,34 @@ function updateHeaderCtaText() {
   });
 }
 
+function initCurrencyDetection() {
+  const saved = localStorage.getItem("invitestory_currency");
+  if (saved === "INR" || saved === "USD") {
+    currentCurrency = saved;
+  } else {
+    try {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+      const isIndia = tz === "Asia/Kolkata" || tz === "Asia/Calcutta";
+      currentCurrency = isIndia ? "INR" : "USD";
+    } catch (e) {
+      currentCurrency = "INR";
+    }
+  }
+
+  const inrBtn = document.getElementById("currency-inr");
+  const usdBtn = document.getElementById("currency-usd");
+  if (inrBtn && usdBtn) {
+    if (currentCurrency === "USD") {
+      usdBtn.classList.add("active");
+      inrBtn.classList.remove("active");
+    } else {
+      inrBtn.classList.add("active");
+      usdBtn.classList.remove("active");
+    }
+  }
+  updatePaymentButtonsForCurrency();
+}
+
 function setupCurrencySwitcher() {
   const inrBtn = document.getElementById("currency-inr");
   const usdBtn = document.getElementById("currency-usd");
@@ -2155,6 +2423,7 @@ function setupCurrencySwitcher() {
     inrBtn.addEventListener("click", () => {
       if (currentCurrency === "INR") return;
       currentCurrency = "INR";
+      localStorage.setItem("invitestory_currency", "INR");
       inrBtn.classList.add("active");
       usdBtn.classList.remove("active");
 
@@ -2164,11 +2433,13 @@ function setupCurrencySwitcher() {
       updateHeaderCtaText();
       renderPricingSection();
       renderCatalogue();
+      updatePaymentButtonsForCurrency();
     });
 
     usdBtn.addEventListener("click", () => {
       if (currentCurrency === "USD") return;
       currentCurrency = "USD";
+      localStorage.setItem("invitestory_currency", "USD");
       usdBtn.classList.add("active");
       inrBtn.classList.remove("active");
 
@@ -2178,6 +2449,7 @@ function setupCurrencySwitcher() {
       updateHeaderCtaText();
       renderPricingSection();
       renderCatalogue();
+      updatePaymentButtonsForCurrency();
     });
   }
 }
@@ -2365,9 +2637,14 @@ function setupPreviewModal() {
   window.addEventListener("resize", updatePreviewScale);
   window.addEventListener("orientationchange", updatePreviewScale);
 
-  // Escape key closes the modal or FAQ popup
+  // Escape key closes the modal, PayPal checkout, or FAQ popup
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
+      const paypalModal = document.getElementById("paypal-checkout-modal");
+      if (paypalModal && paypalModal.classList.contains("is-open")) {
+        closePayPalCheckout();
+        return;
+      }
       const faqBackdrop = document.getElementById("preview-faq-backdrop");
       if (faqBackdrop && faqBackdrop.classList.contains("is-open")) {
         closePreviewFaq();
@@ -2875,6 +3152,7 @@ function setupHeaderCtaHandlers() {
 
 // Init
 document.addEventListener("DOMContentLoaded", () => {
+  initCurrencyDetection();
   setupCurrencySwitcher();
   setupCatalogueHandlers();
   setupPreviewModal();

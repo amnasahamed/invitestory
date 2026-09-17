@@ -3775,6 +3775,223 @@ body:has(#glass-luxury:checked) .catalogue-section {
   color: #ffffff !important;
 }
 
+/* --- PayPal Checkout Modal for International Visitors --- */
+.paypal-checkout-modal {
+  z-index: 1200 !important;
+}
+
+.paypal-modal-panel {
+  max-width: 490px;
+  width: 92%;
+  background: linear-gradient(165deg, #18140c 0%, #0c0a06 100%) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  border-radius: 20px !important;
+  padding: 26px 24px 22px !important;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 175, 55, 0.2) !important;
+  color: #f3edda !important;
+  text-align: left !important;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.paypal-modal-panel .exit-intent-close {
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: #f3edda !important;
+}
+
+.paypal-modal-panel .exit-intent-close:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+  color: #ffffff !important;
+}
+
+.paypal-modal-header {
+  margin-bottom: 18px;
+}
+
+.paypal-modal-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 196, 57, 0.16);
+  color: #ffc439;
+  border: 1px solid rgba(255, 196, 57, 0.35);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+}
+
+.paypal-modal-title {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  font-family: var(--font-header), serif;
+}
+
+.paypal-modal-subtitle {
+  color: rgba(243, 237, 218, 0.7);
+  font-size: 0.84rem;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.paypal-order-summary {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.paypal-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.paypal-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.paypal-item-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(212, 175, 55, 0.22);
+  color: #ecd9ac;
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-bottom: 2px;
+}
+
+.paypal-item-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.paypal-item-desc {
+  font-size: 0.76rem;
+  color: rgba(243, 237, 218, 0.65);
+  line-height: 1.35;
+}
+
+.paypal-item-price {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #ecd9ac;
+  white-space: nowrap;
+}
+
+.paypal-addons-list {
+  padding: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.paypal-addons-title {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: rgba(243, 237, 218, 0.65);
+  margin-bottom: 2px;
+}
+
+.paypal-addon-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.035);
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.paypal-addon-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 196, 57, 0.25);
+}
+
+.paypal-addon-item input[type="checkbox"] {
+  accent-color: #ffc439;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.paypal-addon-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 0.84rem;
+}
+
+.paypal-addon-name {
+  color: rgba(243, 237, 218, 0.9);
+}
+
+.paypal-addon-rate {
+  color: #ecd9ac;
+  font-weight: 600;
+  font-size: 0.84rem;
+  white-space: nowrap;
+}
+
+.paypal-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+}
+
+.paypal-total-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.paypal-total-amount {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffc439;
+}
+
+.paypal-buttons-wrapper {
+  margin-top: 14px;
+  min-height: 110px;
+}
+
+.paypal-trust-strip {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem;
+  color: rgba(243, 237, 218, 0.65);
+  text-align: center;
+}
+
 /* Exit Modal Timer Box — locked gold + deep surface */
 .exit-intent-timer-box {
   background: linear-gradient(165deg, #1a1408 0%, #251c0c 100%);
@@ -5058,6 +5275,26 @@ body:has(#glass-luxury:checked) .catalogue-section {
   border-color: rgba(254, 243, 199, 0.95) !important;
   box-shadow: 0 6px 24px rgba(217, 119, 6, 0.6), 0 0 20px rgba(245, 158, 11, 0.45) !important;
   color: #ffffff !important;
+}
+
+/* PayPal Toolbar CTA Button (International USD Checkout) */
+.preview-toolbar-paypal {
+  flex: 1.25;
+  max-width: 270px;
+  background: linear-gradient(135deg, #ffc439 0%, #f59e0b 55%, #d97706 100%) !important;
+  color: #0b132b !important;
+  border: 1.5px solid rgba(254, 243, 199, 0.9) !important;
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.45), 0 0 14px rgba(255, 196, 57, 0.35) !important;
+  font-weight: 700;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.preview-toolbar-paypal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.65), 0 0 20px rgba(255, 196, 57, 0.5) !important;
+  background: linear-gradient(135deg, #fde047 0%, #fbbf24 50%, #f59e0b 100%) !important;
+  border-color: #ffffff !important;
+  color: #000000 !important;
 }
 
 .preview-toolbar-wa {
