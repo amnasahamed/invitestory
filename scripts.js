@@ -1610,7 +1610,12 @@ function openPreview(id, updateUrl = true) {
   // Show modal & update device scale to fit available viewport seamlessly
   previewModal.classList.add("is-open");
   previewModal.setAttribute("aria-hidden", "false");
+  
+  // Store current scroll position to avoid jumping to top while locking
+  previewState.savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  document.documentElement.classList.add("preview-modal-open");
   document.body.classList.add("preview-modal-open");
+  
   requestAnimationFrame(updatePreviewScale);
 
   // Trigger cinematic entrance animation (spring from dramatic pose to rest)
@@ -1661,7 +1666,11 @@ function closePreview(updateUrl = true) {
 
   previewModal.classList.remove("is-open");
   previewModal.setAttribute("aria-hidden", "true");
+  document.documentElement.classList.remove("preview-modal-open");
   document.body.classList.remove("preview-modal-open");
+  if (typeof previewState.savedScrollY === "number") {
+    window.scrollTo(0, previewState.savedScrollY);
+  }
   stopLoaderPulse();
 
   // Detach iframe src after the close transition so we don't keep a network
@@ -2311,6 +2320,31 @@ function setupPreviewModal() {
     }
   });
 
+  // Prevent background scroll bleed/chaining on mobile touch and desktop wheel
+  // When interacting with the modal backdrop, scrim, or modal controls, don't let it scroll the underlying window.
+  previewModal.addEventListener("touchmove", (e) => {
+    if (!previewModal.classList.contains("is-open")) return;
+    // Allow touch scrolling ONLY inside the phone iframe viewport
+    if (e.target && (e.target.closest("#preview-modal-iframe-wrap") || e.target.closest(".phone-screen-viewport") || e.target.closest("#preview-modal-iframe"))) {
+      return;
+    }
+    // Block any scroll gesture on modal scrim/body backdrop from bubbling to the background page
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  previewModal.addEventListener("wheel", (e) => {
+    if (!previewModal.classList.contains("is-open")) return;
+    // If the wheel event is not directly inside the iframe wrap, cancel it to protect the background page
+    if (e.target && (e.target.closest("#preview-modal-iframe-wrap") || e.target.closest(".phone-screen-viewport") || e.target.closest("#preview-modal-iframe"))) {
+      return;
+    }
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
   // Navigation buttons & side arrows
   if (previewPrevBtn) previewPrevBtn.addEventListener("click", previewPrev);
   if (previewNextBtn) previewNextBtn.addEventListener("click", previewNext);
@@ -2805,6 +2839,7 @@ function openCustomModal() {
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
+  document.documentElement.classList.add("preview-modal-open");
   document.body.classList.add("preview-modal-open");
 }
 
@@ -2813,6 +2848,7 @@ function closeCustomModal() {
   if (!modal) return;
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
+  document.documentElement.classList.remove("preview-modal-open");
   document.body.classList.remove("preview-modal-open");
 }
 

@@ -3821,6 +3821,8 @@ body:has(#glass-luxury:checked) .catalogue-section {
   display: none;
   align-items: center;
   justify-content: center;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 
 .preview-modal.is-open {
@@ -3835,6 +3837,8 @@ body:has(#glass-luxury:checked) .catalogue-section {
   -webkit-backdrop-filter: blur(12px);
   opacity: 0;
   transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: none;
+  overscroll-behavior: none;
 }
 
 .preview-modal.is-open .preview-modal-scrim {
@@ -3888,6 +3892,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   overflow: hidden;
+  overscroll-behavior: contain;
   transform: translateY(20px) scale(0.97);
   opacity: 0;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
@@ -4316,6 +4321,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   background: radial-gradient(ellipse at 50% 30%, rgba(255, 255, 255, 0.98) 0%, rgba(250, 246, 238, 0.96) 60%, rgba(243, 237, 226, 0.98) 100%);
   transition: background 0.6s ease;
   overflow: hidden;
+  overscroll-behavior: contain;
   min-height: 0;
 }
 
@@ -4395,6 +4401,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   perspective: 1300px;
   perspective-origin: 50% 40%;
   overflow: visible;
+  overscroll-behavior: contain;
   padding-top: 26px;
 }
 
@@ -4586,6 +4593,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   height: 852px;
   border-radius: 48px;
   overflow: hidden;
+  overscroll-behavior: contain;
   background-color: #000000;
   isolation: isolate;
   -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -5218,8 +5226,11 @@ body:has(#glass-luxury:checked) .catalogue-section {
 }
 
 /* --- Body scroll lock when modal is open --- */
+html.preview-modal-open,
 body.preview-modal-open {
-  overflow: hidden;
+  overflow: hidden !important;
+  overscroll-behavior: none !important;
+  touch-action: none;
 }
 
 /* --- Responsive: shrink phone frame on narrow viewports --- */
