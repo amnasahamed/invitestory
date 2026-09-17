@@ -7359,6 +7359,7 @@ body.preview-modal-open {
     width: 100% !important;
   }
   .preview-toolbar-razorpay,
+  .preview-toolbar-paypal,
   .preview-toolbar-wa {
     flex: 1 !important;
     min-width: 0 !important;
