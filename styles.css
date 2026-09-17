@@ -5154,73 +5154,30 @@ body:has(#glass-luxury:checked) .catalogue-section {
   box-sizing: border-box;
 }
 
+/* Razorpay Toolbar CTA Button (Domestic INR Checkout) */
 .preview-toolbar-razorpay {
   flex: 1.2;
   max-width: 250px;
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 50%, #065f46 100%);
+  background: linear-gradient(135deg, #0c83ff 0%, #0052cc 55%, #072654 100%) !important;
   color: #ffffff !important;
-  border: 1.5px solid rgba(167, 243, 208, 0.7);
-  box-shadow: 0 4px 18px rgba(22, 163, 74, 0.42), 0 0 14px rgba(34, 197, 94, 0.28);
+  border: 1.5px solid rgba(147, 197, 253, 0.75) !important;
+  box-shadow: 0 4px 18px rgba(12, 131, 255, 0.42), 0 0 14px rgba(12, 131, 255, 0.28) !important;
+  font-weight: 700;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .preview-toolbar-razorpay:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 22px rgba(22, 163, 74, 0.58), 0 0 20px rgba(34, 197, 94, 0.42);
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
-  border-color: rgba(220, 252, 231, 0.95);
-  color: #ffffff !important;
-}
-
-/* Tier 1: Classic Order CTA (Emerald / Forest Green) */
-.preview-modal[data-preview-tier="1"] .preview-toolbar-razorpay {
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 50%, #065f46 100%) !important;
-  color: #ffffff !important;
-  border: 1.5px solid rgba(167, 243, 208, 0.7) !important;
-  box-shadow: 0 4px 18px rgba(22, 163, 74, 0.45), 0 0 14px rgba(34, 197, 94, 0.3) !important;
-}
-.preview-modal[data-preview-tier="1"] .preview-toolbar-razorpay:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%) !important;
-  border-color: rgba(220, 252, 231, 0.95) !important;
-  box-shadow: 0 6px 24px rgba(22, 163, 74, 0.6), 0 0 20px rgba(34, 197, 94, 0.45) !important;
-  color: #ffffff !important;
-}
-
-/* Tier 2: Premium Order CTA (Rose / Berry Magenta) */
-.preview-modal[data-preview-tier="2"] .preview-toolbar-razorpay {
-  background: linear-gradient(135deg, #db2777 0%, #be185d 50%, #9d174d 100%) !important;
-  color: #ffffff !important;
-  border: 1.5px solid rgba(251, 207, 232, 0.7) !important;
-  box-shadow: 0 4px 18px rgba(219, 39, 119, 0.45), 0 0 14px rgba(244, 114, 182, 0.3) !important;
-}
-.preview-modal[data-preview-tier="2"] .preview-toolbar-razorpay:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #ec4899 0%, #db2777 50%, #be185d 100%) !important;
-  border-color: rgba(255, 225, 240, 0.95) !important;
-  box-shadow: 0 6px 24px rgba(219, 39, 119, 0.6), 0 0 20px rgba(244, 114, 182, 0.45) !important;
-  color: #ffffff !important;
-}
-
-/* Tier 3: Luxury Order CTA (Royal Amber / Radiant Gold) */
-.preview-modal[data-preview-tier="3"] .preview-toolbar-razorpay {
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%) !important;
-  color: #ffffff !important;
-  border: 1.5px solid rgba(254, 240, 138, 0.7) !important;
-  box-shadow: 0 4px 18px rgba(217, 119, 6, 0.45), 0 0 14px rgba(245, 158, 11, 0.3) !important;
-}
-.preview-modal[data-preview-tier="3"] .preview-toolbar-razorpay:hover {
-  transform: translateY(-2px);
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%) !important;
-  border-color: rgba(254, 243, 199, 0.95) !important;
-  box-shadow: 0 6px 24px rgba(217, 119, 6, 0.6), 0 0 20px rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 6px 24px rgba(12, 131, 255, 0.65), 0 0 20px rgba(12, 131, 255, 0.45) !important;
+  background: linear-gradient(135deg, #2b95ff 0%, #0c83ff 50%, #0052cc 100%) !important;
+  border-color: rgba(224, 242, 254, 0.95) !important;
   color: #ffffff !important;
 }
 
 /* PayPal Toolbar CTA Button (International USD Checkout) */
 .preview-toolbar-paypal {
-  flex: 1.25;
-  max-width: 270px;
+  flex: 1.2;
+  max-width: 250px;
   background: linear-gradient(135deg, #ffc439 0%, #f59e0b 55%, #d97706 100%) !important;
   color: #0b132b !important;
   border: 1.5px solid rgba(254, 243, 199, 0.9) !important;

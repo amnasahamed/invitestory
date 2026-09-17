@@ -1766,15 +1766,6 @@ function openPreview(id, updateUrl = true) {
   if (previewModalPrice) {
     previewModalPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
   }
-  // Update the "Make it yours — ₹X" CTA price
-  const previewCtaPrice = document.getElementById("preview-cta-price");
-  if (previewCtaPrice) {
-    previewCtaPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
-  }
-  const previewPaypalCtaPrice = document.getElementById("preview-paypal-cta-price");
-  if (previewPaypalCtaPrice) {
-    previewPaypalCtaPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
-  }
   updatePaymentButtonsForCurrency();
   if (previewCounterBadge) {
     previewCounterBadge.textContent = `${idx + 1} of ${TEMPLATE_DATABASE.length}`;
