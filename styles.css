@@ -6049,12 +6049,12 @@ body.preview-modal-open {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 6px;
   width: 100%;
   text-align: center;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.86);
   text-decoration: none;
   padding: 6px 0 2px;
   transition: all 0.2s ease;
