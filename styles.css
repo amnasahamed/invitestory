@@ -1796,7 +1796,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 0;
   overflow: hidden;
 }
 
@@ -1833,14 +1833,16 @@ body:has(#glass-luxury:checked) .catalogue-section {
   width: 100%;
   height: 100%;
   pointer-events: none;
+  z-index: 1;
+  /* Heavier bottom scrim so invite artwork (names/ornaments) can't clash with meta */
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 35%,
-    rgba(0, 0, 0, 0.08) 43%,
-    rgba(0, 0, 0, 0.45) 55%,
-    rgba(0, 0, 0, 0.82) 70%,
-    rgba(0, 0, 0, 0.96) 85%,
-    rgba(0, 0, 0, 0.98) 100%
+    rgba(0, 0, 0, 0) 18%,
+    rgba(0, 0, 0, 0.15) 32%,
+    rgba(0, 0, 0, 0.55) 48%,
+    rgba(0, 0, 0, 0.82) 60%,
+    rgba(0, 0, 0, 0.94) 74%,
+    rgba(8, 6, 4, 0.98) 100%
   );
 }
 
@@ -1850,11 +1852,21 @@ body:has(#glass-luxury:checked) .catalogue-section {
   bottom: var(--card-padding-desktop);
   left: var(--card-padding-desktop);
   right: var(--card-padding-desktop);
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   gap: 12px;
   box-sizing: border-box;
+  /* Soft plate behind text so gold invite type never fights the title */
+  padding: 14px 12px 12px;
+  margin: 0 -4px;
+  border-radius: 16px;
+  background: linear-gradient(
+    to top,
+    rgba(8, 6, 4, 0.72) 0%,
+    rgba(8, 6, 4, 0.45) 55%,
+    rgba(8, 6, 4, 0.0) 100%
+  );
 }
 
 /* Header & Title */
@@ -2117,12 +2129,12 @@ body:has(#glass-luxury:checked) .catalogue-section {
   .templates-grid:not(.view-list) .template-card-overlay {
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0) 30%,
-      rgba(0, 0, 0, 0.15) 40%,
-      rgba(0, 0, 0, 0.55) 52%,
-      rgba(0, 0, 0, 0.88) 68%,
-      rgba(0, 0, 0, 0.97) 84%,
-      rgba(0, 0, 0, 0.99) 100%
+      rgba(0, 0, 0, 0) 12%,
+      rgba(0, 0, 0, 0.2) 28%,
+      rgba(0, 0, 0, 0.62) 44%,
+      rgba(0, 0, 0, 0.88) 58%,
+      rgba(0, 0, 0, 0.96) 72%,
+      rgba(8, 6, 4, 0.99) 100%
     );
   }
 }
@@ -4065,36 +4077,45 @@ body:has(#glass-luxury:checked) .catalogue-section {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 22px;
+  padding: 8px 16px;
   background: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid rgba(212, 175, 55, 0.22);
   flex-shrink: 0;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
+  gap: 10px;
+  min-height: 0;
 }
 
+/* One-row header: title · price · tier · style — no stacked meta */
 .preview-modal-header-text {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px;
   min-width: 0;
+  flex: 1;
 }
 
 .preview-title-row {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  min-width: 0;
+  flex-shrink: 1;
 }
 
 .preview-modal-title {
   font-family: var(--font-header);
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   color: #1a1524;
   letter-spacing: -0.01em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: min(280px, 36vw);
 }
 
 .preview-price-badge {
@@ -4134,9 +4155,20 @@ body:has(#glass-luxury:checked) .catalogue-section {
 }
 
 .preview-modal-style-tag {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   color: #6b6378;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+/* Multi-event copy is package-level — keep out of the header chrome */
+.preview-multievent-note {
+  display: none !important;
 }
 
 .preview-header-actions {
@@ -4211,12 +4243,12 @@ body:has(#glass-luxury:checked) .catalogue-section {
 /* FAQ Button in Preview Header */
 .preview-header-btn.preview-faq-header-btn,
 .preview-faq-header-btn {
-  background: rgba(0, 0, 0, 0.04) !important;
-  color: #2b2438 !important;
-  border: 1px solid rgba(0, 0, 0, 0.12) !important;
-  box-shadow: none !important;
+  background: #ffffff !important;
+  color: #1a1524 !important;
+  border: 1.5px solid rgba(26, 21, 36, 0.28) !important;
+  box-shadow: 0 1px 3px rgba(18, 12, 31, 0.08) !important;
   font-size: 0.76rem !important;
-  font-weight: 600 !important;
+  font-weight: 700 !important;
   padding: 5px 12px !important;
   cursor: pointer;
   letter-spacing: 0.02em;
@@ -4224,11 +4256,11 @@ body:has(#glass-luxury:checked) .catalogue-section {
 
 .preview-header-btn.preview-faq-header-btn:hover,
 .preview-faq-header-btn:hover {
-  background: rgba(0, 0, 0, 0.08) !important;
+  background: #f4f1f8 !important;
   color: #000000 !important;
-  border-color: rgba(0, 0, 0, 0.22) !important;
+  border-color: rgba(26, 21, 36, 0.45) !important;
   transform: translateY(-1px) scale(1.02);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 3px 10px rgba(18, 12, 31, 0.12) !important;
 }
 
 /* --- Preview Modal FAQ Popup System --- */
@@ -4559,7 +4591,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   perspective-origin: 50% 40%;
   overflow: visible;
   overscroll-behavior: contain;
-  padding-top: 26px;
+  padding-top: 12px;
 }
 
 .preview-phone-3d-rig {
@@ -5417,35 +5449,120 @@ body.preview-modal-open {
     border: none;
   }
 
+  /* Compact preview header: one row so the phone gets the height */
   .preview-modal-header {
-    padding: 10px 14px;
-    gap: 8px;
+    padding: 6px 10px;
+    gap: 6px;
+    align-items: center;
+    min-height: 0;
+  }
+
+  .preview-modal-header-text {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 6px;
   }
 
   .preview-title-row {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
   }
 
   .preview-modal-title {
-    font-size: 0.95rem;
-    max-width: 170px;
+    font-size: 0.88rem;
+    max-width: none;
+    flex: 1;
+    min-width: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .preview-price-badge {
-    font-size: 0.76rem;
-    padding: 2px 7px;
+    font-size: 0.7rem;
+    padding: 1px 6px;
     white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Style tag + multi-event note steal vertical space — hide on mobile */
+  .preview-modal-style-tag,
+  .preview-multievent-note {
+    display: none !important;
+  }
+
+  .preview-tier-badge {
+    font-size: 0.55rem;
+    padding: 2px 6px;
+    letter-spacing: 0.06em;
+  }
+
+  .preview-header-actions {
+    gap: 6px;
+    flex-shrink: 0;
   }
 
   .preview-header-btn {
-    padding: 4px 10px;
-    font-size: 0.72rem;
+    padding: 5px 8px;
+    font-size: 0.68rem;
     white-space: nowrap;
+  }
+
+  /* FAQ: keep label + solid pill so it is readable next to Full Demo */
+  .preview-header-btn.preview-faq-header-btn,
+  .preview-faq-header-btn {
+    width: auto !important;
+    height: auto !important;
+    min-height: 30px;
+    padding: 5px 10px !important;
+    justify-content: center;
+    gap: 4px;
+    background: #1a1524 !important;
+    color: #ffffff !important;
+    border: 1.5px solid #1a1524 !important;
+    box-shadow: 0 2px 8px rgba(18, 12, 31, 0.18) !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+  }
+  .preview-header-btn.preview-faq-header-btn span,
+  .preview-faq-header-btn span {
+    display: inline !important;
+  }
+  .preview-header-btn.preview-faq-header-btn svg,
+  .preview-faq-header-btn svg {
+    stroke: currentColor;
+    flex-shrink: 0;
+  }
+  .preview-header-btn.preview-faq-header-btn:hover,
+  .preview-faq-header-btn:hover {
+    background: #2d2640 !important;
+    color: #ffffff !important;
+    border-color: #2d2640 !important;
+  }
+  #preview-fullscreen-btn {
+    padding: 5px 8px;
+  }
+
+  .preview-modal-close {
+    width: 30px;
+    height: 30px;
+    font-size: 1.25rem;
+  }
+
+  .preview-3d-stage {
+    padding-top: 8px;
+  }
+
+  .ios-sheet-grab-handle {
+    height: 4px;
+    margin: 6px auto 2px;
   }
 
   .preview-modal-body {
@@ -7416,3 +7533,494 @@ html:has(body.preview-modal-open)::-webkit-scrollbar {
   height: 0 !important;
   background: transparent !important;
 }
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/* UPI-FIRST FUNNEL — package dual CTAs, express toggle, success panel */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/* Hero secondary (outline) CTA — replaces WhatsApp-first hero button */
+.hero-secondary-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: transparent;
+  color: #2a2118 !important;
+  border: 1.5px solid rgba(42, 33, 24, 0.55);
+  font-family: var(--font-header);
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  padding: 15px 30px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.hero-secondary-cta:hover {
+  transform: translateY(-2px);
+  background: rgba(42, 33, 24, 0.06);
+  border-color: rgba(42, 33, 24, 0.85);
+  color: #1a140f !important;
+}
+.hero-secondary-cta:active {
+  transform: scale(0.98);
+}
+
+/* Differentiation line above the pricing grid */
+.pricing-diff-line {
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-accent-deep);
+  background: var(--color-accent-wash);
+  border: 1px solid rgba(176, 138, 74, 0.28);
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  max-width: 640px;
+  margin: 18px auto 26px;
+  line-height: 1.5;
+}
+
+/* Slot-reservation line under the pricing grid */
+.pricing-slot-line {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-soft);
+  max-width: 620px;
+  margin: 20px auto 0;
+  line-height: 1.6;
+}
+.pricing-slot-line::before {
+  content: "🔒 ";
+}
+
+/* Express 12h checkout toggle on each package card */
+.express-toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text-soft);
+  background: var(--color-bg-elevated);
+  border: 1px dashed var(--color-border-dark);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  margin: 0 0 12px 0;
+  cursor: pointer;
+  user-select: none;
+  transition: var(--transition-fast);
+}
+.express-toggle:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-wash);
+}
+.express-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  min-width: 44px;
+  min-height: 44px;
+  accent-color: var(--color-accent-deep);
+  cursor: pointer;
+  margin: -11px 0 -11px -11px;
+  padding-left: 11px;
+}
+
+/* Package primary Pay button (thumb-friendly) */
+.pkg-pay-btn {
+  min-height: 52px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+/* Package secondary Ask button (outline / text style) */
+.pkg-ask-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  min-height: 48px;
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: transparent;
+  border: 1.5px solid var(--color-border-dark);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-soft);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+.pkg-ask-btn svg {
+  color: #1da851;
+}
+.pkg-ask-btn:hover {
+  border-color: #1da851;
+  color: #146c36;
+  background: rgba(37, 211, 102, 0.07);
+  transform: translateY(-1px);
+}
+.pkg-microcopy {
+  text-align: center;
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+  margin: 10px 0 0;
+  line-height: 1.5;
+}
+
+/* Post-order section CTA */
+.post-order-cta {
+  text-align: center;
+  margin-top: 26px;
+}
+
+/* Template card Pay button (gold-tinted solid on dark card) */
+.template-btn-pay {
+  display: block;
+  width: 100%;
+  padding: 13px 18px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-header, -apple-system, BlinkMacSystemFont, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  letter-spacing: 0.01em;
+  background: rgba(223, 184, 119, 0.16);
+  color: #ffe9b8;
+  border: 1.5px solid rgba(223, 184, 119, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.template-btn-pay:hover {
+  background: linear-gradient(135deg, #f5d77f 0%, #dfb877 100%);
+  color: #120c1f;
+  border-color: rgba(255, 240, 170, 0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(223, 184, 119, 0.4);
+}
+.template-btn-pay:active {
+  transform: scale(0.98);
+}
+.templates-grid.view-list .template-btn-pay {
+  width: auto;
+  padding: 10px 22px;
+  font-size: 0.88rem;
+}
+
+/* Preview modal: tier badge + multi-event note (light header) */
+.preview-tier-badge {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-header);
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 9999px;
+  margin-left: 0;
+  vertical-align: middle;
+  border: 1px solid rgba(18, 12, 31, 0.12);
+  background: rgba(18, 12, 31, 0.06);
+  color: #4a4458;
+  flex-shrink: 0;
+  line-height: 1.2;
+}
+.preview-tier-badge[data-tier="1"] {
+  color: #15803d;
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.12);
+}
+.preview-tier-badge[data-tier="2"] {
+  color: #be185d;
+  border-color: rgba(236, 72, 153, 0.35);
+  background: rgba(236, 72, 153, 0.12);
+}
+.preview-tier-badge[data-tier="3"] {
+  color: #854d0e;
+  border-color: rgba(202, 138, 4, 0.4);
+  background: rgba(234, 179, 8, 0.16);
+}
+.preview-multievent-note {
+  display: none !important;
+  font-size: 0.72rem;
+  color: #5c5568;
+  background: rgba(18, 12, 31, 0.04);
+  border: 1px solid rgba(18, 12, 31, 0.08);
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin: 4px 0 0;
+  line-height: 1.35;
+}
+.preview-multievent-note::before {
+  content: "🎭 ";
+}
+
+/* Payment success panel */
+.pay-success-modal .exit-intent-panel,
+.pay-success-panel {
+  max-width: 460px;
+  text-align: center;
+  background: linear-gradient(180deg, #1c1526 0%, #120c1f 100%);
+  border: 1px solid rgba(223, 184, 119, 0.4);
+  border-radius: 20px;
+  padding: 34px 28px 28px;
+  color: #f3edda;
+}
+.pay-success-check {
+  font-size: 2.6rem;
+  margin-bottom: 10px;
+}
+.pay-success-title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.pay-success-sub {
+  font-size: 0.92rem;
+  color: rgba(243, 237, 218, 0.85);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+.pay-success-receipt {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 0 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pay-success-receipt > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.86rem;
+}
+.pay-success-receipt dt {
+  color: rgba(243, 237, 218, 0.65);
+  font-weight: 500;
+}
+.pay-success-receipt dd {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 700;
+  text-align: right;
+  word-break: break-all;
+}
+.pay-success-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pay-success-wa-btn {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: none;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #1fa855 0%, #157a3e 100%);
+  color: #ffffff;
+  font-family: var(--font-header);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(31, 168, 85, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.pay-success-wa-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 26px rgba(31, 168, 85, 0.55);
+}
+.pay-success-secondary {
+  color: #ecd9ac;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.pay-success-dismiss {
+  background: none;
+  border: none;
+  color: rgba(243, 237, 218, 0.6);
+  font-size: 0.84rem;
+  cursor: pointer;
+  padding: 6px;
+}
+.pay-success-note {
+  margin-top: 14px;
+  font-size: 0.78rem;
+  color: rgba(243, 237, 218, 0.6);
+}
+
+/* Mobile: both package CTAs full-width, thumb-friendly, above the fold */
+@media (max-width: 900px) {
+  .pricing-grid {
+    grid-template-columns: 1fr;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .pkg-pay-btn,
+  .pkg-ask-btn {
+    min-height: 52px;
+    font-size: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .hero-action-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 20px;
+  }
+  .hero-primary-cta,
+  .hero-secondary-cta {
+    width: 100%;
+    min-height: 52px;
+  }
+}
+
+
+/* ── Card CTA polish on dark overlays (2026-09-19c) ──────────────── */
+.template-card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.template-btn-pay {
+  order: 1;
+  background: #fff8ef !important;
+  color: #1c1612 !important;
+  border: 1.5px solid #fff8ef !important;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.35) !important;
+}
+.template-btn-pay:hover {
+  background: #ffffff !important;
+  color: #000 !important;
+  border-color: #ffffff !important;
+  transform: translateY(-1px);
+}
+/* Light outline Preview — readable on dark scrim (was dark-on-dark) */
+.template-btn-preview-primary,
+.tier-card-1 .template-btn-preview-primary,
+.tier-card-2 .template-btn-preview-primary,
+.tier-card-3 .template-btn-preview-primary,
+.template-btn-preview-primary.tier-btn-1,
+.template-btn-preview-primary.tier-btn-2,
+.template-btn-preview-primary.tier-btn-3 {
+  order: 2;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff8ef !important;
+  border: 1.5px solid rgba(255, 248, 239, 0.7) !important;
+  box-shadow: none !important;
+}
+.template-btn-preview-primary:hover,
+.tier-card-1 .template-btn-preview-primary:hover,
+.tier-card-2 .template-btn-preview-primary:hover,
+.tier-card-3 .template-btn-preview-primary:hover,
+.template-btn-preview-primary.tier-btn-1:hover,
+.template-btn-preview-primary.tier-btn-2:hover,
+.template-btn-preview-primary.tier-btn-3:hover {
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: none !important;
+}
+/* Ask last — was order 0 so it jumped above Pay */
+.template-card-wa-link,
+.template-card-wa-link,
+a.template-card-wa-link {
+  order: 3;
+  min-height: 44px;
+  padding: 10px 0 !important;
+  color: rgba(255, 248, 239, 0.9) !important;
+}
+
+/* Hide floating WA on mobile — header WA remains */
+@media (max-width: 768px) {
+  .floating-whatsapp {
+    display: none !important;
+  }
+}
+
+/* Pricing carousel: dots + default to Premium */
+.pricing-dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin: 4px 0 8px;
+}
+.pricing-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(42, 33, 24, 0.22);
+  cursor: pointer;
+}
+.pricing-dot[aria-current="true"] {
+  width: 18px;
+  border-radius: 999px;
+  background: #1c1612;
+}
+.pricing-swipe-hint {
+  display: none;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-soft, #7a7168);
+  margin: 0 0 10px;
+}
+@media (max-width: 768px) {
+  .pricing-dots,
+  .pricing-swipe-hint {
+    display: flex;
+  }
+  .pricing-swipe-hint {
+    display: block;
+  }
+  .pricing-grid {
+    scroll-padding-inline: 16px;
+  }
+}
+
+
+/* ── Pricing Pay clearance + tier nav hide (2026-09-19b) ─────────── */
+@media (max-width: 768px) {
+  .pricing-section {
+    padding-bottom: 48px;
+  }
+  .pricing-grid {
+    margin-bottom: 8px;
+    padding-bottom: 12px;
+  }
+  .pricing-card {
+    margin-bottom: 4px;
+  }
+  /* Keep Pay above the fold of the card, clear of any residual chrome */
+  .pricing-section .pkg-pay-btn,
+  .pricing-section .pricing-card-cta {
+    position: relative;
+    z-index: 2;
+  }
+  .tier-floating-nav.is-hidden-for-pricing {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: translateY(16px) !important;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+  .tier-floating-nav {
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+}
+

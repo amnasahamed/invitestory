@@ -1,4 +1,8 @@
 {
   "buildCommand": "echo 'No build required'",
-  "outputDirectory": "."
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/designs", "destination": "/#catalogue-header", "permanent": false },
+    { "source": "/refunds", "destination": "/refund-and-editing-policy.html", "permanent": true }
+  ]
 }

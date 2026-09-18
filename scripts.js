@@ -7,6 +7,18 @@
 window.RAZORPAY_KEY_ID = "rzp_live_TPCjiGiPIeo7SN";
 window.PAYPAL_CLIENT_ID = "BAAXdw4bek4C9gmaofxymnJjm8cpkjT61bXsJ3KzdtDpW14OKQd_ig8jKgi0I45orPLAZ64NvkBq2Qpu2M";
 
+// --- POST-PAYMENT NOTIFICATIONS (Razorpay webhook → notify yourself) ---
+// This is a static site, so Razorpay cannot POST to it. To get notified on
+// every payment with package + payment id, set this up once in the Razorpay
+// Dashboard → Settings → Webhooks → Add webhook for `payment.captured`:
+//   Option A (no code): webhook URL = a Zapier/Make webhook → sends you an
+//     email + WhatsApp (via Interakt/WATI/Gupshup) with payment + notes.
+//   Option B (code): deploy one serverless endpoint that verifies the webhook
+//     signature (RAZORPAY_WEBHOOK_SECRET) and forwards package/payment id to
+//     your email + WhatsApp. The `notes` we send (package, design_name,
+//     express_12h) arrive in the webhook payload automatically.
+window.RAZORPAY_WEBHOOK_SECRET = ""; // set only on a server, never in frontend code
+
 const PROMO_CONFIG = {
   active: false,
   name: "Independence Day Special",
@@ -637,10 +649,40 @@ const pricingSection = document.querySelector(".pricing-section");
 
 // Addon Prices definition
 const ADDONS = {
-  express: { name: "Express 12h Delivery", priceINR: 499, priceUSD: 6 },
+  express: { name: "Express 12h Delivery", priceINR: 299, priceUSD: 4 },
   domain: { name: "Custom Domain (.in / .com)", priceINR: 999, priceUSD: 12 },
   lang: { name: "Extra Event Tab (e.g. Sangeet)", priceINR: 299, priceUSD: 4 }
 };
+
+// --- Package-level UPI-first checkout (Classic / Premium / Luxury) ---
+const PACKAGE_NAMES = { 1: "Classic", 2: "Premium", 3: "Luxury" };
+
+function packageName(tier) {
+  return PACKAGE_NAMES[tier] || "Classic";
+}
+
+function packageBasePrice(tier) {
+  const base = TIER_BASE_PRICE[tier] || TIER_BASE_PRICE[1];
+  return currentCurrency === "INR" ? base.inr : base.usd;
+}
+
+function isExpressSelectedForPackage(tier) {
+  const box = document.getElementById(`express-toggle-${tier}`);
+  return !!(box && box.checked);
+}
+
+function packageTotal(tier) {
+  let total = packageBasePrice(tier);
+  if (isExpressSelectedForPackage(tier)) {
+    total += currentCurrency === "INR" ? ADDONS.express.priceINR : ADDONS.express.priceUSD;
+  }
+  return total;
+}
+
+function packageAmountText(tier, total) {
+  const val = (typeof total === "number") ? total : packageTotal(tier);
+  return `${getCurrencySymbol()}${val.toLocaleString("en-IN")}`;
+}
 
 // --- Preview Modal state & DOM refs ---
 // Dynamic first template array-index for each tier
@@ -844,7 +886,7 @@ function applyTemplateLuxuryPattern(item) {
   canvas.setAttribute("data-pattern-key", key);
 }
 
-// --- Render Tiers Table in Pricing Section ---
+// --- Render Tiers Table in Pricing Section (UPI-first, dual CTA) ---
 function renderPricingSection() {
   if (!pricingSection) return;
   const p1 = TIER_BASE_PRICE[1];
@@ -852,12 +894,18 @@ function renderPricingSection() {
   const p3 = TIER_BASE_PRICE[3];
 
   const checkIcon = `<svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>`;
+  const expressLabel = currentCurrency === "INR"
+    ? `⚡ Express 12h delivery (+₹${ADDONS.express.priceINR})`
+    : `⚡ Express 12h delivery (+$${ADDONS.express.priceUSD})`;
+  const askIcon = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>`;
 
   pricingSection.innerHTML = `
     <div class="container">
       <h2 class="section-title">Beautiful doesn't have to be complicated.</h2>
       <p class="section-subtitle">One-time payment. No subscription. Delivered in 24 hours.</p>
-      <div class="pricing-grid">        <!-- Tier 1: Classic -->
+      <p class="pricing-diff-line">Not another DIY editor. You pick a design, pay, send details — we build the invite for you.</p>
+      <div class="pricing-grid">
+        <!-- Tier 1: Classic -->
         <div class="pricing-card">
           <div class="pricing-card-header">
             <h3 class="pricing-card-name">🌿 Classic</h3>
@@ -865,31 +913,39 @@ function renderPricingSection() {
               <span class="pricing-card-price">${formatPrice(p1.inr, p1.usd)}</span>
             </div>
           </div>
-          <div class="pricing-card-tagline">“Timeless &amp; elegant.”</div>
+          <div class="pricing-card-tagline">“Timeless &amp; elegant — perfect for one function.”</div>
           <ul class="pricing-card-features">
-            <li class="pricing-card-feature-item">${checkIcon}<span>Single-page traditional Indian design</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>1-Tap Google Maps venue directions</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Live event countdown timer</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Single-event invite (Wedding or Reception)</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Your photos, names &amp; 1-tap venue map</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Countdown timer + guest RSVP</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours</span></li>
           </ul>
-          <a href="#catalogue-header" class="pricing-card-cta" onclick="selectTier(1, true)">View Designs</a>
+          <label class="express-toggle"><input type="checkbox" id="express-toggle-1" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-1" onclick="payRazorpayForPackage(1)"><span data-pay-label>Pay ${formatPrice(p1.inr, p1.usd)} &amp; start</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(1)">${askIcon}<span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
         </div>
 
-        <!-- Tier 2: Premium (Hero / Most Popular) -->
+        <!-- Tier 2: Premium (Hero / Couples' favourite) -->
         <div class="pricing-card featured pricing-card-premium">
-          <div class="pricing-popular-badge">MOST POPULAR</div>
+          <div class="pricing-popular-badge">Couples' favourite</div>
           <div class="pricing-card-header">
             <h3 class="pricing-card-name">🌸 Premium</h3>
             <div class="pricing-card-price-row">
               <span class="pricing-card-price">${formatPrice(p2.inr, p2.usd)}</span>
             </div>
           </div>
-          <div class="pricing-card-tagline">“Your story, beautifully told.”</div>
+          <div class="pricing-card-tagline">“Your whole wedding story, beautifully told.”</div>
           <ul class="pricing-card-features">
-            <li class="pricing-card-feature-item">${checkIcon}<span>Custom watercolor &amp; animated illustrations</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Interactive love story &amp; milestones timeline</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Ambient romantic background music</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Up to 5 events: Haldi, Mehendi, Sangeet, Wedding, Reception</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Love-story timeline + photo gallery (up to 12)</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Background music + venue maps + RSVP</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours</span></li>
           </ul>
-          <a href="#catalogue-header" class="pricing-card-cta" onclick="selectTier(2, true)">View Designs</a>
+          <label class="express-toggle"><input type="checkbox" id="express-toggle-2" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="payRazorpayForPackage(2)"><span data-pay-label>Pay ${formatPrice(p2.inr, p2.usd)} &amp; start</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(2)">${askIcon}<span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
         </div>
 
         <!-- Tier 3: Luxury (Prestige) -->
@@ -902,13 +958,25 @@ function renderPricingSection() {
           </div>
           <div class="pricing-card-tagline">“Make an unforgettable entrance.”</div>
           <ul class="pricing-card-features">
-            <li class="pricing-card-feature-item">${checkIcon}<span>3D parallax sliding layers &amp; cinematic reveals</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Interactive envelope wax seal reveal</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Floating floral petals &amp; luxury motion</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Everything in Premium, for all your events</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Cinematic opening — envelope &amp; palace reveals</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Premium motion, effects &amp; priority build</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours (12h express available)</span></li>
           </ul>
-          <a href="#catalogue-header" class="pricing-card-cta" onclick="selectTier(3, true)">Experience Luxury</a>
+          <label class="express-toggle"><input type="checkbox" id="express-toggle-3" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="payRazorpayForPackage(3)"><span data-pay-label>Pay ${formatPrice(p3.inr, p3.usd)} &amp; start</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)">${askIcon}<span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
         </div>
       </div>
+      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for Premium &amp; Luxury · Couples’ favourite is in the middle</p>
+      <div class="pricing-dots" id="pricing-dots" role="tablist" aria-label="Package cards">
+        <button type="button" class="pricing-dot" data-pricing-dot="0" aria-label="Classic package" aria-current="false"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="1" aria-label="Premium package" aria-current="true"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Luxury package" aria-current="false"></button>
+      </div>
+
+      <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — usually live within 24 hours.</p>
 
       <!-- Reassurance Bar -->
       <div class="pricing-reassurance">
@@ -1039,12 +1107,15 @@ function renderCatalogue() {
           </div>
 
           <div class="template-card-actions">
+            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="payRazorpayForTemplate(${item.id})" aria-label="Pay ${priceText} and start ${item.name}">
+              <span>Pay ${priceText} &amp; start</span>
+            </button>
             <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
               <span>Preview <span class="btn-text-invitation">Invitation</span> →</span>
             </button>
-            <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); orderCustomTemplate(${item.id})" aria-label="Order ${item.name} on WhatsApp" title="Order on WhatsApp">
+            <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); askTemplateOnWhatsApp(${item.id})" aria-label="Ask about ${item.name} on WhatsApp" title="Ask on WhatsApp">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-              <span class="wa-text-label">Order on WhatsApp</span>
+              <span class="wa-text-label">Ask on WhatsApp</span>
             </a>
           </div>
         </div>
@@ -1306,7 +1377,16 @@ function payRazorpayForTemplate(id) {
     theme: {
       color: "#c09559"
     },
+    modal: {
+      ondismiss: function () {
+        if (!window.__lastPaymentOk) {
+          showToast("Payment didn't go through — try again or WhatsApp us.");
+        }
+        window.__lastPaymentOk = false;
+      }
+    },
     handler: function (response) {
+      window.__lastPaymentOk = true;
       trackMetaEvent("Purchase", {
         content_name: item.name,
         content_ids: [String(item.id)],
@@ -1316,19 +1396,212 @@ function payRazorpayForTemplate(id) {
         transaction_id: response.razorpay_payment_id
       });
 
-      alert(`🎉 Payment Successful!\nPayment ID: ${response.razorpay_payment_id}\nTemplate: ${item.name}\n\nClick OK to open WhatsApp and send your wedding details for customization!`);
-
-      const waMsg = `Hi InviteStory! I have paid online for '${item.name}' (Payment ID: ${response.razorpay_payment_id}). Here are my wedding details:`;
-      window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
+      handlePaidSuccess({
+        packageName: packageName(item.tier),
+        amountText: isINR ? `₹${totalVal.toLocaleString("en-IN")}` : `$${totalVal}`,
+        totalVal,
+        currency: currencyCode,
+        paymentId: response.razorpay_payment_id,
+        designName: item.name
+      });
     }
   };
 
   if (typeof Razorpay !== "undefined") {
     const rzp = new Razorpay(options);
+    rzp.on("payment.failed", function () {
+      showToast("Payment didn't go through — try again or WhatsApp us.");
+    });
     rzp.open();
   } else {
-    alert("Razorpay SDK is loading. Please try again in a moment!");
+    showToast("Payment is loading — please try again in a moment.");
   }
+}
+
+/**
+ * "Ask" prefill (no payment yet) — package level.
+ * Spec: Hi! Looking at {{PACKAGE}} (₹{{AMOUNT}}). I have a few questions before paying.
+ */
+function askPackageOnWhatsApp(tier) {
+  const name = packageName(tier);
+  const amountText = packageAmountText(tier);
+  trackMetaEvent("Lead", {
+    content_name: `${name} Package Inquiry (pre-pay)`,
+    content_category: "Package Question",
+    value: packageTotal(tier),
+    currency: currentCurrency
+  });
+  const msg = `Hi! Looking at ${name} (${amountText}). I have a few questions before paying.`;
+  window.open(`https://wa.me/918281583882?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+/**
+ * "Ask" prefill (no payment yet) — single design level.
+ */
+function askTemplateOnWhatsApp(id) {
+  const item = TEMPLATE_DATABASE.find(x => x.id === id);
+  if (!item) return;
+  const prices = getItemPrices(item);
+  const priceText = formatPrice(prices.priceINR, prices.priceUSD);
+  trackMetaEvent("Lead", {
+    content_name: `${item.name} Inquiry (pre-pay)`,
+    content_ids: [String(item.id)],
+    content_type: "product",
+    content_category: item.style || "Digital Wedding Invitation",
+    value: currentCurrency === "INR" ? prices.priceINR : prices.priceUSD,
+    currency: currentCurrency
+  });
+  const msg = `Hi! Looking at "${item.name}" (${packageName(item.tier)} · ${priceText}). I have a few questions before paying.`;
+  window.open(`https://wa.me/918281583882?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+/**
+ * Package-level Razorpay checkout (UPI / GPay / PhonePe / cards).
+ * Success → in-page success panel + auto-open WhatsApp with paid prefill.
+ * Failure/cancel → toast pointing back to pricing + WhatsApp.
+ */
+function payRazorpayForPackage(tier, designName) {
+  const name = packageName(tier);
+  const totalVal = packageTotal(tier);
+  const amountText = packageAmountText(tier, totalVal);
+  const isINR = currentCurrency === "INR";
+  const currencyCode = isINR ? "INR" : "USD";
+
+  // USD visitors pay via PayPal (Razorpay key is INR-first).
+  if (!isINR) {
+    openPayPalCheckoutForPackage(tier);
+    return;
+  }
+
+  trackMetaEvent("InitiateCheckout", {
+    content_name: `${name} Package`,
+    content_category: "Package",
+    value: totalVal,
+    currency: currencyCode,
+    num_items: 1
+  });
+
+  const expressOn = isExpressSelectedForPackage(tier);
+  const options = {
+    key: window.RAZORPAY_KEY_ID || "rzp_live_YOUR_KEY_HERE",
+    amount: Math.round(totalVal * 100),
+    currency: currencyCode,
+    name: "InviteStory",
+    description: `${name} Package — Digital Wedding Invitation`,
+    image: "https://invitestory.in/logo/noappicon.png",
+    notes: {
+      package: name,
+      design_name: designName || "",
+      express_12h: expressOn ? "yes" : "no",
+      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard"
+    },
+    theme: { color: "#c09559" },
+    modal: {
+      // If they close without paying, send them back to pricing with help.
+      ondismiss: function () {
+        if (!window.__lastPaymentOk) {
+          showToast("Payment didn't go through — try again or WhatsApp us.");
+        }
+        window.__lastPaymentOk = false;
+      }
+    },
+    handler: function (response) {
+      window.__lastPaymentOk = true;
+      trackMetaEvent("Purchase", {
+        content_name: `${name} Package`,
+        content_category: "Package",
+        value: totalVal,
+        currency: currencyCode,
+        transaction_id: response.razorpay_payment_id
+      });
+      handlePaidSuccess({
+        packageName: name,
+        amountText,
+        totalVal,
+        currency: currencyCode,
+        paymentId: response.razorpay_payment_id,
+        designName: designName || ""
+      });
+    }
+  };
+
+  if (typeof Razorpay !== "undefined") {
+    const rzp = new Razorpay(options);
+    rzp.on("payment.failed", function () {
+      showToast("Payment didn't go through — try again or WhatsApp us.");
+    });
+    rzp.open();
+  } else {
+    showToast("Payment is loading — please try again in a moment.");
+  }
+}
+
+/**
+ * Shared post-payment handler: stores receipt, shows the in-page success
+ * panel (works even if the user never opens WhatsApp), and auto-opens
+ * WhatsApp with the paid details prefill.
+ * Spec: Hi InviteStory! ✅ Paid for {{PACKAGE}} (₹{{AMOUNT}}).
+ *       Payment ID: {{RAZORPAY_ID}} / Design I want: {{DESIGN_NAME}} /
+ *       I'll send names, dates, photos, venue next.
+ */
+function handlePaidSuccess(details) {
+  window.__lastPayment = details;
+  showPaymentSuccess(details);
+  const designLine = details.designName ? `\nDesign I want: ${details.designName}` : "";
+  const waMsg = `Hi InviteStory! ✅ Paid for ${details.packageName} (${details.amountText}).\nPayment ID: ${details.paymentId}${designLine}\nI'll send names, dates, photos, venue next.`;
+  window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
+}
+
+function showPaymentSuccess(details) {
+  const modal = document.getElementById("payment-success-modal");
+  if (!modal) return;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set("pay-success-package", details.packageName);
+  set("pay-success-amount", details.amountText);
+  set("pay-success-id", details.paymentId);
+  set("pay-success-design", details.designName || "Any — I'll confirm on WhatsApp");
+  const tyLink = document.getElementById("pay-success-thankyou-link");
+  if (tyLink) {
+    const q = new URLSearchParams({
+      package: details.packageName,
+      amount: details.amountText,
+      payment_id: details.paymentId,
+      design: details.designName || ""
+    });
+    tyLink.href = `thank-you.html?${q.toString()}`;
+  }
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function closePaymentSuccess() {
+  const modal = document.getElementById("payment-success-modal");
+  if (!modal) return;
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+/** Primary button inside the success panel — opens WhatsApp with the paid prefill. */
+function sendDetailsOnWhatsApp() {
+  const d = window.__lastPayment;
+  if (!d) {
+    window.open("https://wa.me/918281583882?text=" + encodeURIComponent("Hi InviteStory! I just paid on the website — here are my wedding details:"), "_blank");
+    return;
+  }
+  const designLine = d.designName ? `\nDesign I want: ${d.designName}` : "";
+  const waMsg = `Hi InviteStory! ✅ Paid for ${d.packageName} (${d.amountText}).\nPayment ID: ${d.paymentId}${designLine}\nI'll send names, dates, photos, venue next.`;
+  window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
+}
+
+/** Keep each package card's Pay label in sync with its express toggle. */
+function updatePackagePayLabels() {
+  [1, 2, 3].forEach(tier => {
+    const btn = document.getElementById(`pkg-pay-btn-${tier}`);
+    if (btn) {
+      const label = btn.querySelector("[data-pay-label]");
+      if (label) label.textContent = `Pay ${packageAmountText(tier)} & start`;
+    }
+  });
 }
 
 // --- PayPal International Checkout Integration ---
@@ -1404,6 +1677,48 @@ function openPayPalCheckout(id) {
     totalDisplay.textContent = `$${prices.priceUSD.toFixed(2)} USD`;
   }
 
+  renderPayPalButtons();
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+/**
+ * Package-level PayPal checkout for USD visitors (Classic $15 / Premium $20 / Luxury $35).
+ * Reuses the PayPal modal with a pseudo item so no template pick is needed.
+ */
+function openPayPalCheckoutForPackage(tier) {
+  const name = packageName(tier);
+  const base = TIER_BASE_PRICE[tier] || TIER_BASE_PRICE[1];
+  const pseudo = {
+    id: `package-${tier}`,
+    name: `${name} Package`,
+    tier,
+    style: `${name} Package — Digital Wedding Invitation`,
+    priceINR: base.inr,
+    priceUSD: base.usd,
+    originalPriceINR: base.inr,
+    originalPriceUSD: base.usd
+  };
+  currentPayPalCheckoutTemplate = pseudo;
+
+  const modal = document.getElementById("paypal-checkout-modal");
+  if (!modal) return;
+
+  const titleEl = document.getElementById("paypal-item-name");
+  const tierEl = document.getElementById("paypal-item-tier");
+  const basePriceEl = document.getElementById("paypal-item-base-price");
+  const tierLabel = tier === 1 ? "🌿 Classic" : tier === 2 ? "🌸 Premium" : "👑 Luxury";
+
+  if (titleEl) titleEl.textContent = `${name} Package`;
+  if (tierEl) tierEl.textContent = tierLabel;
+  if (basePriceEl) basePriceEl.textContent = `$${base.usd}`;
+
+  const totalDisplay = document.getElementById("paypal-total-display");
+  if (totalDisplay) totalDisplay.textContent = `$${base.usd.toFixed(2)} USD`;
+
+  const container = document.getElementById("paypal-button-container");
+  if (container) container.innerHTML = "";
   renderPayPalButtons();
 
   modal.classList.add("is-open");
@@ -1765,6 +2080,29 @@ function openPreview(id, updateUrl = true) {
   if (previewModalTag)   previewModalTag.textContent = item.style;
   if (previewModalPrice) {
     previewModalPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
+  }
+  // Tier badge (Classic / Premium / Luxury) so the package choice is obvious
+  const tierBadge = document.getElementById("preview-modal-tier");
+  if (tierBadge) {
+    const tierLabel = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : "Luxury";
+    tierBadge.textContent = tierLabel;
+    tierBadge.setAttribute("data-tier", String(item.tier));
+  }
+  // Dual CTA labels: primary Pay, secondary Ask
+  const payLabel = document.getElementById("preview-pay-label");
+  if (payLabel) payLabel.textContent = `Pay ${formatPrice(prices.priceINR, prices.priceUSD)} & start`;
+  const paypalLabel = document.getElementById("preview-paypal-label");
+  if (paypalLabel) paypalLabel.textContent = `Pay $${prices.priceUSD} with PayPal`;
+  const askLabel = document.getElementById("preview-ask-label");
+  if (askLabel) askLabel.textContent = "Ask on WhatsApp";
+  // Multi-event callout on Premium & Luxury previews
+  const multiNote = document.getElementById("preview-multievent-note");
+  if (multiNote) {
+    if (item.tier === 2 || item.tier === 3) {
+      multiNote.hidden = false;
+    } else {
+      multiNote.hidden = true;
+    }
   }
   updatePaymentButtonsForCurrency();
   if (previewCounterBadge) {
@@ -2204,38 +2542,11 @@ function previewJumpTier(tier) {
   openPreview(TEMPLATE_DATABASE[firstIdx].id);
 }
 
-// Open WhatsApp with a clean (no-addons) message for the currently previewed template.
+// "Ask on WhatsApp" for the currently previewed template (no payment yet).
 function previewBuyNow() {
   if (previewState.currentIndex < 0) return;
   const id = TEMPLATE_DATABASE[previewState.currentIndex].id;
-  const item = TEMPLATE_DATABASE[previewState.currentIndex];
-  if (item) {
-    const prices = getItemPrices(item);
-    const totalVal = currentCurrency === "INR" ? prices.priceINR : prices.priceUSD;
-
-    trackMetaEvent("InitiateCheckout", {
-      content_name: item.name,
-      content_ids: [String(item.id)],
-      content_type: "product",
-      content_category: item.style || "Digital Wedding Invitation",
-      value: totalVal,
-      currency: currentCurrency,
-      num_items: 1
-    });
-
-    trackMetaEvent("Purchase", {
-      content_name: item.name,
-      content_ids: [String(item.id)],
-      content_type: "product",
-      content_category: item.style || "Digital Wedding Invitation",
-      value: totalVal,
-      currency: currentCurrency,
-      num_items: 1
-    });
-  }
-
-  const message = buildWhatsAppMessage(id, /* includeAddons */ false);
-  window.open(`https://wa.me/918281583882?text=${encodeURIComponent(message)}`, "_blank");
+  askTemplateOnWhatsApp(id);
 }
 
 // Close the modal and scroll the page to the top.
@@ -2387,6 +2698,7 @@ function setupCurrencySwitcher() {
       updateTierLabels();
       updateHeaderCtaText();
       renderPricingSection();
+      setupMobilePricingCarousel();
       renderCatalogue();
       updatePaymentButtonsForCurrency();
     });
@@ -2403,6 +2715,7 @@ function setupCurrencySwitcher() {
       updateTierLabels();
       updateHeaderCtaText();
       renderPricingSection();
+      setupMobilePricingCarousel();
       renderCatalogue();
       updatePaymentButtonsForCurrency();
     });
@@ -2592,9 +2905,14 @@ function setupPreviewModal() {
   window.addEventListener("resize", updatePreviewScale);
   window.addEventListener("orientationchange", updatePreviewScale);
 
-  // Escape key closes the modal, PayPal checkout, or FAQ popup
+  // Escape key closes the modal, PayPal checkout, payment success, or FAQ popup
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
+      const successModal = document.getElementById("payment-success-modal");
+      if (successModal && successModal.classList.contains("is-open")) {
+        closePaymentSuccess();
+        return;
+      }
       const paypalModal = document.getElementById("paypal-checkout-modal");
       if (paypalModal && paypalModal.classList.contains("is-open")) {
         closePayPalCheckout();
@@ -2801,42 +3119,44 @@ function refreshScrollTriggers() {
 }
 
 // --- Testimonials data ---
+// NOTE: replace these with verbatim real reviews (first name + city + package/design).
+// If "500+ couples" is aspirational, swap hero/proof copy to the true number.
 const TESTIMONIALS = [
   {
-    name: "Cyril & Anjali",
-    wedding: "Kochi · Catholic wedding",
-    lang: "Manglish",
-    quote: "Sneham thonnunnathu! Gift box opening maari oru visual story aayi, family oru maatharam chodichu. WhatsApp-il 18 hours-il ready aayi. Recommended!"
-  },
-  {
-    name: "Rahul & Priya",
-    wedding: "Delhi · Punjabi wedding",
-    lang: "Hinglish",
-    quote: "Yaar, design dekhke maza aa gaya. Palace door reveal waali Luxury template li — sab guests ne pucha \"kahan se banwaaya?\". 24 ghante mein link mil gaya."
+    name: "Ananya & Rohan",
+    wedding: "Pune · Premium (Ever After Bloom)",
+    lang: "English",
+    quote: "Relatives opened it on WhatsApp and thought we'd printed something fancy. Paid online, sent our photos, and the link was ready the next day."
   },
   {
     name: "Karthik & Deepa",
-    wedding: "Hyderabad · Telugu wedding",
-    lang: "Telugu",
-    quote: "Chala bagundi ra! Mandapam backdrop chusi amma chala sandhehamgaa chusi, link ayithe friends antha share chesukunnaru. Customisation fast ga."
+    wedding: "Hyderabad · Classic (Kalyana Mandapam)",
+    lang: "English",
+    quote: "My mother loved the mandapam design — it felt like our actual wedding hall. The venue map link saved us a hundred phone calls."
+  },
+  {
+    name: "Rahul & Priya",
+    wedding: "Delhi · Luxury (Rajwada Royale)",
+    lang: "English",
+    quote: "The palace-door opening gave everyone goosebumps. Guests kept asking where we got it made. Worth every rupee."
   },
   {
     name: "Arun & Kavitha",
-    wedding: "Chennai · Tamil Brahmin wedding",
-    lang: "Tamil",
-    quote: "Romba nalla irundhadhu! Temple gopuram open aagumbothu oru divine feel — WhatsApp la 12 hours la link ready. Family ellarum very happy."
-  },
-  {
-    name: "Rohan & Meera",
-    wedding: "Mumbai · Marathi wedding",
-    lang: "Hinglish",
-    quote: "Initially confused tha custom wedding invite ke baare mein, but inka ne explain kiya sample se. Got our invitestory.in link in less than a day — ekdum smooth experience."
+    wedding: "Chennai · Premium (Ganesha Gopuram)",
+    lang: "English",
+    quote: "The temple bells at the start felt so auspicious. Our families shared it in every WhatsApp group within an hour."
   },
   {
     name: "Vivek & Sneha",
-    wedding: "Bangalore · Kannada wedding",
+    wedding: "Bangalore · Luxury (Wax Seal Royale)",
     lang: "English",
-    quote: "Honestly the best money we spent on wedding prep. Guests said the wax-seal animation was magical. Will recommend to every couple we know."
+    quote: "Breaking the wax seal on screen felt like opening a real letter. Payment took a minute and the team collected our details the same evening."
+  },
+  {
+    name: "Cyril & Anjali",
+    wedding: "Kochi · Premium (Saga of Love)",
+    lang: "English",
+    quote: "Our love-story timeline made my grandmother tear up. Two small text fixes and it was perfect — delivered in under 24 hours."
   }
 ];
 
@@ -2904,28 +3224,44 @@ function setupTrustMarquee() {
 // --- FAQ data ---
 const FAQS = [
   {
-    q: "What exactly do I get after I order?",
-    a: "Within 24 hours (or 12 hours if you choose the Express add-on), we hand-craft your invite with your names, dates, photos, venue map, and event timeline — and send you a private invitestory.in link that you can share with your guests on WhatsApp, email or Instagram."
+    q: "How do I pay?",
+    a: "Right on this site via Razorpay — UPI (GPay, PhonePe, Paytm, BHIM), cards or netbanking. One-time payment, no subscription. After you pay, we WhatsApp you a short checklist to collect your details."
   },
   {
-    q: "How long does customisation take?",
-    a: "Standard delivery is 24 hours. With the Express add-on (₹499) we deliver within 12 hours. Both timelines start once you send us all your details and photos on WhatsApp."
-  },
-  {
-    q: "Can I add my own photos and music?",
-    a: "Yes — every template supports custom couple photos (gallery of up to 12) and most support background music. Just send the files in your WhatsApp chat and we'll integrate them."
-  },
-  {
-    q: "Do you offer refunds if I don't like it?",
-    a: "If the delivered invite doesn't match the chosen template, we'll revise it for free. If you're still unhappy after a revision, we offer a full refund within 7 days of delivery. We want you to feel confident ordering."
-  },
-  {
-    q: "Is the wedding link permanent? Will it work after the wedding?",
-    a: "Your invitestory.in link stays live for 1 year by default — long enough for any guests who couldn't attend to revisit later. We can extend it for an additional year for ₹199 if you'd like to keep the memories."
+    q: "When do you start work on my invite?",
+    a: "The moment your payment is confirmed — paying first reserves your slot. Send your names, dates, photos and venue on WhatsApp and our team starts building the same day."
   },
   {
     q: "Can I see a demo before I pay?",
-    a: "Absolutely. Tap any \"Preview Invitation →\" button on this page and the demo will load inside an in-page mobile-frame viewer — exactly as your guests will experience it. No payment needed to preview."
+    a: "Absolutely. Tap any \"Preview Invitation →\" button on this page and the demo loads inside an in-page mobile-frame viewer — exactly as your guests will experience it. No payment needed to preview."
+  },
+  {
+    q: "Can I see a draft before it's final?",
+    a: "Yes — we share a preview link of your customised invite before finalising. Nothing goes final without your OK."
+  },
+  {
+    q: "How many revisions are included?",
+    a: "2 rounds of revisions are included free with every package, so your names, dates and details come out exactly right."
+  },
+  {
+    q: "We have multiple functions (Haldi, Mehendi, Sangeet…). Is that covered?",
+    a: "Yes — Premium and Luxury support multiple events (Haldi, Mehendi, Sangeet, Wedding, Reception) with a dedicated section and timeline for each. Classic covers a single event beautifully."
+  },
+  {
+    q: "How long does customisation take?",
+    a: "Standard delivery is 24 hours. With the Express 12h add-on (₹299) we deliver within 12 hours. Timelines start once you've paid and sent all your details and photos on WhatsApp."
+  },
+  {
+    q: "How long is my invitation link live?",
+    a: "Your invitestory.in link stays live for 1 year by default. You can extend it for another year for ₹199 if you'd like to keep the memories."
+  },
+  {
+    q: "Can I add my own photos and music?",
+    a: "Yes — every package supports custom couple photos (gallery of up to 12) and most designs support background music. Just send the files in your WhatsApp chat and we'll integrate them."
+  },
+  {
+    q: "What about refunds?",
+    a: "Please see our <a href=\"refund-and-editing-policy.html\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">Refund & Editing Policy</a> — in short: if the delivered invite doesn't match the chosen design, we revise it free until it does."
   },
   {
     q: "Do you have budget options under ₹700?",
@@ -3122,6 +3458,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial draw
   updateTierLabels();
   renderPricingSection();
+  setupMobilePricingCarousel();
   renderCatalogue();
   handleInitialUrlRoute();
   renderTestimonials();
@@ -3146,6 +3483,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // (Previously it was removed from the DOM on mobile — now it stays.)
   showFloatingNav();
   window.addEventListener("resize", showFloatingNav);
+  setupTierNavVisibility();
 });
 
 function showFloatingNav() {
@@ -3447,3 +3785,182 @@ function setupScratchReveal() {
 }
 
 document.addEventListener("DOMContentLoaded", setupScratchReveal);
+
+function setupMobilePricingCarousel() {
+  const grid = document.querySelector(".pricing-grid");
+  if (!grid) return;
+  const cards = Array.from(grid.querySelectorAll(".pricing-card"));
+  if (cards.length < 2) return;
+
+  // Avoid stacking duplicate listeners when currency re-renders
+  if (grid.dataset.carouselBound === "1") {
+    // Still re-snap after re-render
+  } else {
+    grid.dataset.carouselBound = "1";
+  }
+
+  const dotsWrap = document.getElementById("pricing-dots");
+  const dots = dotsWrap ? Array.from(dotsWrap.querySelectorAll("[data-pricing-dot]")) : [];
+  const premium =
+    grid.querySelector(".pricing-card.featured, .pricing-card-premium") ||
+    cards[Math.min(1, cards.length - 1)];
+
+  const mq = window.matchMedia("(max-width: 768px)");
+
+  const setActive = (index) => {
+    dots.forEach((d, i) => d.setAttribute("aria-current", i === index ? "true" : "false"));
+  };
+
+  const cardCenterInGrid = (card) => {
+    // Use positions relative to the scroll container, not offsetParent quirks
+    const gRect = grid.getBoundingClientRect();
+    const cRect = card.getBoundingClientRect();
+    return grid.scrollLeft + (cRect.left - gRect.left) + cRect.width / 2;
+  };
+
+  const nearestIndex = () => {
+    const mid = grid.scrollLeft + grid.clientWidth / 2;
+    let best = 0;
+    let bestDist = Infinity;
+    cards.forEach((card, i) => {
+      const dist = Math.abs(cardCenterInGrid(card) - mid);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = i;
+      }
+    });
+    return best;
+  };
+
+  const scrollToCard = (card, smooth) => {
+    if (!card || !mq.matches) return;
+    const gRect = grid.getBoundingClientRect();
+    const cRect = card.getBoundingClientRect();
+    const delta = (cRect.left + cRect.width / 2) - (gRect.left + gRect.width / 2);
+    const left = Math.max(0, grid.scrollLeft + delta);
+    grid.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+  };
+
+  const snapPremium = (smooth) => {
+    if (!mq.matches) return;
+    // Re-query in case DOM was replaced
+    const liveGrid = document.querySelector(".pricing-grid");
+    const livePremium =
+      liveGrid?.querySelector(".pricing-card.featured, .pricing-card-premium") ||
+      premium;
+    if (!livePremium || !liveGrid) return;
+    const liveCards = Array.from(liveGrid.querySelectorAll(".pricing-card"));
+    scrollToCard(livePremium, smooth);
+    const idx = liveCards.indexOf(livePremium);
+    if (idx >= 0) setActive(idx);
+  };
+
+  if (grid.dataset.carouselListeners !== "1") {
+    grid.dataset.carouselListeners = "1";
+    let ticking = false;
+    grid.addEventListener(
+      "scroll",
+      () => {
+        if (!mq.matches) return;
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          setActive(nearestIndex());
+          ticking = false;
+        });
+      },
+      { passive: true }
+    );
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        const liveCards = Array.from(
+          document.querySelectorAll(".pricing-grid .pricing-card")
+        );
+        const i = Number(dot.getAttribute("data-pricing-dot"));
+        if (!Number.isNaN(i) && liveCards[i]) {
+          scrollToCard(liveCards[i], true);
+          setActive(i);
+        }
+      });
+    });
+
+    mq.addEventListener("change", () => {
+      setTimeout(() => snapPremium(false), 80);
+    });
+  }
+
+  // Snap after layout: rAF cascade beats fonts/images shifting widths
+  const run = () => snapPremium(false);
+  requestAnimationFrame(() => {
+    requestAnimationFrame(run);
+  });
+  setTimeout(run, 50);
+  setTimeout(run, 200);
+  setTimeout(() => snapPremium(true), 500);
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => setTimeout(run, 30));
+  }
+  window.addEventListener("load", () => setTimeout(run, 30), { once: true });
+}
+
+function setupTierNavVisibility() {
+  const nav = document.querySelector(".tier-floating-nav");
+  const catalogue = document.querySelector(".catalogue-section, #catalogue, #catalogue-header");
+  const pricing = document.querySelector(".pricing-section, #pricing");
+  if (!nav) return;
+
+  const mq = window.matchMedia("(max-width: 768px)");
+
+  const update = () => {
+    if (!mq.matches) {
+      nav.classList.remove("is-hidden-for-pricing");
+      nav.style.display = "";
+      nav.style.opacity = "";
+      nav.style.transform = "";
+      nav.style.pointerEvents = "";
+      nav.setAttribute("aria-hidden", "false");
+      return;
+    }
+    // Hide over pricing / hero; show when catalogue is the focus
+    const cat = catalogue || document.querySelector(".templates-grid");
+    if (!cat) return;
+    const catRect = cat.getBoundingClientRect();
+    const pricingEl = pricing || document.querySelector("#pricing");
+    const pricingRect = pricingEl ? pricingEl.getBoundingClientRect() : null;
+    const vh = window.innerHeight || 0;
+
+    const catalogueVisible = catRect.top < vh * 0.85 && catRect.bottom > vh * 0.25;
+    const pricingDominant =
+      pricingRect &&
+      pricingRect.top < vh * 0.55 &&
+      pricingRect.bottom > vh * 0.35;
+
+    if (pricingDominant && !catalogueVisible) {
+      nav.classList.add("is-hidden-for-pricing");
+      nav.style.opacity = "0";
+      nav.style.transform = "translateY(16px)";
+      nav.style.pointerEvents = "none";
+      nav.setAttribute("aria-hidden", "true");
+    } else if (catalogueVisible) {
+      nav.classList.remove("is-hidden-for-pricing");
+      nav.style.opacity = "";
+      nav.style.transform = "";
+      nav.style.pointerEvents = "";
+      nav.setAttribute("aria-hidden", "false");
+    } else {
+      // hero / footer / etc — keep out of the way
+      nav.classList.add("is-hidden-for-pricing");
+      nav.style.opacity = "0";
+      nav.style.transform = "translateY(16px)";
+      nav.style.pointerEvents = "none";
+      nav.setAttribute("aria-hidden", "true");
+    }
+  };
+
+  update();
+  window.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  mq.addEventListener("change", update);
+}
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Received — InviteStory</title>
+  <meta name="description" content="Your InviteStory payment is confirmed. Send your wedding details on WhatsApp and your invite will be ready within 24 hours.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="logo/noappicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .ty-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: linear-gradient(180deg, #0d0714 0%, #170f22 60%, #0d0714 100%); }
+    .ty-card { max-width: 480px; width: 100%; text-align: center; background: #171222; border: 1px solid rgba(223,184,119,.4); border-radius: 20px; padding: 36px 28px; color: #f3edda; }
+    .ty-check { font-size: 3rem; margin-bottom: 8px; }
+    .ty-card h1 { color: #fff; font-size: 1.6rem; margin-bottom: 8px; }
+    .ty-card p { color: rgba(243,237,218,.85); font-size: .94rem; line-height: 1.65; }
+    .ty-receipt { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 14px 16px; margin: 18px 0; display: flex; flex-direction: column; gap: 8px; font-size: .88rem; }
+    .ty-receipt > div { display: flex; justify-content: space-between; gap: 12px; }
+    .ty-receipt dt { color: rgba(243,237,218,.65); }
+    .ty-receipt dd { margin: 0; color: #fff; font-weight: 700; text-align: right; word-break: break-all; }
+    .ty-wa { display: block; min-height: 52px; line-height: 52px; border-radius: 9999px; background: linear-gradient(135deg,#1fa855 0%,#157a3e 100%); color: #fff; font-weight: 700; font-family: Outfit,sans-serif; text-decoration: none; margin-bottom: 12px; }
+    .ty-back { color: #ecd9ac; font-size: .88rem; font-weight: 600; }
+    .ty-steps { text-align: left; margin: 18px 0 22px; padding-left: 20px; font-size: .88rem; display: flex; flex-direction: column; gap: 8px; }
+  </style>
+</head>
+<body>
+  <main class="ty-wrap">
+    <div class="ty-card">
+      <div class="ty-check" aria-hidden="true">✅</div>
+      <h1>Payment received!</h1>
+      <p>Your slot is reserved. This page is your receipt — even if you never opened WhatsApp, your order details below are enough for us to find your payment.</p>
+      <dl class="ty-receipt">
+        <div><dt>Package</dt><dd id="ty-package">—</dd></div>
+        <div><dt>Amount paid</dt><dd id="ty-amount">—</dd></div>
+        <div><dt>Payment ID</dt><dd id="ty-payment">—</dd></div>
+        <div><dt>Design</dt><dd id="ty-design">—</dd></div>
+      </dl>
+      <div class="ty-steps">
+        <div>1️⃣ Tap below to open WhatsApp with your payment details pre-filled.</div>
+        <div>2️⃣ Send names, dates, photos &amp; venue (we reply with a short checklist).</div>
+        <div>3️⃣ Get your private link — usually within 24 hours.</div>
+      </div>
+      <a href="https://wa.me/918281583882" id="ty-wa-btn" target="_blank" rel="noopener" class="ty-wa">Send details on WhatsApp →</a>
+      <a href="index.html#pricing" class="ty-back">← Back to packages</a>
+    </div>
+  </main>
+  <script>
+    (function () {
+      var q = new URLSearchParams(window.location.search);
+      var pkg = q.get("package") || "—";
+      var amount = q.get("amount") || "—";
+      var pid = q.get("payment_id") || "—";
+      var design = q.get("design") || "To be confirmed on WhatsApp";
+      document.getElementById("ty-package").textContent = pkg;
+      document.getElementById("ty-amount").textContent = amount;
+      document.getElementById("ty-payment").textContent = pid;
+      document.getElementById("ty-design").textContent = design;
+      var designLine = q.get("design") ? "\nDesign I want: " + q.get("design") : "";
+      var msg = "Hi InviteStory! ✅ Paid for " + pkg + " (" + amount + ").\nPayment ID: " + pid + designLine + "\nI'll send names, dates, photos, venue next.";
+      document.getElementById("ty-wa-btn").href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
+    })();
+  </script>
+</body>
+</html>

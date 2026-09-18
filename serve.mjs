@@ -175,6 +175,29 @@ createServer(async (req, res) => {
       return;
     }
 
+    // Friendly routes: /designs → catalogue (every Preview opens a working
+    // live demo via the in-page viewer + ?design= deep links), /refunds →
+    // the refund & editing policy page.
+    if (pathname === "/designs" || pathname === "/designs/") {
+      const indexContent = await readFile(join(root, "index.html"));
+      res.writeHead(200, {
+        "Content-Type": "text/html; charset=utf-8",
+        "Cache-Control": "no-cache",
+      });
+      if (req.method === "HEAD") {
+        res.end();
+      } else {
+        res.end(indexContent);
+      }
+      return;
+    }
+
+    if (pathname === "/refunds" || pathname === "/refunds/") {
+      res.writeHead(308, { Location: "/refund-and-editing-policy.html" });
+      res.end();
+      return;
+    }
+
     let filePath = normalize(join(root, pathname));
 
     if (!filePath.startsWith(root)) {

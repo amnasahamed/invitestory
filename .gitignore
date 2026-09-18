@@ -6,5 +6,7 @@ node_modules/
 *.bak
 .agents/
 skills-lock.json
+preview-*.png
+
 
 
