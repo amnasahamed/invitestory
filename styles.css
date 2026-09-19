@@ -1853,7 +1853,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   box-sizing: border-box;
   /* Light plate — overlay already darkens the CTA zone; avoid a second heavy scrim */
   padding: 10px 8px 8px;
@@ -1871,7 +1871,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
 .template-card-header {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .template-card-title {
@@ -1949,7 +1949,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   font-weight: 400;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -7058,6 +7058,10 @@ body.preview-modal-open {
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
+.templates-grid:not(.view-list) .template-card-tier-label {
+  color: rgba(255, 248, 239, 0.82);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+}
 .template-card-price-wrap {
   display: flex;
   align-items: center;
@@ -7128,13 +7132,13 @@ body.preview-modal-open {
 .template-card-info-side {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .template-card-action-side {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .templates-grid.view-list {
