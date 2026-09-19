@@ -921,7 +921,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-1" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-1" onclick="payRazorpayForPackage(1)"><span data-pay-label>Pay ${formatPrice(p1.inr, p1.usd)} &amp; start</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-1" onclick="payRazorpayForPackage(1)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(1)">${askIcon}<span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
         </div>
@@ -943,7 +943,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-2" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="payRazorpayForPackage(2)"><span data-pay-label>Pay ${formatPrice(p2.inr, p2.usd)} &amp; start</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="payRazorpayForPackage(2)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(2)">${askIcon}<span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
         </div>
@@ -964,7 +964,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours (12h express available)</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-3" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="payRazorpayForPackage(3)"><span data-pay-label>Pay ${formatPrice(p3.inr, p3.usd)} &amp; start</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="payRazorpayForPackage(3)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)">${askIcon}<span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
         </div>
@@ -1107,8 +1107,8 @@ function renderCatalogue() {
           </div>
 
           <div class="template-card-actions">
-            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="payRazorpayForTemplate(${item.id})" aria-label="Pay ${priceText} and start ${item.name}">
-              <span>Pay ${priceText} &amp; start</span>
+            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="payRazorpayForTemplate(${item.id})" aria-label="Choose ${item.name} design">
+              <span>Choose this design</span>
             </button>
             <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
               <span>Preview <span class="btn-text-invitation">Invitation</span> →</span>
@@ -1599,7 +1599,7 @@ function updatePackagePayLabels() {
     const btn = document.getElementById(`pkg-pay-btn-${tier}`);
     if (btn) {
       const label = btn.querySelector("[data-pay-label]");
-      if (label) label.textContent = `Pay ${packageAmountText(tier)} & start`;
+      if (label) label.textContent = "Choose this design";
     }
   });
 }
@@ -2090,7 +2090,7 @@ function openPreview(id, updateUrl = true) {
   }
   // Dual CTA labels: primary Pay, secondary Ask
   const payLabel = document.getElementById("preview-pay-label");
-  if (payLabel) payLabel.textContent = `Pay ${formatPrice(prices.priceINR, prices.priceUSD)} & start`;
+  if (payLabel) payLabel.textContent = "Choose this design";
   const paypalLabel = document.getElementById("preview-paypal-label");
   if (paypalLabel) paypalLabel.textContent = `Pay $${prices.priceUSD} with PayPal`;
   const askLabel = document.getElementById("preview-ask-label");
