@@ -33,7 +33,9 @@ export async function GET(request) {
     status: 200,
     headers: {
       "Content-Type": "text/html; charset=utf-8",
-      "Cache-Control": "public, max-age=300, stale-while-revalidate=86400"
+      "Cache-Control": "public, max-age=0, must-revalidate",
+      "CDN-Cache-Control": "max-age=0, no-cache",
+      "Vary": "Accept-Encoding, Query"
     }
   });
 }
@@ -53,6 +55,8 @@ export default async function handler(req, res) {
   }
 
   res.setHeader("Content-Type", "text/html; charset=utf-8");
-  res.setHeader("Cache-Control", "public, max-age=300, stale-while-revalidate=86400");
+  res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+  res.setHeader("CDN-Cache-Control", "max-age=0, no-cache");
+  res.setHeader("Vary", "Accept-Encoding, Query");
   res.status(200).send(html);
 }

@@ -69,7 +69,9 @@ export default async function middleware(request) {
       status: 200,
       headers: {
         "content-type": "text/html; charset=utf-8",
-        "cache-control": "public, max-age=300, stale-while-revalidate=86400"
+        "cache-control": "public, max-age=0, must-revalidate",
+        "cdn-cache-control": "max-age=0, no-cache",
+        "vary": "Accept-Encoding, Query"
       }
     });
   } catch (err) {
