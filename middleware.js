@@ -13,7 +13,7 @@ function injectOpenGraphTags(html, meta) {
   modified = modified.replace(/<meta property="og:description" content="[^"]*">/i, `<meta property="og:description" content="${meta.desc}">`);
   modified = modified.replace(/<meta name="twitter:description" content="[^"]*">/i, `<meta name="twitter:description" content="${meta.desc}">`);
   
-  // Replace og:image & twitter:image with the specific template's preview card image
+  // Replace og:image & twitter:image
   modified = modified.replace(/<meta property="og:image" content="[^"]*">/i, `<meta property="og:image" content="${meta.imageUrl}">`);
   modified = modified.replace(/<meta name="twitter:image" content="[^"]*">/i, `<meta name="twitter:image" content="${meta.imageUrl}">`);
   
@@ -30,46 +30,50 @@ function injectOpenGraphTags(html, meta) {
   return modified;
 }
 
-export default {
-  async fetch(request, env) {
-    try {
-      const url = new URL(request.url);
-      const designKey = (url.searchParams.get("design") || url.searchParams.get("preview") || url.searchParams.get("id") || "").toLowerCase().trim();
-
-      // Fetch from ASSETS if available, otherwise fetch from origin
-      let response;
-      if (env && env.ASSETS && typeof env.ASSETS.fetch === "function") {
-        response = await env.ASSETS.fetch(request);
-      } else {
-        response = await fetch(request);
-      }
-
-      // If not HTML or no design key, return original response
-      const contentType = response.headers.get("content-type") || "";
-      if (!contentType.includes("text/html") || !designKey) {
-        return response;
-      }
-
-      const meta = designMeta[designKey];
-      if (!meta) {
-        return response;
-      }
-
-      const text = await response.text();
-      const modifiedHtml = injectOpenGraphTags(text, meta);
-
-      const headers = new Headers(response.headers);
-      headers.set("content-type", "text/html; charset=utf-8");
-      headers.set("cache-control", "public, max-age=300, stale-while-revalidate=86400");
-
-      return new Response(modifiedHtml, {
-        status: response.status,
-        statusText: response.statusText,
-        headers
-      });
-    } catch (err) {
-      // Safe fallback to default fetch if anything fails
-      return fetch(request);
-    }
-  }
+export const config = {
+  matcher: ["/", "/index.html", "/designs"]
 };
+
+export default async function middleware(request) {
+  const url = new URL(request.url);
+  const designKey = (url.searchParams.get("design") || url.searchParams.get("preview") || url.searchParams.get("id") || "").toLowerCase().trim();
+
+  // If no design query or design not in meta, pass through to static index.html
+  if (!designKey || !designMeta[designKey]) {
+    return;
+  }
+
+  // Prevent infinite loops if request was already from middleware
+  if (request.headers.get("x-from-og-middleware") === "1") {
+    return;
+  }
+
+  try {
+    // Fetch index.html
+    const originUrl = new URL("/index.html", request.url);
+    const originRes = await fetch(originUrl, {
+      headers: {
+        "x-from-og-middleware": "1"
+      }
+    });
+
+    if (!originRes.ok) {
+      return;
+    }
+
+    const html = await originRes.text();
+    const meta = designMeta[designKey];
+    const modifiedHtml = injectOpenGraphTags(html, meta);
+
+    return new Response(modifiedHtml, {
+      status: 200,
+      headers: {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=300, stale-while-revalidate=86400"
+      }
+    });
+  } catch (err) {
+    // Fall back to normal static handling
+    return;
+  }
+}

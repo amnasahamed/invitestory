@@ -10,40 +10,44 @@
       "has": [
         {
           "type": "query",
-          "key": "design"
+          "key": "design",
+          "value": "(?<design>.*)"
         }
       ],
-      "destination": "/api/og"
+      "destination": "/api/og?design=:design"
     },
     {
       "source": "/",
       "has": [
         {
           "type": "query",
-          "key": "preview"
+          "key": "preview",
+          "value": "(?<preview>.*)"
         }
       ],
-      "destination": "/api/og"
+      "destination": "/api/og?preview=:preview"
     },
     {
       "source": "/",
       "has": [
         {
           "type": "query",
-          "key": "id"
+          "key": "id",
+          "value": "(?<id>.*)"
         }
       ],
-      "destination": "/api/og"
+      "destination": "/api/og?id=:id"
     },
     {
       "source": "/designs",
       "has": [
         {
           "type": "query",
-          "key": "design"
+          "key": "design",
+          "value": "(?<design>.*)"
         }
       ],
-      "destination": "/api/og"
+      "destination": "/api/og?design=:design"
     },
     {
       "source": "/designs",
