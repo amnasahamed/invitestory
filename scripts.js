@@ -1380,7 +1380,16 @@ function payRazorpayForTemplate(id) {
     modal: {
       ondismiss: function () {
         if (!window.__lastPaymentOk) {
-          showToast("Payment didn't go through — try again or WhatsApp us.");
+          const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for "${item.name}" didn't go through on the website. Can you please assist me?`)}`;
+          showToast({
+            title: "Payment Incomplete",
+            message: "Payment was not completed. You can try again or message our team directly on WhatsApp for help.",
+            type: "error",
+            action: {
+              label: "Chat on WhatsApp 💬",
+              url: waUrl
+            }
+          });
         }
         window.__lastPaymentOk = false;
       }
@@ -1410,11 +1419,24 @@ function payRazorpayForTemplate(id) {
   if (typeof Razorpay !== "undefined") {
     const rzp = new Razorpay(options);
     rzp.on("payment.failed", function () {
-      showToast("Payment didn't go through — try again or WhatsApp us.");
+      const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for "${item.name}" failed. Can you please assist me?`)}`;
+      showToast({
+        title: "Payment Failed",
+        message: "Payment didn't go through — please try again or reach out on WhatsApp.",
+        type: "error",
+        action: {
+          label: "Chat on WhatsApp 💬",
+          url: waUrl
+        }
+      });
     });
     rzp.open();
   } else {
-    showToast("Payment is loading — please try again in a moment.");
+    showToast({
+      title: "Loading Checkout",
+      message: "Payment is loading — please try again in a moment.",
+      type: "info"
+    });
   }
 }
 
@@ -1500,7 +1522,16 @@ function payRazorpayForPackage(tier, designName) {
       // If they close without paying, send them back to pricing with help.
       ondismiss: function () {
         if (!window.__lastPaymentOk) {
-          showToast("Payment didn't go through — try again or WhatsApp us.");
+          const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for the ${name} package didn't go through on the website. Can you please assist me?`)}`;
+          showToast({
+            title: "Payment Incomplete",
+            message: "Payment was not completed. You can try again or message our team directly on WhatsApp for help.",
+            type: "error",
+            action: {
+              label: "Chat on WhatsApp 💬",
+              url: waUrl
+            }
+          });
         }
         window.__lastPaymentOk = false;
       }
@@ -1528,11 +1559,24 @@ function payRazorpayForPackage(tier, designName) {
   if (typeof Razorpay !== "undefined") {
     const rzp = new Razorpay(options);
     rzp.on("payment.failed", function () {
-      showToast("Payment didn't go through — try again or WhatsApp us.");
+      const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for the ${name} package failed. Can you please assist me?`)}`;
+      showToast({
+        title: "Payment Failed",
+        message: "Payment didn't go through — please try again or reach out on WhatsApp.",
+        type: "error",
+        action: {
+          label: "Chat on WhatsApp 💬",
+          url: waUrl
+        }
+      });
     });
     rzp.open();
   } else {
-    showToast("Payment is loading — please try again in a moment.");
+    showToast({
+      title: "Loading Checkout",
+      message: "Payment is loading — please try again in a moment.",
+      type: "info"
+    });
   }
 }
 
@@ -1866,13 +1910,66 @@ function getDesignShareContent(item) {
   const shareUrl = getDesignShareUrl(item);
   
   const title = `InviteStory – ${item.name} Wedding Invitation`;
-  const text = `Look at this "${item.name}" interactive wedding invitation ✨\n\nIt has custom music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP.\n\nCheck out the live preview here and tell me what you think:\n${shareUrl}`;
+  const shareIntro = `Look at this "${item.name}" interactive wedding invitation ✨\n\nIt has custom music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP.\n\nCheck out the live preview here and tell me what you think:`;
+  const fullText = `${shareIntro}\n${shareUrl}`;
 
   return {
     title,
-    text,
+    text: fullText,          // Full text with URL for clipboard copying
+    shareText: shareIntro,   // Intro text without URL for navigator.share (avoids duplicate URL)
     url: shareUrl
   };
+}
+
+function updateMetaTagsForDesign(item) {
+  if (!item) return;
+  const shareUrl = getDesignShareUrl(item);
+  const imgUrl = item.image.startsWith("http") ? item.image : `https://www.invitestory.in/${item.image}`;
+  const title = `InviteStory – ${item.name} Wedding Invitation`;
+  const desc = `${item.name} interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP.`;
+
+  const setMeta = (attr, name, content) => {
+    let el = document.querySelector(`meta[${attr}="${name}"]`);
+    if (!el) {
+      el = document.createElement("meta");
+      el.setAttribute(attr, name);
+      document.head.appendChild(el);
+    }
+    el.setAttribute("content", content);
+  };
+
+  setMeta("property", "og:title", title);
+  setMeta("property", "og:description", desc);
+  setMeta("property", "og:image", imgUrl);
+  setMeta("property", "og:url", shareUrl);
+  setMeta("property", "og:image:alt", title);
+
+  setMeta("name", "twitter:title", title);
+  setMeta("name", "twitter:description", desc);
+  setMeta("name", "twitter:image", imgUrl);
+  setMeta("name", "twitter:url", shareUrl);
+
+  document.title = `${item.name} | Interactive Digital Wedding Invitation – InviteStory`;
+}
+
+function restoreDefaultMetaTags() {
+  const setMeta = (attr, name, content) => {
+    let el = document.querySelector(`meta[${attr}="${name}"]`);
+    if (el) el.setAttribute("content", content);
+  };
+
+  setMeta("property", "og:title", "InviteStory – Digital Wedding Card Templates & Online Invitations");
+  setMeta("property", "og:description", "Choose from 30+ interactive digital wedding invitation templates. Live previews, location maps & express 24h WhatsApp customization.");
+  setMeta("property", "og:image", "https://invitestory.in/assets/og-image.jpg");
+  setMeta("property", "og:url", "https://invitestory.in/");
+  setMeta("property", "og:image:alt", "InviteStory - Digital Wedding Card Templates & Online Invitations");
+
+  setMeta("name", "twitter:title", "InviteStory – Digital Wedding Card Templates & Online Invitations");
+  setMeta("name", "twitter:description", "Interactive digital wedding cards with venue maps & ambient music. Delivered in 24 hours.");
+  setMeta("name", "twitter:image", "https://invitestory.in/assets/og-image.jpg");
+  setMeta("name", "twitter:url", "https://invitestory.in/");
+
+  document.title = "InviteStory – Digital Wedding Card Templates & Online Invitations";
 }
 
 function copyDesignShareLink(templateId, event) {
@@ -1887,7 +1984,11 @@ function copyDesignShareLink(templateId, event) {
   const textToCopy = content.text;
 
   const onCopied = () => {
-    showToast(`✨ Link & invitation details copied! Ready to share.`);
+    showToast({
+      title: "Link Copied! ✨",
+      message: `Link & invitation details for "${item.name}" copied to clipboard. Ready to share!`,
+      type: "success"
+    });
   };
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -1918,10 +2019,19 @@ function shareCurrentPreview(event) {
 
   const content = getDesignShareContent(item);
 
+  trackMetaEvent("ShareContent", {
+    content_name: item.name,
+    content_id: String(item.id),
+    content_type: "product"
+  });
+
   if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+    // When using Web Share API, OS share targets (WhatsApp, iOS/Android share sheets)
+    // automatically append the `url` property to `text`.
+    // Using shareText (without URL) prevents the link from appearing twice.
     navigator.share({
       title: content.title,
-      text: content.text,
+      text: content.shareText,
       url: content.url
     }).catch((err) => {
       if (err && err.name !== "AbortError") {
@@ -1933,25 +2043,192 @@ function shareCurrentPreview(event) {
   }
 }
 
-function showToast(message) {
+function hideToast() {
+  const toast = document.getElementById("toast-notification");
+  if (!toast) return;
+  toast.classList.remove("is-visible");
+  clearTimeout(window.__toastTimeout);
+  const fill = document.getElementById("toast-progress-fill");
+  if (fill) {
+    fill.style.transition = "none";
+    fill.style.transform = "scaleX(1)";
+  }
+}
+
+function showToast(messageOrOptions, explicitType, options = {}) {
+  let config = {};
+
+  if (typeof messageOrOptions === "object" && messageOrOptions !== null) {
+    config = { ...messageOrOptions };
+  } else {
+    config = {
+      message: String(messageOrOptions || ""),
+      type: explicitType,
+      ...options
+    };
+  }
+
+  const rawMsg = (config.message || "").trim();
+
+  // Smart detection of type and defaults if not explicitly provided
+  let type = config.type;
+  if (!type) {
+    if (/payment.*(didn't|fail|cancel|error)|failed/i.test(rawMsg)) {
+      type = "error";
+    } else if (/loading|please wait/i.test(rawMsg)) {
+      type = "info";
+    } else if (/copi(ed|y)|share|link/i.test(rawMsg)) {
+      type = "success";
+    } else {
+      type = "info";
+    }
+  }
+
+  // Clean raw message of leading emojis
+  let cleanMsg = rawMsg.replace(/^[✨⚠️❌ℹ️✅]+\s*/, "");
+
+  let title = config.title;
+  let action = config.action;
+  let duration = config.duration;
+
+  if (type === "error") {
+    if (!title) title = "Payment Incomplete";
+    if (!duration) duration = 7000; // Allow enough time for users to tap WhatsApp
+    if (!action && /payment/i.test(cleanMsg)) {
+      const waText = encodeURIComponent("Hi InviteStory! My payment didn't go through on the website. Can you please help me complete my order?");
+      action = {
+        label: "Chat on WhatsApp 💬",
+        url: `https://wa.me/918281583882?text=${waText}`,
+        target: "_blank"
+      };
+    }
+  } else if (type === "success") {
+    if (!title) title = "Link Copied!";
+    if (!duration) duration = 3800;
+  } else {
+    // info
+    if (!title) {
+      if (/loading/i.test(cleanMsg)) {
+        title = "Loading Checkout";
+      } else {
+        title = "Notice";
+      }
+    }
+    if (!duration) duration = 4000;
+  }
+
   let toast = document.getElementById("toast-notification");
-  let msgEl = document.getElementById("toast-message");
   if (!toast) {
     toast = document.createElement("div");
     toast.id = "toast-notification";
-    toast.className = "toast-notification";
+    toast.className = `toast-notification toast-${type}`;
     toast.setAttribute("role", "status");
     toast.setAttribute("aria-live", "polite");
-    toast.innerHTML = `<span class="toast-icon">✨</span><span id="toast-message" class="toast-message"></span>`;
+    toast.innerHTML = `
+      <div class="toast-badge" id="toast-badge"><span class="toast-icon" id="toast-icon"></span></div>
+      <div class="toast-content">
+        <div id="toast-title" class="toast-title"></div>
+        <div id="toast-message" class="toast-message"></div>
+        <div id="toast-action-container" class="toast-action-container" style="display:none;"></div>
+      </div>
+      <button type="button" class="toast-close-btn" id="toast-close-btn" aria-label="Dismiss notification" onclick="hideToast()">&times;</button>
+      <div class="toast-progress-track">
+        <div id="toast-progress-fill" class="toast-progress-fill"></div>
+      </div>
+    `;
     document.body.appendChild(toast);
-    msgEl = document.getElementById("toast-message");
   }
-  if (msgEl) msgEl.textContent = message;
+
+  // Set type class
+  toast.className = `toast-notification toast-${type}`;
+
+  // Set icon
+  const iconEl = document.getElementById("toast-icon");
+  if (iconEl) {
+    if (type === "success") {
+      iconEl.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+    } else if (type === "error") {
+      iconEl.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>`;
+    } else {
+      if (/loading/i.test(cleanMsg)) {
+        iconEl.innerHTML = `<svg class="toast-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10"></path></svg>`;
+      } else {
+        iconEl.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="8"></line><line x1="12" y1="12" x2="12" y2="16"></line></svg>`;
+      }
+    }
+  }
+
+  // Set Title & Message
+  const titleEl = document.getElementById("toast-title");
+  const msgEl = document.getElementById("toast-message");
+  if (titleEl) titleEl.textContent = title;
+  if (msgEl) msgEl.textContent = cleanMsg;
+
+  // Set Action (e.g. WhatsApp button)
+  const actionContainer = document.getElementById("toast-action-container");
+  if (actionContainer) {
+    actionContainer.innerHTML = "";
+    if (action && action.label) {
+      actionContainer.style.display = "block";
+      const btn = document.createElement("a");
+      btn.className = "toast-action-btn";
+      btn.textContent = action.label;
+      if (action.url) {
+        btn.href = action.url;
+        btn.target = action.target || "_blank";
+        btn.rel = "noopener";
+      }
+      if (typeof action.onClick === "function") {
+        btn.onclick = (e) => {
+          action.onClick(e);
+          hideToast();
+        };
+      }
+      actionContainer.appendChild(btn);
+    } else {
+      actionContainer.style.display = "none";
+    }
+  }
+
+  // Reset Progress Bar
+  const progressFill = document.getElementById("toast-progress-fill");
+  if (progressFill) {
+    progressFill.style.transition = "none";
+    progressFill.style.transform = "scaleX(1)";
+  }
+
+  // Display Toast
   toast.classList.add("is-visible");
+
+  // Animate Progress Bar
+  if (progressFill) {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        progressFill.style.transition = `transform ${duration}ms linear`;
+        progressFill.style.transform = "scaleX(0)";
+      });
+    });
+  }
+
+  // Hover handlers to pause auto-dismiss
+  if (!toast.__hasHover) {
+    toast.__hasHover = true;
+    toast.addEventListener("mouseenter", () => {
+      clearTimeout(window.__toastTimeout);
+    });
+    toast.addEventListener("mouseleave", () => {
+      clearTimeout(window.__toastTimeout);
+      window.__toastTimeout = setTimeout(() => {
+        hideToast();
+      }, 2500);
+    });
+  }
+
+  // Handle Timeout
   clearTimeout(window.__toastTimeout);
   window.__toastTimeout = setTimeout(() => {
-    toast.classList.remove("is-visible");
-  }, 3400);
+    hideToast();
+  }, duration);
 }
 
 function fallbackCopyText(text) {
@@ -2064,6 +2341,9 @@ function openPreview(id, updateUrl = true) {
     url.searchParams.delete("id");
     window.history.replaceState({ modalOpen: true, templateId: item.id }, "", url.toString());
   }
+
+  // Update Open Graph and Twitter card meta tags for this specific preview
+  updateMetaTagsForDesign(item);
 
   const prices = getItemPrices(item);
   trackMetaEvent("ViewContent", {
@@ -2196,6 +2476,9 @@ function closePreview(updateUrl = true) {
     url.searchParams.delete("id");
     window.history.replaceState({ modalOpen: false }, "", url.toString());
   }
+
+  // Restore default Open Graph tags
+  restoreDefaultMetaTags();
 
   previewModal.classList.remove("is-open");
   previewModal.setAttribute("aria-hidden", "true");

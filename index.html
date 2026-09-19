@@ -969,10 +969,20 @@
     </div>
   </div>
 
-  <!-- Toast Notification for Link Sharing -->
-  <div id="toast-notification" class="toast-notification" role="status" aria-live="polite">
-    <span class="toast-icon">✨</span>
-    <span id="toast-message" class="toast-message">Link copied to clipboard!</span>
+  <!-- Toast Notification for Link Sharing & System Alerts -->
+  <div id="toast-notification" class="toast-notification toast-success" role="status" aria-live="polite">
+    <div class="toast-badge" id="toast-badge">
+      <span class="toast-icon" id="toast-icon"></span>
+    </div>
+    <div class="toast-content">
+      <div id="toast-title" class="toast-title">Link Copied!</div>
+      <div id="toast-message" class="toast-message">Link copied to clipboard!</div>
+      <div id="toast-action-container" class="toast-action-container" style="display:none;"></div>
+    </div>
+    <button type="button" class="toast-close-btn" id="toast-close-btn" aria-label="Dismiss notification" onclick="hideToast()">&times;</button>
+    <div class="toast-progress-track">
+      <div id="toast-progress-fill" class="toast-progress-fill"></div>
+    </div>
   </div>
 
 

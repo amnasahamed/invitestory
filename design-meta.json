@@ -1,0 +1,622 @@
+{
+  "1": {
+    "id": 1,
+    "name": "Marigold Bhavan",
+    "slug": "marigold-bhavan",
+    "image": "assets/preview/1.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/1.png",
+    "title": "InviteStory – Marigold Bhavan Wedding Invitation",
+    "desc": "Marigold Bhavan interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=marigold-bhavan"
+  },
+  "3": {
+    "id": 3,
+    "name": "Toran Telugu",
+    "slug": "toran-telugu",
+    "image": "assets/preview/2.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/2.png",
+    "title": "InviteStory – Toran Telugu Wedding Invitation",
+    "desc": "Toran Telugu interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=toran-telugu"
+  },
+  "5": {
+    "id": 5,
+    "name": "Shubha Vivaham",
+    "slug": "shubha-vivaham",
+    "image": "assets/preview/3.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/3.png",
+    "title": "InviteStory – Shubha Vivaham Wedding Invitation",
+    "desc": "Shubha Vivaham interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=shubha-vivaham"
+  },
+  "6": {
+    "id": 6,
+    "name": "Kalyana Mandapam",
+    "slug": "kalyana-mandapam",
+    "image": "assets/preview/4.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/4.png",
+    "title": "InviteStory – Kalyana Mandapam Wedding Invitation",
+    "desc": "Kalyana Mandapam interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=kalyana-mandapam"
+  },
+  "7": {
+    "id": 7,
+    "name": "Sage Parchment",
+    "slug": "sage-parchment",
+    "image": "assets/preview/5.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/5.png",
+    "title": "InviteStory – Sage Parchment Wedding Invitation",
+    "desc": "Sage Parchment interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=sage-parchment"
+  },
+  "8": {
+    "id": 8,
+    "name": "Emerald Nikah",
+    "slug": "emerald-nikah",
+    "image": "assets/preview/6.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/6.png",
+    "title": "InviteStory – Emerald Nikah Wedding Invitation",
+    "desc": "Emerald Nikah interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=emerald-nikah"
+  },
+  "9": {
+    "id": 9,
+    "name": "Noor-e-Zahra",
+    "slug": "noor-e-zahra",
+    "image": "assets/preview/7.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/7.png",
+    "title": "InviteStory – Noor-e-Zahra Wedding Invitation",
+    "desc": "Noor-e-Zahra interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=noor-e-zahra"
+  },
+  "10": {
+    "id": 10,
+    "name": "Royal Reception",
+    "slug": "royal-reception",
+    "image": "assets/preview/8.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/8.png",
+    "title": "InviteStory – Royal Reception Wedding Invitation",
+    "desc": "Royal Reception interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=royal-reception"
+  },
+  "11": {
+    "id": 11,
+    "name": "Kerala Sands",
+    "slug": "kerala-sands",
+    "image": "assets/preview/9.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/9.png",
+    "title": "InviteStory – Kerala Sands Wedding Invitation",
+    "desc": "Kerala Sands interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=kerala-sands"
+  },
+  "12": {
+    "id": 12,
+    "name": "Meadow Nikah",
+    "slug": "meadow-nikah",
+    "image": "assets/preview/10.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/10.png",
+    "title": "InviteStory – Meadow Nikah Wedding Invitation",
+    "desc": "Meadow Nikah interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=meadow-nikah"
+  },
+  "13": {
+    "id": 13,
+    "name": "Grand Line Voyage",
+    "slug": "grand-line-voyage",
+    "image": "assets/preview/11.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/11.png",
+    "title": "InviteStory – Grand Line Voyage Wedding Invitation",
+    "desc": "Grand Line Voyage interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=grand-line-voyage"
+  },
+  "14": {
+    "id": 14,
+    "name": "Ghibli Selfie",
+    "slug": "ghibli-selfie",
+    "image": "assets/preview/12.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/12.png",
+    "title": "InviteStory – Ghibli Selfie Wedding Invitation",
+    "desc": "Ghibli Selfie interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ghibli-selfie"
+  },
+  "15": {
+    "id": 15,
+    "name": "Ghibli Portrait",
+    "slug": "ghibli-portrait",
+    "image": "assets/preview/13.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/13.png",
+    "title": "InviteStory – Ghibli Portrait Wedding Invitation",
+    "desc": "Ghibli Portrait interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ghibli-portrait"
+  },
+  "16": {
+    "id": 16,
+    "name": "Lake Pichola Royal",
+    "slug": "lake-pichola-royal",
+    "image": "assets/preview/14.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/14.png",
+    "title": "InviteStory – Lake Pichola Royal Wedding Invitation",
+    "desc": "Lake Pichola Royal interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lake-pichola-royal"
+  },
+  "17": {
+    "id": 17,
+    "name": "Ivory Waltz",
+    "slug": "ivory-waltz",
+    "image": "assets/preview/15.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/15.png",
+    "title": "InviteStory – Ivory Waltz Wedding Invitation",
+    "desc": "Ivory Waltz interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ivory-waltz"
+  },
+  "18": {
+    "id": 18,
+    "name": "Ever After Bloom",
+    "slug": "ever-after-bloom",
+    "image": "assets/preview/16.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/16.png",
+    "title": "InviteStory – Ever After Bloom Wedding Invitation",
+    "desc": "Ever After Bloom interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ever-after-bloom"
+  },
+  "19": {
+    "id": 19,
+    "name": "Saga of Love",
+    "slug": "saga-of-love",
+    "image": "assets/preview/17.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/17.png",
+    "title": "InviteStory – Saga of Love Wedding Invitation",
+    "desc": "Saga of Love interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=saga-of-love"
+  },
+  "21": {
+    "id": 21,
+    "name": "Rajwada Royale – Alt",
+    "slug": "rajwada-royale-alt",
+    "image": "assets/preview/18.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/18.png",
+    "title": "InviteStory – Rajwada Royale – Alt Wedding Invitation",
+    "desc": "Rajwada Royale – Alt interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=rajwada-royale-alt"
+  },
+  "22": {
+    "id": 22,
+    "name": "Rajmahal Palace",
+    "slug": "rajmahal-palace",
+    "image": "assets/preview/19.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/19.png",
+    "title": "InviteStory – Rajmahal Palace Wedding Invitation",
+    "desc": "Rajmahal Palace interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=rajmahal-palace"
+  },
+  "23": {
+    "id": 23,
+    "name": "Midnight Stargaze",
+    "slug": "midnight-stargaze",
+    "image": "assets/preview/20.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/20.png",
+    "title": "InviteStory – Midnight Stargaze Wedding Invitation",
+    "desc": "Midnight Stargaze interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=midnight-stargaze"
+  },
+  "24": {
+    "id": 24,
+    "name": "Petal Path Palace",
+    "slug": "petal-path-palace",
+    "image": "assets/preview/21.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/21.png",
+    "title": "InviteStory – Petal Path Palace Wedding Invitation",
+    "desc": "Petal Path Palace interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=petal-path-palace"
+  },
+  "25": {
+    "id": 25,
+    "name": "Lakeview Lanterns",
+    "slug": "lakeview-lanterns",
+    "image": "assets/preview/22.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/22.png",
+    "title": "InviteStory – Lakeview Lanterns Wedding Invitation",
+    "desc": "Lakeview Lanterns interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lakeview-lanterns"
+  },
+  "26": {
+    "id": 26,
+    "name": "Moonlit Lotus Barge",
+    "slug": "moonlit-lotus-barge",
+    "image": "assets/preview/23.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/23.png",
+    "title": "InviteStory – Moonlit Lotus Barge Wedding Invitation",
+    "desc": "Moonlit Lotus Barge interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=moonlit-lotus-barge"
+  },
+  "27": {
+    "id": 27,
+    "name": "Ganesha Gopuram",
+    "slug": "ganesha-gopuram",
+    "image": "assets/preview/24.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/24.png",
+    "title": "InviteStory – Ganesha Gopuram Wedding Invitation",
+    "desc": "Ganesha Gopuram interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ganesha-gopuram"
+  },
+  "28": {
+    "id": 28,
+    "name": "Wax Seal Royale",
+    "slug": "wax-seal-royale",
+    "image": "assets/preview/25.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/25.png",
+    "title": "InviteStory – Wax Seal Royale Wedding Invitation",
+    "desc": "Wax Seal Royale interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=wax-seal-royale"
+  },
+  "29": {
+    "id": 29,
+    "name": "Seashell Vows",
+    "slug": "seashell-vows",
+    "image": "assets/preview/29.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/29.png",
+    "title": "InviteStory – Seashell Vows Wedding Invitation",
+    "desc": "Seashell Vows interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=seashell-vows"
+  },
+  "30": {
+    "id": 30,
+    "name": "Lantern Madurai",
+    "slug": "lantern-madurai",
+    "image": "assets/preview/30.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/30.png",
+    "title": "InviteStory – Lantern Madurai Wedding Invitation",
+    "desc": "Lantern Madurai interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lantern-madurai"
+  },
+  "31": {
+    "id": 31,
+    "name": "Lotus Leaf Bengaluru",
+    "slug": "lotus-leaf-bengaluru",
+    "image": "assets/preview/31.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/31.png",
+    "title": "InviteStory – Lotus Leaf Bengaluru Wedding Invitation",
+    "desc": "Lotus Leaf Bengaluru interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lotus-leaf-bengaluru"
+  },
+  "32": {
+    "id": 32,
+    "name": "Diya Haveli",
+    "slug": "diya-haveli",
+    "image": "assets/preview/32.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/32.png",
+    "title": "InviteStory – Diya Haveli Wedding Invitation",
+    "desc": "Diya Haveli interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=diya-haveli"
+  },
+  "33": {
+    "id": 33,
+    "name": "Gilded Hall",
+    "slug": "gilded-hall",
+    "image": "assets/preview/33.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/33.png",
+    "title": "InviteStory – Gilded Hall Wedding Invitation",
+    "desc": "Gilded Hall interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=gilded-hall"
+  },
+  "34": {
+    "id": 34,
+    "name": "Slide to Shaadi",
+    "slug": "slide-to-shaadi",
+    "image": "assets/preview/34.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/34.png",
+    "title": "InviteStory – Slide to Shaadi Wedding Invitation",
+    "desc": "Slide to Shaadi interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=slide-to-shaadi"
+  },
+  "marigold-bhavan": {
+    "id": 1,
+    "name": "Marigold Bhavan",
+    "slug": "marigold-bhavan",
+    "image": "assets/preview/1.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/1.png",
+    "title": "InviteStory – Marigold Bhavan Wedding Invitation",
+    "desc": "Marigold Bhavan interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=marigold-bhavan"
+  },
+  "toran-telugu": {
+    "id": 3,
+    "name": "Toran Telugu",
+    "slug": "toran-telugu",
+    "image": "assets/preview/2.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/2.png",
+    "title": "InviteStory – Toran Telugu Wedding Invitation",
+    "desc": "Toran Telugu interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=toran-telugu"
+  },
+  "shubha-vivaham": {
+    "id": 5,
+    "name": "Shubha Vivaham",
+    "slug": "shubha-vivaham",
+    "image": "assets/preview/3.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/3.png",
+    "title": "InviteStory – Shubha Vivaham Wedding Invitation",
+    "desc": "Shubha Vivaham interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=shubha-vivaham"
+  },
+  "kalyana-mandapam": {
+    "id": 6,
+    "name": "Kalyana Mandapam",
+    "slug": "kalyana-mandapam",
+    "image": "assets/preview/4.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/4.png",
+    "title": "InviteStory – Kalyana Mandapam Wedding Invitation",
+    "desc": "Kalyana Mandapam interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=kalyana-mandapam"
+  },
+  "sage-parchment": {
+    "id": 7,
+    "name": "Sage Parchment",
+    "slug": "sage-parchment",
+    "image": "assets/preview/5.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/5.png",
+    "title": "InviteStory – Sage Parchment Wedding Invitation",
+    "desc": "Sage Parchment interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=sage-parchment"
+  },
+  "seashell-vows": {
+    "id": 29,
+    "name": "Seashell Vows",
+    "slug": "seashell-vows",
+    "image": "assets/preview/29.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/29.png",
+    "title": "InviteStory – Seashell Vows Wedding Invitation",
+    "desc": "Seashell Vows interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=seashell-vows"
+  },
+  "emerald-nikah": {
+    "id": 8,
+    "name": "Emerald Nikah",
+    "slug": "emerald-nikah",
+    "image": "assets/preview/6.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/6.png",
+    "title": "InviteStory – Emerald Nikah Wedding Invitation",
+    "desc": "Emerald Nikah interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=emerald-nikah"
+  },
+  "noor-e-zahra": {
+    "id": 9,
+    "name": "Noor-e-Zahra",
+    "slug": "noor-e-zahra",
+    "image": "assets/preview/7.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/7.png",
+    "title": "InviteStory – Noor-e-Zahra Wedding Invitation",
+    "desc": "Noor-e-Zahra interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=noor-e-zahra"
+  },
+  "royal-reception": {
+    "id": 10,
+    "name": "Royal Reception",
+    "slug": "royal-reception",
+    "image": "assets/preview/8.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/8.png",
+    "title": "InviteStory – Royal Reception Wedding Invitation",
+    "desc": "Royal Reception interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=royal-reception"
+  },
+  "kerala-sands": {
+    "id": 11,
+    "name": "Kerala Sands",
+    "slug": "kerala-sands",
+    "image": "assets/preview/9.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/9.png",
+    "title": "InviteStory – Kerala Sands Wedding Invitation",
+    "desc": "Kerala Sands interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=kerala-sands"
+  },
+  "meadow-nikah": {
+    "id": 12,
+    "name": "Meadow Nikah",
+    "slug": "meadow-nikah",
+    "image": "assets/preview/10.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/10.png",
+    "title": "InviteStory – Meadow Nikah Wedding Invitation",
+    "desc": "Meadow Nikah interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=meadow-nikah"
+  },
+  "grand-line-voyage": {
+    "id": 13,
+    "name": "Grand Line Voyage",
+    "slug": "grand-line-voyage",
+    "image": "assets/preview/11.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/11.png",
+    "title": "InviteStory – Grand Line Voyage Wedding Invitation",
+    "desc": "Grand Line Voyage interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=grand-line-voyage"
+  },
+  "ghibli-selfie": {
+    "id": 14,
+    "name": "Ghibli Selfie",
+    "slug": "ghibli-selfie",
+    "image": "assets/preview/12.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/12.png",
+    "title": "InviteStory – Ghibli Selfie Wedding Invitation",
+    "desc": "Ghibli Selfie interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ghibli-selfie"
+  },
+  "ghibli-portrait": {
+    "id": 15,
+    "name": "Ghibli Portrait",
+    "slug": "ghibli-portrait",
+    "image": "assets/preview/13.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/13.png",
+    "title": "InviteStory – Ghibli Portrait Wedding Invitation",
+    "desc": "Ghibli Portrait interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ghibli-portrait"
+  },
+  "lake-pichola-royal": {
+    "id": 16,
+    "name": "Lake Pichola Royal",
+    "slug": "lake-pichola-royal",
+    "image": "assets/preview/14.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/14.png",
+    "title": "InviteStory – Lake Pichola Royal Wedding Invitation",
+    "desc": "Lake Pichola Royal interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lake-pichola-royal"
+  },
+  "ivory-waltz": {
+    "id": 17,
+    "name": "Ivory Waltz",
+    "slug": "ivory-waltz",
+    "image": "assets/preview/15.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/15.png",
+    "title": "InviteStory – Ivory Waltz Wedding Invitation",
+    "desc": "Ivory Waltz interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ivory-waltz"
+  },
+  "ever-after-bloom": {
+    "id": 18,
+    "name": "Ever After Bloom",
+    "slug": "ever-after-bloom",
+    "image": "assets/preview/16.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/16.png",
+    "title": "InviteStory – Ever After Bloom Wedding Invitation",
+    "desc": "Ever After Bloom interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ever-after-bloom"
+  },
+  "saga-of-love": {
+    "id": 19,
+    "name": "Saga of Love",
+    "slug": "saga-of-love",
+    "image": "assets/preview/17.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/17.png",
+    "title": "InviteStory – Saga of Love Wedding Invitation",
+    "desc": "Saga of Love interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=saga-of-love"
+  },
+  "lantern-madurai": {
+    "id": 30,
+    "name": "Lantern Madurai",
+    "slug": "lantern-madurai",
+    "image": "assets/preview/30.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/30.png",
+    "title": "InviteStory – Lantern Madurai Wedding Invitation",
+    "desc": "Lantern Madurai interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lantern-madurai"
+  },
+  "lotus-leaf-bengaluru": {
+    "id": 31,
+    "name": "Lotus Leaf Bengaluru",
+    "slug": "lotus-leaf-bengaluru",
+    "image": "assets/preview/31.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/31.png",
+    "title": "InviteStory – Lotus Leaf Bengaluru Wedding Invitation",
+    "desc": "Lotus Leaf Bengaluru interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lotus-leaf-bengaluru"
+  },
+  "rajwada-royale-alt": {
+    "id": 21,
+    "name": "Rajwada Royale – Alt",
+    "slug": "rajwada-royale-alt",
+    "image": "assets/preview/18.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/18.png",
+    "title": "InviteStory – Rajwada Royale – Alt Wedding Invitation",
+    "desc": "Rajwada Royale – Alt interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=rajwada-royale-alt"
+  },
+  "rajmahal-palace": {
+    "id": 22,
+    "name": "Rajmahal Palace",
+    "slug": "rajmahal-palace",
+    "image": "assets/preview/19.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/19.png",
+    "title": "InviteStory – Rajmahal Palace Wedding Invitation",
+    "desc": "Rajmahal Palace interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=rajmahal-palace"
+  },
+  "midnight-stargaze": {
+    "id": 23,
+    "name": "Midnight Stargaze",
+    "slug": "midnight-stargaze",
+    "image": "assets/preview/20.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/20.png",
+    "title": "InviteStory – Midnight Stargaze Wedding Invitation",
+    "desc": "Midnight Stargaze interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=midnight-stargaze"
+  },
+  "petal-path-palace": {
+    "id": 24,
+    "name": "Petal Path Palace",
+    "slug": "petal-path-palace",
+    "image": "assets/preview/21.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/21.png",
+    "title": "InviteStory – Petal Path Palace Wedding Invitation",
+    "desc": "Petal Path Palace interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=petal-path-palace"
+  },
+  "lakeview-lanterns": {
+    "id": 25,
+    "name": "Lakeview Lanterns",
+    "slug": "lakeview-lanterns",
+    "image": "assets/preview/22.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/22.png",
+    "title": "InviteStory – Lakeview Lanterns Wedding Invitation",
+    "desc": "Lakeview Lanterns interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=lakeview-lanterns"
+  },
+  "moonlit-lotus-barge": {
+    "id": 26,
+    "name": "Moonlit Lotus Barge",
+    "slug": "moonlit-lotus-barge",
+    "image": "assets/preview/23.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/23.png",
+    "title": "InviteStory – Moonlit Lotus Barge Wedding Invitation",
+    "desc": "Moonlit Lotus Barge interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=moonlit-lotus-barge"
+  },
+  "ganesha-gopuram": {
+    "id": 27,
+    "name": "Ganesha Gopuram",
+    "slug": "ganesha-gopuram",
+    "image": "assets/preview/24.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/24.png",
+    "title": "InviteStory – Ganesha Gopuram Wedding Invitation",
+    "desc": "Ganesha Gopuram interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=ganesha-gopuram"
+  },
+  "wax-seal-royale": {
+    "id": 28,
+    "name": "Wax Seal Royale",
+    "slug": "wax-seal-royale",
+    "image": "assets/preview/25.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/25.png",
+    "title": "InviteStory – Wax Seal Royale Wedding Invitation",
+    "desc": "Wax Seal Royale interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=wax-seal-royale"
+  },
+  "diya-haveli": {
+    "id": 32,
+    "name": "Diya Haveli",
+    "slug": "diya-haveli",
+    "image": "assets/preview/32.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/32.png",
+    "title": "InviteStory – Diya Haveli Wedding Invitation",
+    "desc": "Diya Haveli interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=diya-haveli"
+  },
+  "gilded-hall": {
+    "id": 33,
+    "name": "Gilded Hall",
+    "slug": "gilded-hall",
+    "image": "assets/preview/33.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/33.png",
+    "title": "InviteStory – Gilded Hall Wedding Invitation",
+    "desc": "Gilded Hall interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=gilded-hall"
+  },
+  "slide-to-shaadi": {
+    "id": 34,
+    "name": "Slide to Shaadi",
+    "slug": "slide-to-shaadi",
+    "image": "assets/preview/34.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/34.png",
+    "title": "InviteStory – Slide to Shaadi Wedding Invitation",
+    "desc": "Slide to Shaadi interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
+    "url": "https://www.invitestory.in/?design=slide-to-shaadi"
+  }
+}
