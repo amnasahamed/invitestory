@@ -1826,7 +1826,7 @@ body:has(#glass-luxury:checked) .catalogue-section {
   font-family: var(--font-header);
 }
 
-/* Cinematic Dark Bottom Gradient Overlay */
+/* Bottom CTA scrim — keep top ~55–60% of artwork (toran + names) clear */
 .template-card-overlay {
   position: absolute;
   inset: 0;
@@ -1834,15 +1834,13 @@ body:has(#glass-luxury:checked) .catalogue-section {
   height: 100%;
   pointer-events: none;
   z-index: 1;
-  /* Heavier bottom scrim so invite artwork (names/ornaments) can't clash with meta */
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0) 18%,
-    rgba(0, 0, 0, 0.15) 32%,
-    rgba(0, 0, 0, 0.55) 48%,
-    rgba(0, 0, 0, 0.82) 60%,
-    rgba(0, 0, 0, 0.94) 74%,
-    rgba(8, 6, 4, 0.98) 100%
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 55%,
+    rgba(0, 0, 0, 0.12) 68%,
+    rgba(0, 0, 0, 0.45) 82%,
+    rgba(0, 0, 0, 0.78) 100%
   );
 }
 
@@ -1857,14 +1855,14 @@ body:has(#glass-luxury:checked) .catalogue-section {
   flex-direction: column;
   gap: 12px;
   box-sizing: border-box;
-  /* Soft plate behind text so gold invite type never fights the title */
-  padding: 14px 12px 12px;
-  margin: 0 -4px;
+  /* Light plate — overlay already darkens the CTA zone; avoid a second heavy scrim */
+  padding: 10px 8px 8px;
+  margin: 0;
   border-radius: 16px;
   background: linear-gradient(
     to top,
-    rgba(8, 6, 4, 0.72) 0%,
-    rgba(8, 6, 4, 0.45) 55%,
+    rgba(8, 6, 4, 0.22) 0%,
+    rgba(8, 6, 4, 0.06) 50%,
     rgba(8, 6, 4, 0.0) 100%
   );
 }
@@ -2101,22 +2099,39 @@ body:has(#glass-luxury:checked) .catalogue-section {
   }
 
   .templates-grid:not(.view-list) .template-card-content {
-    bottom: var(--card-padding-mobile) !important;
-    left: var(--card-padding-mobile) !important;
-    right: var(--card-padding-mobile) !important;
-    gap: 10px !important;
+    bottom: 12px !important;
+    left: 12px !important;
+    right: 12px !important;
+    gap: 6px !important;
+    padding: 4px 2px 2px !important;
+    margin: 0 !important;
+    background: transparent !important;
+  }
+
+  .templates-grid:not(.view-list) .template-card-header {
+    gap: 4px;
+  }
+
+  .templates-grid:not(.view-list) .template-card-info-side,
+  .templates-grid:not(.view-list) .template-card-action-side {
+    gap: 4px;
   }
 
   .templates-grid:not(.view-list) .template-card-title {
-    font-size: 1.55rem !important;
+    font-size: 1.28rem !important;
   }
 
   .templates-grid:not(.view-list) .template-card-desc {
-    font-size: 0.84rem !important;
+    display: none !important;
   }
 
   .templates-grid:not(.view-list) .template-card-price {
-    font-size: 1.6rem !important;
+    font-size: 1.32rem !important;
+  }
+
+  .templates-grid:not(.view-list) .template-card-actions {
+    gap: 6px !important;
+    margin-top: 0 !important;
   }
 
   .templates-grid:not(.view-list) .template-btn-preview,
@@ -2129,12 +2144,11 @@ body:has(#glass-luxury:checked) .catalogue-section {
   .templates-grid:not(.view-list) .template-card-overlay {
     background: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0) 12%,
-      rgba(0, 0, 0, 0.2) 28%,
-      rgba(0, 0, 0, 0.62) 44%,
-      rgba(0, 0, 0, 0.88) 58%,
-      rgba(0, 0, 0, 0.96) 72%,
-      rgba(8, 6, 4, 0.99) 100%
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 58%,
+      rgba(0, 0, 0, 0.16) 72%,
+      rgba(0, 0, 0, 0.52) 86%,
+      rgba(0, 0, 0, 0.82) 100%
     );
   }
 }
@@ -7943,6 +7957,20 @@ a.template-card-wa-link {
   min-height: 44px;
   padding: 10px 0 !important;
   color: rgba(255, 248, 239, 0.9) !important;
+}
+
+@media (max-width: 640px) {
+  .templates-grid:not(.view-list) .template-card-wa-link,
+  .templates-grid:not(.view-list) a.template-card-wa-link {
+    min-height: 0;
+    padding: 2px 0 !important;
+  }
+
+  .templates-grid:not(.view-list) .template-btn-pay,
+  .templates-grid:not(.view-list) .template-btn-preview-primary {
+    padding: 11px 14px;
+    font-size: 0.88rem;
+  }
 }
 
 /* Hide floating WA on mobile — header WA remains */
