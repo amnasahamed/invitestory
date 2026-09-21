@@ -442,6 +442,27 @@
         <div class="testimonials-grid" id="testimonials-grid"><!-- loaded by scripts.js --></div>
         <button type="button" class="testimonials-nav-btn testimonials-nav-next" id="testimonials-next" aria-label="Next testimonial">&rarr;</button>
       </div>
+
+      <!-- ── WhatsApp Customer Chats Showcase ── -->
+      <div class="wa-reviews-showcase">
+        <div class="wa-reviews-header">
+          <div class="wa-reviews-badge">
+            <span class="wa-badge-pulse" aria-hidden="true"></span>
+            <svg class="wa-badge-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.698c.969.587 1.961.947 2.796.947 3.179 0 5.766-2.587 5.766-5.768.002-3.18-2.584-5.732-5.766-5.732zm3.435 8.163c-.144.405-.837.774-1.17.824-.312.045-.694.072-2.124-.519-1.826-.757-3.003-2.608-3.094-2.729-.092-.121-.741-.987-.741-1.883 0-.895.467-1.336.634-1.517.166-.182.364-.228.485-.228.121 0 .243.002.348.006.111.005.26-.042.406.31.15.364.512 1.25.558 1.341.045.091.076.197.015.318-.06.121-.091.197-.181.303-.091.106-.192.237-.274.318-.091.091-.186.19-.08.372.106.182.47 0.774 1.008 1.253.693.618 1.277.81 1.459.901.182.091.288.076.394-.045.106-.121.455-.53.576-.712.121-.182.242-.152.405-.091.163.061 1.037.489 1.215.578.178.09.297.135.34.21.043.075.043.436-.101.841z"/></svg>
+            <span>100% Real WhatsApp Conversations</span>
+          </div>
+          <h3 class="wa-reviews-title">Real chats. Real reactions. Zero guesswork.</h3>
+          <p class="wa-reviews-subtitle">From custom edits to family blessings on delivery day &mdash; tap any chat screenshot to view full-size.</p>
+        </div>
+
+        <div class="wa-reviews-carousel-wrapper">
+          <button type="button" class="testimonials-nav-btn wa-reviews-nav-prev" id="wa-reviews-prev" aria-label="Previous chat screenshot">&larr;</button>
+          <div class="wa-reviews-track" id="wa-reviews-track">
+            <!-- Populated dynamically by scripts.js -->
+          </div>
+          <button type="button" class="testimonials-nav-btn wa-reviews-nav-next" id="wa-reviews-next" aria-label="Next chat screenshot">&rarr;</button>
+        </div>
+      </div>
       <div class="trust-marquee" aria-label="Trust badges">
         <div class="trust-marquee-track" id="trust-marquee-track">
           <div class="trust-marquee-set">
@@ -1086,6 +1107,31 @@
         <span>🛡️ Buyer Protection</span>
         <span>⚡ 24h Delivery</span>
       </div>
+    </div>
+  <!-- WhatsApp Review Screenshot Lightbox Modal -->
+  <div class="wa-lightbox" id="wa-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="WhatsApp Review Screenshot Viewer">
+    <div class="wa-lightbox-backdrop" id="wa-lightbox-backdrop"></div>
+    <div class="wa-lightbox-modal">
+      <button type="button" class="wa-lightbox-close" id="wa-lightbox-close" aria-label="Close review">&times;</button>
+      <button type="button" class="wa-lightbox-arrow wa-lightbox-arrow-prev" id="wa-lightbox-prev" aria-label="Previous review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="wa-lightbox-figure">
+        <picture id="wa-lightbox-picture">
+          <source id="wa-lightbox-source" type="image/webp">
+          <img id="wa-lightbox-img" src="" alt="WhatsApp Customer Review" />
+        </picture>
+        <div class="wa-lightbox-info">
+          <div class="wa-lightbox-info-top">
+            <span class="wa-lightbox-tag" id="wa-lightbox-tag"></span>
+            <span class="wa-lightbox-counter" id="wa-lightbox-counter"></span>
+          </div>
+          <p class="wa-lightbox-highlight" id="wa-lightbox-highlight"></p>
+        </div>
+      </div>
+      <button type="button" class="wa-lightbox-arrow wa-lightbox-arrow-next" id="wa-lightbox-next" aria-label="Next review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
     </div>
   </div>
 

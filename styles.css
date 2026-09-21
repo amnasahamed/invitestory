@@ -2957,6 +2957,409 @@ body:has(#glass-luxury:checked) .catalogue-section {
   margin-top: 2px;
 }
 
+/* ═══════════════════════════════════════════════════════════════ */
+/* WHATSAPP REVIEWS SHOWCASE & LIGHTBOX                           */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.wa-reviews-showcase {
+  margin: 44px 0 40px;
+  padding: 36px 28px 32px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf8f5 100%);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px rgba(22, 22, 26, 0.04);
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .wa-reviews-showcase {
+    padding: 24px 16px 20px;
+    margin: 32px 0 32px;
+    border-radius: 16px;
+  }
+}
+
+.wa-reviews-header {
+  margin-bottom: 24px;
+}
+
+.wa-reviews-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 13px;
+  background: rgba(37, 211, 102, 0.1);
+  color: #128c46;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border-radius: 9999px;
+  border: 1px solid rgba(37, 211, 102, 0.22);
+  margin-bottom: 12px;
+}
+
+.wa-badge-pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #25d366;
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
+  animation: wa-badge-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes wa-badge-ping {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+.wa-badge-icon {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.wa-reviews-title {
+  font-family: var(--font-header);
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 600;
+  color: var(--color-text-dark);
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.wa-reviews-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-gray);
+  margin: 0;
+  line-height: 1.5;
+  max-width: 640px;
+}
+
+.wa-reviews-carousel-wrapper {
+  position: relative;
+  margin: 0 -8px;
+}
+
+.wa-reviews-track {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 10px 8px 18px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.wa-reviews-track::-webkit-scrollbar {
+  display: none;
+}
+
+.wa-reviews-nav-prev { left: -8px; }
+.wa-reviews-nav-next { right: -8px; }
+
+@media (max-width: 600px) {
+  .wa-reviews-carousel-wrapper {
+    padding-bottom: 48px;
+  }
+  .wa-reviews-nav-prev {
+    top: auto;
+    bottom: 4px;
+    transform: none;
+    left: calc(50% - 46px);
+  }
+  .wa-reviews-nav-next {
+    top: auto;
+    bottom: 4px;
+    transform: none;
+    left: calc(50% + 14px);
+  }
+}
+
+.wa-card {
+  flex: 0 0 250px;
+  scroll-snap-align: start;
+  background: var(--color-bg-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  user-select: none;
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  .wa-card {
+    flex: 0 0 74vw;
+    max-width: 280px;
+  }
+}
+
+.wa-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 28px rgba(22, 22, 26, 0.09);
+  border-color: rgba(176, 138, 74, 0.4);
+}
+
+.wa-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #f7f5f0;
+  overflow: hidden;
+}
+
+.wa-card-media picture,
+.wa-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.wa-card:hover .wa-card-media img {
+  transform: scale(1.035);
+}
+
+.wa-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 22, 25, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  backdrop-filter: blur(2px);
+}
+
+.wa-card:hover .wa-card-overlay {
+  opacity: 1;
+}
+
+.wa-card-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--color-text-dark);
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
+  letter-spacing: 0.01em;
+}
+
+.wa-card-zoom-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+.wa-card-footer {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: #ffffff;
+  border-top: 1px solid rgba(22, 22, 26, 0.05);
+}
+
+.wa-card-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.wa-card-highlight {
+  font-size: 0.82rem;
+  color: var(--color-text-soft);
+  font-weight: 500;
+  line-height: 1.35;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Lightbox Modal ── */
+.wa-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  padding: 20px;
+}
+
+.wa-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.wa-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 14, 18, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.wa-lightbox-modal {
+  position: relative;
+  z-index: 2;
+  max-width: min(94vw, 480px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: wa-lightbox-pop 0.26s cubic-bezier(0.2, 0.9, 0.3, 1.1);
+}
+
+@keyframes wa-lightbox-pop {
+  from { transform: scale(0.94) translateY(8px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.wa-lightbox-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.wa-lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.32);
+  transform: scale(1.08);
+}
+
+.wa-lightbox-arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(22, 22, 26, 0.1);
+  color: #16161a;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transition: transform 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+}
+
+.wa-lightbox-arrow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.wa-lightbox-arrow:hover {
+  background: #f7f5f0;
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+}
+
+.wa-lightbox-arrow-prev { left: -54px; }
+.wa-lightbox-arrow-next { right: -54px; }
+
+@media (max-width: 640px) {
+  .wa-lightbox-arrow-prev { left: 8px; }
+  .wa-lightbox-arrow-next { right: 8px; }
+}
+
+.wa-lightbox-figure {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+}
+
+.wa-lightbox-figure picture {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: #fbfaf7;
+  max-height: 68vh;
+  overflow: hidden;
+}
+
+.wa-lightbox-figure img {
+  width: 100%;
+  height: auto;
+  max-height: 68vh;
+  object-fit: contain;
+  display: block;
+}
+
+.wa-lightbox-info {
+  padding: 14px 18px 16px;
+  background: #ffffff;
+  border-top: 1px solid rgba(22, 22, 26, 0.07);
+}
+
+.wa-lightbox-info-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.wa-lightbox-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+
+.wa-lightbox-counter {
+  font-size: 0.76rem;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.wa-lightbox-highlight {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  line-height: 1.4;
+  margin: 0;
+}
+
 /* Trust marquee */
 .trust-marquee {
   position: relative;

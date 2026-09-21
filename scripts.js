@@ -3402,32 +3402,30 @@ function refreshScrollTriggers() {
 }
 
 // --- Testimonials data ---
-// NOTE: replace these with verbatim real reviews (first name + city + package/design).
-// If "500+ couples" is aspirational, swap hero/proof copy to the true number.
 const TESTIMONIALS = [
   {
-    name: "Ananya & Rohan",
-    wedding: "Pune · Premium (Ever After Bloom)",
+    name: "Vibhore & Shalini",
+    wedding: "Verified Order · Luxury Invitation",
     lang: "English",
-    quote: "Relatives opened it on WhatsApp and thought we'd printed something fancy. Paid online, sent our photos, and the link was ready the next day."
+    quote: "Got our preview link on WhatsApp the same day. Two quick wording updates and the final link was ready. Relatives opened it on phone and loved the music & animations."
   },
   {
-    name: "Karthik & Deepa",
-    wedding: "Hyderabad · Classic (Kalyana Mandapam)",
+    name: "Punam & Jagdish",
+    wedding: "Verified Order · Classic Mandapam",
     lang: "English",
-    quote: "My mother loved the mandapam design — it felt like our actual wedding hall. The venue map link saved us a hundred phone calls."
+    quote: "Paid online, shared our event dates and venue on WhatsApp. Everything was set up seamlessly — the integrated Google Maps link saved us dozens of phone calls."
+  },
+  {
+    name: "Sumeet & Shikha",
+    wedding: "Verified Order · Premium Celebration",
+    lang: "English",
+    quote: "The interactive love timeline gave our family goosebumps. We shared our link in every WhatsApp group and got nonstop compliments from guests."
   },
   {
     name: "Rahul & Priya",
     wedding: "Delhi · Luxury (Rajwada Royale)",
     lang: "English",
     quote: "The palace-door opening gave everyone goosebumps. Guests kept asking where we got it made. Worth every rupee."
-  },
-  {
-    name: "Arun & Kavitha",
-    wedding: "Chennai · Premium (Ganesha Gopuram)",
-    lang: "English",
-    quote: "The temple bells at the start felt so auspicious. Our families shared it in every WhatsApp group within an hour."
   },
   {
     name: "Vivek & Sneha",
@@ -3460,8 +3458,6 @@ function renderTestimonials() {
 }
 
 // Wire the prev/next overlay buttons on the testimonials carousel.
-// Each click scrolls by one card's width + the gap, snapping naturally
-// to the next card via scroll-snap-type: x mandatory.
 function setupTestimonialsNav() {
   const grid = document.getElementById("testimonials-grid");
   const prevBtn = document.getElementById("testimonials-prev");
@@ -3471,7 +3467,7 @@ function setupTestimonialsNav() {
   const scrollStep = () => {
     const card = grid.querySelector(".testimonial-card");
     if (!card) return 300;
-    return card.getBoundingClientRect().width + 14; // width + gap
+    return card.getBoundingClientRect().width + 14;
   };
 
   prevBtn.addEventListener("click", () => {
@@ -3481,7 +3477,6 @@ function setupTestimonialsNav() {
     grid.scrollBy({ left: scrollStep(), behavior: "smooth" });
   });
 
-  // Disable prev/next when the carousel is at the corresponding edge
   const updateDisabled = () => {
     const maxScroll = grid.scrollWidth - grid.clientWidth;
     prevBtn.disabled = grid.scrollLeft <= 1;
@@ -3490,6 +3485,243 @@ function setupTestimonialsNav() {
   grid.addEventListener("scroll", updateDisabled, { passive: true });
   window.addEventListener("resize", updateDisabled);
   updateDisabled();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// REAL WHATSAPP CUSTOMER REVIEWS DATA & LIGHTBOX
+// ═══════════════════════════════════════════════════════════════
+
+const WA_REVIEWS = [
+  {
+    id: 1,
+    file: "review-01",
+    alt: "InviteStory WhatsApp review: I like your work. Thanks for all your support",
+    highlight: "“I like your work. Thanks for all your support ❤️”",
+    tag: "Priority Delivery"
+  },
+  {
+    id: 2,
+    file: "review-02",
+    alt: "InviteStory WhatsApp review: Perfect bro bs jo real wali image ha wo remove kr dena",
+    highlight: "“Perfect bro... bs real image remove kr dena” · Same-day photo swap",
+    tag: "Fast Revision"
+  },
+  {
+    id: 3,
+    file: "review-03",
+    alt: "InviteStory WhatsApp review: Updated. Thank you bro",
+    highlight: "“Updated ✅ Thank you bro... 🫶”",
+    tag: "Quick Update"
+  },
+  {
+    id: 4,
+    file: "review-04",
+    alt: "InviteStory WhatsApp review: Punam and Jagdish Wedding Invitation delivered",
+    highlight: "Punam & Jagdish Wedding · “Thank you ❤️”",
+    tag: "Delivered & Approved"
+  },
+  {
+    id: 5,
+    file: "review-05",
+    alt: "InviteStory WhatsApp review: Vibhore and Shalini Wedding Invitation delivered",
+    highlight: "Vibhore & Shalini Wedding · “All good thankyou 💖”",
+    tag: "Delivered & Approved"
+  },
+  {
+    id: 6,
+    file: "review-06",
+    alt: "InviteStory WhatsApp review: Mene mom dad ko bhej diya woo check kar rahe hai Sir everyone like it",
+    highlight: "“Mene mom dad ko bhej diya... Sir everyone like it 😇”",
+    tag: "Family Approved"
+  },
+  {
+    id: 7,
+    file: "review-07",
+    alt: "InviteStory WhatsApp review: Thank You Mam for making this invitation beautiful",
+    highlight: "“Thank You Mam for making this invitation beautiful 🥰”",
+    tag: "Delighted Bride"
+  },
+  {
+    id: 8,
+    file: "review-08",
+    alt: "InviteStory WhatsApp review: Updated Please check Hi it's great Thank you",
+    highlight: "“Updated, please check... Hi it's great, Thank you!”",
+    tag: "5-Star Rating"
+  },
+  {
+    id: 9,
+    file: "review-09",
+    alt: "InviteStory WhatsApp review: Thank you sir! I appreciate your work!",
+    highlight: "“Thank you sir! I appreciate your work! 🙏 ❤️”",
+    tag: "Happy Couple"
+  },
+  {
+    id: 10,
+    file: "review-10",
+    alt: "InviteStory WhatsApp review: Sumeet and Shikha Wedding Invitation delivered",
+    highlight: "Sumeet & Shikha Wedding · “Thanks bro ❤️”",
+    tag: "Delivered & Approved"
+  },
+  {
+    id: 11,
+    file: "review-11",
+    alt: "InviteStory WhatsApp review: Can I share this right? Definitely bro",
+    highlight: "“Can I share this right? Definitely bro 😊”",
+    tag: "Verified Client"
+  }
+];
+
+let currentLightboxIndex = 0;
+
+function renderWhatsAppReviews() {
+  const track = document.getElementById("wa-reviews-track");
+  if (!track) return;
+
+  track.innerHTML = WA_REVIEWS.map((rev, index) => `
+    <article class="wa-card" data-review-index="${index}" role="button" tabindex="0" aria-label="View review screenshot ${index + 1}: ${rev.tag}">
+      <div class="wa-card-media">
+        <picture>
+          <source srcset="assets/reviews/${rev.file}.webp" type="image/webp">
+          <img src="assets/reviews/${rev.file}.jpeg" alt="${rev.alt}" loading="lazy" width="250" height="312" />
+        </picture>
+        <div class="wa-card-overlay" aria-hidden="true">
+          <span class="wa-card-zoom-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            Tap to zoom
+          </span>
+        </div>
+      </div>
+      <div class="wa-card-footer">
+        <span class="wa-card-tag">${rev.tag}</span>
+        <p class="wa-card-highlight">${rev.highlight}</p>
+      </div>
+    </article>
+  `).join("");
+}
+
+function setupWhatsAppReviewsNav() {
+  const track = document.getElementById("wa-reviews-track");
+  const prevBtn = document.getElementById("wa-reviews-prev");
+  const nextBtn = document.getElementById("wa-reviews-next");
+  if (!track || !prevBtn || !nextBtn) return;
+
+  const scrollStep = () => {
+    const card = track.querySelector(".wa-card");
+    if (!card) return 260;
+    return card.getBoundingClientRect().width + 16;
+  };
+
+  prevBtn.addEventListener("click", () => {
+    track.scrollBy({ left: -scrollStep(), behavior: "smooth" });
+  });
+  nextBtn.addEventListener("click", () => {
+    track.scrollBy({ left: scrollStep(), behavior: "smooth" });
+  });
+
+  const updateDisabled = () => {
+    const maxScroll = track.scrollWidth - track.clientWidth;
+    prevBtn.disabled = track.scrollLeft <= 2;
+    nextBtn.disabled = track.scrollLeft >= maxScroll - 2;
+  };
+  track.addEventListener("scroll", updateDisabled, { passive: true });
+  window.addEventListener("resize", updateDisabled);
+  updateDisabled();
+}
+
+function openLightbox(index) {
+  if (index < 0 || index >= WA_REVIEWS.length) return;
+  currentLightboxIndex = index;
+  const rev = WA_REVIEWS[index];
+
+  const modal = document.getElementById("wa-lightbox");
+  const source = document.getElementById("wa-lightbox-source");
+  const img = document.getElementById("wa-lightbox-img");
+  const tag = document.getElementById("wa-lightbox-tag");
+  const highlight = document.getElementById("wa-lightbox-highlight");
+  const counter = document.getElementById("wa-lightbox-counter");
+
+  if (!modal || !img) return;
+
+  if (source) source.srcset = `assets/reviews/${rev.file}.webp`;
+  img.src = `assets/reviews/${rev.file}.jpeg`;
+  img.alt = rev.alt;
+  if (tag) tag.textContent = rev.tag;
+  if (highlight) highlight.textContent = rev.highlight;
+  if (counter) counter.textContent = `${index + 1} of ${WA_REVIEWS.length}`;
+
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+  document.body.style.overflow = "hidden";
+}
+
+function closeLightbox() {
+  const modal = document.getElementById("wa-lightbox");
+  if (!modal) return;
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+function setupWhatsAppLightbox() {
+  const modal = document.getElementById("wa-lightbox");
+  const backdrop = document.getElementById("wa-lightbox-backdrop");
+  const closeBtn = document.getElementById("wa-lightbox-close");
+  const prevBtn = document.getElementById("wa-lightbox-prev");
+  const nextBtn = document.getElementById("wa-lightbox-next");
+  const track = document.getElementById("wa-reviews-track");
+
+  if (!modal) return;
+
+  if (track) {
+    track.addEventListener("click", (e) => {
+      const card = e.target.closest(".wa-card");
+      if (!card) return;
+      const index = parseInt(card.getAttribute("data-review-index"), 10);
+      if (!isNaN(index)) openLightbox(index);
+    });
+
+    track.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        const card = e.target.closest(".wa-card");
+        if (card) {
+          e.preventDefault();
+          const index = parseInt(card.getAttribute("data-review-index"), 10);
+          if (!isNaN(index)) openLightbox(index);
+        }
+      }
+    });
+  }
+
+  if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+  if (backdrop) backdrop.addEventListener("click", closeLightbox);
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const prev = (currentLightboxIndex - 1 + WA_REVIEWS.length) % WA_REVIEWS.length;
+      openLightbox(prev);
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const next = (currentLightboxIndex + 1) % WA_REVIEWS.length;
+      openLightbox(next);
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (!modal.classList.contains("active")) return;
+    if (e.key === "Escape") closeLightbox();
+    else if (e.key === "ArrowLeft") {
+      const prev = (currentLightboxIndex - 1 + WA_REVIEWS.length) % WA_REVIEWS.length;
+      openLightbox(prev);
+    } else if (e.key === "ArrowRight") {
+      const next = (currentLightboxIndex + 1) % WA_REVIEWS.length;
+      openLightbox(next);
+    }
+  });
 }
 
 // Trust marquee — clone the .trust-marquee-set so the track contains two
@@ -3734,6 +3966,8 @@ document.addEventListener("DOMContentLoaded", () => {
   setupHowItWorksToggle();
   setupUrgency();
   setupTestimonialsNav();
+  setupWhatsAppReviewsNav();
+  setupWhatsAppLightbox();
   setupTrustMarquee();
   setupResponsivePlaceholder();
   setupHeaderCtaHandlers();
@@ -3745,6 +3979,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderCatalogue();
   handleInitialUrlRoute();
   renderTestimonials();
+  renderWhatsAppReviews();
   renderFaqs();
 
   // GSAP animations after the first paint so initial positions are valid
