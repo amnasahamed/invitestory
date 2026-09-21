@@ -2983,42 +2983,6 @@ body:has(#glass-luxury:checked) .catalogue-section {
   margin-bottom: 24px;
 }
 
-.wa-reviews-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 5px 13px;
-  background: rgba(37, 211, 102, 0.1);
-  color: #128c46;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  border-radius: 9999px;
-  border: 1px solid rgba(37, 211, 102, 0.22);
-  margin-bottom: 12px;
-}
-
-.wa-badge-pulse {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #25d366;
-  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.6);
-  animation: wa-badge-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-@keyframes wa-badge-ping {
-  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-  70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(37, 211, 102, 0); }
-  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
-
-.wa-badge-icon {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-}
-
 .wa-reviews-title {
   font-family: var(--font-header);
   font-size: clamp(1.2rem, 2vw, 1.55rem);
