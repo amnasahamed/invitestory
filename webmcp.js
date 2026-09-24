@@ -29,11 +29,11 @@
       execute: async ({ query, category }) => {
         const q = (query || "").toLowerCase();
         const catalogue = [
-          { id: "diya-haveli", name: "Diya Haveli", style: "Royal Rajasthani Palace", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/diya-haveli.html" },
+          { id: "diya-haveli", name: "Diya Haveli", style: "Royal Rajasthani Palace", priceINR: "₹2,999", previewUrl: "https://invitestory.in/assets/preview/diya-haveli.html" },
           { id: "emerald-nikah", name: "Emerald Nikah", style: "Islamic Nikah / Walima", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/emerald-nikah.html" },
           { id: "kalyana-mandapam", name: "Kalyana Mandapam", style: "South Indian & Telugu", priceINR: "₹999", previewUrl: "https://invitestory.in/assets/preview/kalyana-mandapam.html" },
           { id: "ever-after-bloom", name: "Ever After Bloom", style: "Botanical & Floral", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/ever-after-bloom.html" },
-          { id: "slide-to-shaadi", name: "Slide to Shaadi", style: "Quirky & Modern Swipe", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/slide-to-shaadi.html" },
+          { id: "slide-to-shaadi", name: "Slide to Shaadi", style: "Quirky & Modern Swipe", priceINR: "₹2,999", previewUrl: "https://invitestory.in/assets/preview/slide-to-shaadi.html" },
           { id: "sage-parchment", name: "Sage Parchment", style: "Minimalist Aesthetic", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/sage-parchment.html" }
         ];
 

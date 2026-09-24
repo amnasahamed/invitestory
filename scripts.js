@@ -33,8 +33,8 @@ function getItemPrices(item) {
     return {
       priceINR: PROMO_CONFIG.promoPriceINR,
       priceUSD: PROMO_CONFIG.promoPriceUSD,
-      originalPriceINR: item.originalPriceINR || (item.tier === 1 ? 1499 : item.tier === 2 ? 2499 : 3499),
-      originalPriceUSD: item.originalPriceUSD || (item.tier === 1 ? 18 : item.tier === 2 ? 30 : 42)
+      originalPriceINR: item.originalPriceINR || (item.tier === 1 ? 1499 : item.tier === 2 ? 2999 : 3999),
+      originalPriceUSD: item.originalPriceUSD || (item.tier === 1 ? 25 : item.tier === 2 ? 45 : 65)
     };
   }
   return {
@@ -324,7 +324,7 @@ const TEMPLATE_DATABASE = [
     promise: "Breezy seaside romance captured on textured watercolor paper."
   },
 
-  // --- TIER 2: Premium & Illustrated (₹1,499 / $20) ---
+  // --- TIER 2: Premium & Illustrated (₹1,999 / $30) ---
   {
     id: 8,
     name: "Emerald Nikah",
@@ -1910,7 +1910,7 @@ function openPayPalCheckout(id) {
 }
 
 /**
- * Package-level PayPal checkout for USD visitors (Classic $15 / Premium $20 / Luxury $35).
+ * Package-level PayPal checkout for USD visitors (Classic $15 / Premium $30 / Luxury $49).
  * Reuses the PayPal modal with a pseudo item so no template pick is needed.
  */
 function openPayPalCheckoutForPackage(tier) {
