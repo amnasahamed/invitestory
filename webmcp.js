@@ -78,7 +78,7 @@
           pricing: {
             Classic: "₹999 ($15)",
             Premium: "₹1,999 ($30)",
-            Luxury: "₹2,499 ($40)",
+            Luxury: "₹2,999 ($49)",
             bespokeStartingAt: "₹8,000"
           },
           orderWhatsApp: "https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20want%20to%20customize%20template%20" + encodeURIComponent(templateId)
