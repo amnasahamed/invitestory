@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-landing="ads">
 <head>
   <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -10,13 +10,20 @@
   </script>
 
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-JS52597LF1');
-  </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-JS52597LF1');
+  
+  // Google Ads Tag Config (Replace AW-XXXXXXXXX with your Google Ads Conversion ID)
+  window.GOOGLE_ADS_ID = window.GOOGLE_ADS_ID || '';
+  if (window.GOOGLE_ADS_ID) {
+    gtag('config', window.GOOGLE_ADS_ID);
+  }
+</script>
 
   <!-- Meta Pixel Code -->
   <script>
@@ -32,1050 +39,1110 @@
     fbq('init', window.META_PIXEL_ID);
     fbq('track', 'PageView');
   </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=877558961848422&ev=PageView&noscript=1" /></noscript>
+  <!-- End Meta Pixel Code -->
 
+  <!-- Razorpay Checkout Standard SDK -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <!-- PayPal Checkout SDK for International Orders -->
+  <script id="paypal-sdk-script" src="https://www.paypal.com/sdk/js?client-id=BAAXdw4bek4C9gmaofxymnJjm8cpkjT61bXsJ3KzdtDpW14OKQd_ig8jKgi0I45orPLAZ64NvkBq2Qpu2M&currency=USD&components=buttons" async></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  
+  <!-- Primary Meta Tags -->
   <title>Custom Digital Wedding Invitations From ₹999 – InviteStory</title>
+  <meta name="title" content="Custom Digital Wedding Invitations From ₹999 – InviteStory">
   <meta name="description" content="Hand-crafted interactive wedding website invitations with turn-by-turn Google Maps, music player, RSVP tracker & couple photo gallery. Delivered in 48 hours.">
-  <meta name="keywords" content="digital wedding invitations, wedding website card, interactive wedding card, mobile wedding invitation, online wedding card India">
-  <link rel="canonical" href="https://invitestory.in/digital-wedding-invitations">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#120c1f">
+  <meta name="keywords" content="digital wedding invitation, online wedding card, whatsapp wedding invite, e invite for wedding, wedding invitations online, virtual wedding invitations, electronic wedding invitations, digital wedding card, best online wedding invitations, digital wedding invitation link, wedding card for whatsapp, InviteStory templates">
+  <meta name="author" content="InviteStory">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#0a1f16">
 
+  <!-- Canonical Link -->
+  <link rel="canonical" href="https://invitestory.in/digital-wedding-invitations">
+
+  <!-- Machine Discovery & Agent Link Relations (RFC 8288 / RFC 9727) -->
+  <link rel="api-catalog" href="/.well-known/api-catalog" type="application/linkset+json">
+  <link rel="service-desc" href="/openapi.json" type="application/vnd.oai.openapi+json;version=3.0">
+  <link rel="service-doc" href="/terms.html" type="text/html">
+  <link rel="describedby" href="/llms.txt" type="text/plain">
+
+  <!-- Favicon & Touch Icons (Google SERP & Browsers) -->
   <link rel="icon" type="image/png" href="logo/noappicon.png">
+  <link rel="shortcut icon" type="image/png" href="logo/noappicon.png">
+  <link rel="apple-touch-icon" href="logo/noappicon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://invitestory.in/digital-wedding-invitations">
+  <meta property="og:site_name" content="InviteStory">
+  <meta property="og:title" content="InviteStory – Digital Wedding Card Templates & Online Invitations">
+  <meta property="og:description" content="Choose from 30+ interactive digital wedding invitation templates. Live previews, location maps & express 24h WhatsApp customization.">
+  <meta property="og:image" content="https://invitestory.in/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="InviteStory - Digital Wedding Card Templates & Online Invitations">
+  <meta property="og:locale" content="en_IN">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://invitestory.in/digital-wedding-invitations">
+  <meta name="twitter:title" content="InviteStory – Digital Wedding Card Templates & Online Invitations">
+  <meta name="twitter:description" content="Interactive digital wedding cards with venue maps & ambient music. Delivered in 48 hours.">
+  <meta name="twitter:image" content="https://invitestory.in/assets/og-image.jpg">
+
+  <!-- Structured Data (JSON-LD): WebSite & Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://invitestory.in/#organization",
+        "name": "InviteStory",
+        "url": "https://invitestory.in/",
+        "logo": "https://invitestory.in/assets/logo.png",
+        "description": "Provider of premium, interactive digital wedding invitations and e-invites.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-8281583882",
+          "contactType": "customer service",
+          "availableLanguage": ["en", "hi", "te", "ta", "ml"]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://invitestory.in/#website",
+        "url": "https://invitestory.in/digital-wedding-invitations",
+        "name": "InviteStory",
+        "publisher": {
+          "@id": "https://invitestory.in/#organization"
+        },
+        "description": "Browse 30+ digital wedding invitation templates. Live previews, custom links delivered in 48h."
+      },
+      {
+        "@type": "Product",
+        "@id": "https://invitestory.in/#product",
+        "name": "Digital Wedding Invitation Templates",
+        "description": "Custom hand-crafted interactive digital wedding cards with Google Maps venue integration, countdown timer, gallery, and music.",
+        "brand": {
+          "@type": "Brand",
+          "name": "InviteStory"
+        },
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "INR",
+          "lowPrice": "999",
+          "highPrice": "1999",
+          "offerCount": "25",
+          "availability": "https://schema.org/InStock"
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://invitestory.in/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How do I pay?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Pay on the site via Razorpay — UPI (GPay, PhonePe, Paytm, BHIM), cards or netbanking. One-time payment, no subscription. After you pay, we WhatsApp you a short checklist to collect your details."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When do you start work on my invite?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The moment your payment is confirmed — paying first reserves your slot. Send your names, dates, photos and venue on WhatsApp and our team starts building the same day."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does customisation take?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Standard delivery is 48 hours. With the Express 24h add-on (₹299) we deliver within 24 hours. Timelines start once you've paid and sent all your details and photos on WhatsApp."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I see a draft before it's final?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes — we share a preview link of your customised invite before finalising. Free revision requests for 24 hours after your first draft is delivered."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is the wedding link permanent? Will it work after the wedding?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Your invitestory.in link stays live for 1 year by default — long enough for any guests who couldn't attend to revisit later. We can extend it for an additional year for ₹199 if you'd like to keep the memories."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I see a demo before I pay?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely. Tap any Preview button on this page and the demo will load inside an in-page mobile-frame viewer — exactly as your guests will experience it. No payment needed to preview."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Fonts: Cormorant Garamond luxury serif + Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css">
-
-  <!-- Razorpay Checkout SDK -->
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
-  <style>
-    .lp-announcement {
-      background: linear-gradient(90deg, rgba(200,154,88,0.2) 0%, rgba(200,154,88,0.35) 50%, rgba(200,154,88,0.2) 100%);
-      border-bottom: 1px solid rgba(223,184,119,0.3);
-      padding: 8px 16px;
-      text-align: center;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #f3edda;
-      letter-spacing: 0.3px;
-    }
-    .lp-hero {
-      padding: 56px 0 44px;
-      text-align: center;
-      position: relative;
-    }
-    .lp-hero-tag {
-      display: inline-block;
-      padding: 6px 16px;
-      background: rgba(223,184,119,0.14);
-      border: 1px solid rgba(223,184,119,0.35);
-      border-radius: 9999px;
-      color: #ecd9ac;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
-    }
-    .lp-hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 700;
-      color: #ffffff;
-      line-height: 1.18;
-      max-width: 820px;
-      margin: 0 auto 16px;
-    }
-    .lp-hero h1 span.gold {
-      background: linear-gradient(135deg, #f5d799 0%, #d89f55 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .lp-hero-sub {
-      font-size: clamp(1rem, 2.2vw, 1.18rem);
-      color: rgba(243,237,218,0.85);
-      max-width: 680px;
-      margin: 0 auto 28px;
-      line-height: 1.6;
-    }
-    .lp-hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-    .lp-btn-primary {
-      background: linear-gradient(135deg, #dfb877 0%, #b8863f 100%);
-      color: #120c1f;
-      font-weight: 700;
-      font-size: 1.02rem;
-      padding: 14px 28px;
-      border-radius: 9999px;
-      text-decoration: none;
-      box-shadow: 0 6px 20px rgba(223,184,119,0.35);
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .lp-btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 26px rgba(223,184,119,0.5);
-    }
-    .lp-btn-whatsapp {
-      background: linear-gradient(135deg, #22c55e 0%, #15803d 100%);
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 1.02rem;
-      padding: 14px 26px;
-      border-radius: 9999px;
-      text-decoration: none;
-      box-shadow: 0 6px 20px rgba(34,197,94,0.35);
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .lp-btn-whatsapp:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 26px rgba(34,197,94,0.5);
-    }
-    .lp-proof-ribbon {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      gap: 18px;
-      font-size: 0.9rem;
-      color: #ecd9ac;
-      padding: 12px 20px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(223,184,119,0.22);
-      border-radius: 14px;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    .lp-proof-ribbon span.dot {
-      width: 4px;
-      height: 4px;
-      background: #dfb877;
-      border-radius: 50%;
-      opacity: 0.7;
-    }
-    .lp-section-heading {
-      text-align: center;
-      margin-bottom: 38px;
-    }
-    .lp-section-heading h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-      color: #ffffff;
-      margin-bottom: 10px;
-    }
-    .lp-section-heading p {
-      color: rgba(243,237,218,0.75);
-      font-size: 0.98rem;
-    }
-    .lp-gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 22px;
-      margin-bottom: 50px;
-    }
-    .lp-card {
-      background: #171124;
-      border: 1px solid rgba(223,184,119,0.2);
-      border-radius: 18px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.25s, border-color 0.25s;
-    }
-    .lp-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(223,184,119,0.5);
-    }
-    .lp-card-img-wrap {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 4/5;
-      background: #0d0714;
-      overflow: hidden;
-    }
-    .lp-card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.4s ease;
-    }
-    .lp-card:hover .lp-card-img {
-      transform: scale(1.04);
-    }
-    .lp-card-tier-pill {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      padding: 4px 10px;
-      background: rgba(13,7,20,0.85);
-      border: 1px solid rgba(223,184,119,0.4);
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #f5d799;
-      backdrop-filter: blur(8px);
-    }
-    .lp-card-body {
-      padding: 16px 18px;
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      gap: 8px;
-    }
-    .lp-card-title {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 0;
-    }
-    .lp-card-desc {
-      font-size: 0.85rem;
-      color: rgba(243,237,218,0.7);
-      line-height: 1.45;
-      flex-grow: 1;
-      margin: 0;
-    }
-    .lp-card-price-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      margin-top: 4px;
-    }
-    .lp-card-price {
-      font-weight: 800;
-      font-size: 1.18rem;
-      color: #ecd9ac;
-    }
-    .lp-card-btn {
-      padding: 8px 16px;
-      background: rgba(223,184,119,0.18);
-      border: 1px solid rgba(223,184,119,0.4);
-      border-radius: 9999px;
-      color: #ecd9ac;
-      font-size: 0.82rem;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .lp-card-btn:hover {
-      background: #dfb877;
-      color: #120c1f;
-    }
-
-    /* Modal for Live Preview */
-    .lp-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      background: rgba(8, 4, 14, 0.88);
-      backdrop-filter: blur(10px);
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .lp-modal.open {
-      display: flex;
-    }
-    .lp-modal-box {
-      background: #171124;
-      border: 1px solid rgba(223,184,119,0.4);
-      border-radius: 20px;
-      max-width: 480px;
-      width: 100%;
-      height: 85vh;
-      max-height: 780px;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-    }
-    .lp-modal-header {
-      padding: 14px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      background: #120c1f;
-    }
-    .lp-modal-header h4 {
-      color: #fff;
-      font-size: 1.05rem;
-      margin: 0;
-    }
-    .lp-modal-close {
-      background: transparent;
-      border: none;
-      color: #ecd9ac;
-      font-size: 1.5rem;
-      cursor: pointer;
-      line-height: 1;
-    }
-    .lp-modal-frame {
-      flex: 1;
-      width: 100%;
-      border: none;
-      background: #000;
-    }
-    .lp-modal-footer {
-      padding: 12px 18px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      gap: 10px;
-      background: #120c1f;
-    }
-
-    /* Reviews Section */
-    .lp-reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-      margin-bottom: 50px;
-    }
-    .lp-review-card {
-      background: #171124;
-      border: 1px solid rgba(223,184,119,0.22);
-      border-radius: 16px;
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .lp-review-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .lp-review-author {
-      font-weight: 700;
-      color: #ffffff;
-      font-size: 1rem;
-    }
-    .lp-review-badge {
-      font-size: 0.74rem;
-      font-weight: 600;
-      padding: 3px 9px;
-      background: rgba(34,197,94,0.15);
-      border: 1px solid rgba(34,197,94,0.35);
-      color: #4ade80;
-      border-radius: 9999px;
-    }
-    .lp-review-text {
-      color: rgba(243,237,218,0.85);
-      font-size: 0.92rem;
-      line-height: 1.6;
-      font-style: italic;
-      margin: 0;
-    }
-    .lp-review-img-preview {
-      margin-top: 8px;
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.1);
-      max-height: 130px;
-    }
-    .lp-review-img-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    /* Process & Terms */
-    .lp-steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-    .lp-step-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(223,184,119,0.2);
-      border-radius: 16px;
-      padding: 22px;
-      text-align: left;
-    }
-    .lp-step-num {
-      width: 36px;
-      height: 36px;
-      background: rgba(223,184,119,0.2);
-      color: #ecd9ac;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      margin-bottom: 12px;
-    }
-    .lp-step-title {
-      font-weight: 700;
-      color: #fff;
-      font-size: 1.05rem;
-      margin-bottom: 6px;
-    }
-    .lp-step-desc {
-      color: rgba(243,237,218,0.75);
-      font-size: 0.88rem;
-      line-height: 1.55;
-      margin: 0;
-    }
-  </style>
 </head>
 <body>
 
-  <!-- Sticky Reassurance Top Bar -->
-  <div class="lp-announcement">
-    ✨ Human-customized • Secure payment • Delivered within 48 hours after payment and receipt of all required details.
-  </div>
-
-  <!-- Header -->
-  <header class="boutique-header">
-    <div class="container boutique-nav">
-      <a href="digital-wedding-invitations.html" class="boutique-logo" aria-label="InviteStory Home">
-        <img src="logo/just logo.png" alt="InviteStory Logo" class="logo-img">
-        <span class="logo-text">InviteStory</span>
-      </a>
-      <div class="nav-right" style="display: flex; gap: 12px; align-items: center;">
-        <a href="#pricing-packages" class="btn btn-outline btn-sm">Packages & Pricing</a>
-        <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20have%20a%20few%20questions%20about%20your%20digital%20wedding%20invitations." target="_blank" rel="noopener" class="btn btn-primary btn-sm lp-wa-cta" data-cta-loc="nav_header">WhatsApp Enquiry 💬</a>
+  <!-- Header Bar -->
+  <header class="header-bar">
+    <div class="container header-container">
+      <img src="assets/logo.png" alt="InviteStory Logo - Digital Wedding Card Templates" class="logo-img" loading="eager" fetchpriority="high">
+      <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
+        <div class="currency-switch-container">
+          <button class="currency-btn active" id="currency-inr">INR (₹)</button>
+          <button class="currency-btn" id="currency-usd">USD ($)</button>
+        </div>
+        <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27d%20like%20to%20know%20more%20about%20your%20digital%20wedding%20invitations%21" target="_blank" rel="noopener" class="header-wa-icon" title="Chat with us on WhatsApp" aria-label="Chat on WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="22" height="22" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg>
+        </a>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- Hero Section -->
-    <section class="lp-hero">
-      <div class="container">
-        <span class="lp-hero-tag">Handcrafted Digital Wedding Invitations</span>
-        <h1>Custom Digital Wedding Invitations <span class="gold">From ₹999</span></h1>
-        <p class="lp-hero-sub">
-          Interactive mobile website invitations that your guests will love. Includes turn-by-turn Google Maps directions, RSVP guest counters, wedding playlist music & animated ceremony timelines.
+  <!-- Hero Section -->
+  <section class="hero hero-showroom">
+    <div class="container hero-layout">
+      <div class="hero-copy">
+        <p class="hero-kicker"><span aria-hidden="true"></span> Digital wedding invitations, made personal</p>
+
+        <h1 class="hero-headline">
+          Your wedding story,<br>
+          <span class="hero-headline-highlight">beautifully invited.</span>
+        </h1>
+
+        <p class="hero-subheadline">
+          A custom invite guests open on their phone — your photos, events, music &amp; venue map. We build it. You just share the link.
         </p>
-        <div class="lp-hero-ctas">
-          <a href="#pricing-packages" class="lp-btn-primary">View Packages & Pricing ↓</a>
-          <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20would%20like%20to%20know%20more%20about%20your%20digital%20wedding%20invitations." target="_blank" rel="noopener" class="lp-btn-whatsapp lp-wa-cta" data-cta-loc="hero_cta">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-            <span>Ask on WhatsApp 💬</span>
+
+        <p class="hero-process-line">
+          Choose a design <span aria-hidden="true">·</span> Pay securely <span aria-hidden="true">·</span> Ready in 48 hours
+        </p>
+
+        <div class="hero-action-wrapper">
+          <a href="#pricing" class="hero-primary-cta" id="hero-explore-btn">
+            <span>See packages &amp; pay</span>
+            <span class="hero-cta-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#catalogue-header" class="hero-secondary-cta" id="hero-preview-btn">
+            <span>Preview designs</span>
           </a>
         </div>
-        <div class="lp-proof-ribbon">
-          <span>Human-customized</span>
-          <span class="dot"></span>
-          <span>Secure UPI / Card Payment</span>
-          <span class="dot"></span>
-          <span>Delivered within 48 hours</span>
+
+        <div class="hero-proof-strip" aria-label="Why couples choose InviteStory">
+          <div class="hero-proof-item">
+            <span class="hero-proof-text"><strong>Human-customized</strong></span>
+          </div>
+          <span class="hero-proof-dot" aria-hidden="true"></span>
+          <div class="hero-proof-item">
+            <span class="hero-proof-text"><strong>Secure payment</strong></span>
+          </div>
+          <span class="hero-proof-dot" aria-hidden="true"></span>
+          <div class="hero-proof-item">
+            <span class="hero-proof-text"><strong>Delivered in 48 hours</strong></span>
+          </div>
         </div>
       </div>
-    </section>
 
-    <!-- Curated Non-Branded Designs Showcase -->
-    <section class="container" style="padding: 40px 20px;">
-      <div class="lp-section-heading">
-        <h2>Curated Non-Branded Live Previews</h2>
-        <p>Explore verified live templates. Tap any design to open the interactive live demo on mobile.</p>
-      </div>
-
-      <div class="lp-gallery-grid" id="lp-designs-container">
-        <!-- 1. Marigold Bhavan -->
-        <article class="lp-card" data-design-id="1" data-design-name="Marigold Bhavan" data-tier="Classic" data-price="999" data-demo="https://marigold-bhavan.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">🌿 Classic · ₹999</span>
-            <img src="assets/preview/1.png" alt="Marigold Bhavan Digital Wedding Invitation" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Marigold Bhavan</h3>
-            <p class="lp-card-desc">Traditional marigold &amp; gold Indian motifs with 1-tap Google Maps and countdown timer.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹999</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(1)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2. Toran Telugu -->
-        <article class="lp-card" data-design-id="3" data-design-name="Toran Telugu" data-tier="Classic" data-price="999" data-demo="https://toran-telugu.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">🌿 Classic · ₹999</span>
-            <img src="assets/preview/2.png" alt="Toran Telugu Digital Wedding Invitation" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Toran Telugu</h3>
-            <p class="lp-card-desc">Auspicious mango leaf toran &amp; temple mandapam motifs designed for South Indian celebrations.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹999</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(3)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3. Diya Haveli -->
-        <article class="lp-card" data-design-id="7" data-design-name="Diya Haveli" data-tier="Classic" data-price="999" data-demo="https://diya-haveli.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">🌿 Classic · ₹999</span>
-            <img src="assets/preview/3.png" alt="Diya Haveli Traditional Wedding Card" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Diya Haveli</h3>
-            <p class="lp-card-desc">Warm glowing diyas, heritage jharokha courtyard visuals, and instant RSVP tracking.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹999</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(7)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 4. Emerald Nikah -->
-        <article class="lp-card" data-design-id="5" data-design-name="Emerald Nikah" data-tier="Premium" data-price="1499" data-demo="https://emerald-nikah.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">🌸 Premium · ₹1,499</span>
-            <img src="assets/preview/6.png" alt="Emerald Nikah Digital Wedding Card" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Emerald Nikah</h3>
-            <p class="lp-card-desc">Royal emerald green, Arabic calligraphy, multi-event ceremony itinerary, and couple photo gallery.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹1,499</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(5)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5. Sage Parchment -->
-        <article class="lp-card" data-design-id="8" data-design-name="Sage Parchment" data-tier="Classic" data-price="999" data-demo="https://sage-parchment.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">🌿 Classic · ₹999</span>
-            <img src="assets/preview/4.png" alt="Sage Parchment Minimalist Wedding Invitation" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Sage Parchment</h3>
-            <p class="lp-card-desc">Modern botanical minimalism on organic texture for understated, elegant ceremonies.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹999</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(8)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 6. Ivory Waltz -->
-        <article class="lp-card" data-design-id="12" data-design-name="Ivory Waltz" data-tier="Premium" data-price="1499" data-demo="https://ivory-waltz.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">🌸 Premium · ₹1,499</span>
-            <img src="assets/preview/7.png" alt="Ivory Waltz Formal Wedding Invitation" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Ivory Waltz</h3>
-            <p class="lp-card-desc">Timeless ivory &amp; warm white formal palette with multi-event schedule, music, and photo gallery.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹1,499</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(12)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 7. Wax Seal Royale -->
-        <article class="lp-card" data-design-id="20" data-design-name="Wax Seal Royale" data-tier="Luxury" data-price="2499" data-demo="https://wax-seal-royale.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">👑 Luxury · ₹2,499</span>
-            <img src="assets/preview/8.png" alt="Wax Seal Royale Luxury Invitation" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Wax Seal Royale</h3>
-            <p class="lp-card-desc">Interactive virtual wax seal peel reveal, custom royal music, full 12-photo gallery, and VIP RSVP.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹2,499</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(20)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-
-        <!-- 8. Rajwada Royale -->
-        <article class="lp-card" data-design-id="21" data-design-name="Rajwada Royale" data-tier="Luxury" data-price="2499" data-demo="https://rajwada-royale.invitestory.in/">
-          <div class="lp-card-img-wrap">
-            <span class="lp-card-tier-pill">👑 Luxury · ₹2,499</span>
-            <img src="assets/preview/11.png" alt="Rajwada Royale Palace Doors Wedding Card" class="lp-card-img" loading="lazy">
-          </div>
-          <div class="lp-card-body">
-            <h3 class="lp-card-title">Rajwada Royale</h3>
-            <p class="lp-card-desc">Majestic palace door unlatching animation, royal procession visuals, and personalized soundtrack.</p>
-            <div class="lp-card-price-row">
-              <span class="lp-card-price">₹2,499</span>
-              <button type="button" class="lp-card-btn" onclick="openLpPreview(21)">Live Preview ↗</button>
-            </div>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Pricing Packages Section (Strictly Classic, Premium, Luxury) -->
-    <section id="pricing-packages" class="pricing-section" style="padding: 50px 0;">
-      <div class="container">
-        <div class="lp-section-heading">
-          <h2>Transparent One-Time Packages</h2>
-          <p>One-time payment • No recurring subscription • Fast delivery to WhatsApp</p>
+      <div class="hero-visual">
+        <div class="hero-visual-heading">
+          <span>Featured design</span>
+          <span>Tap to preview live</span>
         </div>
 
-        <div class="pricing-grid">
-          <!-- Tier 1: Classic -->
-          <div class="pricing-card">
-            <div class="pricing-card-header">
-              <h3 class="pricing-card-name">🌿 Classic</h3>
-              <div class="pricing-card-price-row">
-                <span class="pricing-card-price">₹999</span>
-              </div>
-            </div>
-            <div class="pricing-card-tagline">“Timeless &amp; elegant — perfect for one function.”</div>
-            <ul class="pricing-card-features">
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Single-event invite (Wedding or Reception)</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Couple cover portrait, names &amp; 1-tap venue map</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Countdown timer + guest RSVP</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>1-Year high-speed hosted link</span>
-              </li>
-            </ul>
-            <button type="button" class="pricing-card-cta" onclick="checkoutPackage(1, 999, 'Classic')">
-              <span>Book Classic (₹999) →</span>
+        <div class="hero-showroom-showcase" aria-label="Featured wedding invitation previews">
+        
+        <!-- Showcase Card 1: Classic (Sage Parchment) -->
+        <button type="button" class="showroom-card showroom-card-classic" onclick="openPreview(7)" title="Preview Sage Parchment classic template">
+          <span class="showroom-card-media">
+            <img src="assets/preview/5.png" alt="Sage Parchment Classic Digital Wedding Card" class="showroom-card-img" loading="eager" fetchpriority="high">
+            <span class="showroom-card-overlay">
+              <span class="showroom-play-badge">Preview →</span>
+            </span>
+          </span>
+          <span class="showroom-card-footer">
+            <span class="showroom-tier-tag tier-classic">Classic</span>
+            <span class="showroom-card-title">Sage Parchment</span>
+          </span>
+        </button>
+
+        <!-- Showcase Card 2: Premium (Ever After Bloom - Center Hero Card) -->
+        <button type="button" class="showroom-card showroom-card-premium is-hero-center" onclick="openPreview(18)" title="Preview Ever After Bloom premium template">
+          <span class="showroom-popular-pill">Couples' favourite</span>
+          <span class="showroom-card-media">
+            <img src="assets/preview/16.png" alt="Ever After Bloom Premium Watercolor Digital Wedding Card" class="showroom-card-img" loading="eager" fetchpriority="high">
+            <span class="showroom-card-overlay">
+              <span class="showroom-play-badge">Preview →</span>
+            </span>
+          </span>
+          <span class="showroom-card-footer">
+            <span class="showroom-tier-tag tier-premium">Premium</span>
+            <span class="showroom-card-title">Ever After Bloom</span>
+          </span>
+        </button>
+
+        <!-- Showcase Card 3: Luxury (Rajwada Royale – Alt) -->
+        <button type="button" class="showroom-card showroom-card-luxury" onclick="openPreview(21)" title="Preview Rajwada Royale luxury template">
+          <span class="showroom-card-media">
+            <img src="assets/preview/18.png" alt="Rajwada Royale – Alt Luxury Digital Wedding Card" class="showroom-card-img" loading="eager" fetchpriority="high">
+            <span class="showroom-card-overlay">
+              <span class="showroom-play-badge">Preview →</span>
+            </span>
+          </span>
+          <span class="showroom-card-footer">
+            <span class="showroom-tier-tag tier-luxury">Luxury</span>
+            <span class="showroom-card-title">Rajwada Royale – Alt</span>
+          </span>
+        </button>
+
+        </div>
+
+        <div class="hero-feature-float" aria-hidden="true">
+          <span>Music</span><i></i><span>Maps</span><i></i><span>RSVP</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 2: TEMPLATE CATALOGUE (Product First — moved UP)      -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="catalogue-section" id="catalogue-header">
+    <div class="container">
+      <!-- Catalogue Section Header -->
+      <div class="catalogue-section-header">
+        <h2 class="section-title">See them. Feel them. Choose yours.</h2>
+        <p class="section-subtitle">30+ handcrafted designs with live interactive previews</p>
+        
+        <!-- Grid / List View Toggle -->
+        <div class="view-mode-toggle-wrap">
+          <div class="view-mode-toggle" role="group" aria-label="Template View Mode">
+            <button type="button" class="view-mode-btn active" id="view-mode-grid" data-mode="grid" aria-label="Card grid view" title="Card grid view">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              <span>Card</span>
             </button>
-            <a href="https://wa.me/918281583882?text=Hi%20InviteStory!%20Looking%20at%20Classic%20Package%20(%E2%82%B9999).%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener" class="pkg-ask-btn lp-wa-cta" data-cta-loc="pkg_classic_ask">
-              <span>Ask on WhatsApp 💬</span>
-            </a>
-            <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
-          </div>
-
-          <!-- Tier 2: Premium (Featured) -->
-          <div class="pricing-card featured pricing-card-premium">
-            <div class="pricing-popular-badge">Couples' favourite</div>
-            <div class="pricing-card-header">
-              <h3 class="pricing-card-name">🌸 Premium</h3>
-              <div class="pricing-card-price-row">
-                <span class="pricing-card-price">₹1,499</span>
-              </div>
-            </div>
-            <div class="pricing-card-tagline">“Your whole wedding story, beautifully told.”</div>
-            <ul class="pricing-card-features">
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Up to 5 events: Haldi, Mehendi, Sangeet, Wedding, Reception</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Love-story timeline + couple photo gallery (up to 12)</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Background music soundtrack + venue maps + RSVP</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>1-Year high-speed hosted link</span>
-              </li>
-            </ul>
-            <button type="button" class="pricing-card-cta" onclick="checkoutPackage(2, 1499, 'Premium')">
-              <span>Book Premium (₹1,499) →</span>
+            <button type="button" class="view-mode-btn" id="view-mode-list" data-mode="list" aria-label="List view" title="List view">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              <span>List</span>
             </button>
-            <a href="https://wa.me/918281583882?text=Hi%20InviteStory!%20Looking%20at%20Premium%20Package%20(%E2%82%B91%2C499).%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener" class="pkg-ask-btn lp-wa-cta" data-cta-loc="pkg_premium_ask">
-              <span>Ask on WhatsApp 💬</span>
-            </a>
-            <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
-          </div>
-
-          <!-- Tier 3: Luxury -->
-          <div class="pricing-card pricing-card-luxury">
-            <div class="pricing-card-header">
-              <h3 class="pricing-card-name">👑 Luxury</h3>
-              <div class="pricing-card-price-row">
-                <span class="pricing-card-price">₹2,499</span>
-              </div>
-            </div>
-            <div class="pricing-card-tagline">“Make an unforgettable entrance.”</div>
-            <ul class="pricing-card-features">
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Everything in Premium for all your wedding functions</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Cinematic interactive opening — envelope peel or palace reveal</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>Priority build + photo gallery (up to 12) + custom audio</span>
-              </li>
-              <li class="pricing-card-feature-item">
-                <svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-                <span>1-Year high-speed hosted link</span>
-              </li>
-            </ul>
-            <button type="button" class="pricing-card-cta" onclick="checkoutPackage(3, 2499, 'Luxury')">
-              <span>Book Luxury (₹2,499) →</span>
-            </button>
-            <a href="https://wa.me/918281583882?text=Hi%20InviteStory!%20Looking%20at%20Luxury%20Package%20(%E2%82%B92%2C499).%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener" class="pkg-ask-btn lp-wa-cta" data-cta-loc="pkg_luxury_ask">
-              <span>Ask on WhatsApp 💬</span>
-            </a>
-            <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- Verifiable Customer Reviews Section -->
-    <section class="container" style="padding: 40px 20px;">
-      <div class="lp-section-heading">
-        <h2>Genuine Customer Reviews &amp; WhatsApp Proofs</h2>
-        <p>Real feedback from couples who celebrated with InviteStory.</p>
-      </div>
-
-      <div class="lp-reviews-grid">
-        <article class="lp-review-card">
-          <div class="lp-review-header">
-            <span class="lp-review-author">Vibhore &amp; Shalini</span>
-            <span class="lp-review-badge">Verified Order</span>
-          </div>
-          <p class="lp-review-text">“Got our preview link on WhatsApp the same day. Two quick wording updates and the final link was ready. Relatives opened it on phone and loved the music &amp; animations.”</p>
-          <div class="lp-review-img-preview">
-            <img src="review/WhatsApp Image 2026-03-01 at 4.09.52 PM (1).jpeg" alt="WhatsApp Review Vibhore & Shalini" loading="lazy">
-          </div>
-        </article>
-
-        <article class="lp-review-card">
-          <div class="lp-review-header">
-            <span class="lp-review-author">Punam &amp; Jagdish</span>
-            <span class="lp-review-badge">Verified Order</span>
-          </div>
-          <p class="lp-review-text">“Paid online, shared our event dates and venue on WhatsApp. Everything was set up seamlessly — the integrated Google Maps link saved us dozens of phone calls.”</p>
-          <div class="lp-review-img-preview">
-            <img src="review/WhatsApp Image 2026-03-01 at 4.09.52 PM.jpeg" alt="WhatsApp Review Punam & Jagdish" loading="lazy">
-          </div>
-        </article>
-
-        <article class="lp-review-card">
-          <div class="lp-review-header">
-            <span class="lp-review-author">Sumeet &amp; Shikha</span>
-            <span class="lp-review-badge">Verified Order</span>
-          </div>
-          <p class="lp-review-text">“The interactive love timeline gave our family goosebumps. We shared our link in every WhatsApp group and got nonstop compliments from guests.”</p>
-          <div class="lp-review-img-preview">
-            <img src="review/WhatsApp Image 2026-03-01 at 4.09.53 PM (1).jpeg" alt="WhatsApp Review Sumeet & Shikha" loading="lazy">
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <!-- Delivery & Revision Policy -->
-    <section class="container" style="padding: 20px 20px 60px;">
-      <div class="lp-section-heading">
-        <h2>How It Works &amp; Clear Terms</h2>
-        <p>Simple 3-step order process with guaranteed transparent policies.</p>
-      </div>
-
-      <div class="lp-steps-grid">
-        <div class="lp-step-item">
-          <div class="lp-step-num">1</div>
-          <h3 class="lp-step-title">Choose Package &amp; Pay</h3>
-          <p class="lp-step-desc">Pick your desired tier (Classic, Premium, or Luxury). Complete quick, secure payment via UPI, GPay, PhonePe, or cards.</p>
+      <!-- Filter controls -->
+      <div class="controls-card">
+        <!-- Search bar -->
+        <div class="search-box-wrapper">
+          <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <input type="text" id="search-input" class="search-input" placeholder="Search templates (e.g. Telugu, Royal, Nikah, Palace, Sage)...">
+          <button class="clear-search-btn" id="clear-search-btn" aria-label="Clear search">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-        <div class="lp-step-item">
-          <div class="lp-step-num">2</div>
-          <h3 class="lp-step-title">Send Details on WhatsApp</h3>
-          <p class="lp-step-desc">We reach out on WhatsApp within minutes with a simple checklist to collect your names, ceremony dates, venue Google Maps links, and photos.</p>
-        </div>
-        <div class="lp-step-item">
-          <div class="lp-step-num">3</div>
-          <h3 class="lp-step-title">Delivered in 48 Hours</h3>
-          <p class="lp-step-desc">Delivered within 48 hours after payment and receipt of all required details. Free revision requests for 24 hours after your first draft is delivered.</p>
+
+        <!-- Simplified style tags -->
+        <div class="filter-tags-row" id="filter-tags">
+          <button class="filter-tag active" data-tag="all">All</button>
+          <button class="filter-tag" data-tag="our-picks">⭐ Our Picks</button>
+          <button class="filter-tag" data-tag="traditional">Traditional</button>
+          <button class="filter-tag" data-tag="modern">Modern</button>
+          <button class="filter-tag" data-tag="royal">Royal</button>
+          <button class="filter-tag" data-tag="south-indian">South Indian</button>
+          <button class="filter-tag" data-tag="islamic">Islamic</button>
+          <button class="filter-tag" data-tag="quirky">Illustrated</button>
         </div>
       </div>
-
-      <div style="background: rgba(223,184,119,0.08); border: 1px solid rgba(223,184,119,0.25); border-radius: 14px; padding: 18px 24px; text-align: center; max-width: 720px; margin: 0 auto; color: #ecd9ac; font-size: 0.92rem;">
-        🛡️ <strong>Our Promise:</strong> Free revision requests for 24 hours after your first draft is delivered. All detail edits, map link updates, and text adjustments are included free during this window.
-      </div>
-    </section>
-  </main>
-
-  <!-- Interactive Live Preview Modal -->
-  <div id="lp-preview-modal" class="lp-modal" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="lp-modal-box">
-      <div class="lp-modal-header">
-        <h4 id="lp-modal-title">Design Preview</h4>
-        <button type="button" class="lp-modal-close" onclick="closeLpPreview()" aria-label="Close Preview">&times;</button>
-      </div>
-      <iframe id="lp-modal-iframe" class="lp-modal-frame" title="Interactive Wedding Card Demo" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
-      <div class="lp-modal-footer">
-        <a href="#pricing-packages" class="btn btn-primary btn-sm" style="flex: 1; text-align: center;" onclick="closeLpPreview()">Select Package →</a>
-        <a href="#" id="lp-modal-wa-btn" target="_blank" rel="noopener" class="btn btn-outline btn-sm lp-wa-cta" data-cta-loc="preview_modal" style="flex: 1; text-align: center;">Ask on WhatsApp 💬</a>
+      
+      <!-- Template list grid -->
+      <div class="templates-grid" id="templates-grid">
+        <!-- Loaded dynamically by scripts.js -->
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 3: HOW IT WORKS — Rewritten, customer-oriented copy   -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <div class="how-it-works-header">
+        <h3 class="how-section-title">Your invitation is 3 steps away.</h3>
+      </div>
+
+      <div class="how-steps-wrap how-steps-visible" id="how-steps-wrap" aria-hidden="false">
+        <div class="how-steps">
+          <div class="how-step">
+            <div class="how-step-icon">①</div>
+            <h4 class="how-step-title">Choose a design</h4>
+            <p class="how-step-desc">Open the live demo. See exactly what your guests will receive.</p>
+          </div>
+          <div class="how-step-arrow">→</div>
+          <div class="how-step">
+            <div class="how-step-icon">②</div>
+            <h4 class="how-step-title">Pay &amp; book</h4>
+            <p class="how-step-desc">Secure UPI in under a minute. One-time, no subscription.</p>
+          </div>
+          <div class="how-step-arrow">→</div>
+          <div class="how-step">
+            <div class="how-step-icon">③</div>
+            <h4 class="how-step-title">We build it</h4>
+            <p class="how-step-desc">Send details on WhatsApp; your private link arrives in 48h.</p>
+          </div>
+        </div>
+        <p class="how-steps-tagline">No app. No editing. No design skills.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 4: SOCIAL PROOF                                        -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="social-proof">
+    <div class="container">
+      <h2 class="section-title">Made for real weddings.</h2>
+      <p class="section-subtitle">Real reviews from real couples, in their own words.</p>
+      <div class="testimonials-wrapper">
+        <button type="button" class="testimonials-nav-btn testimonials-nav-prev" id="testimonials-prev" aria-label="Previous testimonial">&larr;</button>
+        <div class="testimonials-grid" id="testimonials-grid"><!-- loaded by scripts.js --></div>
+        <button type="button" class="testimonials-nav-btn testimonials-nav-next" id="testimonials-next" aria-label="Next testimonial">&rarr;</button>
+      </div>
+
+      <!-- ── WhatsApp Customer Chats Showcase ── -->
+      <div class="wa-reviews-showcase">
+        <div class="wa-reviews-header">
+          <h3 class="wa-reviews-title">Real chats. Real reactions. Zero guesswork.</h3>
+          <p class="wa-reviews-subtitle">From custom edits to family blessings on delivery day &mdash; tap any chat screenshot to view full-size.</p>
+        </div>
+
+        <div class="wa-reviews-carousel-wrapper">
+          <button type="button" class="testimonials-nav-btn wa-reviews-nav-prev" id="wa-reviews-prev" aria-label="Previous chat screenshot">&larr;</button>
+          <div class="wa-reviews-track" id="wa-reviews-track">
+            <!-- Populated dynamically by scripts.js -->
+          </div>
+          <button type="button" class="testimonials-nav-btn wa-reviews-nav-next" id="wa-reviews-next" aria-label="Next chat screenshot">&rarr;</button>
+        </div>
+      </div>
+      <div class="trust-marquee" aria-label="Trust badges">
+        <div class="trust-marquee-track" id="trust-marquee-track">
+          <div class="trust-marquee-set">
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 6v6c0 5 3.4 9.4 8 10 4.6-.6 8-5 8-10V6l-8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+              </span>
+              <div class="trust-text">
+                <strong>Hand-Crafted Quality</strong>
+                <span>Every template customised by humans</span>
+              </div>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              <div class="trust-text">
+                <strong>Delivered in 48 Hours</strong>
+                <span>After payment &amp; receipt of details</span>
+              </div>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon trust-icon-upi" aria-hidden="true">
+                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                  <rect width="32" height="32" rx="6" fill="#097939"/>
+                  <text x="16" y="21" text-anchor="middle" font-family="Inter, sans-serif" font-weight="700" font-size="11" fill="#fff">UPI</text>
+                </svg>
+              </span>
+              <div class="trust-text">
+                <strong>UPI / Indian Payments</strong>
+                <span>GPay, PhonePe, Paytm, BHIM</span>
+              </div>
+            </div>
+            <div class="trust-item">
+              <span class="trust-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 3.5L11 13l-4-4-6 6 11 11 11.5-11.5z"/></svg>
+              </span>
+              <div class="trust-text">
+                <strong>WhatsApp Support</strong>
+                <span>Real human replies, not bots</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 5: WHAT HAPPENS AFTER YOU ORDER? (NEW)                 -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="post-order-section">
+    <div class="container">
+      <h2 class="section-title">What happens after you order?</h2>
+      <p class="section-subtitle">Zero guesswork. Here's exactly how it works.</p>
+      <div class="post-order-steps">
+        <div class="post-order-step">
+          <span class="post-order-step-num">1</span>
+          <div class="post-order-step-content">
+            <h4>Choose your design</h4>
+            <p>Pick a live preview you love. No designing required.</p>
+          </div>
+        </div>
+        <div class="post-order-step">
+          <span class="post-order-step-num">2</span>
+          <div class="post-order-step-content">
+            <h4>Pay securely</h4>
+            <p>UPI / GPay / PhonePe via Razorpay. One-time, no subscription.</p>
+          </div>
+        </div>
+        <div class="post-order-step">
+          <span class="post-order-step-num">3</span>
+          <div class="post-order-step-content">
+            <h4>WhatsApp us your details</h4>
+            <p>Names, dates, photos, venues — we send a short checklist.</p>
+          </div>
+        </div>
+        <div class="post-order-step">
+          <span class="post-order-step-num">4</span>
+          <div class="post-order-step-content">
+            <h4>We build it</h4>
+            <p>Humans customise everything. No Canva for you.</p>
+          </div>
+        </div>
+        <div class="post-order-step">
+          <span class="post-order-step-num">5</span>
+          <div class="post-order-step-content">
+            <h4>Get your private link</h4>
+            <p>Usually 48h (24h express available). Share on WhatsApp / Instagram.</p>
+          </div>
+        </div>
+      </div>
+      <div class="post-order-cta">
+        <a href="#pricing" class="btn-hero-primary">
+          <span>Choose a design — from ₹999</span>
+          <span class="btn-icon">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 6: PRICING (Moved DOWN — after social proof)           -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <h2 class="section-title">Beautiful doesn't have to be complicated.</h2>
+      <p class="section-subtitle">One-time payment. No subscription. Delivered in 48 hours.</p>
+      <p class="pricing-diff-line">Not another DIY editor. You pick a design, pay, send details — we build the invite for you.</p>
+      <div class="pricing-grid">
+        <!-- Tier 1: Classic -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <h3 class="pricing-card-name">🌿 Classic</h3>
+            <div class="pricing-card-price-row">
+              <span class="pricing-card-price">₹999</span>
+            </div>
+          </div>
+          <div class="pricing-card-tagline">“Timeless &amp; elegant — perfect for one function.”</div>
+          <ul class="pricing-card-features">
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Single-event invite (Wedding or Reception)</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Your photos, names &amp; 1-tap venue map</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Countdown timer + guest RSVP</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Delivered in 48 hours</span></li>
+          </ul>
+          <label class="express-toggle"><input type="checkbox" id="express-toggle-1" onchange="updatePackagePayLabels()"><span>⚡ Express 24h delivery (+₹299)</span></label>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-1" onclick="payRazorpayForPackage(1)"><span data-pay-label>Choose this design</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(1)"><span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
+        </div>
+
+        <!-- Tier 2: Premium (Hero / Couples' favourite) -->
+        <div class="pricing-card featured pricing-card-premium">
+          <div class="pricing-popular-badge">Couples' favourite</div>
+          <div class="pricing-card-header">
+            <h3 class="pricing-card-name">🌸 Premium</h3>
+            <div class="pricing-card-price-row">
+              <span class="pricing-card-price">₹1,499</span>
+            </div>
+          </div>
+          <div class="pricing-card-tagline">“Your whole wedding story, beautifully told.”</div>
+          <ul class="pricing-card-features">
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Up to 5 events: Haldi, Mehendi, Sangeet, Wedding, Reception</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Love-story timeline + photo gallery (up to 12)</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Background music + venue maps + RSVP</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Delivered in 48 hours</span></li>
+          </ul>
+          <label class="express-toggle"><input type="checkbox" id="express-toggle-2" onchange="updatePackagePayLabels()"><span>⚡ Express 24h delivery (+₹299)</span></label>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="payRazorpayForPackage(2)"><span data-pay-label>Choose this design</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(2)"><span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
+        </div>
+
+        <!-- Tier 3: Luxury (Prestige) -->
+        <div class="pricing-card pricing-card-luxury">
+          <div class="pricing-card-header">
+            <h3 class="pricing-card-name">👑 Luxury</h3>
+            <div class="pricing-card-price-row">
+              <span class="pricing-card-price">₹1,999</span>
+            </div>
+          </div>
+          <div class="pricing-card-tagline">“Make an unforgettable entrance.”</div>
+          <ul class="pricing-card-features">
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Everything in Premium, for all your events</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Cinematic opening — envelope &amp; palace reveals</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Premium motion, effects &amp; priority build</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Delivered in 48 hours (24h express available)</span></li>
+          </ul>
+          <label class="express-toggle"><input type="checkbox" id="express-toggle-3" onchange="updatePackagePayLabels()"><span>⚡ Express 24h delivery (+₹299)</span></label>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="payRazorpayForPackage(3)"><span data-pay-label>Choose this design</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)"><span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
+        </div>
+      </div>
+      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for Premium &amp; Luxury · Couples’ favourite is in the middle</p>
+      <div class="pricing-dots" id="pricing-dots" role="tablist" aria-label="Package cards">
+        <button type="button" class="pricing-dot" data-pricing-dot="0" aria-label="Classic package" aria-current="false"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="1" aria-label="Premium package" aria-current="true"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Luxury package" aria-current="false"></button>
+      </div>
+      <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — delivered within 48 hours after payment and receipt of all required details.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 7: FAQ                                                  -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="section-title">Questions, Answered</h2>
+      <p class="section-subtitle">Everything you might want to know before you pay.</p>
+      <div class="faq-list" id="faq-list"><!-- loaded by scripts.js --></div>
+    </div>
+  </section>
+
+  
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 9: BLOG GUIDES                                         -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="guides-section">
+    <div class="container">
+      <h2 class="section-title">Wedding Guides & Digital Card Advice</h2>
+      <p class="section-subtitle">Expert tips on picking templates, Telugu & Nikah design customs, and wedding invitation etiquette.</p>
+      <div class="guides-grid">
+
+        <article class="guide-card">
+          <span class="guide-tag">Trends & Tech</span>
+          <h3 class="guide-title"><a href="blog/digital-wedding-invitation-trends-2026.html">Top 10 Digital Wedding Invitation Trends for 2026</a></h3>
+          <p class="guide-desc">Live venue maps, background music, countdown timers & 3D wax seals.</p>
+          <a href="blog/digital-wedding-invitation-trends-2026.html" class="guide-link">Read Article →</a>
+        </article>
+
+        <article class="guide-card">
+          <span class="guide-tag">Telugu Customs</span>
+          <h3 class="guide-title"><a href="blog/telugu-digital-wedding-invitation-guide.html">Telugu Digital Wedding Cards: Toran & Muhurtham Guide</a></h3>
+          <p class="guide-desc">Banana leaf Toran accents, deepam lamps, and auspicious timing.</p>
+          <a href="blog/telugu-digital-wedding-invitation-guide.html" class="guide-link">Read Article →</a>
+        </article>
+
+        <article class="guide-card">
+          <span class="guide-tag">Islamic Nikah</span>
+          <h3 class="guide-title"><a href="blog/islamic-nikah-digital-card-guide.html">Emerald Nikah & Islamic Digital Marriage Cards</a></h3>
+          <p class="guide-desc">Arabic calligraphic details, emerald palettes, and venue maps.</p>
+          <a href="blog/islamic-nikah-digital-card-guide.html" class="guide-link">Read Article →</a>
+        </article>
+
+      </div>
+      <div class="guides-more">
+        <a href="blog/index.html" class="btn btn-outline btn-sm">Explore All Wedding Guides 📖</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- SECTION 10: FINAL CTA (Rewritten)                              -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="final-cta">
+    <div class="container">
+      <h2 class="final-cta-title">Your wedding deserves an invitation <em>they'll remember.</em></h2>
+      <p class="final-cta-desc">Choose a design. Pay once. We do the rest.</p>
+      <div class="final-cta-buttons">
+        <a href="#pricing" class="btn-hero-primary">
+          <span>Pay from ₹999</span>
+          <span class="btn-icon">→</span>
+        </a>
+        <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener" class="final-cta-wa-btn">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+      <div class="final-cta-micro">
+        <span>⚡ Human-customized</span>
+        <span>🔒 Secure payment</span>
+        <span>⏱️ Delivered in 48 hours</span>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
         <div class="footer-brand">
-          <img src="logo/just logo.png" alt="InviteStory Logo" class="footer-logo" loading="lazy">
-          <p>Hand-crafted interactive digital wedding invitations with turn-by-turn venue maps, countdown timer and music — delivered to your WhatsApp in 48 hours.</p>
+          <img src="logo/just logo.png" alt="InviteStory Logo - Digital Wedding Cards" class="footer-logo" loading="lazy">
+          <p>Hand-crafted interactive digital wedding invitations with venue maps, countdown and music — delivered to your WhatsApp in 48 hours.</p>
         </div>
         <div>
-          <h4 class="footer-heading">Trust &amp; Legal</h4>
+          <h4 class="footer-heading">Explore</h4>
           <ul class="footer-links">
-            <li><a href="refund-and-editing-policy.html">Refund &amp; Editing Policy</a></li>
-            <li><a href="terms.html">Terms of Service</a></li>
-            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="#catalogue-header">Template Catalogue</a></li>
+            <li><a href="#pricing">Packages &amp; Pay</a></li>
+                        <li><a href="blog/index.html">Wedding Blog & Guides</a></li>
+            <li><a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener">Chat on WhatsApp</a></li>
+            <li><a href="https://www.instagram.com/invitestory.in" target="_blank" rel="noopener">Instagram · @invitestory.in</a></li>
           </ul>
         </div>
         <div>
           <h4 class="footer-heading">Support</h4>
           <ul class="footer-links">
-            <li><a href="https://wa.me/918281583882" target="_blank" rel="noopener" class="lp-wa-cta" data-cta-loc="footer_wa">WhatsApp: +91 82815 83882</a></li>
-            <li><a href="mailto:support@invitestory.in">support@invitestory.in</a></li>
-            <li><span style="color: rgba(243,237,218,0.6); font-size: 0.85rem;">Mon - Sat, 9:00 AM - 9:00 PM IST</span></li>
+            <li><a href="refund-and-editing-policy.html">Refund & Editing Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
           </ul>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 InviteStory. All rights reserved. Delivered within 48 hours after payment and receipt of all required details.</p>
+        <span>&copy; 2026 InviteStory. All rights reserved.</span>
+        <span>Need help? Message us on WhatsApp · +91 82815 83882</span>
       </div>
     </div>
   </footer>
 
-  <!-- Page Logic & Conversion Tracking Script -->
-  <script>
-    // --- UTM & Click ID Attribution Helpers ---
-    function getStoredAttribution() {
-      try {
-        var urlParams = new URLSearchParams(window.location.search);
-        var keys = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "utm_id", "gclid", "gbraid", "wbraid", "fbclid"];
-        keys.forEach(function(k) {
-          var v = urlParams.get(k);
-          if (v) {
-            localStorage.setItem("ist_" + k, v);
-            sessionStorage.setItem("ist_" + k, v);
-          }
-        });
-        var getK = function(k) {
-          return urlParams.get(k) || sessionStorage.getItem("ist_" + k) || localStorage.getItem("ist_" + k) || "";
-        };
-        var notes = {};
-        keys.forEach(function(k) {
-          var val = getK(k);
-          if (val) notes[k] = val;
-        });
-        return notes;
-      } catch (e) {
-        return {};
-      }
-    }
+  <!-- Preview Modal -->
+  <div id="preview-modal" class="preview-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="preview-modal-title">
+    <div class="preview-modal-scrim" data-preview-close></div>
+    
+    <!-- Dynamic Ambient Theme Glow Backdrop -->
+    <div class="preview-modal-ambient-glow" id="preview-modal-ambient-glow"></div>
 
-    function buildAttributionQuery() {
-      var attr = getStoredAttribution();
-      var sp = new URLSearchParams();
-      Object.keys(attr).forEach(function(k) {
-        if (attr[k]) sp.set(k, attr[k]);
-      });
-      var str = sp.toString();
-      return str ? "&" + str : "";
-    }
+    <div class="preview-modal-panel">
+      <div class="ios-sheet-grab-handle" aria-hidden="true"></div>
+      <!-- Dark Luxury Glass Header -->
+      <header class="preview-modal-header">
+        <div class="preview-modal-header-text">
+            <div class="preview-title-row">
+              <h2 id="preview-modal-title" class="preview-modal-title">Template Name</h2>
+              <span class="preview-price-badge" id="preview-modal-price">₹999</span>
+            </div>
+            <span class="preview-modal-style-tag" id="preview-modal-tag">Style tag</span>
+            <span class="preview-tier-badge" id="preview-modal-tier" data-tier="2">Premium</span>
+            <p class="preview-multievent-note" id="preview-multievent-note" hidden>Multi-event ready: Haldi · Mehendi · Sangeet · Wedding · Reception</p>
+        </div>
+        <div class="preview-header-actions">
+          <button type="button" class="preview-header-btn preview-faq-header-btn" id="preview-faq-btn" onclick="openPreviewFaq(event)" title="Frequently Asked Questions" aria-label="Preview FAQ">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <span>FAQ</span>
+          </button>
+          <a href="#" id="preview-fullscreen-btn" target="_blank" rel="noopener" class="preview-header-btn" title="Open full screen demo in new tab">Full Demo ↗</a>
+          <button type="button" class="preview-modal-close" data-preview-close aria-label="Close preview">&times;</button>
+        </div>
+      </header>
 
-    // Run on page load to capture incoming ad traffic immediately
-    getStoredAttribution();
+      <!-- Main Canvas & Living 3D Device Stage -->
+      <div class="preview-modal-body" id="preview-modal-body">
+        <!-- Distinct Luxury Ambient Pattern Canvas for each template -->
+        <div class="preview-pattern-canvas" id="preview-pattern-canvas" aria-hidden="true"></div>
 
-    // --- Unified Conversion Tracker ---
-    function trackEvent(eventName, params) {
-      params = params || {};
-      var val = params.value || 0;
-      var curr = params.currency || "INR";
-      var attr = getStoredAttribution();
+        <!-- Floating Side Navigation Arrows (Story style) -->
+        <button type="button" class="preview-side-arrow side-arrow-prev" id="preview-side-prev" aria-label="Previous template">&lsaquo;</button>
+        <button type="button" class="preview-side-arrow side-arrow-next" id="preview-side-next" aria-label="Next template">&rsaquo;</button>
 
-      // 1. Google Analytics 4
-      if (typeof gtag === "function") {
-        gtag("event", eventName, Object.assign({}, params, attr, { value: val, currency: curr }));
+        <!-- 3D Perspective Stage -->
+        <div class="preview-3d-stage" id="preview-3d-stage">
+          <div class="preview-phone-3d-rig is-flat-mode" id="preview-phone-3d-rig">
+            <!-- 3D Floor Cast Shadow -->
+            <div class="phone-shadow-3d" aria-hidden="true"></div>
 
-        // Primary Google Ads Conversion Optimization
-        if (eventName === "purchase") {
-          var targetSendTo = window.GOOGLE_ADS_ID && window.GOOGLE_ADS_PURCHASE_LABEL
-            ? window.GOOGLE_ADS_ID + "/" + window.GOOGLE_ADS_PURCHASE_LABEL
-            : (window.GOOGLE_ADS_ID || "");
-          if (targetSendTo) {
-            var adsParams = {
-              send_to: targetSendTo,
-              value: val,
-              currency: curr,
-              transaction_id: params.transaction_id || ""
-            };
-            if (attr.gclid) adsParams.gclid = attr.gclid;
-            gtag("event", "conversion", adsParams);
-          }
-        }
-      }
+            <!-- Phone Frame -->
+            <div class="preview-modal-iframe-wrap" id="preview-modal-iframe-wrap">
+              <!-- iPhone 17 Pro Precision Titanium Buttons & Camera Control -->
+              <div class="phone-button phone-action-btn" aria-hidden="true" title="Action Button"></div>
+              <div class="phone-button phone-vol-up" aria-hidden="true" title="Volume Up"></div>
+              <div class="phone-button phone-vol-down" aria-hidden="true" title="Volume Down"></div>
+              <div class="phone-button phone-power" aria-hidden="true" title="Side Button"></div>
+              <div class="phone-button phone-camera-control" aria-hidden="true" title="Camera Control"></div>
 
-      // 2. Meta Pixel
-      if (typeof fbq === "function") {
-        if (eventName === "purchase") {
-          fbq("track", "Purchase", { value: val, currency: curr, content_name: params.package_name });
-        } else if (eventName === "begin_checkout") {
-          fbq("track", "InitiateCheckout", { value: val, currency: curr, content_name: params.package_name });
-        } else if (eventName === "whatsapp_click") {
-          fbq("track", "Contact", { content_name: params.cta_location || "WhatsApp Enquiry" });
-        } else if (eventName === "select_design") {
-          fbq("track", "ViewContent", { content_name: params.item_name });
-        }
-      }
-    }
+              <!-- Titanium Chassis Antenna Separation Bands -->
+              <div class="phone-antenna phone-antenna-tl" aria-hidden="true"></div>
+              <div class="phone-antenna phone-antenna-tr" aria-hidden="true"></div>
+              <div class="phone-antenna phone-antenna-bl" aria-hidden="true"></div>
+              <div class="phone-antenna phone-antenna-br" aria-hidden="true"></div>
 
-    // --- Designs Catalog for Landing Page ---
-    var LP_DESIGNS = {
-      1: { name: "Marigold Bhavan", demo: "https://marigold-bhavan.invitestory.in/", price: 999, tier: "Classic" },
-      3: { name: "Toran Telugu", demo: "https://toran-telugu.invitestory.in/", price: 999, tier: "Classic" },
-      7: { name: "Diya Haveli", demo: "https://diya-haveli.invitestory.in/", price: 999, tier: "Classic" },
-      5: { name: "Emerald Nikah", demo: "https://emerald-nikah.invitestory.in/", price: 1499, tier: "Premium" },
-      8: { name: "Sage Parchment", demo: "https://sage-parchment.invitestory.in/", price: 999, tier: "Classic" },
-      12: { name: "Ivory Waltz", demo: "https://ivory-waltz.invitestory.in/", price: 1499, tier: "Premium" },
-      20: { name: "Wax Seal Royale", demo: "https://wax-seal-royale.invitestory.in/", price: 2499, tier: "Luxury" },
-      21: { name: "Rajwada Royale", demo: "https://rajwada-royale.invitestory.in/", price: 2499, tier: "Luxury" }
-    };
+              <!-- iPhone 17 Pro OLED Screen Viewport -->
+              <div class="phone-screen-viewport" id="phone-screen-viewport">
+                <!-- Multi-Layer Specular Glass Reflections -->
+                <div class="phone-glass-glare-stack" id="phone-glass-glare-stack" aria-hidden="true">
+                  <div class="glare-layer glare-highlight" id="glare-highlight"></div>
+                  <div class="glare-layer glare-rim" id="glare-rim"></div>
+                  <div class="glare-layer glare-ambient" id="glare-ambient"></div>
+                </div>
 
-    function openLpPreview(id) {
-      var item = LP_DESIGNS[id];
-      if (!item) return;
+                <div class="preview-modal-loader" id="preview-modal-loader" aria-hidden="true">
+                  <div class="preview-modal-loader-dot"></div>
+                  <div class="preview-modal-loader-dot"></div>
+                  <div class="preview-modal-loader-dot"></div>
+                </div>
+                <iframe
+                  id="preview-modal-iframe"
+                  class="preview-modal-iframe"
+                  title="Template preview"
+                  loading="eager"
+                  referrerpolicy="no-referrer-when-downgrade"
+                  allow="autoplay; fullscreen; clipboard-write; web-share; accelerometer; gyroscope"
+                  sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"
+                  src="about:blank"></iframe>
+                <!-- iPhone 17 Pro Dynamic Island -->
+                <div class="preview-modal-phone-notch dynamic-island-17-pro" aria-hidden="true">
+                  <div class="dynamic-island-faceid"></div>
+                  <div class="dynamic-island-lens">
+                    <div class="dynamic-island-lens-flare"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      trackEvent("select_design", {
-        item_id: String(id),
-        item_name: item.name,
-        value: item.price,
-        currency: "INR"
-      });
+      <!-- Dark Luxury Glass Footer Toolbar -->
+      <footer class="preview-modal-toolbar">
+        <div class="preview-toolbar-top-row">
+          <div class="preview-toolbar-nav-group">
+            <div class="preview-modal-nav">
+              <button type="button" class="preview-nav-btn" id="preview-prev-btn" aria-label="Previous template">&larr;</button>
+              <button type="button" class="preview-nav-btn" id="preview-next-btn" aria-label="Next template">&rarr;</button>
+            </div>
+            <span class="preview-counter-badge" id="preview-counter-badge">1 of 25</span>
+          </div>
 
-      var modal = document.getElementById("lp-preview-modal");
-      var frame = document.getElementById("lp-modal-iframe");
-      var title = document.getElementById("lp-modal-title");
-      var waBtn = document.getElementById("lp-modal-wa-btn");
+          <!-- 3D vs Flat View Toggle Switch -->
+          <div class="preview-view-toggle" id="preview-view-toggle" role="group" aria-label="Device view angle">
+            <button type="button" class="preview-view-btn" id="view-mode-3d" onclick="setPreviewViewMode('3d')" title="Cinematic 3D Isometric View">✦ 3D</button>
+            <button type="button" class="preview-view-btn active" id="view-mode-flat" onclick="setPreviewViewMode('flat')" title="Flat Front Reading View">▣ Flat</button>
+          </div>
 
-      title.textContent = item.name + " (" + item.tier + " · ₹" + item.price + ")";
-      frame.src = item.demo;
-      waBtn.href = "https://wa.me/918281583882?text=" + encodeURIComponent("Hi InviteStory! I am previewing " + item.name + " (" + item.tier + " · ₹" + item.price + ") on your website. I have a question!");
+          <!-- Jump to Tier Pills -->
+          <div class="preview-modal-tiers" id="preview-modal-tiers" role="tablist" aria-label="Jump to tier">
+            <button type="button" class="preview-tier-tab" data-preview-tier="1" role="tab">Classic</button>
+            <button type="button" class="preview-tier-tab" data-preview-tier="2" role="tab">Premium</button>
+            <button type="button" class="preview-tier-tab" data-preview-tier="3" role="tab">Luxury</button>
+          </div>
+        </div>
 
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-    }
+        <div class="preview-modal-actions">
+          <div class="preview-actions-row">
+            <button type="button" class="preview-toolbar-btn preview-toolbar-razorpay" id="preview-instant-pay-btn" onclick="payRazorpayForTemplate()" title="Book this design securely with UPI, Cards, or Netbanking via Razorpay">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-2px; margin-right:5px; flex-shrink:0;" aria-hidden="true">
+                <path d="M22.436 0l-11.91 7.773-3.794 6.745 5.039-3.292 4.195-2.738-4.71 8.358-4.52 8.016 6.035-3.94 3.792-6.745 6.873-12.177z M5.564 24l11.91-7.773 3.794-6.745-5.039 3.292-4.195 2.738 4.71-8.358 4.52-8.016-6.035 3.94-3.792 6.745-6.873 12.177z"/>
+              </svg>
+              <span id="preview-pay-label">Choose this design</span>
+            </button>
+            <button type="button" class="preview-toolbar-btn preview-toolbar-paypal" id="preview-instant-paypal-btn" onclick="openPayPalCheckout()" style="display: none;" title="Book this design securely with PayPal, Cards, or Pay Later">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-2px; margin-right:5px; flex-shrink:0;" aria-hidden="true">
+                <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .77-.655h6.39c3.27 0 5.672 1.348 5.405 4.887-.276 3.655-2.613 5.437-5.748 5.437H9.28a.78.78 0 0 0-.77.656l-.884 5.602a.78.78 0 0 1-.55.69z"/>
+                <path d="M18.892 7.747c-.244 3.238-2.316 4.816-5.093 4.816h-2.197a.78.78 0 0 0-.77.656l-1.127 7.15a.547.547 0 0 0 .54.632h3.407a.684.684 0 0 0 .676-.576l.723-4.582a.78.78 0 0 1 .77-.657h1.025c3.088 0 5.503-1.254 6.2-4.908.411-2.152-.07-3.882-1.782-4.731-.58-.287-1.312-.468-2.371-.468z" opacity=".85"/>
+              </svg>
+              <span id="preview-paypal-label">Pay with PayPal</span>
+            </button>
+            <button type="button" class="preview-toolbar-btn preview-toolbar-wa" id="preview-buy-btn">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block; vertical-align:-2px; margin-right:4px;" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              <span id="preview-ask-label">Ask on WhatsApp</span>
+            </button>
+            <button type="button" class="preview-toolbar-btn preview-toolbar-share" id="preview-footer-share-btn" onclick="shareCurrentPreview(event)" title="Share design link" aria-label="Share design link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              <span>Share</span>
+            </button>
+          </div>
+        </div>
+      </footer>
 
-    function closeLpPreview() {
-      var modal = document.getElementById("lp-preview-modal");
-      var frame = document.getElementById("lp-modal-iframe");
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-      frame.src = "";
-    }
+      <!-- Preview FAQ Sheet Modal Popup -->
+      <div class="preview-faq-backdrop" id="preview-faq-backdrop" aria-hidden="true" onclick="closePreviewFaq()">
+        <div class="preview-faq-sheet" onclick="event.stopPropagation()">
+          <div class="preview-faq-sheet-header">
+            <div class="preview-faq-sheet-title-wrap">
+              <span class="preview-faq-badge">Quick Guide</span>
+              <h3 class="preview-faq-sheet-title">Frequently Asked Questions</h3>
+            </div>
+            <button type="button" class="preview-faq-close" onclick="closePreviewFaq()" aria-label="Close FAQ">&times;</button>
+          </div>
+          
+          <div class="preview-faq-list">
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">⚡</span>
+                <h4>When will I get my invitation?</h4>
+              </div>
+              <p class="preview-faq-a">Delivered within <strong>48 hours</strong> of payment + details (24h with Express).</p>
+            </div>
 
-    // --- Package Checkout Handling ---
-    function checkoutPackage(tier, amount, name) {
-      trackEvent("begin_checkout", {
-        package_tier: tier,
-        package_name: name,
-        value: amount,
-        currency: "INR",
-        items: [{ item_id: String(tier), item_name: name, price: amount }]
-      });
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">💌</span>
+                <h4>How many people can I send this to?</h4>
+              </div>
+              <p class="preview-faq-a"><strong>Unlimited.</strong> Share with as many guests, family, and friends as you need via WhatsApp, SMS, or email.</p>
+            </div>
 
-      var attr = getStoredAttribution();
-      var options = {
-        key: window.RAZORPAY_KEY_ID || "rzp_live_YOUR_KEY_HERE",
-        amount: amount * 100,
-        currency: "INR",
-        name: "InviteStory",
-        description: name + " Package – Digital Wedding Invitation",
-        image: "https://invitestory.in/logo/noappicon.png",
-        notes: Object.assign({
-          package: name,
-          landing_page: "digital-wedding-invitations"
-        }, attr),
-        theme: { color: "#dfb877" },
-        handler: function (response) {
-          trackEvent("purchase", {
-            transaction_id: response.razorpay_payment_id,
-            value: amount,
-            currency: "INR",
-            package_name: name,
-            items: [{ item_id: String(tier), item_name: name, price: amount }]
-          });
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">✏️</span>
+                <h4>How much will you edit?</h4>
+              </div>
+              <p class="preview-faq-a">Free revision requests for 24 hours after your first draft is delivered.</p>
+            </div>
 
-          var attrQuery = buildAttributionQuery();
-          window.location.href = "thank-you.html?package=" + encodeURIComponent(name) + "&amount=" + encodeURIComponent("₹" + amount) + "&payment_id=" + encodeURIComponent(response.razorpay_payment_id) + attrQuery;
-        }
-      };
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">✨</span>
+                <h4>Can I get a custom design tailored to my ideas?</h4>
+              </div>
+              <p class="preview-faq-a">Yes! Bespoke invitations start at ₹8,000 based on design complexity.</p>
+            </div>
 
-      try {
-        var rzp = new Razorpay(options);
-        rzp.open();
-      } catch (err) {
-        console.error("Razorpay error:", err);
-        // Fallback to WhatsApp order
-        window.open("https://wa.me/918281583882?text=" + encodeURIComponent("Hi InviteStory! I want to order the " + name + " Package (₹" + amount + "). Please share payment link!"), "_blank");
-      }
-    }
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">⏳</span>
+                <h4>How long is my invitation link active?</h4>
+              </div>
+              <p class="preview-faq-a">Your personalized link stays live for <strong>1 year</strong> by default (extendable).</p>
+            </div>
 
-    // --- Event Listeners Setup on Page Load ---
-    document.addEventListener("DOMContentLoaded", function () {
-      // 1. Track WhatsApp Clicks across all WhatsApp buttons
-      document.addEventListener("click", function (e) {
-        var waLink = e.target.closest('a[href*="wa.me"]');
-        if (!waLink) return;
-        var loc = waLink.getAttribute("data-cta-loc") || "landing_page";
-        trackEvent("whatsapp_click", {
-          cta_location: loc,
-          button_text: waLink.innerText.trim().slice(0, 50)
-        });
-      }, { passive: true });
+            <div class="preview-faq-item">
+              <div class="preview-faq-q">
+                <span class="preview-faq-icon">🎵</span>
+                <h4>Can I add background music? Is it included?</h4>
+              </div>
+              <p class="preview-faq-a">Yes! Simply share your music link or audio track, and we’ll integrate it seamlessly at <strong>no extra charge</strong>.</p>
+            </div>
+          </div>
 
-      // 2. Track view_package via IntersectionObserver on #pricing-packages
-      var pkgSection = document.getElementById("pricing-packages");
-      if (pkgSection && typeof IntersectionObserver !== "undefined") {
-        var hasTrackedPackages = false;
-        var obs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting && !hasTrackedPackages) {
-              hasTrackedPackages = true;
-              trackEvent("view_package", {
-                package_tier: 1,
-                package_name: "Classic",
-                value: 999,
-                currency: "INR"
-              });
-              obs.disconnect();
-            }
-          });
-        }, { threshold: 0.2 });
-        obs.observe(pkgSection);
-      }
-    });
-  </script>
+          <div class="preview-faq-sheet-footer">
+            <button type="button" class="preview-faq-gotit-btn" onclick="closePreviewFaq()">Got it, back to preview</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Link Sharing & System Alerts -->
+  <div id="toast-notification" class="toast-notification toast-success" role="status" aria-live="polite">
+    <div class="toast-badge" id="toast-badge">
+      <span class="toast-icon" id="toast-icon"></span>
+    </div>
+    <div class="toast-content">
+      <div id="toast-title" class="toast-title">Link Copied!</div>
+      <div id="toast-message" class="toast-message">Link copied to clipboard!</div>
+      <div id="toast-action-container" class="toast-action-container" style="display:none;"></div>
+    </div>
+    <button type="button" class="toast-close-btn" id="toast-close-btn" aria-label="Dismiss notification" onclick="hideToast()">&times;</button>
+    <div class="toast-progress-track">
+      <div id="toast-progress-fill" class="toast-progress-fill"></div>
+    </div>
+  </div>
+
+
+  <!-- Exclusive Bespoke Modal (Starts from ₹8,000) -->
+  <div id="custom-modal" class="exit-intent-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="custom-modal-title">
+    <div class="exit-intent-scrim" data-custom-close></div>
+    <div class="exit-intent-panel exit-intent-fomo-panel" style="max-width: 480px; text-align: center;">
+      <button type="button" class="exit-intent-close" data-custom-close aria-label="Close">&times;</button>
+      <div class="exit-intent-eyebrow" style="background: rgba(185, 138, 66, 0.18); color: #ecd9ac; border: 1px solid rgba(185, 138, 66, 0.4); padding: 5px 14px; border-radius: 9999px; display: inline-block;">✨ BESPOKE DESIGN & CUSTOMIZATION</div>
+      <h3 id="custom-modal-title" class="exit-intent-title" style="margin-top: 14px; color: #ffffff; font-size: 1.35rem; font-weight: 700;">Bespoke Invitations Start at <span id="custom-modal-price" style="color: #ecd9ac; font-weight: 800;">₹8,000</span></h3>
+      <p class="exit-intent-desc" style="font-size: 0.92rem; line-height: 1.65; color: rgba(243, 237, 218, 0.85); margin-bottom: 18px;">
+        Looking for a 1-on-1 bespoke wedding invitation build? Our senior design team will hand-craft your unique concept, custom illustrations, tailored animations, and personal audio tracks.
+      </p>
+
+      <div style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 16px; text-align: left; margin-bottom: 20px;">
+        <div style="font-weight: 700; font-size: 0.88rem; color: #ecd9ac; margin-bottom: 10px;">💎 What's Included in Exclusive Customization:</div>
+        <ul style="font-size: 0.85rem; color: rgba(243, 237, 218, 0.9); padding-left: 18px; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          <li>1-on-1 Dedicated Senior Designer via WhatsApp & Call</li>
+          <li>Custom illustrations, venue maps & unique color themes</li>
+          <li>Free revision requests for 24 hours after your first draft is delivered.</li>
+          <li>1-Year Hosted Vercel Link with express priority delivery</li>
+        </ul>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <a href="#" id="custom-modal-wa-btn" target="_blank" rel="noopener" class="exit-intent-cta" style="background: linear-gradient(135deg, #1fa855 0%, #157a3e 100%); color: #ffffff; box-shadow: 0 4px 20px rgba(31, 168, 85, 0.45); font-weight: 700; border-radius: 9999px; padding: 12px; font-size: 1rem; text-decoration: none; display: block;">Continue to WhatsApp Chat 💬</a>
+        <button type="button" data-custom-close class="btn btn-outline btn-sm" style="border-radius: 9999px; width: 100%; color: #f3edda; border-color: rgba(243, 237, 218, 0.35); background: rgba(255, 255, 255, 0.08); padding: 11px; font-size: 0.88rem; font-weight: 600; cursor: pointer;">Explore Catalogue Templates</button>
+      </div>
+
+      <p class="exit-intent-fineprint" style="margin-top: 14px; color: rgba(243, 237, 218, 0.6); font-size: 0.78rem;">⚡ Looking for standard templates? Pick any catalog template starting from ₹999!</p>
+    </div>
+  </div>
+
+  <!-- Payment Success Panel (works even if the user never opens WhatsApp) -->
+  <div id="payment-success-modal" class="exit-intent-modal pay-success-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="pay-success-title">
+    <div class="exit-intent-scrim" onclick="closePaymentSuccess()"></div>
+    <div class="exit-intent-panel pay-success-panel">
+      <button type="button" class="exit-intent-close" onclick="closePaymentSuccess()" aria-label="Close">&times;</button>
+      <div class="pay-success-check" aria-hidden="true">✅</div>
+      <h3 id="pay-success-title" class="pay-success-title">Payment received!</h3>
+      <p class="pay-success-sub">Your slot is reserved. Send your details on WhatsApp and we start building today.</p>
+      <dl class="pay-success-receipt">
+        <div><dt>Package</dt><dd id="pay-success-package">Premium</dd></div>
+        <div><dt>Amount paid</dt><dd id="pay-success-amount">₹1,499</dd></div>
+        <div><dt>Payment ID</dt><dd id="pay-success-id">—</dd></div>
+        <div><dt>Design</dt><dd id="pay-success-design">—</dd></div>
+      </dl>
+      <div class="pay-success-actions">
+        <button type="button" class="pay-success-wa-btn" onclick="sendDetailsOnWhatsApp()">Send details on WhatsApp →</button>
+        <a href="thank-you.html" id="pay-success-thankyou-link" class="pay-success-secondary">Open my receipt page</a>
+        <button type="button" class="pay-success-dismiss" onclick="closePaymentSuccess()">I'll do it later</button>
+      </div>
+      <p class="pay-success-note">Usually live within 48 hours · 24h express if selected</p>
+    </div>
+  </div>
+
+  <!-- PayPal Checkout Modal for International Visitors -->
+  <div id="paypal-checkout-modal" class="exit-intent-modal paypal-checkout-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="paypal-modal-title">
+    <div class="exit-intent-scrim" onclick="closePayPalCheckout()"></div>
+    <div class="exit-intent-panel paypal-modal-panel">
+      <button type="button" class="exit-intent-close" onclick="closePayPalCheckout()" aria-label="Close checkout">&times;</button>
+      
+      <div class="paypal-modal-header">
+        <div class="paypal-modal-eyebrow">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 3.72a.78.78 0 0 1 .77-.655h6.39c3.27 0 5.672 1.348 5.405 4.887-.276 3.655-2.613 5.437-5.748 5.437H9.28a.78.78 0 0 0-.77.656l-.884 5.602a.78.78 0 0 1-.55.69z"/>
+            <path d="M18.892 7.747c-.244 3.238-2.316 4.816-5.093 4.816h-2.197a.78.78 0 0 0-.77.656l-1.127 7.15a.547.547 0 0 0 .54.632h3.407a.684.684 0 0 0 .676-.576l.723-4.582a.78.78 0 0 1 .77-.657h1.025c3.088 0 5.503-1.254 6.2-4.908.411-2.152-.07-3.882-1.782-4.731-.58-.287-1.312-.468-2.371-.468z" opacity=".75"/>
+          </svg>
+          SECURE PAYPAL CHECKOUT (USD)
+        </div>
+        <h3 id="paypal-modal-title" class="paypal-modal-title">Complete Your Invitation Order</h3>
+        <p class="paypal-modal-subtitle">Pay securely via PayPal, Credit/Debit Card, or Pay Later. Delivered within 48 hours after payment and receipt of all required details.</p>
+      </div>
+
+      <!-- Item Overview Card -->
+      <div class="paypal-order-summary">
+        <div class="paypal-item-row">
+          <div class="paypal-item-info">
+            <span class="paypal-item-badge" id="paypal-item-tier">Luxury</span>
+            <h4 class="paypal-item-name" id="paypal-item-name">Royal Heritage</h4>
+            <span class="paypal-item-desc">Includes live RSVP, Google Maps venue direction & background music</span>
+          </div>
+          <div class="paypal-item-price" id="paypal-item-base-price">$35</div>
+        </div>
+
+        <!-- Total Price Breakdown -->
+        <div class="paypal-total-row">
+          <span class="paypal-total-label">Total to Pay (USD):</span>
+          <span class="paypal-total-amount" id="paypal-total-display">$35.00 USD</span>
+        </div>
+      </div>
+
+      <!-- PayPal Smart Buttons Container -->
+      <div class="paypal-buttons-wrapper">
+        <div id="paypal-button-container"></div>
+      </div>
+
+      <!-- Trust Reassurance Badges -->
+      <div class="paypal-trust-strip">
+        <span>🔒 256-Bit SSL</span>
+        <span>🛡️ Buyer Protection</span>
+        <span>⚡ 48h Delivery</span>
+      </div>
+    </div>
+  <!-- WhatsApp Review Screenshot Lightbox Modal -->
+  <div class="wa-lightbox" id="wa-lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="WhatsApp Review Screenshot Viewer">
+    <div class="wa-lightbox-backdrop" id="wa-lightbox-backdrop"></div>
+    <div class="wa-lightbox-modal">
+      <button type="button" class="wa-lightbox-close" id="wa-lightbox-close" aria-label="Close review">&times;</button>
+      <button type="button" class="wa-lightbox-arrow wa-lightbox-arrow-prev" id="wa-lightbox-prev" aria-label="Previous review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="wa-lightbox-figure">
+        <picture id="wa-lightbox-picture">
+          <source id="wa-lightbox-source" type="image/webp">
+          <img id="wa-lightbox-img" src="" alt="WhatsApp Customer Review" />
+        </picture>
+        <div class="wa-lightbox-info">
+          <div class="wa-lightbox-info-top">
+            <span class="wa-lightbox-tag" id="wa-lightbox-tag"></span>
+            <span class="wa-lightbox-counter" id="wa-lightbox-counter"></span>
+          </div>
+          <p class="wa-lightbox-highlight" id="wa-lightbox-highlight"></p>
+        </div>
+      </div>
+      <button type="button" class="wa-lightbox-arrow wa-lightbox-arrow-next" id="wa-lightbox-next" aria-label="Next review">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Floating WhatsApp CTA button -->
+  <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I'd%20like%20to%20order%20a%20digital%20wedding%20invitation%21"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="floating-whatsapp"
+     id="floating-whatsapp"
+     aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.004 2.667A13.28 13.28 0 0 0 2.73 15.94a13.2 13.2 0 0 0 1.79 6.63L2.667 29.333l6.97-1.826A13.28 13.28 0 0 0 16.004 29.3 13.28 13.28 0 0 0 29.333 16 13.28 13.28 0 0 0 16.004 2.667Zm7.63 18.72c-.32.9-1.886 1.72-2.6 1.8-.713.08-1.38.32-4.64-1.04-3.92-1.64-6.38-5.68-6.57-5.94-.19-.26-1.56-2.08-1.56-3.96s.98-2.8 1.34-3.18c.36-.38.78-.46 1.04-.46h.75c.24 0 .56-.09.88.67.32.76 1.1 2.66 1.19 2.86.1.19.16.42.03.67-.13.26-.19.42-.38.64-.19.22-.4.5-.57.67-.19.19-.38.4-.16.78.22.38.97 1.6 2.08 2.6 1.43 1.27 2.64 1.66 3.02 1.85.38.19.6.16.82-.1.22-.26.95-1.1 1.2-1.48.26-.38.51-.32.86-.19.35.13 2.22 1.05 2.6 1.24.38.19.64.29.73.45.1.16.1.93-.21 1.83Z" fill="currentColor"/>
+    </svg>
+  </a>
+
+  <!-- Floating tier nav (mobile-app style bottom bar) -->
+  <nav class="tier-floating-nav" aria-label="Tier quick filter">
+    <div class="glass-radio-group" id="tier-radio-group">
+      <input type="radio" name="tier" id="glass-all" value="0" checked />
+      <label for="glass-all">All <span class="tier-meta" data-tier-count>(31)</span></label>
+
+      <input type="radio" name="tier" id="glass-classic" value="1" />
+      <label for="glass-classic">Classic <span class="tier-meta" data-tier-count>(8)</span></label>
+
+      <input type="radio" name="tier" id="glass-premium" value="2" />
+      <label for="glass-premium">Premium <span class="tier-meta" data-tier-count>(12)</span></label>
+
+      <input type="radio" name="tier" id="glass-luxury" value="3" />
+      <label for="glass-luxury">Luxury <span class="tier-meta" data-tier-count>(11)</span></label>
+
+      <div class="glass-glider"></div>
+    </div>
+  </nav>
+
+  <!-- GSAP + Plugins (free: ScrollTrigger, Flip, ScrollToPlugin) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/Flip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollToPlugin.min.js"></script>
+
+  <!-- WebMCP Agent Tools & JS Scripts -->
+  <script src="webmcp.js"></script>
+  <script src="scripts.js"></script>
 </body>
 </html>

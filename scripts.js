@@ -729,6 +729,19 @@ const TEMPLATE_DATABASE = [
   }
 ];
 
+// Detect if on Google Ads dedicated landing page
+const isAdsLandingPage = window.location.pathname.includes("digital-wedding-invitations") || (document.documentElement && document.documentElement.dataset.landing === "ads");
+
+if (isAdsLandingPage) {
+  // Exclude trademarked designs (Grand Line Voyage, Ghibli Selfie, Ghibli Portrait)
+  const trademarkedIds = new Set([13, 14, 15]);
+  for (let i = TEMPLATE_DATABASE.length - 1; i >= 0; i--) {
+    if (trademarkedIds.has(TEMPLATE_DATABASE[i].id)) {
+      TEMPLATE_DATABASE.splice(i, 1);
+    }
+  }
+}
+
 // --- 2. State Management ---
 let currentCurrency = "INR"; // "INR" or "USD"
 let activeTierFilter = 0; // 0: All, 1: Classic, 2: Premium, 3: Luxury
@@ -2116,9 +2129,13 @@ function restoreDefaultMetaTags() {
   setMeta("name", "twitter:title", "InviteStory – Digital Wedding Card Templates & Online Invitations");
   setMeta("name", "twitter:description", "Interactive digital wedding cards with venue maps & ambient music. Delivered in 48 hours.");
   setMeta("name", "twitter:image", "https://invitestory.in/assets/og-image.jpg");
-  setMeta("name", "twitter:url", "https://invitestory.in/");
-
-  document.title = "InviteStory – Digital Wedding Card Templates & Online Invitations";
+  if (isAdsLandingPage) {
+    document.title = "Custom Digital Wedding Invitations From ₹999 – InviteStory";
+    setMeta("property", "og:url", "https://invitestory.in/digital-wedding-invitations");
+    setMeta("name", "twitter:url", "https://invitestory.in/digital-wedding-invitations");
+  } else {
+    document.title = "InviteStory – Digital Wedding Card Templates & Online Invitations";
+  }
 }
 
 function copyDesignShareLink(templateId, event) {
@@ -3935,6 +3952,13 @@ const FAQS = [
   }
 ];
 
+if (isAdsLandingPage) {
+  const downsellIdx = FAQS.findIndex(f => f.a && f.a.includes("reveals.invitestory.in"));
+  if (downsellIdx !== -1) {
+    FAQS.splice(downsellIdx, 1);
+  }
+}
+
 function renderFaqs() {
   const list = document.getElementById("faq-list");
   if (!list) return;
@@ -4182,7 +4206,9 @@ function showFloatingNav() {
 function setupResponsivePlaceholder() {
   const input = document.getElementById("search-input");
   if (!input) return;
-  const DESKTOP_PLACEHOLDER = "Search templates (e.g. Telugu, Ghibli, Nikah, Floral)";
+  const DESKTOP_PLACEHOLDER = isAdsLandingPage
+    ? "Search templates (e.g. Telugu, Royal, Nikah, Floral)"
+    : "Search templates (e.g. Telugu, Ghibli, Nikah, Floral)";
   const MOBILE_PLACEHOLDER  = "Search templates…";
   const mq = window.matchMedia("(max-width: 768px)");
   const apply = () => {
