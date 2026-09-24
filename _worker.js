@@ -34,6 +34,15 @@ export default {
   async fetch(request, env) {
     try {
       const url = new URL(request.url);
+
+      if (url.pathname === "/digital-wedding-invitations") {
+        url.pathname = "/digital-wedding-invitations.html";
+        const newReq = new Request(url.toString(), request);
+        return env && env.ASSETS && typeof env.ASSETS.fetch === "function"
+          ? env.ASSETS.fetch(newReq)
+          : fetch(newReq);
+      }
+
       const designKey = (url.searchParams.get("design") || url.searchParams.get("preview") || url.searchParams.get("id") || "").toLowerCase().trim();
 
       // Fetch from ASSETS if available, otherwise fetch from origin

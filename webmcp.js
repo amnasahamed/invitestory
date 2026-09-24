@@ -67,7 +67,7 @@
       execute: async ({ templateId }) => {
         return {
           templateId,
-          deliveryTimeline: "24 hours standard (12 hours Express)",
+          deliveryTimeline: "48 hours standard (24 hours Express)",
           features: [
             "Interactive Touch animations & Page flips",
             "Google Maps venue location navigation",

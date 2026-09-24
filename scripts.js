@@ -45,73 +45,183 @@ function getItemPrices(item) {
   };
 }
 
-// --- UTM & GOOGLE ADS CAMPAIGN TRACKER ---
+// --- UTM & GOOGLE ADS CLICK ID ATTRIBUTION TRACKER ---
 /**
- * Safely retrieves and persists UTM campaign parameters & GCLID from the URL into localStorage
+ * Safely captures, normalizes, and persists UTM campaign parameters, Google Click IDs (gclid, gbraid, wbraid),
+ * and Meta click IDs (fbclid) into both sessionStorage and localStorage.
  */
 function getUtmCampaignParams() {
   try {
     const urlParams = new URLSearchParams(window.location.search);
-    const keys = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "gclid"];
+    const keys = [
+      "utm_source", "utm_medium", "utm_campaign", "utm_term",
+      "utm_content", "utm_id", "gclid", "gbraid", "wbraid", "fbclid"
+    ];
     keys.forEach(key => {
-      if (urlParams.has(key)) {
-        localStorage.setItem(key, urlParams.get(key));
+      const val = urlParams.get(key);
+      if (val) {
+        localStorage.setItem("ist_" + key, val);
+        sessionStorage.setItem("ist_" + key, val);
+        localStorage.setItem(key, val);
       }
     });
+
+    const getVal = (key) => urlParams.get(key) || sessionStorage.getItem("ist_" + key) || localStorage.getItem("ist_" + key) || localStorage.getItem(key) || "";
+
     return {
-      utmSource: localStorage.getItem("utm_source") || "",
-      utmMedium: localStorage.getItem("utm_medium") || "",
-      utmCampaign: localStorage.getItem("utm_campaign") || "",
-      gclid: localStorage.getItem("gclid") || ""
+      utmSource: getVal("utm_source"),
+      utmMedium: getVal("utm_medium"),
+      utmCampaign: getVal("utm_campaign"),
+      utmTerm: getVal("utm_term"), // Keyword
+      utmContent: getVal("utm_content"), // Ad creative
+      utmId: getVal("utm_id"), // Campaign ID
+      gclid: getVal("gclid"), // Google Click ID
+      gbraid: getVal("gbraid"), // Google iOS click ID
+      wbraid: getVal("wbraid"), // Google Web click ID
+      fbclid: getVal("fbclid")
     };
   } catch (err) {
-    return { utmSource: "", utmMedium: "", utmCampaign: "", gclid: "" };
+    return { utmSource: "", utmMedium: "", utmCampaign: "", utmTerm: "", utmContent: "", utmId: "", gclid: "", gbraid: "", wbraid: "", fbclid: "" };
   }
 }
+
+/**
+ * Returns formatted attribution object for Razorpay notes and payment tracking
+ */
+function getAttributionNotes() {
+  const p = getUtmCampaignParams();
+  const notes = {};
+  if (p.utmSource) notes.utm_source = p.utmSource.slice(0, 50);
+  if (p.utmMedium) notes.utm_medium = p.utmMedium.slice(0, 50);
+  if (p.utmCampaign) notes.utm_campaign = p.utmCampaign.slice(0, 50);
+  if (p.utmTerm) notes.utm_term = p.utmTerm.slice(0, 50); // Search keyword
+  if (p.utmContent) notes.utm_content = p.utmContent.slice(0, 50); // Ad creative
+  if (p.utmId) notes.utm_id = p.utmId.slice(0, 50);
+  if (p.gclid) notes.gclid = p.gclid.slice(0, 100); // Google Click ID
+  if (p.gbraid) notes.gbraid = p.gbraid.slice(0, 50);
+  if (p.wbraid) notes.wbraid = p.wbraid.slice(0, 50);
+  return notes;
+}
+
+/**
+ * Builds URL query string containing all active attribution parameters
+ */
+function buildAttributionQueryString() {
+  const p = getUtmCampaignParams();
+  const sp = new URLSearchParams();
+  if (p.utmSource) sp.set("utm_source", p.utmSource);
+  if (p.utmMedium) sp.set("utm_medium", p.utmMedium);
+  if (p.utmCampaign) sp.set("utm_campaign", p.utmCampaign);
+  if (p.utmTerm) sp.set("utm_term", p.utmTerm);
+  if (p.utmContent) sp.set("utm_content", p.utmContent);
+  if (p.utmId) sp.set("utm_id", p.utmId);
+  if (p.gclid) sp.set("gclid", p.gclid);
+  if (p.gbraid) sp.set("gbraid", p.gbraid);
+  if (p.wbraid) sp.set("wbraid", p.wbraid);
+  const str = sp.toString();
+  return str ? "&" + str : "";
+}
+
 // Run on load
 getUtmCampaignParams();
 
-// --- META PIXEL & GOOGLE ADS EVENT TRACKER ---
 /**
- * Safe helper for sending Meta Pixel & Google Ads standard events (PageView, ViewContent, InitiateCheckout, Lead, Purchase)
- * @param {string} eventName - Name of the event to track
- * @param {Object} [params] - Optional event parameters (e.g. content_name, value, currency)
+ * Multi-Platform Conversion Tracker for GA4, Google Ads, and Meta Pixel.
+ * Configured events:
+ * - purchase: Primary Google Ads conversion with order value and transaction ID
+ * - whatsapp_click: Secondary conversion (observation only, not equal to purchase)
+ * - begin_checkout: Funnel step before payment
+ * - select_design: Template preview / selection event
+ * - view_package: Package card impression / interaction
  */
-function trackMetaEvent(eventName, params = {}) {
+function trackConversionEvent(eventName, params = {}) {
   try {
-    // 1. Meta Pixel
-    if (typeof window.fbq === "function") {
-      if (params && Object.keys(params).length > 0) {
-        window.fbq("track", eventName, params);
-      } else {
-        window.fbq("track", eventName);
+    const isINR = (typeof currentCurrency !== "undefined" ? currentCurrency : "INR") === "INR";
+    const defaultCurrency = isINR ? "INR" : "USD";
+    const eventCurrency = params.currency || defaultCurrency;
+    const eventValue = typeof params.value === "number" ? params.value : Number(params.value) || 0;
+    const attr = getAttributionNotes();
+
+    // 1. Google Analytics 4 (GA4) Standard & Custom Events
+    if (typeof window.gtag === "function") {
+      window.gtag("event", eventName, {
+        ...params,
+        ...attr,
+        currency: eventCurrency,
+        value: eventValue
+      });
+
+      // Google Ads Conversion Optimization:
+      // Primary optimization: Only completed 'purchase' events count as primary conversion
+      if (eventName === "purchase" || eventName === "Purchase") {
+        const purchaseLabel = window.GOOGLE_ADS_PURCHASE_LABEL || window.GOOGLE_ADS_CONVERSION_LABEL || "";
+        const targetSendTo = window.GOOGLE_ADS_ID && purchaseLabel
+          ? `${window.GOOGLE_ADS_ID}/${purchaseLabel}`
+          : window.GOOGLE_ADS_ID || "";
+
+        const adsParams = {
+          value: eventValue || 999,
+          currency: eventCurrency,
+          transaction_id: params.transaction_id || ""
+        };
+        if (attr.gclid) adsParams.gclid = attr.gclid;
+        if (targetSendTo) adsParams.send_to = targetSendTo;
+        window.gtag("event", "conversion", adsParams);
+      } else if (eventName === "whatsapp_click" && window.GOOGLE_ADS_WHATSAPP_LABEL) {
+        // Optional secondary conversion only if specifically configured
+        window.gtag("event", "conversion", {
+          send_to: `${window.GOOGLE_ADS_ID}/${window.GOOGLE_ADS_WHATSAPP_LABEL}`,
+          value: 0,
+          currency: eventCurrency,
+          event_category: "Engagement",
+          event_label: params.cta_location || "WhatsApp Enquiry"
+        });
       }
     }
-    // 2. Google Analytics 4 & Google Ads Event
-    if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, params);
-      
-      // Standard Google Ads Conversion Event trigger for high-intent conversions
-      if (eventName === "Lead" || eventName === "InitiateCheckout" || eventName === "Purchase") {
-        const conversionLabel = window.GOOGLE_ADS_CONVERSION_LABEL || "";
-        const targetSendTo = window.GOOGLE_ADS_ID && conversionLabel 
-          ? `${window.GOOGLE_ADS_ID}/${conversionLabel}` 
-          : window.GOOGLE_ADS_ID || "";
-          
-        const adsParams = {
-          value: params.value || 999,
-          currency: params.currency || "INR",
-          event_category: params.content_category || "Google Ads Lead",
-          event_label: params.content_name || eventName
-        };
-        if (targetSendTo) adsParams.send_to = targetSendTo;
-        
-        window.gtag("event", "conversion", adsParams);
+
+    // 2. Meta Pixel (fbq) Mapping
+    if (typeof window.fbq === "function") {
+      if (eventName === "purchase" || eventName === "Purchase") {
+        window.fbq("track", "Purchase", {
+          value: eventValue,
+          currency: eventCurrency,
+          content_type: "product",
+          content_name: params.content_name || params.package_name || "Digital Wedding Invitation"
+        });
+      } else if (eventName === "begin_checkout" || eventName === "InitiateCheckout") {
+        window.fbq("track", "InitiateCheckout", {
+          value: eventValue,
+          currency: eventCurrency,
+          content_name: params.content_name || params.package_name || "Digital Wedding Invitation"
+        });
+      } else if (eventName === "whatsapp_click" || eventName === "Lead") {
+        window.fbq("track", "Contact", {
+          content_name: params.content_name || params.design_name || params.package_name || "WhatsApp Enquiry",
+          value: eventValue,
+          currency: eventCurrency
+        });
+      } else if (eventName === "select_design" || eventName === "ViewContent") {
+        window.fbq("track", "ViewContent", {
+          content_name: params.item_name || params.content_name,
+          content_ids: params.item_id ? [String(params.item_id)] : [],
+          value: eventValue,
+          currency: eventCurrency
+        });
       }
     }
   } catch (err) {
-    console.warn("Analytics tracking warning:", err);
+    console.warn("Conversion tracking warning:", err);
   }
+}
+
+// Backward-compatible alias for legacy calls
+function trackMetaEvent(eventName, params = {}) {
+  // Map legacy event names to standard conversion names
+  let standardName = eventName;
+  if (eventName === "InitiateCheckout") standardName = "begin_checkout";
+  else if (eventName === "Purchase") standardName = "purchase";
+  else if (eventName === "ViewContent") standardName = "select_design";
+  trackConversionEvent(standardName, params);
 }
 
 // --- 1. Template Database ---
@@ -649,7 +759,7 @@ const pricingSection = document.querySelector(".pricing-section");
 
 // Addon Prices definition
 const ADDONS = {
-  express: { name: "Express 12h Delivery", priceINR: 299, priceUSD: 4 },
+  express: { name: "Express 24h Delivery", priceINR: 299, priceUSD: 4 },
   domain: { name: "Custom Domain (.in / .com)", priceINR: 999, priceUSD: 12 },
   lang: { name: "Extra Event Tab (e.g. Sangeet)", priceINR: 299, priceUSD: 4 }
 };
@@ -895,14 +1005,14 @@ function renderPricingSection() {
 
   const checkIcon = `<svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>`;
   const expressLabel = currentCurrency === "INR"
-    ? `⚡ Express 12h delivery (+₹${ADDONS.express.priceINR})`
-    : `⚡ Express 12h delivery (+$${ADDONS.express.priceUSD})`;
+    ? `⚡ Express 24h delivery (+₹${ADDONS.express.priceINR})`
+    : `⚡ Express 24h delivery (+$${ADDONS.express.priceUSD})`;
   const askIcon = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>`;
 
   pricingSection.innerHTML = `
     <div class="container">
       <h2 class="section-title">Beautiful doesn't have to be complicated.</h2>
-      <p class="section-subtitle">One-time payment. No subscription. Delivered in 24 hours.</p>
+      <p class="section-subtitle">One-time payment. No subscription. Delivered in 48 hours.</p>
       <p class="pricing-diff-line">Not another DIY editor. You pick a design, pay, send details — we build the invite for you.</p>
       <div class="pricing-grid">
         <!-- Tier 1: Classic -->
@@ -918,12 +1028,12 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Single-event invite (Wedding or Reception)</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Your photos, names &amp; 1-tap venue map</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Countdown timer + guest RSVP</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 48 hours</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-1" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
           <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-1" onclick="payRazorpayForPackage(1)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(1)">${askIcon}<span>Ask on WhatsApp</span></button>
-          <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
+          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
         </div>
 
         <!-- Tier 2: Premium (Hero / Couples' favourite) -->
@@ -940,12 +1050,12 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Up to 5 events: Haldi, Mehendi, Sangeet, Wedding, Reception</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Love-story timeline + photo gallery (up to 12)</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Background music + venue maps + RSVP</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 48 hours</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-2" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
           <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="payRazorpayForPackage(2)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(2)">${askIcon}<span>Ask on WhatsApp</span></button>
-          <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
+          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
         </div>
 
         <!-- Tier 3: Luxury (Prestige) -->
@@ -961,12 +1071,12 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Everything in Premium, for all your events</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Cinematic opening — envelope &amp; palace reveals</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Premium motion, effects &amp; priority build</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 24 hours (12h express available)</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 48 hours (24h express available)</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-3" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
           <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="payRazorpayForPackage(3)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)">${askIcon}<span>Ask on WhatsApp</span></button>
-          <p class="pkg-microcopy">Delivered in 24 hours · UPI / GPay / PhonePe</p>
+          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
         </div>
       </div>
       <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for Premium &amp; Luxury · Couples’ favourite is in the middle</p>
@@ -976,7 +1086,7 @@ function renderPricingSection() {
         <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Luxury package" aria-current="false"></button>
       </div>
 
-      <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — usually live within 24 hours.</p>
+      <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — delivered within 48 hours after payment and receipt of all required details.</p>
 
       <!-- Reassurance Bar -->
       <div class="pricing-reassurance">
@@ -984,10 +1094,38 @@ function renderPricingSection() {
         <span class="pricing-reassurance-dot" aria-hidden="true"></span>
         <span class="pricing-reassurance-item">No subscription</span>
         <span class="pricing-reassurance-dot" aria-hidden="true"></span>
-        <span class="pricing-reassurance-item">Digital delivery in 24h</span>
+        <span class="pricing-reassurance-item">Digital delivery in 48h</span>
       </div>
     </div>
   `;
+  initPackageViewTracking();
+}
+
+let hasTrackedPackageView = false;
+function initPackageViewTracking() {
+  if (hasTrackedPackageView) return;
+  const pricingEl = document.getElementById("pricing");
+  if (!pricingEl || typeof IntersectionObserver === "undefined") return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !hasTrackedPackageView) {
+        hasTrackedPackageView = true;
+        [1, 2, 3].forEach(tier => {
+          const p = TIER_BASE_PRICE[tier];
+          trackConversionEvent("view_package", {
+            package_tier: tier,
+            package_name: packageName(tier),
+            value: currentCurrency === "INR" ? p.inr : p.usd,
+            currency: currentCurrency
+          });
+        });
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.2 });
+
+  observer.observe(pricingEl);
 }
 
 function selectTier(tierNum, smoothScroll = false) {
@@ -1336,7 +1474,7 @@ function payRazorpayForTemplate(id) {
 
   if (expressChecked) {
     totalVal += (currentCurrency === "INR" ? ADDONS.express.priceINR : ADDONS.express.priceUSD);
-    selectedAddons.push("Express 12h Delivery");
+    selectedAddons.push("Express 24h Delivery");
   }
   if (domainChecked) {
     totalVal += (currentCurrency === "INR" ? ADDONS.domain.priceINR : ADDONS.domain.priceUSD);
@@ -1372,7 +1510,8 @@ function payRazorpayForTemplate(id) {
       template_id: String(item.id),
       template_style: item.style || "Digital Card",
       add_ons: selectedAddons.length > 0 ? selectedAddons.join(", ") : "None",
-      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard"
+      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard",
+      ...getAttributionNotes()
     },
     theme: {
       color: "#c09559"
@@ -1447,9 +1586,11 @@ function payRazorpayForTemplate(id) {
 function askPackageOnWhatsApp(tier) {
   const name = packageName(tier);
   const amountText = packageAmountText(tier);
-  trackMetaEvent("Lead", {
+  trackConversionEvent("whatsapp_click", {
+    cta_location: "pricing_card",
+    package_tier: tier,
+    package_name: name,
     content_name: `${name} Package Inquiry (pre-pay)`,
-    content_category: "Package Question",
     value: packageTotal(tier),
     currency: currentCurrency
   });
@@ -1465,11 +1606,12 @@ function askTemplateOnWhatsApp(id) {
   if (!item) return;
   const prices = getItemPrices(item);
   const priceText = formatPrice(prices.priceINR, prices.priceUSD);
-  trackMetaEvent("Lead", {
+  trackConversionEvent("whatsapp_click", {
+    cta_location: "template_card",
+    package_tier: item.tier,
+    design_id: item.id,
+    design_name: item.name,
     content_name: `${item.name} Inquiry (pre-pay)`,
-    content_ids: [String(item.id)],
-    content_type: "product",
-    content_category: item.style || "Digital Wedding Invitation",
     value: currentCurrency === "INR" ? prices.priceINR : prices.priceUSD,
     currency: currentCurrency
   });
@@ -1515,7 +1657,8 @@ function payRazorpayForPackage(tier, designName) {
       package: name,
       design_name: designName || "",
       express_12h: expressOn ? "yes" : "no",
-      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard"
+      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard",
+      ...getAttributionNotes()
     },
     theme: { color: "#c09559" },
     modal: {
@@ -1589,10 +1732,14 @@ function payRazorpayForPackage(tier, designName) {
  *       I'll send names, dates, photos, venue next.
  */
 function handlePaidSuccess(details) {
-  window.__lastPayment = details;
+  const attr = getAttributionNotes();
+  window.__lastPayment = Object.assign({}, details, attr);
   showPaymentSuccess(details);
   const designLine = details.designName ? `\nDesign I want: ${details.designName}` : "";
-  const waMsg = `Hi InviteStory! ✅ Paid for ${details.packageName} (${details.amountText}).\nPayment ID: ${details.paymentId}${designLine}\nI'll send names, dates, photos, venue next.`;
+  const refLine = (attr.utm_campaign || attr.utm_source || attr.utm_term)
+    ? `\nRef: ${attr.utm_source || 'ad'} / ${attr.utm_campaign || 'direct'}${attr.utm_term ? ' / ' + attr.utm_term : ''}`
+    : "";
+  const waMsg = `Hi InviteStory! ✅ Paid for ${details.packageName} (${details.amountText}).\nPayment ID: ${details.paymentId}${designLine}${refLine}\nI'll send names, dates, photos, venue next.`;
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
 }
 
@@ -1612,6 +1759,8 @@ function showPaymentSuccess(details) {
       payment_id: details.paymentId,
       design: details.designName || ""
     });
+    const attr = getAttributionNotes();
+    Object.keys(attr).forEach(k => { if (attr[k]) q.set(k, attr[k]); });
     tyLink.href = `thank-you.html?${q.toString()}`;
   }
   modal.classList.add("is-open");
@@ -1959,13 +2108,13 @@ function restoreDefaultMetaTags() {
   };
 
   setMeta("property", "og:title", "InviteStory – Digital Wedding Card Templates & Online Invitations");
-  setMeta("property", "og:description", "Choose from 30+ interactive digital wedding invitation templates. Live previews, location maps & express 24h WhatsApp customization.");
+  setMeta("property", "og:description", "Choose from 30+ interactive digital wedding invitation templates. Live previews, location maps & express 48h WhatsApp customization.");
   setMeta("property", "og:image", "https://invitestory.in/assets/og-image.jpg");
   setMeta("property", "og:url", "https://invitestory.in/");
   setMeta("property", "og:image:alt", "InviteStory - Digital Wedding Card Templates & Online Invitations");
 
   setMeta("name", "twitter:title", "InviteStory – Digital Wedding Card Templates & Online Invitations");
-  setMeta("name", "twitter:description", "Interactive digital wedding cards with venue maps & ambient music. Delivered in 24 hours.");
+  setMeta("name", "twitter:description", "Interactive digital wedding cards with venue maps & ambient music. Delivered in 48 hours.");
   setMeta("name", "twitter:image", "https://invitestory.in/assets/og-image.jpg");
   setMeta("name", "twitter:url", "https://invitestory.in/");
 
@@ -2346,7 +2495,9 @@ function openPreview(id, updateUrl = true) {
   updateMetaTagsForDesign(item);
 
   const prices = getItemPrices(item);
-  trackMetaEvent("ViewContent", {
+  trackConversionEvent("select_design", {
+    item_id: String(item.id),
+    item_name: item.name,
     content_name: item.name,
     content_ids: [String(item.id)],
     content_type: "product",
@@ -2928,11 +3079,11 @@ function updateTierLabels() {
 }
 
 function updateHeaderCtaText() {
-  const priceText = currentCurrency === "INR" ? "from ₹4,999" : "from $60";
-  const shortPriceText = currentCurrency === "INR" ? "Custom (₹4.9k) 💬" : "Custom ($60) 💬";
+  const priceText = currentCurrency === "INR" ? "from ₹8,000" : "from $100";
+  const shortPriceText = currentCurrency === "INR" ? "Bespoke (₹8k) 💬" : "Bespoke ($100) 💬";
   document.querySelectorAll(".header-cta").forEach(cta => {
-    cta.innerHTML = `<span class="cta-text-full">Order Customization (${priceText}) 💬</span><span class="cta-text-short">${shortPriceText}</span>`;
-    cta.title = `Exclusive custom designs & full customization start ${priceText}`;
+    cta.innerHTML = `<span class="cta-text-full">Bespoke Invitations (${priceText}) 💬</span><span class="cta-text-short">${shortPriceText}</span>`;
+    cta.title = `Bespoke invitations start at ₹8,000 ($100 USD)`;
   });
 }
 
@@ -3755,8 +3906,8 @@ const FAQS = [
     a: "Yes — we share a preview link of your customised invite before finalising. Nothing goes final without your OK."
   },
   {
-    q: "How many revisions are included?",
-    a: "2 rounds of revisions are included free with every package, so your names, dates and details come out exactly right."
+    q: "How does the revision process work?",
+    a: "Free revision requests for 24 hours after your first draft is delivered. Detail edits, text updates, Google Maps links, and photo swaps are made quickly upon request via WhatsApp."
   },
   {
     q: "We have multiple functions (Haldi, Mehendi, Sangeet…). Is that covered?",
@@ -3764,19 +3915,19 @@ const FAQS = [
   },
   {
     q: "How long does customisation take?",
-    a: "Standard delivery is 24 hours. With the Express 12h add-on (₹299) we deliver within 12 hours. Timelines start once you've paid and sent all your details and photos on WhatsApp."
+    a: "Standard delivery is 48 hours. With the Express 24h add-on (₹299) we deliver within 24 hours. Timelines start once you've paid and sent all your details and photos on WhatsApp."
   },
   {
     q: "How long is my invitation link live?",
     a: "Your invitestory.in link stays live for 1 year by default. You can extend it for another year for ₹199 if you'd like to keep the memories."
   },
   {
-    q: "Can I add my own photos and music?",
-    a: "Yes — every package supports custom couple photos (gallery of up to 12) and most designs support background music. Just send the files in your WhatsApp chat and we'll integrate them."
+    q: "Which packages include photos and music?",
+    a: "All packages include custom couple photos (Classic includes your couple cover portrait). Full photo galleries (up to 12 photos), love-story timelines, and background music are included in our Premium and Luxury packages."
   },
   {
     q: "What about refunds?",
-    a: "Please see our <a href=\"refund-and-editing-policy.html\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">Refund & Editing Policy</a> — in short: if the delivered invite doesn't match the chosen design, we revise it free until it does."
+    a: "Please see our <a href=\"refund-and-editing-policy.html\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">Refund & Editing Policy</a> — all sales are final once customization begins. Free revision requests for 24 hours after your first draft is delivered to ensure all details are accurate."
   },
   {
     q: "Do you have budget options under ₹700?",
@@ -3901,19 +4052,19 @@ function openCustomModal() {
   if (!modal) return;
 
   const isINR = currentCurrency === "INR";
-  const priceText = isINR ? "₹4,999" : "$60";
+  const priceText = isINR ? "₹8,000" : "$100";
   const priceEl = document.getElementById("custom-modal-price");
   if (priceEl) priceEl.textContent = priceText;
 
   const waBtn = document.getElementById("custom-modal-wa-btn");
   if (waBtn) {
-    const message = `Hi InviteStory, I would like to order Exclusive Customization & Bespoke Design (starting from ${priceText}). Please share details!`;
+    const message = `Hi InviteStory, I would like to order Bespoke Design (starting at ${priceText}). Please share details!`;
     waBtn.href = `https://wa.me/918281583882?text=${encodeURIComponent(message)}`;
     waBtn.onclick = () => {
-      trackMetaEvent("Lead", {
-        content_name: "Exclusive Customization Inquiry",
-        content_category: `Exclusive Custom Design (${priceText})`,
-        value: isINR ? 4999 : 60,
+      trackConversionEvent("whatsapp_click", {
+        cta_location: "custom_modal",
+        content_name: "Bespoke Customization Inquiry",
+        value: isINR ? 8000 : 100,
         currency: currentCurrency
       });
       closeCustomModal();
@@ -3986,16 +4137,31 @@ document.addEventListener("DOMContentLoaded", () => {
   initAnimations();
   refreshScrollTriggers();
 
-  // Floating WhatsApp Lead Tracking
+  // Global and Floating WhatsApp Click Tracking (Secondary Conversion)
   const floatingWa = document.getElementById("floating-whatsapp");
   if (floatingWa) {
     floatingWa.addEventListener("click", () => {
-      trackMetaEvent("Lead", {
-        content_name: "Floating WhatsApp Support Chat",
-        content_category: "Customer Inquiry"
+      trackConversionEvent("whatsapp_click", {
+        cta_location: "floating_button",
+        content_name: "Floating WhatsApp Support Chat"
       });
     });
   }
+
+  document.addEventListener("click", (e) => {
+    const waLink = e.target.closest('a[href*="wa.me"]');
+    if (!waLink || waLink.id === "floating-whatsapp") return;
+    const location = waLink.closest("header") ? "header"
+      : waLink.closest("footer") ? "footer"
+      : waLink.closest(".final-cta-section") ? "final_cta"
+      : waLink.closest("#custom-modal") ? "custom_modal"
+      : waLink.closest(".hero-section") ? "hero"
+      : "page_link";
+    trackConversionEvent("whatsapp_click", {
+      cta_location: location,
+      content_name: waLink.getAttribute("aria-label") || waLink.title || waLink.innerText.trim().slice(0, 50) || "WhatsApp Link"
+    });
+  }, { passive: true });
 
   // Show the floating tier nav on all viewports.
   // (Previously it was removed from the DOM on mobile — now it stays.)

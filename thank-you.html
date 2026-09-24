@@ -9,10 +9,35 @@
     })(window, document, "clarity", "script", "ykjlqgwscq");
   </script>
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-JS52597LF1');
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+    window.META_PIXEL_ID = window.META_PIXEL_ID || '877558961848422';
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', window.META_PIXEL_ID);
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=877558961848422&ev=PageView&noscript=1" /></noscript>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment Received — InviteStory</title>
-  <meta name="description" content="Your InviteStory payment is confirmed. Send your wedding details on WhatsApp and your invite will be ready within 24 hours.">
+  <meta name="description" content="Your InviteStory payment is confirmed. Send your wedding details on WhatsApp and your invite will be delivered within 48 hours after payment and receipt of all required details.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" href="logo/noappicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,7 +74,7 @@
       <div class="ty-steps">
         <div>1️⃣ Tap below to open WhatsApp with your payment details pre-filled.</div>
         <div>2️⃣ Send names, dates, photos &amp; venue (we reply with a short checklist).</div>
-        <div>3️⃣ Get your private link — usually within 24 hours.</div>
+        <div>3️⃣ Delivered within 48 hours after payment and receipt of all required details.</div>
       </div>
       <a href="https://wa.me/918281583882" id="ty-wa-btn" target="_blank" rel="noopener" class="ty-wa">Send details on WhatsApp →</a>
       <a href="index.html#pricing" class="ty-back">← Back to packages</a>
@@ -59,16 +84,118 @@
     (function () {
       var q = new URLSearchParams(window.location.search);
       var pkg = q.get("package") || "—";
-      var amount = q.get("amount") || "—";
+      var amountStr = q.get("amount") || "—";
       var pid = q.get("payment_id") || "—";
       var design = q.get("design") || "To be confirmed on WhatsApp";
+
+      // Attribution retrieval: URL query params with storage fallback
+      var getAttr = function(key) {
+        return q.get(key) || sessionStorage.getItem("ist_" + key) || localStorage.getItem("ist_" + key) || localStorage.getItem(key) || "";
+      };
+
+      var utmSource = getAttr("utm_source");
+      var utmMedium = getAttr("utm_medium");
+      var utmCampaign = getAttr("utm_campaign");
+      var utmTerm = getAttr("utm_term");
+      var utmContent = getAttr("utm_content");
+      var gclid = getAttr("gclid");
+      var gbraid = getAttr("gbraid");
+      var wbraid = getAttr("wbraid");
+
       document.getElementById("ty-package").textContent = pkg;
-      document.getElementById("ty-amount").textContent = amount;
+      document.getElementById("ty-amount").textContent = amountStr;
       document.getElementById("ty-payment").textContent = pid;
       document.getElementById("ty-design").textContent = design;
+
       var designLine = q.get("design") ? "\nDesign I want: " + q.get("design") : "";
-      var msg = "Hi InviteStory! ✅ Paid for " + pkg + " (" + amount + ").\nPayment ID: " + pid + designLine + "\nI'll send names, dates, photos, venue next.";
-      document.getElementById("ty-wa-btn").href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
+      var refLine = (utmSource || utmCampaign || utmTerm)
+        ? "\nRef: " + (utmSource || "ads") + (utmCampaign ? " / " + utmCampaign : "") + (utmTerm ? " / " + utmTerm : "")
+        : "";
+      var msg = "Hi InviteStory! ✅ Paid for " + pkg + " (" + amountStr + ").\nPayment ID: " + pid + designLine + refLine + "\nI'll send names, dates, photos, venue next.";
+      var waBtn = document.getElementById("ty-wa-btn");
+      waBtn.href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
+
+      // Track secondary conversion: whatsapp_click
+      waBtn.addEventListener("click", function () {
+        if (typeof gtag === "function") {
+          gtag("event", "whatsapp_click", {
+            cta_location: "thank_you_page",
+            package_name: pkg,
+            payment_id: pid,
+            utm_source: utmSource,
+            utm_campaign: utmCampaign,
+            utm_term: utmTerm,
+            gclid: gclid
+          });
+        }
+      });
+
+      // Primary conversion: purchase with deduplication by payment_id
+      if (pid && pid !== "—") {
+        var storageKey = "tracked_purchase_" + pid;
+        if (!sessionStorage.getItem(storageKey)) {
+          sessionStorage.setItem(storageKey, "1");
+
+          // Parse numeric amount
+          var numericAmount = 999;
+          var numMatch = amountStr.match(/[\d,.]+/);
+          if (numMatch) {
+            numericAmount = parseFloat(numMatch[0].replace(/,/g, "")) || 999;
+          }
+          var currency = amountStr.indexOf("$") !== -1 ? "USD" : "INR";
+
+          // 1. Google Analytics 4 purchase event with full keyword & campaign attribution
+          if (typeof gtag === "function") {
+            var gaPayload = {
+              transaction_id: pid,
+              value: numericAmount,
+              currency: currency,
+              items: [{
+                item_id: pkg,
+                item_name: pkg + " - Digital Wedding Invitation",
+                item_category: "Digital Wedding Invitation",
+                price: numericAmount,
+                quantity: 1
+              }]
+            };
+            if (utmSource) gaPayload.source = utmSource;
+            if (utmMedium) gaPayload.medium = utmMedium;
+            if (utmCampaign) gaPayload.campaign = utmCampaign;
+            if (utmTerm) gaPayload.term = utmTerm;
+            if (utmContent) gaPayload.content = utmContent;
+            if (gclid) gaPayload.gclid = gclid;
+            if (gbraid) gaPayload.gbraid = gbraid;
+            if (wbraid) gaPayload.wbraid = wbraid;
+
+            gtag("event", "purchase", gaPayload);
+
+            // Primary Google Ads conversion
+            var targetSendTo = window.GOOGLE_ADS_ID && window.GOOGLE_ADS_CONVERSION_LABEL
+              ? window.GOOGLE_ADS_ID + "/" + window.GOOGLE_ADS_CONVERSION_LABEL
+              : window.GOOGLE_ADS_ID || "";
+            if (targetSendTo) {
+              var adsData = {
+                send_to: targetSendTo,
+                value: numericAmount,
+                currency: currency,
+                transaction_id: pid
+              };
+              if (gclid) adsData.gclid = gclid;
+              gtag("event", "conversion", adsData);
+            }
+          }
+
+          // 2. Meta Pixel Purchase
+          if (typeof fbq === "function") {
+            fbq("track", "Purchase", {
+              value: numericAmount,
+              currency: currency,
+              content_name: pkg,
+              content_type: "product"
+            });
+          }
+        }
+      }
     })();
   </script>
 </body>

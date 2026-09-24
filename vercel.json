@@ -6,6 +6,10 @@
   ],
   "rewrites": [
     {
+      "source": "/digital-wedding-invitations",
+      "destination": "/digital-wedding-invitations.html"
+    },
+    {
       "source": "/",
       "has": [
         {

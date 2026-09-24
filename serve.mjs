@@ -230,6 +230,16 @@ createServer(async (req, res) => {
     let isDirectMdRequest = false;
     let info = await stat(filePath).catch(() => null);
 
+    // If requesting extensionless clean URL, check if .html exists
+    if (!info && !extname(filePath)) {
+      const htmlCandidate = filePath + ".html";
+      const htmlInfo = await stat(htmlCandidate).catch(() => null);
+      if (htmlInfo && !htmlInfo.isDirectory()) {
+        filePath = htmlCandidate;
+        info = htmlInfo;
+      }
+    }
+
     // If requesting .md directly, but only .html exists, map to .html
     if (!info && filePath.endsWith(".md")) {
       const htmlCandidate = filePath.slice(0, -3) + ".html";
