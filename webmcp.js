@@ -31,7 +31,7 @@
         const catalogue = [
           { id: "diya-haveli", name: "Diya Haveli", style: "Royal Rajasthani Palace", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/diya-haveli.html" },
           { id: "emerald-nikah", name: "Emerald Nikah", style: "Islamic Nikah / Walima", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/emerald-nikah.html" },
-          { id: "kalyana-mandapam", name: "Kalyana Mandapam", style: "South Indian & Telugu", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/kalyana-mandapam.html" },
+          { id: "kalyana-mandapam", name: "Kalyana Mandapam", style: "South Indian & Telugu", priceINR: "₹999", previewUrl: "https://invitestory.in/assets/preview/kalyana-mandapam.html" },
           { id: "ever-after-bloom", name: "Ever After Bloom", style: "Botanical & Floral", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/ever-after-bloom.html" },
           { id: "slide-to-shaadi", name: "Slide to Shaadi", style: "Quirky & Modern Swipe", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/slide-to-shaadi.html" },
           { id: "sage-parchment", name: "Sage Parchment", style: "Minimalist Aesthetic", priceINR: "₹1,999", previewUrl: "https://invitestory.in/assets/preview/sage-parchment.html" }
@@ -76,8 +76,10 @@
             "1 Year high-speed cloud hosting"
           ],
           pricing: {
-            INR: "₹1,999",
-            USD: "$25"
+            Classic: "₹999 ($15)",
+            Premium: "₹1,999 ($30)",
+            Luxury: "₹2,499 ($40)",
+            bespokeStartingAt: "₹8,000"
           },
           orderWhatsApp: "https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20want%20to%20customize%20template%20" + encodeURIComponent(templateId)
         };
