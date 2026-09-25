@@ -73,7 +73,7 @@
             "Google Maps venue location navigation",
             "Custom background music & Spotify playlist integration",
             "RSVP tracking via WhatsApp & web",
-            "1 Year high-speed cloud hosting"
+            "High-speed cloud hosting (event end date + 1 month validity)"
           ],
           pricing: {
             Classic: "₹999 ($15)",

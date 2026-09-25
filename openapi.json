@@ -46,7 +46,7 @@
           "method": "stripe",
           "amount": 1999,
           "currency": "INR",
-          "description": "InviteStory interactive wedding invitation design, custom soundtrack, venue maps, and 1-year hosting."
+          "description": "InviteStory interactive wedding invitation design, custom soundtrack, venue maps, and hosting valid until 1 month after event end date."
         },
         "requestBody": {
           "required": true,

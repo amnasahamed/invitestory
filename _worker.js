@@ -43,6 +43,14 @@ export default {
           : fetch(newReq);
       }
 
+      if (url.pathname === "/dearly" || url.pathname === "/dearly/") {
+        url.pathname = "/dearly.html";
+        const newReq = new Request(url.toString(), request);
+        return env && env.ASSETS && typeof env.ASSETS.fetch === "function"
+          ? env.ASSETS.fetch(newReq)
+          : fetch(newReq);
+      }
+
       const designKey = (url.searchParams.get("design") || url.searchParams.get("preview") || url.searchParams.get("id") || "").toLowerCase().trim();
 
       // Fetch from ASSETS if available, otherwise fetch from origin

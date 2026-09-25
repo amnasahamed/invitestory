@@ -1,0 +1,3 @@
+[submodule "dearly"]
+	path = dearly
+	url = https://github.com/amnasahamed/dearly.git

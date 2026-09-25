@@ -42,7 +42,7 @@
   <!-- End Meta Pixel Code -->
 
   <!-- Razorpay Checkout Standard SDK -->
-  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js" defer></script>
   <!-- PayPal Checkout SDK for International Orders -->
   <script id="paypal-sdk-script" src="https://www.paypal.com/sdk/js?client-id=BAAXdw4bek4C9gmaofxymnJjm8cpkjT61bXsJ3KzdtDpW14OKQd_ig8jKgi0I45orPLAZ64NvkBq2Qpu2M&currency=USD&components=buttons" async></script>
   <meta charset="UTF-8">
@@ -134,7 +134,7 @@
           "priceCurrency": "INR",
           "lowPrice": "999",
           "highPrice": "2999",
-          "offerCount": "25",
+          "offerCount": "31",
           "availability": "https://schema.org/InStock"
         }
       },
@@ -179,7 +179,7 @@
             "name": "Is the wedding link permanent? Will it work after the wedding?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Your invitestory.in link stays live for 1 year by default — long enough for any guests who couldn't attend to revisit later. We can extend it for an additional year for ₹199 if you'd like to keep the memories."
+              "text": "All invitation links remain active until 1 month after your event end date (event end date + 1 month validity). You can easily extend it upon request if you'd like to keep the memories alive longer."
             }
           },
           {
@@ -192,10 +192,10 @@
           },
           {
             "@type": "Question",
-            "name": "Do you have budget options under ₹700?",
+            "name": "Do you have budget options or a DIY editor?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! If you are looking for simple budget-friendly single-page invitations, we have a dedicated collection at reveals.invitestory.in with templates starting at just ₹699."
+              "text": "Yes! If you want to design it yourself, try our DIY Editor at diy.invitestory.in starting at just ₹499. For single-page reveal cards, explore our dedicated collection at reveals.invitestory.in starting from ₹999."
             }
           }
         ]
@@ -250,12 +250,12 @@
         </p>
 
         <div class="hero-action-wrapper">
-          <a href="#pricing" class="hero-primary-cta" id="hero-explore-btn">
-            <span>See packages &amp; pay</span>
+          <a href="#catalogue-header" class="hero-primary-cta" id="hero-explore-btn">
+            <span>Explore invitation designs</span>
             <span class="hero-cta-arrow" aria-hidden="true">→</span>
           </a>
-          <a href="#catalogue-header" class="hero-secondary-cta" id="hero-preview-btn">
-            <span>Preview designs</span>
+          <a href="#pricing" class="hero-secondary-cta" id="hero-preview-btn">
+            <span>See packages</span>
           </a>
         </div>
 
@@ -336,6 +336,112 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
+  <!-- THE DEARLY COLLECTION — Haute Couture Flagship Showcase         -->
+  <!-- ═══════════════════════════════════════════════════════════════ -->
+  <section class="dearly-showroom-section" id="dearly-collection" aria-labelledby="dearly-heading">
+    <div class="container">
+      <div class="dearly-showroom-header">
+        <span class="dearly-showroom-eyebrow">InviteStory signature · Haute couture</span>
+        <h2 class="dearly-showroom-title" id="dearly-heading">The <em>Dearly</em> Collection</h2>
+        <p class="dearly-showroom-subtitle">For couples who want the invitation to feel like part of the wedding — a little anticipation, a beautiful reveal, and a story that unfolds from a wax seal.</p>
+        <div class="dearly-showroom-price-badge">
+          <span class="dearly-price-amount" data-inr="4999" data-usd="80">₹4,999</span>
+          <span class="dearly-price-note">per suite · 24h express delivery included</span>
+        </div>
+      </div>
+
+      <ul class="dearly-showroom-features" aria-label="Included with every suite">
+        <li>Animated wax-seal opening</li>
+        <li>Email RSVP</li>
+        <li>Photo gallery</li>
+      </ul>
+
+      <div class="dearly-showroom-grid">
+        <!-- Magnolia Reverie -->
+        <div class="dearly-card" style="--dearly-accent: #6B3A5D;">
+          <div class="dearly-card-media">
+            <img src="dearly/aubergine-magnolia/assets/envelope-first.webp" alt="Magnolia Reverie — Aubergine wax-seal invitation" loading="lazy" />
+          </div>
+          <div class="dearly-card-info">
+            <div class="dearly-card-header-row">
+              <h3 class="dearly-card-name">Magnolia Reverie</h3>
+              <span class="dearly-card-price-pill" data-inr="4999" data-usd="80">₹4,999</span>
+            </div>
+            <p class="dearly-card-palette">Aubergine &amp; Blush</p>
+            <div class="dearly-card-actions">
+              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(35)">Pick this design</button>
+              <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(35)" aria-label="Preview Magnolia Reverie">Preview</button>
+              <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20Magnolia%20Reverie." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about Magnolia Reverie on WhatsApp" aria-label="Ask about Magnolia Reverie on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.8 11.8 0 0 0 1.8 17.8L0 24l6.4-1.7A11.8 11.8 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4Zm-8.4 18a9.7 9.7 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.4 4.7Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.2-.7l.5-.6c.2-.2.2-.4.3-.6l-.1-.6c-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5H7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2a11.4 11.4 0 0 0 4.4 4c.6.3 1.1.5 1.4.6.6.2 1.2.2 1.6.1.5-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.5-.1-.2-.3-.3-.5-.4Z"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Golden Camellia -->
+        <div class="dearly-card" style="--dearly-accent: #8B6914;">
+          <div class="dearly-card-media">
+            <img src="dearly/cinnamon-camellia/assets/envelope-first.webp" alt="Golden Camellia — Cinnamon wax-seal invitation" loading="lazy" />
+          </div>
+          <div class="dearly-card-info">
+            <div class="dearly-card-header-row">
+              <h3 class="dearly-card-name">Golden Camellia</h3>
+              <span class="dearly-card-price-pill" data-inr="4999" data-usd="80">₹4,999</span>
+            </div>
+            <p class="dearly-card-palette">Cinnamon &amp; Gold</p>
+            <div class="dearly-card-actions">
+              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(36)">Pick this design</button>
+              <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(36)" aria-label="Preview Golden Camellia">Preview</button>
+              <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20Golden%20Camellia." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about Golden Camellia on WhatsApp" aria-label="Ask about Golden Camellia on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Something Blue -->
+        <div class="dearly-card" style="--dearly-accent: #1E3A5F;">
+          <div class="dearly-card-media">
+            <img src="dearly/cobalt-iris/assets/envelope-first.webp" alt="Something Blue — Cobalt Iris wax-seal invitation" loading="lazy" />
+          </div>
+          <div class="dearly-card-info">
+            <div class="dearly-card-header-row">
+              <h3 class="dearly-card-name">Something Blue</h3>
+              <span class="dearly-card-price-pill" data-inr="4999" data-usd="80">₹4,999</span>
+            </div>
+            <p class="dearly-card-palette">Cobalt &amp; Iris</p>
+            <div class="dearly-card-actions">
+              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(37)">Pick this design</button>
+              <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(37)" aria-label="Preview Something Blue">Preview</button>
+              <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20Something%20Blue." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about Something Blue on WhatsApp" aria-label="Ask about Something Blue on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- The Dahlia Garden -->
+        <div class="dearly-card" style="--dearly-accent: #2D4F4F;">
+          <div class="dearly-card-media">
+            <img src="dearly/petrol-dahlia/assets/envelope-first.webp" alt="The Dahlia Garden — Petrol wax-seal invitation" loading="lazy" />
+          </div>
+          <div class="dearly-card-info">
+            <div class="dearly-card-header-row">
+              <h3 class="dearly-card-name">The Dahlia Garden</h3>
+              <span class="dearly-card-price-pill" data-inr="4999" data-usd="80">₹4,999</span>
+            </div>
+            <p class="dearly-card-palette">Petrol &amp; Sage</p>
+            <div class="dearly-card-actions">
+              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(38)">Pick this design</button>
+              <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(38)" aria-label="Preview The Dahlia Garden">Preview</button>
+              <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20The%20Dahlia%20Garden." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about The Dahlia Garden on WhatsApp" aria-label="Ask about The Dahlia Garden on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dearly-showroom-footer">
+        <a href="dearly/index.html" class="dearly-explore-link">Discover the Dearly experience <span aria-hidden="true">↗</span></a>
+        <a href="#catalogue-header" class="dearly-browse-all-link">Browse all invitations <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════ -->
   <!-- SECTION 2: TEMPLATE CATALOGUE (Product First — moved UP)      -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="catalogue-section" id="catalogue-header">
@@ -355,6 +461,10 @@
             <button type="button" class="view-mode-btn" id="view-mode-list" data-mode="list" aria-label="List view" title="List view">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
               <span>List</span>
+            </button>
+            <button type="button" class="view-mode-btn" id="view-mode-match" data-mode="match" aria-label="Match view" title="Match view">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              <span>Match</span>
             </button>
           </div>
         </div>
@@ -385,6 +495,7 @@
           <button class="filter-tag" data-tag="south-indian">South Indian</button>
           <button class="filter-tag" data-tag="islamic">Islamic</button>
           <button class="filter-tag" data-tag="quirky">Illustrated</button>
+          <button class="filter-tag" data-tag="dearly">✨ Dearly Exclusive</button>
         </div>
       </div>
       
@@ -566,6 +677,7 @@
       <h2 class="section-title">Beautiful doesn't have to be complicated.</h2>
       <p class="section-subtitle">One-time payment. No subscription. Delivered in 48 hours.</p>
       <p class="pricing-diff-line">Not another DIY editor. You pick a design, pay, send details — we build the invite for you.</p>
+      <div class="pricing-selected-design" id="pricing-selected-design" hidden aria-live="polite"></div>
       <div class="pricing-grid">
         <!-- Tier 1: Classic -->
         <div class="pricing-card">
@@ -590,7 +702,7 @@
 
         <!-- Tier 2: Premium (Hero / Couples' favourite) -->
         <div class="pricing-card featured pricing-card-premium">
-          <div class="pricing-popular-badge">Couples' favourite</div>
+          <div class="pricing-popular-badge">Best for most weddings</div>
           <div class="pricing-card-header">
             <h3 class="pricing-card-name">🌸 Premium</h3>
             <div class="pricing-card-price-row">
@@ -630,12 +742,37 @@
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)"><span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
         </div>
+
+        <!-- Tier 4: Dearly Exclusive -->
+        <div class="pricing-card pricing-card-dearly">
+          <div class="pricing-popular-badge dearly-badge">✨ Haute Couture</div>
+          <div class="pricing-card-header">
+            <h3 class="pricing-card-name">✨ The Dearly Suite</h3>
+            <div class="pricing-card-price-row">
+              <span class="pricing-card-price">₹4,999</span>
+            </div>
+          </div>
+          <div class="pricing-card-tagline">“An heirloom-grade digital invitation.”</div>
+          <ul class="pricing-card-features">
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Everything in Luxury + animated wax-seal opening</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Email RSVP with guest management dashboard</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Optional photo gallery &amp; botanical motion</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>24-hour express delivery included</span></li>
+          </ul>
+          <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="payRazorpayForPackage(4)"><span data-pay-label>Pick this design</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(4)"><span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">24h express delivery included. · UPI / GPay / PhonePe</p>
+        </div>
       </div>
-      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for Premium &amp; Luxury · Couples’ favourite is in the middle</p>
+      <div class="pricing-trust-strip" aria-label="Payment reassurance">
+        <span>🔒 Secure UPI payment</span><span>✦ Human-built for you</span><span>⏱ Delivered in 48 hours</span>
+      </div>
+      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for all packages</p>
       <div class="pricing-dots" id="pricing-dots" role="tablist" aria-label="Package cards">
         <button type="button" class="pricing-dot" data-pricing-dot="0" aria-label="Classic package" aria-current="false"></button>
         <button type="button" class="pricing-dot" data-pricing-dot="1" aria-label="Premium package" aria-current="true"></button>
         <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Luxury package" aria-current="false"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="3" aria-label="Dearly Exclusive package" aria-current="false"></button>
       </div>
       <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — delivered within 48 hours after payment and receipt of all required details.</p>
     </div>
@@ -659,13 +796,16 @@
     <div class="container">
       <div class="budget-downsell-card">
         <div class="budget-downsell-left">
-          <span class="budget-downsell-badge">BUDGET OPTION · FROM ₹699</span>
+          <span class="budget-downsell-badge">BUDGET &amp; DIY OPTIONS · FROM ₹499</span>
           <div>
-            <h4 class="budget-downsell-title">Need something simpler and cheaper?</h4>
-            <p class="budget-downsell-desc">Our Quick Invite collection is single-page cards with live previews — a lighter alternative to the full Classic / Premium / Luxury builds above.</p>
+            <h4 class="budget-downsell-title">Looking for a DIY Editor or Single-Page Reveal?</h4>
+            <p class="budget-downsell-desc">Design your own card with our DIY Editor at just ₹499 on diy.invitestory.in, or explore single-page reveals starting from ₹999 on reveals.invitestory.in.</p>
           </div>
         </div>
-        <a href="https://reveals.invitestory.in" target="_blank" rel="noopener" class="budget-downsell-cta">Explore Quick Invites →</a>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+          <a href="https://diy.invitestory.in" target="_blank" rel="noopener" class="budget-downsell-cta">DIY Editor (₹499) →</a>
+          <a href="https://reveals.invitestory.in" target="_blank" rel="noopener" class="budget-downsell-cta" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(223,184,119,0.4); color: #ecd9ac;">Explore Reveals (₹999) →</a>
+        </div>
       </div>
     </div>
   </section>
@@ -745,7 +885,8 @@
           <ul class="footer-links">
             <li><a href="#catalogue-header">Template Catalogue</a></li>
             <li><a href="#pricing">Packages &amp; Pay</a></li>
-            <li><a href="https://diy.invitestory.in" target="_blank" rel="noopener">DIY Cards at ₹499</a></li>
+            <li><a href="https://diy.invitestory.in" target="_blank" rel="noopener">DIY Cards at ₹499 (DIY Editor)</a></li>
+            <li><a href="https://reveals.invitestory.in" target="_blank" rel="noopener">Reveals from ₹999</a></li>
             <li><a href="blog/index.html">Wedding Blog & Guides</a></li>
             <li><a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener">Chat on WhatsApp</a></li>
             <li><a href="https://www.instagram.com/invitestory.in" target="_blank" rel="noopener">Instagram · @invitestory.in</a></li>
@@ -871,7 +1012,7 @@
               <button type="button" class="preview-nav-btn" id="preview-prev-btn" aria-label="Previous template">&larr;</button>
               <button type="button" class="preview-nav-btn" id="preview-next-btn" aria-label="Next template">&rarr;</button>
             </div>
-            <span class="preview-counter-badge" id="preview-counter-badge">1 of 25</span>
+            <span class="preview-counter-badge" id="preview-counter-badge">1 of 31</span>
           </div>
 
           <!-- 3D vs Flat View Toggle Switch -->
@@ -885,6 +1026,7 @@
             <button type="button" class="preview-tier-tab" data-preview-tier="1" role="tab">Classic</button>
             <button type="button" class="preview-tier-tab" data-preview-tier="2" role="tab">Premium</button>
             <button type="button" class="preview-tier-tab" data-preview-tier="3" role="tab">Luxury</button>
+            <button type="button" class="preview-tier-tab" data-preview-tier="4" role="tab">✨ Dearly</button>
           </div>
         </div>
 
@@ -964,7 +1106,7 @@
                 <span class="preview-faq-icon">⏳</span>
                 <h4>How long is my invitation link active?</h4>
               </div>
-              <p class="preview-faq-a">Your personalized link stays live for <strong>1 year</strong> by default (extendable).</p>
+              <p class="preview-faq-a">Your personalized link stays live until <strong>1 month after your event end date</strong> (extendable upon request).</p>
             </div>
 
             <div class="preview-faq-item">
@@ -1018,7 +1160,7 @@
           <li>1-on-1 Dedicated Senior Designer via WhatsApp & Call</li>
           <li>Custom illustrations, venue maps & unique color themes</li>
           <li>Free revision requests for 24 hours after your first draft is delivered.</li>
-          <li>1-Year Hosted Vercel Link with express priority delivery</li>
+          <li>Hosted invitestory.in link valid until 1 month after your event end date with express priority delivery</li>
         </ul>
       </div>
 
@@ -1027,7 +1169,7 @@
         <button type="button" data-custom-close class="btn btn-outline btn-sm" style="border-radius: 9999px; width: 100%; color: #f3edda; border-color: rgba(243, 237, 218, 0.35); background: rgba(255, 255, 255, 0.08); padding: 11px; font-size: 0.88rem; font-weight: 600; cursor: pointer;">Explore Catalogue Templates</button>
       </div>
 
-      <p class="exit-intent-fineprint" style="margin-top: 14px; color: rgba(243, 237, 218, 0.6); font-size: 0.78rem;">⚡ Looking for standard templates? Pick any catalog template starting from ₹999!</p>
+      <p class="exit-intent-fineprint" style="margin-top: 14px; color: rgba(243, 237, 218, 0.6); font-size: 0.78rem;">⚡ Looking for standard templates? Pick any catalogue template starting from ₹999!</p>
     </div>
   </div>
 
@@ -1155,6 +1297,9 @@
 
       <input type="radio" name="tier" id="glass-luxury" value="3" />
       <label for="glass-luxury">Luxury <span class="tier-meta" data-tier-count>(12)</span></label>
+
+      <input type="radio" name="tier" id="glass-dearly" value="4" />
+      <label for="glass-dearly">✨ Dearly <span class="tier-meta" data-tier-count>(4)</span></label>
 
       <div class="glass-glider"></div>
     </div>

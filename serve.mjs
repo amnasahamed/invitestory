@@ -50,6 +50,8 @@ const MIME = {
   ".mp3": "audio/mpeg",
   ".woff": "font/woff",
   ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
+  ".otf": "font/otf",
   ".txt": "text/plain; charset=utf-8",
   ".xml": "application/xml; charset=utf-8",
   ".csv": "text/csv; charset=utf-8",

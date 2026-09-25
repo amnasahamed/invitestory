@@ -29,7 +29,7 @@ const PROMO_CONFIG = {
 };
 
 function getItemPrices(item) {
-  if (PROMO_CONFIG.active) {
+  if (PROMO_CONFIG.active && item.tier !== 4) {
     return {
       priceINR: PROMO_CONFIG.promoPriceINR,
       priceUSD: PROMO_CONFIG.promoPriceUSD,
@@ -726,6 +726,79 @@ const TEMPLATE_DATABASE = [
     tags: ["quirky", "cinematic", "royal", "udaipur"],
     desc: "iPhone 'Slide to answer' call interface opening up into a romantic Udaipur lakeside golden hour view.",
     promise: "Slide to answer the call of a lifetime with lakeside golden hour magic."
+  },
+  // --- TIER 4: The Dearly Collection (Haute Couture / ₹4,999 / $80) ---
+  {
+    id: 35,
+    name: "Magnolia Reverie",
+    slug: "dearly-magnolia",
+    image: "dearly/aubergine-magnolia/assets/envelope-first.webp",
+    tier: 4,
+    collection: "dearly",
+    priceINR: 4999,
+    priceUSD: 80,
+    originalPriceINR: 4999,
+    originalPriceUSD: 80,
+    demoUrl: "https://dearly-magnolia.invitestory.in/",
+    style: "Dearly Signature Suite",
+    accentColor: "#682e49",
+    tags: ["exclusive", "dearly", "wax-seal", "rsvp", "botanical", "our-picks"],
+    desc: "Deep plum aubergine with ivory magnolia botanicals, animated wax-seal unboxing, built-in email RSVP & optional couple photo gallery.",
+    promise: "Wax seal unboxing, email RSVP, and 24-hour express turnaround."
+  },
+  {
+    id: 36,
+    name: "Golden Camellia",
+    slug: "dearly-camellia",
+    image: "dearly/cinnamon-camellia/assets/envelope-first.webp",
+    tier: 4,
+    collection: "dearly",
+    priceINR: 4999,
+    priceUSD: 80,
+    originalPriceINR: 4999,
+    originalPriceUSD: 80,
+    demoUrl: "https://dearly-camellia.invitestory.in/",
+    style: "Dearly Signature Suite",
+    accentColor: "#8b4e2b",
+    tags: ["exclusive", "dearly", "wax-seal", "rsvp", "botanical", "warm-gold"],
+    desc: "Warm terracotta cinnamon with golden camellia botanicals, animated wax-seal unboxing, built-in email RSVP & optional couple photo gallery.",
+    promise: "Warm earthy elegance with interactive wax seal unboxing & email RSVP."
+  },
+  {
+    id: 37,
+    name: "Something Blue",
+    slug: "dearly-iris",
+    image: "dearly/cobalt-iris/assets/envelope-first.webp",
+    tier: 4,
+    collection: "dearly",
+    priceINR: 4999,
+    priceUSD: 80,
+    originalPriceINR: 4999,
+    originalPriceUSD: 80,
+    demoUrl: "https://dearly-iris.invitestory.in/",
+    style: "Dearly Signature Suite",
+    accentColor: "#294e7b",
+    tags: ["exclusive", "dearly", "wax-seal", "rsvp", "botanical", "royal"],
+    desc: "Regal cobalt sapphire with delicate English iris florals, animated wax-seal unboxing, built-in email RSVP & optional couple photo gallery.",
+    promise: "Aristocratic sapphire luxury with interactive wax seal opening & email RSVP."
+  },
+  {
+    id: 38,
+    name: "The Dahlia Garden",
+    slug: "dearly-dahlia",
+    image: "dearly/petrol-dahlia/assets/envelope-first.webp",
+    tier: 4,
+    collection: "dearly",
+    priceINR: 4999,
+    priceUSD: 80,
+    originalPriceINR: 4999,
+    originalPriceUSD: 80,
+    demoUrl: "https://dearly-dahlia.invitestory.in/",
+    style: "Dearly Signature Suite",
+    accentColor: "#174b49",
+    tags: ["exclusive", "dearly", "wax-seal", "rsvp", "botanical", "modern"],
+    desc: "Deep sea petrol teal paired with rich garden dahlias, animated wax-seal unboxing, built-in email RSVP & optional couple photo gallery.",
+    promise: "Moody contemporary botanical luxury with interactive wax seal & email RSVP."
   }
 ];
 
@@ -744,7 +817,7 @@ if (isAdsLandingPage) {
 
 // --- 2. State Management ---
 let currentCurrency = "INR"; // "INR" or "USD"
-let activeTierFilter = 0; // 0: All, 1: Classic, 2: Premium, 3: Luxury
+let activeTierFilter = 0; // 0: All, 1: Classic, 2: Premium, 3: Luxury, 4: Dearly
 let activeTagFilter = "all";
 let searchQuery = "";
 
@@ -754,8 +827,8 @@ const searchInput = document.getElementById("search-input");
 const clearSearchBtn = document.getElementById("clear-search-btn");
 const filterTagsContainer = document.getElementById("filter-tags");
 
-// Tier radio group (glass-morphism) — maps tier id (0/1/2/3) to its input id
-const TIER_RADIO_IDS = { 0: "glass-all", 1: "glass-classic", 2: "glass-premium", 3: "glass-luxury" };
+// Tier radio group (glass-morphism) — maps tier id (0/1/2/3/4) to its input id
+const TIER_RADIO_IDS = { 0: "glass-all", 1: "glass-classic", 2: "glass-premium", 3: "glass-luxury", 4: "glass-dearly" };
 const tierRadios = document.querySelectorAll("#tier-radio-group input[type=radio]");
 const tierRadioByValue = {};
 tierRadios.forEach(r => { tierRadioByValue[r.value] = r; });
@@ -764,7 +837,8 @@ tierRadios.forEach(r => { tierRadioByValue[r.value] = r; });
 const TIER_BASE_PRICE = {
   1: { inr: 999,  usd: 15 },
   2: { inr: 1999, usd: 30 },
-  3: { inr: 2999, usd: 49 }
+  3: { inr: 2999, usd: 49 },
+  4: { inr: 4999, usd: 80 }
 };
 
 // Pricing Grid references (to update pricing currency symbols dynamically)
@@ -778,7 +852,7 @@ const ADDONS = {
 };
 
 // --- Package-level UPI-first checkout (Classic / Premium / Luxury) ---
-const PACKAGE_NAMES = { 1: "Classic", 2: "Premium", 3: "Luxury" };
+const PACKAGE_NAMES = { 1: "Classic", 2: "Premium", 3: "Luxury", 4: "Dearly Exclusive" };
 
 function packageName(tier) {
   return PACKAGE_NAMES[tier] || "Classic";
@@ -812,7 +886,8 @@ function packageAmountText(tier, total) {
 const TIER_FIRST_INDEX = {
   1: TEMPLATE_DATABASE.findIndex(t => t.tier === 1),
   2: TEMPLATE_DATABASE.findIndex(t => t.tier === 2),
-  3: TEMPLATE_DATABASE.findIndex(t => t.tier === 3)
+  3: TEMPLATE_DATABASE.findIndex(t => t.tier === 3),
+  4: TEMPLATE_DATABASE.findIndex(t => t.tier === 4)
 };
 
 // Automatically generate clean URL slugs for every template in database
@@ -867,6 +942,10 @@ const PhonePhysics = {
   els: {},
   // Reduced motion preference
   reducedMotion: false,
+  // Gyroscope state tracking
+  lastGyroTime: 0,
+  lastNormX: 0,
+  lastNormY: 0,
   // Low-power mobile & Android optimization flags
   isAndroid: typeof navigator !== "undefined" && /Android/i.test(navigator.userAgent || ""),
   isMobile: typeof window !== "undefined" && (window.matchMedia("(max-width: 768px)").matches || (typeof navigator !== "undefined" && /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "")))
@@ -970,10 +1049,15 @@ const LUXURY_PATTERNS = {
   paisley: (color) => ({
     size: "76px 76px",
     svg: `<svg xmlns='http://www.w3.org/2000/svg' width='76' height='76' viewBox='0 0 76 76'><g fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.4'><path d='M38 14 C48 14 56 24 56 36 C56 50 44 60 36 64 C32 66 26 62 24 56 C22 50 26 44 32 42 C38 40 40 34 38 28 C36 22 28 24 26 28'/><circle cx='38' cy='36' r='3' fill='${color}' fill-opacity='0.4'/></g></svg>`
+  }),
+  dearly: (color) => ({
+    size: "80px 80px",
+    svg: `<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><g fill='none' stroke='${color}' stroke-width='1.2' stroke-opacity='0.45'><path d='M40 8 C48 22 58 28 72 40 C58 52 48 58 40 72 C32 58 22 52 8 40 C22 28 32 22 40 8 Z'/><circle cx='40' cy='40' r='18' stroke-dasharray='3 3'/><circle cx='40' cy='40' r='4' fill='${color}' fill-opacity='0.6'/><path d='M40 22 L40 58 M22 40 L58 40'/></g></svg>`
   })
 };
 
 function getTemplatePatternKey(item) {
+  if (item.tier === 4 || item.collection === "dearly") return "dearly";
   const str = `${item.name} ${item.style || ""} ${(item.tags || []).join(" ")} ${item.slug || ""}`.toLowerCase();
   
   if (/ghibli|anime|whimsical|fantasy|fairy/.test(str)) return "whimsical";
@@ -1015,6 +1099,7 @@ function renderPricingSection() {
   const p1 = TIER_BASE_PRICE[1];
   const p2 = TIER_BASE_PRICE[2];
   const p3 = TIER_BASE_PRICE[3];
+  const p4 = TIER_BASE_PRICE[4];
 
   const checkIcon = `<svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>`;
   const expressLabel = currentCurrency === "INR"
@@ -1027,6 +1112,7 @@ function renderPricingSection() {
       <h2 class="section-title">Beautiful doesn't have to be complicated.</h2>
       <p class="section-subtitle">One-time payment. No subscription. Delivered in 48 hours.</p>
       <p class="pricing-diff-line">Not another DIY editor. You pick a design, pay, send details — we build the invite for you.</p>
+      <div class="pricing-selected-design" id="pricing-selected-design" hidden aria-live="polite"></div>
       <div class="pricing-grid">
         <!-- Tier 1: Classic -->
         <div class="pricing-card">
@@ -1051,7 +1137,7 @@ function renderPricingSection() {
 
         <!-- Tier 2: Premium (Hero / Couples' favourite) -->
         <div class="pricing-card featured pricing-card-premium">
-          <div class="pricing-popular-badge">Couples' favourite</div>
+          <div class="pricing-popular-badge">Best for most weddings</div>
           <div class="pricing-card-header">
             <h3 class="pricing-card-name">🌸 Premium</h3>
             <div class="pricing-card-price-row">
@@ -1091,12 +1177,37 @@ function renderPricingSection() {
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)">${askIcon}<span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
         </div>
+
+        <!-- Tier 4: Dearly Exclusive -->
+        <div class="pricing-card pricing-card-dearly">
+          <div class="pricing-popular-badge dearly-badge">✨ Haute Couture</div>
+          <div class="pricing-card-header">
+            <h3 class="pricing-card-name">✨ The Dearly Suite</h3>
+            <div class="pricing-card-price-row">
+              <span class="pricing-card-price">${formatPrice(p4.inr, p4.usd)}</span>
+            </div>
+          </div>
+          <div class="pricing-card-tagline">“An heirloom-grade digital invitation.”</div>
+          <ul class="pricing-card-features">
+            <li class="pricing-card-feature-item">${checkIcon}<span>Everything in Luxury + animated wax-seal opening</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Email RSVP with guest management dashboard</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>Optional photo gallery &amp; botanical motion</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>24-hour express delivery included</span></li>
+          </ul>
+          <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="payRazorpayForPackage(4)"><span data-pay-label>Pick this design</span></button>
+          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(4)">${askIcon}<span>Ask on WhatsApp</span></button>
+          <p class="pkg-microcopy">24h express delivery included. · UPI / GPay / PhonePe</p>
+        </div>
       </div>
-      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for Premium &amp; Luxury · Couples’ favourite is in the middle</p>
+      <div class="pricing-trust-strip" aria-label="Payment reassurance">
+        <span>🔒 Secure UPI payment</span><span>✦ Human-built for you</span><span>⏱ Delivered in 48 hours</span>
+      </div>
+      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for all packages</p>
       <div class="pricing-dots" id="pricing-dots" role="tablist" aria-label="Package cards">
         <button type="button" class="pricing-dot" data-pricing-dot="0" aria-label="Classic package" aria-current="false"></button>
         <button type="button" class="pricing-dot" data-pricing-dot="1" aria-label="Premium package" aria-current="true"></button>
         <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Luxury package" aria-current="false"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="3" aria-label="Dearly Exclusive package" aria-current="false"></button>
       </div>
 
       <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — delivered within 48 hours after payment and receipt of all required details.</p>
@@ -1124,7 +1235,7 @@ function initPackageViewTracking() {
     entries.forEach(entry => {
       if (entry.isIntersecting && !hasTrackedPackageView) {
         hasTrackedPackageView = true;
-        [1, 2, 3].forEach(tier => {
+        [1, 2, 3, 4].forEach(tier => {
           const p = TIER_BASE_PRICE[tier];
           trackConversionEvent("view_package", {
             package_tier: tier,
@@ -1188,6 +1299,7 @@ function updateTierNavCounts() {
   const classicCount = TEMPLATE_DATABASE.filter(t => t.tier === 1).length;
   const premiumCount = TEMPLATE_DATABASE.filter(t => t.tier === 2).length;
   const luxuryCount = TEMPLATE_DATABASE.filter(t => t.tier === 3).length;
+  const dearlyCount = TEMPLATE_DATABASE.filter(t => t.tier === 4).length;
 
   const labels = document.querySelectorAll("#tier-radio-group label");
   labels.forEach(label => {
@@ -1198,6 +1310,7 @@ function updateTierNavCounts() {
     else if (forAttr === "glass-classic") countSpan.textContent = `(${classicCount})`;
     else if (forAttr === "glass-premium") countSpan.textContent = `(${premiumCount})`;
     else if (forAttr === "glass-luxury") countSpan.textContent = `(${luxuryCount})`;
+    else if (forAttr === "glass-dearly") countSpan.textContent = `(${dearlyCount})`;
   });
 }
 
@@ -1234,10 +1347,15 @@ function renderCatalogue() {
     `;
     return;
   }
+
+  if (document.getElementById("view-mode-match")?.classList.contains("active")) {
+    renderMatchDeck(filtered);
+    return;
+  }
   
   filtered.forEach(item => {
-    const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : "Luxury";
-    const tierIcon = item.tier === 1 ? "🌿" : item.tier === 2 ? "🌸" : "👑";
+    const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly Exclusive" : "Luxury";
+    const tierIcon = item.tier === 1 ? "🌿" : item.tier === 2 ? "🌸" : item.tier === 4 ? "✨" : "👑";
     
     const prices = getItemPrices(item);
     const priceText = formatPrice(prices.priceINR, prices.priceUSD);
@@ -1264,6 +1382,7 @@ function renderCatalogue() {
             <h3 class="template-card-title">${item.name}</h3>
             <div class="template-card-tags">
               ${isPick ? '<span class="template-tag tag-pick">⭐ Our Pick</span>' : ''}
+              ${item.tier === 4 ? '<span class="template-tag tag-dearly">✨ Dearly Exclusive</span>' : ''}
               ${item.style ? `<span class="template-tag tag-style">${item.style}</span>` : ''}
             </div>
           </div>
@@ -1278,11 +1397,11 @@ function renderCatalogue() {
           </div>
 
           <div class="template-card-actions">
-            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="payRazorpayForTemplate(${item.id})" aria-label="Choose ${item.name} design">
-              <span>Choose this design</span>
+            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="payRazorpayForTemplate(${item.id})" aria-label="Pick ${item.name} design">
+              <span>${item.tier === 4 ? "Pick design" : "Choose design"}</span>
             </button>
             <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
-              <span>Preview <span class="btn-text-invitation">Invitation</span> →</span>
+              <span>Preview <span class="btn-text-invitation">invitation</span> →</span>
             </button>
             <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); askTemplateOnWhatsApp(${item.id})" aria-label="Ask about ${item.name} on WhatsApp" title="Ask on WhatsApp">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
@@ -1304,6 +1423,96 @@ function renderCatalogue() {
         ease: "power2.out", overwrite: true }
     );
   }
+}
+
+let matchDeckIndex = 0;
+
+function renderMatchDeck(items) {
+  const deck = items.slice(0, 8);
+  matchDeckIndex = Math.min(matchDeckIndex, Math.max(deck.length - 1, 0));
+  templatesGrid.classList.add("match-deck-grid");
+  templatesGrid.innerHTML = `
+    <div class="match-mode-intro">
+      <span class="match-mode-kicker">Find your invitation</span>
+      <h3>Swipe right on the one that feels like you.</h3>
+      <p>Preview a design, or pass until something clicks.</p>
+    </div>
+    <div class="match-deck" aria-live="polite">
+      ${deck.map((item, offset) => {
+        const dbIndex = TEMPLATE_DATABASE.indexOf(item) + 1;
+        const imgSrc = item.image || `assets/preview/${dbIndex}.png`;
+        const behind = offset < matchDeckIndex;
+        return `<article class="match-card ${offset === matchDeckIndex ? "is-current" : ""} ${behind ? "is-passed" : ""}" data-match-index="${offset}" data-template-id="${item.id}" style="--deck-offset:${Math.max(offset - matchDeckIndex, 0)}">
+          <button type="button" class="match-card-media" data-preview-trigger="${item.id}" aria-label="Preview ${item.name}">
+            <img src="${imgSrc}" alt="${item.name} invitation design" loading="lazy">
+            <span class="match-card-preview">Tap to preview</span>
+          </button>
+          <div class="match-card-info"><div><span class="match-card-label">${item.style || "Handcrafted design"}</span><h3>${item.name}</h3><p>${item.desc}</p></div><span class="match-card-count">${offset + 1} / ${deck.length}</span></div>
+          <span class="match-stamp match-stamp-nope">PASS</span><span class="match-stamp match-stamp-like">LIKE</span>
+        </article>`;
+      }).join("")}
+    </div>
+    <div class="match-actions" role="group" aria-label="Match actions">
+      <button type="button" class="match-action match-action-pass" data-match-action="pass" aria-label="Pass on this design">×</button>
+      <button type="button" class="match-action match-action-like" data-match-action="like" aria-label="Like this design">♥</button>
+    </div>
+    <p class="match-mode-status" id="match-mode-status">${matchDeckIndex >= deck.length ? "You’ve seen every match." : ""}${matchDeckIndex >= deck.length ? '<button type="button" class="match-reset" data-match-reset>Start over</button>' : ""}</p>`;
+  bindMatchDeck(deck);
+}
+
+function bindMatchDeck(deck) {
+  const action = (kind) => {
+    if (!deck.length || matchDeckIndex >= deck.length) return;
+    const card = templatesGrid.querySelector(`.match-card[data-match-index="${matchDeckIndex}"]`);
+    if (card) card.classList.add(kind === "like" ? "swipe-right" : "swipe-left");
+    if (kind === "like") {
+      const item = deck[matchDeckIndex];
+      setTimeout(() => openPreview(item.id), 180);
+    }
+    matchDeckIndex += 1;
+    setTimeout(() => renderMatchDeck(deck), 220);
+  };
+  templatesGrid.querySelectorAll("[data-match-action]").forEach(btn => btn.addEventListener("click", () => action(btn.dataset.matchAction)));
+  const reset = templatesGrid.querySelector("[data-match-reset]");
+  if (reset) reset.addEventListener("click", () => { matchDeckIndex = 0; renderMatchDeck(deck); });
+  const current = templatesGrid.querySelector(".match-card.is-current");
+  if (!current) return;
+  let startX = 0;
+  let startY = 0;
+  let dragging = false;
+  let moved = false;
+  let suppressClick = false;
+  current.addEventListener("pointerdown", e => {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    startX = e.clientX; startY = e.clientY; dragging = true; moved = false;
+    current.classList.add("is-dragging"); current.setPointerCapture(e.pointerId);
+  });
+  current.addEventListener("pointermove", e => {
+    if (!dragging) return;
+    const dx = e.clientX - startX; const dy = e.clientY - startY;
+    if (Math.abs(dx) > 6 || Math.abs(dy) > 6) moved = true;
+    const progress = Math.min(Math.abs(dx) / 150, 1);
+    current.style.setProperty("--drag-x", `${dx}px`);
+    current.style.setProperty("--drag-y", `${dy * .18}px`);
+    current.style.setProperty("--drag-rotate", `${dx * .055}deg`);
+    current.style.setProperty("--drag-progress", progress);
+    current.classList.toggle("dragging-right", dx > 12);
+    current.classList.toggle("dragging-left", dx < -12);
+    if (Math.abs(dx) > 8) e.preventDefault();
+  });
+  const finishDrag = e => {
+    if (!dragging) return;
+    dragging = false; current.classList.remove("is-dragging");
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > Math.max(82, current.offsetWidth * .25)) action(dx > 0 ? "like" : "pass");
+    else { current.style.removeProperty("--drag-x"); current.style.removeProperty("--drag-y"); current.style.removeProperty("--drag-rotate"); current.style.removeProperty("--drag-progress"); current.classList.remove("dragging-right", "dragging-left"); }
+    suppressClick = moved;
+  };
+  current.addEventListener("pointerup", finishDrag);
+  current.addEventListener("pointercancel", finishDrag);
+  current.addEventListener("click", e => { if (suppressClick) { e.preventDefault(); e.stopPropagation(); suppressClick = false; } }, true);
+  current.addEventListener("keydown", e => { if (e.key === "ArrowRight") { e.preventDefault(); action("like"); } if (e.key === "ArrowLeft") { e.preventDefault(); action("pass"); } });
+  current.tabIndex = 0;
 }
 
 // Toggle Row Expand — GSAP Flip animates between collapsed/expanded states
@@ -1421,7 +1630,7 @@ function buildWhatsAppMessage(id, includeAddons) {
     ? `${getCurrencySymbol()}${saveINR.toLocaleString("en-IN")}`
     : `${getCurrencySymbol()}${saveUSD}`;
 
-  const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : "Luxury";
+  const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly Exclusive" : "Luxury";
 
   let message = PROMO_CONFIG.active
     ? `🇮🇳 *Hi InviteStory!* I would like to order *${item.name}* under the Independence Day Offer (Flat ₹815)!\n\n`
@@ -1892,7 +2101,7 @@ function openPayPalCheckout(id) {
   const basePriceEl = document.getElementById("paypal-item-base-price");
 
   const prices = getItemPrices(item);
-  const tierName = item.tier === 1 ? "🌿 Classic" : item.tier === 2 ? "🌸 Premium" : "👑 Luxury";
+  const tierName = item.tier === 1 ? "🌿 Classic" : item.tier === 2 ? "🌸 Premium" : item.tier === 4 ? "✨ Dearly Exclusive" : "👑 Luxury";
 
   if (titleEl) titleEl.textContent = item.name;
   if (tierEl) tierEl.textContent = tierName;
@@ -1997,7 +2206,7 @@ function renderPayPalButtons() {
       createOrder: function(data, actions) {
         const item = currentPayPalCheckoutTemplate || TEMPLATE_DATABASE[0];
         const total = calculatePayPalTotal();
-        const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : "Luxury";
+        const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly Exclusive" : "Luxury";
 
         trackMetaEvent("InitiateCheckout", {
           content_name: item.name,
@@ -2455,13 +2664,16 @@ function handleInitialUrlRoute() {
   if (designQuery) {
     const matched = findTemplateByQuery(designQuery);
     if (matched) {
-      setTimeout(() => {
-        openPreview(matched.id, false);
-        const card = document.getElementById(`template-card-${matched.id}`);
-        if (card) {
-          card.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-      }, 350);
+      // Find card element in catalogue if available and cache target scroll position
+      // so closing the modal cleanly lands on the card without scroll-fighting on Android
+      const card = document.getElementById(`template-card-${matched.id}`);
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        const targetY = (window.pageYOffset || document.documentElement.scrollTop || 0) + rect.top - (window.innerHeight / 2) + (rect.height / 2);
+        previewState.savedScrollY = Math.max(0, targetY);
+      }
+      // Open preview modal cleanly without competing smooth scrolls against overflow:hidden
+      openPreview(matched.id, false);
     }
   }
 }
@@ -2469,6 +2681,11 @@ function handleInitialUrlRoute() {
 // 3D View Angle vs Flat View Rig Switching
 function setPreviewViewMode(mode) {
   previewState.viewMode = mode;
+  if (mode === "3d") {
+    phonePhysicsEnableGyroscope();
+  } else {
+    phonePhysicsDisableGyroscope();
+  }
   syncPreviewViewRig();
 }
 
@@ -2515,6 +2732,12 @@ function openPreview(id, updateUrl = true) {
   if (idx === -1) return;
 
   const item = TEMPLATE_DATABASE[idx];
+  const selectedDesignNote = document.getElementById("pricing-selected-design");
+  if (selectedDesignNote) {
+    selectedDesignNote.innerHTML = `<span class="pricing-selected-design-icon">✓</span><span><strong>${item.name}</strong> is selected. Ready to make it yours?</span><a href="#pricing">Choose your package →</a>`;
+    selectedDesignNote.hidden = false;
+  }
+  try { localStorage.setItem("invitestory_selected_design", JSON.stringify({ id: item.id, name: item.name })); } catch (e) {}
   previewState.currentIndex = idx;
   previewState.lastFocusedElement = document.activeElement;
 
@@ -2549,24 +2772,32 @@ function openPreview(id, updateUrl = true) {
   if (previewModalPrice) {
     previewModalPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
   }
-  // Tier badge (Classic / Premium / Luxury) so the package choice is obvious
+  // Tier badge (Classic / Premium / Luxury / Haute Couture)
   const tierBadge = document.getElementById("preview-modal-tier");
   if (tierBadge) {
-    const tierLabel = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : "Luxury";
+    const tierLabel = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "✨ Haute Couture" : "Luxury";
     tierBadge.textContent = tierLabel;
     tierBadge.setAttribute("data-tier", String(item.tier));
   }
   // Dual CTA labels: primary Pay, secondary Ask
   const payLabel = document.getElementById("preview-pay-label");
-  if (payLabel) payLabel.textContent = "Choose this design";
+  if (payLabel) {
+    payLabel.textContent = item.tier === 4 ? "Pick this design" : "Choose this design";
+  }
   const paypalLabel = document.getElementById("preview-paypal-label");
-  if (paypalLabel) paypalLabel.textContent = `Pay $${prices.priceUSD} with PayPal`;
+  if (paypalLabel) {
+    paypalLabel.textContent = item.tier === 4 ? `Pick this design · $${prices.priceUSD}` : `Pay $${prices.priceUSD} with PayPal`;
+  }
   const askLabel = document.getElementById("preview-ask-label");
   if (askLabel) askLabel.textContent = "Ask on WhatsApp";
-  // Multi-event callout on Premium & Luxury previews
+  // Multi-event / Couture callout on previews
   const multiNote = document.getElementById("preview-multievent-note");
   if (multiNote) {
-    if (item.tier === 2 || item.tier === 3) {
+    if (item.tier === 4) {
+      multiNote.textContent = "✨ Haute Couture Suite · Wax-Seal Unboxing · Email RSVP & Guest List · 24h Express Included";
+      multiNote.hidden = false;
+    } else if (item.tier === 2 || item.tier === 3) {
+      multiNote.textContent = "Multi-event ready: Haldi · Mehendi · Sangeet · Wedding · Reception";
       multiNote.hidden = false;
     } else {
       multiNote.hidden = true;
@@ -2612,12 +2843,14 @@ function openPreview(id, updateUrl = true) {
   previewModal.classList.add("is-open");
   previewModal.setAttribute("aria-hidden", "false");
   
-  // Store current scroll position to avoid jumping to top while locking
-  previewState.savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  // Store current scroll position to avoid jumping to top while locking (preserve pre-calculated scroll from direct link)
+  if (typeof previewState.savedScrollY !== "number" || previewState.savedScrollY < 0) {
+    previewState.savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+  }
   document.documentElement.classList.add("preview-modal-open");
   document.body.classList.add("preview-modal-open");
   
-  requestAnimationFrame(updatePreviewScale);
+  schedulePreviewScale();
 
   // Trigger cinematic entrance animation (spring from dramatic pose to rest)
   phonePhysicsTriggerEntrance();
@@ -2625,6 +2858,16 @@ function openPreview(id, updateUrl = true) {
   // Move focus to the close button for keyboard users
   const closeBtn = previewModal.querySelector(".preview-modal-close");
   if (closeBtn) closeBtn.focus();
+}
+
+// Throttled requestAnimationFrame scheduler to prevent layout thrashing on mobile resize/orientation changes
+let updateScaleRaf = null;
+function schedulePreviewScale() {
+  if (updateScaleRaf) return;
+  updateScaleRaf = requestAnimationFrame(() => {
+    updateScaleRaf = null;
+    updatePreviewScale();
+  });
 }
 
 // Dynamically scale the iPhone 17 Pro mockup frame (405x864, 393x852 screen) to fit available body height/width
@@ -2645,7 +2888,10 @@ function updatePreviewScale() {
   const scale = Math.min(scaleX, scaleY);
 
   const clampedScale = Math.max(0.42, Math.min(1.0, scale));
-  previewIframeWrap.style.transform = `scale(${clampedScale})`;
+  const newTransform = `scale(${clampedScale.toFixed(3)})`;
+  if (previewIframeWrap.style.transform !== newTransform) {
+    previewIframeWrap.style.transform = newTransform;
+  }
 }
 
 // Close the preview modal and restore body scroll + focus.
@@ -2672,8 +2918,9 @@ function closePreview(updateUrl = true) {
   previewModal.setAttribute("aria-hidden", "true");
   document.documentElement.classList.remove("preview-modal-open");
   document.body.classList.remove("preview-modal-open");
-  if (typeof previewState.savedScrollY === "number") {
+  if (typeof previewState.savedScrollY === "number" && previewState.savedScrollY >= 0) {
     window.scrollTo(0, previewState.savedScrollY);
+    previewState.savedScrollY = -1;
   }
   stopLoaderPulse();
 
@@ -2687,8 +2934,9 @@ function closePreview(updateUrl = true) {
 
   previewState.currentIndex = -1;
 
-  // Stop 3D physics rAF loop
+  // Stop 3D physics rAF loop and disable gyroscope
   phonePhysicsStop();
+  phonePhysicsDisableGyroscope();
 
   // Restore focus to the originating trigger
   if (previewState.lastFocusedElement && typeof previewState.lastFocusedElement.focus === "function") {
@@ -2936,60 +3184,64 @@ function phonePhysicsTriggerEntrance() {
   phonePhysicsStart();
 }
 
-function phonePhysicsInitGyroscope() {
+// Motion & Orientation tracking: only requested and active when user explicitly clicks/taps 3D switcher
+let isGyroListenerAttached = false;
+let isGyroPermissionRequested = false;
+
+function phonePhysicsHandleOrientation(e) {
+  if (!previewModal || !previewModal.classList.contains("is-open")) return;
+  if (previewState.viewMode !== "3d") return;
+  if (e.gamma === null || e.beta === null) return;
+
+  // Rate-limit gyro events to max ~25-30fps to avoid swamping main thread and rAF on Android
+  const now = performance.now();
+  const interval = PhonePhysics.isAndroid ? 45 : 30; // 22Hz on Android, 33Hz on iOS
+  if (now - PhonePhysics.lastGyroTime < interval) return;
+  PhonePhysics.lastGyroTime = now;
+
+  // gamma: left-to-right tilt in degrees [-90, 90]
+  // beta: front-to-back tilt in degrees [-180, 180], phone usually held at ~45deg
+  const normX = Math.max(-0.5, Math.min(0.5, e.gamma / 50));
+  const normY = Math.max(-0.5, Math.min(0.5, (e.beta - 45) / 50));
+
+  // Deadzone check: ignore tiny sensor jitter (crucial on noisy Android accelerometer/gyro)
+  if (Math.abs(normX - PhonePhysics.lastNormX) < 0.012 && Math.abs(normY - PhonePhysics.lastNormY) < 0.012) {
+    return;
+  }
+  PhonePhysics.lastNormX = normX;
+  PhonePhysics.lastNormY = normY;
+
+  phonePhysicsSetMouseTarget(normX, normY);
+}
+
+function phonePhysicsEnableGyroscope() {
   if (typeof window === "undefined" || !("DeviceOrientationEvent" in window)) return;
+  if (isGyroListenerAttached) return;
 
-  let gyroActive = false;
-  let lastGyroTime = 0;
-  let lastNormX = 0;
-  let lastNormY = 0;
-
-  const handleOrientation = (e) => {
-    if (!previewModal || !previewModal.classList.contains("is-open")) return;
-    if (previewState.viewMode !== "3d") return;
-    if (e.gamma === null || e.beta === null) return;
-
-    // Rate-limit gyro events to max ~30fps to avoid swamping main thread and rAF on Android
-    const now = performance.now();
-    const interval = PhonePhysics.isAndroid ? 45 : 30; // 22Hz on Android, 33Hz on iOS
-    if (now - lastGyroTime < interval) return;
-    lastGyroTime = now;
-
-    // gamma: left-to-right tilt in degrees [-90, 90]
-    // beta: front-to-back tilt in degrees [-180, 180], phone usually held at ~45deg
-    const normX = Math.max(-0.5, Math.min(0.5, e.gamma / 50));
-    const normY = Math.max(-0.5, Math.min(0.5, (e.beta - 45) / 50));
-
-    // Deadzone check: ignore tiny sensor jitter (crucial on noisy Android accelerometer/gyro)
-    if (Math.abs(normX - lastNormX) < 0.012 && Math.abs(normY - lastNormY) < 0.012) {
-      return;
-    }
-    lastNormX = normX;
-    lastNormY = normY;
-
-    phonePhysicsSetMouseTarget(normX, normY);
-  };
-
-  // iOS 13+ permission flow
+  // iOS 13+ permission flow — MUST only be triggered from an explicit user tap on the 3D toggle button
   if (typeof DeviceOrientationEvent.requestPermission === "function") {
-    const requestGyro = () => {
-      if (gyroActive) return;
+    if (!isGyroPermissionRequested) {
+      isGyroPermissionRequested = true;
       DeviceOrientationEvent.requestPermission()
         .then((state) => {
           if (state === "granted") {
-            gyroActive = true;
-            window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+            isGyroListenerAttached = true;
+            window.addEventListener("deviceorientation", phonePhysicsHandleOrientation, { passive: true });
           }
         })
         .catch(() => {});
-      window.removeEventListener("click", requestGyro);
-      window.removeEventListener("touchend", requestGyro);
-    };
-    window.addEventListener("click", requestGyro, { once: true });
-    window.addEventListener("touchend", requestGyro, { once: true });
+    }
   } else {
-    // Android or non-iOS devices: add throttled orientation listener
-    window.addEventListener("deviceorientation", handleOrientation, { passive: true });
+    // Android or standard devices: attach only while 3D view mode is actively turned on
+    isGyroListenerAttached = true;
+    window.addEventListener("deviceorientation", phonePhysicsHandleOrientation, { passive: true });
+  }
+}
+
+function phonePhysicsDisableGyroscope() {
+  if (isGyroListenerAttached) {
+    window.removeEventListener("deviceorientation", phonePhysicsHandleOrientation);
+    isGyroListenerAttached = false;
   }
 }
 
@@ -3112,6 +3364,19 @@ function updateTierLabels() {
     const base = TIER_BASE_PRICE[tier];
     if (!base) return;
     el.textContent = formatPrice(base.inr, base.usd);
+  });
+
+  // Sync Dearly Showroom price elements
+  const dearlyAmount = document.querySelector(".dearly-price-amount");
+  const dearlyNote = document.querySelector(".dearly-price-note");
+  if (dearlyAmount) {
+    dearlyAmount.textContent = currentCurrency === "INR" ? "₹4,999" : "$80";
+  }
+  if (dearlyNote) {
+    dearlyNote.textContent = "per suite · 24h express delivery included";
+  }
+  document.querySelectorAll(".dearly-card-price-pill").forEach(el => {
+    el.textContent = currentCurrency === "INR" ? "₹4,999" : "$80";
   });
 }
 
@@ -3237,7 +3502,7 @@ function setupCatalogueHandlers() {
       // Dispatch public custom event so external listeners can react
       // without needing to know internal catalogue state.
       // Usage: document.addEventListener('filterTier', e => console.log(e.detail.tier));
-      const tierNames = { "0": "all", "1": "classic", "2": "premium", "3": "luxury" };
+      const tierNames = { "0": "all", "1": "classic", "2": "premium", "3": "luxury", "4": "dearly" };
       document.dispatchEvent(new CustomEvent("filterTier", {
         bubbles: true,
         detail: { tier: tierNames[radio.value] ?? radio.value, value: radio.value }
@@ -3279,17 +3544,28 @@ function setupCatalogueHandlers() {
   // --- View Mode (Card Grid vs Compact List) ---
   const viewModeGridBtn = document.getElementById("view-mode-grid");
   const viewModeListBtn = document.getElementById("view-mode-list");
+  const viewModeMatchBtn = document.getElementById("view-mode-match");
 
   function setViewMode(mode) {
     if (!templatesGrid) return;
     if (mode === "list") {
       templatesGrid.classList.add("view-list");
+      templatesGrid.classList.remove("match-deck-grid");
       if (viewModeListBtn) viewModeListBtn.classList.add("active");
       if (viewModeGridBtn) viewModeGridBtn.classList.remove("active");
+      if (viewModeMatchBtn) viewModeMatchBtn.classList.remove("active");
+    } else if (mode === "match") {
+      templatesGrid.classList.remove("view-list");
+      templatesGrid.classList.add("match-deck-grid");
+      if (viewModeMatchBtn) viewModeMatchBtn.classList.add("active");
+      if (viewModeGridBtn) viewModeGridBtn.classList.remove("active");
+      if (viewModeListBtn) viewModeListBtn.classList.remove("active");
     } else {
       templatesGrid.classList.remove("view-list");
+      templatesGrid.classList.remove("match-deck-grid");
       if (viewModeGridBtn) viewModeGridBtn.classList.add("active");
       if (viewModeListBtn) viewModeListBtn.classList.remove("active");
+      if (viewModeMatchBtn) viewModeMatchBtn.classList.remove("active");
     }
     try {
       localStorage.setItem("invitestory_view_mode", mode);
@@ -3308,6 +3584,9 @@ function setupCatalogueHandlers() {
   }
   if (viewModeListBtn) {
     viewModeListBtn.addEventListener("click", () => setViewMode("list"));
+  }
+  if (viewModeMatchBtn) {
+    viewModeMatchBtn.addEventListener("click", () => { matchDeckIndex = 0; setViewMode("match"); renderCatalogue(); });
   }
 }
 
@@ -3372,9 +3651,9 @@ function setupPreviewModal() {
     });
   });
 
-  // Responsive device scaling on window resize / orientation change
-  window.addEventListener("resize", updatePreviewScale);
-  window.addEventListener("orientationchange", updatePreviewScale);
+  // Responsive device scaling on window resize / orientation change (throttled via rAF)
+  window.addEventListener("resize", schedulePreviewScale, { passive: true });
+  window.addEventListener("orientationchange", schedulePreviewScale, { passive: true });
 
   // Escape key closes the modal, PayPal checkout, payment success, or FAQ popup
   document.addEventListener("keydown", (e) => {
@@ -3464,9 +3743,6 @@ function setupPreviewModal() {
         phonePhysicsResetTarget();
       }
     }, { passive: true });
-
-    // Gyroscope tilt for mobile (premium feel)
-    phonePhysicsInitGyroscope();
   }
 
   // Handle browser Back/Forward navigation smoothly
@@ -3489,33 +3765,36 @@ function initAnimations() {
   // --- Hero entrance (runs once on page load) ---
   if (document.querySelector(".hero-headline")) {
     gsap.from(".hero-headline", {
-      y: 28, opacity: 0, duration: 1, ease: "power3.out"
+      y: 28, duration: 1, ease: "power3.out"
     });
   }
   if (document.querySelector(".hero-subheadline")) {
     gsap.from(".hero-subheadline", {
-      y: 18, opacity: 0, duration: 0.8, delay: 0.15, ease: "power3.out"
+      y: 18, duration: 0.8, delay: 0.15, ease: "power3.out"
     });
   }
   if (document.querySelector(".hero-process-line")) {
     gsap.from(".hero-process-line", {
-      y: 14, opacity: 0, duration: 0.7, delay: 0.25, ease: "power3.out"
+      y: 14, duration: 0.7, delay: 0.25, ease: "power3.out"
     });
   }
   if (document.querySelector(".hero-action-wrapper")) {
     gsap.from(".hero-action-wrapper", {
-      y: 16, opacity: 0, duration: 0.7, delay: 0.35, ease: "power3.out"
+      y: 16, duration: 0.7, delay: 0.35, ease: "power3.out"
     });
   }
   if (document.querySelector(".hero-proof-strip")) {
     gsap.from(".hero-proof-strip", {
-      y: 14, opacity: 0, duration: 0.65, delay: 0.45, ease: "power3.out"
+      y: 14, duration: 0.65, delay: 0.45, ease: "power3.out"
     });
   }
-  if (document.querySelector(".hero-showroom-showcase")) {
-    gsap.from(".showroom-card", {
-      y: 30, opacity: 0, duration: 0.8, stagger: 0.1, delay: 0.55, ease: "power3.out"
-    });
+  if (document.querySelector(".hero-design-marquee, .hero-showroom-showcase")) {
+    const heroDesignTargets = document.querySelectorAll(".hero-design-card, .showroom-card");
+    if (heroDesignTargets.length) {
+      gsap.from(heroDesignTargets, {
+        y: 30, duration: 0.8, stagger: 0.1, delay: 0.55, ease: "power3.out"
+      });
+    }
   }
 
   // --- Pricing cards stagger as they scroll into view ---
@@ -3956,7 +4235,7 @@ const FAQS = [
   },
   {
     q: "How long is my invitation link live?",
-    a: "Your invitestory.in link stays live for 1 year by default. You can extend it for another year for ₹199 if you'd like to keep the memories."
+    a: "Your invitestory.in link stays live until 1 month after your event end date (event end date + 1 month validity). You can easily extend it upon request if you'd like to keep the memories alive longer."
   },
   {
     q: "Which packages include photos and music?",
@@ -3967,8 +4246,8 @@ const FAQS = [
     a: "Please see our <a href=\"refund-and-editing-policy.html\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">Refund & Editing Policy</a> — all sales are final once customization begins. Free revision requests for 24 hours after your first draft is delivered to ensure all details are accurate."
   },
   {
-    q: "Do you have budget options under ₹700?",
-    a: "Yes! If you are looking for simple budget-friendly single-page invitations, we have a dedicated collection at <a href=\"https://reveals.invitestory.in\" target=\"_blank\" rel=\"noopener\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">reveals.invitestory.in</a> with templates starting at just ₹699."
+    q: "Do you have budget options or a DIY editor?",
+    a: "Yes! If you want to design it yourself, try our DIY Editor at <a href=\"https://diy.invitestory.in\" target=\"_blank\" rel=\"noopener\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">diy.invitestory.in</a> starting at just ₹499. For single-page reveal cards, explore our dedicated collection at <a href=\"https://reveals.invitestory.in\" target=\"_blank\" rel=\"noopener\" class=\"gold-text\" style=\"font-weight: 600; text-decoration: underline;\">reveals.invitestory.in</a> starting from ₹999."
   }
 ];
 
@@ -4166,6 +4445,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTrustMarquee();
   setupResponsivePlaceholder();
   setupHeaderCtaHandlers();
+  setupHeroDesignMarquee();
 
   // Initial draw
   updateTierLabels();
@@ -4213,6 +4493,42 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", showFloatingNav);
   setupTierNavVisibility();
 });
+
+function setupHeroDesignMarquee() {
+  const showcase = document.querySelector(".hero-showroom-showcase");
+  if (!showcase || !Array.isArray(TEMPLATE_DATABASE) || !TEMPLATE_DATABASE.length) return;
+
+  const cards = TEMPLATE_DATABASE.map((item, index) => {
+    const image = item.image || `assets/preview/${index + 1}.png`;
+    const tier = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly" : "Luxury";
+    return `<button type="button" class="hero-design-card" data-hero-design-id="${item.id}" aria-label="Preview ${item.name}">
+      <span class="hero-design-media"><img src="${image}" alt="${item.name} wedding invitation design" loading="lazy" decoding="async"><span class="hero-design-preview">Preview →</span></span>
+      <span class="hero-design-footer"><span class="hero-design-tier">${tier}</span><span class="hero-design-name">${item.name}</span></span>
+    </button>`;
+  }).join("");
+
+  showcase.innerHTML = `<div class="hero-design-marquee" tabindex="0" aria-label="Invitation design carousel"><div class="hero-design-track">${cards}${cards}</div></div>`;
+  document.body.classList.add("hero-marquee-ready");
+  const marquee = showcase.querySelector(".hero-design-marquee");
+  const track = showcase.querySelector(".hero-design-track");
+  let pointerStart = 0;
+  let pointerMoved = false;
+
+  showcase.addEventListener("click", e => {
+    const card = e.target.closest("[data-hero-design-id]");
+    if (!card || pointerMoved) { pointerMoved = false; return; }
+    openPreview(Number(card.dataset.heroDesignId));
+  });
+  marquee.addEventListener("pointerdown", e => { pointerStart = e.clientX; pointerMoved = false; marquee.setPointerCapture(e.pointerId); track.classList.add("is-dragging"); });
+  marquee.addEventListener("pointermove", e => { if (Math.abs(e.clientX - pointerStart) > 8) pointerMoved = true; });
+  const endDrag = () => track.classList.remove("is-dragging");
+  marquee.addEventListener("pointerup", endDrag);
+  marquee.addEventListener("pointercancel", endDrag);
+  marquee.addEventListener("mouseenter", () => track.classList.add("is-paused"));
+  marquee.addEventListener("mouseleave", () => track.classList.remove("is-paused"));
+  marquee.addEventListener("focusin", () => track.classList.add("is-paused"));
+  marquee.addEventListener("focusout", () => track.classList.remove("is-paused"));
+}
 
 function showFloatingNav() {
   const nav = document.querySelector(".tier-floating-nav");
@@ -4693,4 +5009,3 @@ function setupTierNavVisibility() {
   window.addEventListener("resize", update);
   mq.addEventListener("change", update);
 }
-

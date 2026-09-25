@@ -5,7 +5,9 @@
 ## Core Pages
 
 - [Home & Catalog](https://invitestory.in/): Browse 30+ interactive wedding invitation templates across Rajasthani, South Indian, Islamic Nikah, Botanical, and Contemporary styles.
-- [Terms & Conditions & Delivery Policy](https://invitestory.in/terms.html): Details on digital service delivery (within 12-24 hours), pricing in INR/USD, and hosting terms.
+- [DIY Wedding Card Editor](https://diy.invitestory.in): Self-service DIY wedding invitation editor starting at ₹499.
+- [Reveals Collection](https://reveals.invitestory.in): Single-page digital invitations starting from ₹999.
+- [Terms & Conditions & Delivery Policy](https://invitestory.in/terms.html): Details on digital service delivery (within 48 hours, or 24 hours with Express), pricing in INR/USD, and hosting terms (event end date + 1 month validity).
 - [Privacy Policy](https://invitestory.in/privacy-policy.html): Information on customer data protection, order processing, and privacy.
 - [Refund and Editing Policy](https://invitestory.in/refund-and-editing-policy.html): Revisions, customization window, and cancellation policy.
 
