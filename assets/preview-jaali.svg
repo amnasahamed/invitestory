@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">
+  <g fill="none" stroke="#6f4e21" stroke-width=".85" stroke-linejoin="round">
+    <path d="M80 0L160 80L80 160L0 80ZM0 0L80 80L160 0M0 160L80 80L160 160"/>
+    <g id="rosette">
+      <path d="M80 47L89 62L106 54L98 71L113 80L98 89L106 106L89 98L80 113L71 98L54 106L62 89L47 80L62 71L54 54L71 62Z"/>
+      <path d="M80 62L98 80L80 98L62 80ZM80 72L88 80L80 88L72 80Z"/>
+    </g>
+    <use href="#rosette" x="-80" y="-80"/><use href="#rosette" x="80" y="-80"/>
+    <use href="#rosette" x="-80" y="80"/><use href="#rosette" x="80" y="80"/>
+  </g>
+</svg>

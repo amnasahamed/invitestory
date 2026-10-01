@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="280" height="360" viewBox="0 0 280 360">
+  <g fill="none" stroke="#775052" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+    <g id="sprig">
+      <path d="M58 290C64 244 105 208 99 152C96 123 80 95 86 63"/>
+      <path d="M68 253C40 245 34 220 40 198C64 209 75 226 68 253ZM89 220C115 212 131 188 127 167C101 178 88 195 89 220ZM98 185C71 179 57 160 61 138C85 147 98 164 98 185ZM96 150C120 140 131 118 124 100C103 111 93 130 96 150ZM88 117C69 106 63 88 70 73C86 86 94 102 88 117ZM86 84C103 77 111 60 107 44C89 53 83 68 86 84Z"/>
+      <path d="M68 253L40 198M89 220L127 167M98 185L61 138M96 150L124 100M88 117L70 73" stroke-width=".65"/>
+    </g>
+    <use href="#sprig" transform="translate(280 360) rotate(180)"/>
+    <path d="M31 327l3-5 3 5-3 5ZM161 37l3-5 3 5-3 5"/>
+  </g>
+</svg>

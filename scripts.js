@@ -2,10 +2,9 @@
  * InviteStory Simple Catalogue Directory
  * Features: INR/USD Currency Toggle, Accordion Detail Expanders, Live Add-ons Price Calculator, and WhatsApp Order URL Generators.
  */
-
-// --- PROMOTION CONFIGURATION ---
+  const askIcon = `<img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true">`;
+// --- PAYMENT CONFIGURATION ---
 window.RAZORPAY_KEY_ID = "rzp_live_TPCjiGiPIeo7SN";
-window.PAYPAL_CLIENT_ID = "BAAXdw4bek4C9gmaofxymnJjm8cpkjT61bXsJ3KzdtDpW14OKQd_ig8jKgi0I45orPLAZ64NvkBq2Qpu2M";
 
 // --- POST-PAYMENT NOTIFICATIONS (Razorpay webhook → notify yourself) ---
 // This is a static site, so Razorpay cannot POST to it. To get notified on
@@ -33,8 +32,8 @@ function getItemPrices(item) {
     return {
       priceINR: PROMO_CONFIG.promoPriceINR,
       priceUSD: PROMO_CONFIG.promoPriceUSD,
-      originalPriceINR: item.originalPriceINR || (item.tier === 1 ? 1499 : item.tier === 2 ? 2999 : 3999),
-      originalPriceUSD: item.originalPriceUSD || (item.tier === 1 ? 25 : item.tier === 2 ? 45 : 65)
+      originalPriceINR: item.originalPriceINR || (item.tier === 2 ? 1999 : item.tier === 3 ? 2999 : 4999),
+      originalPriceUSD: item.originalPriceUSD || (item.tier === 2 ? 29 : item.tier === 3 ? 45 : 75)
     };
   }
   return {
@@ -160,7 +159,7 @@ function trackConversionEvent(eventName, params = {}) {
           : window.GOOGLE_ADS_ID || "";
 
         const adsParams = {
-          value: eventValue || 999,
+          value: eventValue || 1999,
           currency: eventCurrency,
           transaction_id: params.transaction_id || ""
         };
@@ -226,16 +225,16 @@ function trackMetaEvent(eventName, params = {}) {
 
 // --- 1. Template Database ---
 const TEMPLATE_DATABASE = [
-  // --- TIER 1: Classic & Traditional (₹999 / $15) ---
+  // --- TIER 2: Premium & Modern (₹1,999 / $29) ---
   {
     id: 1,
     name: "Marigold Bhavan",
     image: "assets/preview/1.png",
-    tier: 1,
-    priceINR: 999,
-    priceUSD: 15,
-    originalPriceINR: 999,
-    originalPriceUSD: 15,
+    tier: 2,
+    priceINR: 1999,
+    priceUSD: 29,
+    originalPriceINR: 1999,
+    originalPriceUSD: 29,
     demoUrl: "https://marigold-bhavan.invitestory.in/",
     style: "Classic Indian",
     accentColor: "#d58936",
@@ -247,11 +246,11 @@ const TEMPLATE_DATABASE = [
     id: 3,
     name: "Toran Telugu",
     image: "assets/preview/2.png",
-    tier: 1,
-    priceINR: 999,
-    priceUSD: 15,
-    originalPriceINR: 999,
-    originalPriceUSD: 15,
+    tier: 2,
+    priceINR: 1999,
+    priceUSD: 29,
+    originalPriceINR: 1999,
+    originalPriceUSD: 29,
     demoUrl: "https://toran-telugu.invitestory.in/",
     style: "Traditional Telugu",
     accentColor: "#558b2f",
@@ -265,9 +264,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/3.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://shubha-vivaham.invitestory.in/",
     style: "South Indian Muhurtham",
     accentColor: "#d84315",
@@ -279,11 +278,11 @@ const TEMPLATE_DATABASE = [
     id: 6,
     name: "Kalyana Mandapam",
     image: "assets/preview/4.png",
-    tier: 1,
-    priceINR: 999,
-    priceUSD: 15,
-    originalPriceINR: 999,
-    originalPriceUSD: 15,
+    tier: 2,
+    priceINR: 1999,
+    priceUSD: 29,
+    originalPriceINR: 1999,
+    originalPriceUSD: 29,
     demoUrl: "https://kalyana-mandapam.invitestory.in/",
     style: "Traditional Telugu",
     accentColor: "#c2185b",
@@ -297,9 +296,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/5.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://sage-parchment.invitestory.in/",
     style: "Minimalist Modern",
     accentColor: "#7e8d85",
@@ -313,9 +312,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/29.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://seashell-vows.invitestory.in/",
     style: "Goa Seaside Watercolor",
     accentColor: "#e07a5f",
@@ -323,17 +322,15 @@ const TEMPLATE_DATABASE = [
     desc: "Ivory watercolor paper texture featuring breezy Goa seaside aesthetics, bougainvillea accents, and coastal seashells.",
     promise: "Breezy seaside romance captured on textured watercolor paper."
   },
-
-  // --- TIER 2: Premium & Illustrated (₹1,999 / $30) ---
   {
     id: 8,
     name: "Emerald Nikah",
     image: "assets/preview/6.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://emerald-nikah.invitestory.in/",
     style: "Islamic Garden",
     accentColor: "#004d40",
@@ -345,11 +342,11 @@ const TEMPLATE_DATABASE = [
     id: 9,
     name: "Noor-e-Zahra",
     image: "assets/preview/7.png",
-    tier: 1,
-    priceINR: 999,
-    priceUSD: 15,
-    originalPriceINR: 999,
-    originalPriceUSD: 15,
+    tier: 2,
+    priceINR: 1999,
+    priceUSD: 29,
+    originalPriceINR: 1999,
+    originalPriceUSD: 29,
     demoUrl: "https://noor-e-zahra.invitestory.in/",
     style: "Islamic Nikah",
     accentColor: "#1a237e",
@@ -363,9 +360,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/8.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://royal-reception.invitestory.in/",
     style: "Grand Walima",
     accentColor: "#311b92",
@@ -379,9 +376,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/9.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://kerala-sands.invitestory.in/",
     style: "Coastal Kerala",
     accentColor: "#00796b",
@@ -395,9 +392,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/10.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://meadow-nikah.invitestory.in/",
     style: "Outdoor Garden Nikah",
     accentColor: "#2e7d32",
@@ -411,9 +408,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/11.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://grand-line-voyage.invitestory.in/",
     style: "Anime / One Piece",
     accentColor: "#0288d1",
@@ -427,9 +424,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/12.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://ghibli-selfie.invitestory.in/",
     style: "Watercolor Ghibli",
     accentColor: "#c5e1a5",
@@ -443,9 +440,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/13.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://ghibli-portrait.invitestory.in/",
     style: "Watercolor Storybook",
     accentColor: "#81c784",
@@ -454,30 +451,14 @@ const TEMPLATE_DATABASE = [
     promise: "A sentimental journey that will warm every guest's heart."
   },
   {
-    id: 16,
-    name: "Lake Pichola Royal",
-    image: "assets/preview/14.png",
-    tier: 3,
-    priceINR: 2999,
-    priceUSD: 49,
-    originalPriceINR: 2999,
-    originalPriceUSD: 49,
-    demoUrl: "https://lake-pichola-royal.invitestory.in/",
-    style: "Udaipur Royal",
-    accentColor: "#795548",
-    tags: ["royal", "rajasthani", "palace", "traditional"],
-    desc: "Inspired by the Udaipur Lake Palace on Lake Pichola. Regal hues, gold outlines, and slow, gorgeous water reflections.",
-    promise: "Royal elegance inspired by Rajasthan's heritage."
-  },
-  {
     id: 17,
     name: "Ivory Waltz",
     image: "assets/preview/15.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://ivory-waltz.invitestory.in/",
     style: "Modern Neutral",
     accentColor: "#a1887f",
@@ -491,9 +472,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/16.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://ever-after-bloom.invitestory.in/",
     style: "Watercolor Garden",
     accentColor: "#f06292",
@@ -507,9 +488,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/17.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://saga-of-love.invitestory.in/",
     style: "Elegant Parchment",
     accentColor: "#b0bec5",
@@ -523,9 +504,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/30.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://lantern-madurai.invitestory.in/",
     style: "Madurai Temple Parallax",
     accentColor: "#6b8e23",
@@ -539,9 +520,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/31.png",
     tier: 2,
     priceINR: 1999,
-    priceUSD: 30,
+    priceUSD: 29,
     originalPriceINR: 1999,
-    originalPriceUSD: 30,
+    originalPriceUSD: 29,
     demoUrl: "https://lotus-leaf-bengaluru.invitestory.in/",
     style: "Botanical Sage Leaf",
     accentColor: "#4a7c59",
@@ -550,16 +531,16 @@ const TEMPLATE_DATABASE = [
     promise: "Botanical elegance with blooming lotus seal animation."
   },
 
-  // --- TIER 3: Luxury & Cinematic (₹2,999 / $49) ---
+  // --- TIER 3: Luxury & Cinematic (₹2,999 / $45) ---
   {
     id: 21,
     name: "Rajwada Royale – Alt",
     image: "assets/preview/18.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://rajwada-royale.invitestory.in/",
     style: "Royal Palace Door (Alt)",
     accentColor: "#880e4f",
@@ -573,9 +554,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/19.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://rajmahal-palace.invitestory.in/",
     style: "Maroon Palace Reveal",
     accentColor: "#b71c1c",
@@ -589,9 +570,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/20.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://midnight-stargaze.invitestory.in/",
     style: "Navy & Gold Starlit Palace",
     accentColor: "#0d47a1",
@@ -605,9 +586,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/21.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://petal-path-palace.invitestory.in/",
     style: "5-Layer Parallax",
     accentColor: "#ad1457",
@@ -621,9 +602,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/22.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://lakeview-lanterns.invitestory.in/",
     style: "Kerala Lakeside Cinematic",
     accentColor: "#00695c",
@@ -637,9 +618,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/23.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://moonlit-lotus-barge.invitestory.in/",
     style: "Udaipur Lotus Reveal",
     accentColor: "#ad1457",
@@ -653,9 +634,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/24.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://ganesha-gopuram.invitestory.in/",
     style: "Baby Ganesha Cinematic",
     accentColor: "#ff8f00",
@@ -669,9 +650,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/25.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://wax-seal-royale.invitestory.in/",
     style: "Interactive Envelope Wax Seal",
     accentColor: "#4e342e",
@@ -685,9 +666,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/32.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://diya-haveli.invitestory.in/",
     style: "Jaipur Haveli Diya",
     accentColor: "#c62828",
@@ -701,9 +682,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/33.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://gilded-hall.invitestory.in/",
     style: "Golden Hall Cinematic",
     accentColor: "#c09559",
@@ -717,9 +698,9 @@ const TEMPLATE_DATABASE = [
     image: "assets/preview/34.png",
     tier: 3,
     priceINR: 2999,
-    priceUSD: 49,
+    priceUSD: 45,
     originalPriceINR: 2999,
-    originalPriceUSD: 49,
+    originalPriceUSD: 45,
     demoUrl: "https://slide-to-shaadi.invitestory.in/",
     style: "Interactive Call & Lakeside",
     accentColor: "#f57c00",
@@ -727,7 +708,23 @@ const TEMPLATE_DATABASE = [
     desc: "iPhone 'Slide to answer' call interface opening up into a romantic Udaipur lakeside golden hour view.",
     promise: "Slide to answer the call of a lifetime with lakeside golden hour magic."
   },
-  // --- TIER 4: The Dearly Collection (Haute Couture / ₹4,999 / $80) ---
+  {
+    id: 16,
+    name: "Lake Pichola Royal",
+    image: "assets/preview/14.png",
+    tier: 3,
+    priceINR: 2999,
+    priceUSD: 45,
+    originalPriceINR: 2999,
+    originalPriceUSD: 45,
+    demoUrl: "https://lake-pichola-royal.invitestory.in/",
+    style: "Udaipur Royal",
+    accentColor: "#795548",
+    tags: ["royal", "rajasthani", "palace", "traditional"],
+    desc: "Inspired by the Udaipur Lake Palace on Lake Pichola. Regal hues, gold outlines, and slow, gorgeous water reflections.",
+    promise: "Royal elegance inspired by Rajasthan's heritage."
+  },
+  // --- TIER 4: The Dearly Collection (Haute Couture / ₹4,999 / $75) ---
   {
     id: 35,
     name: "Magnolia Reverie",
@@ -736,9 +733,9 @@ const TEMPLATE_DATABASE = [
     tier: 4,
     collection: "dearly",
     priceINR: 4999,
-    priceUSD: 80,
+    priceUSD: 75,
     originalPriceINR: 4999,
-    originalPriceUSD: 80,
+    originalPriceUSD: 75,
     demoUrl: "https://dearly-magnolia.invitestory.in/",
     style: "Dearly Signature Suite",
     accentColor: "#682e49",
@@ -754,9 +751,9 @@ const TEMPLATE_DATABASE = [
     tier: 4,
     collection: "dearly",
     priceINR: 4999,
-    priceUSD: 80,
+    priceUSD: 75,
     originalPriceINR: 4999,
-    originalPriceUSD: 80,
+    originalPriceUSD: 75,
     demoUrl: "https://dearly-camellia.invitestory.in/",
     style: "Dearly Signature Suite",
     accentColor: "#8b4e2b",
@@ -772,9 +769,9 @@ const TEMPLATE_DATABASE = [
     tier: 4,
     collection: "dearly",
     priceINR: 4999,
-    priceUSD: 80,
+    priceUSD: 75,
     originalPriceINR: 4999,
-    originalPriceUSD: 80,
+    originalPriceUSD: 75,
     demoUrl: "https://dearly-iris.invitestory.in/",
     style: "Dearly Signature Suite",
     accentColor: "#294e7b",
@@ -790,9 +787,9 @@ const TEMPLATE_DATABASE = [
     tier: 4,
     collection: "dearly",
     priceINR: 4999,
-    priceUSD: 80,
+    priceUSD: 75,
     originalPriceINR: 4999,
-    originalPriceUSD: 80,
+    originalPriceUSD: 75,
     demoUrl: "https://dearly-dahlia.invitestory.in/",
     style: "Dearly Signature Suite",
     accentColor: "#174b49",
@@ -817,7 +814,7 @@ if (isAdsLandingPage) {
 
 // --- 2. State Management ---
 let currentCurrency = "INR"; // "INR" or "USD"
-let activeTierFilter = 0; // 0: All, 1: Classic, 2: Premium, 3: Luxury, 4: Dearly
+let activeTierFilter = 0; // 0: All, 2: Premium, 3: Luxury, 4: Dearly
 let activeTagFilter = "all";
 let searchQuery = "";
 
@@ -827,18 +824,17 @@ const searchInput = document.getElementById("search-input");
 const clearSearchBtn = document.getElementById("clear-search-btn");
 const filterTagsContainer = document.getElementById("filter-tags");
 
-// Tier radio group (glass-morphism) — maps tier id (0/1/2/3/4) to its input id
-const TIER_RADIO_IDS = { 0: "glass-all", 1: "glass-classic", 2: "glass-premium", 3: "glass-luxury", 4: "glass-dearly" };
+// Tier radio group (glass-morphism) — maps tier id (0/2/3/4) to its input id
+const TIER_RADIO_IDS = { 0: "glass-all", 2: "glass-premium", 3: "glass-luxury", 4: "glass-dearly" };
 const tierRadios = document.querySelectorAll("#tier-radio-group input[type=radio]");
 const tierRadioByValue = {};
 tierRadios.forEach(r => { tierRadioByValue[r.value] = r; });
 
 // Per-tier base prices shown in the radio labels (currency-switchable)
 const TIER_BASE_PRICE = {
-  1: { inr: 999,  usd: 15 },
-  2: { inr: 1999, usd: 30 },
-  3: { inr: 2999, usd: 49 },
-  4: { inr: 4999, usd: 80 }
+  2: { inr: 1999, usd: 29 },
+  3: { inr: 2999, usd: 45 },
+  4: { inr: 4999, usd: 75 }
 };
 
 // Pricing Grid references (to update pricing currency symbols dynamically)
@@ -846,20 +842,21 @@ const pricingSection = document.querySelector(".pricing-section");
 
 // Addon Prices definition
 const ADDONS = {
-  express: { name: "Express 24h Delivery", priceINR: 299, priceUSD: 4 },
+  emailRsvp: { name: "Email RSVP", priceINR: 2000, priceUSD: 24 },
+  express: { name: "Express 24h Delivery", priceINR: 499, priceUSD: 9 },
   domain: { name: "Custom Domain (.in / .com)", priceINR: 999, priceUSD: 12 },
   lang: { name: "Extra Event Tab (e.g. Sangeet)", priceINR: 299, priceUSD: 4 }
 };
 
-// --- Package-level UPI-first checkout (Classic / Premium / Luxury) ---
-const PACKAGE_NAMES = { 1: "Classic", 2: "Premium", 3: "Luxury", 4: "Dearly Exclusive" };
+// --- Package-level UPI-first checkout (Premium / Luxury / Dearly) ---
+const PACKAGE_NAMES = { 2: "Premium", 3: "Luxury", 4: "Dearly Exclusive" };
 
 function packageName(tier) {
-  return PACKAGE_NAMES[tier] || "Classic";
+  return PACKAGE_NAMES[tier] || "Premium";
 }
 
 function packageBasePrice(tier) {
-  const base = TIER_BASE_PRICE[tier] || TIER_BASE_PRICE[1];
+  const base = TIER_BASE_PRICE[tier] || TIER_BASE_PRICE[2];
   return currentCurrency === "INR" ? base.inr : base.usd;
 }
 
@@ -884,7 +881,6 @@ function packageAmountText(tier, total) {
 // --- Preview Modal state & DOM refs ---
 // Dynamic first template array-index for each tier
 const TIER_FIRST_INDEX = {
-  1: TEMPLATE_DATABASE.findIndex(t => t.tier === 1),
   2: TEMPLATE_DATABASE.findIndex(t => t.tier === 2),
   3: TEMPLATE_DATABASE.findIndex(t => t.tier === 3),
   4: TEMPLATE_DATABASE.findIndex(t => t.tier === 4)
@@ -899,6 +895,7 @@ TEMPLATE_DATABASE.forEach(item => {
 
 const previewState = { 
   currentIndex: -1, 
+  lastDesignByTier: {},
   lastFocusedElement: null,
   viewMode: "flat" // "3d" or "flat"
 };
@@ -906,20 +903,20 @@ const previewState = {
 // --- Spring-Damped 3D Physics Engine (Heavy Solid Titanium Damping) ---
 const PhonePhysics = {
   // Resting pose: elegant cinematic angle
-  REST: { rotY: -9, rotX: 4.5, rotZ: -0.6, scale: 1, translateY: 0, opacity: 1 },
+  REST: { rotY: -22, rotX: 5, rotZ: -0.5, scale: 0.95, translateY: 0, opacity: 1 },
   // Entrance start pose: smooth glide
-  ENTRANCE: { rotY: -18, rotX: 8, rotZ: -0.9, scale: 0.96, translateY: 18, opacity: 0.7 },
+  ENTRANCE: { rotY: -24, rotX: 7, rotZ: -0.7, scale: 0.98, translateY: 10, opacity: 1 },
   // Responsiveness tracking factor
-  LERP_FACTOR: 0.12,
+  LERP_FACTOR: 0.075,
   // Heavy solid damping factor (kills rubbery oscillation, settles authoritatively)
-  DAMPING: 0.74,
+  DAMPING: 0.64,
   // Sleep threshold to stop animating when settled (saves CPU)
   EPSILON: 0.005,
 
   // Current interpolated values (what's rendered)
-  current: { rotY: -9, rotX: 4.5, rotZ: -0.6, scale: 1, translateY: 0, opacity: 1 },
+  current: { rotY: -22, rotX: 5, rotZ: -0.5, scale: 0.95, translateY: 0, opacity: 1 },
   // Target values (set by mouse/touch/gyro)
-  target: { rotY: -9, rotX: 4.5, rotZ: -0.6, scale: 1, translateY: 0, opacity: 1 },
+  target: { rotY: -22, rotX: 5, rotZ: -0.5, scale: 0.95, translateY: 0, opacity: 1 },
   // Velocity for overshoot damping
   velocity: { rotY: 0, rotX: 0, rotZ: 0, scale: 0, translateY: 0, opacity: 0 },
 
@@ -1001,7 +998,7 @@ function hexToRgba(hex, alpha = 0.4) {
 }
 
 function tierEmoji(tier) {
-  return tier === 1 ? "🌿" : tier === 2 ? "💎" : "👑";
+  return "";
 }
 
 // --- Distinct Luxury Pattern Engine for Preview Stage ---
@@ -1096,15 +1093,14 @@ function applyTemplateLuxuryPattern(item) {
 // --- Render Tiers Table in Pricing Section (UPI-first, dual CTA) ---
 function renderPricingSection() {
   if (!pricingSection) return;
-  const p1 = TIER_BASE_PRICE[1];
   const p2 = TIER_BASE_PRICE[2];
   const p3 = TIER_BASE_PRICE[3];
   const p4 = TIER_BASE_PRICE[4];
 
   const checkIcon = `<svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>`;
   const expressLabel = currentCurrency === "INR"
-    ? `⚡ Express 24h delivery (+₹${ADDONS.express.priceINR})`
-    : `⚡ Express 24h delivery (+$${ADDONS.express.priceUSD})`;
+    ? `Express 24h delivery (+₹${ADDONS.express.priceINR})`
+    : `Express 24h delivery (+$${ADDONS.express.priceUSD})`;
   const askIcon = `<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>`;
 
   pricingSection.innerHTML = `
@@ -1114,32 +1110,11 @@ function renderPricingSection() {
       <p class="pricing-diff-line">Not another DIY editor. You pick a design, pay, send details — we build the invite for you.</p>
       <div class="pricing-selected-design" id="pricing-selected-design" hidden aria-live="polite"></div>
       <div class="pricing-grid">
-        <!-- Tier 1: Classic -->
-        <div class="pricing-card">
-          <div class="pricing-card-header">
-            <h3 class="pricing-card-name">🌿 Classic</h3>
-            <div class="pricing-card-price-row">
-              <span class="pricing-card-price">${formatPrice(p1.inr, p1.usd)}</span>
-            </div>
-          </div>
-          <div class="pricing-card-tagline">“Timeless &amp; elegant — perfect for one function.”</div>
-          <ul class="pricing-card-features">
-            <li class="pricing-card-feature-item">${checkIcon}<span>Single-event invite (Wedding or Reception)</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Your photos, names &amp; 1-tap venue map</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Countdown timer + guest RSVP</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 48 hours</span></li>
-          </ul>
-          <label class="express-toggle"><input type="checkbox" id="express-toggle-1" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-1" onclick="payRazorpayForPackage(1)"><span data-pay-label>Choose this design</span></button>
-          <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(1)">${askIcon}<span>Ask on WhatsApp</span></button>
-          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
-        </div>
-
         <!-- Tier 2: Premium (Hero / Couples' favourite) -->
         <div class="pricing-card featured pricing-card-premium">
           <div class="pricing-popular-badge">Best for most weddings</div>
           <div class="pricing-card-header">
-            <h3 class="pricing-card-name">🌸 Premium</h3>
+            <h3 class="pricing-card-name">Premium</h3>
             <div class="pricing-card-price-row">
               <span class="pricing-card-price">${formatPrice(p2.inr, p2.usd)}</span>
             </div>
@@ -1152,7 +1127,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 48 hours</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-2" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="payRazorpayForPackage(2)"><span data-pay-label>Choose this design</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="openOrderDrawerForPackage(2)"><span data-pay-label>Customize &amp; Order</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(2)">${askIcon}<span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
         </div>
@@ -1160,7 +1135,7 @@ function renderPricingSection() {
         <!-- Tier 3: Luxury (Prestige) -->
         <div class="pricing-card pricing-card-luxury">
           <div class="pricing-card-header">
-            <h3 class="pricing-card-name">👑 Luxury</h3>
+            <h3 class="pricing-card-name">Luxury</h3>
             <div class="pricing-card-price-row">
               <span class="pricing-card-price">${formatPrice(p3.inr, p3.usd)}</span>
             </div>
@@ -1173,16 +1148,16 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Delivered in 48 hours (24h express available)</span></li>
           </ul>
           <label class="express-toggle"><input type="checkbox" id="express-toggle-3" onchange="updatePackagePayLabels()"><span>${expressLabel}</span></label>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="payRazorpayForPackage(3)"><span data-pay-label>Choose this design</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="openOrderDrawerForPackage(3)"><span data-pay-label>Customize &amp; Order</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)">${askIcon}<span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
         </div>
 
         <!-- Tier 4: Dearly Exclusive -->
         <div class="pricing-card pricing-card-dearly">
-          <div class="pricing-popular-badge dearly-badge">✨ Haute Couture</div>
+          <div class="pricing-popular-badge dearly-badge">Haute Couture</div>
           <div class="pricing-card-header">
-            <h3 class="pricing-card-name">✨ The Dearly Suite</h3>
+            <h3 class="pricing-card-name">The Dearly Suite</h3>
             <div class="pricing-card-price-row">
               <span class="pricing-card-price">${formatPrice(p4.inr, p4.usd)}</span>
             </div>
@@ -1194,20 +1169,19 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Optional photo gallery &amp; botanical motion</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>24-hour express delivery included</span></li>
           </ul>
-          <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="payRazorpayForPackage(4)"><span data-pay-label>Pick this design</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="openOrderDrawerForPackage(4)"><span data-pay-label>Customize Dearly Suite</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(4)">${askIcon}<span>Ask on WhatsApp</span></button>
           <p class="pkg-microcopy">24h express delivery included. · UPI / GPay / PhonePe</p>
         </div>
       </div>
       <div class="pricing-trust-strip" aria-label="Payment reassurance">
-        <span>🔒 Secure UPI payment</span><span>✦ Human-built for you</span><span>⏱ Delivered in 48 hours</span>
+        <span>Secure UPI payment</span><span>Human-built for you</span><span>Delivered in 48 hours</span>
       </div>
-      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for all packages</p>
+      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for all packages · Couples’ favourite is Premium</p>
       <div class="pricing-dots" id="pricing-dots" role="tablist" aria-label="Package cards">
-        <button type="button" class="pricing-dot" data-pricing-dot="0" aria-label="Classic package" aria-current="false"></button>
-        <button type="button" class="pricing-dot" data-pricing-dot="1" aria-label="Premium package" aria-current="true"></button>
-        <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Luxury package" aria-current="false"></button>
-        <button type="button" class="pricing-dot" data-pricing-dot="3" aria-label="Dearly Exclusive package" aria-current="false"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="0" aria-label="Premium package" aria-current="true"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="1" aria-label="Luxury package" aria-current="false"></button>
+        <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Dearly Exclusive package" aria-current="false"></button>
       </div>
 
       <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — delivered within 48 hours after payment and receipt of all required details.</p>
@@ -1269,26 +1243,25 @@ function selectTier(tierNum, smoothScroll = false) {
 }
 
 function getGeomSvg(tier) {
-  if (tier === 1) {
-    // Nested concentric rings
-    return `<svg class="geom-svg" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="0.8" />
-      <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="0.5" />
-    </svg>`;
-  } else if (tier === 2) {
+  if (tier === 2) {
     // Interlocking Rhombus
     return `<svg class="geom-svg" viewBox="0 0 24 24">
       <path d="M12 3l7 8-7 8-7-8z" stroke="currentColor" stroke-width="0.8" />
       <path d="M12 6l4.5 5.5-4.5 5.5-4.5-5.5z" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1 1" />
     </svg>`;
-  } else {
+  } else if (tier === 3) {
     // Cinematic star with radial dashlines and central core
     return `<svg class="geom-svg" viewBox="0 0 24 24">
-      <path d="M12 2l2.5 5.5 5.5 2.5-5.5 2.5-2.5 5.5-2.5-5.5-5.5-2.5 5.5-2.5z" stroke="currentColor" stroke-width="0.8" />
-      <circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="0.6" />
-      <circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none" />
+      <path d="M12 2l2.4 6.9h7.2l-5.8 4.2 2.2 6.9-6-4.4-6 4.4 2.2-6.9-5.8-4.2h7.2z" stroke="currentColor" stroke-width="0.7" fill="none" />
+      <circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="0.5" />
       <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 2" />
       <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 2" />
+    </svg>`;
+  } else {
+    // Dearly Botanical Wax Seal crest
+    return `<svg class="geom-svg" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="0.8" />
+      <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="0.5" />
     </svg>`;
   }
 }
@@ -1296,7 +1269,6 @@ function getGeomSvg(tier) {
 // Dynamically sync floating bottom navigation counts with current TEMPLATE_DATABASE
 function updateTierNavCounts() {
   const allCount = TEMPLATE_DATABASE.length;
-  const classicCount = TEMPLATE_DATABASE.filter(t => t.tier === 1).length;
   const premiumCount = TEMPLATE_DATABASE.filter(t => t.tier === 2).length;
   const luxuryCount = TEMPLATE_DATABASE.filter(t => t.tier === 3).length;
   const dearlyCount = TEMPLATE_DATABASE.filter(t => t.tier === 4).length;
@@ -1307,7 +1279,6 @@ function updateTierNavCounts() {
     const countSpan = label.querySelector(".tier-meta");
     if (!countSpan) return;
     if (forAttr === "glass-all") countSpan.textContent = `(${allCount})`;
-    else if (forAttr === "glass-classic") countSpan.textContent = `(${classicCount})`;
     else if (forAttr === "glass-premium") countSpan.textContent = `(${premiumCount})`;
     else if (forAttr === "glass-luxury") countSpan.textContent = `(${luxuryCount})`;
     else if (forAttr === "glass-dearly") countSpan.textContent = `(${dearlyCount})`;
@@ -1354,8 +1325,8 @@ function renderCatalogue() {
   }
   
   filtered.forEach(item => {
-    const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly Exclusive" : "Luxury";
-    const tierIcon = item.tier === 1 ? "🌿" : item.tier === 2 ? "🌸" : item.tier === 4 ? "✨" : "👑";
+    const tierName = item.tier === 4 ? "Dearly Exclusive" : item.tier === 3 ? "Luxury" : "Premium";
+    const tierIcon = "";
     
     const prices = getItemPrices(item);
     const priceText = formatPrice(prices.priceINR, prices.priceUSD);
@@ -1381,8 +1352,8 @@ function renderCatalogue() {
           <div class="template-card-header">
             <h3 class="template-card-title">${item.name}</h3>
             <div class="template-card-tags">
-              ${isPick ? '<span class="template-tag tag-pick">⭐ Our Pick</span>' : ''}
-              ${item.tier === 4 ? '<span class="template-tag tag-dearly">✨ Dearly Exclusive</span>' : ''}
+              ${isPick ? '<span class="template-tag tag-pick">Our Pick</span>' : ''}
+              ${item.tier === 4 ? '<span class="template-tag tag-dearly">Dearly Exclusive</span>' : ''}
               ${item.style ? `<span class="template-tag tag-style">${item.style}</span>` : ''}
             </div>
           </div>
@@ -1397,14 +1368,14 @@ function renderCatalogue() {
           </div>
 
           <div class="template-card-actions">
-            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="payRazorpayForTemplate(${item.id})" aria-label="Pick ${item.name} design">
-              <span>${item.tier === 4 ? "Pick design" : "Choose design"}</span>
+            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="openOrderDrawerForTemplate(${item.id})" aria-label="Customize and order ${item.name} design">
+              <span>Customize &amp; Order</span>
             </button>
             <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
               <span>Preview <span class="btn-text-invitation">invitation</span> →</span>
             </button>
             <a href="#" class="template-card-wa-link" id="order-btn-${item.id}" onclick="event.preventDefault(); askTemplateOnWhatsApp(${item.id})" aria-label="Ask about ${item.name} on WhatsApp" title="Ask on WhatsApp">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.694.075-2.227-.557-1.848-.762-3.033-2.639-3.125-2.762-.093-.122-.746-.992-.746-1.892 0-.9.471-1.343.639-1.527.168-.184.367-.23.49-.23.123 0 .245.001.352.006.113.006.264-.043.413.315.153.367.521 1.272.568 1.365.046.092.077.2.015.322-.061.123-.092.2-.184.307-.092.108-.194.24-.276.323-.093.092-.19.192-.082.377.108.184.478.788 1.025 1.275.704.628 1.298.822 1.482.914.184.092.291.077.399-.046.108-.123.46-0.537.583-.721.123-.184.246-.153.414-.092.169.061 1.074.507 1.258.6.184.092.307.138.353.215.046.077.046.445-.098.85zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.397 21.493 10.144 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              <img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true">
               <span class="wa-text-label">Ask on WhatsApp</span>
             </a>
           </div>
@@ -1454,7 +1425,7 @@ function renderMatchDeck(items) {
     </div>
     <div class="match-actions" role="group" aria-label="Match actions">
       <button type="button" class="match-action match-action-pass" data-match-action="pass" aria-label="Pass on this design">×</button>
-      <button type="button" class="match-action match-action-like" data-match-action="like" aria-label="Like this design">♥</button>
+      <button type="button" class="match-action match-action-like" data-match-action="like" aria-label="Like this design"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
     </div>
     <p class="match-mode-status" id="match-mode-status">${matchDeckIndex >= deck.length ? "You’ve seen every match." : ""}${matchDeckIndex >= deck.length ? '<button type="button" class="match-reset" data-match-reset>Start over</button>' : ""}</p>`;
   bindMatchDeck(deck);
@@ -1630,24 +1601,24 @@ function buildWhatsAppMessage(id, includeAddons) {
     ? `${getCurrencySymbol()}${saveINR.toLocaleString("en-IN")}`
     : `${getCurrencySymbol()}${saveUSD}`;
 
-  const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly Exclusive" : "Luxury";
+  const tierName = item.tier === 4 ? "Dearly Exclusive" : item.tier === 3 ? "Luxury" : "Premium";
 
   let message = PROMO_CONFIG.active
-    ? `🇮🇳 *Hi InviteStory!* I would like to order *${item.name}* under the Independence Day Offer (Flat ₹815)!\n\n`
-    : `✨ *Hi InviteStory!* I would like to order the *${item.name}* invitation card.\n\n`;
+    ? `*Hi InviteStory!* I would like to order *${item.name}* under the Independence Day Offer (Flat ₹815)!\n\n`
+    : `*Hi InviteStory!* I would like to order the *${item.name}* invitation card.\n\n`;
 
-  message += `💍 *Design:* ${item.name} (${tierName} Tier)\n`;
-  message += `💰 *Total Price:* ${totalPriceText}`;
+  message += `*Design:* ${item.name} (${tierName} Tier)\n`;
+  message += `*Total Price:* ${totalPriceText}`;
 
   if (checkedAddons.length > 0) {
-    message += `\n➕ *Add-ons:* ${checkedAddons.join(", ")}`;
+    message += `\n*Add-ons:* ${checkedAddons.join(", ")}`;
   }
 
-  message += `\n\nPlease let me know the next steps to share our event details & photos! 💌`;
+  message += `\n\nPlease let me know the next steps to share our event details & photos!`;
 
   const { utmSource, utmCampaign } = getUtmCampaignParams();
   if (utmSource || utmCampaign) {
-    message += `\n\n📌 _Ref: ${utmSource || 'ads'}${utmCampaign ? ' / ' + utmCampaign : ''}_`;
+    message += `\n\n_Ref: ${utmSource || 'ads'}${utmCampaign ? ' / ' + utmCampaign : ''}_`;
   }
 
   return message;
@@ -1767,7 +1738,7 @@ function payRazorpayForTemplate(id) {
             message: "Payment was not completed. You can try again or message our team directly on WhatsApp for help.",
             type: "error",
             action: {
-              label: "Chat on WhatsApp 💬",
+              label: "Chat on WhatsApp",
               url: waUrl
             }
           });
@@ -1806,7 +1777,7 @@ function payRazorpayForTemplate(id) {
         message: "Payment didn't go through — please try again or reach out on WhatsApp.",
         type: "error",
         action: {
-          label: "Chat on WhatsApp 💬",
+          label: "Chat on WhatsApp",
           url: waUrl
         }
       });
@@ -1873,12 +1844,6 @@ function payRazorpayForPackage(tier, designName) {
   const isINR = currentCurrency === "INR";
   const currencyCode = isINR ? "INR" : "USD";
 
-  // USD visitors pay via PayPal (Razorpay key is INR-first).
-  if (!isINR) {
-    openPayPalCheckoutForPackage(tier);
-    return;
-  }
-
   trackMetaEvent("InitiateCheckout", {
     content_name: `${name} Package`,
     content_category: "Package",
@@ -1913,7 +1878,7 @@ function payRazorpayForPackage(tier, designName) {
             message: "Payment was not completed. You can try again or message our team directly on WhatsApp for help.",
             type: "error",
             action: {
-              label: "Chat on WhatsApp 💬",
+              label: "Chat on WhatsApp",
               url: waUrl
             }
           });
@@ -1950,7 +1915,7 @@ function payRazorpayForPackage(tier, designName) {
         message: "Payment didn't go through — please try again or reach out on WhatsApp.",
         type: "error",
         action: {
-          label: "Chat on WhatsApp 💬",
+          label: "Chat on WhatsApp",
           url: waUrl
         }
       });
@@ -1969,7 +1934,7 @@ function payRazorpayForPackage(tier, designName) {
  * Shared post-payment handler: stores receipt, shows the in-page success
  * panel (works even if the user never opens WhatsApp), and auto-opens
  * WhatsApp with the paid details prefill.
- * Spec: Hi InviteStory! ✅ Paid for {{PACKAGE}} (₹{{AMOUNT}}).
+ * Spec: Hi InviteStory! Paid for {{PACKAGE}} (₹{{AMOUNT}}).
  *       Payment ID: {{RAZORPAY_ID}} / Design I want: {{DESIGN_NAME}} /
  *       I'll send names, dates, photos, venue next.
  */
@@ -1981,7 +1946,7 @@ function handlePaidSuccess(details) {
   const refLine = (attr.utm_campaign || attr.utm_source || attr.utm_term)
     ? `\nRef: ${attr.utm_source || 'ad'} / ${attr.utm_campaign || 'direct'}${attr.utm_term ? ' / ' + attr.utm_term : ''}`
     : "";
-  const waMsg = `Hi InviteStory! ✅ Paid for ${details.packageName} (${details.amountText}).\nPayment ID: ${details.paymentId}${designLine}${refLine}\nI'll send names, dates, photos, venue next.`;
+  const waMsg = `Hi InviteStory! Paid for ${details.packageName} (${details.amountText}).\nPayment ID: ${details.paymentId}${designLine}${refLine}\nI'll send names, dates, photos, venue next.`;
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
 }
 
@@ -2024,66 +1989,31 @@ function sendDetailsOnWhatsApp() {
     return;
   }
   const designLine = d.designName ? `\nDesign I want: ${d.designName}` : "";
-  const waMsg = `Hi InviteStory! ✅ Paid for ${d.packageName} (${d.amountText}).\nPayment ID: ${d.paymentId}${designLine}\nI'll send names, dates, photos, venue next.`;
+  const waMsg = `Hi InviteStory! Paid for ${d.packageName} (${d.amountText}).\nPayment ID: ${d.paymentId}${designLine}\nI'll send names, dates, photos, venue next.`;
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
 }
 
 /** Keep each package card's Pay label in sync with its express toggle. */
 function updatePackagePayLabels() {
-  [1, 2, 3].forEach(tier => {
+  [2, 3, 4].forEach(tier => {
     const btn = document.getElementById(`pkg-pay-btn-${tier}`);
     if (btn) {
       const label = btn.querySelector("[data-pay-label]");
-      if (label) label.textContent = "Choose this design";
+      if (label) label.textContent = tier === 4 ? "Customize Dearly Suite" : "Customize & Order";
     }
   });
 }
 
-// --- PayPal International Checkout Integration ---
-let currentPayPalCheckoutTemplate = null;
-let paypalSdkPromise = null;
+// --- Dynamic Order Sheet / Drawer Controller ---
+let orderDrawerState = {
+  template: null,
+  tier: 2,
+  isPackage: false,
+  basePrice: 1999,
+  total: 1999
+};
 
-function loadPayPalSdk() {
-  if (typeof paypal !== "undefined") return Promise.resolve();
-  if (paypalSdkPromise) return paypalSdkPromise;
-
-  paypalSdkPromise = new Promise((resolve, reject) => {
-    const existing = document.getElementById("paypal-sdk-script");
-    if (existing) {
-      if (typeof paypal !== "undefined") {
-        resolve();
-        return;
-      }
-      existing.addEventListener("load", () => resolve());
-      existing.addEventListener("error", (err) => reject(err));
-      return;
-    }
-    const script = document.createElement("script");
-    script.id = "paypal-sdk-script";
-    script.src = `https://www.paypal.com/sdk/js?client-id=${window.PAYPAL_CLIENT_ID}&currency=USD&components=buttons`;
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = (e) => reject(e);
-    document.head.appendChild(script);
-  });
-  return paypalSdkPromise;
-}
-
-function updatePaymentButtonsForCurrency() {
-  const rzpBtn = document.getElementById("preview-instant-pay-btn");
-  const paypalBtn = document.getElementById("preview-instant-paypal-btn");
-  if (rzpBtn && paypalBtn) {
-    if (currentCurrency === "USD") {
-      rzpBtn.style.display = "none";
-      paypalBtn.style.display = "inline-flex";
-    } else {
-      rzpBtn.style.display = "inline-flex";
-      paypalBtn.style.display = "none";
-    }
-  }
-}
-
-function openPayPalCheckout(id) {
+function openOrderDrawerForTemplate(id) {
   let templateId = id;
   if (!templateId && typeof previewState !== "undefined" && previewState.currentIndex >= 0) {
     templateId = TEMPLATE_DATABASE[previewState.currentIndex]?.id;
@@ -2091,192 +2021,368 @@ function openPayPalCheckout(id) {
   const item = TEMPLATE_DATABASE.find(x => x.id === templateId) || TEMPLATE_DATABASE[0];
   if (!item) return;
 
-  currentPayPalCheckoutTemplate = item;
+  orderDrawerState.template = item;
+  orderDrawerState.tier = item.tier;
+  orderDrawerState.isPackage = false;
 
-  const modal = document.getElementById("paypal-checkout-modal");
+  const modal = document.getElementById("order-drawer-modal");
   if (!modal) return;
+  modal.setAttribute("data-order-tier", orderDrawerState.tier);
 
-  const titleEl = document.getElementById("paypal-item-name");
-  const tierEl = document.getElementById("paypal-item-tier");
-  const basePriceEl = document.getElementById("paypal-item-base-price");
-
-  const prices = getItemPrices(item);
-  const tierName = item.tier === 1 ? "🌿 Classic" : item.tier === 2 ? "🌸 Premium" : item.tier === 4 ? "✨ Dearly Exclusive" : "👑 Luxury";
-
-  if (titleEl) titleEl.textContent = item.name;
-  if (tierEl) tierEl.textContent = tierName;
-  if (basePriceEl) basePriceEl.textContent = `$${prices.priceUSD}`;
-
-  const totalDisplay = document.getElementById("paypal-total-display");
-  if (totalDisplay) {
-    totalDisplay.textContent = `$${prices.priceUSD.toFixed(2)} USD`;
+  // Populate visual preview
+  const thumbEl = document.getElementById("order-drawer-thumb");
+  if (thumbEl) {
+    thumbEl.src = item.image || "assets/preview/1.png";
+    thumbEl.alt = item.name;
   }
 
-  renderPayPalButtons();
+  const nameEl = document.getElementById("order-drawer-item-name");
+  if (nameEl) nameEl.textContent = item.name;
+
+  const styleEl = document.getElementById("order-drawer-item-style");
+  if (styleEl) {
+    styleEl.textContent = item.style
+      ? `${item.style} · Digital Invitation Suite`
+      : "Digital Invitation Suite · Music & Maps";
+  }
+
+  const tierBadge = document.getElementById("order-drawer-tier-badge");
+  if (tierBadge) {
+    tierBadge.textContent = item.tier === 4 ? "Dearly Haute Couture" : item.tier === 3 ? "Luxury Collection" : "Premium Collection";
+  }
+
+  const delTag = document.getElementById("order-drawer-delivery-tag");
+  if (delTag) {
+    delTag.textContent = item.tier === 4 ? "24h Express Included" : "48-Hour Delivery";
+  }
+
+  // Setup add-on toggles
+  const expressInput = document.getElementById("order-drawer-addon-express");
+  const expressPrice = document.getElementById("order-addon-express-price");
+  const isDearly = item.tier === 4;
+
+  if (expressInput) {
+    if (isDearly) {
+      expressInput.checked = true;
+      expressInput.disabled = true;
+      if (expressPrice) expressPrice.textContent = "Included Free";
+    } else {
+      expressInput.checked = false;
+      expressInput.disabled = false;
+      if (expressPrice) {
+        expressPrice.textContent = currentCurrency === "INR" ? `+₹${ADDONS.express.priceINR}` : `+$${ADDONS.express.priceUSD}`;
+      }
+    }
+  }
+
+  const emailRsvpInput = document.getElementById("order-drawer-addon-email-rsvp");
+  if (emailRsvpInput) {
+    emailRsvpInput.checked = isDearly;
+    emailRsvpInput.disabled = isDearly;
+  }
+  updateOrderDrawerTotal();
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
+
+  trackMetaEvent("InitiateCheckout", {
+    content_name: item.name,
+    content_ids: [String(item.id)],
+    content_type: "product",
+    content_category: item.style || "Digital Wedding Invitation",
+    value: orderDrawerState.total,
+    currency: currentCurrency === "INR" ? "INR" : "USD"
+  });
 }
 
-/**
- * Package-level PayPal checkout for USD visitors (Classic $15 / Premium $30 / Luxury $49).
- * Reuses the PayPal modal with a pseudo item so no template pick is needed.
- */
-function openPayPalCheckoutForPackage(tier) {
-  const name = packageName(tier);
-  const base = TIER_BASE_PRICE[tier] || TIER_BASE_PRICE[1];
-  const pseudo = {
-    id: `package-${tier}`,
-    name: `${name} Package`,
-    tier,
-    style: `${name} Package — Digital Wedding Invitation`,
-    priceINR: base.inr,
-    priceUSD: base.usd,
-    originalPriceINR: base.inr,
-    originalPriceUSD: base.usd
-  };
-  currentPayPalCheckoutTemplate = pseudo;
+function openOrderDrawerForPackage(tier) {
+  const pTier = Number(tier) || 2;
+  const name = packageName(pTier);
+  const isDearly = pTier === 4;
 
-  const modal = document.getElementById("paypal-checkout-modal");
+  orderDrawerState.template = null;
+  orderDrawerState.tier = pTier;
+  orderDrawerState.isPackage = true;
+
+  const modal = document.getElementById("order-drawer-modal");
   if (!modal) return;
+  modal.setAttribute("data-order-tier", orderDrawerState.tier);
 
-  const titleEl = document.getElementById("paypal-item-name");
-  const tierEl = document.getElementById("paypal-item-tier");
-  const basePriceEl = document.getElementById("paypal-item-base-price");
-  const tierLabel = tier === 1 ? "🌿 Classic" : tier === 2 ? "🌸 Premium" : "👑 Luxury";
+  const thumbEl = document.getElementById("order-drawer-thumb");
+  if (thumbEl) {
+    thumbEl.src = isDearly ? "assets/preview/18.png" : pTier === 3 ? "assets/preview/11.png" : "assets/preview/1.png";
+    thumbEl.alt = `${name} Package`;
+  }
 
-  if (titleEl) titleEl.textContent = `${name} Package`;
-  if (tierEl) tierEl.textContent = tierLabel;
-  if (basePriceEl) basePriceEl.textContent = `$${base.usd}`;
+  const nameEl = document.getElementById("order-drawer-item-name");
+  if (nameEl) nameEl.textContent = `${name} Invitation Suite`;
 
-  const totalDisplay = document.getElementById("paypal-total-display");
-  if (totalDisplay) totalDisplay.textContent = `$${base.usd.toFixed(2)} USD`;
+  const styleEl = document.getElementById("order-drawer-item-style");
+  if (styleEl) {
+    styleEl.textContent = isDearly
+      ? "Wax-Seal Unboxing · Email RSVP · 24h Express"
+      : "Full Wedding Suite · Google Maps · Soundtrack · RSVP";
+  }
 
-  const container = document.getElementById("paypal-button-container");
-  if (container) container.innerHTML = "";
-  renderPayPalButtons();
+  const tierBadge = document.getElementById("order-drawer-tier-badge");
+  if (tierBadge) {
+    tierBadge.textContent = isDearly ? "Dearly Haute Couture" : pTier === 3 ? "Luxury Collection" : "Premium Collection";
+  }
+
+  const delTag = document.getElementById("order-drawer-delivery-tag");
+  if (delTag) {
+    delTag.textContent = isDearly ? "24h Express Included" : "48-Hour Delivery";
+  }
+
+  const expressInput = document.getElementById("order-drawer-addon-express");
+  const expressPrice = document.getElementById("order-addon-express-price");
+  const wasCheckedOnCard = isExpressSelectedForPackage(pTier);
+
+  if (expressInput) {
+    if (isDearly) {
+      expressInput.checked = true;
+      expressInput.disabled = true;
+      if (expressPrice) expressPrice.textContent = "Included Free";
+    } else {
+      expressInput.checked = wasCheckedOnCard;
+      expressInput.disabled = false;
+      if (expressPrice) {
+        expressPrice.textContent = currentCurrency === "INR" ? `+₹${ADDONS.express.priceINR}` : `+$${ADDONS.express.priceUSD}`;
+      }
+    }
+  }
+
+  const emailRsvpInput = document.getElementById("order-drawer-addon-email-rsvp");
+  if (emailRsvpInput) {
+    emailRsvpInput.checked = isDearly;
+    emailRsvpInput.disabled = isDearly;
+  }
+  updateOrderDrawerTotal();
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
+
+  trackMetaEvent("InitiateCheckout", {
+    content_name: `${name} Package`,
+    content_category: "Package",
+    value: orderDrawerState.total,
+    currency: currentCurrency === "INR" ? "INR" : "USD",
+    num_items: 1
+  });
 }
 
-function closePayPalCheckout() {
-  const modal = document.getElementById("paypal-checkout-modal");
+function closeOrderDrawer() {
+  const modal = document.getElementById("order-drawer-modal");
   if (!modal) return;
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
 }
 
-function calculatePayPalTotal() {
-  if (!currentPayPalCheckoutTemplate) return 15;
-  const prices = getItemPrices(currentPayPalCheckoutTemplate);
-  return prices.priceUSD;
+function setOrderAddonPrice(element, addon, included) {
+  element.replaceChildren();
+  const price = formatPrice(addon.priceINR, addon.priceUSD);
+  if (!included) {
+    element.textContent = `+${price}`;
+    return;
+  }
+  const regularPrice = document.createElement("s");
+  regularPrice.textContent = price;
+  regularPrice.setAttribute("aria-label", `Regular price ${price}`);
+  const includedLabel = document.createElement("span");
+  includedLabel.textContent = "Included";
+  element.append(regularPrice, includedLabel);
 }
 
-function renderPayPalButtons() {
-  const container = document.getElementById("paypal-button-container");
-  if (!container) return;
+function updateOrderDrawerTotal() {
+  const isINR = currentCurrency === "INR";
+  let basePrice = 1999;
 
-  if (typeof paypal === "undefined") {
-    container.innerHTML = `<div style="text-align:center; padding:18px; color:#ecd9ac; font-size:0.9rem;">Connecting to PayPal...</div>`;
-    loadPayPalSdk().then(() => {
-      container.innerHTML = "";
-      renderPayPalButtons();
-    }).catch(err => {
-      container.innerHTML = `<div style="text-align:center; padding:12px; color:#f87171; font-size:0.85rem;">Could not load PayPal SDK. Please check your connection or message us on WhatsApp.</div>`;
-    });
-    return;
+  if (orderDrawerState.isPackage) {
+    basePrice = packageBasePrice(orderDrawerState.tier);
+  } else if (orderDrawerState.template) {
+    const prices = getItemPrices(orderDrawerState.template);
+    basePrice = isINR ? prices.priceINR : prices.priceUSD;
   }
 
-  // Avoid recreating buttons if already rendered, since createOrder evaluates dynamic amounts at click time
-  if (container.children.length > 0) {
-    return;
+  let total = basePrice;
+  const isDearly = orderDrawerState.tier === 4;
+
+  const expressChecked = document.getElementById("order-drawer-addon-express")?.checked;
+
+  if (expressChecked && !isDearly) {
+    total += isINR ? ADDONS.express.priceINR : ADDONS.express.priceUSD;
   }
 
-  container.innerHTML = "";
-  try {
-    paypal.Buttons({
-      style: {
-        layout: 'vertical',
-        color:  'gold',
-        shape:  'pill',
-        label:  'paypal',
-        height: 42
-      },
-      createOrder: function(data, actions) {
-        const item = currentPayPalCheckoutTemplate || TEMPLATE_DATABASE[0];
-        const total = calculatePayPalTotal();
-        const tierName = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly Exclusive" : "Luxury";
+  const emailRsvpChecked = document.getElementById("order-drawer-addon-email-rsvp")?.checked;
+  if (emailRsvpChecked && !isDearly) {
+    total += isINR ? ADDONS.emailRsvp.priceINR : ADDONS.emailRsvp.priceUSD;
+  }
+  const emailRsvpPriceEl = document.getElementById("order-addon-email-rsvp-price");
+  if (emailRsvpPriceEl) {
+    setOrderAddonPrice(emailRsvpPriceEl, ADDONS.emailRsvp, isDearly);
+  }
+  const emailRsvpSubEl = document.getElementById("order-addon-email-rsvp-sub");
+  if (emailRsvpSubEl) {
+    emailRsvpSubEl.textContent = isDearly ? "Included with your Dearly invitation" : "Receive guest responses by email";
+  }
 
-        trackMetaEvent("InitiateCheckout", {
-          content_name: item.name,
-          content_ids: [String(item.id)],
-          content_type: "product",
-          content_category: item.style || "Digital Wedding Invitation",
-          value: total,
-          currency: "USD"
-        });
+  orderDrawerState.total = total;
 
-        return actions.order.create({
-          purchase_units: [{
-            description: `InviteStory: ${item.name} Wedding Invitation (${tierName} Tier)`,
-            amount: {
-              currency_code: "USD",
-              value: total.toFixed(2),
-              breakdown: {
-                item_total: {
-                  currency_code: "USD",
-                  value: total.toFixed(2)
-                }
-              }
-            },
-            items: [{
-              name: `${item.name} - Digital Wedding Invitation`,
-              description: `${tierName} Tier Digital Wedding Invitation`,
-              unit_amount: {
-                currency_code: "USD",
-                value: total.toFixed(2)
-              },
-              quantity: "1",
-              category: "DIGITAL_GOODS"
-            }]
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          const item = currentPayPalCheckoutTemplate || TEMPLATE_DATABASE[0];
-          const total = calculatePayPalTotal();
-          const transactionId = details.id || (details.purchase_units && details.purchase_units[0]?.payments?.captures[0]?.id) || data.orderID;
+  const formattedBase = isINR ? `₹${basePrice.toLocaleString("en-IN")}` : `$${basePrice} USD`;
+  const formattedTotal = isINR ? `₹${total.toLocaleString("en-IN")}` : `$${total} USD`;
 
-          trackMetaEvent("Purchase", {
-            content_name: item.name,
-            content_ids: [String(item.id)],
-            content_type: "product",
-            value: total,
-            currency: "USD",
-            transaction_id: transactionId
+  const basePriceEl = document.getElementById("order-drawer-base-price");
+  if (basePriceEl) basePriceEl.textContent = formattedBase;
+
+  const totalValEl = document.getElementById("order-drawer-total-val");
+  if (totalValEl) totalValEl.textContent = formattedTotal;
+
+  const ctaBadgeEl = document.getElementById("order-drawer-cta-badge");
+  if (ctaBadgeEl) ctaBadgeEl.textContent = isINR ? `₹${total.toLocaleString("en-IN")}` : `$${total}`;
+
+  // Update add-on price labels
+  const expressPriceEl = document.getElementById("order-addon-express-price");
+  if (expressPriceEl) setOrderAddonPrice(expressPriceEl, ADDONS.express, isDearly);
+  const addonsTitleEl = document.querySelector("#order-drawer-modal .order-addons-title");
+  if (addonsTitleEl) addonsTitleEl.textContent = isDearly ? "Included with your Dearly suite:" : "Optional Add-ons:";
+  const includedValueEl = document.getElementById("order-drawer-included-value");
+  if (includedValueEl) {
+    includedValueEl.hidden = !isDearly;
+    includedValueEl.textContent = isDearly
+      ? `${formatPrice(ADDONS.express.priceINR + ADDONS.emailRsvp.priceINR, ADDONS.express.priceUSD + ADDONS.emailRsvp.priceUSD)} in additional services included with your Dearly suite.`
+      : "";
+  }
+}
+
+function proceedFromOrderDrawerToCheckout() {
+  const isINR = currentCurrency === "INR";
+  const currencyCode = isINR ? "INR" : "USD";
+  const totalVal = orderDrawerState.total;
+  const tier = orderDrawerState.tier;
+  const name = orderDrawerState.template ? orderDrawerState.template.name : `${packageName(tier)} Package`;
+
+  const expressChecked = document.getElementById("order-drawer-addon-express")?.checked || tier === 4;
+
+  const selectedAddons = [];
+  if (expressChecked) selectedAddons.push("Express 24h Delivery");
+  const emailRsvpChecked = document.getElementById("order-drawer-addon-email-rsvp")?.checked || tier === 4;
+  if (emailRsvpChecked) selectedAddons.push(tier === 4 ? "Email RSVP (included)" : "Email RSVP");
+
+  closeOrderDrawer();
+
+  const options = {
+    key: window.RAZORPAY_KEY_ID || "rzp_live_YOUR_KEY_HERE",
+    amount: Math.round(totalVal * 100),
+    currency: currencyCode,
+    name: "InviteStory",
+    description: `${name} — Digital Wedding Invitation`,
+    image: "https://invitestory.in/logo/noappicon.png",
+    notes: {
+      package: packageName(tier),
+      template_name: orderDrawerState.template?.name || "",
+      template_id: String(orderDrawerState.template?.id || ""),
+      add_ons: selectedAddons.length > 0 ? selectedAddons.join(", ") : "None",
+      express_24h: expressChecked ? "yes" : "no",
+      email_rsvp: emailRsvpChecked ? "yes" : "no",
+      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard",
+      ...getAttributionNotes()
+    },
+    theme: { color: "#c09559" },
+    modal: {
+      ondismiss: function () {
+        if (!window.__lastPaymentOk) {
+          const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My checkout for "${name}" (${currencyCode === "INR" ? "₹" : "$"}${totalVal}) was cancelled. Could you please assist me?`)}`;
+          showToast({
+            title: "Payment Incomplete",
+            message: "Checkout wasn't completed. You can try again or message our team directly on WhatsApp for help.",
+            type: "error",
+            action: { label: "Chat on WhatsApp", url: waUrl }
           });
-
-          closePayPalCheckout();
-
-          alert(`🎉 Payment Successful via PayPal!\n\nOrder ID: ${transactionId}\nTemplate: ${item.name}\nAmount: $${total} USD\n\nClick OK to open WhatsApp and send your wedding details for customization!`);
-
-          const waMsg = `Hi InviteStory! I have paid online via PayPal for '${item.name}' (Total: $${total} USD, Order ID: ${transactionId}). Here are our wedding details for customization:`;
-          window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
-        });
-      },
-      onCancel: function(data) {
-        console.log("PayPal checkout cancelled", data);
-      },
-      onError: function(err) {
-        console.error("PayPal checkout error", err);
-        alert("There was an issue processing your payment with PayPal. Please try again or message us on WhatsApp.");
+        }
+        window.__lastPaymentOk = false;
       }
-    }).render("#paypal-button-container");
-  } catch (err) {
-    console.error("Failed to render PayPal Buttons", err);
+    },
+    handler: function (response) {
+      window.__lastPaymentOk = true;
+      trackMetaEvent("Purchase", {
+        content_name: name,
+        content_category: "Digital Wedding Invitation",
+        value: totalVal,
+        currency: currencyCode,
+        transaction_id: response.razorpay_payment_id
+      });
+      handlePaidSuccess({
+        packageName: packageName(tier),
+        amountText: isINR ? `₹${totalVal.toLocaleString("en-IN")}` : `$${totalVal}`,
+        totalVal,
+        currency: currencyCode,
+        paymentId: response.razorpay_payment_id,
+        designName: orderDrawerState.template?.name || ""
+      });
+    }
+  };
+
+  if (typeof Razorpay !== "undefined") {
+    const rzp = new Razorpay(options);
+    rzp.on("payment.failed", function () {
+      const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for ${name} failed. Can you please assist me?`)}`;
+      showToast({
+        title: "Payment Failed",
+        message: "Payment didn't go through — please try again or reach out on WhatsApp.",
+        type: "error",
+        action: { label: "Chat on WhatsApp", url: waUrl }
+      });
+    });
+    rzp.open();
+  } else {
+    showToast({
+      title: "Loading Checkout",
+      message: "Payment is loading — please try again in a moment.",
+      type: "info"
+    });
   }
+}
+
+function askOrderDrawerOnWhatsApp() {
+  const isINR = currentCurrency === "INR";
+  const name = orderDrawerState.template ? `"${orderDrawerState.template.name}" (${packageName(orderDrawerState.tier)} Suite)` : `${packageName(orderDrawerState.tier)} Package`;
+  const price = isINR ? `₹${orderDrawerState.total.toLocaleString("en-IN")}` : `$${orderDrawerState.total}`;
+  const msg = `Hi InviteStory! I'm on the website looking at ${name} (${price}). I have a few questions about wedding details and delivery before booking. Can you please assist me?`;
+  window.open(`https://wa.me/918281583882?text=${encodeURIComponent(msg)}`, "_blank");
+}
+
+// --- Payment Button UI & Handlers ---
+function updatePaymentButtonsForCurrency() {
+  const currentItem = TEMPLATE_DATABASE[previewState.currentIndex];
+  if (currentItem) {
+    const prices = getItemPrices(currentItem);
+    const priceText = formatPrice(prices.priceINR, prices.priceUSD);
+    if (previewModalPrice) previewModalPrice.textContent = priceText;
+    document.getElementById("preview-sheet-price").textContent = priceText;
+    document.getElementById("preview-pay-label").textContent = `Customize & Order — ${priceText}`;
+  }
+  const rzpBtn = document.getElementById("preview-instant-pay-btn");
+  if (rzpBtn) {
+    rzpBtn.style.display = "inline-flex";
+  }
+  const paypalBtn = document.getElementById("preview-instant-paypal-btn");
+  if (paypalBtn) {
+    paypalBtn.style.display = "none";
+  }
+  if (typeof updateOrderDrawerTotal === "function") {
+    updateOrderDrawerTotal();
+  }
+}
+
+// Compatibility stubs for any external or legacy references
+function openPayPalCheckout(id) {
+  openOrderDrawerForTemplate(id);
+}
+function openPayPalCheckoutForPackage(tier) {
+  openOrderDrawerForPackage(tier);
+}
+function closePayPalCheckout() {
+  closeOrderDrawer();
 }
 
 // --- Preview Modal functions ---
@@ -2301,7 +2407,7 @@ function getDesignShareContent(item) {
   const shareUrl = getDesignShareUrl(item);
   
   const title = `InviteStory – ${item.name} Wedding Invitation`;
-  const shareIntro = `Look at this "${item.name}" interactive wedding invitation ✨\n\nIt has custom music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP.\n\nCheck out the live preview here and tell me what you think:`;
+  const shareIntro = `Look at this "${item.name}" interactive wedding invitation\n\nIt has custom music, animated couple story scenes, 1-tap Google Maps directions & instant guest RSVP.\n\nCheck out the live preview here and tell me what you think:`;
   const fullText = `${shareIntro}\n${shareUrl}`;
 
   return {
@@ -2380,7 +2486,7 @@ function copyDesignShareLink(templateId, event) {
 
   const onCopied = () => {
     showToast({
-      title: "Link Copied! ✨",
+      title: "Link Copied!",
       message: `Link & invitation details for "${item.name}" copied to clipboard. Ready to share!`,
       type: "success"
     });
@@ -2480,7 +2586,7 @@ function showToast(messageOrOptions, explicitType, options = {}) {
   }
 
   // Clean raw message of leading emojis
-  let cleanMsg = rawMsg.replace(/^[✨⚠️❌ℹ️✅]+\s*/, "");
+  let cleanMsg = rawMsg.replace(/^[\u2728\u26A0\u274C\u2139\u2705\uFE0F]+\s*/, "");
 
   let title = config.title;
   let action = config.action;
@@ -2492,7 +2598,7 @@ function showToast(messageOrOptions, explicitType, options = {}) {
     if (!action && /payment/i.test(cleanMsg)) {
       const waText = encodeURIComponent("Hi InviteStory! My payment didn't go through on the website. Can you please help me complete my order?");
       action = {
-        label: "Chat on WhatsApp 💬",
+        label: "Chat on WhatsApp",
         url: `https://wa.me/918281583882?text=${waText}`,
         target: "_blank"
       };
@@ -2681,7 +2787,7 @@ function handleInitialUrlRoute() {
 // 3D View Angle vs Flat View Rig Switching
 function setPreviewViewMode(mode) {
   previewState.viewMode = mode;
-  if (mode === "3d") {
+  if (mode === "3d" && !PhonePhysics.reducedMotion) {
     phonePhysicsEnableGyroscope();
   } else {
     phonePhysicsDisableGyroscope();
@@ -2694,6 +2800,8 @@ function syncPreviewViewRig() {
   const btn3D = document.getElementById("view-mode-3d");
   const btnFlat = document.getElementById("view-mode-flat");
   if (!rig) return;
+  if (btn3D) btn3D.setAttribute("aria-pressed", String(previewState.viewMode === "3d"));
+  if (btnFlat) btnFlat.setAttribute("aria-pressed", String(previewState.viewMode === "flat"));
 
   if (previewState.viewMode === "3d") {
     rig.classList.add("is-3d-mode");
@@ -2726,6 +2834,31 @@ function syncPreviewViewRig() {
 
 // --- Preview Modal functions ---
 
+// Favourites are a local viewer preference; ordering and template data stay unchanged.
+const previewFavourites = new Set();
+try {
+  const stored = JSON.parse(localStorage.getItem("invitestory_favourites") || "[]");
+  if (Array.isArray(stored)) stored.forEach(id => previewFavourites.add(id));
+} catch (e) {}
+
+function syncPreviewFavourite() {
+  const item = TEMPLATE_DATABASE[previewState.currentIndex];
+  const button = document.getElementById("preview-favourite-btn");
+  if (!item || !button) return;
+  const saved = previewFavourites.has(item.id);
+  button.setAttribute("aria-pressed", String(saved));
+  button.setAttribute("aria-label", saved ? "Remove design from favourites" : "Save design to favourites");
+}
+
+function togglePreviewFavourite() {
+  const item = TEMPLATE_DATABASE[previewState.currentIndex];
+  if (!item) return;
+  if (previewFavourites.has(item.id)) previewFavourites.delete(item.id);
+  else previewFavourites.add(item.id);
+  try { localStorage.setItem("invitestory_favourites", JSON.stringify([...previewFavourites])); } catch (e) {}
+  syncPreviewFavourite();
+}
+
 // Open the in-page preview modal for a given template id.
 function openPreview(id, updateUrl = true) {
   const idx = TEMPLATE_DATABASE.findIndex(x => x.id === id);
@@ -2734,12 +2867,15 @@ function openPreview(id, updateUrl = true) {
   const item = TEMPLATE_DATABASE[idx];
   const selectedDesignNote = document.getElementById("pricing-selected-design");
   if (selectedDesignNote) {
-    selectedDesignNote.innerHTML = `<span class="pricing-selected-design-icon">✓</span><span><strong>${item.name}</strong> is selected. Ready to make it yours?</span><a href="#pricing">Choose your package →</a>`;
+    selectedDesignNote.innerHTML = `<span class="pricing-selected-design-icon"><svg width="12" height="12" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg></span><span><strong>${item.name}</strong> is selected. Ready to make it yours?</span><a href="#pricing">Choose your package →</a>`;
     selectedDesignNote.hidden = false;
   }
   try { localStorage.setItem("invitestory_selected_design", JSON.stringify({ id: item.id, name: item.name })); } catch (e) {}
   previewState.currentIndex = idx;
-  previewState.lastFocusedElement = document.activeElement;
+  previewState.lastDesignByTier[item.tier] = item.id;
+  if (!previewModal.classList.contains("is-open")) {
+    previewState.lastFocusedElement = document.activeElement;
+  }
 
   // Seamlessly update browser URL without refresh so user can share link directly
   if (updateUrl && window.history && window.history.replaceState) {
@@ -2775,26 +2911,26 @@ function openPreview(id, updateUrl = true) {
   // Tier badge (Classic / Premium / Luxury / Haute Couture)
   const tierBadge = document.getElementById("preview-modal-tier");
   if (tierBadge) {
-    const tierLabel = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "✨ Haute Couture" : "Luxury";
-    tierBadge.textContent = tierLabel;
+    const tierLabel = item.tier === 4 ? "Dearly" : item.tier === 3 ? "Luxury" : "Premium";
+    tierBadge.textContent = `${tierLabel} Collection`;
+    document.getElementById("preview-sheet-collection").textContent = tierLabel;
     tierBadge.setAttribute("data-tier", String(item.tier));
   }
+  document.getElementById("preview-sheet-title").textContent = item.name;
+  document.getElementById("preview-sheet-price").textContent = formatPrice(prices.priceINR, prices.priceUSD);
+  syncPreviewFavourite();
   // Dual CTA labels: primary Pay, secondary Ask
   const payLabel = document.getElementById("preview-pay-label");
   if (payLabel) {
-    payLabel.textContent = item.tier === 4 ? "Pick this design" : "Choose this design";
-  }
-  const paypalLabel = document.getElementById("preview-paypal-label");
-  if (paypalLabel) {
-    paypalLabel.textContent = item.tier === 4 ? `Pick this design · $${prices.priceUSD}` : `Pay $${prices.priceUSD} with PayPal`;
+    payLabel.textContent = `Customize & Order — ${formatPrice(prices.priceINR, prices.priceUSD)}`;
   }
   const askLabel = document.getElementById("preview-ask-label");
-  if (askLabel) askLabel.textContent = "Ask on WhatsApp";
+  if (askLabel) askLabel.textContent = "WhatsApp";
   // Multi-event / Couture callout on previews
   const multiNote = document.getElementById("preview-multievent-note");
   if (multiNote) {
     if (item.tier === 4) {
-      multiNote.textContent = "✨ Haute Couture Suite · Wax-Seal Unboxing · Email RSVP & Guest List · 24h Express Included";
+      multiNote.textContent = "Haute Couture Suite · Wax-Seal Unboxing · Email RSVP & Guest List · 24h Express Included";
       multiNote.hidden = false;
     } else if (item.tier === 2 || item.tier === 3) {
       multiNote.textContent = "Multi-event ready: Haldi · Mehendi · Sangeet · Wedding · Reception";
@@ -2805,7 +2941,8 @@ function openPreview(id, updateUrl = true) {
   }
   updatePaymentButtonsForCurrency();
   if (previewCounterBadge) {
-    previewCounterBadge.textContent = `${idx + 1} of ${TEMPLATE_DATABASE.length}`;
+    const collection = TEMPLATE_DATABASE.filter(template => template.tier === item.tier);
+    previewCounterBadge.textContent = `${collection.findIndex(template => template.id === item.id) + 1} / ${collection.length}`;
   }
   if (previewFullscreenBtn) {
     previewFullscreenBtn.href = item.demoUrl;
@@ -2876,22 +3013,11 @@ function updatePreviewScale() {
   const body = previewModal.querySelector(".preview-modal-body");
   if (!body) return;
 
-  const availWidth = body.clientWidth - 20;
-  const availHeight = body.clientHeight - 12;
-  
-  // Authentic iPhone 17 Pro 19.55:9 ratio (405x864 chassis, 393x852 active OLED)
-  const targetWidth = 405;
-  const targetHeight = 864;
-
-  const scaleX = availWidth / targetWidth;
-  const scaleY = availHeight / targetHeight;
-  const scale = Math.min(scaleX, scaleY);
-
-  const clampedScale = Math.max(0.42, Math.min(1.0, scale));
-  const newTransform = `scale(${clampedScale.toFixed(3)})`;
-  if (previewIframeWrap.style.transform !== newTransform) {
-    previewIframeWrap.style.transform = newTransform;
-  }
+  // Keep templates at their original mobile resolution as the phone resizes.
+  const screen = document.getElementById("phone-screen-viewport");
+  const scale = Math.min(body.clientWidth / 393, body.clientHeight / 852);
+  screen.style.transform = `scale(${scale})`;
+  previewIframeWrap.style.transform = "";
 }
 
 // Close the preview modal and restore body scroll + focus.
@@ -2948,20 +3074,38 @@ function closePreview(updateUrl = true) {
 }
 
 // --- Preview Modal FAQ Functions ---
+let previewFaqPreviousFocus = null;
+let previewFaqInertElements = [];
 function openPreviewFaq(e) {
   if (e && typeof e.stopPropagation === "function") e.stopPropagation();
   const faqBackdrop = document.getElementById("preview-faq-backdrop");
   if (faqBackdrop) {
+    if (faqBackdrop.classList.contains("is-open")) return;
+    previewFaqPreviousFocus = document.activeElement;
+    previewFaqInertElements = Array.from(previewModal.children)
+      .filter(element => element !== faqBackdrop && !element.inert);
+    previewFaqInertElements.forEach(element => { element.inert = true; });
+    faqBackdrop.inert = false;
     faqBackdrop.classList.add("is-open");
     faqBackdrop.setAttribute("aria-hidden", "false");
+    previewModal.classList.add("is-faq-open");
+    faqBackdrop.querySelector(".preview-faq-list").scrollTop = 0;
+    faqBackdrop.querySelector(".preview-faq-close").focus();
   }
 }
 
 function closePreviewFaq() {
   const faqBackdrop = document.getElementById("preview-faq-backdrop");
   if (faqBackdrop) {
+    const wasOpen = faqBackdrop.classList.contains("is-open");
     faqBackdrop.classList.remove("is-open");
     faqBackdrop.setAttribute("aria-hidden", "true");
+    faqBackdrop.inert = true;
+    previewModal.classList.remove("is-faq-open");
+    previewFaqInertElements.forEach(element => { element.inert = false; });
+    previewFaqInertElements = [];
+    if (wasOpen && previewModal.classList.contains("is-open")) previewFaqPreviousFocus?.focus();
+    previewFaqPreviousFocus = null;
   }
 }
 
@@ -2975,7 +3119,7 @@ function phonePhysicsEnsureEls() {
       PhonePhysics.els = {
         stage: stage,
         rig: rig,
-        shadow: rig.querySelector(".phone-shadow-3d"),
+        shadow: rig.closest(".preview-device-row")?.querySelector(".preview-studio-shadow") || rig.querySelector(".phone-shadow-3d"),
         glareHighlight: document.getElementById("glare-highlight"),
         glareRim: document.getElementById("glare-rim"),
         glareAmbient: document.getElementById("glare-ambient")
@@ -3066,11 +3210,15 @@ function phonePhysicsLoop() {
   // Apply to DOM
   if (els.rig) {
     els.rig.style.transform = `translate3d(0, ${current.translateY.toFixed(1)}px, 0) rotateY(${current.rotY.toFixed(2)}deg) rotateX(${current.rotX.toFixed(2)}deg) rotateZ(${current.rotZ.toFixed(2)}deg) scale(${current.scale.toFixed(3)})`;
-    els.rig.style.opacity = current.opacity.toFixed(2);
+    // Opacity below 1 would flatten the chassis into a single surface.
+    els.rig.style.opacity = "1";
+    els.rig.style.setProperty("--glass-x", `${glare.current.highlightX.toFixed(1)}px`);
   }
 
   if (els.shadow) {
-    els.shadow.style.transform = `rotateX(85deg) translateZ(-40px) translateX(${shadow.current.x.toFixed(1)}px)`;
+    els.shadow.style.transform = els.shadow.classList.contains("preview-studio-shadow")
+      ? `translateX(${shadow.current.x.toFixed(1)}px)`
+      : `rotateX(85deg) translateZ(-40px) translateX(${shadow.current.x.toFixed(1)}px)`;
     els.shadow.style.opacity = shadow.current.opacity.toFixed(2);
     // On non-Android or desktop, adjust blur filter; on Android, radial gradient handles blur without expensive filter
     if (!PhonePhysics.isAndroid) {
@@ -3107,10 +3255,10 @@ function phonePhysicsSetMouseTarget(normX, normY) {
   const clampedY = Math.max(-0.55, Math.min(0.55, normY));
 
   // Phone rig target angles: realistic titanium hardware weight, controlled range
-  PhonePhysics.target.rotY = PhonePhysics.REST.rotY + (clampedX * 11);
-  PhonePhysics.target.rotX = PhonePhysics.REST.rotX - (clampedY * 9);
-  PhonePhysics.target.rotZ = PhonePhysics.REST.rotZ + (clampedX * 0.8);
-  PhonePhysics.target.scale = 1;
+  PhonePhysics.target.rotY = PhonePhysics.REST.rotY + (clampedX * 12);
+  PhonePhysics.target.rotX = PhonePhysics.REST.rotX - (clampedY * 6);
+  PhonePhysics.target.rotZ = PhonePhysics.REST.rotZ + (clampedX * 0.4);
+  PhonePhysics.target.scale = PhonePhysics.REST.scale;
   PhonePhysics.target.translateY = 0;
   PhonePhysics.target.opacity = 1;
 
@@ -3245,24 +3393,24 @@ function phonePhysicsDisableGyroscope() {
   }
 }
 
-// Navigate to next/previous template by array index (wraps at ends).
-function previewNext() {
-  if (previewState.currentIndex < 0) return;
-  const next = (previewState.currentIndex + 1) % TEMPLATE_DATABASE.length;
-  openPreview(TEMPLATE_DATABASE[next].id);
+// Browse within the active collection, wrapping at either end.
+function previewNavigate(direction) {
+  const item = TEMPLATE_DATABASE[previewState.currentIndex];
+  if (!item) return;
+  const collection = TEMPLATE_DATABASE.filter(template => template.tier === item.tier);
+  const position = collection.findIndex(template => template.id === item.id);
+  const next = (position + direction + collection.length) % collection.length;
+  openPreview(collection[next].id);
 }
-function previewPrev() {
-  if (previewState.currentIndex < 0) return;
-  const len = TEMPLATE_DATABASE.length;
-  const prev = (previewState.currentIndex - 1 + len) % len;
-  openPreview(TEMPLATE_DATABASE[prev].id);
-}
+function previewNext() { previewNavigate(1); }
+function previewPrev() { previewNavigate(-1); }
 
-// Jump modal to the first template of the given tier (modal stays open).
+// Return to the last design viewed in this collection during the session.
 function previewJumpTier(tier) {
-  if (!(tier in TIER_FIRST_INDEX)) return;
-  const firstIdx = TIER_FIRST_INDEX[tier];
-  openPreview(TEMPLATE_DATABASE[firstIdx].id);
+  const item = TEMPLATE_DATABASE.find(template => template.id === previewState.lastDesignByTier[tier] && template.tier === tier)
+    || TEMPLATE_DATABASE.find(template => template.tier === tier);
+  if (!item || TEMPLATE_DATABASE[previewState.currentIndex]?.id === item.id) return;
+  openPreview(item.id);
 }
 
 // "Ask on WhatsApp" for the currently previewed template (no payment yet).
@@ -3288,7 +3436,8 @@ function updatePreviewTierTabs(activeTier) {
     const tier = parseInt(tab.getAttribute("data-preview-tier"), 10);
     const isActive = tier === activeTier;
     tab.classList.toggle("is-active", isActive);
-    tab.setAttribute("aria-selected", isActive ? "true" : "false");
+    tab.setAttribute("aria-pressed", String(isActive));
+    if (isActive) tab.closest(".preview-collection-switcher")?.setAttribute("data-selected-tier", String(tier));
   });
 }
 
@@ -3382,9 +3531,9 @@ function updateTierLabels() {
 
 function updateHeaderCtaText() {
   const priceText = currentCurrency === "INR" ? "from ₹8,000" : "from $100";
-  const shortPriceText = currentCurrency === "INR" ? "Bespoke (₹8k) 💬" : "Bespoke ($100) 💬";
+  const shortPriceText = currentCurrency === "INR" ? "Bespoke (₹8k)" : "Bespoke ($100)";
   document.querySelectorAll(".header-cta").forEach(cta => {
-    cta.innerHTML = `<span class="cta-text-full">Bespoke Invitations (${priceText}) 💬</span><span class="cta-text-short">${shortPriceText}</span>`;
+    cta.innerHTML = `<span class="cta-text-full">Bespoke Invitations (${priceText})</span><span class="cta-text-short">${shortPriceText}</span>`;
     cta.title = `Bespoke invitations start at ₹8,000 ($100 USD)`;
   });
 }
@@ -3502,7 +3651,7 @@ function setupCatalogueHandlers() {
       // Dispatch public custom event so external listeners can react
       // without needing to know internal catalogue state.
       // Usage: document.addEventListener('filterTier', e => console.log(e.detail.tier));
-      const tierNames = { "0": "all", "1": "classic", "2": "premium", "3": "luxury", "4": "dearly" };
+      const tierNames = { "0": "all", "2": "premium", "3": "luxury", "4": "dearly" };
       document.dispatchEvent(new CustomEvent("filterTier", {
         bubbles: true,
         detail: { tier: tierNames[radio.value] ?? radio.value, value: radio.value }
@@ -3601,6 +3750,21 @@ function setupPreviewModal() {
     previewIframe.classList.add("is-loaded");
     previewLoader.classList.add("is-hidden");
     stopLoaderPulse();
+    // Pointer events inside a same-origin invitation do not bubble to the viewer.
+    // Listen without preventing any invitation click or scrolling gesture.
+    try {
+      const invitation = previewIframe.contentWindow;
+      invitation.document.addEventListener("pointermove", (event) => {
+        if (event.pointerType !== "mouse" || previewState.viewMode !== "3d" || PhonePhysics.reducedMotion) return;
+        phonePhysicsSetMouseTarget(event.clientX / invitation.innerWidth - 0.5,
+          event.clientY / invitation.innerHeight - 0.5);
+      }, { passive: true });
+      invitation.document.addEventListener("mouseleave", () => {
+        if (previewState.viewMode === "3d") phonePhysicsResetTarget();
+      }, { passive: true });
+    } catch (e) {
+      // External invitations retain the outer-frame tilt controls.
+    }
   });
 
   // Delegated close: any element with [data-preview-close] inside the modal
@@ -3614,6 +3778,7 @@ function setupPreviewModal() {
   // When interacting with the modal backdrop, scrim, or modal controls, don't let it scroll the underlying window.
   previewModal.addEventListener("touchmove", (e) => {
     if (!previewModal.classList.contains("is-open")) return;
+    if (e.target.closest(".preview-faq-list")) return;
     // Allow touch scrolling ONLY inside the phone iframe viewport
     if (e.target && (e.target.closest("#preview-modal-iframe-wrap") || e.target.closest(".phone-screen-viewport") || e.target.closest("#preview-modal-iframe"))) {
       return;
@@ -3626,6 +3791,7 @@ function setupPreviewModal() {
 
   previewModal.addEventListener("wheel", (e) => {
     if (!previewModal.classList.contains("is-open")) return;
+    if (e.target.closest(".preview-faq-list")) return;
     // If the wheel event is not directly inside the iframe wrap, cancel it to protect the background page
     if (e.target && (e.target.closest("#preview-modal-iframe-wrap") || e.target.closest(".phone-screen-viewport") || e.target.closest("#preview-modal-iframe"))) {
       return;
@@ -3648,6 +3814,18 @@ function setupPreviewModal() {
     tab.addEventListener("click", () => {
       const tier = parseInt(tab.getAttribute("data-preview-tier"), 10);
       previewJumpTier(tier);
+      tab.focus();
+    });
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      const availableTabs = Array.from(previewTierTabs).filter(button => !button.disabled);
+      const current = availableTabs.indexOf(tab);
+      if (current < 0 || !availableTabs.length) return;
+      event.preventDefault();
+      const next = event.key === "Home" ? 0
+        : event.key === "End" ? availableTabs.length - 1
+        : (current + (event.key === "ArrowRight" ? 1 : -1) + availableTabs.length) % availableTabs.length;
+      availableTabs[next].focus();
     });
   });
 
@@ -3655,17 +3833,30 @@ function setupPreviewModal() {
   window.addEventListener("resize", schedulePreviewScale, { passive: true });
   window.addEventListener("orientationchange", schedulePreviewScale, { passive: true });
 
-  // Escape key closes the modal, PayPal checkout, payment success, or FAQ popup
+  // Escape key closes the modal, order drawer, payment success, or FAQ popup
   document.addEventListener("keydown", (e) => {
+    const openFaq = document.querySelector("#preview-faq-backdrop.is-open");
+    if (openFaq && e.key === "Tab") {
+      const targets = openFaq.querySelectorAll("button, [tabindex='0']");
+      const first = targets[0];
+      const last = targets[targets.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
     if (e.key === "Escape") {
+      const orderDrawer = document.getElementById("order-drawer-modal");
+      if (orderDrawer && orderDrawer.classList.contains("is-open")) {
+        closeOrderDrawer();
+        return;
+      }
       const successModal = document.getElementById("payment-success-modal");
       if (successModal && successModal.classList.contains("is-open")) {
         closePaymentSuccess();
-        return;
-      }
-      const paypalModal = document.getElementById("paypal-checkout-modal");
-      if (paypalModal && paypalModal.classList.contains("is-open")) {
-        closePayPalCheckout();
         return;
       }
       const faqBackdrop = document.getElementById("preview-faq-backdrop");
@@ -3686,27 +3877,28 @@ function setupPreviewModal() {
   const stage = document.getElementById("preview-3d-stage");
   const rig = document.getElementById("preview-phone-3d-rig");
   if (stage && rig) {
+    const tiltSurface = rig.closest(".preview-device-row") || stage;
     // Cache DOM elements for the physics loop (avoid per-frame lookups)
     PhonePhysics.els = {
       stage: stage,
       rig: rig,
-      shadow: rig.querySelector(".phone-shadow-3d"),
+      shadow: rig.closest(".preview-device-row")?.querySelector(".preview-studio-shadow") || rig.querySelector(".phone-shadow-3d"),
       glareHighlight: document.getElementById("glare-highlight"),
       glareRim: document.getElementById("glare-rim"),
       glareAmbient: document.getElementById("glare-ambient")
     };
 
     // Mouse → set physics targets (NO direct DOM writes)
-    stage.addEventListener("mousemove", (e) => {
+    tiltSurface.addEventListener("mousemove", (e) => {
       if (!previewModal.classList.contains("is-open")) return;
       if (previewState.viewMode !== "3d") return;
-      const rect = stage.getBoundingClientRect();
+      const rect = tiltSurface.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5; // -0.5 to 0.5
       const y = (e.clientY - rect.top) / rect.height - 0.5;
       phonePhysicsSetMouseTarget(x, y);
     });
 
-    stage.addEventListener("mouseleave", () => {
+    tiltSurface.addEventListener("mouseleave", () => {
       if (previewState.viewMode === "3d") {
         phonePhysicsResetTarget();
       }
@@ -3963,7 +4155,7 @@ const WA_REVIEWS = [
     id: 1,
     file: "review-01",
     alt: "InviteStory WhatsApp review: I like your work. Thanks for all your support",
-    highlight: "“I like your work. Thanks for all your support ❤️”",
+    highlight: "“I like your work. Thanks for all your support ”",
     tag: "Priority Delivery"
   },
   {
@@ -3977,35 +4169,35 @@ const WA_REVIEWS = [
     id: 3,
     file: "review-03",
     alt: "InviteStory WhatsApp review: Updated. Thank you bro",
-    highlight: "“Updated ✅ Thank you bro... 🫶”",
+    highlight: "“Updated, thank you bro... ”",
     tag: "Quick Update"
   },
   {
     id: 4,
     file: "review-04",
     alt: "InviteStory WhatsApp review: Punam and Jagdish Wedding Invitation delivered",
-    highlight: "Punam & Jagdish Wedding · “Thank you ❤️”",
+    highlight: "Punam & Jagdish Wedding · “Thank you ”",
     tag: "Delivered & Approved"
   },
   {
     id: 5,
     file: "review-05",
     alt: "InviteStory WhatsApp review: Vibhore and Shalini Wedding Invitation delivered",
-    highlight: "Vibhore & Shalini Wedding · “All good thankyou 💖”",
+    highlight: "Vibhore & Shalini Wedding · “All good thankyou ”",
     tag: "Delivered & Approved"
   },
   {
     id: 6,
     file: "review-06",
     alt: "InviteStory WhatsApp review: Mene mom dad ko bhej diya woo check kar rahe hai Sir everyone like it",
-    highlight: "“Mene mom dad ko bhej diya... Sir everyone like it 😇”",
+    highlight: "“Mene mom dad ko bhej diya... Sir everyone like it ”",
     tag: "Family Approved"
   },
   {
     id: 7,
     file: "review-07",
     alt: "InviteStory WhatsApp review: Thank You Mam for making this invitation beautiful",
-    highlight: "“Thank You Mam for making this invitation beautiful 🥰”",
+    highlight: "“Thank You Mam for making this invitation beautiful ”",
     tag: "Delighted Bride"
   },
   {
@@ -4019,21 +4211,21 @@ const WA_REVIEWS = [
     id: 9,
     file: "review-09",
     alt: "InviteStory WhatsApp review: Thank you sir! I appreciate your work!",
-    highlight: "“Thank you sir! I appreciate your work! 🙏 ❤️”",
+    highlight: "“Thank you sir! I appreciate your work!  ”",
     tag: "Happy Couple"
   },
   {
     id: 10,
     file: "review-10",
     alt: "InviteStory WhatsApp review: Sumeet and Shikha Wedding Invitation delivered",
-    highlight: "Sumeet & Shikha Wedding · “Thanks bro ❤️”",
+    highlight: "Sumeet & Shikha Wedding · “Thanks bro ”",
     tag: "Delivered & Approved"
   },
   {
     id: 11,
     file: "review-11",
     alt: "InviteStory WhatsApp review: Can I share this right? Definitely bro",
-    highlight: "“Can I share this right? Definitely bro 😊”",
+    highlight: "“Can I share this right? Definitely bro ”",
     tag: "Verified Client"
   }
 ];
@@ -4231,7 +4423,7 @@ const FAQS = [
   },
   {
     q: "How long does customisation take?",
-    a: "Standard delivery is 48 hours. With the Express 24h add-on (₹299) we deliver within 24 hours. Timelines start once you've paid and sent all your details and photos on WhatsApp."
+    a: "Standard delivery is 48 hours. With the Express 24h add-on (₹499 / $9 USD) we deliver within 24 hours. Timelines start once you've paid and sent all your details and photos on WhatsApp."
   },
   {
     q: "How long is my invitation link live?",
@@ -4500,7 +4692,7 @@ function setupHeroDesignMarquee() {
 
   const cards = TEMPLATE_DATABASE.map((item, index) => {
     const image = item.image || `assets/preview/${index + 1}.png`;
-    const tier = item.tier === 1 ? "Classic" : item.tier === 2 ? "Premium" : item.tier === 4 ? "Dearly" : "Luxury";
+    const tier = item.tier === 4 ? "Dearly" : item.tier === 3 ? "Luxury" : "Premium";
     return `<button type="button" class="hero-design-card" data-hero-design-id="${item.id}" aria-label="Preview ${item.name}">
       <span class="hero-design-media"><img src="${image}" alt="${item.name} wedding invitation design" loading="lazy" decoding="async"><span class="hero-design-preview">Preview →</span></span>
       <span class="hero-design-footer"><span class="hero-design-tier">${tier}</span><span class="hero-design-name">${item.name}</span></span>
@@ -4656,7 +4848,7 @@ function setupScratchReveal() {
     ctx.textBaseline = "middle";
     ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
     ctx.shadowOffsetY = 1;
-    ctx.fillText("✨ SCRATCH TO REVEAL ✨", rect.width / 2, rect.height / 2);
+    ctx.fillText("SCRATCH TO REVEAL", rect.width / 2, rect.height / 2);
     ctx.restore();
   }
 

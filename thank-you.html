@@ -62,7 +62,7 @@
 <body>
   <main class="ty-wrap">
     <div class="ty-card">
-      <div class="ty-check" aria-hidden="true">✅</div>
+      <div class="ty-check" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h1>Payment received!</h1>
       <p>Your slot is reserved. This page is your receipt — even if you never opened WhatsApp, your order details below are enough for us to find your payment.</p>
       <dl class="ty-receipt">
@@ -72,9 +72,9 @@
         <div><dt>Design</dt><dd id="ty-design">—</dd></div>
       </dl>
       <div class="ty-steps">
-        <div>1️⃣ Tap below to open WhatsApp with your payment details pre-filled.</div>
-        <div>2️⃣ Send names, dates, photos &amp; venue (we reply with a short checklist).</div>
-        <div>3️⃣ Delivered within 48 hours after payment and receipt of all required details.</div>
+        <div><strong>1.</strong> Tap below to open WhatsApp with your payment details pre-filled.</div>
+        <div><strong>2.</strong> Send names, dates, photos &amp; venue (we reply with a short checklist).</div>
+        <div><strong>3.</strong> Delivered within 48 hours after payment and receipt of all required details.</div>
       </div>
       <a href="https://wa.me/918281583882" id="ty-wa-btn" target="_blank" rel="noopener" class="ty-wa">Send details on WhatsApp →</a>
       <a href="index.html#pricing" class="ty-back">← Back to packages</a>
@@ -111,7 +111,7 @@
       var refLine = (utmSource || utmCampaign || utmTerm)
         ? "\nRef: " + (utmSource || "ads") + (utmCampaign ? " / " + utmCampaign : "") + (utmTerm ? " / " + utmTerm : "")
         : "";
-      var msg = "Hi InviteStory! ✅ Paid for " + pkg + " (" + amountStr + ").\nPayment ID: " + pid + designLine + refLine + "\nI'll send names, dates, photos, venue next.";
+      var msg = "Hi InviteStory! Paid for " + pkg + " (" + amountStr + ").\nPayment ID: " + pid + designLine + refLine + "\nI'll send names, dates, photos, venue next.";
       var waBtn = document.getElementById("ty-wa-btn");
       waBtn.href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
 
@@ -137,10 +137,10 @@
           sessionStorage.setItem(storageKey, "1");
 
           // Parse numeric amount
-          var numericAmount = 999;
+          var numericAmount = 1999;
           var numMatch = amountStr.match(/[\d,.]+/);
           if (numMatch) {
-            numericAmount = parseFloat(numMatch[0].replace(/,/g, "")) || 999;
+            numericAmount = parseFloat(numMatch[0].replace(/,/g, "")) || 1999;
           }
           var currency = amountStr.indexOf("$") !== -1 ? "USD" : "INR";
 
