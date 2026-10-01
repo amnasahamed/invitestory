@@ -10689,11 +10689,27 @@ a.template-card-wa-link {
   border: 1px solid #58544e; box-shadow: inset 0 1px 0 #f2ebe1;
 }
 #preview-modal .preview-chassis-volume {
-  left: -18px; top: 22%; height: 12%; transform: rotateY(90deg);
+  left: -18px; top: 22%; height: 5%; transform: rotateY(90deg);
 }
+#preview-modal .preview-chassis-volume-lower { top: 29%; }
 #preview-modal .preview-chassis-power {
   right: -18px; top: 26%; height: 9%; transform: rotateY(90deg);
 }
+/* Slim hardware details sit outside the screen and turn with the device. */
+#preview-modal .preview-gallery-device:not(.is-3d-mode) .preview-chassis-button {
+  display: block;
+  position: absolute;
+  width: 3px;
+  border: 1px solid #646168;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #77747b, #b6b3b8);
+  box-shadow: inset 0 1px 0 #d4d1d6, 0 1px 2px rgba(24,20,27,.18);
+  transform: none;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+#preview-modal .preview-gallery-device:not(.is-3d-mode) .preview-chassis-volume { left: -10px; }
+#preview-modal .preview-gallery-device:not(.is-3d-mode) .preview-chassis-power { right: -10px; }
 #preview-modal .preview-device-row:has(.is-3d-mode) .preview-studio-shadow {
   display: block; position: absolute; bottom: -18px; left: 20%; width: 60%; height: 46px;
   background: radial-gradient(ellipse, rgba(66,47,29,.27), rgba(66,47,29,.08) 48%, transparent 72%);
