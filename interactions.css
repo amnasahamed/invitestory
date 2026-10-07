@@ -52,6 +52,12 @@
 .interaction-preview-poster > img { width:100%; height:100%; object-fit:cover; object-position:top; }
 .interaction-preview-poster > div { position:absolute; bottom:20px; left:20px; right:20px; background:#fffffff2; padding:14px; border-radius:14px; color:#222; font:400 13px/1.5 var(--font-body); }
 .interaction-preview-poster p { margin:0; }
+.interaction-preview-poster .interaction-preview-loading-label { display:block; margin-bottom:8px; font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; }
+.interaction-preview-poster blockquote { margin:0 0 12px; font:500 clamp(18px,5vw,25px)/1.35 var(--font-heading,var(--font-body)); }
+.interaction-preview-loading-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.interaction-preview-loading-actions:has(button[hidden]):has(a[hidden]) { display:none; }
+.interaction-preview-loading-actions [hidden] { display:none; }
+.interaction-preview-loading-actions a { display:inline-flex; align-items:center; text-decoration:none; }
 @media(prefers-reduced-motion:reduce) { .interaction-preview-poster { transition:none; } }
 .interaction-demo-controls { display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; margin:6px 0; }
 .interaction-demo-controls[hidden] { display:none; }

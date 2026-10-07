@@ -200,7 +200,13 @@ const InviteInteractions = (() => {
     if(wasSaved) notify(`${item.name} removed`,()=>toggleSavedDesign(id),'Undo');
     else {if(!reduced())document.querySelector(`#template-card-${id} .sales-save-design`)?.animate([{transform:'scale(.85)'},{transform:'scale(1.1)'},{transform:'scale(1)'}],{duration:220});notify(`${item.name} saved`,openShortlist,'View');}
   }
-  let previewOrigin=null, posterTimer, poster, previewItem=null;
+  let previewOrigin=null, posterTimer, posterReadyTimer, poster, previewItem=null, previewLoadVersion=0;
+  const previewQuotes = [
+    'Every beautiful celebration begins with an invitation.',
+    'Two hearts. A thousand memories. One beautiful beginning.',
+    'A little glimpse of the day you will remember forever.',
+    'Your story deserves a beautiful beginning.'
+  ];
   const localDearly = {35:'aubergine-magnolia',36:'cinnamon-camellia',37:'cobalt-iris',38:'petrol-dahlia'};
   function demoURL(item){return localDearly[item.id] ? `dearly/${localDearly[item.id]}/?studio-preview=1` : (item.localDemoUrl || item.demoUrl);}
   function demoAPI(){try{return document.getElementById('preview-modal-iframe').contentWindow.InvitationPreview;}catch{return null;}}
@@ -230,6 +236,8 @@ const InviteInteractions = (() => {
   function afterPreview(item) {
     if(!document.body.classList.contains('browse-home') || !poster) return;
     previewItem=item;
+    previewLoadVersion++;
+    clearTimeout(posterReadyTimer);
     if(explore){explore.hidden=true;explore.open=false;}
     if(paletteTools){paletteTools.hidden=!localDearly[item.id];paletteTools.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.previewPalette)===item.id)));}
     if(chapters){chapters.hidden=!localDearly[item.id];chapters.querySelectorAll('button').forEach(button=>{button.disabled=true;button.setAttribute('aria-pressed',String(button.dataset.chapter==='opening'));});}
@@ -237,14 +245,19 @@ const InviteInteractions = (() => {
     poster.querySelector('img').src=item.image;
     if(!reduced())poster.querySelector('img').animate([{opacity:.5},{opacity:1}],{duration:180});
     poster.hidden=false;poster.classList.remove('is-ready');
-    poster.querySelector('p').textContent='Opening the live invitation…';
+    poster.querySelector('blockquote').textContent=previewQuotes[item.id % previewQuotes.length];
+    poster.querySelector('p').textContent='Preparing your invitation preview…';
+    poster.querySelector('a').href=item.demoUrl;
+    poster.querySelector('a').hidden=true;
     poster.querySelector('button').hidden=true;
     clearTimeout(posterTimer);
-    posterTimer=setTimeout(()=>{if(!poster.hidden && !poster.classList.contains('is-ready')){poster.querySelector('p').textContent='Taking a little longer. You can retry or open the full demo.';poster.querySelector('button').hidden=false;}},8000);
+    posterTimer=setTimeout(()=>{if(!poster.hidden && !poster.classList.contains('is-ready')){poster.querySelector('p').textContent='Taking a little longer. Retry, or open the full demo.';poster.querySelector('button').hidden=false;poster.querySelector('a').hidden=false;}},8000);
     requestAnimationFrame(()=>{if(previewOrigin?.id===item.id) artworkTransition(previewOrigin.rect,poster.getBoundingClientRect(),item.image);});
   }
   function beforePreviewClose() {
     clearTimeout(posterTimer);
+    clearTimeout(posterReadyTimer);
+    previewLoadVersion++;
     if(previewOrigin){const origin=document.querySelector(`#template-card-${previewOrigin.id} .template-card-img`);if(origin)previewState.savedScrollY=Math.max(0,origin.getBoundingClientRect().top+window.scrollY-previewOrigin.rect.top);}
     if(previewOrigin && previewItem && poster) {
       const target=document.querySelector(`#template-card-${previewOrigin.id} .template-card-img`);
@@ -361,7 +374,7 @@ const InviteInteractions = (() => {
     savedButton=document.createElement('button');savedButton.type='button';savedButton.className='interaction-secondary';savedButton.addEventListener('click',openShortlist);actions.appendChild(savedButton);updateSavedButton();
     feedback=document.createElement('div');feedback.className='interaction-feedback';feedback.hidden=true;feedback.setAttribute('role','status');document.body.appendChild(feedback);
     poster=document.createElement('div');poster.className='interaction-preview-poster';poster.hidden=true;
-    poster.innerHTML='<img alt="Invitation artwork while the live demo loads"><div><p role="status"></p><button type="button" class="interaction-secondary" hidden>Retry preview</button></div>';
+    poster.innerHTML='<img alt=""><div><span class="interaction-preview-loading-label">A moment before forever</span><blockquote></blockquote><p role="status"></p><div class="interaction-preview-loading-actions"><button type="button" class="interaction-secondary" hidden>Retry preview</button><a class="interaction-secondary" target="_blank" rel="noopener" hidden>Open full demo ↗</a></div></div>';
     document.getElementById('phone-screen-viewport').appendChild(poster);
     poster.querySelector('button').addEventListener('click',()=>{if(previewItem){document.getElementById('preview-modal-iframe').src=demoURL(previewItem);afterPreview(previewItem);}});
     demoTools=document.createElement('div');demoTools.className='interaction-demo-controls';demoTools.hidden=true;
@@ -378,12 +391,31 @@ const InviteInteractions = (() => {
     paletteTools.addEventListener('click',event=>{const choice=event.target.closest('[data-preview-palette]');if(choice && Number(choice.dataset.previewPalette)!==previewItem?.id)openPreview(Number(choice.dataset.previewPalette));});
     demoTools.addEventListener('click',event=>{const button=event.target.closest('[data-demo-action]');if(!button)return;const wasOpened=Boolean(demoAPI()?.state().opened);demoAction(button.dataset.demoAction);if(button.dataset.demoAction!=='sound'){const chapter=button.dataset.demoAction==='open' && wasOpened?'invitation':'opening';chapters.querySelectorAll('button').forEach(choice=>choice.setAttribute('aria-pressed',String(choice.dataset.chapter===chapter)));explore.open=false;document.getElementById('guest-chapter-status').textContent=`Guest view · ${chapter==='opening'?1:2} of 4`;explore.querySelector('summary').textContent=button.dataset.demoAction==='replay'?'Playing the opening':'Explore this invitation';schedulePreviewScale();}if(button.dataset.demoAction==='sound')setTimeout(()=>{button.textContent=demoAPI()?.state().sound?'Sound on':'Sound off';button.setAttribute('aria-pressed',String(Boolean(demoAPI()?.state().sound)));},150);});
     document.getElementById('preview-modal-iframe').addEventListener('load',()=>{
-
       if(!previewItem) return;
-      if(demoTools)demoTools.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
-      if(chapters)chapters.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
-      clearTimeout(posterTimer);poster.classList.add('is-ready');
-      setTimeout(()=>{if(poster.classList.contains('is-ready'))poster.hidden=true;},reduced()?0:180);
+      const version=previewLoadVersion, frame=document.getElementById('preview-modal-iframe');
+      clearTimeout(posterReadyTimer);
+      function revealWhenReady(){
+        if(version!==previewLoadVersion || !previewItem)return;
+        try {
+          const doc=frame.contentDocument;
+          const expected=new URL(demoURL(previewItem),location.href);
+          // Ignore about:blank and stale loads when browsing quickly. Wait for
+          // rendered content and visible artwork, rather than just iframe load.
+          if(!doc || doc.location.pathname!==expected.pathname)return;
+          const text=doc.body?.innerText.trim()||'';
+          const visibleImages=[...doc.images].filter(image=>{const rect=image.getBoundingClientRect();return rect.width>0 && rect.height>0 && rect.top<frame.clientHeight && rect.bottom>0 && image.getAttribute('loading')!=='lazy';});
+          const rendered=text.length>10 || visibleImages.some(image=>image.complete && image.naturalWidth>0);
+          if(!rendered || /^(404\b|Not Found\b)/i.test(text) || visibleImages.some(image=>!image.complete || !image.naturalWidth)){
+            if(!poster.querySelector('button').hidden)return;
+            posterReadyTimer=setTimeout(revealWhenReady,100);return;
+          }
+        } catch { /* External fallback demos use their load event. */ }
+        if(demoTools)demoTools.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
+        if(chapters)chapters.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
+        clearTimeout(posterTimer);poster.classList.add('is-ready');
+        posterReadyTimer=setTimeout(()=>{if(version===previewLoadVersion)poster.hidden=true;},reduced()?0:180);
+      }
+      posterReadyTimer=setTimeout(revealWhenReady,0);
     });
     const sharedCurrency=new URLSearchParams(location.search).get('currency');
     if(sharedCurrency==='INR' || sharedCurrency==='USD')document.getElementById(`currency-${sharedCurrency.toLowerCase()}`).click();
