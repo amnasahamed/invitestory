@@ -15,7 +15,7 @@ function website() {
     getElementById: id => elements.get(id) ?? null,
     querySelector: selector => elements.get(selector) ?? null, querySelectorAll: selector => Array.isArray(elements.get(selector)) ? elements.get(selector) : [], addEventListener() {},
   };
-  const window = { location, open() {}, matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
+  const window = { location, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
   const context = vm.createContext({ document, window, location, history: window.history, navigator: { userAgent: 'test', maxTouchPoints: 0 }, localStorage: store, sessionStorage: store, URL, URLSearchParams, console, setTimeout, clearTimeout, queueMicrotask });
   vm.runInContext(readFileSync(new URL('../scripts.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../sales.js', import.meta.url), 'utf8'), context);
@@ -86,7 +86,7 @@ test('retargeting retains design IDs and separates viewing an order from startin
 
 test('a catalogue WhatsApp enquiry records Contact without starting a checkout', () => {
   const site = website();
-  site.run('orderCustomTemplate(21)');
+  site.run('askTemplateOnWhatsApp(21)');
   assert.equal(site.calls.some(call => call[0] === 'meta' && call[2] === 'Contact'), true);
   assert.equal(site.calls.some(call => call[0] === 'meta' && call[2] === 'InitiateCheckout'), false);
   assert.equal(site.calls.some(call => call[0] === 'meta' && call[2] === 'Purchase'), false);
@@ -189,8 +189,10 @@ test('Dearly showroom uses its checkout USD price and retired ₹299 extras neve
   site.run("currentCurrency = 'INR'");
   site.elements.set('addon-lang-1',{checked:true});
   assert.equal(site.run('ADDONS.lang'),undefined);
-  assert.match(site.run('buildWhatsAppMessage(1,true)'),/₹1,999/);
-  assert.doesNotMatch(site.run('buildWhatsAppMessage(1,true)'),/Multi-Language|Extra Event|₹299/);
+  site.run('askTemplateOnWhatsApp(1)');
+  const message=new URL(site.calls.find(call=>call[0]==='open')[1]).searchParams.get('text');
+  assert.match(message,/₹1,999/);
+  assert.doesNotMatch(message,/Multi-Language|Extra Event|₹299/);
 });
 
 

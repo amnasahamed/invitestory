@@ -1,41 +1,11 @@
-/**
- * InviteStory Simple Catalogue Directory
- * Features: INR/USD Currency Toggle, Accordion Detail Expanders, Live Add-ons Price Calculator, and WhatsApp Order URL Generators.
- */
+/* Catalogue, invitation previews, booking and payment flow. */
   const askIcon = `<img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true">`;
 // --- PAYMENT CONFIGURATION ---
 window.RAZORPAY_KEY_ID = "rzp_live_TPCjiGiPIeo7SN";
 
-// --- POST-PAYMENT NOTIFICATIONS (Razorpay webhook → notify yourself) ---
-// This is a static site, so Razorpay cannot POST to it. To get notified on
-// every payment with package + payment id, set this up once in the Razorpay
-// Dashboard → Settings → Webhooks → Add webhook for `payment.captured`:
-//   Option A (no code): webhook URL = a Zapier/Make webhook → sends you an
-//     email + WhatsApp (via Interakt/WATI/Gupshup) with payment + notes.
-//   Option B (code): deploy one serverless endpoint that verifies the webhook
-//     signature (RAZORPAY_WEBHOOK_SECRET) and forwards package/payment id to
-//     your email + WhatsApp. The `notes` we send (package, design_name,
-//     express_12h) arrive in the webhook payload automatically.
-window.RAZORPAY_WEBHOOK_SECRET = ""; // set only on a server, never in frontend code
-
-const PROMO_CONFIG = {
-  active: false,
-  name: "Independence Day Special",
-  promoPriceINR: 815,
-  promoPriceUSD: 10,
-  // Fixed campaign end deadline: August 15, 2026 at 23:59:59 IST
-  endsAt: new Date("2026-08-15T23:59:59+05:30").getTime()
-};
+// Payment notifications belong in a server-side Razorpay payment.captured webhook.
 
 function getItemPrices(item) {
-  if (PROMO_CONFIG.active && item.tier !== 4) {
-    return {
-      priceINR: PROMO_CONFIG.promoPriceINR,
-      priceUSD: PROMO_CONFIG.promoPriceUSD,
-      originalPriceINR: item.originalPriceINR || (item.tier === 2 ? 1999 : item.tier === 3 ? 2999 : 4999),
-      originalPriceUSD: item.originalPriceUSD || (item.tier === 2 ? 29 : item.tier === 3 ? 45 : 75)
-    };
-  }
   return {
     priceINR: item.priceINR,
     priceUSD: item.priceUSD,
@@ -100,25 +70,6 @@ function getAttributionNotes() {
   if (p.gbraid) notes.gbraid = p.gbraid.slice(0, 50);
   if (p.wbraid) notes.wbraid = p.wbraid.slice(0, 50);
   return notes;
-}
-
-/**
- * Builds URL query string containing all active attribution parameters
- */
-function buildAttributionQueryString() {
-  const p = getUtmCampaignParams();
-  const sp = new URLSearchParams();
-  if (p.utmSource) sp.set("utm_source", p.utmSource);
-  if (p.utmMedium) sp.set("utm_medium", p.utmMedium);
-  if (p.utmCampaign) sp.set("utm_campaign", p.utmCampaign);
-  if (p.utmTerm) sp.set("utm_term", p.utmTerm);
-  if (p.utmContent) sp.set("utm_content", p.utmContent);
-  if (p.utmId) sp.set("utm_id", p.utmId);
-  if (p.gclid) sp.set("gclid", p.gclid);
-  if (p.gbraid) sp.set("gbraid", p.gbraid);
-  if (p.wbraid) sp.set("wbraid", p.wbraid);
-  const str = sp.toString();
-  return str ? "&" + str : "";
 }
 
 // Run on load
@@ -869,8 +820,6 @@ const searchInput = document.getElementById("search-input");
 const clearSearchBtn = document.getElementById("clear-search-btn");
 const filterTagsContainer = document.getElementById("filter-tags");
 
-// Tier radio group (glass-morphism) — maps tier id (0/2/3/4) to its input id
-const TIER_RADIO_IDS = { 0: "glass-all", 2: "glass-premium", 3: "glass-luxury", 4: "glass-dearly" };
 const tierRadios = document.querySelectorAll("#tier-radio-group input[type=radio]");
 const tierRadioByValue = {};
 tierRadios.forEach(r => { tierRadioByValue[r.value] = r; });
@@ -888,8 +837,7 @@ const pricingSection = document.querySelector(".pricing-section");
 // Addon Prices definition
 const ADDONS = {
   emailRsvp: { name: "Email RSVP", priceINR: 2000, priceUSD: 24 },
-  express: { name: "Express 24h Delivery", priceINR: 799, priceUSD: 9 },
-  domain: { name: "Custom Domain (.in / .com)", priceINR: 999, priceUSD: 12 }
+  express: { name: "Express 24h Delivery", priceINR: 799, priceUSD: 9 }
 };
 
 // --- Package-level UPI-first checkout (Premium / Luxury / Dearly) ---
@@ -923,12 +871,6 @@ function packageAmountText(tier, total) {
 }
 
 // --- Preview Modal state & DOM refs ---
-// Dynamic first template array-index for each tier
-const TIER_FIRST_INDEX = {
-  2: TEMPLATE_DATABASE.findIndex(t => t.tier === 2),
-  3: TEMPLATE_DATABASE.findIndex(t => t.tier === 3),
-  4: TEMPLATE_DATABASE.findIndex(t => t.tier === 4)
-};
 
 // Automatically generate clean URL slugs for every template in database
 TEMPLATE_DATABASE.forEach(item => {
@@ -937,8 +879,8 @@ TEMPLATE_DATABASE.forEach(item => {
   }
 });
 
-const previewState = { 
-  currentIndex: -1, 
+const previewState = {
+  currentIndex: -1,
   lastDesignByTier: {},
   lastFocusedElement: null,
   viewMode: "flat" // "3d" or "flat"
@@ -1011,12 +953,11 @@ const previewHomeBtn    = document.getElementById("preview-home-btn");
 const previewBuyBtn     = document.getElementById("preview-buy-btn");
 const previewAmbientGlow   = document.getElementById("preview-modal-ambient-glow");
 const previewModalPrice    = document.getElementById("preview-modal-price");
-const previewModalOrigPrice= document.getElementById("preview-modal-orig-price");
+
 const previewFullscreenBtn = document.getElementById("preview-fullscreen-btn");
 const previewCounterBadge  = document.getElementById("preview-counter-badge");
 const previewSidePrev      = document.getElementById("preview-side-prev");
 const previewSideNext      = document.getElementById("preview-side-next");
-const previewPatternCanvas = document.getElementById("preview-pattern-canvas");
 
 // --- Helper Functions ---
 function getCurrencySymbol() {
@@ -1039,10 +980,6 @@ function hexToRgba(hex, alpha = 0.4) {
   const g = (num >> 8) & 255;
   const b = num & 255;
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-function tierEmoji(tier) {
-  return "";
 }
 
 // --- Distinct Luxury Pattern Engine for Preview Stage ---
@@ -1100,7 +1037,7 @@ const LUXURY_PATTERNS = {
 function getTemplatePatternKey(item) {
   if (item.tier === 4 || item.collection === "dearly") return "dearly";
   const str = `${item.name} ${item.style || ""} ${(item.tags || []).join(" ")} ${item.slug || ""}`.toLowerCase();
-  
+
   if (/ghibli|anime|whimsical|fantasy|fairy/.test(str)) return "whimsical";
   if (/beach|sea|ocean|coastal|seashell|goa|water/.test(str)) return "waves";
   if (/nikah|emerald|islamic|noor|desert/.test(str)) return "arabesque";
@@ -1124,7 +1061,7 @@ function applyTemplateLuxuryPattern(item) {
   const key = getTemplatePatternKey(item);
   const generator = LUXURY_PATTERNS[key] || LUXURY_PATTERNS.jali;
   const accent = item.accentColor || "#c09559";
-  
+
   const patternData = generator(accent);
   const encodedSvg = encodeURIComponent(patternData.svg);
   const dataUri = `url("data:image/svg+xml,${encodedSvg}")`;
@@ -1288,30 +1225,6 @@ function selectTier(tierNum, smoothScroll = false) {
   }
 }
 
-function getGeomSvg(tier) {
-  if (tier === 2) {
-    // Interlocking Rhombus
-    return `<svg class="geom-svg" viewBox="0 0 24 24">
-      <path d="M12 3l7 8-7 8-7-8z" stroke="currentColor" stroke-width="0.8" />
-      <path d="M12 6l4.5 5.5-4.5 5.5-4.5-5.5z" stroke="currentColor" stroke-width="0.5" stroke-dasharray="1 1" />
-    </svg>`;
-  } else if (tier === 3) {
-    // Cinematic star with radial dashlines and central core
-    return `<svg class="geom-svg" viewBox="0 0 24 24">
-      <path d="M12 2l2.4 6.9h7.2l-5.8 4.2 2.2 6.9-6-4.4-6 4.4 2.2-6.9-5.8-4.2h7.2z" stroke="currentColor" stroke-width="0.7" fill="none" />
-      <circle cx="12" cy="12" r="2.5" stroke="currentColor" stroke-width="0.5" />
-      <line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 2" />
-      <line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="0.3" stroke-dasharray="1 2" />
-    </svg>`;
-  } else {
-    // Dearly Botanical Wax Seal crest
-    return `<svg class="geom-svg" viewBox="0 0 24 24">
-      <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="0.8" />
-      <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="0.5" />
-    </svg>`;
-  }
-}
-
 // Dynamically sync floating bottom navigation counts with current TEMPLATE_DATABASE
 function updateTierNavCounts() {
   const allCount = TEMPLATE_DATABASE.length;
@@ -1335,14 +1248,14 @@ function updateTierNavCounts() {
 function renderCatalogue() {
   if (!templatesGrid) return;
   updateTierNavCounts();
-  
+
   let filtered = TEMPLATE_DATABASE.filter(item => {
     if (activeTierFilter !== 0 && item.tier !== activeTierFilter) return false;
     if (activeTagFilter !== "all" && !item.tags.includes(activeTagFilter)) return false;
     if (searchQuery.trim() !== "") {
       const q = searchQuery.toLowerCase();
-      return item.name.toLowerCase().includes(q) || 
-             item.style.toLowerCase().includes(q) || 
+      return item.name.toLowerCase().includes(q) ||
+             item.style.toLowerCase().includes(q) ||
              item.desc.toLowerCase().includes(q) ||
              item.tags.some(tag => tag.includes(q));
     }
@@ -1350,9 +1263,9 @@ function renderCatalogue() {
   });
   if (typeof getDiscoveryDesigns === "function") filtered = getDiscoveryDesigns(filtered);
   if (typeof renderDiscoveryStatus === "function") renderDiscoveryStatus(filtered.length);
-  
+
   templatesGrid.innerHTML = "";
-  
+
   if (filtered.length === 0) {
     templatesGrid.innerHTML = `
       <div class="no-results">
@@ -1372,14 +1285,14 @@ function renderCatalogue() {
     renderMatchDeck(filtered);
     return;
   }
-  
+
   filtered.forEach(item => {
     const tierName = item.tier === 4 ? "Dearly Exclusive" : item.tier === 3 ? "Luxury" : "Premium";
     const tierIcon = "";
-    
+
     const prices = getItemPrices(item);
     const priceText = formatPrice(prices.priceINR, prices.priceUSD);
-    
+
     const card = document.createElement("div");
     card.className = `template-card tier-card-${item.tier}`;
     card.id = `template-card-${item.id}`;
@@ -1536,286 +1449,6 @@ function bindMatchDeck(deck) {
   current.tabIndex = 0;
 }
 
-// Toggle Row Expand — GSAP Flip animates between collapsed/expanded states
-function toggleAccordion(id) {
-  const card = document.getElementById(`template-card-${id}`);
-  if (!card) return;
-
-  const willExpand = !card.classList.contains("expanded");
-  if (willExpand) {
-    const item = TEMPLATE_DATABASE.find(x => x.id === id);
-    if (item) {
-      const prices = getItemPrices(item);
-      trackMetaEvent("ViewContent", {
-        content_name: item.name,
-        content_ids: [String(item.id)],
-        content_type: "product",
-        content_category: item.style || "Digital Wedding Invitation",
-        value: currentCurrency === "INR" ? prices.priceINR : prices.priceUSD,
-        currency: currentCurrency
-      });
-    }
-  }
-
-  if (typeof gsap === "undefined" || typeof Flip === "undefined") {
-    card.classList.toggle("expanded");
-    return;
-  }
-
-  const state = Flip.getState(card.querySelectorAll(
-    ".template-info, .template-details-expanded, .template-actions, .expand-icon"
-  ));
-
-  card.classList.toggle("expanded");
-
-  Flip.from(state, {
-    duration: 0.5,
-    ease: "power2.inOut",
-    absolute: true,
-    nested: true,
-    onComplete: () => Flip.cleanup()
-  });
-}
-
-// Live recalculate checkboxes
-function recalculatePrice(id) {
-  const item = TEMPLATE_DATABASE.find(x => x.id === id);
-  if (!item) return;
-  
-  const expressChecked = document.getElementById(`addon-express-${id}`).checked;
-  const domainChecked = document.getElementById(`addon-domain-${id}`).checked;
-  
-  const prices = getItemPrices(item);
-  let totalINR = prices.priceINR;
-  let totalUSD = prices.priceUSD;
-  
-  if (expressChecked) {
-    totalINR += ADDONS.express.priceINR;
-    totalUSD += ADDONS.express.priceUSD;
-  }
-  if (domainChecked) {
-    totalINR += ADDONS.domain.priceINR;
-    totalUSD += ADDONS.domain.priceUSD;
-  }
-  
-  // Update UI total text
-  const totalDisplay = document.getElementById(`total-price-${id}`);
-  if (totalDisplay) {
-    totalDisplay.innerText = formatPrice(totalINR, totalUSD);
-  }
-}
-
-// Build the WhatsApp order message for a given template id.
-function buildWhatsAppMessage(id, includeAddons) {
-  const item = TEMPLATE_DATABASE.find(x => x.id === id);
-  if (!item) return "";
-
-  const prices = getItemPrices(item);
-  const basePriceText = formatPrice(prices.priceINR, prices.priceUSD);
-  let checkedAddons = [];
-  let totalINR = prices.priceINR;
-  let totalUSD = prices.priceUSD;
-
-  if (includeAddons) {
-    const expressChecked = document.getElementById(`addon-express-${id}`);
-    const domainChecked  = document.getElementById(`addon-domain-${id}`);
-
-    if (expressChecked && expressChecked.checked) {
-      checkedAddons.push(`${ADDONS.express.name} (+${formatPrice(ADDONS.express.priceINR, ADDONS.express.priceUSD)})`);
-      totalINR += ADDONS.express.priceINR;
-      totalUSD += ADDONS.express.priceUSD;
-    }
-    if (domainChecked && domainChecked.checked) {
-      checkedAddons.push(`${ADDONS.domain.name} (+${formatPrice(ADDONS.domain.priceINR, ADDONS.domain.priceUSD)})`);
-      totalINR += ADDONS.domain.priceINR;
-      totalUSD += ADDONS.domain.priceUSD;
-    }
-  }
-
-  const totalPriceText = formatPrice(totalINR, totalUSD);
-  const originalPriceText = formatPrice(prices.originalPriceINR, prices.originalPriceUSD);
-  const saveINR = prices.originalPriceINR - prices.priceINR;
-  const saveUSD = prices.originalPriceUSD - prices.priceUSD;
-  const saveText = currentCurrency === "INR"
-    ? `${getCurrencySymbol()}${saveINR.toLocaleString("en-IN")}`
-    : `${getCurrencySymbol()}${saveUSD}`;
-
-  const tierName = item.tier === 4 ? "Dearly Exclusive" : item.tier === 3 ? "Luxury" : "Premium";
-
-  let message = PROMO_CONFIG.active
-    ? `*Hi InviteStory!* I would like to order *${item.name}* under the Independence Day Offer (Flat ₹815)!\n\n`
-    : `*Hi InviteStory!* I would like to order the *${item.name}* invitation card.\n\n`;
-
-  message += `*Design:* ${item.name} (${tierName} Tier)\n`;
-  message += `*Total Price:* ${totalPriceText}`;
-
-  if (checkedAddons.length > 0) {
-    message += `\n*Add-ons:* ${checkedAddons.join(", ")}`;
-  }
-
-  message += `\n\nPlease let me know the next steps to share our event details & photos!`;
-
-  const { utmSource, utmCampaign } = getUtmCampaignParams();
-  if (utmSource || utmCampaign) {
-    message += `\n\n_Ref: ${utmSource || 'ads'}${utmCampaign ? ' / ' + utmCampaign : ''}_`;
-  }
-
-  return message;
-}
-
-// WhatsApp redirect trigger compile
-function orderCustomTemplate(id) {
-  const item = TEMPLATE_DATABASE.find(x => x.id === id);
-  if (item) {
-    const expressChecked = document.getElementById(`addon-express-${id}`)?.checked;
-    const domainChecked  = document.getElementById(`addon-domain-${id}`)?.checked;
-
-    const prices = getItemPrices(item);
-    let totalVal = currentCurrency === "INR" ? prices.priceINR : prices.priceUSD;
-    if (expressChecked) totalVal += (currentCurrency === "INR" ? ADDONS.express.priceINR : ADDONS.express.priceUSD);
-    if (domainChecked)  totalVal += (currentCurrency === "INR" ? ADDONS.domain.priceINR : ADDONS.domain.priceUSD);
-
-    trackConversionEvent("whatsapp_click", {
-      content_name: item.name,
-      content_ids: [String(item.id)],
-      content_type: "product",
-      content_category: item.style || "Digital Wedding Invitation",
-      value: totalVal,
-      currency: currentCurrency,
-      location: "catalogue_design",
-      num_items: 1
-    });
-  }
-
-  const message = buildWhatsAppMessage(id, /* includeAddons */ true);
-  window.open(`https://wa.me/918281583882?text=${encodeURIComponent(message)}`, "_blank");
-}
-
-/**
- * Triggers Razorpay Checkout modal for a specific template (or currently previewed template)
- * Automatically attaches Template Name, ID, Style, and Add-ons in Razorpay transaction notes!
- */
-function payRazorpayForTemplate(id) {
-  let templateId = id;
-  if (!templateId && typeof previewState !== "undefined" && previewState.currentIndex >= 0) {
-    templateId = TEMPLATE_DATABASE[previewState.currentIndex]?.id;
-  }
-  
-  const item = TEMPLATE_DATABASE.find(x => x.id === templateId) || TEMPLATE_DATABASE[0];
-  if (!item) return;
-
-  // Check selected add-ons
-  const expressChecked = document.getElementById(`addon-express-${item.id}`)?.checked;
-  const domainChecked  = document.getElementById(`addon-domain-${item.id}`)?.checked;
-
-  const prices = getItemPrices(item);
-  let totalVal = currentCurrency === "INR" ? prices.priceINR : prices.priceUSD;
-  const selectedAddons = [];
-
-  if (expressChecked) {
-    totalVal += (currentCurrency === "INR" ? ADDONS.express.priceINR : ADDONS.express.priceUSD);
-    selectedAddons.push("Express 24h Delivery");
-  }
-  if (domainChecked) {
-    totalVal += (currentCurrency === "INR" ? ADDONS.domain.priceINR : ADDONS.domain.priceUSD);
-    selectedAddons.push("Custom Domain");
-  }
-
-  const isINR = currentCurrency === "INR";
-  const currencyCode = isINR ? "INR" : "USD";
-  const amountInSubunits = Math.round(totalVal * 100);
-
-  trackMetaEvent("InitiateCheckout", {
-    content_name: item.name,
-    content_ids: [String(item.id)],
-    content_type: "product",
-    content_category: item.style || "Digital Wedding Invitation",
-    value: totalVal,
-    currency: currencyCode
-  });
-
-  const options = {
-    key: window.RAZORPAY_KEY_ID || "rzp_live_YOUR_KEY_HERE",
-    amount: amountInSubunits,
-    currency: currencyCode,
-    name: "InviteStory",
-    description: `Digital Wedding Invitation - ${item.name}`,
-    image: "https://invitestory.in/logo/noappicon.png",
-    notes: {
-      template_name: item.name,
-      template_id: String(item.id),
-      template_style: item.style || "Digital Card",
-      add_ons: selectedAddons.length > 0 ? selectedAddons.join(", ") : "None",
-      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard",
-      ...getAttributionNotes()
-    },
-    theme: {
-      color: "#c09559"
-    },
-    modal: {
-      ondismiss: function () {
-        if (!window.__lastPaymentOk) {
-          const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for "${item.name}" didn't go through on the website. Can you please assist me?`)}`;
-          showToast({
-            title: "Payment not completed",
-            message: "You can try again, or contact us on WhatsApp for help.",
-            type: "error",
-            action: {
-              label: "Chat on WhatsApp",
-              url: waUrl
-            }
-          });
-        }
-        window.__lastPaymentOk = false;
-      }
-    },
-    handler: function (response) {
-      window.__lastPaymentOk = true;
-      trackMetaEvent("Purchase", {
-        content_name: item.name,
-        content_ids: [String(item.id)],
-        content_type: "product",
-        value: totalVal,
-        currency: currencyCode,
-        transaction_id: response.razorpay_payment_id
-      });
-
-      handlePaidSuccess({
-        packageName: packageName(item.tier),
-        amountText: isINR ? `₹${totalVal.toLocaleString("en-IN")}` : `$${totalVal}`,
-        totalVal,
-        currency: currencyCode,
-        paymentId: response.razorpay_payment_id,
-        designName: item.name,
-        addons: item.tier === 4 ? ["Express 24h Delivery (included)", "Email RSVP (included)", ...selectedAddons.filter(label => label !== "Express 24h Delivery")] : selectedAddons, express: item.tier === 4 || Boolean(expressChecked)
-      });
-    }
-  };
-
-  if (typeof Razorpay !== "undefined") {
-    const rzp = new Razorpay(options);
-    rzp.on("payment.failed", function () {
-      const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for "${item.name}" failed. Can you please assist me?`)}`;
-      showToast({
-        title: "Payment didn’t go through",
-        message: "Try again, or contact us on WhatsApp for help.",
-        type: "error",
-        action: {
-          label: "Chat on WhatsApp",
-          url: waUrl
-        }
-      });
-    });
-    rzp.open();
-  } else {
-    showToast({
-      title: "Opening checkout",
-      message: "Please wait a moment, then try again.",
-      type: "info"
-    });
-  }
-}
-
 /**
  * "Ask" prefill (no payment yet) — package level.
  * Spec: Hi! Looking at {{PACKAGE}} (₹{{AMOUNT}}). I have a few questions before paying.
@@ -1854,105 +1487,6 @@ function askTemplateOnWhatsApp(id) {
   });
   const msg = `Hi! Looking at "${item.name}" (${packageName(item.tier)} · ${priceText}). I have a few questions before paying.`;
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(msg)}`, "_blank");
-}
-
-/**
- * Package-level Razorpay checkout (UPI / GPay / PhonePe / cards).
- * Success → in-page success panel + auto-open WhatsApp with paid prefill.
- * Failure/cancel → toast pointing back to pricing + WhatsApp.
- */
-function payRazorpayForPackage(tier, designName) {
-  const name = packageName(tier);
-  const totalVal = packageTotal(tier);
-  const amountText = packageAmountText(tier, totalVal);
-  const isINR = currentCurrency === "INR";
-  const currencyCode = isINR ? "INR" : "USD";
-
-  trackMetaEvent("InitiateCheckout", {
-    content_name: `${name} Package`,
-    content_category: "Package",
-    value: totalVal,
-    currency: currencyCode,
-    num_items: 1
-  });
-
-  const expressOn = isExpressSelectedForPackage(tier);
-  const options = {
-    key: window.RAZORPAY_KEY_ID || "rzp_live_YOUR_KEY_HERE",
-    amount: Math.round(totalVal * 100),
-    currency: currencyCode,
-    name: "InviteStory",
-    description: `${name} Package — Digital Wedding Invitation`,
-    image: "https://invitestory.in/logo/noappicon.png",
-    notes: {
-      package: name,
-      design_name: designName || "",
-      express_24h: (tier === 4 || expressOn) ? "yes" : "no",
-      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard",
-      ...getAttributionNotes()
-    },
-    theme: { color: "#c09559" },
-    modal: {
-      // If they close without paying, send them back to pricing with help.
-      ondismiss: function () {
-        if (!window.__lastPaymentOk) {
-          const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for the ${name} package didn't go through on the website. Can you please assist me?`)}`;
-          showToast({
-            title: "Payment not completed",
-            message: "You can try again, or contact us on WhatsApp for help.",
-            type: "error",
-            action: {
-              label: "Chat on WhatsApp",
-              url: waUrl
-            }
-          });
-        }
-        window.__lastPaymentOk = false;
-      }
-    },
-    handler: function (response) {
-      window.__lastPaymentOk = true;
-      trackMetaEvent("Purchase", {
-        content_name: `${name} Package`,
-        content_category: "Package",
-        value: totalVal,
-        currency: currencyCode,
-        transaction_id: response.razorpay_payment_id
-      });
-      handlePaidSuccess({
-        packageName: name,
-        amountText,
-        totalVal,
-        currency: currencyCode,
-        paymentId: response.razorpay_payment_id,
-        designName: designName || "",
-        addons: tier === 4 ? ["Express 24h Delivery (included)", "Email RSVP (included)"] : expressOn ? ["Express 24h Delivery"] : [], express: tier === 4 || expressOn
-      });
-    }
-  };
-
-  if (typeof Razorpay !== "undefined") {
-    const rzp = new Razorpay(options);
-    rzp.on("payment.failed", function () {
-      const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for the ${name} package failed. Can you please assist me?`)}`;
-      showToast({
-        title: "Payment didn’t go through",
-        message: "Try again, or contact us on WhatsApp for help.",
-        type: "error",
-        action: {
-          label: "Chat on WhatsApp",
-          url: waUrl
-        }
-      });
-    });
-    rzp.open();
-  } else {
-    showToast({
-      title: "Opening checkout",
-      message: "Please wait a moment, then try again.",
-      type: "info"
-    });
-  }
 }
 
 /**
@@ -2020,17 +1554,6 @@ function sendDetailsOnWhatsApp() {
   }
   const waMsg = InvitePaidOrder.message(d);
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
-}
-
-/** Keep each package card's Pay label in sync with its express toggle. */
-function updatePackagePayLabels() {
-  [2, 3, 4].forEach(tier => {
-    const btn = document.getElementById(`pkg-pay-btn-${tier}`);
-    if (btn) {
-      const label = btn.querySelector("[data-pay-label]");
-      if (label) label.textContent = tier === 4 ? "Choose a Dearly design" : "Choose a design";
-    }
-  });
 }
 
 // --- Dynamic Order Sheet / Drawer Controller ---
@@ -2322,7 +1845,7 @@ function proceedFromOrderDrawerToCheckout() {
       add_ons: selectedAddons.length > 0 ? selectedAddons.join(", ") : "None",
       express_24h: expressChecked ? "yes" : "no",
       email_rsvp: emailRsvpChecked ? "yes" : "no",
-      promo_offer: PROMO_CONFIG.active ? PROMO_CONFIG.name : "Standard",
+      promo_offer: "Standard",
       ...getAttributionNotes()
     },
     theme: { color: "#c09559" },
@@ -2409,24 +1932,10 @@ function updatePaymentButtonsForCurrency() {
   if (rzpBtn) {
     rzpBtn.style.display = "inline-flex";
   }
-  const paypalBtn = document.getElementById("preview-instant-paypal-btn");
-  if (paypalBtn) {
-    paypalBtn.style.display = "none";
-  }
+
   if (typeof updateOrderDrawerTotal === "function") {
     updateOrderDrawerTotal();
   }
-}
-
-// Compatibility stubs for any external or legacy references
-function openPayPalCheckout(id) {
-  openOrderDrawerForTemplate(id);
-}
-function openPayPalCheckoutForPackage(tier) {
-  openOrderDrawerForPackage(tier);
-}
-function closePayPalCheckout() {
-  closeOrderDrawer(false);
 }
 
 // --- Preview Modal functions ---
@@ -2449,7 +1958,7 @@ function getDesignShareUrl(item) {
 
 function getDesignShareContent(item) {
   const shareUrl = getDesignShareUrl(item);
-  
+
   const title = `InviteStory – ${item.name} Wedding Invitation`;
   const prices = getItemPrices(item);
   const shareIntro = `What do you think of "${item.name}" for our wedding?\n\n${packageName(item.tier)} · ${formatPrice(prices.priceINR, prices.priceUSD)} one-time, personalized by InviteStory.\nMusic, wedding schedule, venue directions and ${item.tier === 4 ? "Email" : "WhatsApp"} RSVP.\n\nOpen the live preview and help me choose:`;
@@ -3047,14 +2556,14 @@ function openPreview(id, updateUrl = true) {
   // Show modal & update device scale to fit available viewport seamlessly
   previewModal.classList.add("is-open");
   previewModal.setAttribute("aria-hidden", "false");
-  
+
   // Store current scroll position to avoid jumping to top while locking (preserve pre-calculated scroll from direct link)
   if (typeof previewState.savedScrollY !== "number" || previewState.savedScrollY < 0) {
     previewState.savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
   }
   document.documentElement.classList.add("preview-modal-open");
   document.body.classList.add("preview-modal-open");
-  
+
   schedulePreviewScale();
 
   // Trigger cinematic entrance animation (spring from dramatic pose to rest)
@@ -3243,7 +2752,7 @@ function phonePhysicsLoop() {
     const diff = target[k] - current[k];
     velocity[k] = (velocity[k] + diff * LERP_FACTOR) * DAMPING;
     current[k] += velocity[k];
-    
+
     const absDiff = Math.abs(diff);
     const absVel = Math.abs(velocity[k]);
     if (absDiff > maxDelta) maxDelta = absDiff;
@@ -3559,7 +3068,7 @@ function resetFilters() {
 
   const allRadio = tierRadioByValue["0"];
   if (allRadio) allRadio.checked = true;
-  
+
   updateTagFilterButtons();
   renderCatalogue();
 }
@@ -3576,20 +3085,8 @@ function updateTagFilterButtons() {
   });
 }
 
-
 // Setup currency changer segmented toggle
 // Refresh the prices shown inside the glass-radio-group labels
-// (e.g. "Classic ₹999" → "Classic $12" on USD toggle).
-function updateHeroOfferCard() {
-  const symEl = document.getElementById("hero-currency-symbol");
-  const valEl = document.getElementById("hero-price-val");
-  if (symEl && valEl) {
-    symEl.textContent = getCurrencySymbol();
-    valEl.textContent = PROMO_CONFIG.active
-      ? (currentCurrency === "INR" ? PROMO_CONFIG.promoPriceINR : PROMO_CONFIG.promoPriceUSD)
-      : (currentCurrency === "INR" ? 999 : 15);
-  }
-}
 
 function updateTierLabels() {
   document.querySelectorAll("[data-tier-price]").forEach(el => {
@@ -3669,7 +3166,7 @@ function setupCurrencySwitcher() {
       usdBtn.classList.remove("active");
 
       // Re-render components
-      updateHeroOfferCard();
+
       updateTierLabels();
       updateHeaderCtaText();
       renderPricingSection();
@@ -3686,7 +3183,7 @@ function setupCurrencySwitcher() {
       inrBtn.classList.remove("active");
 
       // Re-render components
-      updateHeroOfferCard();
+
       updateTierLabels();
       updateHeaderCtaText();
       renderPricingSection();
@@ -3711,7 +3208,7 @@ function setupCatalogueHandlers() {
       renderCatalogue();
     });
   }
-  
+
   if (clearSearchBtn) {
     clearSearchBtn.addEventListener("click", () => {
       searchInput.value = "";
@@ -3720,7 +3217,7 @@ function setupCatalogueHandlers() {
       renderCatalogue();
     });
   }
-  
+
   tierRadios.forEach(radio => {
     radio.addEventListener("change", () => {
       if (!radio.checked) return;
@@ -3750,7 +3247,7 @@ function setupCatalogueHandlers() {
       }));
     });
   });
-  
+
   if (filterTagsContainer) {
     filterTagsContainer.addEventListener("click", (e) => {
       const tagBtn = e.target.closest(".filter-tag");
@@ -4025,7 +3522,7 @@ function setupPreviewModal() {
     stage.addEventListener("touchmove", (e) => {
       if (!previewModal.classList.contains("is-open")) return;
       if (previewState.viewMode !== "3d") return;
-      
+
       // If user is interacting directly inside the iframe wrap, don't tilt the phone
       if (e.target && (e.target.closest("#preview-modal-iframe-wrap") || e.target.closest(".phone-screen-viewport"))) {
         return;
@@ -4060,12 +3557,12 @@ function setupPreviewModal() {
   });
 }
 
-// --- GSAP Animations (ScrollTrigger, Flip, ScrollToPlugin) ---
+// --- GSAP Animations (ScrollTrigger, ScrollToPlugin) ---
 // Guard against the CDN failing to load.
 function initAnimations() {
   if (typeof gsap === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  gsap.registerPlugin(window.ScrollTrigger, window.Flip, window.ScrollToPlugin);
+  gsap.registerPlugin(window.ScrollTrigger, window.ScrollToPlugin);
 
   // --- Hero entrance (runs once on page load) ---
   if (document.querySelector(".hero-headline")) {
@@ -4094,7 +3591,7 @@ function initAnimations() {
     });
   }
   if (document.querySelector(".hero-design-marquee, .hero-showroom-showcase")) {
-    const heroDesignTargets = document.querySelectorAll(".hero-design-card, .showroom-card");
+    const heroDesignTargets = document.querySelectorAll(".showroom-card");
     if (heroDesignTargets.length) {
       gsap.from(heroDesignTargets, {
         y: 30, duration: 0.8, stagger: 0.1, delay: 0.55, ease: "power3.out"
@@ -4631,45 +4128,6 @@ function setupFaqHandlers() {
   });
 }
 
-// --- Urgency: countdown timer to August 15, 11:59:59 PM IST ---
-function setupUrgency() {
-  const endsAt = PROMO_CONFIG.endsAt;
-
-  const timerEl = document.getElementById("urgency-timer");
-  const topTimerEl = document.getElementById("promo-top-timer");
-  const exitTimerEl = document.getElementById("exit-modal-timer");
-
-  function tickCountdown() {
-    const diff = Math.max(0, endsAt - Date.now());
-    const d = Math.floor(diff / (24 * 60 * 60 * 1000));
-    const h = Math.floor((diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-    const m = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
-    const s = Math.floor((diff % (60 * 1000)) / 1000);
-    
-    const formattedStr = d > 0
-      ? `${d}d ${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`
-      : `${String(h).padStart(2, "0")}h ${String(m).padStart(2, "0")}m ${String(s).padStart(2, "0")}s`;
-
-    if (timerEl) timerEl.textContent = formattedStr;
-    if (topTimerEl) topTimerEl.textContent = formattedStr;
-    if (exitTimerEl) exitTimerEl.textContent = formattedStr;
-  }
-  tickCountdown();
-  setInterval(tickCountdown, 1000);
-
-  // Live viewers — random number in 18-45, refreshed every 7-12s
-  const viewersEl = document.getElementById("urgency-viewers-count");
-  if (viewersEl) {
-    const updateViewers = () => {
-      const n = 18 + Math.floor(Math.random() * 28);
-      viewersEl.textContent = String(n);
-    };
-    updateViewers();
-    setInterval(updateViewers, 7000 + Math.random() * 5000);
-  }
-}
-
-
 function openCustomModal() {
   const modal = document.getElementById("custom-modal");
   if (!modal) return;
@@ -4738,14 +4196,13 @@ document.addEventListener("DOMContentLoaded", () => {
   setupPreviewModal();
   setupFaqHandlers();
   setupHowItWorksToggle();
-  setupUrgency();
+
   setupTestimonialsNav();
   setupWhatsAppReviewsNav();
   setupWhatsAppLightbox();
   setupTrustMarquee();
   setupResponsivePlaceholder();
   setupHeaderCtaHandlers();
-  setupHeroDesignMarquee();
 
   // Initial draw
   updateTierLabels();
@@ -4794,42 +4251,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTierNavVisibility();
 });
 
-function setupHeroDesignMarquee() {
-  const showcase = document.querySelector(".hero-showroom-showcase");
-  if (!showcase || !Array.isArray(TEMPLATE_DATABASE) || !TEMPLATE_DATABASE.length) return;
-
-  const cards = TEMPLATE_DATABASE.map((item, index) => {
-    const image = item.image || `assets/preview/${index + 1}.png`;
-    const tier = item.tier === 4 ? "Dearly" : item.tier === 3 ? "Luxury" : "Premium";
-    return `<button type="button" class="hero-design-card" data-hero-design-id="${item.id}" aria-label="Preview ${item.name}">
-      <span class="hero-design-media"><img src="${image}" alt="${item.name} wedding invitation design" loading="lazy" decoding="async"><span class="hero-design-preview">Preview →</span></span>
-      <span class="hero-design-footer"><span class="hero-design-tier">${tier}</span><span class="hero-design-name">${item.name}</span></span>
-    </button>`;
-  }).join("");
-
-  showcase.innerHTML = `<div class="hero-design-marquee" tabindex="0" aria-label="Invitation design carousel"><div class="hero-design-track">${cards}${cards}</div></div>`;
-  document.body.classList.add("hero-marquee-ready");
-  const marquee = showcase.querySelector(".hero-design-marquee");
-  const track = showcase.querySelector(".hero-design-track");
-  let pointerStart = 0;
-  let pointerMoved = false;
-
-  showcase.addEventListener("click", e => {
-    const card = e.target.closest("[data-hero-design-id]");
-    if (!card || pointerMoved) { pointerMoved = false; return; }
-    openPreview(Number(card.dataset.heroDesignId));
-  });
-  marquee.addEventListener("pointerdown", e => { pointerStart = e.clientX; pointerMoved = false; marquee.setPointerCapture(e.pointerId); track.classList.add("is-dragging"); });
-  marquee.addEventListener("pointermove", e => { if (Math.abs(e.clientX - pointerStart) > 8) pointerMoved = true; });
-  const endDrag = () => track.classList.remove("is-dragging");
-  marquee.addEventListener("pointerup", endDrag);
-  marquee.addEventListener("pointercancel", endDrag);
-  marquee.addEventListener("mouseenter", () => track.classList.add("is-paused"));
-  marquee.addEventListener("mouseleave", () => track.classList.remove("is-paused"));
-  marquee.addEventListener("focusin", () => track.classList.add("is-paused"));
-  marquee.addEventListener("focusout", () => track.classList.remove("is-paused"));
-}
-
 function showFloatingNav() {
   const nav = document.querySelector(".tier-floating-nav");
   if (!nav) return;
@@ -4859,278 +4280,6 @@ function setupResponsivePlaceholder() {
 // Paints a rich metallic gold foil surface over the price, then erases it
 // as the user drags (mouse or touch), emitting live sparkle dust particles.
 // When ~38% of the surface is revealed, the foil smoothly dissolves with a
-// celebratory gold confetti burst and unlocked badge transition.
-function setupScratchReveal() {
-  const canvas = document.getElementById("hero-scratch-canvas");
-  const hint   = document.getElementById("hero-scratch-hint");
-  const hintText = document.getElementById("hero-scratch-hint-text");
-  const surface = document.getElementById("hero-scratch-surface");
-  const priceRow = document.getElementById("hero-price-row");
-  const sparkleLayer = document.getElementById("scratch-sparkle-layer");
-  if (!canvas || !hint || !surface) return;
-
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  const ctx = canvas.getContext("2d", { willReadFrequently: true });
-  let drawing = false;
-  let lastPoint = null;
-  let revealed = false;
-  let dpr = window.devicePixelRatio || 1;
-
-  function paintSurface() {
-    const rect = canvas.getBoundingClientRect();
-    dpr = window.devicePixelRatio || 1;
-    canvas.width  = Math.round(rect.width  * dpr);
-    canvas.height = Math.round(rect.height * dpr);
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    ctx.clearRect(0, 0, rect.width, rect.height);
-
-    // Multi-stop rich metallic gold foil gradient
-    const grad = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    grad.addColorStop(0,    "#fceabb");
-    grad.addColorStop(0.3,  "#f8b500");
-    grad.addColorStop(0.6,  "#e6c875");
-    grad.addColorStop(0.85, "#b8860b");
-    grad.addColorStop(1,    "#8a6207");
-    ctx.fillStyle = grad;
-    ctx.fillRect(0, 0, rect.width, rect.height);
-
-    // Metallic diagonal highlight sheen
-    const hi = ctx.createLinearGradient(0, 0, rect.width, rect.height);
-    hi.addColorStop(0, "rgba(255, 255, 255, 0.45)");
-    hi.addColorStop(0.3, "rgba(255, 255, 255, 0.1)");
-    hi.addColorStop(0.7, "rgba(0, 0, 0, 0)");
-    hi.addColorStop(1, "rgba(0, 0, 0, 0.25)");
-    ctx.fillStyle = hi;
-    ctx.fillRect(0, 0, rect.width, rect.height);
-
-    // Micro-texture cross hatch for lottery ticket metallic feel
-    ctx.save();
-    ctx.globalAlpha = 0.12;
-    ctx.strokeStyle = "#1a1205";
-    ctx.lineWidth = 1;
-    ctx.setLineDash([2, 3]);
-    for (let x = -rect.height; x < rect.width; x += 8) {
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x + rect.height, rect.height);
-      ctx.stroke();
-    }
-    ctx.restore();
-
-    // Inset border frame line
-    ctx.save();
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
-    ctx.lineWidth = 1.5;
-    ctx.strokeRect(3, 3, rect.width - 6, rect.height - 6);
-    ctx.restore();
-
-    // Foil Stamp Emblem & Label (Framed pill badge so text is self-contained)
-    ctx.save();
-    const badgeW = 150;
-    const badgeH = 26;
-    const badgeX = (rect.width - badgeW) / 2;
-    const badgeY = (rect.height - badgeH) / 2;
-
-    ctx.shadowColor = "rgba(0, 0, 0, 0.25)";
-    ctx.shadowBlur = 6;
-    ctx.shadowOffsetY = 2;
-    ctx.fillStyle = "rgba(20, 14, 4, 0.4)";
-    ctx.beginPath();
-    if (ctx.roundRect) {
-      ctx.roundRect(badgeX, badgeY, badgeW, badgeH, 13);
-    } else {
-      ctx.rect(badgeX, badgeY, badgeW, badgeH);
-    }
-    ctx.fill();
-    ctx.shadowColor = "transparent";
-
-    ctx.strokeStyle = "rgba(255, 240, 190, 0.6)";
-    ctx.lineWidth = 1;
-    ctx.stroke();
-
-    ctx.fillStyle = "#281b05";
-    ctx.font = "700 10.5px -apple-system, BlinkMacSystemFont, 'Inter', sans-serif";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.shadowColor = "rgba(255, 255, 255, 0.6)";
-    ctx.shadowOffsetY = 1;
-    ctx.fillText("SCRATCH TO REVEAL", rect.width / 2, rect.height / 2);
-    ctx.restore();
-  }
-
-  function getPoint(evt) {
-    const rect = canvas.getBoundingClientRect();
-    const src  = (evt.touches && evt.touches[0]) ? evt.touches[0] : evt;
-    return { x: src.clientX - rect.left, y: src.clientY - rect.top };
-  }
-
-  function spawnScratchSparkle(x, y) {
-    if (!sparkleLayer) return;
-    const count = Math.random() > 0.5 ? 2 : 3;
-    for (let i = 0; i < count; i++) {
-      const p = document.createElement("span");
-      p.className = "scratch-sparkle-particle";
-      p.style.left = x + "px";
-      p.style.top = y + "px";
-
-      const angle = Math.random() * Math.PI * 2;
-      const dist = 14 + Math.random() * 26;
-      const dx = Math.cos(angle) * dist + "px";
-      const dy = Math.sin(angle) * dist + "px";
-
-      p.style.setProperty("--dx", dx);
-      p.style.setProperty("--dy", dy);
-
-      sparkleLayer.appendChild(p);
-      setTimeout(() => p.remove(), 450);
-    }
-  }
-
-  function scratchAt(point) {
-    if (!point) return;
-    ctx.globalCompositeOperation = "destination-out";
-    const r = 26;
-
-    if (lastPoint) {
-      const dx = point.x - lastPoint.x;
-      const dy = point.y - lastPoint.y;
-      const dist = Math.hypot(dx, dy);
-      const steps = Math.max(1, Math.ceil(dist / 4));
-      for (let i = 0; i <= steps; i++) {
-        const t = i / steps;
-        const x = lastPoint.x + dx * t;
-        const y = lastPoint.y + dy * t;
-        ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    } else {
-      ctx.beginPath();
-      ctx.arc(point.x, point.y, r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalCompositeOperation = "source-over";
-    lastPoint = point;
-
-    spawnScratchSparkle(point.x, point.y);
-    checkRevealProgress();
-  }
-
-  function checkRevealProgress() {
-    if (revealed) return;
-    const w = canvas.width;
-    const h = canvas.height;
-    const data = ctx.getImageData(0, 0, w, h).data;
-    let cleared = 0;
-    const total = w * h;
-    for (let i = 3; i < data.length; i += 32) {
-      if (data[i] === 0) cleared++;
-    }
-    const samples = Math.ceil(total / 8);
-    if (cleared / samples > 0.38) reveal();
-  }
-
-  function reveal() {
-    if (revealed) return;
-    revealed = true;
-    canvas.classList.add("is-revealed");
-    if (surface) surface.classList.add("is-unlocked-surface");
-    if (priceRow) priceRow.classList.add("is-revealed-price");
-
-    if (hint) {
-      hint.classList.add("is-unlocked-hint");
-      if (hintText) {
-        hintText.textContent = PROMO_CONFIG.active
-          ? "Flat ₹815 Special Unlocked!"
-          : (currentCurrency === "INR" ? "Starting at ₹999 Unlocked!" : "Starting at $15 Unlocked!");
-      }
-      const icon = hint.querySelector(".scratch-hint-icon");
-      if (icon) {
-        icon.outerHTML = `<svg class="scratch-hint-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-      }
-    }
-    spawnConfetti();
-  }
-
-  function spawnConfetti() {
-    if (!surface || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    const layer = document.createElement("div");
-    layer.className = "hero-confetti";
-    surface.appendChild(layer);
-
-    const palette = ["#d6b87c", "#e8cf94", "#b08a4a", "#f0d99e", "#ffffff", "#34d399"];
-    const shapes  = ["", "is-circle", "is-ribbon"];
-    const pieces  = 22;
-
-    for (let i = 0; i < pieces; i++) {
-      const piece = document.createElement("span");
-      piece.className = "hero-confetti-piece" + (shapes[i % shapes.length] ? " " + shapes[i % shapes.length] : "");
-
-      const angle  = Math.random() * Math.PI * 2;
-      const radius = 60 + Math.random() * 90;
-      const fall   = 40 + Math.random() * 60;
-      const tx = Math.cos(angle) * radius;
-      const ty = Math.sin(angle) * radius + fall;
-      const rot = (Math.random() * 720 - 360) + "deg";
-      const delay = (Math.random() * 0.12) + "s";
-
-      piece.style.setProperty("--tx", tx.toFixed(1) + "px");
-      piece.style.setProperty("--ty", ty.toFixed(1) + "px");
-      piece.style.setProperty("--r",  rot);
-      piece.style.setProperty("--d",  delay);
-      piece.style.setProperty("--c",  palette[i % palette.length]);
-      layer.appendChild(piece);
-    }
-
-    setTimeout(() => layer.remove(), 1800);
-  }
-
-  // Mouse events
-  canvas.addEventListener("mousedown", (e) => {
-    e.preventDefault();
-    drawing = true;
-    lastPoint = null;
-    scratchAt(getPoint(e));
-  });
-  window.addEventListener("mousemove", (e) => {
-    if (!drawing) return;
-    scratchAt(getPoint(e));
-  });
-  window.addEventListener("mouseup", () => { drawing = false; lastPoint = null; });
-
-  // Touch events
-  canvas.addEventListener("touchstart", (e) => {
-    e.preventDefault();
-    drawing = true;
-    lastPoint = null;
-    scratchAt(getPoint(e));
-  }, { passive: false });
-  canvas.addEventListener("touchmove", (e) => {
-    if (!drawing) return;
-    e.preventDefault();
-    scratchAt(getPoint(e));
-  }, { passive: false });
-  canvas.addEventListener("touchend", () => { drawing = false; lastPoint = null; });
-  canvas.addEventListener("touchcancel", () => { drawing = false; lastPoint = null; });
-
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      if (!revealed) paintSurface();
-    }, 150);
-  });
-
-  requestAnimationFrame(() => {
-    paintSurface();
-    if (reduceMotion) reveal();
-  });
-}
-
-document.addEventListener("DOMContentLoaded", setupScratchReveal);
 
 function setupMobilePricingCarousel() {
   const grid = document.querySelector(".pricing-grid");
