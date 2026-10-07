@@ -2998,8 +2998,7 @@ function openPreview(id, updateUrl = true) {
   }
   updatePaymentButtonsForCurrency();
   if (previewCounterBadge) {
-    const collection = TEMPLATE_DATABASE.filter(template => template.tier === item.tier);
-    previewCounterBadge.textContent = `${collection.findIndex(template => template.id === item.id) + 1} / ${collection.length}`;
+    previewCounterBadge.textContent = `${idx + 1} / ${TEMPLATE_DATABASE.length}`;
   }
   if (previewFullscreenBtn) {
     previewFullscreenBtn.href = item.demoUrl;
@@ -3462,14 +3461,12 @@ function phonePhysicsDisableGyroscope() {
   }
 }
 
-// Browse within the active collection, wrapping at either end.
+// Browse the complete catalogue in order, wrapping at either end.
 function previewNavigate(direction) {
   const item = TEMPLATE_DATABASE[previewState.currentIndex];
   if (!item) return;
-  const collection = TEMPLATE_DATABASE.filter(template => template.tier === item.tier);
-  const position = collection.findIndex(template => template.id === item.id);
-  const next = (position + direction + collection.length) % collection.length;
-  openPreview(collection[next].id);
+  const next = (previewState.currentIndex + direction + TEMPLATE_DATABASE.length) % TEMPLATE_DATABASE.length;
+  openPreview(TEMPLATE_DATABASE[next].id);
 }
 function previewNext() { previewNavigate(1); }
 function previewPrev() { previewNavigate(-1); }

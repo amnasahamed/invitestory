@@ -55,6 +55,17 @@ test('discovery defaults to the full catalogue and preserves shared shortlist or
   assert.equal(site.run('JSON.stringify(getDiscoveryDesigns(TEMPLATE_DATABASE).map(item => item.id))'), '[21]');
 });
 
+test('preview arrows traverse all 35 designs across collections and wrap both ways', () => {
+  const site = website();
+  site.run('const visits=[]; openPreview=id=>{visits.push(id);previewState.currentIndex=TEMPLATE_DATABASE.findIndex(item=>item.id===id);};previewState.currentIndex=0;');
+  for (let i=0;i<35;i++) site.run('previewNext()');
+  assert.equal(site.run('new Set(visits).size'), 35);
+  assert.equal(site.run('previewState.currentIndex'), 0);
+  site.run('previewPrev()');
+  assert.equal(site.run('previewState.currentIndex'), 34);
+  assert.equal(site.run('TEMPLATE_DATABASE[previewState.currentIndex].tier'), 4);
+});
+
 test('family sharing includes the correct price and the actual RSVP channel', () => {
   const site = website();
   assert.match(site.run('getDesignShareContent(TEMPLATE_DATABASE.find(item => item.id === 1)).text'), /₹1,999.*[\s\S]*WhatsApp RSVP/);
