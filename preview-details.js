@@ -8,7 +8,7 @@
   function render() {
     const hidden = mobile.matches && collapsed;
     modal.classList.toggle('is-details-hidden', hidden);
-    toggle.textContent = hidden ? 'Show details' : 'Hide details';
+    toggle.textContent = hidden ? 'Show controls' : 'Hide controls';
     toggle.setAttribute('aria-expanded', String(!hidden));
     if (typeof schedulePreviewScale === 'function') schedulePreviewScale();
   }

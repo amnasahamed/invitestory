@@ -131,9 +131,10 @@
   .studio-home #preview-modal #preview-details-toggle {
     display:inline-flex; align-items:center; justify-content:center;
     min-height:44px; padding:8px 10px; border:1px solid var(--invitation-border,#d7d9d2);
-    border-radius:22px; background:var(--invitation-surface,#fffaf0); color:var(--invitation-ink,#23412d);
+    border-radius:22px; background:var(--invitation-soft,#edf2ef); color:var(--invitation-ink,#23412d);
     font:500 12px var(--font-body); white-space:nowrap; cursor:pointer; touch-action:manipulation;
   }
+  .studio-home #preview-modal #preview-details-toggle:hover { border-color:var(--invitation-accent,#23412d); }
   .studio-home #preview-modal.is-details-hidden :is(.preview-floating-controls,.preview-browse-controls,.preview-sheet-summary,.preview-secondary-actions,.interaction-preview-explore,.sales-preview-context,.preview-sheet-signoff) { display:none; }
   .studio-home #preview-modal.is-details-hidden .preview-top-controls { justify-content:flex-end; }
   .studio-home #preview-modal.is-details-hidden .preview-modal-panel { grid-template-rows:minmax(0,1fr) auto; }
