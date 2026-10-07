@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Local invitation preview audit</title>
+<style>body{font:16px system-ui;margin:24px}iframe{width:390px;height:844px;border:1px solid #ccc}pre{white-space:pre-wrap}section{display:flex;gap:24px;align-items:flex-start}</style>
+<h1>Local invitation preview audit</h1><p id="status">Starting…</p>
+<section><iframe id="preview" title="Invitation under test" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals allow-downloads"></iframe><pre id="results"></pre></section>
+<script type="module">
+const manifest = await fetch('/previews/manifest.json').then(response => response.json());
+const frame = document.querySelector('iframe');
+window.previewAuditResults = [];
+const params = new URLSearchParams(location.search);
+const offset = Number(params.get('offset') || 0), limit = Number(params.get('limit') || manifest.designs.length);
+for (const design of manifest.designs.slice(offset, offset + limit)) {
+  document.querySelector('#status').textContent = `Checking ${design.name}`;
+  await new Promise(resolve => { frame.onload = resolve; frame.src = design.url; });
+  await new Promise(resolve => setTimeout(resolve, 2200));
+  try {
+    const child = frame.contentWindow, doc = frame.contentDocument;
+    const text = doc.body.innerText;
+    const expected = JSON.parse(sessionStorage.getItem('invitestory.previewNames') || '{}');
+    const result = {id:design.id, name:design.name, url:design.url,
+      rendered:(text.trim().length > 10 || [...doc.images].some(image => image.complete && image.naturalWidth > 0)) && !/^404\b|^Not Found$/i.test(text.trim()),
+      textLength:text.length, title:doc.title,
+      namesPresent:!expected.first && !expected.second ? null : [expected.first,expected.second].filter(Boolean).every(name => text.toLocaleLowerCase().includes(name.toLocaleLowerCase())),
+      loadedImages:[...doc.images].filter(image => image.currentSrc && image.complete && image.naturalWidth > 0).length,
+      failedImages:[...doc.images].filter(image => image.currentSrc && image.complete && image.naturalWidth === 0).map(image => image.currentSrc),
+      errors:child.InvitationDemoDiagnostics?.errors || [],
+      recoveries:child.InvitationDemoDiagnostics?.recoveries || []};
+    window.previewAuditResults.push(result);
+  } catch(error) { window.previewAuditResults.push({id:design.id,error:String(error)}); }
+  document.querySelector('#results').textContent = JSON.stringify(window.previewAuditResults, null, 2);
+}
+document.querySelector('#status').textContent = 'Finished';
+</script></html>

@@ -1,0 +1,75 @@
+{
+  "id": 14,
+  "name": "Ghibli Selfie",
+  "source": "https://ghibli-selfie.invitestory.in/",
+  "slug": "ghibli-selfie",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ghibli-selfie",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "d532fd6b800a45575b42ecf3e395fb47a70f5b1d20a4e23a449ff84c3e8dc8fa",
+    "editable/wedding-data.js": "d72313625bb2896aa9687a7c15cf1eea414e4906d07d4bb438eba96e7e4696aa",
+    "editable/assets/petal.png": "6a7ca8edf3ff9ac6679606ef568399f5d20e97e4cc1b852ff68976a4e7b9f65d",
+    "editable/assets/cloud-a.png": "ae52890db53fdbf70e275b599caaed2b4dc55aab98233e3cfdb9a5b6905345d4",
+    "editable/assets/mosque.png": "f5b5ed2369a123b08f3fd3312a60aa8f0736d1bf82f30d0b1a633596e5c47d49",
+    "editable/assets/butterfly.png": "80b70cbd51f1907f22049257d1ab4bf79ed80d41905b3aa6fbce89cd1c744118",
+    "editable/assets/gramophone.png": "65dee2c84af4aecaa4e3c0caedd41ea575e0a6b08372f380bb357eef60cf3804",
+    "editable/assets/bouquet.png": "93e463671589b7b076de348d2ec2db31a21d789badd8da5a07b357a8ace68dde",
+    "editable/assets/couple.png": "c1199fb60990562c74ca64b5b4594c8b7672f93f79e9ac479bc843f26e0a7ced",
+    "external/fonts.googleapis.com/css2-afefae8748.css": "5eb00183a00a8d1ef0749032df9c382622d20a11af6b9a29747c3e4efe0e86ea",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/index-D-DATC24.js": "22b70cf6422eee4794f20ad252449698959b6cf0eff35a659c9c41faa20e40e4",
+    "assets/styles-BZkC9aYC.css": "9a495f87b48dd13266a12373ec9f01e795485dd044e16b1141778573b9e24000"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/petal.webp",
+      "before": 196676,
+      "after": 127832,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/cloud-a.webp",
+      "before": 162804,
+      "after": 102940,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/mosque.webp",
+      "before": 406281,
+      "after": 253370,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/butterfly.webp",
+      "before": 177174,
+      "after": 125046,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/gramophone.webp",
+      "before": 247092,
+      "after": 161066,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/bouquet.webp",
+      "before": 1573797,
+      "after": 1063266,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 2544328,
+      "after": 1602670,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 5308152,
+  "assetBytesAfter": 3436190,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

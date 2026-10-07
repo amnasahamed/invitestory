@@ -1,0 +1,76 @@
+{
+  "id": 24,
+  "name": "Petal Path Palace",
+  "source": "https://petal-path-palace.invitestory.in/",
+  "slug": "petal-path-palace",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/petal-path-palace",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "083085bfbe358ba2aa5570c890f0ceff12cc122bb12303bafa0bf1642817ec59",
+    "editable/wedding-data.js": "ccbda183a750138b3e2a5ff9d4bd37787fcd8a6b02ca4ec62fe35d49738634ae",
+    "editable/assets/05-sky-palace.png": "4d473b93d239941e4888b235408362e11e33d9aeed8043bf9b33fcd6b05d5a01",
+    "editable/assets/01-arch-frame.png": "e0cc04b6eca339bb481c632ed875d8bbef4826783e2bea2c64bbeb820e61ade9",
+    "editable/assets/intro-veil.png": "f8baccfa4b8709a5c6ecaefe33c136da263be1d33d317aea7adf753d2258ac8f",
+    "editable/assets/04-garden-guests.png": "2bc37943f5acf43549d12bd9c83033ee79037595c19122e64ac7e1bb8cb20391",
+    "editable/assets/02-foreground-guests.png": "daf64112a17f6092ea2ea99fbea6e119547dce41a09f366e62dac99fa054b5d5",
+    "editable/assets/03-couple.png": "b03acdce6da576506e4ce5429b613390c786dec5caa0255b796232a135770d6b",
+    "editable/assets/source-full.png": "05e48e4a7059f2adc1f3c75aaedee8274a8d578e09c1a34a734655fefc9a2689",
+    "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+    "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "assets/index-B-yBjE0R.css": "66d141c8d6070abb3d42d4e40c88ef2927f492a9b5c2f2adc922af5ac867dc0e",
+    "assets/index-CxJ6pamB.js": "a10e46a3f503471ed8c2d4a597f8b5e4533f420200cb2609344eb24d5059e988"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/05-sky-palace.webp",
+      "before": 1424281,
+      "after": 951674,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/01-arch-frame.webp",
+      "before": 1759903,
+      "after": 1179076,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/intro-veil.webp",
+      "before": 18199,
+      "after": 5168,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/04-garden-guests.webp",
+      "before": 1791681,
+      "after": 1224892,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/02-foreground-guests.webp",
+      "before": 1260846,
+      "after": 834986,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/03-couple.webp",
+      "before": 1064838,
+      "after": 673492,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/source-full.webp",
+      "before": 1016916,
+      "after": 675150,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 8336664,
+  "assetBytesAfter": 5544438,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

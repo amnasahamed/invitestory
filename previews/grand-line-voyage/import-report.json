@@ -1,0 +1,100 @@
+{
+  "id": 13,
+  "name": "Grand Line Voyage",
+  "source": "https://grand-line-voyage.invitestory.in/",
+  "slug": "grand-line-voyage",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/grand-line-voyage",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "7605b97e53e9d6c56ee8e113ab2955376a81e3f4fb9803d7833350f9cd81ae7c",
+    "editable/wedding-data.js": "cd01147a4ca9f980a651aaceb556bd764d4c82e2232c9d5286dfc2084fd407fe",
+    "editable/assets/op-groom.png": "d16ac768864c631ae8a1f85258508518c00ee33a4a670773eeb49ec83108aca1",
+    "editable/assets/op-map-v1.png": "f7bd4f236ca3fa9e9a8a3b868b21a8a7273fa8b37c599c096ed352dcdb6eddd8",
+    "editable/assets/op-couple-panel.png": "5199e7efd032a35b8072ddd0d87a4fed4a977d20d043af7214b98cc9ef020068",
+    "editable/assets/op-bride.png": "77f0d9d10a4522e729dee0827165ed2d0186c6bb1abc71b8ebdcbe5be16500a1",
+    "editable/assets/op-hero-ship.png": "fff6dba62a8bee0d75bf9608a7a104f8081e7e77b738e45f77f00313d986c019",
+    "external/media.invitestory.in/grand-line-voyage/op-deck-texture.png": "337b30759166b9479ebb2123ab464fa01ec3da1748c917ad7af2a6570542b2c8",
+    "external/media.invitestory.in/grand-line-voyage/op-coin.png": "57c67336e93b60d4cee49cce603bc39a392aa8c75d40c48a5a3ee4608498865d",
+    "external/media.invitestory.in/grand-line-voyage/op-treasure-chest.png": "462d7c12323836355b9beb438a919b4ff523922eeed1efe63a5ee7266eb44142",
+    "external/media.invitestory.in/grand-line-voyage/op-log-pose.png": "998fe4cc78650cf58eb1654a48fd6847f333067f18de1291d596d1a6a21a1fe2",
+    "external/fonts.googleapis.com/css2-71c8d3c756.css": "61b44c3072831e06981a637221aa7d92a222e15d7da69ab528ca039550e4a2e7",
+    "external/fonts.googleapis.com/css2-b1e778a487.css": "82d8946498d99985397d5550e9430627e4889e3e9767fd11077a23decd2ba2ff",
+    "external/fonts.gstatic.com/s/mukta/v17/iJWKBXyXfDDVXYnDp3uS0Q.woff2": "cb59826862e7916e2b0d6e5f686b6fa44d1be9ce1364ee123154ef29b5e06dcb",
+    "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbEyjlmf-2fW7A.woff2": "22d364972baa5c06f5a3aae43877809c2c5042f24abdc74ade01746b486bf005",
+    "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbFmi1mf-2fW7A.woff2": "a99bf7bc3096c1136dff3b02f91e11c879e5c4e622168c9c4a21b8b4d1a27f1d",
+    "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbFqj1mf-2fW7A.woff2": "ba43e810f7f7ca2c1d22b7fc353dcca1dcf81c3f4a6a687b5d906c337a50c081",
+    "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbF6iFmf-2fW7A.woff2": "cdf572e0e5c695ac1106298e5411d1fbb640067da9bfaa28c6d2dba25a5e4d04",
+    "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbEeiVmf-2fW7A.woff2": "7a4b36fac1b08a5d3a8fd491ae8c4d0fb72caab398919dbc800164183b104a61",
+    "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+    "external/fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+    "external/fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZQa-lGQzaLlA.woff2": "f8ed11ac45df6a5fa0098813dba3a14ed06fe1b068ca2f3d45a877ee30f6157d",
+    "external/fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZoaelGQzaLlA.woff2": "c2dfa37eb5cf904a534d0c63b418423c6ab186de782d7eeb70c95f739149b401",
+    "external/fonts.gstatic.com/s/titanone/v17/mFTzWbsGxbbS_J5cQcjyljIh2Eo.woff2": "0687111fb88f47f6c46b58e080984b35669509cc436f6009642c71a2da671203",
+    "external/fonts.gstatic.com/s/yatraone/v16/C8ch4copsHzj8p7NaF0xxlOHbRE.woff2": "105e35bb2f63edd7ac537325c28ced21131665db79488a25f1ba62e171f72206",
+    "external/fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Jo02SuCgQ.woff2": "12d6a2dc8345163d5c8d797c7f88f1f2a4a36b2ce8400272d3fa78ecbce72d76",
+    "assets/index-BIrKTpvw.js": "c47a52c2452408ba263bc0b9a3f88e56d4cb98c56153efa2a5a4a91c987438cf",
+    "assets/styles-CtT-Ivkq.css": "ddb4ede71711fe600b069859911864c73aa3565f4828a1e635ab49dac62aad54"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/op-groom.webp",
+      "before": 2132241,
+      "after": 1551318,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/op-map-v1.webp",
+      "before": 2878857,
+      "after": 1882840,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/op-couple-panel.webp",
+      "before": 2231861,
+      "after": 1631810,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/op-bride.webp",
+      "before": 2303702,
+      "after": 1673374,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/op-hero-ship.webp",
+      "before": 4478521,
+      "after": 3305344,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/grand-line-voyage/op-deck-texture.png",
+      "before": 114684,
+      "after": 114684,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/grand-line-voyage/op-coin.webp",
+      "before": 228149,
+      "after": 165872,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/grand-line-voyage/op-treasure-chest.webp",
+      "before": 730977,
+      "after": 490452,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/grand-line-voyage/op-log-pose.webp",
+      "before": 247317,
+      "after": 159042,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 15346309,
+  "assetBytesAfter": 10974736,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

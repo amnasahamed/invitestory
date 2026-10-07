@@ -1,0 +1,102 @@
+{
+  "id": 7,
+  "name": "Sage Parchment",
+  "source": "https://sage-parchment.invitestory.in/",
+  "slug": "sage-parchment",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/sage-parchment",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "ea25001970d680b41051fa9e207fbb8efc85cccbd803bcd833d172528d287550",
+    "editable/wedding-data.js": "cfe16ecf83e38d188d2fc58ae9ab9d0582111388c75143223dff8b0effa2c893",
+    "editable/assets/gate-panel.jpg": "e36ea716fe022420b9443b0b68f74904d88c920f1e43bb60b5b8bcbee5f79828",
+    "editable/assets/hero-arch.jpg": "aca85a69290c8857e9c534f595136eb2b42c2d899946a6c1129576160a9c6062",
+    "editable/assets/map-preview.jpg": "377d407f33a7df18ba6e0f5f84d2a9e34be7b4a3e796f4f9e1e288ce13d0d776",
+    "editable/assets/story-1.jpg": "74ce277ce187b0a7cda050646c4a5dc354a4c66f812ca0fc1d9845a0e81d5510",
+    "editable/assets/story-3.jpg": "0e84aca886c7d6007a66978e7b03debca0652ff6285210015e31d7ec99dbfe78",
+    "editable/assets/story-2.jpg": "72be2e1d6009a59f9b9046c6e4981f6c633f276cabb47df02b47db652f88aeac",
+    "editable/assets/lotus.png": "a39120971bd0ca4befca5caa67370709241cd34e5d75c2e2140afbb9bd0693e9",
+    "editable/assets/footer-floral.jpg": "f3c08b9c69168c1c1f8d2f56f13d8868bd150481ee04350c1a267cd1a6eb9b22",
+    "external/media.invitestory.in/sage-parchment/og-image.jpg": "aca85a69290c8857e9c534f595136eb2b42c2d899946a6c1129576160a9c6062",
+    "external/media.invitestory.in/sage-parchment/src/assets/hero-arch.jpg": "aca85a69290c8857e9c534f595136eb2b42c2d899946a6c1129576160a9c6062",
+    "external/fonts.googleapis.com/css2-5f7e6dc2f6.css": "84be8dc31da8e2b960b9c2820888226ed165b7a1dbf1cb8c8df8ad65cf09203c",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+    "assets/styles-DHpdJjWo.css": "fa46cfe61ec602e7f5c72c6aeda7b47270b76a7bf0ea1b5281eb4f213bbe2583",
+    "assets/index-FTKWP6I9.js": "9287cd479d3e9eadf0a22cea817d759fce8eca5cd2c1214cba645dfb3ff0f876"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/gate-panel.jpg",
+      "before": 417423,
+      "after": 417423,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/hero-arch.jpg",
+      "before": 335165,
+      "after": 335165,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/map-preview.jpg",
+      "before": 270584,
+      "after": 270584,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-1.jpg",
+      "before": 222473,
+      "after": 222473,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-3.jpg",
+      "before": 282977,
+      "after": 282977,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-2.jpg",
+      "before": 253829,
+      "after": 253829,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/lotus.webp",
+      "before": 336838,
+      "after": 218350,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/footer-floral.jpg",
+      "before": 278680,
+      "after": 278680,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/sage-parchment/og-image.jpg",
+      "before": 335165,
+      "after": 335165,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/sage-parchment/src/assets/hero-arch.jpg",
+      "before": 335165,
+      "after": 335165,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 3068299,
+  "assetBytesAfter": 2949811,
+  "optionalDependencyFallbacks": [
+    {
+      "file": "assets/index-FTKWP6I9.js",
+      "missing": "./Aurora-DSbGJm_Z.js",
+      "fallback": "no optional Aurora overlay"
+    }
+  ],
+  "exportRepairs": []
+}

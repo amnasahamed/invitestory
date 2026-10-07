@@ -87,7 +87,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://invitestory.in/">
   <meta name="twitter:title" content="InviteStory – Digital Wedding Card Templates & Online Invitations">
-  <meta name="twitter:description" content="Interactive digital wedding cards with venue maps & ambient music. Delivered in 48 hours.">
+  <meta name="twitter:description" content="Interactive digital wedding cards with venue maps & ambient music. First draft within 48h.">
   <meta name="twitter:image" content="https://invitestory.in/assets/og-image.jpg">
 
   <!-- Structured Data (JSON-LD): WebSite & Organization -->
@@ -117,7 +117,7 @@
         "publisher": {
           "@id": "https://invitestory.in/#organization"
         },
-        "description": "Browse 30+ digital wedding invitation templates. Live previews, custom links delivered in 48h."
+        "description": "Browse 30+ digital wedding invitation templates. Live previews, personalized first drafts within 48 hours after payment and complete details."
       },
       {
         "@type": "Product",
@@ -133,7 +133,7 @@
           "priceCurrency": "INR",
           "lowPrice": "1999",
           "highPrice": "4999",
-          "offerCount": "31",
+          "offerCount": "35",
           "availability": "https://schema.org/InStock"
         }
       },
@@ -154,7 +154,7 @@
             "name": "When do you start work on my invite?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The moment your payment is confirmed — paying first reserves your slot. Send your names, dates, photos and venue on WhatsApp and our team starts building the same day."
+              "text": "We start customization after payment and receipt of complete names, dates, venues and photos on WhatsApp. Your first-draft timeline starts when both are ready."
             }
           },
           {
@@ -162,7 +162,7 @@
             "name": "How long does customisation take?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Standard delivery is 48 hours. With the Express 24h add-on (₹499 / $9 USD) we deliver within 24 hours. Timelines start once you've paid and sent all your details and photos on WhatsApp."
+              "text": "Your first draft arrives within 48 hours; within 24 hours with Express (₹799 / $9 USD) or Dearly, where it is included. Timing starts after payment and complete details. Review and approve the draft before sharing."
             }
           },
           {
@@ -194,7 +194,7 @@
             "name": "Do you have budget options or a DIY editor?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes! If you want to design it yourself, try our DIY Editor at diy.invitestory.in starting at just ₹499. For single-page reveal cards, explore our dedicated collection at reveals.invitestory.in starting from ₹999."
+              "text": "Design your own card with our DIY Editor at diy.invitestory.in for ₹999, or explore single-page reveal cards at reveals.invitestory.in from ₹999."
             }
           }
         ]
@@ -209,15 +209,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261001-solid-phone-1">
+  <link rel="stylesheet" href="styles.css?v=20261006-sales-1">
+  <link rel="stylesheet" href="sales.css?v=20261007-clarity-2">
+  <link rel="stylesheet" href="home.css?v=20261007-collection-badges-13">
+  <link rel="stylesheet" href="interactions.css?v=20261007-themes-3">
+  <link rel="stylesheet" href="preview-themes.css?v=20261007-compact-7">
 </head>
-<body>
+<body class="studio-home atelier-home browse-home">
+  <a class="studio-skip-link" href="#catalogue-header">Skip to invitation designs</a>
 
   <!-- Header Bar -->
   <header class="header-bar">
     <div class="container header-container">
       <img src="assets/logo.png" alt="InviteStory Logo - Digital Wedding Card Templates" class="logo-img" loading="eager" fetchpriority="high">
-      <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
+      <button type="button" class="atelier-menu-toggle" aria-expanded="false" aria-controls="home-navigation">Menu <span aria-hidden="true">+</span></button>
+      <nav class="studio-nav" id="home-navigation" aria-label="Main navigation">
+        <a href="#catalogue-header">The designs</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <div class="header-actions">
         <div class="currency-switch-container">
           <button class="currency-btn active" id="currency-inr">INR (₹)</button>
           <button class="currency-btn" id="currency-usd">USD ($)</button>
@@ -229,113 +240,70 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero hero-showroom">
+  <section class="hero hero-showroom studio-hero" aria-labelledby="home-heading">
     <div class="container hero-layout">
       <div class="hero-copy">
-        <p class="hero-kicker"><span aria-hidden="true"></span> Digital wedding invitations, made personal</p>
-
-        <h1 class="hero-headline">
-          Your wedding story,<br>
-          <span class="hero-headline-highlight">beautifully invited.</span>
-        </h1>
-
-        <p class="hero-subheadline">
-          A custom invite guests open on their phone — your photos, events, music &amp; venue map. We build it. You just share the link.
-        </p>
-
+        <p class="hero-kicker">Digital invitations. Personal by design.</p>
+        <h1 class="hero-headline" id="home-heading">Find an invitation that feels like you.</h1>
+        <p class="hero-subheadline">Explore the designs. We personalize your choice, ready to share in one beautiful link.</p>
         <div class="hero-action-wrapper">
-          <a href="#catalogue-header" class="hero-primary-cta" id="hero-explore-btn">
-            <span>Explore invitation designs</span>
-            <span class="hero-cta-arrow" aria-hidden="true">→</span>
-          </a>
-          <a href="#pricing" class="hero-secondary-cta" id="hero-preview-btn">
-            <span>See packages</span>
-          </a>
-        </div>
-
-        <div class="hero-proof-strip" aria-label="Why couples choose InviteStory">
-          <span class="hero-proof-item"><strong>Human-customized</strong></span>
-          <span class="hero-proof-divider" aria-hidden="true"></span>
-          <span class="hero-proof-item"><strong>Secure payment</strong></span>
-          <span class="hero-proof-divider" aria-hidden="true"></span>
-          <span class="hero-proof-item"><strong>Delivered in 48 hours</strong></span>
+          <a href="#catalogue-header" class="hero-primary-cta" id="hero-explore-btn">Find your invitation <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-
-      <div class="hero-visual">
-        <div class="hero-visual-heading">
-          <span>Featured design</span>
-          <span>Tap to preview live</span>
-        </div>
-
-        <div class="hero-showroom-showcase" aria-label="Featured wedding invitation previews">
-        
-        <!-- Showcase Card 1: Premium (Marigold Bhavan) -->
-        <button type="button" class="showroom-card showroom-card-premium" onclick="openPreview(1)" title="Preview Marigold Bhavan premium template">
-          <span class="showroom-card-media">
-            <img src="assets/preview/1.png" alt="Marigold Bhavan Premium Digital Wedding Card" class="showroom-card-img" loading="eager" fetchpriority="high">
-            <span class="showroom-card-overlay">
-              <span class="showroom-play-badge">Preview →</span>
-            </span>
-          </span>
-          <span class="showroom-card-footer">
-            <span class="showroom-tier-tag tier-premium">Premium</span>
-            <span class="showroom-card-title">Marigold Bhavan</span>
-          </span>
+      <div class="atelier-hero-product">
+        <button type="button" class="atelier-envelope" id="hero-preview-btn" aria-label="Open the Magnolia Reverie live invitation" onclick="openPreview(Number(this.dataset.designId))" data-design-id="35">
+          <img id="atelier-envelope-image" src="dearly/aubergine-magnolia/assets/envelope-first.webp" alt="Magnolia embossed envelope with a floral wax seal" width="941" height="1672" fetchpriority="high">
+          <span class="atelier-open-affordance" aria-hidden="true">Open invitation <span>↗</span></span>
         </button>
-
-        <!-- Showcase Card 2: Premium (Ever After Bloom - Center Hero Card) -->
-        <button type="button" class="showroom-card showroom-card-premium is-hero-center" onclick="openPreview(18)" title="Preview Ever After Bloom premium template">
-          <span class="showroom-popular-pill">Couples' favourite</span>
-          <span class="showroom-card-media">
-            <img src="assets/preview/16.png" alt="Ever After Bloom Premium Watercolor Digital Wedding Card" class="showroom-card-img" loading="eager" fetchpriority="high">
-            <span class="showroom-card-overlay">
-              <span class="showroom-play-badge">Preview →</span>
-            </span>
-          </span>
-          <span class="showroom-card-footer">
-            <span class="showroom-tier-tag tier-premium">Premium</span>
-            <span class="showroom-card-title">Ever After Bloom</span>
-          </span>
-        </button>
-
-        <!-- Showcase Card 3: Luxury (Rajwada Royale – Alt) -->
-        <button type="button" class="showroom-card showroom-card-luxury" onclick="openPreview(21)" title="Preview Rajwada Royale luxury template">
-          <span class="showroom-card-media">
-            <img src="assets/preview/18.png" alt="Rajwada Royale – Alt Luxury Digital Wedding Card" class="showroom-card-img" loading="eager" fetchpriority="high">
-            <span class="showroom-card-overlay">
-              <span class="showroom-play-badge">Preview →</span>
-            </span>
-          </span>
-          <span class="showroom-card-footer">
-            <span class="showroom-tier-tag tier-luxury">Luxury</span>
-            <span class="showroom-card-title">Rajwada Royale – Alt</span>
-          </span>
-        </button>
-
-        </div>
-
-        <div class="hero-feature-float" aria-hidden="true">
-          <span>Music</span><i></i><span>Maps</span><i></i><span>RSVP</span>
+        <div class="atelier-product-caption">
+          <div><strong id="atelier-product-name">Magnolia Reverie</strong><span>From the Dearly collection</span></div>
+          <div class="atelier-palette" role="group" aria-label="Signature invitation palette">
+            <button type="button" class="atelier-palette-choice is-selected" aria-label="Show Magnolia Reverie" aria-pressed="true" data-hero-design="35" style="--swatch:#682e49"></button>
+            <button type="button" class="atelier-palette-choice" aria-label="Show Something Blue" aria-pressed="false" data-hero-design="37" style="--swatch:#1e3a5f"></button>
+            <button type="button" class="atelier-palette-choice" aria-label="Show The Dahlia Garden" aria-pressed="false" data-hero-design="38" style="--swatch:#2d4f4f"></button>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
+  <div class="studio-details-strip" aria-label="What your invitation includes">
+    <div class="container">
+      <p class="studio-starting-price"><span data-sales-price="2" data-sales-price-prefix="From ">From ₹1,999</span> <span>Personalization &amp; hosting included</span></p>
+      <p class="studio-delivery-note">First draft within 48 hours <span>After payment and complete details</span></p>
+    </div>
+  </div>
 
+  <section class="atelier-experience" aria-labelledby="experience-heading">
+    <div class="container atelier-experience-layout">
+      <header class="invitation-includes-heading">
+        <p class="invitation-includes-eyebrow">Made for you. Easy for your guests.</p>
+        <h2 id="experience-heading">Your wedding,<br><em>in one link.</em></h2>
+        <p>Your celebrations, directions and guest replies, together in a personal invitation.</p>
+      </header>
+      <div class="atelier-experience-copy">
+        <ul class="invitation-includes-list">
+          <li><span aria-hidden="true">01</span><div><h3>Your story &amp; celebrations</h3><p>Your photos, music and event details, personalized for you.</p></div></li>
+          <li><span aria-hidden="true">02</span><div><h3>A clear way to get there</h3><p>Venue directions your guests can open straight from the invitation.</p></div></li>
+          <li><span aria-hidden="true">03</span><div><h3>Guest replies in one place</h3><p>WhatsApp RSVP with Premium &amp; Luxury. Email RSVP notifications with guest names and an Excel download option in the email with Dearly.</p></div></li>
+        </ul>
+        <button type="button" class="invitation-includes-demo" onclick="openPreview(35)">Try the Dearly invitation <span aria-hidden="true">↗</span></button>
+        <p class="invitation-includes-demo-note">Explore the wax-seal opening and guest experience.</p>
+      </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <!-- THE DEARLY COLLECTION — Haute Couture Flagship Showcase         -->
+  <!-- THE DEARLY COLLECTION — Wax-seal collection Flagship Showcase         -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="dearly-showroom-section" id="dearly-collection" aria-labelledby="dearly-heading">
     <div class="container">
       <div class="dearly-showroom-header">
-        <span class="dearly-showroom-eyebrow">InviteStory signature · Haute couture</span>
+        <span class="dearly-showroom-eyebrow">InviteStory signature · Wax-seal invitations</span>
         <h2 class="dearly-showroom-title" id="dearly-heading">The <em>Dearly</em> Collection</h2>
-        <p class="dearly-showroom-subtitle">For couples who want the invitation to feel like part of the wedding — a little anticipation, a beautiful reveal, and a story that unfolds from a wax seal.</p>
+        <p class="dearly-showroom-subtitle">A wax seal opens to reveal your wedding story, with floral animation and Email RSVP for guest replies.</p>
         <div class="dearly-showroom-price-badge">
           <span class="dearly-price-amount" data-inr="4999" data-usd="75">₹4,999</span>
-          <span class="dearly-price-note">per suite · 24h express delivery included</span>
+          <span class="dearly-price-note">per invitation · First draft within 24h after payment + complete details</span>
         </div>
       </div>
 
@@ -358,7 +326,7 @@
             </div>
             <p class="dearly-card-palette">Aubergine &amp; Blush</p>
             <div class="dearly-card-actions">
-              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(35)">Pick this design</button>
+              <button type="button" class="btn dearly-card-cta" onclick="openOrderDrawerForTemplate(35)">Pick this design</button>
               <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(35)" aria-label="Preview Magnolia Reverie">Preview</button>
               <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20Magnolia%20Reverie." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about Magnolia Reverie on WhatsApp" aria-label="Ask about Magnolia Reverie on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0 11.8 11.8 0 0 0 1.8 17.8L0 24l6.4-1.7A11.8 11.8 0 0 0 24 11.9c0-3.2-1.2-6.2-3.5-8.4Zm-8.4 18a9.7 9.7 0 0 1-5-1.4l-.4-.2-3.8 1 1-3.7-.2-.4a9.8 9.8 0 1 1 8.4 4.7Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1s-.5-.2-.7.2l-1 1.2c-.2.2-.4.3-.7.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.7-2.1c-.2-.3 0-.5.2-.7l.5-.6c.2-.2.2-.4.3-.6l-.1-.6c-.1-.2-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5H7c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2a11.4 11.4 0 0 0 4.4 4c.6.3 1.1.5 1.4.6.6.2 1.2.2 1.6.1.5-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.5-.1-.2-.3-.3-.5-.4Z"/></svg></a>
             </div>
@@ -377,7 +345,7 @@
             </div>
             <p class="dearly-card-palette">Cinnamon &amp; Gold</p>
             <div class="dearly-card-actions">
-              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(36)">Pick this design</button>
+              <button type="button" class="btn dearly-card-cta" onclick="openOrderDrawerForTemplate(36)">Pick this design</button>
               <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(36)" aria-label="Preview Golden Camellia">Preview</button>
               <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20Golden%20Camellia." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about Golden Camellia on WhatsApp" aria-label="Ask about Golden Camellia on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg></a>
             </div>
@@ -396,7 +364,7 @@
             </div>
             <p class="dearly-card-palette">Cobalt &amp; Iris</p>
             <div class="dearly-card-actions">
-              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(37)">Pick this design</button>
+              <button type="button" class="btn dearly-card-cta" onclick="openOrderDrawerForTemplate(37)">Pick this design</button>
               <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(37)" aria-label="Preview Something Blue">Preview</button>
               <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20Something%20Blue." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about Something Blue on WhatsApp" aria-label="Ask about Something Blue on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg></a>
             </div>
@@ -415,7 +383,7 @@
             </div>
             <p class="dearly-card-palette">Petrol &amp; Sage</p>
             <div class="dearly-card-actions">
-              <button type="button" class="btn dearly-card-cta" onclick="payRazorpayForTemplate(38)">Pick this design</button>
+              <button type="button" class="btn dearly-card-cta" onclick="openOrderDrawerForTemplate(38)">Pick this design</button>
               <button type="button" class="btn dearly-card-preview-action" onclick="openPreview(38)" aria-label="Preview The Dahlia Garden">Preview</button>
               <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20The%20Dahlia%20Garden." target="_blank" rel="noopener" class="dearly-card-link" title="Ask about The Dahlia Garden on WhatsApp" aria-label="Ask about The Dahlia Garden on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg></a>
             </div>
@@ -437,28 +405,13 @@
     <div class="container">
       <!-- Catalogue Section Header -->
       <div class="catalogue-section-header">
-        <h2 class="section-title">See them. Feel them. Choose yours.</h2>
-        <p class="section-subtitle">30+ handcrafted designs with live interactive previews</p>
+        <h2 class="section-title">Find the one that <em>feels like you.</em></h2>
+        <p class="section-subtitle">From familiar traditions to a fresh perspective. Preview a design as your guests will see it.</p>
         
-        <!-- Grid / List View Toggle -->
-        <div class="view-mode-toggle-wrap">
-          <div class="view-mode-toggle" role="group" aria-label="Template View Mode">
-            <button type="button" class="view-mode-btn active" id="view-mode-grid" data-mode="grid" aria-label="Card grid view" title="Card grid view">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
-              <span>Card</span>
-            </button>
-            <button type="button" class="view-mode-btn" id="view-mode-list" data-mode="list" aria-label="List view" title="List view">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-              <span>List</span>
-            </button>
-            <button type="button" class="view-mode-btn" id="view-mode-match" data-mode="match" aria-label="Match view" title="Match view">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-              <span>Match</span>
-            </button>
-          </div>
-        </div>
+
       </div>
 
+      <div id="invitation-discovery"></div>
       <!-- Filter controls -->
       <div class="controls-card">
         <!-- Search bar -->
@@ -466,7 +419,7 @@
           <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
-          <input type="text" id="search-input" class="search-input" placeholder="Search templates (e.g. Telugu, Ghibli, Nikah, Palace, Sage)...">
+          <input type="text" id="search-input" class="search-input" aria-label="Search invitation designs" placeholder="Search a style, tradition, or design…">
           <button class="clear-search-btn" id="clear-search-btn" aria-label="Clear search">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -477,7 +430,6 @@
         <!-- Simplified style tags -->
         <div class="filter-tags-row" id="filter-tags">
           <button class="filter-tag active" data-tag="all">All</button>
-          <button class="filter-tag" data-tag="our-picks">⭐ Our Picks</button>
           <button class="filter-tag" data-tag="traditional">Traditional</button>
           <button class="filter-tag" data-tag="modern">Modern</button>
           <button class="filter-tag" data-tag="royal">Royal</button>
@@ -492,6 +444,7 @@
       <div class="templates-grid" id="templates-grid">
         <!-- Loaded dynamically by scripts.js -->
       </div>
+      <div id="catalogue-discovery-footer" class="catalogue-discovery-footer"></div>
     </div>
   </section>
 
@@ -499,32 +452,35 @@
   <!-- SECTION 3: HOW IT WORKS — Rewritten, customer-oriented copy   -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="how-it-works" id="how-it-works">
-    <div class="container">
+    <div class="container studio-process-layout">
+      <div class="atelier-service-intro"><p class="atelier-service-label">A design service, from start to send.</p><h2 class="atelier-service-title">Chosen by you.<br><em>Made for you.</em></h2><p>You have a wedding to plan. We’ll take care of the invitation.</p></div>
+      <div class="studio-process-copy">
       <div class="how-it-works-header">
-        <h3 class="how-section-title">Your invitation is 3 steps away.</h3>
+        <p class="how-section-title">From your first choice to their first look.</p>
       </div>
 
       <div class="how-steps-wrap how-steps-visible" id="how-steps-wrap" aria-hidden="false">
         <div class="how-steps">
           <div class="how-step">
-            <div class="how-step-icon">①</div>
-            <h4 class="how-step-title">Choose a design</h4>
-            <p class="how-step-desc">Open the live demo. See exactly what your guests will receive.</p>
+            <div class="how-step-icon" aria-hidden="true">1</div>
+            <h3 class="how-step-title">Choose &amp; book</h3>
+            <p class="how-step-desc">Try the live invitation. Choose your design and review your one-time price before paying.</p>
           </div>
           <div class="how-step-arrow">→</div>
           <div class="how-step">
-            <div class="how-step-icon">②</div>
-            <h4 class="how-step-title">Pay &amp; book</h4>
-            <p class="how-step-desc">Secure UPI in under a minute. One-time, no subscription.</p>
+            <div class="how-step-icon" aria-hidden="true">2</div>
+            <h3 class="how-step-title">Send us your details</h3>
+            <p class="how-step-desc">Send your names, photos, dates and venues on WhatsApp. Our team personalizes the design for you.</p>
           </div>
           <div class="how-step-arrow">→</div>
           <div class="how-step">
-            <div class="how-step-icon">③</div>
-            <h4 class="how-step-title">We build it</h4>
-            <p class="how-step-desc">Send details on WhatsApp; your private link arrives in 48h.</p>
+            <div class="how-step-icon" aria-hidden="true">3</div>
+            <h3 class="how-step-title">Review. Then share.</h3>
+            <p class="how-step-desc">Your first draft arrives within 48h after payment and complete details; within 24h with Express or Dearly. Approve, then share your link.</p>
           </div>
         </div>
-        <p class="how-steps-tagline">No app. No editing. No design skills.</p>
+        <p class="how-steps-tagline">Approve your draft before sharing. Free revision requests for 24 hours after your first draft.</p>
+      </div>
       </div>
     </div>
   </section>
@@ -533,20 +489,21 @@
   <!-- SECTION 4: SOCIAL PROOF                                        -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="social-proof">
+    <div id="hero-customer-proof" class="sales-customer-proof container"></div>
     <div class="container">
-      <h2 class="section-title">Made for real weddings.</h2>
-      <p class="section-subtitle">Real reviews from real couples, in their own words.</p>
-      <div class="testimonials-wrapper">
-        <button type="button" class="testimonials-nav-btn testimonials-nav-prev" id="testimonials-prev" aria-label="Previous testimonial">&larr;</button>
-        <div class="testimonials-grid" id="testimonials-grid"><!-- loaded by scripts.js --></div>
-        <button type="button" class="testimonials-nav-btn testimonials-nav-next" id="testimonials-next" aria-label="Next testimonial">&rarr;</button>
-      </div>
+      <h2 class="section-title">The nicest part?<br><em>What comes back.</em></h2>
+      <p class="section-subtitle">A few words from the people we’ve invited for. Read their original WhatsApp conversations.</p>
 
+      <div class="atelier-testimonial" aria-live="polite">
+        <div class="atelier-quote-copy"><blockquote id="atelier-customer-quote">“Thank You Mam for making this invitation beautiful”</blockquote><p id="atelier-customer-context">A customer’s message after seeing their invitation.</p><button type="button" class="atelier-text-link" id="atelier-review-original" onclick="openLightbox(Number(this.dataset.reviewIndex))" data-review-index="6">Read the original chat <span aria-hidden="true">↗</span></button><div class="atelier-review-selector" role="group" aria-label="Customer conversation"><button type="button" data-customer-review="6" aria-pressed="true">The invitation</button><button type="button" data-customer-review="5" aria-pressed="false">The family</button><button type="button" data-customer-review="8" aria-pressed="false">The service</button></div></div>
+        <button type="button" class="atelier-chat-image" id="atelier-review-image-button" onclick="openLightbox(Number(this.dataset.reviewIndex))" data-review-index="6" aria-label="Read the original customer conversation"><img id="atelier-review-image" src="assets/reviews/review-07.webp" alt="Original customer WhatsApp conversation thanking InviteStory for their invitation" width="400" height="600" loading="lazy"></button>
+      </div>
+      <details class="atelier-all-reviews"><summary>More customer conversations</summary>
       <!-- ── WhatsApp Customer Chats Showcase ── -->
       <div class="wa-reviews-showcase">
         <div class="wa-reviews-header">
-          <h3 class="wa-reviews-title">Real chats. Real reactions. Zero guesswork.</h3>
-          <p class="wa-reviews-subtitle">From custom edits to family blessings on delivery day &mdash; tap any chat screenshot to view full-size.</p>
+          <h3 class="wa-reviews-title">Read the original customer chats.</h3>
+          <p class="wa-reviews-subtitle">Tap a screenshot to read the conversation full-size.</p>
         </div>
 
         <div class="wa-reviews-carousel-wrapper">
@@ -557,6 +514,7 @@
           <button type="button" class="testimonials-nav-btn wa-reviews-nav-next" id="wa-reviews-next" aria-label="Next chat screenshot">&rarr;</button>
         </div>
       </div>
+      </details>
       <div class="trust-marquee" aria-label="Trust badges">
         <div class="trust-marquee-track" id="trust-marquee-track">
           <div class="trust-marquee-set">
@@ -574,7 +532,7 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </span>
               <div class="trust-text">
-                <strong>Delivered in 48 Hours</strong>
+                <strong>First draft within 48h</strong>
                 <span>After payment &amp; receipt of details</span>
               </div>
             </div>
@@ -614,14 +572,14 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="pricing-section" id="pricing">
     <div class="container">
-      <h2 class="section-title">Beautiful doesn't have to be complicated.</h2>
-      <p class="section-subtitle">One-time payment. No subscription. Delivered in 48 hours.</p>
-      <p class="pricing-diff-line">Not another DIY editor. You pick a design, pay, send details — we build the invite for you.</p>
+      <h2 class="section-title">Three collections. One-time pricing.</h2>
+      <p class="section-subtitle">One-time payment. Personalization and hosting included.</p>
+      <p class="pricing-diff-line">Pick a collection, then choose a design. Each design belongs to one collection.</p>
       <div class="pricing-selected-design" id="pricing-selected-design" hidden aria-live="polite"></div>
       <div class="pricing-grid">
         <!-- Tier 2: Premium (Hero / Couples' favourite) -->
         <div class="pricing-card featured pricing-card-premium">
-          <div class="pricing-popular-badge">Best for most weddings</div>
+          <div class="pricing-popular-badge">Story, photos & music</div>
           <div class="pricing-card-header">
             <h3 class="pricing-card-name">Premium</h3>
             <div class="pricing-card-price-row">
@@ -632,13 +590,12 @@
           <ul class="pricing-card-features">
             <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Up to 5 events: Haldi, Mehendi, Sangeet, Wedding, Reception</span></li>
             <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Love-story timeline + photo gallery (up to 12)</span></li>
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Background music + venue maps + RSVP</span></li>
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Delivered in 48 hours</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Your music, venue directions + WhatsApp RSVP</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>First draft within 48h</span></li>
           </ul>
-          <label class="express-toggle"><input type="checkbox" id="express-toggle-2" onchange="updatePackagePayLabels()"><span>Express 24h delivery (+₹499)</span></label>
           <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="payRazorpayForPackage(2)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(2)"><img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true"><span>Ask on WhatsApp</span></button>
-          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
+          <p class="pkg-microcopy">First draft within 48 hours after payment + complete details. Review before final approval. · UPI / GPay / PhonePe</p>
         </div>
 
         <!-- Tier 3: Luxury (Prestige) -->
@@ -651,48 +608,47 @@
           </div>
           <div class="pricing-card-tagline">“Make an unforgettable entrance.”</div>
           <ul class="pricing-card-features">
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Everything in Premium, for all your events</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Everything in Premium, including WhatsApp RSVP</span></li>
             <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Cinematic opening — envelope &amp; palace reveals</span></li>
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Premium motion, effects &amp; priority build</span></li>
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Delivered in 48 hours (24h express available)</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>All wedding events, with animated transitions</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>First draft within 48h; optional 24h Express</span></li>
           </ul>
-          <label class="express-toggle"><input type="checkbox" id="express-toggle-3" onchange="updatePackagePayLabels()"><span>Express 24h delivery (+₹499)</span></label>
           <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="payRazorpayForPackage(3)"><span data-pay-label>Choose this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)"><img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true"><span>Ask on WhatsApp</span></button>
-          <p class="pkg-microcopy">Delivered within 48 hours after payment and receipt of all required details. · UPI / GPay / PhonePe</p>
+          <p class="pkg-microcopy">First draft within 48 hours after payment + complete details. Review before final approval. · UPI / GPay / PhonePe</p>
         </div>
 
         <!-- Tier 4: Dearly Exclusive -->
         <div class="pricing-card pricing-card-dearly">
-          <div class="pricing-popular-badge dearly-badge">Haute Couture</div>
+          <div class="pricing-popular-badge dearly-badge">Wax-seal collection</div>
           <div class="pricing-card-header">
             <h3 class="pricing-card-name">The Dearly Suite</h3>
             <div class="pricing-card-price-row">
               <span class="pricing-card-price">₹4,999</span>
             </div>
           </div>
-          <div class="pricing-card-tagline">“An heirloom-grade digital invitation.”</div>
+          <div class="pricing-card-tagline">“A floral reveal for your wedding story.”</div>
           <ul class="pricing-card-features">
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Everything in Luxury + animated wax-seal opening</span></li>
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Email RSVP with guest management dashboard</span></li>
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Optional photo gallery &amp; botanical motion</span></li>
-            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>24-hour express delivery included</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Animated wax-seal opening, music, events &amp; venue maps</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Email RSVP notifications + Excel download from the email</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>Photo gallery included on request &amp; botanical motion</span></li>
+            <li class="pricing-card-feature-item"><svg class="pricing-feature-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg><span>First draft within 24h, included</span></li>
           </ul>
           <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="payRazorpayForPackage(4)"><span data-pay-label>Pick this design</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(4)"><img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true"><span>Ask on WhatsApp</span></button>
-          <p class="pkg-microcopy">24h express delivery included. · UPI / GPay / PhonePe</p>
+          <p class="pkg-microcopy">First draft within 24h after payment + complete details. Review before final approval.</p>
         </div>
       </div>
       <div class="pricing-trust-strip" aria-label="Payment reassurance">
-        <span>Secure UPI payment</span><span>Human-built for you</span><span>Delivered in 48 hours</span>
+        <span>Secure UPI payment</span><span>Human-built for you</span><span>First draft within 48h</span>
       </div>
-      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe for all packages · Couples’ favourite is Premium</p>
+      <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe to compare all three collections</p>
       <div class="pricing-dots" id="pricing-dots" role="tablist" aria-label="Package cards">
         <button type="button" class="pricing-dot" data-pricing-dot="0" aria-label="Premium package" aria-current="true"></button>
         <button type="button" class="pricing-dot" data-pricing-dot="1" aria-label="Luxury package" aria-current="false"></button>
         <button type="button" class="pricing-dot" data-pricing-dot="2" aria-label="Dearly Exclusive package" aria-current="false"></button>
       </div>
-      <p class="pricing-slot-line">Payment first reserves your slot. After UPI, we WhatsApp you in minutes to collect details — delivered within 48 hours after payment and receipt of all required details.</p>
+      <p class="pricing-slot-line">After booking, send your names, dates, venues and photos on WhatsApp. Your draft timeline starts when payment and complete details are received.</p>
     </div>
   </section>
 
@@ -701,7 +657,7 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="faq-section">
     <div class="container">
-      <h2 class="section-title">Questions, Answered</h2>
+      <h2 class="section-title">Before you book</h2>
       <p class="section-subtitle">Everything you might want to know before you pay.</p>
       <div class="faq-list" id="faq-list"><!-- loaded by scripts.js --></div>
     </div>
@@ -714,14 +670,14 @@
     <div class="container">
       <div class="budget-downsell-card">
         <div class="budget-downsell-left">
-          <span class="budget-downsell-badge">BUDGET &amp; DIY OPTIONS · FROM ₹499</span>
+          <span class="budget-downsell-badge">BUDGET &amp; DIY OPTIONS · FROM ₹999</span>
           <div>
             <h4 class="budget-downsell-title">Looking for a DIY Editor or Single-Page Reveal?</h4>
-            <p class="budget-downsell-desc">Design your own card with our DIY Editor at just ₹499 on diy.invitestory.in, or explore single-page reveals starting from ₹999 on reveals.invitestory.in.</p>
+            <p class="budget-downsell-desc">Design your own card with our DIY Editor at ₹999 on diy.invitestory.in, or explore single-page reveals starting from ₹999 on reveals.invitestory.in.</p>
           </div>
         </div>
         <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
-          <a href="https://diy.invitestory.in" target="_blank" rel="noopener" class="budget-downsell-cta">DIY Editor (₹499) →</a>
+          <a href="https://diy.invitestory.in" target="_blank" rel="noopener" class="budget-downsell-cta">DIY Editor (₹999) →</a>
           <a href="https://reveals.invitestory.in" target="_blank" rel="noopener" class="budget-downsell-cta" style="background: rgba(255,255,255,0.12); border: 1px solid rgba(223,184,119,0.4); color: #ecd9ac;">Explore Reveals (₹999) →</a>
         </div>
       </div>
@@ -770,11 +726,11 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="final-cta">
     <div class="container">
-      <h2 class="final-cta-title">Your wedding deserves an invitation <em>they'll remember.</em></h2>
-      <p class="final-cta-desc">Choose a design. Pay once. We do the rest.</p>
+      <h2 class="final-cta-title">Your people.<br>Your story.<br><em>Your invitation.</em></h2>
+      <p class="final-cta-desc">Start with a design you love. We’ll make it unmistakably yours.</p>
       <div class="final-cta-buttons">
-        <a href="#pricing" class="btn-hero-primary">
-          <span>Pay from ₹1,999</span>
+        <a href="#catalogue-header" class="btn-hero-primary">
+          <span>Choose your invitation</span>
           <span class="btn-icon">→</span>
         </a>
         <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener" class="final-cta-wa-btn">
@@ -782,7 +738,7 @@
           <span>Chat on WhatsApp</span>
         </a>
       </div>
-      <p class="final-cta-micro">Human-customized · Secure payment · Delivered in 48 hours</p>
+      <p class="final-cta-micro">Human-customized · Secure payment · First draft within 48h</p>
     </div>
   </section>
 
@@ -792,14 +748,14 @@
       <div class="footer-top">
         <div class="footer-brand">
           <img src="logo/just logo.png" alt="InviteStory Logo - Digital Wedding Cards" class="footer-logo" loading="lazy">
-          <p>Hand-crafted interactive digital wedding invitations with venue maps, countdown and music — delivered to your WhatsApp in 48 hours.</p>
+          <p>Hand-crafted interactive digital wedding invitations with venue maps, countdown and music; first draft within 48 hours after payment and complete details.</p>
         </div>
         <div>
           <h4 class="footer-heading">Explore</h4>
           <ul class="footer-links">
             <li><a href="#catalogue-header">Template Catalogue</a></li>
             <li><a href="#pricing">Packages &amp; Pay</a></li>
-            <li><a href="https://diy.invitestory.in" target="_blank" rel="noopener">DIY Cards at ₹499 (DIY Editor)</a></li>
+            <li><a href="https://diy.invitestory.in" target="_blank" rel="noopener">DIY Cards at ₹999 (DIY Editor)</a></li>
             <li><a href="https://reveals.invitestory.in" target="_blank" rel="noopener">Reveals from ₹999</a></li>
             <li><a href="blog/index.html">Wedding Blog & Guides</a></li>
             <li><a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%20have%20a%20few%20questions%20before%20paying." target="_blank" rel="noopener">Chat on WhatsApp</a></li>
@@ -829,31 +785,32 @@
     <!-- Dynamic Ambient Theme Glow Backdrop -->
     <div class="preview-modal-ambient-glow" id="preview-modal-ambient-glow"></div>
 
-        <div class="preview-footer-controls">
-          <button type="button" class="preview-icon-btn" id="preview-favourite-btn" onclick="togglePreviewFavourite()" aria-label="Save design to favourites" aria-pressed="false">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>
-          </button>
-          <button type="button" class="preview-icon-btn preview-modal-close" data-preview-close aria-label="Close preview">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-          </button>
+
+
+    <div class="preview-modal-panel">
+    <header class="preview-top-controls">
       <nav class="preview-floating-controls" aria-label="Invitation viewer controls">
         <div class="preview-viewer-pill">
-          <span id="preview-counter-badge" class="preview-counter-badge">1 / 35</span>
+          <span id="preview-counter-badge" class="preview-counter-badge" aria-label="Design position in this collection">1 / 35</span>
           <div class="preview-view-toggle" id="preview-view-toggle" role="group" aria-label="Device view angle">
             <button type="button" class="preview-view-btn" id="view-mode-3d" onclick="setPreviewViewMode('3d')" aria-pressed="false">3D</button>
             <button type="button" class="preview-view-btn active" id="view-mode-flat" onclick="setPreviewViewMode('flat')" aria-pressed="true">Flat</button>
           </div>
         </div>
         <a href="#" id="preview-fullscreen-btn" target="_blank" rel="noopener" class="preview-expand-btn" title="Open full demo in new tab" aria-label="Open full demo in new tab">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg><span>Open demo ↗</span>
         </a>
-      </nav>
-        </div>
-
-    <div class="preview-modal-panel">
+      </nav>          <button type="button" class="preview-icon-btn preview-modal-close" data-preview-close aria-label="Close preview">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg><span>Close</span>
+          </button>
+    </header>
       <div class="preview-device-row">
-        <button type="button" class="preview-side-arrow side-arrow-prev" id="preview-side-prev" aria-label="Previous template">&lsaquo;</button>
-        <button type="button" class="preview-side-arrow side-arrow-next" id="preview-side-next" aria-label="Next template">&rsaquo;</button>
+        <nav class="preview-browse-controls" aria-label="Browse invitation designs"><button type="button" class="preview-side-arrow side-arrow-prev" id="preview-side-prev" aria-label="Previous template"><span aria-hidden="true">‹</span><span>Back</span></button><button type="button" id="preview-names-edit" aria-haspopup="dialog" aria-controls="preview-names-dialog">Add your names</button>
+          <button type="button" class="preview-icon-btn" id="preview-favourite-btn" onclick="togglePreviewFavourite()" aria-label="Save design to favourites" aria-pressed="false">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span data-favourite-label>Save</span>
+          </button>
+
+<button type="button" class="preview-side-arrow side-arrow-next" id="preview-side-next" aria-label="Next template"><span>Next</span><span aria-hidden="true">›</span></button></nav>
       <div class="preview-studio-shadow" aria-hidden="true"></div>
       <div class="preview-gallery-device preview-phone-3d-rig is-flat-mode" id="preview-phone-3d-rig">
         <div class="preview-phone-chassis" aria-hidden="true">
@@ -946,13 +903,21 @@
 
 
       <footer class="preview-modal-toolbar">
+<dialog id="preview-names-dialog" class="preview-names" aria-labelledby="preview-names-title">
+          <button type="button" id="preview-names-close" class="preview-names-close" aria-label="Close name customization">×</button>
+          <h2 id="preview-names-title" tabindex="-1">Picture your names here</h2>
+          <p class="preview-names-intro">Try both names across the designs. You can change them anytime.</p>
+          <form id="preview-names-form" class="preview-names-form">
+            <label>Your name<input name="first" type="text" maxlength="50" autocomplete="off" placeholder="Your name"></label>
+            <label>Partner’s name<input name="second" type="text" maxlength="50" autocomplete="off" placeholder="Partner’s name"></label>
+            <div class="preview-names-actions"><button type="submit">See our names</button><button type="button" id="preview-names-skip">Skip for now</button><button type="reset" id="preview-names-reset">Use sample names</button></div>
+            <p id="preview-names-status" role="status">Names stay in this browser tab. Other details are samples.</p>
+          </form>
+        </dialog>
+
         <div class="preview-sheet-summary">
-          <div class="preview-sheet-details"><h3 id="preview-sheet-title">Template Name</h3><p class="preview-sheet-meta"><span id="preview-sheet-collection">Premium</span> · <span id="preview-sheet-price">₹1,999</span></p></div>
-      <nav class="preview-collection-switcher" aria-label="Invitation collection" data-selected-tier="2">
-        <button type="button" class="preview-tier-tab is-active" data-preview-tier="2" aria-pressed="true">Premium</button>
-        <button type="button" class="preview-tier-tab" data-preview-tier="3" aria-pressed="false">Luxury</button>
-        <button type="button" class="preview-tier-tab" data-preview-tier="4" aria-pressed="false">Dearly</button>
-      </nav>
+          <div class="preview-sheet-details"><h3 id="preview-sheet-title">Template Name</h3><nav class="preview-collection-switcher" aria-label="Invitation collection" data-selected-tier="2"><button type="button" class="preview-tier-tab is-active" data-preview-tier="2" aria-pressed="true">Premium</button><button type="button" class="preview-tier-tab" data-preview-tier="3" aria-pressed="false">Luxury</button><button type="button" class="preview-tier-tab" data-preview-tier="4" aria-pressed="false">Dearly</button></nav><p class="preview-sheet-meta"><span id="preview-sheet-collection">Premium</span> · <span id="preview-sheet-price">₹1,999</span></p></div>
+      
           <span class="preview-collection-badge"><span aria-hidden="true">♛</span><span id="preview-modal-tier" class="preview-sheet-tier" data-tier="2">Premium Collection</span></span>
         </div>
         <button type="button" class="preview-toolbar-btn" id="preview-instant-pay-btn" onclick="openOrderDrawerForTemplate()">
@@ -991,7 +956,7 @@
                 <span class="preview-faq-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></span>
                 <h4>When will I get my invitation?</h4>
               </div>
-              <p class="preview-faq-a">Delivered within <strong>48 hours</strong> of payment + details (24h with Express).</p>
+              <p class="preview-faq-a">First draft within <strong>48 hours</strong> after payment + complete details (24h with Express or Dearly). Review before final approval.</p>
             </div>
 
             <div class="preview-faq-item">
@@ -1048,8 +1013,8 @@
       <span class="toast-icon" id="toast-icon"></span>
     </div>
     <div class="toast-content">
-      <div id="toast-title" class="toast-title">Link Copied!</div>
-      <div id="toast-message" class="toast-message">Link copied to clipboard!</div>
+      <div id="toast-title" class="toast-title">Link copied</div>
+      <div id="toast-message" class="toast-message">Your link is ready to share.</div>
       <div id="toast-action-container" class="toast-action-container" style="display:none;"></div>
     </div>
     <button type="button" class="toast-close-btn" id="toast-close-btn" aria-label="Dismiss notification" onclick="hideToast()">&times;</button>
@@ -1059,13 +1024,13 @@
   </div>
 
 
-  <!-- Exclusive Bespoke Modal (Starts from ₹8,000) -->
+  <!-- Exclusive Bespoke Modal (Starts from ₹12,000) -->
   <div id="custom-modal" class="exit-intent-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="custom-modal-title">
     <div class="exit-intent-scrim" data-custom-close></div>
     <div class="exit-intent-panel exit-intent-fomo-panel" style="max-width: 480px; text-align: center;">
       <button type="button" class="exit-intent-close" data-custom-close aria-label="Close">&times;</button>
       <div class="exit-intent-eyebrow" style="background: rgba(185, 138, 66, 0.18); color: #ecd9ac; border: 1px solid rgba(185, 138, 66, 0.4); padding: 5px 14px; border-radius: 9999px; display: inline-block;">BESPOKE DESIGN &amp; CUSTOMIZATION</div>
-      <h3 id="custom-modal-title" class="exit-intent-title" style="margin-top: 14px; color: #ffffff; font-size: 1.35rem; font-weight: 700;">Bespoke Invitations Start at <span id="custom-modal-price" style="color: #ecd9ac; font-weight: 800;">₹8,000</span></h3>
+      <h3 id="custom-modal-title" class="exit-intent-title" style="margin-top: 14px; color: #ffffff; font-size: 1.35rem; font-weight: 700;">Bespoke Invitations Start at <span id="custom-modal-price" style="color: #ecd9ac; font-weight: 800;">₹12,000</span></h3>
       <p class="exit-intent-desc" style="font-size: 0.92rem; line-height: 1.65; color: rgba(243, 237, 218, 0.85); margin-bottom: 18px;">
         Looking for a 1-on-1 bespoke wedding invitation build? Our senior design team will hand-craft your unique concept, custom illustrations, tailored animations, and personal audio tracks.
       </p>
@@ -1096,19 +1061,21 @@
       <button type="button" class="exit-intent-close" onclick="closePaymentSuccess()" aria-label="Close">&times;</button>
       <div class="pay-success-check" aria-hidden="true"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h3 id="pay-success-title" class="pay-success-title">Payment received!</h3>
-      <p class="pay-success-sub">Your slot is reserved. Send your details on WhatsApp and we start building today.</p>
+      <p class="pay-success-sub">Thank you for choosing InviteStory. Send us your order summary on WhatsApp. Our team will confirm your details and guide you through the next steps.</p>
       <dl class="pay-success-receipt">
         <div><dt>Package</dt><dd id="pay-success-package">Premium</dd></div>
         <div><dt>Amount paid</dt><dd id="pay-success-amount">₹1,999</dd></div>
         <div><dt>Payment ID</dt><dd id="pay-success-id">—</dd></div>
         <div><dt>Design</dt><dd id="pay-success-design">—</dd></div>
+        <div><dt>Extras / services</dt><dd id="pay-success-addons">—</dd></div>
+        <div><dt>Delivery</dt><dd id="pay-success-delivery">—</dd></div>
       </dl>
       <div class="pay-success-actions">
-        <button type="button" class="pay-success-wa-btn" onclick="sendDetailsOnWhatsApp()">Send details on WhatsApp →</button>
+        <button type="button" class="pay-success-wa-btn" onclick="sendDetailsOnWhatsApp()">Send order summary on WhatsApp →</button>
         <a href="thank-you.html" id="pay-success-thankyou-link" class="pay-success-secondary">Open my receipt page</a>
         <button type="button" class="pay-success-dismiss" onclick="closePaymentSuccess()">I'll do it later</button>
       </div>
-      <p class="pay-success-note">Usually live within 48 hours · 24h express if selected</p>
+      <p class="pay-success-note">Delivery timing begins once we receive all required details.</p>
     </div>
   </div>
 
@@ -1139,7 +1106,7 @@
         <div class="order-drawer-card-details">
           <div class="order-drawer-card-topline">
             <span id="order-drawer-tier-badge" class="order-drawer-badge">Premium</span>
-            <span id="order-drawer-delivery-tag" class="order-drawer-delivery-tag">48-Hour Delivery</span>
+            <span id="order-drawer-delivery-tag" class="order-drawer-delivery-tag">First draft within 48h</span>
           </div>
           <h4 id="order-drawer-item-name" class="order-drawer-item-name">Royal Heritage</h4>
           <p id="order-drawer-item-style" class="order-drawer-item-style">Interactive Wedding Website · Ambient Music · RSVP</p>
@@ -1177,7 +1144,7 @@
             <div class="order-step-num">3</div>
             <div class="order-step-content">
               <div class="order-step-title">First Draft in 48h</div>
-              <div class="order-step-desc">Review your private link. You get a 24-hour window then to suggest all changes.</div>
+              <div class="order-step-desc">Review your invitation draft. You get a 24-hour window then to suggest all changes.</div>
             </div>
           </div>
         </div>
@@ -1216,7 +1183,7 @@
               <div class="order-addon-name">24-Hour Express Delivery</div>
               <div class="order-addon-sub" id="order-addon-express-sub">Jump to the front of our design queue</div>
             </div>
-            <div class="order-addon-price" id="order-addon-express-price">+₹499</div>
+            <div class="order-addon-price" id="order-addon-express-price">+₹799</div>
           </label>
           <label class="order-addon-item" id="order-addon-email-rsvp-label">
             <input type="checkbox" id="order-drawer-addon-email-rsvp" onchange="updateOrderDrawerTotal()" />
@@ -1234,8 +1201,8 @@
       <!-- Total Price Bar -->
       <div class="order-drawer-total-bar">
         <div class="order-drawer-total-label">
-          <span>Total Investment</span>
-          <small>All taxes &amp; cloud hosting included</small>
+          <span>Your invitation</span>
+          <small>Personalised for your celebration</small>
         </div>
         <div class="order-drawer-total-val" id="order-drawer-total-val">₹4,999</div>
       </div>
@@ -1256,7 +1223,7 @@
           <span id="order-drawer-cta-text">Make this invitation mine</span>
           <span id="order-drawer-cta-badge" class="order-drawer-cta-badge">₹4,999</span>
         </button>
-        <p class="order-drawer-guarantee"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; margin-right:4px;" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Secure payment · Personalised by our team</p>
+        <p class="order-drawer-guarantee">Review your draft before final approval. Free revision requests for 24 hours after your first draft.</p>
       </div>
 
     </div>
@@ -1303,21 +1270,21 @@
   </a>
 
   <!-- Floating tier nav (mobile-app style bottom bar) -->
-  <nav class="tier-floating-nav" aria-label="Tier quick filter">
+  <nav class="tier-floating-nav home-collection-nav" aria-label="Filter invitation collections">
     <div class="glass-radio-group" id="tier-radio-group">
       <input type="radio" name="tier" id="glass-all" value="0" checked />
-      <label for="glass-all">All <span class="tier-meta" data-tier-count>(35)</span></label>
+      <label for="glass-all">All</label>
 
       <input type="radio" name="tier" id="glass-premium" value="2" />
-      <label for="glass-premium">Premium <span class="tier-meta" data-tier-count>(19)</span></label>
+      <label for="glass-premium">Premium</label>
 
       <input type="radio" name="tier" id="glass-luxury" value="3" />
-      <label for="glass-luxury">Luxury <span class="tier-meta" data-tier-count>(12)</span></label>
+      <label for="glass-luxury">Luxury</label>
 
       <input type="radio" name="tier" id="glass-dearly" value="4" />
-      <label for="glass-dearly">Dearly <span class="tier-meta" data-tier-count>(4)</span></label>
+      <label for="glass-dearly">Dearly</label>
 
-      <div class="glass-glider"></div>
+
     </div>
   </nav>
 
@@ -1329,6 +1296,12 @@
 
   <!-- WebMCP Agent Tools & JS Scripts -->
   <script src="webmcp.js"></script>
-  <script src="scripts.js?v=20261001-solid-phone-1"></script>
+  <script src="preview-themes.js?v=20261007-2"></script>
+  <script src="paid-order.js"></script>
+  <script src="scripts.js?v=20261007-collection-badges-13"></script>
+  <script src="sales.js?v=20261007-collections-9"></script>
+  <script src="home.js?v=20261007-includes-12"></script>
+  <script src="interactions.js?v=20261007-controls-8"></script>
+<script src="preview-names.js"></script>
 </body>
 </html>

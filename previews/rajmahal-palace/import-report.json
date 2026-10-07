@@ -1,0 +1,75 @@
+{
+  "id": 22,
+  "name": "Rajmahal Palace",
+  "source": "https://rajmahal-palace.invitestory.in/",
+  "slug": "rajmahal-palace",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/rajmahal-palace",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "08dbf0d344807893233a0a86df25f8170aeca9ee1142f27ad63f1d6383ddf275",
+    "editable/wedding-data.js": "9788a63c4542d8505c5facf4873fc19a452f589daf69ddbeb92563965fbe3d24",
+    "editable/assets/ganesha.png": "8755e412ecfd8377c039480c5d203d787fd80cc814ee9f2c37ef2d899e029465",
+    "editable/assets/hero-bg.png": "ed40adf2e208ac4585ffabfc09bbd70b8e7b7bd92e484bdb31a81c81346ba126",
+    "editable/assets/diya.png": "acdd1f74db6d15e0bdf26b128e6acba14efc8efdb5099adfc5960087b1215ed4",
+    "editable/assets/footer-garland.png": "4e11c83d5029f25d4a637ead8110550336e5570839092da7857a72180cedbe40",
+    "editable/assets/couple.png": "485c16c2e42566cb8076a0824fe02122c0385396237e4bec6c29ae2f3fa9b361",
+    "editable/assets/mandala.png": "53f7da4b30bc57771a7624edea4f6edf1a95b7c63935c1abf261648ca72d3600",
+    "external/media.invitestory.in/rajmahal-palace/assets/og-image.jpg": "c05cd1290f92c275266339694e6f23b61710d7b6b19c04343260911e57f0dead",
+    "external/fonts.googleapis.com/css2-07365ea972.css": "24bb1be590e85e1e7fd0049a5811d208b83a364760b86d548527050af7f620ce",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/index-DnBXbGkD.css": "77ed13f912aa278f66f0397c12f8d7d28795fae664987d0b8ce9bb9231e6a8b9",
+    "assets/index-OIk1B1Dk.js": "b453d094d8593d1d16218be1ba27962319716dd65d0ab4f6a42a1483e44d7190"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/ganesha.webp",
+      "before": 609014,
+      "after": 446638,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/hero-bg.webp",
+      "before": 2394411,
+      "after": 1700336,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/diya.webp",
+      "before": 695589,
+      "after": 523244,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/footer-garland.webp",
+      "before": 879081,
+      "after": 733146,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 2184991,
+      "after": 1622944,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/mandala.webp",
+      "before": 1955214,
+      "after": 1392900,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/rajmahal-palace/assets/og-image.jpg",
+      "before": 104275,
+      "after": 104275,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 8822575,
+  "assetBytesAfter": 6523483,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

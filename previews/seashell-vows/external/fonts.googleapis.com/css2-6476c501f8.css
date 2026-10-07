@@ -1,0 +1,24 @@
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300;
+  src: url("/previews/_shared/f514bf32a396ed41137c6bdd.woff") format('woff');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300;
+  src: url("/previews/_shared/481075f7235bcb130b16eaf7.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  src: url("/previews/_shared/481075f7235bcb130b16eaf7.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  src: url("/previews/_shared/481075f7235bcb130b16eaf7.woff2") format('woff2');
+}

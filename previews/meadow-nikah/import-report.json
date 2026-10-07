@@ -1,0 +1,110 @@
+{
+  "id": 12,
+  "name": "Meadow Nikah",
+  "source": "https://meadow-nikah.invitestory.in/",
+  "slug": "meadow-nikah",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/meadow-nikah",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "1842e2b70514be33efb4ae0ee61ca8e92984510b723d16fc6ed395d9b89faa25",
+    "editable/wedding-data.js": "d0ba635f3bcc9e5253d23801d54f651e83f9d7b9a2075a69e3f552bdf90b2d1d",
+    "editable/assets/groom.jpg": "7ec0cdca3c656ab096f4ac3d469b8a32e183ba8ebc4a92ee8d9266a454f2134f",
+    "editable/assets/hero.jpg": "31b0103d071b1dc32f402cbd5867d588f58dac88fb4b05ce988517bc12cb3918",
+    "editable/assets/Continuous_wedding_invitation_an\u2026_202608122343.mp4": "b5cc26013c08b739a8458175c283bab7583b4f3c4f61a11a040f414e8e61cd13",
+    "editable/assets/gallery-6.jpg": "15c122ff126aafaeebca90248432af77efa0609e6e3cfae4ff2b61b2621cf488",
+    "editable/assets/map.jpg": "11c10f4137d410cabe582ea95c57cfa34235caf5a03b438e80954ec76ef9ea06",
+    "editable/assets/gallery-4.jpg": "a761daf0edda9cb87253f8c0e32fc5d10d30a639d662567b7f085f28c6784449",
+    "editable/assets/gallery-5.jpg": "98f66ae20f689fac7e7952bbef552271731ecc976803e0e3651ef0c7b4129605",
+    "editable/assets/gallery-1.jpg": "4e3e87f69cef16741c5c77ab7c7ffbc71c5379f9b95b2cef9394ec2b69fb46a9",
+    "editable/assets/gallery-2.jpg": "83b3186cb737711ff3ed44c272413f5cbc24e75153a45fec1828b9295b8a15b5",
+    "editable/assets/gallery-3.jpg": "fa1699d45ca09f45029394d46f67a247a38abda372708c74e976b740c9d02ca6",
+    "editable/assets/bride.jpg": "c36509ea8cec9347aeb5c21777f47daa426c3c01c523a0a6048d928f61db0cee",
+    "editable/assets/ChatGPT Image Aug 12, 2026 at 11_08_45 PM.png": "9a80a8e4c1f89c77a80fd3fcdf36ae6ba83eb6789530b54b1be13355a6787a22",
+    "external/fonts.googleapis.com/css2-12dbab0da7.css": "de734dfb777420d56fbaf5971b97dcd58f7635ab5925ccb69f3d268060581a35",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/styles-DX-39EG5.css": "c884c6fb306a25d7ff8f685a398fd1a29b79360b47ca5fea57e961ce6b613d76",
+    "assets/index-DF9DML25.js": "4cf8ef15b3586f2b7746f85f7a368ae2110afeb851e07ad807a064bb6108d71b"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/groom.jpg",
+      "before": 125407,
+      "after": 125407,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/hero.jpg",
+      "before": 214707,
+      "after": 214707,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/Continuous_wedding_invitation_an\u2026_202608122343.mp4",
+      "before": 3343540,
+      "after": 3254746,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/gallery-6.jpg",
+      "before": 179076,
+      "after": 179076,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/map.jpg",
+      "before": 188228,
+      "after": 188228,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gallery-4.jpg",
+      "before": 157116,
+      "after": 157116,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gallery-5.jpg",
+      "before": 235658,
+      "after": 235658,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gallery-1.jpg",
+      "before": 202220,
+      "after": 202220,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gallery-2.jpg",
+      "before": 187996,
+      "after": 187996,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gallery-3.jpg",
+      "before": 212546,
+      "after": 212546,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/bride.jpg",
+      "before": 103093,
+      "after": 103093,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/ChatGPT Image Aug 12, 2026 at 11_08_45 PM.webp",
+      "before": 2062418,
+      "after": 1524242,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 7212005,
+  "assetBytesAfter": 6585035,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

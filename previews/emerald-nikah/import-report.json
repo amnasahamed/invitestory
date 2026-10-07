@@ -1,0 +1,88 @@
+{
+  "id": 8,
+  "name": "Emerald Nikah",
+  "source": "https://emerald-nikah.invitestory.in/",
+  "slug": "emerald-nikah",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/emerald-nikah",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "d04761516032930ef0d3a03073692b7930058f9364db928bd5296fa8c0229615",
+    "editable/wedding-data.js": "5619fc594acff0a20c26d4d94200882c8d5df6deb227727d778a36f1ae055e91",
+    "editable/assets/groom.jpg": "9a79697008e2e6a433279859cd37c12d266fa6a7e881598be6424e0aea2848d8",
+    "editable/assets/roses.png": "ff387c0be4cdb99145678b8c1a5218978e2de71cd6f38a45de54946f44038235",
+    "editable/assets/hero-bg.jpg": "1aa7023d0e2fc13f12b005527cf52180e3d4b48edae4ac93b6182587f72e8a9c",
+    "editable/assets/daisies.png": "2e3fd67bad897908928f591c4a799380f8a5bd2c51898ed9442e0f9a9581bf6b",
+    "editable/assets/map.jpg": "bd07c91bab5dd80959e7c6c7be84bfdc4dc083cfe3ca30994795b5ca17521f64",
+    "editable/assets/divider.png": "e2489c6de20111d1b53590e124df93ce1b859b1b3b7909bfa0afbe65ab8c5f54",
+    "editable/assets/bride.jpg": "f064ef1e56bbdccc8548f50bc269f059203c9446084a5b4707b9692e8836db5a",
+    "editable/assets/mandala.png": "efadc95f1439c2e01093806771fe7e3a8f1e9775cb4c317db1aa415cd39b3e53",
+    "external/fonts.googleapis.com/css2-e60879549b.css": "075c28ba32ba17933eccef52665b56a7580aa252eb93e42244fb271405a0a56a",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZoaelGQzaLlA.woff2": "c2dfa37eb5cf904a534d0c63b418423c6ab186de782d7eeb70c95f739149b401",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOfQPYbg.woff2": "17f7c699cf11ee00b1134e920a53363eda5506680ad061eb79b2f34cc2fb73d7",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "external/fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUsvrQw7g.woff2": "04a9d9d65ffd962c9cd30cc8fd1126268909e4bdb32991fc6abd66fbc6ef031f",
+    "external/fonts.gstatic.com/s/amiri/v30/J7afnpd8CGxBHpUrtLMS7JNK.woff2": "5436d007086292a65e4d3cc216365a0c8479000c599af40f39e19ba3ce3b4bdc",
+    "external/fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY9xJlCGg.woff2": "6b6e5a32d44e6f4eac874be6a6d8fab9775cbe5c5920fee8b6a4cc0780192c0b",
+    "assets/index-BFujBVD8.js": "ea7aac6926338160bd29f814461763af29ea8dffdd9c2036f29e90a5d53e15af",
+    "assets/styles-BBCSj1GG.css": "30e548e3a082040f6243821b2d6bf9048e6de969f45bca24b5b8e6414f7bc2f8"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/groom.jpg",
+      "before": 179199,
+      "after": 179199,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/roses.webp",
+      "before": 1061514,
+      "after": 682246,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/hero-bg.jpg",
+      "before": 242164,
+      "after": 242164,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/daisies.webp",
+      "before": 993962,
+      "after": 622658,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/map.jpg",
+      "before": 161217,
+      "after": 161217,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/divider.webp",
+      "before": 377688,
+      "after": 284962,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/bride.jpg",
+      "before": 159422,
+      "after": 159422,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/mandala.webp",
+      "before": 1748598,
+      "after": 1357600,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 4923764,
+  "assetBytesAfter": 3689468,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

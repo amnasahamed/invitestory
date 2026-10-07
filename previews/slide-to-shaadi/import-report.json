@@ -1,0 +1,48 @@
+{
+  "id": 34,
+  "name": "Slide to Shaadi",
+  "source": "https://slide-to-shaadi.invitestory.in/",
+  "slug": "slide-to-shaadi",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/slide-to-shaadi",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "index.html": "2f9b2c488ce7d6c9ef23fce78b310d6048367554ceffe128d00658f4ec6dded1",
+    "editable/wedding-data.js": "48a5bfaf0efdecccca3956c7dc6373e819aa2da8a6cb3ee454bfaca548df01b4",
+    "editable/assets/wedding-lockscreen.jpg": "51ac42db86ae1d759956e434c67a9c6c122d441590015e993f242afea4ec89ea",
+    "editable/assets/ornament-divider.jpg": "2b8dce6ce23e3689b53b589681dcc78f2cdc820b487ba3be74440fd65a80b1a6",
+    "editable/assets/couple-avatar.jpg": "82ec5106b809bd93c8958d19755e4a932e185a48eca524f6bc491d1c6cccfb37",
+    "external/fonts.googleapis.com/css2-c91799fb12.css": "5296dfbd4dad5c217f3ccdc1805bf30741ac99f2f1564d47c68b31a6f3e75370",
+    "external/fonts.googleapis.com/css2-fa6ab76fc3.css": "4bf795d604eb2b8235a679bea2340b1661edc1dd1769939167a487a9b36e6126",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRsgW7TdXc.woff2": "036f74a716b3b07b93d28c3476f1e35e6cac4da371be4034477b84764d545960",
+    "assets/styles-DP1slGf3.css": "aec4184b000fc290c8ce865fa11ed1587413aec90aa4507a3c76c6f328add543",
+    "assets/routes-BWCofe85.js": "e766a6b26b0c7ed1ed174e4c0c42122a0d66476680b2ce05c9ac83319128f956",
+    "assets/index-AcQTVbCu.js": "1fcad57c7b20593ae9edd568b05677a28ffcf4b63cfaeb030f4b5b206132643e"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/wedding-lockscreen.jpg",
+      "before": 265947,
+      "after": 265947,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/ornament-divider.jpg",
+      "before": 179116,
+      "after": 179116,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple-avatar.jpg",
+      "before": 268763,
+      "after": 268763,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 713826,
+  "assetBytesAfter": 713826,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

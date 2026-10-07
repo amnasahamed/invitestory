@@ -1,0 +1,228 @@
+{
+  "date": "2026-10-07",
+  "names": [
+    "Nikhil",
+    "Sana"
+  ],
+  "scope": "Initial mobile iframe rendering; Ganesha Gopuram checked manually after Skip intro",
+  "templates": [
+    {
+      "id": 1,
+      "name": "Marigold Bhavan",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 3,
+      "name": "Toran Telugu",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 5,
+      "name": "Shubha Vivaham",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 6,
+      "name": "Kalyana Mandapam",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 7,
+      "name": "Sage Parchment",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 29,
+      "name": "Seashell Vows",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 8,
+      "name": "Emerald Nikah",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 9,
+      "name": "Noor-e-Zahra",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 10,
+      "name": "Royal Reception",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 11,
+      "name": "Kerala Sands",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 12,
+      "name": "Meadow Nikah",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 13,
+      "name": "Grand Line Voyage",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 14,
+      "name": "Ghibli Selfie",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 15,
+      "name": "Ghibli Portrait",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 17,
+      "name": "Ivory Waltz",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 18,
+      "name": "Ever After Bloom",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 19,
+      "name": "Saga of Love",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 30,
+      "name": "Lantern Madurai",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 31,
+      "name": "Lotus Leaf Bengaluru",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 21,
+      "name": "Rajwada Royale \u2013 Alt",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 22,
+      "name": "Rajmahal Palace",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 23,
+      "name": "Midnight Stargaze",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 24,
+      "name": "Petal Path Palace",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 25,
+      "name": "Lakeview Lanterns",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 26,
+      "name": "Moonlit Lotus Barge",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 27,
+      "name": "Ganesha Gopuram",
+      "namesVerified": true,
+      "method": "Manual opening check"
+    },
+    {
+      "id": 28,
+      "name": "Wax Seal Royale",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 32,
+      "name": "Diya Haveli",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 33,
+      "name": "Gilded Hall",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 34,
+      "name": "Slide to Shaadi",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 16,
+      "name": "Lake Pichola Royal",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 35,
+      "name": "Magnolia Reverie",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 36,
+      "name": "Golden Camellia",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 37,
+      "name": "Something Blue",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    },
+    {
+      "id": 38,
+      "name": "The Dahlia Garden",
+      "namesVerified": true,
+      "method": "Initial iframe body check"
+    }
+  ],
+  "initialUncaughtErrors": 0,
+  "initialFailedImages": 0,
+  "manualChecks": [
+    "Apply names",
+    "Reset sample names",
+    "Swapped sample names preserve chosen order",
+    "Full demo remains original hosted URL"
+  ]
+}

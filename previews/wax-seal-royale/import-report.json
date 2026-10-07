@@ -1,0 +1,261 @@
+{
+  "id": 28,
+  "name": "Wax Seal Royale",
+  "source": "https://wax-seal-royale.invitestory.in/",
+  "slug": "wax-seal-royale",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/wax-seal-royale",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "b4c4a6f9ae511e2754b597dd5d65c86b0aef06bb082c6bca77a88eb46b78ceb1",
+    "css/tilda-blocks-page155232023.min-4d5d6fdfae.css": "3ef1b15a6aaa72610b516bcf09d1ddd8f70a2fcc0d22e993ffe257e33158033e",
+    "css/tilda-animation-2.0.min.css": "4367cfe21925829103cb1d8a3e599fde37dcf00e90c8303c904e5db1f5816292",
+    "css/custom.css": "b1dde80367ba9504dc4c64e57060f4ae6360491e8541931ee065d0be928fb169",
+    "css/tilda-grid-3.0.min.css": "0b5f664c528f466606c93195975f671fc46c3a9c10fee54426c2cd1cf89b1fec",
+    "css/tilda-forms-1.0.min.css": "313f15c1e6632f8223ab6444e94263914474c1ce285ddde1e7b4aeadc15555e3",
+    "css/tilda-popup-1.1.min.css": "6f284e1ae65f2f2b636e361febafaa49d1aa0a3322c713be9238725b39948101",
+    "css/fonts.css": "cde88a43834e8d37ec6562bc3e18eb9cdbba974956ea19b77c9e980264981b46",
+    "images/cdn/local-favicon.svg": "06ea37683395e536d4f3c15fa8a25d679be0525233c1d31b45f7f256755e6678",
+    "images/cdn/left-element_1.png": "739fba004e70a6c57dad28b8c1944ddb3f908908c1a94f32d2b4b3725ea3a6f9",
+    "images/cdn/noroot_9.png": "6888b095b360a89b12eb109e560b043221cd358d95192ed9c4c25742180a1061",
+    "images/cdn/noroot_8.png": "5044cea6aec1d81c6f11d69e5b8ab2e4bc21cdd504530d0ca9a629b05e0f8c0a",
+    "images/cdn/noroot_13.png": "c165d95e30a5da2cdd2f7ee0948fbb989ea06940f54838969291f3918e5d8aed",
+    "images/cdn/noroot.png": "b5d37eb20cc8cb7cf96dcbf4a4c3ad0014ba36ac12e3d75a47b32362b434c2f1",
+    "images/cdn/noroot_11.png": "f08661a6ed9eaf69fa478c673ae4416fee8286c8b38543afb26d90adbcd337e9",
+    "images/cdn/noroot_6.png": "33160dcd2e1c9da345c6dda75a7e0a8d8b66da34cfc7fe175f611c00eb7fcab3",
+    "images/cdn/noroot_14.png": "2f9e0c283a7d4c09da4150396603aeaf68fa4efe057117025ff8470514dca86c",
+    "images/cdn/acomm-decor.png": "a5400b8927f0a68338b124600588087f97f9f7339cea013de930b7e83354ac47",
+    "images/cdn/noroot_7.png": "ae5b681c0cb7ed28e43a0257ba7ad9e71b15b0a7c295a1c51aaf47225accda55",
+    "images/cdn/noroot_5.png": "1513249e9419cd7b732975bd2b4fc9cd2587f93a7dd5042733c2b421b7143eda",
+    "images/cdn/noroot_4.png": "f9f8bf1d1c553ec6dbf57e29e52d925800cb9ab8df19adb5915dcd24ebfd62a2",
+    "images/cdn/Rectangle_270.svg": "f4f3156f8e968bd427e94e89287b83bcce461f82c0c4657bcfa09eb70347fa82",
+    "images/cdn/right-element_1.png": "0b1de3295b4088e4eb6f53dce579c83d84c36f4965ab1dd4829217f4600b1c87",
+    "js/tilda-zero-1.1.min.js": "61fdae2e2a8c3721699044a3fd51425af351aff123aad42d45f20c7b2a89e81f",
+    "js/tilda-animation-sbs-1.0.min.js": "ebe77a6fbd3e4fb742ff37bb3347e1a4c3fa2c4d275807e54554ba246b9e11b5",
+    "js/tilda-popup-1.0.min.js": "22dd5ef26241412d3a0872d24e45000751ea3414fcf0b8d331413f6be6e5eb1c",
+    "js/tilda-fallback-1.0.min.js": "cdf65e26b905a653bce60df182886b032b606940391badb1e3a655f434ca446c",
+    "js/tilda-forms-1.0.min.js": "7f79eb4c5080506c34db1882e52177ffa4f8c1320890b1df62ef1f547ae3eb92",
+    "js/tilda-scripts-3.0.min.js": "c82d6e0f0f4e4080e9cecc7858b8d66195e7f5896eaab04b38ae90573ff08d92",
+    "js/tilda-events-1.0.min.js": "5ef75137fa784d916c1731eb5c3700fdadaf7babc8c55a933cb52910249ce576",
+    "js/tilda-animation-2.0.min.js": "c764f6558612179a585b3b4e0f4e952a12142d0b158c5b570160cdf3db82b524",
+    "js/tilda-lazyload-1.0.min.js": "2f718826160d39cd3a9b9e23b5044ea7143c1413dce1779c4e68b750745193c0",
+    "js/tilda-blocks-page155232023.min-4d5d6fdfae.js": "ebe56ce14de88e2361f614ba8fd65c6ebcb2d77265959dde6317535861f7d90b",
+    "js/tilda-zero-scale-1.0.min.js": "cafa1dd9be7eb11f84470c3cb4261b4992a5d81aec22f42a27cb264f0efc6986",
+    "js/tilda-polyfill-1.0.min.js": "1082d43aff97bd0ae8de1f3267b6242268525abcc44b34e0e35e5583f8b9ddd1",
+    "editable/wedding-data.js": "0e01acbfee4a3f880f32e35fbf606fe7d5c3106f02f9b26203e11819bbcf3d16",
+    "editable/assets/1782224012851.mp4": "c6c181da568ef517a1c925b9f2197c5e403b397e26d2643fe24968fd1c9600f7",
+    "editable/assets/ChatGPT Image Jun 23, 2026, 04_40_29 PM.png": "5e5eda53015358d53417d3a11269f5a2c1d9cd2de419073c4118f23ccd61bcbe",
+    "editable/assets/Swans2.mov": "447e700289aaadad44efb5110b85de5f0d91f7d2ea9047b45527a3457bcf2709",
+    "editable/assets/Einaudi_ Divenire (1) (1).mp3": "08d268fee3d790adbe9db32e0bd115c83f321680cdc8d7b977b03ace22b13e3f",
+    "editable/assets/cdn/623915249_2629494717_3.png": "b6f862cbe39c2d34ffc371dde159d4e0e955bd4884e140dc3f66e476fa642c19",
+    "editable/assets/cdn/rose_-_Copy.png": "13eb7a82d1950eb562460a934b479abd1c2f00761eb36516a505861d2e1ed815",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_3.png": "b6f862cbe39c2d34ffc371dde159d4e0e955bd4884e140dc3f66e476fa642c19",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/ChatGPT_Image_May_25.png": "d4c15896c51461594d8dfdf93bf3348fa0002b71236bf423cbe55388ed8a99a0",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_2.png": "b6f862cbe39c2d34ffc371dde159d4e0e955bd4884e140dc3f66e476fa642c19",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_1.png": "6dd322c0a55559c1c1a8be24e50bbd9ab661d63def9f2f0d8d27278eb8f59c21",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_4.png": "8cddc9f387acf78d9708477fee1f264ae6923683246560f6a9cab76cac115180",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_12.png": "ac5d4eadcfea0780ba0703af353bb4264ab6684032040e009ec88d70299f2f95",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_1.png": "548550744c675d7d4d9db8fd0a63c0f5854e5503e9fc916e762e46a620bf2e8e",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy.png": "13eb7a82d1950eb562460a934b479abd1c2f00761eb36516a505861d2e1ed815",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_3.png": "4d8938b3234aefffdf76dc5ca796b8acc7a56258c55c0198d1bc3c775a858022",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_10.png": "e28c016132b09902ce8d9d7a0a362307adbc6bc4a407e30541b0e9e6b0eb251b",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_2.png": "c27fc716e555f84080744e92e0ec73c35dbad01aedcadf28708d6d21bfba1c33",
+    "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy_1.png": "13eb7a82d1950eb562460a934b479abd1c2f00761eb36516a505861d2e1ed815",
+    "external/media.invitestory.in/wax-seal-royale/fonts/Amiri-Bold.woff": "608c2a0a0c60a21ed098ee1012695a163a6c7f9e060ab746f71da41f637f1b5c",
+    "external/media.invitestory.in/wax-seal-royale/fonts/SourceSans3-Regular.woff": "62e270156c8b0178a77f4031aae0ec82729b45dcf3c7a601b15c76104ae5120b",
+    "external/media.invitestory.in/wax-seal-royale/fonts/BeauRivage-Regular.woff": "c9e3c71e071c1704c1b8798231f6a576aaba50b5a754bce6d4e843f65974fb81",
+    "fonts/ArticaPro.woff": "45fee8d121ab4c78bbfb893f9b1a7f3cd4e95213a2612294f942c57c37118636",
+    "fonts/GT_Super_Display_Lig.woff": "859150a4b507daac2235c4da54feeb6aebd99176eaedf751d2adbf71d0280f23",
+    "fonts/Ovo-Regular.woff2": "bfce9e4011f5f29d7dd5056211c26b5396d5fd7427aa21b4840af300d3e3368d",
+    "fonts/ImperialScript-Regul.woff": "2a217d631d732859edc4cb91995cb6d7a8ac6d8ef8d5db0f11395c4041a40797",
+    "fonts/decotype-thuluth-reg.woff": "2f3aca559488cf1d9bdf57e2c2628e6de7eab5d554a1671c2d932386b5b9cdad",
+    "fonts/Canela-Light-Trial.woff": "739841c05cc22c32f329bdde895726e8fd1ddfc4bf184b5aa33e6b16eaa48ca2",
+    "fonts/ReemKufi-Regular.woff2": "98e2a2095228d1e83ac8c0a073089cac568c2a04912a58eefcf465e5a05804d7",
+    "fonts/Rufina-Bold.woff": "2861c42a555f542ceb9b8b938926d49e9f4e68b5acf2138ebf5786a50909f361",
+    "fonts/Rufina-Regular.woff": "8c8efaf1b309f48734de39fcb28610f72b51d80e4fd70dadc113a48403877cf9",
+    "fonts/TheSilverEditorial-R.woff": "afd105b161dc88416e4bb71099a49bf0c948b4adf222f83e46c75a2724070f21",
+    "fonts/google/cinzel-latin-ext.woff2": "bd11c74f54739723a68677a077d6d562f3e5d09b9bb822eb658ee5314d1a9614",
+    "fonts/google/ovo-latin.woff2": "c8c6bb6c9b0d49b1cee90ec5ec771fc31b946ebd815b0dacaef1f71e86391727",
+    "fonts/google/cinzel-latin.woff2": "ef95296c778719c3d658a8284d65078100450948851b9114485ada01d9d3d3f8"
+  },
+  "optimizations": [
+    {
+      "path": "images/cdn/left-element_1.webp",
+      "before": 19371,
+      "after": 14610,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_9.webp",
+      "before": 13358,
+      "after": 9622,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_8.webp",
+      "before": 11989,
+      "after": 9226,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_13.webp",
+      "before": 10965,
+      "after": 8350,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot.webp",
+      "before": 17251,
+      "after": 13092,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_11.webp",
+      "before": 30060,
+      "after": 21362,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_6.webp",
+      "before": 29417,
+      "after": 21104,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_14.webp",
+      "before": 61595,
+      "after": 42364,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/acomm-decor.webp",
+      "before": 20896,
+      "after": 16908,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_7.webp",
+      "before": 17610,
+      "after": 13996,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_5.webp",
+      "before": 12822,
+      "after": 9470,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/noroot_4.webp",
+      "before": 13145,
+      "after": 9296,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "images/cdn/right-element_1.webp",
+      "before": 19603,
+      "after": 14706,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/1782224012851.mp4",
+      "before": 1564391,
+      "after": 1523138,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/ChatGPT Image Jun 23, 2026, 04_40_29 PM.webp",
+      "before": 2238513,
+      "after": 1534944,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/cdn/623915249_2629494717_3.webp",
+      "before": 714552,
+      "after": 428480,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/cdn/rose_-_Copy.webp",
+      "before": 1568367,
+      "after": 968388,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_3.webp",
+      "before": 714552,
+      "after": 428480,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/ChatGPT_Image_May_25.webp",
+      "before": 2312259,
+      "after": 1766684,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_2.webp",
+      "before": 714552,
+      "after": 428480,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_1.webp",
+      "before": 1968558,
+      "after": 1279714,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_4.webp",
+      "before": 1239963,
+      "after": 821354,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_12.webp",
+      "before": 604140,
+      "after": 342954,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_1.webp",
+      "before": 535584,
+      "after": 303146,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy.webp",
+      "before": 1568367,
+      "after": 968388,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_3.webp",
+      "before": 698923,
+      "after": 457288,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_10.webp",
+      "before": 201203,
+      "after": 139334,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_2.webp",
+      "before": 636139,
+      "after": 422548,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy_1.webp",
+      "before": 1568367,
+      "after": 968388,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 19126512,
+  "assetBytesAfter": 12985814,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

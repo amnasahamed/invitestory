@@ -1,0 +1,102 @@
+{
+  "id": 19,
+  "name": "Saga of Love",
+  "source": "https://saga-of-love.invitestory.in/",
+  "slug": "saga-of-love",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/saga-of-love",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "fc2b9529516f52ce3d398c771c05195fc12623eb709f5f4fa3fd86a391e29773",
+    "editable/wedding-data.js": "2049efab0ca66f0cc7d1959baa71fbd7fe9245d5e2bcf55158881a9db6172da8",
+    "editable/assets/story-1.webp": "7bbf96320843ff80bc3bb3f96359b525431bd2ccd8bce86ecb7029b4334a07d4",
+    "editable/assets/hero-arch.webp": "387302a6172f2b8025c16e36cefab181eb9c666e611d0433a02ec254568163dc",
+    "editable/assets/gate-panel.webp": "1fceed54f41ed718cbcfc534b861635318ba741e81cddf4efc1164997b1445c6",
+    "editable/assets/map-preview.webp": "2109311eb91a3b5f114e13b3dca4f4810cb1405269086efe4294691746e44ba9",
+    "editable/assets/story-3.webp": "7fb4c63762eff96744fdd0723fee00c6ef59d4cf6ddb73546e420752b336e77e",
+    "editable/assets/story-2.webp": "f85049c98b1b750f115c978a6079e72ebe3ca1eda0a1c41626a6b3c346a7ff82",
+    "editable/assets/footer-floral.webp": "91739ceb61c3a4f1f7ded6d4d8fc65f5f5c2ba98679fca0018d383c466467644",
+    "external/media.invitestory.in/saga-of-love/og-image.jpg": "c851d936fe14b5b20500f6fbd71e3fcda867a0bf46a6998702b276b081b2d2e2",
+    "external/fonts.googleapis.com/css2-5f7e6dc2f6.css": "84be8dc31da8e2b960b9c2820888226ed165b7a1dbf1cb8c8df8ad65cf09203c",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+    "assets/styles-CyopAWIO.css": "d2a56cab3228b9eda1d1353e3364d13b560a59ad4a8bd547d4eee060d222cf3b",
+    "assets/lotus-lCFuqOQX.webp": "7fcac3e126a0b694ae1d1fdd2ddfa8a6ce7fc45ef42983a9570b062a944bf4bb",
+    "assets/index-CwGDgeeH.js": "00cf339ec33cd458b8ff5f69afce0980e63a1d8eac44db0996b6ab7d5b8b6241",
+    "assets/jaali-CjkqZpoD.webp": "68ff09ef92bf9151fa66f673a389769c76f3fff96e6efcc6e0a11a40c1e28099"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/story-1.webp",
+      "before": 110932,
+      "after": 110932,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/hero-arch.webp",
+      "before": 214848,
+      "after": 214848,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gate-panel.webp",
+      "before": 278204,
+      "after": 278204,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/map-preview.webp",
+      "before": 136568,
+      "after": 136568,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-3.webp",
+      "before": 162742,
+      "after": 162742,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-2.webp",
+      "before": 133502,
+      "after": 133502,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/footer-floral.webp",
+      "before": 129384,
+      "after": 129384,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/saga-of-love/og-image.jpg",
+      "before": 208466,
+      "after": 208466,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/lotus-lCFuqOQX.webp",
+      "before": 31126,
+      "after": 31126,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/jaali-CjkqZpoD.webp",
+      "before": 20104,
+      "after": 20104,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 1425876,
+  "assetBytesAfter": 1425876,
+  "optionalDependencyFallbacks": [
+    {
+      "file": "assets/index-CwGDgeeH.js",
+      "missing": "./Aurora-BOmNvkF7.js",
+      "fallback": "no optional Aurora overlay"
+    }
+  ],
+  "exportRepairs": []
+}

@@ -1,0 +1,75 @@
+{
+  "id": 11,
+  "name": "Kerala Sands",
+  "source": "https://kerala-sands.invitestory.in/",
+  "slug": "kerala-sands",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/kerala-sands",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "da1c7207403ff66fcfea0fe5264935be499a85e8fed98f2e57ec22d8eea88414",
+    "editable/wedding-data.js": "3f74222f129483b4a2968cf5c0877bc6bb3b8920b9f5b4966230cadc78561b98",
+    "editable/assets/groom.png": "029ab5ec362fad74d98f1481c6e55696f0215b8f633782a14d5884aba6aad52a",
+    "editable/assets/couple-hero.png": "8346a339efb35a459e2f7b4943fec6b61377f696a105bec6367c0f65fb954763",
+    "editable/assets/map-preview.jpg": "70f4a6741fef83ea01f9dd19d35bce8f4b96c765b89205be2b82f4cde90a2ce5",
+    "editable/assets/bride.png": "2b34ac94fdde7c7b5e78f79bdebd8e04ab8718e9964427fe464abac59a907c3e",
+    "external/media.invitestory.in/kerala-sands/images/garland.png": "dc6098e8cc981aaea1cb2e9170f27757c19610f91951cdd969addff114e3b72a",
+    "external/media.invitestory.in/kerala-sands/images/floral-corner.png": "f9ee154e65f39065ec86805a5f171665b6e8109e43491567a1975b36203229dd",
+    "external/media.invitestory.in/kerala-sands/images/mandala-texture.jpg": "9a3f31a35145658c8fd9e8adccbceefd9e6dbc1fd37b709fbd56aeebbad18384",
+    "external/fonts.googleapis.com/css2-7e2498fbed.css": "5eb00183a00a8d1ef0749032df9c382622d20a11af6b9a29747c3e4efe0e86ea",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/index-cdc8IQTD.js": "f9682de5a94c7658a042a55e477fa8e08a9cc13f9f146c017019dce513bfa6c8",
+    "assets/styles-xl0qPzWF.css": "0792e8adfd2707d2ccfc20fee8d0a2cabda8a5822168f213cea2983ba970ae64"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/groom.webp",
+      "before": 1139079,
+      "after": 740668,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/couple-hero.webp",
+      "before": 2559901,
+      "after": 1730876,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/map-preview.jpg",
+      "before": 165330,
+      "after": 165330,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/bride.webp",
+      "before": 1139744,
+      "after": 736352,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/kerala-sands/images/garland.webp",
+      "before": 1002375,
+      "after": 761328,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/kerala-sands/images/floral-corner.webp",
+      "before": 1130018,
+      "after": 773426,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/kerala-sands/images/mandala-texture.jpg",
+      "before": 369229,
+      "after": 369229,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 7505676,
+  "assetBytesAfter": 5277209,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

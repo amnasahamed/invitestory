@@ -1,0 +1,62 @@
+{
+  "id": 25,
+  "name": "Lakeview Lanterns",
+  "source": "https://lakeview-lanterns.invitestory.in/",
+  "slug": "lakeview-lanterns",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lakeview-lanterns",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "8fad3bb79fd1722d6e8fbedf0f8bbc759601c90180c6c8609a5fdf3ee6224bf3",
+    "editable/wedding-data.js": "66694dd09b929924401ffb2ab9f575d3365f20ab9bc95e7e5776ec72aef07a0b",
+    "editable/assets/opener-diya-v1.png": "bdc12191d9d1066ce6e6125b618bfec51016be6a74664093fe331129d4c759b0",
+    "editable/assets/hero-lakeview-teal-v1.png": "41dbe974723f1f50cbbeb5e827c78a4315cdcc2754fc9ea3a0bd470cb3584bda",
+    "editable/assets/hero-couple-v2.png": "24074815697c439f12050feac6fa4bbb6a09eee7691f579248787caf87e1142e",
+    "external/media.invitestory.in/lakeview-lanterns/assets/reference.png": "d37af30fffa040ba764755e2414f1f073a46d15f8859d94d9752632604bf669c",
+    "external/media.invitestory.in/lakeview-lanterns/assets/layers/lantern-sprite.png": "c45caf33372f073f2ded8d2b71d8a800ca4bc53849cf75aa5fcaab54965100b5",
+    "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+    "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "assets/index-BTbTLFfy.js": "5c84dfe7d4a8425d2a9fcc200c4d0dae6a782ed912393fc047c5d7a279065057",
+    "assets/index-ohagFVcT.css": "82c3d37db6e76cf6213342835ccd5ff4ccbece46b6108f05db47e639ad74348f"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/opener-diya-v1.webp",
+      "before": 1806554,
+      "after": 1138076,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/hero-lakeview-teal-v1.webp",
+      "before": 1674770,
+      "after": 1221902,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/hero-couple-v2.webp",
+      "before": 2841959,
+      "after": 1835724,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/lakeview-lanterns/assets/reference.webp",
+      "before": 986781,
+      "after": 700938,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/lakeview-lanterns/assets/layers/lantern-sprite.webp",
+      "before": 1195261,
+      "after": 756064,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 8505325,
+  "assetBytesAfter": 5652704,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

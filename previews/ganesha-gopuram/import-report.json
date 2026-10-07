@@ -1,0 +1,104 @@
+{
+  "id": 27,
+  "name": "Ganesha Gopuram",
+  "source": "https://ganesha-gopuram.invitestory.in/",
+  "slug": "ganesha-gopuram",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ganesha-gopuram",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "49173cfe14d206319b2357a9bd35f66467df414c8f6988b3c0a361871758a3ea",
+    "editable/wedding-data.js": "8d715de864b37a22c3c4c174e9e26e50cac0f3d65b7ab650e8065cd73fa4a4ed",
+    "editable/assets/video/poster.png": "886364a542846a1141dd084054a8388537597cbdaffa1de3c9776943449530df",
+    "editable/assets/video/intro.mp4": "9d5ab4832ed40755fa8c3029deb89800a336020790c79d00ae0d8fec96347019",
+    "external/media.invitestory.in/ganesha-gopuram/assets/reference.png": "771012e0bb8e369ba43df015e2afee64ff2193ded375527143e4aa36cfbad84f",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-04-gold-frame.png": "65f36bf49e0f36ea9a5d2c892a5eea3e93193abe49ea93e1f920e20047788e8d",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/family-welcome-card.png": "2ea09f0b0a3cf9ee9e78bf6396fb074b02a732d6f15a5b38b8a22c2cdf0ab166",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/cover-welcome.png": "a7e2d38c260eba1f5f22f4527da9bc277c328fc529b8faf7980b91ee4e97be76",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/ganesha-icon.png": "424d1c48ff9bc93c1047150cbc7dc4d5fbf0b93ff99cc77d6ad4d19b62114c8e",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/butterflies-sprite.png": "1cb4df8b85245d5d9e50bb8502a8dccdb45a8532f6e68e44333e23f33b87b862",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-03-props.png": "2fc342eca5afe767245fac156edfc18a3978de31cabd4a3a9f87bdaba03fb7b8",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-02-toran.png": "1e23180b794f47c49e03f603989a5948ce7f3bc1d0930aa4ef09c8f07452420e",
+    "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-01-backdrop.png": "0d43130ea2975aee063e16ab38bae4bcfb677821cb6125665eb5cc33bd04beb9",
+    "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+    "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "assets/index-H7dJ6ZK0.js": "2bd424b4889a7bceac51ef3ddb555858c7d94a7666a2f3c5d59718a5953693a2",
+    "assets/index-XMeAJffG.css": "ea72237c0fe2844ce6e4d19f4aa8c6e6407de87a1c4e268deb9714c8a1d6c32f"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/video/poster.png",
+      "before": 1287930,
+      "after": 1287930,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/video/intro.mp4",
+      "before": 969153,
+      "after": 969152,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/reference.webp",
+      "before": 2413120,
+      "after": 1678420,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-04-gold-frame.webp",
+      "before": 113564,
+      "after": 103886,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/family-welcome-card.webp",
+      "before": 545724,
+      "after": 523700,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/cover-welcome.webp",
+      "before": 652694,
+      "after": 616504,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/ganesha-icon.webp",
+      "before": 65569,
+      "after": 60986,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/butterflies-sprite.webp",
+      "before": 72143,
+      "after": 65804,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-03-props.webp",
+      "before": 208167,
+      "after": 198024,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-02-toran.webp",
+      "before": 341595,
+      "after": 318130,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-01-backdrop.webp",
+      "before": 360843,
+      "after": 342644,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 7030502,
+  "assetBytesAfter": 6165180,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

@@ -1,0 +1,21 @@
+@font-face {
+  font-family: 'Italiana';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts.gstatic.com/s/italiana/v21/QldNNTtLsx4E__B0XTmUY3tWxg.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Marcellus';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/previews/_shared/b3a7f6bf92650f3e875ad32f.woff2") format('woff2');
+}
+@font-face {
+  font-family: 'Parisienne';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/previews/_shared/b587e9bbe83a2164e63b707e.woff2") format('woff2');
+}

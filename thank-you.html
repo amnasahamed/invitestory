@@ -11,6 +11,7 @@
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
+  <script src="paid-order.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -37,7 +38,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment Received — InviteStory</title>
-  <meta name="description" content="Your InviteStory payment is confirmed. Send your wedding details on WhatsApp and your invite will be delivered within 48 hours after payment and receipt of all required details.">
+  <meta name="description" content="Your InviteStory payment is confirmed. Send your wedding details on WhatsApp. First draft within 48 hours, or 24 hours with Express or Dearly, after payment and complete details.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" href="logo/noappicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -64,19 +65,21 @@
     <div class="ty-card">
       <div class="ty-check" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
       <h1>Payment received!</h1>
-      <p>Your slot is reserved. This page is your receipt — even if you never opened WhatsApp, your order details below are enough for us to find your payment.</p>
+      <p>Thank you for choosing InviteStory. Send us your order summary on WhatsApp. Our team will confirm your details and guide you through the next steps.</p>
       <dl class="ty-receipt">
         <div><dt>Package</dt><dd id="ty-package">—</dd></div>
         <div><dt>Amount paid</dt><dd id="ty-amount">—</dd></div>
         <div><dt>Payment ID</dt><dd id="ty-payment">—</dd></div>
         <div><dt>Design</dt><dd id="ty-design">—</dd></div>
+        <div><dt>Extras / services</dt><dd id="ty-addons">—</dd></div>
+        <div><dt>Delivery</dt><dd id="ty-delivery">—</dd></div>
       </dl>
       <div class="ty-steps">
         <div><strong>1.</strong> Tap below to open WhatsApp with your payment details pre-filled.</div>
         <div><strong>2.</strong> Send names, dates, photos &amp; venue (we reply with a short checklist).</div>
-        <div><strong>3.</strong> Delivered within 48 hours after payment and receipt of all required details.</div>
+        <div><strong>3.</strong> Your first-draft timeframe begins after payment and complete details. Review and approve before sharing.</div>
       </div>
-      <a href="https://wa.me/918281583882" id="ty-wa-btn" target="_blank" rel="noopener" class="ty-wa">Send details on WhatsApp →</a>
+      <a href="https://wa.me/918281583882" id="ty-wa-btn" target="_blank" rel="noopener" class="ty-wa">Send order summary on WhatsApp →</a>
       <a href="index.html#pricing" class="ty-back">← Back to packages</a>
     </div>
   </main>
@@ -107,11 +110,13 @@
       document.getElementById("ty-payment").textContent = pid;
       document.getElementById("ty-design").textContent = design;
 
-      var designLine = q.get("design") ? "\nDesign I want: " + q.get("design") : "";
-      var refLine = (utmSource || utmCampaign || utmTerm)
-        ? "\nRef: " + (utmSource || "ads") + (utmCampaign ? " / " + utmCampaign : "") + (utmTerm ? " / " + utmTerm : "")
-        : "";
-      var msg = "Hi InviteStory! Paid for " + pkg + " (" + amountStr + ").\nPayment ID: " + pid + designLine + refLine + "\nI'll send names, dates, photos, venue next.";
+      var addons = [];
+      try { addons = JSON.parse(q.get("addons") || "[]"); } catch {}
+      var details = {packageName:pkg, amountText:amountStr, paymentId:pid, designName:q.get("design") || "", addons:addons, express:q.get("express")==="1", currency:q.get("currency") || "INR", previewNames:q.get("names") || "", utm_source:utmSource, utm_campaign:utmCampaign, utm_term:utmTerm, utm_content:utmContent};
+      var summary = InvitePaidOrder.summary(details);
+      document.getElementById("ty-addons").textContent = summary.addons;
+      document.getElementById("ty-delivery").textContent = summary.delivery;
+      var msg = InvitePaidOrder.message(details);
       var waBtn = document.getElementById("ty-wa-btn");
       waBtn.href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
 

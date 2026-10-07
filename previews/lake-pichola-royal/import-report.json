@@ -1,0 +1,97 @@
+{
+  "id": 16,
+  "name": "Lake Pichola Royal",
+  "source": "https://lake-pichola-royal.invitestory.in/",
+  "slug": "lake-pichola-royal",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lake-pichola-royal",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "475fc83b40d05009a6b8c351d52e7be2f4d1b19ea24350f833da45743f3fc63e",
+    "sections/dock.js": "1641ce13261b2aa24ce4fb625a1e2faa57dd863caf1770e2b667338c09dad40b",
+    "sections/navbar.js": "3591bcb86a069b19953b3fdee5d77c09fec3c8dbe5365f4ff3256ce6e56b5fa1",
+    "sections/itinerary.js": "9a4247fc9631d7a230f5e4f17dd853065736f6bb88ce8ac5204e88f7a94af78c",
+    "sections/story.js": "10b4f5ba34177486e1e3fdb71ce140b93c185fedf143d642500b2f342ed8d945",
+    "sections/gallery.js": "e52ff12321400566704ea470bdf3c085fa1ab56403b371eabdb311286f62aeca",
+    "sections/countdown.js": "9dd46079b9978e75f86d70194a2dca2e8319171b6b5aafb54f845bf43aff2291",
+    "sections/hero.js": "43a8956282e7f0483831dfe7e7f39d62705e09f344706731fcdade2f721f9573",
+    "sections/details.js": "88b25b00cede7261160a238081bb6e18e23636f249c3d9b9ceffdd6c0986195d",
+    "sections/footer.js": "c6c72d85c120e35061834bdcd0eaec3d0577bc730c81a06ba339741cf54379fc",
+    "content/wedding-data.js": "946742314a545667e2868ba14747d35640df8e36e19f5b145e5da2cd7034813f",
+    "styles/theme.css": "77668ed4f77d53e5d7c0fc29b51c52dc19bdd67f34aea94af32c8321dd800d67",
+    "styles/responsive.css": "73bea1b5a3ff3f947052641ceed8e9c1c385c0f566376244937491733b0da06c",
+    "styles/fonts.css": "10e3bcd0f5ca2bf1d5e7c39b20f38e1bf9a11e4f3e1f6432eac38792782045c4",
+    "styles/utilities.css": "04996489295cf99aee53dbbbb0b8f66b88c0a6b1761059e702ad3cad1a392629",
+    "styles/base.css": "1a7895cd54666892a4c483be050cd8a450fd372bcaca77ea67840ef8ce1d0a56",
+    "scripts/icons.js": "fb4e9d388f772a9da24e8fa8565a5c84b1b7cbbe601c6453e27bec6e44a98d7a",
+    "scripts/dock.js": "4f2fdeea31a17d67de95bf3c10d81a417981a00f93e863bacf79577e9eca4b55",
+    "scripts/navbar.js": "1409704ee08485ed985ee3ac3703465f2aa8a0e36b5a9e6d33ea3fc374650b3c",
+    "scripts/itinerary.js": "9bb7be65111c4a706d821d34d57c8da5f3e54c9928841d9125094548965d1f00",
+    "scripts/effects.js": "40a371ce508e2105d9182f2c8f9bdd921cd3ccfac7ae3976f3d88e73a05b2baa",
+    "scripts/card-tilt.js": "c7d296fb1413a24f4c20fa82b0e09313e481b62aeb2e8b397f0f19fec5810134",
+    "scripts/gallery.js": "d5b32db41a5f00f9f2696f070c2479e46342e3dbf179fb436a4e37489b70d295",
+    "scripts/itinerary-ics.js": "69e43cfb0ded3ed4f406e7f7be62410e292893c84774f94cd77d4dac736afdc5",
+    "scripts/main.js": "dc2f9ee0c0046af3b0416d8757dc3a7757cfede132f48b7ba4e686bdf17af889",
+    "scripts/countdown.js": "27dbd1fd8218d7c501f421905b836f18f09c8bff4ed024a271ebcac8e2a35c8d",
+    "scripts/hero.js": "168a5923dcfe6ba5bf84b3fc063294b3dfe02711083995af022ce111a2e63a1f",
+    "scripts/details.js": "21e0b9ad2c1e21af0bc0d410af18a233d5ce1227e7cb6dc6eb1bee6cde77dcda",
+    "scripts/calendar.js": "558b42ad412442417ce95d00ac0ce7cef5ac3f24808c324ce3efee0efe24ec7e",
+    "scripts/reveal.js": "80f1254aed236bb5d30096e663ff5ee51078094e7fcbfc2e88163b014194efb1",
+    "scripts/footer.js": "3d804f6820b2a0d116f468e7c730927a4a8e3f575e2416c460a18eb7598a709f",
+    "scripts/vendor/confetti.js": "502e44c4d7d2ff158a0105ca811b8c4fe57bfed54381187624dad85920b463ae",
+    "assets/images/event_vivah.jpg": "0620ed3f1095fb93976c410a600754c2985e882016b9a536ca2c3518cb5e224a",
+    "assets/images/royal-couple.jpg": "aa0c32e0af0e86b6d5bf714b3ebb2026861d4984855634866d0158eea35c473c",
+    "assets/images/event_sangeet.jpg": "b2e2fa349f7f0d3584489e96845876790be4fd9409597f3f89a5d9e8f728a93f",
+    "assets/images/event_mehendi.jpg": "fec15f2eb2c77d2842102ed9ae597d9bbce41ce71a91feecc2637698e8f17547",
+    "assets/images/hero_twilight.jpg": "23fa402f1fb33c7c9632c6a70c3bd1ee96c87cd3affc03c8c2afb978b3f0d7b8",
+    "assets/images/event_reception.jpg": "2af7e92743dc50e5a66b8811702b51abb71106229da7ec8edb12b51fa2cae19a",
+    "assets/audio/indian-flute-and-sitar.mp3": "7e1c5715443c6fb2e4af66af3316adce4638f2f8c53680d70665aeed41d74cf5",
+    "assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXPT7Sh2E-.woff2": "d81677a89bc8f7aafac1ad022251f69691457465e98b56d6ec5a86d622ffc29d",
+    "assets/fonts/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtXK-F2qC0s.woff": "f781cbcbe65df93756c69a31669ffaa6af5dee2b980477e43bf69bb857789b1b",
+    "assets/fonts/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "assets/fonts/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+    "assets/fonts/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545"
+  },
+  "optimizations": [
+    {
+      "path": "assets/images/event_vivah.jpg",
+      "before": 1118671,
+      "after": 1118671,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/images/royal-couple.jpg",
+      "before": 1067989,
+      "after": 1067989,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/images/event_sangeet.jpg",
+      "before": 1169623,
+      "after": 1169623,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/images/event_mehendi.jpg",
+      "before": 1227140,
+      "after": 1227140,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/images/hero_twilight.jpg",
+      "before": 913813,
+      "after": 913813,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/images/event_reception.jpg",
+      "before": 1263121,
+      "after": 1263121,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 6760357,
+  "assetBytesAfter": 6760357,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

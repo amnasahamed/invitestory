@@ -1,0 +1,83 @@
+{
+  "id": 10,
+  "name": "Royal Reception",
+  "source": "https://royal-reception.invitestory.in/",
+  "slug": "royal-reception",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/royal-reception",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "0c26223d990f0b5bb53ec806d36a811c4b87144522cf568b25ca4a210f18f79f",
+    "editable/wedding-data.js": "b1036bf388cf6c7c040d7ad3c03189fc1e53fa7fe8931e9e58c5414f321fd7e8",
+    "editable/assets/groom.png": "e0bd7d434db58312ba75672cce15b81ccd2869d8ba08d2734d4ab809eb23e37e",
+    "editable/assets/couple-hero.png": "4f6ef1873aeea49975948350f6b042c4158364ef93f608a9d3b3c5d58d3e19d6",
+    "editable/assets/lotus-cluster.png": "3f0dd0115bc088f52194edf01e8701c2663b2e66703e4860874fb3ca483bcbc5",
+    "editable/assets/map-preview.jpg": "0ccae1785fd17759e2ef49e44fdab513a836ceb6902e1b5b3e199f24d42ad1d7",
+    "editable/assets/butterfly.png": "09877f0613915b0654b155752a509b99283ae205a14bd8b1cdbf22dacebc5642",
+    "editable/assets/swirl-band.png": "e730c885422bbce4766e2d5a695454d76840f2bea46d0ff07479daa43c2b903c",
+    "editable/assets/bride.png": "53c50b13630449d793f3a6dab05663b26ff27171a4ec6ba5a512d2c5280bfb18",
+    "editable/assets/mandala-texture.jpg": "db2bbf4fd103ffcb816060d5c626d9d336eb0c82f1422f2faf31415034b1daf1",
+    "external/fonts.googleapis.com/css2-9facd44c61.css": "f2161bfc231bae144d5b0153c4479260edc0fab3b55ac71d30a9332c7c6765f8",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/index-v0zxlr5R.js": "c11d5e5fd65745257d2e96660fc1a20f10f94279bfa57bfbb7b14140bc353a33",
+    "assets/styles-k_wyScDq.css": "84c558524acf7426e823b0ac2450b96404edebded909961ea8ef9d4127d76953"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/groom.webp",
+      "before": 1358673,
+      "after": 839942,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/couple-hero.webp",
+      "before": 1860104,
+      "after": 1193830,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/lotus-cluster.webp",
+      "before": 1770504,
+      "after": 1337274,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/map-preview.jpg",
+      "before": 139116,
+      "after": 139116,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/butterfly.webp",
+      "before": 125093,
+      "after": 83960,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/swirl-band.webp",
+      "before": 1251056,
+      "after": 868998,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/bride.webp",
+      "before": 1662971,
+      "after": 1046840,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/mandala-texture.jpg",
+      "before": 352276,
+      "after": 352276,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 8519793,
+  "assetBytesAfter": 5862236,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

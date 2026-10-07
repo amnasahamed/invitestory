@@ -1,0 +1,7 @@
+# Hash-named shared fonts are identical across invitation previews.
+/previews/_shared/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Sample invitations should not compete with the main catalogue in search.
+/previews/*
+  X-Robots-Tag: noindex

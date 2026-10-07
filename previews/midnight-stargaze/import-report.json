@@ -1,0 +1,82 @@
+{
+  "id": 23,
+  "name": "Midnight Stargaze",
+  "source": "https://midnight-stargaze.invitestory.in/",
+  "slug": "midnight-stargaze",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/midnight-stargaze",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "469cd6f9351932ce2d8a119a3d4117693c53b63489c8f93818e9ecdba57ea809",
+    "editable/wedding-data.js": "9303db4ca3b6657e1305f39af454d862175f9b6d36408251bbfb3676f8b67a00",
+    "editable/assets/ganesha.png": "8755e412ecfd8377c039480c5d203d787fd80cc814ee9f2c37ef2d899e029465",
+    "editable/assets/venue-palace.webp": "28e038b5239b4758c2526cd401f259476b35831f7b3a3120f1e28dac06a3a3f5",
+    "editable/assets/couple.webp": "43474d841626808c8e5f8904b75765936b276a7540c4d29ed09f6d9d90f3e36a",
+    "editable/assets/lantern.webp": "a06f3984dba138cce0dce9ece4d670fd2004ddf918655c329d31b90e6b7821ce",
+    "external/media.invitestory.in/midnight-stargaze/assets/garland-top.webp": "b64df9093713aa82c9dc5b247c77462fd4943e135f883433308d83f192069ab9",
+    "external/media.invitestory.in/midnight-stargaze/assets/navy-texture.webp": "87b7e40f606ffb62dafa49931dd0b114ea1e8f47662ec29da0a7649a3f4eb358",
+    "external/media.invitestory.in/midnight-stargaze/assets/mandala.png": "53f7da4b30bc57771a7624edea4f6edf1a95b7c63935c1abf261648ca72d3600",
+    "external/fonts.googleapis.com/css2-07365ea972.css": "24bb1be590e85e1e7fd0049a5811d208b83a364760b86d548527050af7f620ce",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/index-3-78T76B.css": "bbac75cf0f2f4c52eb7fc4db4e5274fe6eb2db71becf723cf4deeabe1c6234ec",
+    "assets/index-B7GbZwnv.js": "17e53d84a3e3a1399a5c98456ae9ded6a277de5701e387c89f8c67c0c573a03a",
+    "assets/lantern.webp": "a06f3984dba138cce0dce9ece4d670fd2004ddf918655c329d31b90e6b7821ce"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/ganesha.webp",
+      "before": 609014,
+      "after": 446638,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/venue-palace.webp",
+      "before": 174270,
+      "after": 174270,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 190388,
+      "after": 190388,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/lantern.webp",
+      "before": 52302,
+      "after": 52302,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/midnight-stargaze/assets/garland-top.webp",
+      "before": 374436,
+      "after": 374436,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/midnight-stargaze/assets/navy-texture.webp",
+      "before": 143704,
+      "after": 143704,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/midnight-stargaze/assets/mandala.webp",
+      "before": 1955214,
+      "after": 1392900,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "assets/lantern.webp",
+      "before": 52302,
+      "after": 52302,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 3551630,
+  "assetBytesAfter": 2826940,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

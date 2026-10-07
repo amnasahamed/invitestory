@@ -10,6 +10,13 @@ node_modules/
 # Dev scripts and server files
 serve.mjs
 html-to-markdown.mjs
+marketing/
+tests/
+tools/
+**/__pycache__/
+previews/**/import-report.json
+previews/last-import.json
+previews/local-import-report.json
 package.json
 package-lock.json
 bun.lockb
@@ -20,4 +27,19 @@ wrangler.jsonc
 
 # Scratch files
 *.csv
-ChatGPT Image*
+/ChatGPT Image*
+
+# Internal reports, local runtimes and configuration
+/docs/
+/anti-slop/
+/.wrangler/
+**/.git
+**/.git/**
+.env
+.env.*
+*.bak
+/skills-lock.json
+/vercel.json
+/middleware.js
+/api/
+/_worker.js

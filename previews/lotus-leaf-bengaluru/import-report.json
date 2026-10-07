@@ -1,0 +1,61 @@
+{
+  "id": 31,
+  "name": "Lotus Leaf Bengaluru",
+  "source": "https://lotus-leaf-bengaluru.invitestory.in/",
+  "slug": "lotus-leaf-bengaluru",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lotus-leaf-bengaluru",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "2454312ab1291e2ea829500568cb6657435586f1a39ea3790779d62782530b1b",
+    "editable/wedding-data.js": "7d5ecc6d2e355f0763a9ed8425151d8d8823b4de18d21d03b4de77ade757266d",
+    "editable/assets/aarav-ananya-og.jpg": "a4263ba065baedafe26f5b2e00aa7068cccd4efc12136a7c9b2ff780d3e4ee98",
+    "editable/assets/sm.mp4": "dc51fdcb3681ad0f9497d8a85548e72926db1dd9fddf8f317eedc813ae6059ac",
+    "editable/assets/flow-first-frame.webp": "deba3ddbb5d9cffa1b890427bf10fb104b6d5240fe62b1f1d72595e44edbaba8",
+    "editable/assets/aarav-ananya-story.webp": "7a4278256d24987ee467c8bb315c7921178574d66589a9eb37857a69643443d3",
+    "editable/assets/aarav-ananya-hero.webp": "35ca9e47ee9a3fde6d43a1fd36c54e40d269f7cd0a54a4c223b5b9d2ccc485f6",
+    "external/fonts.googleapis.com/css2-01da2f8115.css": "b9647b4f6977046b500ec267b9a387935e9232fb12a5ed59d496b09877427ef3",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjNk9IfqxUQ.woff": "a442d16ffebebb3fbf555778c345707ef980d326af8a1ae67dfaa00c0f2571ff",
+    "external/fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RnipYvQwI.woff2": "bed175405601c464daf50397db785d55b6c9d93c1be428a4ff7c3fb5a4e23c19",
+    "external/fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRsgW7TdXc.woff2": "036f74a716b3b07b93d28c3476f1e35e6cac4da371be4034477b84764d545960",
+    "assets/index-Fwiizu_u.css": "473f0ad26f4793a054115f29bdae432297fee0fd8cd10ca07347d02de31fa45e",
+    "assets/index-DLpsKpIv.js": "92da05b0d19c6e5056d9a2234ffccd5e723711493975a52c16f78e3a249127cc"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/aarav-ananya-og.jpg",
+      "before": 149341,
+      "after": 149341,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/sm.mp4",
+      "before": 2383615,
+      "after": 2383614,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/flow-first-frame.webp",
+      "before": 475850,
+      "after": 475850,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/aarav-ananya-story.webp",
+      "before": 422146,
+      "after": 422146,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/aarav-ananya-hero.webp",
+      "before": 570806,
+      "after": 570806,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 4001758,
+  "assetBytesAfter": 4001757,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

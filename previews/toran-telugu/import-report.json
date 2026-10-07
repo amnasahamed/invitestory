@@ -1,0 +1,88 @@
+{
+  "id": 3,
+  "name": "Toran Telugu",
+  "source": "https://toran-telugu.invitestory.in/",
+  "slug": "toran-telugu",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/toran-telugu",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "cd10c743240811a61d73af91998c154c51e3450141f6f38f7fe0b318b2853e21",
+    "editable/wedding-data.js": "6525ac74e896df37fb441f5f9153678fe92bf7f703e55e01028f8753ae702453",
+    "editable/assets/jasmine-strand.png": "19c06302954b1b7314638d4541e0e8d939dbae2721fe4f33d6e326a9d6fe8cc2",
+    "editable/assets/couple-2.jpg": "019883311ba65d45b1041356044d7c637f1a83dbfc85fdd3299a2cf73820e52d",
+    "editable/assets/couple-3.jpg": "e2aabdd981f1f393e7a456eb2167ab4549454a4de6eddb028c1b72f6776371b7",
+    "editable/assets/couple-1.jpg": "464cf6da2db2849021384a0c5cb053b1ea3008d3b5cbe618628ead04c7c29258",
+    "editable/assets/couple-4.jpg": "8c8d828f6a555302a853cad1b62eab184ed87f3291478e28ebc2f11647e2622f",
+    "editable/assets/gopuram.png": "8579c1fa88304220b8f827180199031d4d4a6fe0199f4345fac481461d2b23aa",
+    "editable/assets/hero-flatlay.jpg": "baa9285d06b067b70c2eb0d9ec83d851e3d98bc0a981006c4c931f3f6262f8bc",
+    "external/fonts.googleapis.com/css2-a70786b470.css": "6d06a39b762d1defa4de9bccf10f4b55ebc3b529b63c13d030fb519e63baac24",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+    "external/fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOfQPYbg.woff2": "17f7c699cf11ee00b1134e920a53363eda5506680ad061eb79b2f34cc2fb73d7",
+    "external/fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1_PZJEZG-e9gHhdI4-NBbfd2ys3SjJCx1sztrpLpI.woff2": "8776b16393b45f1e892cbf18eabdf59f9f2d34b9dd1374f990ce93c098330815",
+    "assets/styles-BgdVW63E.css": "d1dc5812bc1e53a5c98601384629a5782b155ef0ade6c8c1568d6e46ab86848b",
+    "assets/index-BmbkA8aA.js": "47de580bde2ffdc6f68d115293bede8ea420ed5970227d72a1f8cb247439d007"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/jasmine-strand.webp",
+      "before": 193335,
+      "after": 130258,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/couple-2.jpg",
+      "before": 138997,
+      "after": 138997,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple-3.jpg",
+      "before": 139961,
+      "after": 139961,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple-1.jpg",
+      "before": 108464,
+      "after": 108464,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple-4.jpg",
+      "before": 144167,
+      "after": 144167,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gopuram.webp",
+      "before": 449880,
+      "after": 339990,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/hero-flatlay.jpg",
+      "before": 231356,
+      "after": 231356,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 1406160,
+  "assetBytesAfter": 1233193,
+  "optionalDependencyFallbacks": [
+    {
+      "file": "assets/index-BmbkA8aA.js",
+      "missing": "./lenis-DoixeXP8.js",
+      "fallback": "native scrolling"
+    },
+    {
+      "file": "assets/index-BmbkA8aA.js",
+      "missing": "./Aurora-BNue7cja.js",
+      "fallback": "no optional Aurora overlay"
+    }
+  ],
+  "exportRepairs": []
+}

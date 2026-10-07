@@ -1,0 +1,365 @@
+{
+  "date": "2026-10-07",
+  "origin": "http://localhost:7100",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "scope": "Initial rendering after iframe load and 2200ms; not exhaustive interaction testing",
+  "results": [
+    {
+      "id": 1,
+      "name": "Marigold Bhavan",
+      "url": "/previews/marigold-bhavan/",
+      "rendered": true,
+      "loadedImages": 2,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 3,
+      "name": "Toran Telugu",
+      "url": "/previews/toran-telugu/",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 5,
+      "name": "Shubha Vivaham",
+      "url": "/previews/shubha-vivaham/",
+      "rendered": true,
+      "loadedImages": 10,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 6,
+      "name": "Kalyana Mandapam",
+      "url": "/previews/kalyana-mandapam/",
+      "rendered": true,
+      "loadedImages": 9,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 7,
+      "name": "Sage Parchment",
+      "url": "/previews/sage-parchment/",
+      "rendered": true,
+      "loadedImages": 11,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 29,
+      "name": "Seashell Vows",
+      "url": "/previews/seashell-vows/",
+      "rendered": true,
+      "loadedImages": 8,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 8,
+      "name": "Emerald Nikah",
+      "url": "/previews/emerald-nikah/",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 9,
+      "name": "Noor-e-Zahra",
+      "url": "/previews/noor-e-zahra/",
+      "rendered": true,
+      "loadedImages": 6,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 10,
+      "name": "Royal Reception",
+      "url": "/previews/royal-reception/",
+      "rendered": true,
+      "loadedImages": 9,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 11,
+      "name": "Kerala Sands",
+      "url": "/previews/kerala-sands/",
+      "rendered": true,
+      "loadedImages": 6,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 12,
+      "name": "Meadow Nikah",
+      "url": "/previews/meadow-nikah/",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 13,
+      "name": "Grand Line Voyage",
+      "url": "/previews/grand-line-voyage/",
+      "rendered": true,
+      "loadedImages": 13,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 14,
+      "name": "Ghibli Selfie",
+      "url": "/previews/ghibli-selfie/",
+      "rendered": true,
+      "loadedImages": 16,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 15,
+      "name": "Ghibli Portrait",
+      "url": "/previews/ghibli-portrait/",
+      "rendered": true,
+      "loadedImages": 6,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 17,
+      "name": "Ivory Waltz",
+      "url": "/previews/ivory-waltz/",
+      "rendered": true,
+      "loadedImages": 9,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 18,
+      "name": "Ever After Bloom",
+      "url": "/previews/ever-after-bloom/",
+      "rendered": true,
+      "loadedImages": 23,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 19,
+      "name": "Saga of Love",
+      "url": "/previews/saga-of-love/",
+      "rendered": true,
+      "loadedImages": 11,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 30,
+      "name": "Lantern Madurai",
+      "url": "/previews/lantern-madurai/",
+      "rendered": true,
+      "loadedImages": 1,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 31,
+      "name": "Lotus Leaf Bengaluru",
+      "url": "/previews/lotus-leaf-bengaluru/",
+      "rendered": true,
+      "loadedImages": 3,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 21,
+      "name": "Rajwada Royale \u2013 Alt",
+      "url": "/previews/rajwada-royale/",
+      "rendered": true,
+      "loadedImages": 8,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 22,
+      "name": "Rajmahal Palace",
+      "url": "/previews/rajmahal-palace/",
+      "rendered": true,
+      "loadedImages": 15,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 23,
+      "name": "Midnight Stargaze",
+      "url": "/previews/midnight-stargaze/",
+      "rendered": true,
+      "loadedImages": 15,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 24,
+      "name": "Petal Path Palace",
+      "url": "/previews/petal-path-palace/",
+      "rendered": true,
+      "loadedImages": 10,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 25,
+      "name": "Lakeview Lanterns",
+      "url": "/previews/lakeview-lanterns/",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 26,
+      "name": "Moonlit Lotus Barge",
+      "url": "/previews/moonlit-lotus-barge/",
+      "rendered": true,
+      "loadedImages": 9,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 27,
+      "name": "Ganesha Gopuram",
+      "url": "/previews/ganesha-gopuram/",
+      "rendered": true,
+      "loadedImages": 2,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 28,
+      "name": "Wax Seal Royale",
+      "url": "/previews/wax-seal-royale/",
+      "rendered": true,
+      "loadedImages": 27,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 32,
+      "name": "Diya Haveli",
+      "url": "/previews/diya-haveli/",
+      "rendered": true,
+      "loadedImages": 11,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": [
+        "React SSR hydration recovery; see local-preview-import.md"
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Gilded Hall",
+      "url": "/previews/gilded-hall/",
+      "rendered": true,
+      "loadedImages": 5,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": [
+        "React SSR hydration recovery; see local-preview-import.md"
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Slide to Shaadi",
+      "url": "/previews/slide-to-shaadi/",
+      "rendered": true,
+      "loadedImages": 2,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 16,
+      "name": "Lake Pichola Royal",
+      "url": "/previews/lake-pichola-royal/",
+      "rendered": true,
+      "loadedImages": 15,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 35,
+      "name": "Magnolia Reverie",
+      "url": "/dearly/aubergine-magnolia/?studio-preview=1",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 36,
+      "name": "Golden Camellia",
+      "url": "/dearly/cinnamon-camellia/?studio-preview=1",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 37,
+      "name": "Something Blue",
+      "url": "/dearly/cobalt-iris/?studio-preview=1",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 38,
+      "name": "The Dahlia Garden",
+      "url": "/dearly/petrol-dahlia/?studio-preview=1",
+      "rendered": true,
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    }
+  ]
+}

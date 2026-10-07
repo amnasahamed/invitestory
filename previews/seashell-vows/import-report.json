@@ -1,0 +1,119 @@
+{
+  "id": 29,
+  "name": "Seashell Vows",
+  "source": "https://seashell-vows.invitestory.in/",
+  "slug": "seashell-vows",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/seashell-vows",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "index.html": "bd286c156c13e06f4efa50c4d436e5a1a72c8b1412f6866c5c5619463c21d455",
+    "editable/wedding-data.js": "cc73f8bcb8b2a6e62a40ea5d9cb6742bf836e7099b9719a4236e240d5f3ec43f",
+    "editable/assets/footer-wash-DG1rtX_C.jpg": "e1d0a9383fdd1743be4c361a1cd2a9010128820c0ac4a9fcdd86dff4e1b6c80c",
+    "editable/assets/venue-map-Wf_iSDI1.jpg": "42c6d1f44a85900a72642fae5b219682d4acf771ef8b9c64c186f0836ef319f1",
+    "editable/assets/hero-arch.jpg": "874f0d216e4c82b6309cc7b0ebb92ffb8a135dab945dde9b25c0f9e6eaa66de8",
+    "editable/assets/wedding-opener.mp4": "1dcb7c0c6c527c7ebc8599114eb609939c212636c1562afd822236f71ad927e6",
+    "editable/assets/rings-seashell-vignette.png": "c68e38d86661ea92718044f33b2dccf92c1c38b520e2765d75e2363bc27c7450",
+    "editable/assets/couple-walking.png": "6a6d8b8acc84de3b563144eb4bbed54a80287383e971b1eecbfb9691da6a569d",
+    "external/media.invitestory.in/seashell-vows/src/assets/bougainvillea-divider.png": "ff9fe1176b97a60f34782c13b70b650bd195569140650d0efdb45a8b9ef1f85c",
+    "external/media.invitestory.in/seashell-vows/src/assets/watercolor-lantern.png": "6bacac069910553263adf9c0dda7b65489147d8d284ea64c7fc5548458bc6e0b",
+    "external/media.invitestory.in/seashell-vows/src/assets/lantern-constellation.png": "6e7fadca22c4f16766e08d8f15d004fd74461c12ce22627b8247eaec3d481d36",
+    "external/media.invitestory.in/seashell-vows/src/assets/floral-spray.png": "5aaf0aff6e1f730368818ebe4c8edf5c8d4c3dbe9585d8f584f823554d716bff",
+    "external/media.invitestory.in/seashell-vows/src/assets/opener-frames/lantern-reveal-first.png": "2e729cfade04c7fe2643d74fc255f0f0f71f3fbb6498bf48dabf4c05d3044855",
+    "external/fonts.googleapis.com/css2-86ad40e56c.css": "516d978f2974b9a4a2964f1c652a15fc455782f706d4140b61627af9145647ec",
+    "external/fonts.googleapis.com/css2-6476c501f8.css": "478ca8b47f8d1577853c3c03123eb1756387e193cef90efc0f869d79c336880f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjNk9IfqxUQ.woff": "f514bf32a396ed41137c6bdd0507151c73c4ccafba499494e006a98ce823a384",
+    "external/fonts.gstatic.com/s/petitformalscript/v19/B50TF6xQr2TXJBnGOFME6u5OR83oRP5qoHzqOYgY.woff2": "34fa74781ee7f90f67bb4e3799af6f8c23d0d8cb68df986519e7295193f26ed0",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/styles-CbBzkN6m.css": "7c929f55f7f530815ee6226e8164e9c14084f8d7c1db697cb86956a78ceffd4e",
+    "assets/index-B9M5EMSq.js": "4a615ee42b49cf37394bcc835e412fc6d953165bc3aab838c0d53e3274ef9524",
+    "assets/footer-wash-DG1rtX_C.jpg": "e1d0a9383fdd1743be4c361a1cd2a9010128820c0ac4a9fcdd86dff4e1b6c80c",
+    "assets/venue-map-Wf_iSDI1.jpg": "42c6d1f44a85900a72642fae5b219682d4acf771ef8b9c64c186f0836ef319f1",
+    "assets/routes-CfpvyV9Z.js": "11567645f365b0cd98a4b0a7a70734ae743a2b6d8867749572f7dfce56fb2afa"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/footer-wash-DG1rtX_C.jpg",
+      "before": 13472,
+      "after": 13472,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/venue-map-Wf_iSDI1.jpg",
+      "before": 21432,
+      "after": 21432,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/hero-arch.jpg",
+      "before": 224108,
+      "after": 224108,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/wedding-opener.mp4",
+      "before": 5465608,
+      "after": 5380865,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/rings-seashell-vignette.webp",
+      "before": 1846712,
+      "after": 1282920,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/couple-walking.webp",
+      "before": 2534035,
+      "after": 1755460,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/seashell-vows/src/assets/bougainvillea-divider.webp",
+      "before": 975989,
+      "after": 773422,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/seashell-vows/src/assets/watercolor-lantern.webp",
+      "before": 2282707,
+      "after": 1605684,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/seashell-vows/src/assets/lantern-constellation.webp",
+      "before": 940811,
+      "after": 629118,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/seashell-vows/src/assets/floral-spray.webp",
+      "before": 561337,
+      "after": 372798,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/seashell-vows/src/assets/opener-frames/lantern-reveal-first.webp",
+      "before": 2253380,
+      "after": 1677456,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "assets/footer-wash-DG1rtX_C.jpg",
+      "before": 13472,
+      "after": 13472,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/venue-map-Wf_iSDI1.jpg",
+      "before": 21432,
+      "after": 21432,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 17154495,
+  "assetBytesAfter": 13771639,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

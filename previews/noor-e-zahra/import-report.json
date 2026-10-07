@@ -1,0 +1,79 @@
+{
+  "id": 9,
+  "name": "Noor-e-Zahra",
+  "source": "https://noor-e-zahra.invitestory.in/",
+  "slug": "noor-e-zahra",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/noor-e-zahra",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "c48de1e6eccf220df638b59d0467b77958f9f2d2e15c54922f7c8a7f003d3221",
+    "editable/wedding-data.js": "0a5487d59df301d90180a3703136c44527e6f135fdb9e3cb3199860671bf0bd3",
+    "editable/assets/groom.jpg": "e9d65f6aaa4e2f600b15a4f2cbe286e50259afb80ada67cbfa3053b7b4611317",
+    "editable/assets/gold-flourish.png": "2914e8d201058c75da30ba61117402cc1495ed23cd327cf29832e901fb3d74de",
+    "editable/assets/masjid.png": "6304a352e06d3fa23350e99ad31802ec8ddecaab6bfadcd342ac05adf8e77efd",
+    "editable/assets/floral-corner.png": "49e4aaa74a0253d8cc4eca81d72b8147c4f0142b5352abf543df7743c0b1cfd1",
+    "editable/assets/bride.jpg": "cb5f88c4a877e793e7fe8d2ee12ebe37ab6c2fc266dcf21351757cb1595405a8",
+    "editable/assets/paper-texture.jpg": "b9a7dac398e0d6099535daac1e7908a2dc2e127791c2b3da97cb11ed859d7167",
+    "editable/assets/mandala.png": "8fd364408d955ce538326f57b5864ab79f4b03b394db95878b6267df79946209",
+    "external/fonts.googleapis.com/css2-e45b5c1357.css": "d34af6175a636b49e916dce3916735a94f9f060670e5e6a4dd2d150839d165d0",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+    "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUsvrQw7g.woff2": "04a9d9d65ffd962c9cd30cc8fd1126268909e4bdb32991fc6abd66fbc6ef031f",
+    "external/fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY9xJlCGg.woff2": "6b6e5a32d44e6f4eac874be6a6d8fab9775cbe5c5920fee8b6a4cc0780192c0b",
+    "assets/index-DJiECBMo.js": "fecac1f0858701c58130cb5d8ce3e63b3a98956fc486c242facee2bb23870400",
+    "assets/styles-oy5_5gfv.css": "ca6aab7fa89b2a01ea493da40c79490c51a168c1428d5dd4887eb0c9ae62a1e9"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/groom.jpg",
+      "before": 120219,
+      "after": 120219,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/gold-flourish.webp",
+      "before": 504620,
+      "after": 377644,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/masjid.webp",
+      "before": 317460,
+      "after": 241642,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/floral-corner.webp",
+      "before": 755128,
+      "after": 480898,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/bride.jpg",
+      "before": 147427,
+      "after": 147427,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/paper-texture.jpg",
+      "before": 202495,
+      "after": 202495,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/mandala.webp",
+      "before": 1272163,
+      "after": 1108518,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 3319512,
+  "assetBytesAfter": 2678843,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

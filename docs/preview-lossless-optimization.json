@@ -1,0 +1,151 @@
+{
+  "method": "cwebp -z 9 -exact -metadata all; decoded RGBA, ICC and EXIF verified; smaller files only",
+  "before": 4144520,
+  "after": 4144520,
+  "assets": [
+    {
+      "path": "dearly/aubergine-magnolia/assets/botanical.webp",
+      "before": 110368,
+      "after": 110368,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/aubergine-magnolia/assets/envelope-first.webp",
+      "before": 335368,
+      "after": 335368,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/aubergine-magnolia/assets/envelope-last.webp",
+      "before": 279468,
+      "after": 279468,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/aubergine-magnolia/assets/hero-first.webp",
+      "before": 172944,
+      "after": 172944,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/aubergine-magnolia/assets/motion-sprig.webp",
+      "before": 22902,
+      "after": 22902,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/aubergine-magnolia/assets/timeline-flower.webp",
+      "before": 8342,
+      "after": 8342,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cinnamon-camellia/assets/botanical.webp",
+      "before": 127882,
+      "after": 127882,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cinnamon-camellia/assets/envelope-first.webp",
+      "before": 387740,
+      "after": 387740,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cinnamon-camellia/assets/envelope-last.webp",
+      "before": 305508,
+      "after": 305508,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cinnamon-camellia/assets/hero-first.webp",
+      "before": 225450,
+      "after": 225450,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cinnamon-camellia/assets/motion-sprig.webp",
+      "before": 25052,
+      "after": 25052,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cinnamon-camellia/assets/timeline-flower.webp",
+      "before": 9298,
+      "after": 9298,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cobalt-iris/assets/botanical.webp",
+      "before": 139466,
+      "after": 139466,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cobalt-iris/assets/envelope-first.webp",
+      "before": 390622,
+      "after": 390622,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cobalt-iris/assets/envelope-last.webp",
+      "before": 313778,
+      "after": 313778,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cobalt-iris/assets/hero-first.webp",
+      "before": 171520,
+      "after": 171520,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cobalt-iris/assets/motion-sprig.webp",
+      "before": 21310,
+      "after": 21310,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/cobalt-iris/assets/timeline-flower.webp",
+      "before": 10016,
+      "after": 10016,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/petrol-dahlia/assets/botanical.webp",
+      "before": 125714,
+      "after": 125714,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/petrol-dahlia/assets/envelope-first.webp",
+      "before": 359862,
+      "after": 359862,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/petrol-dahlia/assets/envelope-last.webp",
+      "before": 320218,
+      "after": 320218,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/petrol-dahlia/assets/hero-first.webp",
+      "before": 240150,
+      "after": 240150,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/petrol-dahlia/assets/motion-sprig.webp",
+      "before": 30312,
+      "after": 30312,
+      "optimization": "original retained"
+    },
+    {
+      "path": "dearly/petrol-dahlia/assets/timeline-flower.webp",
+      "before": 11230,
+      "after": 11230,
+      "optimization": "original retained"
+    }
+  ]
+}

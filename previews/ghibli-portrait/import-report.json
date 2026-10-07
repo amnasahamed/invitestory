@@ -1,0 +1,124 @@
+{
+  "id": 15,
+  "name": "Ghibli Portrait",
+  "source": "https://ghibli-portrait.invitestory.in/",
+  "slug": "ghibli-portrait",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ghibli-portrait",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "d7267829f4c1347b2376b290a546d000a30cab7679b49fcc2c489756644bac97",
+    "editable/wedding-data.js": "8b31fc739dc32596b65d1d3fbaac31b8e1a95eb3572d548dbf875e3ab9fe7585",
+    "editable/assets/family-groom.png": "c5ebd5bf647b07d6ae1ddabe235a08bedbf587d998c1b2ef83dcda0fef539626",
+    "editable/assets/gallery-6.png": "5f10c53b78a761df14c3caec7630a8d967a923e449d8e458deadd95f7bb62dca",
+    "editable/assets/gallery-4.png": "579d8313a4463483918be65f2f417abb273508910db7f0d78da5eba13daf1750",
+    "editable/assets/gallery-5.png": "1651140f58bd9fc05867353518eb0b6658c348185f44760ddb308dc3f61ec8dc",
+    "editable/assets/gallery-1.png": "6c200cf1561bca9bdc5b6cc3f4f612eab0a1906cd24bb3cc29ba94a67c095f71",
+    "editable/assets/family-bride.png": "29f3d2715a2133296f75a5fc360efcef5d7c1c6e41a9ba3bfdad9285bb20b3e7",
+    "editable/assets/gallery-2.png": "61f0483560fb1123f03c98c289594f1576b1e9a6616317f8ace3b62e65fc38b0",
+    "editable/assets/gallery-3.png": "82538454d27a0161a8af61ebb6b55f0c68d33e1c4702497539fd98867cc7e754",
+    "editable/assets/childhood-groom.png": "f637fa6ae059d67f00f19a52772ddbc392f0d7e63b094850d6672c4e91575909",
+    "editable/assets/body-bride.png": "8be7fccedc37e964b0ab113d60b142b459b04c7edf7b038b4b8ab2251194658c",
+    "editable/assets/portrait-bride.png": "73031b0701de3877a348c73576ad1a9a33ba490b3d674f53b29dd51e675207fa",
+    "editable/assets/portrait-groom.png": "040c258e70379374f9725fe99fbf0e9cc219b16bf3d9955a189c58ada5c0c001",
+    "editable/assets/body-groom.png": "4e4260a0b0816de24293d5a7fdf6f1c27bb313260cbed52eb187c4d324f387e8",
+    "editable/assets/childhood-bride.png": "965550ecfcb834218f42852638fbfadffe03890627e72265824c503b0578f587",
+    "external/fonts.googleapis.com/css2-ee1adbc530.css": "c8bda37a674d3a2b8aa53a7f5594edc60d038d98433ac19c7f89fa161b273e84",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/index-DLKeitWv.css": "f5e0248f816c3ae73d7777a5a2eda07550416e7e81fa97e15546a57993772606",
+    "assets/index-Dmcb-76g.js": "58ee4117e76c714ba41d58643ccea0edc8ddd39d2630e224057f7576bc7c014d"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/family-groom.webp",
+      "before": 2175047,
+      "after": 1458658,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/gallery-6.webp",
+      "before": 1988897,
+      "after": 1392466,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/gallery-4.webp",
+      "before": 2170992,
+      "after": 1509438,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/gallery-5.webp",
+      "before": 2475634,
+      "after": 1902842,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/gallery-1.webp",
+      "before": 2210789,
+      "after": 1534838,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/family-bride.webp",
+      "before": 2138147,
+      "after": 1445748,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/gallery-2.webp",
+      "before": 2156782,
+      "after": 1489334,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/gallery-3.webp",
+      "before": 1758469,
+      "after": 1221672,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/childhood-groom.webp",
+      "before": 1574515,
+      "after": 1061458,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/body-bride.webp",
+      "before": 811285,
+      "after": 587780,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/portrait-bride.webp",
+      "before": 1982065,
+      "after": 1364806,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/portrait-groom.webp",
+      "before": 2225053,
+      "after": 1492402,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/body-groom.webp",
+      "before": 2035638,
+      "after": 1467122,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/childhood-bride.webp",
+      "before": 1499709,
+      "after": 1019912,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 27203022,
+  "assetBytesAfter": 18948476,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

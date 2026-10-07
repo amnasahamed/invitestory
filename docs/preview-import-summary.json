@@ -1,0 +1,2959 @@
+{
+  "importedTemplates": 31,
+  "assetBytesBefore": 270817850,
+  "assetBytesAfter": 212713609,
+  "sharedFontSavings": 7021332,
+  "originalExportsPreserved": true,
+  "templates": [
+    {
+      "id": 1,
+      "name": "Marigold Bhavan",
+      "source": "https://marigold-bhavan.invitestory.in/",
+      "slug": "marigold-bhavan",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/marigold-bhavan",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "8cfaaa486f282071f79fd995d1d704934a3b6cd6411685a04649755fdf50197a",
+        "editable/wedding-data.js": "2465af23ee2324c49ab541310a1138564592f9844df3b645de5f26370da57d43",
+        "editable/assets/footer-bg.jpg": "87a7b6f2c955e7b0843d28c598daef6ec65db5003fdb0d23c1cea585a4f79acb",
+        "editable/assets/map.jpg": "4df5957afb5f8b4aac58ed9af13a0835d2d649864a1449681b4b32ab6e147d15",
+        "editable/assets/couple.png": "65ba058d65fd580619a761615afa09d0f9f15c4f7b6cb48586ad3259bf003138",
+        "external/fonts.googleapis.com/css2-abe2d3246c.css": "395da8222ad4479dbb606f33a02f6000b88f2beb5d461e7ebc6c7840d0eb2195",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjNk9IfqxUQ.woff": "f514bf32a396ed41137c6bdd0507151c73c4ccafba499494e006a98ce823a384",
+        "external/fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpcyp6COKv.woff2": "b587e9bbe83a2164e63b707e0eeee4a5db113f4e51d8eba4c331b385657f89de",
+        "external/fonts.gstatic.com/s/josefinsans/v34/Qw3aZQNVED7rKGKxtqIqX5EkD3Z_dH0.woff2": "83a90ef9ac158f10699d82b8acebdef4582059f4c1fb961da5f853727c488b17",
+        "assets/styles-DJO19CfA.css": "afdb2b40c567138fb936cdef26555f1de313cb787bde2c1c63fdb0b6db70fcd7",
+        "assets/index-2d1L6cXj.js": "ff8c407d2bcef5e80125332d0acca065a86def43a43a4044791fd78d07eaa6f5"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/footer-bg.jpg",
+          "before": 147451,
+          "after": 147451,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/map.jpg",
+          "before": 152622,
+          "after": 152622,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 1105124,
+          "after": 1105124,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 1711970,
+          "after": 1105124,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 2012043,
+      "assetBytesAfter": 1405197,
+      "optionalDependencyFallbacks": [
+        {
+          "file": "assets/index-2d1L6cXj.js",
+          "missing": "./lenis-DoixeXP8.js",
+          "fallback": "native scrolling"
+        }
+      ],
+      "exportRepairs": []
+    },
+    {
+      "id": 3,
+      "name": "Toran Telugu",
+      "source": "https://toran-telugu.invitestory.in/",
+      "slug": "toran-telugu",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/toran-telugu",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "cd10c743240811a61d73af91998c154c51e3450141f6f38f7fe0b318b2853e21",
+        "editable/wedding-data.js": "6525ac74e896df37fb441f5f9153678fe92bf7f703e55e01028f8753ae702453",
+        "editable/assets/jasmine-strand.png": "19c06302954b1b7314638d4541e0e8d939dbae2721fe4f33d6e326a9d6fe8cc2",
+        "editable/assets/couple-2.jpg": "019883311ba65d45b1041356044d7c637f1a83dbfc85fdd3299a2cf73820e52d",
+        "editable/assets/couple-3.jpg": "e2aabdd981f1f393e7a456eb2167ab4549454a4de6eddb028c1b72f6776371b7",
+        "editable/assets/couple-1.jpg": "464cf6da2db2849021384a0c5cb053b1ea3008d3b5cbe618628ead04c7c29258",
+        "editable/assets/couple-4.jpg": "8c8d828f6a555302a853cad1b62eab184ed87f3291478e28ebc2f11647e2622f",
+        "editable/assets/gopuram.png": "8579c1fa88304220b8f827180199031d4d4a6fe0199f4345fac481461d2b23aa",
+        "editable/assets/hero-flatlay.jpg": "baa9285d06b067b70c2eb0d9ec83d851e3d98bc0a981006c4c931f3f6262f8bc",
+        "external/fonts.googleapis.com/css2-a70786b470.css": "6d06a39b762d1defa4de9bccf10f4b55ebc3b529b63c13d030fb519e63baac24",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+        "external/fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOfQPYbg.woff2": "17f7c699cf11ee00b1134e920a53363eda5506680ad061eb79b2f34cc2fb73d7",
+        "external/fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1_PZJEZG-e9gHhdI4-NBbfd2ys3SjJCx1sztrpLpI.woff2": "8776b16393b45f1e892cbf18eabdf59f9f2d34b9dd1374f990ce93c098330815",
+        "assets/styles-BgdVW63E.css": "d1dc5812bc1e53a5c98601384629a5782b155ef0ade6c8c1568d6e46ab86848b",
+        "assets/index-BmbkA8aA.js": "47de580bde2ffdc6f68d115293bede8ea420ed5970227d72a1f8cb247439d007"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/jasmine-strand.webp",
+          "before": 193335,
+          "after": 130258,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple-2.jpg",
+          "before": 138997,
+          "after": 138997,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple-3.jpg",
+          "before": 139961,
+          "after": 139961,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple-1.jpg",
+          "before": 108464,
+          "after": 108464,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple-4.jpg",
+          "before": 144167,
+          "after": 144167,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gopuram.webp",
+          "before": 449880,
+          "after": 339990,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/hero-flatlay.jpg",
+          "before": 231356,
+          "after": 231356,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 1406160,
+      "assetBytesAfter": 1233193,
+      "optionalDependencyFallbacks": [
+        {
+          "file": "assets/index-BmbkA8aA.js",
+          "missing": "./lenis-DoixeXP8.js",
+          "fallback": "native scrolling"
+        },
+        {
+          "file": "assets/index-BmbkA8aA.js",
+          "missing": "./Aurora-BNue7cja.js",
+          "fallback": "no optional Aurora overlay"
+        }
+      ],
+      "exportRepairs": []
+    },
+    {
+      "id": 5,
+      "name": "Shubha Vivaham",
+      "source": "https://shubha-vivaham.invitestory.in/",
+      "slug": "shubha-vivaham",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/shubha-vivaham",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "7f7ba332774e0be19fe9661e8759854e40ae684565a148a11f8bc3de6a995079",
+        "editable/wedding-data.js": "ee62836d69776c0a25ca5279b7618a756b88bf1b580a9026046c15c96c1ee7f8",
+        "editable/assets/couple.png": "dca58f73e33b69637df41880b67af7e8799d211cfb51ec53fedf644096b72d48",
+        "external/media.invitestory.in/shubha-vivaham/assets/footer-overlay.png": "7a2ef449a49e944d77f62f3a3fadb1684c6ac9f30d3cd9b8c9379a4d34069009",
+        "external/media.invitestory.in/shubha-vivaham/assets/bg-texture.png": "9110a85136c714e2e0da2bc1ea013ac44e636d3bb3c96bba255517b0ce87d1c1",
+        "external/media.invitestory.in/shubha-vivaham/assets/og-image.jpg": "7e06a8f4601b0c5daf8f13ebfbd8454208bb58f634cf8668c3f4d19741a939ff",
+        "external/media.invitestory.in/shubha-vivaham/assets/banana-leaves.png": "748a602c4540b81121ee2e8c29ed6361f7bc0f3ab9b97a2bd916c0fff1ffc313",
+        "external/media.invitestory.in/shubha-vivaham/assets/toran-top.png": "e103c5230241761fe8edeb52e40a85c73cdeaecf7125fc8501b3b19166b83423",
+        "external/fonts.googleapis.com/css2-1836f8b6f7.css": "5547763fe8755edff6a10d12874c16ef5510f5643969756ac97fd1592bc15582",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "assets/index-B2yKB5Bb.css": "808524bb50e4917934d2ddd7d17ceb81abaf6a9cd29c12cee5d19f21eb072e4d",
+        "assets/index-D4tjOMjU.js": "beeed7f300796ce3606ccd79482977ca374d8aa52cd2dd86205d5d4f7045619a"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 1379326,
+          "after": 1052930,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/shubha-vivaham/assets/footer-overlay.webp",
+          "before": 622433,
+          "after": 488536,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/shubha-vivaham/assets/bg-texture.webp",
+          "before": 2378446,
+          "after": 1629480,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/shubha-vivaham/assets/og-image.jpg",
+          "before": 123279,
+          "after": 123279,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/shubha-vivaham/assets/banana-leaves.webp",
+          "before": 833159,
+          "after": 596366,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/shubha-vivaham/assets/toran-top.webp",
+          "before": 569970,
+          "after": 446056,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 5906613,
+      "assetBytesAfter": 4336647,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 6,
+      "name": "Kalyana Mandapam",
+      "source": "https://kalyana-mandapam.invitestory.in/",
+      "slug": "kalyana-mandapam",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/kalyana-mandapam",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "65433d2195887d5476e110690bba7137b782700ef5ac835066759ff40f477509",
+        "editable/wedding-data.js": "012aa09fa3bbef26c5afbfb21ddf15a323c080f41374fdc4c271798f0cb9d9d5",
+        "editable/assets/garland-top.webp": "2b0ee78a2ce7fdab2596fe761893631ab3cb14ce59e69bd4e258105adf5fe01a",
+        "editable/assets/couple.webp": "f377c46ae228e6f5629ad7c688223481cb86bdd4f62cf096506761bdf6f770c3",
+        "editable/assets/mandap-footer.webp": "feb5fc91fd55d580c082d908423944077b9b773e241aaccd7bfad13005a963e0",
+        "assets/texture-bg.webp": "42929db6ac2e14c091abdbcb9972c883fa49fded642fe9a1d7376cb735482185",
+        "assets/index-BcS--ptf.js": "9c51bac391ed9bd0c9055f14380e2a2c0e0f069052fd74853378f59f3c25ee9a",
+        "assets/index-yVHCWpVH.css": "8e47cf8d086a7dc5bfdb1fe46002bc7c7e581e4589a3045c4373bc9e48c9fee8"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/garland-top.webp",
+          "before": 568462,
+          "after": 568462,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 290248,
+          "after": 290248,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/mandap-footer.webp",
+          "before": 298360,
+          "after": 298360,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/texture-bg.webp",
+          "before": 92822,
+          "after": 92822,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 1249892,
+      "assetBytesAfter": 1249892,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 7,
+      "name": "Sage Parchment",
+      "source": "https://sage-parchment.invitestory.in/",
+      "slug": "sage-parchment",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/sage-parchment",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "ea25001970d680b41051fa9e207fbb8efc85cccbd803bcd833d172528d287550",
+        "editable/wedding-data.js": "cfe16ecf83e38d188d2fc58ae9ab9d0582111388c75143223dff8b0effa2c893",
+        "editable/assets/gate-panel.jpg": "e36ea716fe022420b9443b0b68f74904d88c920f1e43bb60b5b8bcbee5f79828",
+        "editable/assets/hero-arch.jpg": "aca85a69290c8857e9c534f595136eb2b42c2d899946a6c1129576160a9c6062",
+        "editable/assets/map-preview.jpg": "377d407f33a7df18ba6e0f5f84d2a9e34be7b4a3e796f4f9e1e288ce13d0d776",
+        "editable/assets/story-1.jpg": "74ce277ce187b0a7cda050646c4a5dc354a4c66f812ca0fc1d9845a0e81d5510",
+        "editable/assets/story-3.jpg": "0e84aca886c7d6007a66978e7b03debca0652ff6285210015e31d7ec99dbfe78",
+        "editable/assets/story-2.jpg": "72be2e1d6009a59f9b9046c6e4981f6c633f276cabb47df02b47db652f88aeac",
+        "editable/assets/lotus.png": "a39120971bd0ca4befca5caa67370709241cd34e5d75c2e2140afbb9bd0693e9",
+        "editable/assets/footer-floral.jpg": "f3c08b9c69168c1c1f8d2f56f13d8868bd150481ee04350c1a267cd1a6eb9b22",
+        "external/media.invitestory.in/sage-parchment/og-image.jpg": "aca85a69290c8857e9c534f595136eb2b42c2d899946a6c1129576160a9c6062",
+        "external/media.invitestory.in/sage-parchment/src/assets/hero-arch.jpg": "aca85a69290c8857e9c534f595136eb2b42c2d899946a6c1129576160a9c6062",
+        "external/fonts.googleapis.com/css2-5f7e6dc2f6.css": "84be8dc31da8e2b960b9c2820888226ed165b7a1dbf1cb8c8df8ad65cf09203c",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+        "assets/styles-DHpdJjWo.css": "fa46cfe61ec602e7f5c72c6aeda7b47270b76a7bf0ea1b5281eb4f213bbe2583",
+        "assets/index-FTKWP6I9.js": "9287cd479d3e9eadf0a22cea817d759fce8eca5cd2c1214cba645dfb3ff0f876"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/gate-panel.jpg",
+          "before": 417423,
+          "after": 417423,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/hero-arch.jpg",
+          "before": 335165,
+          "after": 335165,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/map-preview.jpg",
+          "before": 270584,
+          "after": 270584,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-1.jpg",
+          "before": 222473,
+          "after": 222473,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-3.jpg",
+          "before": 282977,
+          "after": 282977,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-2.jpg",
+          "before": 253829,
+          "after": 253829,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/lotus.webp",
+          "before": 336838,
+          "after": 218350,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/footer-floral.jpg",
+          "before": 278680,
+          "after": 278680,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/sage-parchment/og-image.jpg",
+          "before": 335165,
+          "after": 335165,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/sage-parchment/src/assets/hero-arch.jpg",
+          "before": 335165,
+          "after": 335165,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 3068299,
+      "assetBytesAfter": 2949811,
+      "optionalDependencyFallbacks": [
+        {
+          "file": "assets/index-FTKWP6I9.js",
+          "missing": "./Aurora-DSbGJm_Z.js",
+          "fallback": "no optional Aurora overlay"
+        }
+      ],
+      "exportRepairs": []
+    },
+    {
+      "id": 29,
+      "name": "Seashell Vows",
+      "source": "https://seashell-vows.invitestory.in/",
+      "slug": "seashell-vows",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/seashell-vows",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "index.html": "bd286c156c13e06f4efa50c4d436e5a1a72c8b1412f6866c5c5619463c21d455",
+        "editable/wedding-data.js": "cc73f8bcb8b2a6e62a40ea5d9cb6742bf836e7099b9719a4236e240d5f3ec43f",
+        "editable/assets/footer-wash-DG1rtX_C.jpg": "e1d0a9383fdd1743be4c361a1cd2a9010128820c0ac4a9fcdd86dff4e1b6c80c",
+        "editable/assets/venue-map-Wf_iSDI1.jpg": "42c6d1f44a85900a72642fae5b219682d4acf771ef8b9c64c186f0836ef319f1",
+        "editable/assets/hero-arch.jpg": "874f0d216e4c82b6309cc7b0ebb92ffb8a135dab945dde9b25c0f9e6eaa66de8",
+        "editable/assets/wedding-opener.mp4": "1dcb7c0c6c527c7ebc8599114eb609939c212636c1562afd822236f71ad927e6",
+        "editable/assets/rings-seashell-vignette.png": "c68e38d86661ea92718044f33b2dccf92c1c38b520e2765d75e2363bc27c7450",
+        "editable/assets/couple-walking.png": "6a6d8b8acc84de3b563144eb4bbed54a80287383e971b1eecbfb9691da6a569d",
+        "external/media.invitestory.in/seashell-vows/src/assets/bougainvillea-divider.png": "ff9fe1176b97a60f34782c13b70b650bd195569140650d0efdb45a8b9ef1f85c",
+        "external/media.invitestory.in/seashell-vows/src/assets/watercolor-lantern.png": "6bacac069910553263adf9c0dda7b65489147d8d284ea64c7fc5548458bc6e0b",
+        "external/media.invitestory.in/seashell-vows/src/assets/lantern-constellation.png": "6e7fadca22c4f16766e08d8f15d004fd74461c12ce22627b8247eaec3d481d36",
+        "external/media.invitestory.in/seashell-vows/src/assets/floral-spray.png": "5aaf0aff6e1f730368818ebe4c8edf5c8d4c3dbe9585d8f584f823554d716bff",
+        "external/media.invitestory.in/seashell-vows/src/assets/opener-frames/lantern-reveal-first.png": "2e729cfade04c7fe2643d74fc255f0f0f71f3fbb6498bf48dabf4c05d3044855",
+        "external/fonts.googleapis.com/css2-86ad40e56c.css": "516d978f2974b9a4a2964f1c652a15fc455782f706d4140b61627af9145647ec",
+        "external/fonts.googleapis.com/css2-6476c501f8.css": "478ca8b47f8d1577853c3c03123eb1756387e193cef90efc0f869d79c336880f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjNk9IfqxUQ.woff": "f514bf32a396ed41137c6bdd0507151c73c4ccafba499494e006a98ce823a384",
+        "external/fonts.gstatic.com/s/petitformalscript/v19/B50TF6xQr2TXJBnGOFME6u5OR83oRP5qoHzqOYgY.woff2": "34fa74781ee7f90f67bb4e3799af6f8c23d0d8cb68df986519e7295193f26ed0",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/styles-CbBzkN6m.css": "7c929f55f7f530815ee6226e8164e9c14084f8d7c1db697cb86956a78ceffd4e",
+        "assets/index-B9M5EMSq.js": "4a615ee42b49cf37394bcc835e412fc6d953165bc3aab838c0d53e3274ef9524",
+        "assets/footer-wash-DG1rtX_C.jpg": "e1d0a9383fdd1743be4c361a1cd2a9010128820c0ac4a9fcdd86dff4e1b6c80c",
+        "assets/venue-map-Wf_iSDI1.jpg": "42c6d1f44a85900a72642fae5b219682d4acf771ef8b9c64c186f0836ef319f1",
+        "assets/routes-CfpvyV9Z.js": "11567645f365b0cd98a4b0a7a70734ae743a2b6d8867749572f7dfce56fb2afa"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/footer-wash-DG1rtX_C.jpg",
+          "before": 13472,
+          "after": 13472,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/venue-map-Wf_iSDI1.jpg",
+          "before": 21432,
+          "after": 21432,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/hero-arch.jpg",
+          "before": 224108,
+          "after": 224108,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/wedding-opener.mp4",
+          "before": 5465608,
+          "after": 5380865,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/rings-seashell-vignette.webp",
+          "before": 1846712,
+          "after": 1282920,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple-walking.webp",
+          "before": 2534035,
+          "after": 1755460,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/seashell-vows/src/assets/bougainvillea-divider.webp",
+          "before": 975989,
+          "after": 773422,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/seashell-vows/src/assets/watercolor-lantern.webp",
+          "before": 2282707,
+          "after": 1605684,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/seashell-vows/src/assets/lantern-constellation.webp",
+          "before": 940811,
+          "after": 629118,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/seashell-vows/src/assets/floral-spray.webp",
+          "before": 561337,
+          "after": 372798,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/seashell-vows/src/assets/opener-frames/lantern-reveal-first.webp",
+          "before": 2253380,
+          "after": 1677456,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "assets/footer-wash-DG1rtX_C.jpg",
+          "before": 13472,
+          "after": 13472,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/venue-map-Wf_iSDI1.jpg",
+          "before": 21432,
+          "after": 21432,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 17154495,
+      "assetBytesAfter": 13771639,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 8,
+      "name": "Emerald Nikah",
+      "source": "https://emerald-nikah.invitestory.in/",
+      "slug": "emerald-nikah",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/emerald-nikah",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "d04761516032930ef0d3a03073692b7930058f9364db928bd5296fa8c0229615",
+        "editable/wedding-data.js": "5619fc594acff0a20c26d4d94200882c8d5df6deb227727d778a36f1ae055e91",
+        "editable/assets/groom.jpg": "9a79697008e2e6a433279859cd37c12d266fa6a7e881598be6424e0aea2848d8",
+        "editable/assets/roses.png": "ff387c0be4cdb99145678b8c1a5218978e2de71cd6f38a45de54946f44038235",
+        "editable/assets/hero-bg.jpg": "1aa7023d0e2fc13f12b005527cf52180e3d4b48edae4ac93b6182587f72e8a9c",
+        "editable/assets/daisies.png": "2e3fd67bad897908928f591c4a799380f8a5bd2c51898ed9442e0f9a9581bf6b",
+        "editable/assets/map.jpg": "bd07c91bab5dd80959e7c6c7be84bfdc4dc083cfe3ca30994795b5ca17521f64",
+        "editable/assets/divider.png": "e2489c6de20111d1b53590e124df93ce1b859b1b3b7909bfa0afbe65ab8c5f54",
+        "editable/assets/bride.jpg": "f064ef1e56bbdccc8548f50bc269f059203c9446084a5b4707b9692e8836db5a",
+        "editable/assets/mandala.png": "efadc95f1439c2e01093806771fe7e3a8f1e9775cb4c317db1aa415cd39b3e53",
+        "external/fonts.googleapis.com/css2-e60879549b.css": "075c28ba32ba17933eccef52665b56a7580aa252eb93e42244fb271405a0a56a",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZoaelGQzaLlA.woff2": "c2dfa37eb5cf904a534d0c63b418423c6ab186de782d7eeb70c95f739149b401",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/pinyonscript/v24/6xKpdSJbL9-e9LuoeQiDRQR8aOfQPYbg.woff2": "17f7c699cf11ee00b1134e920a53363eda5506680ad061eb79b2f34cc2fb73d7",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "external/fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUsvrQw7g.woff2": "04a9d9d65ffd962c9cd30cc8fd1126268909e4bdb32991fc6abd66fbc6ef031f",
+        "external/fonts.gstatic.com/s/amiri/v30/J7afnpd8CGxBHpUrtLMS7JNK.woff2": "5436d007086292a65e4d3cc216365a0c8479000c599af40f39e19ba3ce3b4bdc",
+        "external/fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY9xJlCGg.woff2": "6b6e5a32d44e6f4eac874be6a6d8fab9775cbe5c5920fee8b6a4cc0780192c0b",
+        "assets/index-BFujBVD8.js": "ea7aac6926338160bd29f814461763af29ea8dffdd9c2036f29e90a5d53e15af",
+        "assets/styles-BBCSj1GG.css": "30e548e3a082040f6243821b2d6bf9048e6de969f45bca24b5b8e6414f7bc2f8"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/groom.jpg",
+          "before": 179199,
+          "after": 179199,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/roses.webp",
+          "before": 1061514,
+          "after": 682246,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/hero-bg.jpg",
+          "before": 242164,
+          "after": 242164,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/daisies.webp",
+          "before": 993962,
+          "after": 622658,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/map.jpg",
+          "before": 161217,
+          "after": 161217,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/divider.webp",
+          "before": 377688,
+          "after": 284962,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/bride.jpg",
+          "before": 159422,
+          "after": 159422,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/mandala.webp",
+          "before": 1748598,
+          "after": 1357600,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 4923764,
+      "assetBytesAfter": 3689468,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 9,
+      "name": "Noor-e-Zahra",
+      "source": "https://noor-e-zahra.invitestory.in/",
+      "slug": "noor-e-zahra",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/noor-e-zahra",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "c48de1e6eccf220df638b59d0467b77958f9f2d2e15c54922f7c8a7f003d3221",
+        "editable/wedding-data.js": "0a5487d59df301d90180a3703136c44527e6f135fdb9e3cb3199860671bf0bd3",
+        "editable/assets/groom.jpg": "e9d65f6aaa4e2f600b15a4f2cbe286e50259afb80ada67cbfa3053b7b4611317",
+        "editable/assets/gold-flourish.png": "2914e8d201058c75da30ba61117402cc1495ed23cd327cf29832e901fb3d74de",
+        "editable/assets/masjid.png": "6304a352e06d3fa23350e99ad31802ec8ddecaab6bfadcd342ac05adf8e77efd",
+        "editable/assets/floral-corner.png": "49e4aaa74a0253d8cc4eca81d72b8147c4f0142b5352abf543df7743c0b1cfd1",
+        "editable/assets/bride.jpg": "cb5f88c4a877e793e7fe8d2ee12ebe37ab6c2fc266dcf21351757cb1595405a8",
+        "editable/assets/paper-texture.jpg": "b9a7dac398e0d6099535daac1e7908a2dc2e127791c2b3da97cb11ed859d7167",
+        "editable/assets/mandala.png": "8fd364408d955ce538326f57b5864ab79f4b03b394db95878b6267df79946209",
+        "external/fonts.googleapis.com/css2-e45b5c1357.css": "d34af6175a636b49e916dce3916735a94f9f060670e5e6a4dd2d150839d165d0",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+        "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/amiri/v30/J7aRnpd8CGxBHqUsvrQw7g.woff2": "04a9d9d65ffd962c9cd30cc8fd1126268909e4bdb32991fc6abd66fbc6ef031f",
+        "external/fonts.gstatic.com/s/amiri/v30/J7acnpd8CGxBHp2VkZY9xJlCGg.woff2": "6b6e5a32d44e6f4eac874be6a6d8fab9775cbe5c5920fee8b6a4cc0780192c0b",
+        "assets/index-DJiECBMo.js": "fecac1f0858701c58130cb5d8ce3e63b3a98956fc486c242facee2bb23870400",
+        "assets/styles-oy5_5gfv.css": "ca6aab7fa89b2a01ea493da40c79490c51a168c1428d5dd4887eb0c9ae62a1e9"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/groom.jpg",
+          "before": 120219,
+          "after": 120219,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gold-flourish.webp",
+          "before": 504620,
+          "after": 377644,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/masjid.webp",
+          "before": 317460,
+          "after": 241642,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/floral-corner.webp",
+          "before": 755128,
+          "after": 480898,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/bride.jpg",
+          "before": 147427,
+          "after": 147427,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/paper-texture.jpg",
+          "before": 202495,
+          "after": 202495,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/mandala.webp",
+          "before": 1272163,
+          "after": 1108518,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 3319512,
+      "assetBytesAfter": 2678843,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 10,
+      "name": "Royal Reception",
+      "source": "https://royal-reception.invitestory.in/",
+      "slug": "royal-reception",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/royal-reception",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "0c26223d990f0b5bb53ec806d36a811c4b87144522cf568b25ca4a210f18f79f",
+        "editable/wedding-data.js": "b1036bf388cf6c7c040d7ad3c03189fc1e53fa7fe8931e9e58c5414f321fd7e8",
+        "editable/assets/groom.png": "e0bd7d434db58312ba75672cce15b81ccd2869d8ba08d2734d4ab809eb23e37e",
+        "editable/assets/couple-hero.png": "4f6ef1873aeea49975948350f6b042c4158364ef93f608a9d3b3c5d58d3e19d6",
+        "editable/assets/lotus-cluster.png": "3f0dd0115bc088f52194edf01e8701c2663b2e66703e4860874fb3ca483bcbc5",
+        "editable/assets/map-preview.jpg": "0ccae1785fd17759e2ef49e44fdab513a836ceb6902e1b5b3e199f24d42ad1d7",
+        "editable/assets/butterfly.png": "09877f0613915b0654b155752a509b99283ae205a14bd8b1cdbf22dacebc5642",
+        "editable/assets/swirl-band.png": "e730c885422bbce4766e2d5a695454d76840f2bea46d0ff07479daa43c2b903c",
+        "editable/assets/bride.png": "53c50b13630449d793f3a6dab05663b26ff27171a4ec6ba5a512d2c5280bfb18",
+        "editable/assets/mandala-texture.jpg": "db2bbf4fd103ffcb816060d5c626d9d336eb0c82f1422f2faf31415034b1daf1",
+        "external/fonts.googleapis.com/css2-9facd44c61.css": "f2161bfc231bae144d5b0153c4479260edc0fab3b55ac71d30a9332c7c6765f8",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/index-v0zxlr5R.js": "c11d5e5fd65745257d2e96660fc1a20f10f94279bfa57bfbb7b14140bc353a33",
+        "assets/styles-k_wyScDq.css": "84c558524acf7426e823b0ac2450b96404edebded909961ea8ef9d4127d76953"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/groom.webp",
+          "before": 1358673,
+          "after": 839942,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple-hero.webp",
+          "before": 1860104,
+          "after": 1193830,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/lotus-cluster.webp",
+          "before": 1770504,
+          "after": 1337274,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/map-preview.jpg",
+          "before": 139116,
+          "after": 139116,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/butterfly.webp",
+          "before": 125093,
+          "after": 83960,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/swirl-band.webp",
+          "before": 1251056,
+          "after": 868998,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/bride.webp",
+          "before": 1662971,
+          "after": 1046840,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/mandala-texture.jpg",
+          "before": 352276,
+          "after": 352276,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 8519793,
+      "assetBytesAfter": 5862236,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 11,
+      "name": "Kerala Sands",
+      "source": "https://kerala-sands.invitestory.in/",
+      "slug": "kerala-sands",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/kerala-sands",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "da1c7207403ff66fcfea0fe5264935be499a85e8fed98f2e57ec22d8eea88414",
+        "editable/wedding-data.js": "3f74222f129483b4a2968cf5c0877bc6bb3b8920b9f5b4966230cadc78561b98",
+        "editable/assets/groom.png": "029ab5ec362fad74d98f1481c6e55696f0215b8f633782a14d5884aba6aad52a",
+        "editable/assets/couple-hero.png": "8346a339efb35a459e2f7b4943fec6b61377f696a105bec6367c0f65fb954763",
+        "editable/assets/map-preview.jpg": "70f4a6741fef83ea01f9dd19d35bce8f4b96c765b89205be2b82f4cde90a2ce5",
+        "editable/assets/bride.png": "2b34ac94fdde7c7b5e78f79bdebd8e04ab8718e9964427fe464abac59a907c3e",
+        "external/media.invitestory.in/kerala-sands/images/garland.png": "dc6098e8cc981aaea1cb2e9170f27757c19610f91951cdd969addff114e3b72a",
+        "external/media.invitestory.in/kerala-sands/images/floral-corner.png": "f9ee154e65f39065ec86805a5f171665b6e8109e43491567a1975b36203229dd",
+        "external/media.invitestory.in/kerala-sands/images/mandala-texture.jpg": "9a3f31a35145658c8fd9e8adccbceefd9e6dbc1fd37b709fbd56aeebbad18384",
+        "external/fonts.googleapis.com/css2-7e2498fbed.css": "5eb00183a00a8d1ef0749032df9c382622d20a11af6b9a29747c3e4efe0e86ea",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/index-cdc8IQTD.js": "f9682de5a94c7658a042a55e477fa8e08a9cc13f9f146c017019dce513bfa6c8",
+        "assets/styles-xl0qPzWF.css": "0792e8adfd2707d2ccfc20fee8d0a2cabda8a5822168f213cea2983ba970ae64"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/groom.webp",
+          "before": 1139079,
+          "after": 740668,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple-hero.webp",
+          "before": 2559901,
+          "after": 1730876,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/map-preview.jpg",
+          "before": 165330,
+          "after": 165330,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/bride.webp",
+          "before": 1139744,
+          "after": 736352,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/kerala-sands/images/garland.webp",
+          "before": 1002375,
+          "after": 761328,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/kerala-sands/images/floral-corner.webp",
+          "before": 1130018,
+          "after": 773426,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/kerala-sands/images/mandala-texture.jpg",
+          "before": 369229,
+          "after": 369229,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 7505676,
+      "assetBytesAfter": 5277209,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 12,
+      "name": "Meadow Nikah",
+      "source": "https://meadow-nikah.invitestory.in/",
+      "slug": "meadow-nikah",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/meadow-nikah",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "1842e2b70514be33efb4ae0ee61ca8e92984510b723d16fc6ed395d9b89faa25",
+        "editable/wedding-data.js": "d0ba635f3bcc9e5253d23801d54f651e83f9d7b9a2075a69e3f552bdf90b2d1d",
+        "editable/assets/groom.jpg": "7ec0cdca3c656ab096f4ac3d469b8a32e183ba8ebc4a92ee8d9266a454f2134f",
+        "editable/assets/hero.jpg": "31b0103d071b1dc32f402cbd5867d588f58dac88fb4b05ce988517bc12cb3918",
+        "editable/assets/Continuous_wedding_invitation_an\u2026_202608122343.mp4": "b5cc26013c08b739a8458175c283bab7583b4f3c4f61a11a040f414e8e61cd13",
+        "editable/assets/gallery-6.jpg": "15c122ff126aafaeebca90248432af77efa0609e6e3cfae4ff2b61b2621cf488",
+        "editable/assets/map.jpg": "11c10f4137d410cabe582ea95c57cfa34235caf5a03b438e80954ec76ef9ea06",
+        "editable/assets/gallery-4.jpg": "a761daf0edda9cb87253f8c0e32fc5d10d30a639d662567b7f085f28c6784449",
+        "editable/assets/gallery-5.jpg": "98f66ae20f689fac7e7952bbef552271731ecc976803e0e3651ef0c7b4129605",
+        "editable/assets/gallery-1.jpg": "4e3e87f69cef16741c5c77ab7c7ffbc71c5379f9b95b2cef9394ec2b69fb46a9",
+        "editable/assets/gallery-2.jpg": "83b3186cb737711ff3ed44c272413f5cbc24e75153a45fec1828b9295b8a15b5",
+        "editable/assets/gallery-3.jpg": "fa1699d45ca09f45029394d46f67a247a38abda372708c74e976b740c9d02ca6",
+        "editable/assets/bride.jpg": "c36509ea8cec9347aeb5c21777f47daa426c3c01c523a0a6048d928f61db0cee",
+        "editable/assets/ChatGPT Image Aug 12, 2026 at 11_08_45 PM.png": "9a80a8e4c1f89c77a80fd3fcdf36ae6ba83eb6789530b54b1be13355a6787a22",
+        "external/fonts.googleapis.com/css2-12dbab0da7.css": "de734dfb777420d56fbaf5971b97dcd58f7635ab5925ccb69f3d268060581a35",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/styles-DX-39EG5.css": "c884c6fb306a25d7ff8f685a398fd1a29b79360b47ca5fea57e961ce6b613d76",
+        "assets/index-DF9DML25.js": "4cf8ef15b3586f2b7746f85f7a368ae2110afeb851e07ad807a064bb6108d71b"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/groom.jpg",
+          "before": 125407,
+          "after": 125407,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/hero.jpg",
+          "before": 214707,
+          "after": 214707,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/Continuous_wedding_invitation_an\u2026_202608122343.mp4",
+          "before": 3343540,
+          "after": 3254746,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/gallery-6.jpg",
+          "before": 179076,
+          "after": 179076,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/map.jpg",
+          "before": 188228,
+          "after": 188228,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gallery-4.jpg",
+          "before": 157116,
+          "after": 157116,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gallery-5.jpg",
+          "before": 235658,
+          "after": 235658,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gallery-1.jpg",
+          "before": 202220,
+          "after": 202220,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gallery-2.jpg",
+          "before": 187996,
+          "after": 187996,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gallery-3.jpg",
+          "before": 212546,
+          "after": 212546,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/bride.jpg",
+          "before": 103093,
+          "after": 103093,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/ChatGPT Image Aug 12, 2026 at 11_08_45 PM.webp",
+          "before": 2062418,
+          "after": 1524242,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 7212005,
+      "assetBytesAfter": 6585035,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 13,
+      "name": "Grand Line Voyage",
+      "source": "https://grand-line-voyage.invitestory.in/",
+      "slug": "grand-line-voyage",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/grand-line-voyage",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "7605b97e53e9d6c56ee8e113ab2955376a81e3f4fb9803d7833350f9cd81ae7c",
+        "editable/wedding-data.js": "cd01147a4ca9f980a651aaceb556bd764d4c82e2232c9d5286dfc2084fd407fe",
+        "editable/assets/op-groom.png": "d16ac768864c631ae8a1f85258508518c00ee33a4a670773eeb49ec83108aca1",
+        "editable/assets/op-map-v1.png": "f7bd4f236ca3fa9e9a8a3b868b21a8a7273fa8b37c599c096ed352dcdb6eddd8",
+        "editable/assets/op-couple-panel.png": "5199e7efd032a35b8072ddd0d87a4fed4a977d20d043af7214b98cc9ef020068",
+        "editable/assets/op-bride.png": "77f0d9d10a4522e729dee0827165ed2d0186c6bb1abc71b8ebdcbe5be16500a1",
+        "editable/assets/op-hero-ship.png": "fff6dba62a8bee0d75bf9608a7a104f8081e7e77b738e45f77f00313d986c019",
+        "external/media.invitestory.in/grand-line-voyage/op-deck-texture.png": "337b30759166b9479ebb2123ab464fa01ec3da1748c917ad7af2a6570542b2c8",
+        "external/media.invitestory.in/grand-line-voyage/op-coin.png": "57c67336e93b60d4cee49cce603bc39a392aa8c75d40c48a5a3ee4608498865d",
+        "external/media.invitestory.in/grand-line-voyage/op-treasure-chest.png": "462d7c12323836355b9beb438a919b4ff523922eeed1efe63a5ee7266eb44142",
+        "external/media.invitestory.in/grand-line-voyage/op-log-pose.png": "998fe4cc78650cf58eb1654a48fd6847f333067f18de1291d596d1a6a21a1fe2",
+        "external/fonts.googleapis.com/css2-71c8d3c756.css": "61b44c3072831e06981a637221aa7d92a222e15d7da69ab528ca039550e4a2e7",
+        "external/fonts.googleapis.com/css2-b1e778a487.css": "82d8946498d99985397d5550e9430627e4889e3e9767fd11077a23decd2ba2ff",
+        "external/fonts.gstatic.com/s/mukta/v17/iJWKBXyXfDDVXYnDp3uS0Q.woff2": "cb59826862e7916e2b0d6e5f686b6fa44d1be9ce1364ee123154ef29b5e06dcb",
+        "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbEyjlmf-2fW7A.woff2": "22d364972baa5c06f5a3aae43877809c2c5042f24abdc74ade01746b486bf005",
+        "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbFmi1mf-2fW7A.woff2": "a99bf7bc3096c1136dff3b02f91e11c879e5c4e622168c9c4a21b8b4d1a27f1d",
+        "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbFqj1mf-2fW7A.woff2": "ba43e810f7f7ca2c1d22b7fc353dcca1dcf81c3f4a6a687b5d906c337a50c081",
+        "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbF6iFmf-2fW7A.woff2": "cdf572e0e5c695ac1106298e5411d1fbb640067da9bfaa28c6d2dba25a5e4d04",
+        "external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbEeiVmf-2fW7A.woff2": "7a4b36fac1b08a5d3a8fd491ae8c4d0fb72caab398919dbc800164183b104a61",
+        "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+        "external/fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+        "external/fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZQa-lGQzaLlA.woff2": "f8ed11ac45df6a5fa0098813dba3a14ed06fe1b068ca2f3d45a877ee30f6157d",
+        "external/fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZoaelGQzaLlA.woff2": "c2dfa37eb5cf904a534d0c63b418423c6ab186de782d7eeb70c95f739149b401",
+        "external/fonts.gstatic.com/s/titanone/v17/mFTzWbsGxbbS_J5cQcjyljIh2Eo.woff2": "0687111fb88f47f6c46b58e080984b35669509cc436f6009642c71a2da671203",
+        "external/fonts.gstatic.com/s/yatraone/v16/C8ch4copsHzj8p7NaF0xxlOHbRE.woff2": "105e35bb2f63edd7ac537325c28ced21131665db79488a25f1ba62e171f72206",
+        "external/fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Jo02SuCgQ.woff2": "12d6a2dc8345163d5c8d797c7f88f1f2a4a36b2ce8400272d3fa78ecbce72d76",
+        "assets/index-BIrKTpvw.js": "c47a52c2452408ba263bc0b9a3f88e56d4cb98c56153efa2a5a4a91c987438cf",
+        "assets/styles-CtT-Ivkq.css": "ddb4ede71711fe600b069859911864c73aa3565f4828a1e635ab49dac62aad54"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/op-groom.webp",
+          "before": 2132241,
+          "after": 1551318,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/op-map-v1.webp",
+          "before": 2878857,
+          "after": 1882840,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/op-couple-panel.webp",
+          "before": 2231861,
+          "after": 1631810,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/op-bride.webp",
+          "before": 2303702,
+          "after": 1673374,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/op-hero-ship.webp",
+          "before": 4478521,
+          "after": 3305344,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/grand-line-voyage/op-deck-texture.png",
+          "before": 114684,
+          "after": 114684,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/grand-line-voyage/op-coin.webp",
+          "before": 228149,
+          "after": 165872,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/grand-line-voyage/op-treasure-chest.webp",
+          "before": 730977,
+          "after": 490452,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/grand-line-voyage/op-log-pose.webp",
+          "before": 247317,
+          "after": 159042,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 15346309,
+      "assetBytesAfter": 10974736,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 14,
+      "name": "Ghibli Selfie",
+      "source": "https://ghibli-selfie.invitestory.in/",
+      "slug": "ghibli-selfie",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ghibli-selfie",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "d532fd6b800a45575b42ecf3e395fb47a70f5b1d20a4e23a449ff84c3e8dc8fa",
+        "editable/wedding-data.js": "d72313625bb2896aa9687a7c15cf1eea414e4906d07d4bb438eba96e7e4696aa",
+        "editable/assets/petal.png": "6a7ca8edf3ff9ac6679606ef568399f5d20e97e4cc1b852ff68976a4e7b9f65d",
+        "editable/assets/cloud-a.png": "ae52890db53fdbf70e275b599caaed2b4dc55aab98233e3cfdb9a5b6905345d4",
+        "editable/assets/mosque.png": "f5b5ed2369a123b08f3fd3312a60aa8f0736d1bf82f30d0b1a633596e5c47d49",
+        "editable/assets/butterfly.png": "80b70cbd51f1907f22049257d1ab4bf79ed80d41905b3aa6fbce89cd1c744118",
+        "editable/assets/gramophone.png": "65dee2c84af4aecaa4e3c0caedd41ea575e0a6b08372f380bb357eef60cf3804",
+        "editable/assets/bouquet.png": "93e463671589b7b076de348d2ec2db31a21d789badd8da5a07b357a8ace68dde",
+        "editable/assets/couple.png": "c1199fb60990562c74ca64b5b4594c8b7672f93f79e9ac479bc843f26e0a7ced",
+        "external/fonts.googleapis.com/css2-afefae8748.css": "5eb00183a00a8d1ef0749032df9c382622d20a11af6b9a29747c3e4efe0e86ea",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/index-D-DATC24.js": "22b70cf6422eee4794f20ad252449698959b6cf0eff35a659c9c41faa20e40e4",
+        "assets/styles-BZkC9aYC.css": "9a495f87b48dd13266a12373ec9f01e795485dd044e16b1141778573b9e24000"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/petal.webp",
+          "before": 196676,
+          "after": 127832,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/cloud-a.webp",
+          "before": 162804,
+          "after": 102940,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/mosque.webp",
+          "before": 406281,
+          "after": 253370,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/butterfly.webp",
+          "before": 177174,
+          "after": 125046,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gramophone.webp",
+          "before": 247092,
+          "after": 161066,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/bouquet.webp",
+          "before": 1573797,
+          "after": 1063266,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 2544328,
+          "after": 1602670,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 5308152,
+      "assetBytesAfter": 3436190,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 15,
+      "name": "Ghibli Portrait",
+      "source": "https://ghibli-portrait.invitestory.in/",
+      "slug": "ghibli-portrait",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ghibli-portrait",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "d7267829f4c1347b2376b290a546d000a30cab7679b49fcc2c489756644bac97",
+        "editable/wedding-data.js": "8b31fc739dc32596b65d1d3fbaac31b8e1a95eb3572d548dbf875e3ab9fe7585",
+        "editable/assets/family-groom.png": "c5ebd5bf647b07d6ae1ddabe235a08bedbf587d998c1b2ef83dcda0fef539626",
+        "editable/assets/gallery-6.png": "5f10c53b78a761df14c3caec7630a8d967a923e449d8e458deadd95f7bb62dca",
+        "editable/assets/gallery-4.png": "579d8313a4463483918be65f2f417abb273508910db7f0d78da5eba13daf1750",
+        "editable/assets/gallery-5.png": "1651140f58bd9fc05867353518eb0b6658c348185f44760ddb308dc3f61ec8dc",
+        "editable/assets/gallery-1.png": "6c200cf1561bca9bdc5b6cc3f4f612eab0a1906cd24bb3cc29ba94a67c095f71",
+        "editable/assets/family-bride.png": "29f3d2715a2133296f75a5fc360efcef5d7c1c6e41a9ba3bfdad9285bb20b3e7",
+        "editable/assets/gallery-2.png": "61f0483560fb1123f03c98c289594f1576b1e9a6616317f8ace3b62e65fc38b0",
+        "editable/assets/gallery-3.png": "82538454d27a0161a8af61ebb6b55f0c68d33e1c4702497539fd98867cc7e754",
+        "editable/assets/childhood-groom.png": "f637fa6ae059d67f00f19a52772ddbc392f0d7e63b094850d6672c4e91575909",
+        "editable/assets/body-bride.png": "8be7fccedc37e964b0ab113d60b142b459b04c7edf7b038b4b8ab2251194658c",
+        "editable/assets/portrait-bride.png": "73031b0701de3877a348c73576ad1a9a33ba490b3d674f53b29dd51e675207fa",
+        "editable/assets/portrait-groom.png": "040c258e70379374f9725fe99fbf0e9cc219b16bf3d9955a189c58ada5c0c001",
+        "editable/assets/body-groom.png": "4e4260a0b0816de24293d5a7fdf6f1c27bb313260cbed52eb187c4d324f387e8",
+        "editable/assets/childhood-bride.png": "965550ecfcb834218f42852638fbfadffe03890627e72265824c503b0578f587",
+        "external/fonts.googleapis.com/css2-ee1adbc530.css": "c8bda37a674d3a2b8aa53a7f5594edc60d038d98433ac19c7f89fa161b273e84",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/index-DLKeitWv.css": "f5e0248f816c3ae73d7777a5a2eda07550416e7e81fa97e15546a57993772606",
+        "assets/index-Dmcb-76g.js": "58ee4117e76c714ba41d58643ccea0edc8ddd39d2630e224057f7576bc7c014d"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/family-groom.webp",
+          "before": 2175047,
+          "after": 1458658,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-6.webp",
+          "before": 1988897,
+          "after": 1392466,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-4.webp",
+          "before": 2170992,
+          "after": 1509438,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-5.webp",
+          "before": 2475634,
+          "after": 1902842,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-1.webp",
+          "before": 2210789,
+          "after": 1534838,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/family-bride.webp",
+          "before": 2138147,
+          "after": 1445748,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-2.webp",
+          "before": 2156782,
+          "after": 1489334,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-3.webp",
+          "before": 1758469,
+          "after": 1221672,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/childhood-groom.webp",
+          "before": 1574515,
+          "after": 1061458,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/body-bride.webp",
+          "before": 811285,
+          "after": 587780,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/portrait-bride.webp",
+          "before": 1982065,
+          "after": 1364806,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/portrait-groom.webp",
+          "before": 2225053,
+          "after": 1492402,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/body-groom.webp",
+          "before": 2035638,
+          "after": 1467122,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/childhood-bride.webp",
+          "before": 1499709,
+          "after": 1019912,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 27203022,
+      "assetBytesAfter": 18948476,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 17,
+      "name": "Ivory Waltz",
+      "source": "https://ivory-waltz.invitestory.in/",
+      "slug": "ivory-waltz",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ivory-waltz",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "001518ff47fb3f58e958963dc910eb39091b932d2510cf027e94e3889178bfa4",
+        "editable/wedding-data.js": "2a487206e7dfe22fad7f4afd7ab8540b693fb5c304d1c2196903913d545f44c7",
+        "editable/assets/hero-composite.jpg": "5cd2b3bb7a64210551190b0b9b68cbf5eae20748ff6afce12a285ea675188436",
+        "editable/assets/layer-01-background.png": "25cf8e5af068fa68954d22915547aff505bc899aaf5aff2e3c46c14bc6dd40ec",
+        "editable/assets/layer-03-groom.png": "1f77dca2da9aaaa55feee5c7a29b15af9fe49271d7b2142337fc79cb2dc5a4d2",
+        "editable/assets/layer-04-bride.png": "be286a58b7c48b7be12fbe55fc5a6e3747cd851d23294a96ec15a7581d998b60",
+        "editable/assets/layer-02-shadows.png": "1bb267c944b970a07c587e7f3533113cdf208c6636fff7e9205653c747153300",
+        "editable/assets/layer-couple.png": "74757925d2b3ae79afcff0142dc588e8361edb04c6889eb1e2aeef2a5290c896",
+        "editable/assets/layer-05-bouquet.png": "f2a3606126e145a7755be2c471485ddfc0be31d570b50055754a70bec3fa9e2a",
+        "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+        "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "assets/index-mGGyI97A.js": "a744e0285eba328113e7c9f2044dfeffdfb25b81ec8bddd23d6e53ce86974c1d",
+        "assets/index-pQKWR5sE.css": "5fc65ece02ea268dc7153a96bb2fcc3abae27bbb2d7da47bc117620bc84c98e3"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/hero-composite.jpg",
+          "before": 231764,
+          "after": 231764,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/layer-01-background.webp",
+          "before": 1767288,
+          "after": 1359292,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/layer-03-groom.webp",
+          "before": 1099657,
+          "after": 770942,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/layer-04-bride.webp",
+          "before": 1097617,
+          "after": 771242,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/layer-02-shadows.webp",
+          "before": 979432,
+          "after": 719080,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/layer-couple.webp",
+          "before": 325820,
+          "after": 205310,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/layer-05-bouquet.webp",
+          "before": 747156,
+          "after": 528730,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 6248734,
+      "assetBytesAfter": 4586360,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 18,
+      "name": "Ever After Bloom",
+      "source": "https://ever-after-bloom.invitestory.in/",
+      "slug": "ever-after-bloom",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ever-after-bloom",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "dd821076a9b03adc2173c93956226aea3d92482d7578fc4339c5d3a2e9c24586",
+        "index.html": "606aa2195d65b86e143aae0f703ae71a980a1fe606870ae8826a0efa3e99fa12",
+        "editable/wedding-data.js": "30b68c15ff5f8aa2d7eb0ab6d5d2654c9e66039aab90c2cd16b2406b8d692124",
+        "editable/assets/gold-flourish.png": "3e4c9648ae45ce8d317893e9b6d5b4141068674846de9371cdee6d3b0ec418f8",
+        "editable/assets/sunset-sky.jpg": "58ac676aff825b3022d7150f499ec661adfd6fed15083e049f19df5ddd90c22c",
+        "editable/assets/scene-balcony.jpg": "22a19a6ca3510485f16c58aeb7800edaac9a38ea9f45a04891c7cec6df6bc2d8",
+        "editable/assets/invite-open.mp4": "3c2f83249de6258595d1c94d18133887b5017ea0de9264ca90f88a04c96778e4",
+        "editable/assets/map-plate.jpg": "6e281c6dbf9c716a2792d1343eca58bc7409597093f52797ef8d1e1611b9a485",
+        "editable/assets/hero-palace.jpg": "d5972a4ed254b5fabde28a1fcb3f98eed1f2e3c87b77c8b2f00d8a9f7544d083",
+        "editable/assets/wedding-car.png": "789e20163552e624e8ff8b87ba740e98e22efad5c541c51e34f464a520425c3a",
+        "editable/assets/garden-courtyard.jpg": "735342855f8a9ab811b8f37d0636520a5b9ecf949b73350fe317fa1ab4f81926",
+        "editable/assets/lantern.png": "5cfdc9b155c07bdc88c7966de6d78e64de10f8875d6a249f654c05cc1466434f",
+        "editable/assets/couple-lanterns.png": "230679cc5d9eb3d0d85e8e5cd0f653d2d5bfb27c04cb10cd91ef49bd56366cb2",
+        "editable/assets/invite-seal.png": "6383b511b91d8718bdd8ee175ecc22f92965d67c7494c73b950dc812025abcff",
+        "editable/assets/scene-dancing.jpg": "84ef98f254c549adbb574f48359f93b5faeb4e81c264d50e357c9ca704918d02",
+        "editable/assets/scene-hands.jpg": "adf53017e9d7a45c61bb7f34a7f9216eadf86a84aec13c0c47f9606c85bd7dca",
+        "editable/assets/portrait-bride.jpg": "6199f497383799740750e92aea183323f0188999b84a0d44e9a4fb6718ec9795",
+        "editable/assets/scene-walking.jpg": "6a62cc083112450245737ff389a56481a46a3f0a2f9d5f3522228ad3ccbbde6e",
+        "editable/assets/portrait-groom.jpg": "3a9bcf48e6fa7feff2d7114254caf9e2e9784dda3f37fcb12638a1761261dd1b",
+        "editable/assets/bougainvillea.png": "9adad112ebbf73eb97396441470050cf2e6db22f19b9db2493f63c15f8de9dab",
+        "external/fonts.googleapis.com/css2-7b506d0618.css": "82e0bd6002a214dc38b7f75409ac5507fc2efe558de5431da89a22b151777c9e",
+        "external/fonts.googleapis.com/css2-062b797faa.css": "c0da9e997c4d10d908758312ba9587dd6efe8549a719edd289d4bfe03d9687ca",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+        "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+        "assets/routes-RO7ZGgkY.js": "0817c6ae4421a331432e17137a6455df04ec78860dc3d95ae20f30f144a2fd5b",
+        "assets/styles-DMO58HcY.css": "fc408e65dd9b2d8ec54d1574683d05194097dece28c20f628049f6fb0b6a299c",
+        "assets/index-09N2lWIL.js": "fbbf6306e62fd7986b62667ea5b384f29a3837ceb1bbd66506e526db22322c42"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/gold-flourish.webp",
+          "before": 201310,
+          "after": 153922,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/sunset-sky.jpg",
+          "before": 227356,
+          "after": 227356,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/scene-balcony.jpg",
+          "before": 176533,
+          "after": 176533,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/invite-open.mp4",
+          "before": 3471947,
+          "after": 3383157,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/map-plate.jpg",
+          "before": 305636,
+          "after": 305636,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/hero-palace.jpg",
+          "before": 235729,
+          "after": 235729,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/wedding-car.webp",
+          "before": 1254506,
+          "after": 852336,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/garden-courtyard.jpg",
+          "before": 350157,
+          "after": 350157,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/lantern.webp",
+          "before": 716562,
+          "after": 485254,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple-lanterns.webp",
+          "before": 783582,
+          "after": 505988,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/invite-seal.webp",
+          "before": 2282744,
+          "after": 1645106,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/scene-dancing.jpg",
+          "before": 214880,
+          "after": 214880,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/scene-hands.jpg",
+          "before": 182229,
+          "after": 182229,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/portrait-bride.jpg",
+          "before": 184556,
+          "after": 184556,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/scene-walking.jpg",
+          "before": 257766,
+          "after": 257766,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/portrait-groom.jpg",
+          "before": 153206,
+          "after": 153206,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/bougainvillea.webp",
+          "before": 1140261,
+          "after": 762708,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 12138960,
+      "assetBytesAfter": 10076519,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 19,
+      "name": "Saga of Love",
+      "source": "https://saga-of-love.invitestory.in/",
+      "slug": "saga-of-love",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/saga-of-love",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "fc2b9529516f52ce3d398c771c05195fc12623eb709f5f4fa3fd86a391e29773",
+        "editable/wedding-data.js": "2049efab0ca66f0cc7d1959baa71fbd7fe9245d5e2bcf55158881a9db6172da8",
+        "editable/assets/story-1.webp": "7bbf96320843ff80bc3bb3f96359b525431bd2ccd8bce86ecb7029b4334a07d4",
+        "editable/assets/hero-arch.webp": "387302a6172f2b8025c16e36cefab181eb9c666e611d0433a02ec254568163dc",
+        "editable/assets/gate-panel.webp": "1fceed54f41ed718cbcfc534b861635318ba741e81cddf4efc1164997b1445c6",
+        "editable/assets/map-preview.webp": "2109311eb91a3b5f114e13b3dca4f4810cb1405269086efe4294691746e44ba9",
+        "editable/assets/story-3.webp": "7fb4c63762eff96744fdd0723fee00c6ef59d4cf6ddb73546e420752b336e77e",
+        "editable/assets/story-2.webp": "f85049c98b1b750f115c978a6079e72ebe3ca1eda0a1c41626a6b3c346a7ff82",
+        "editable/assets/footer-floral.webp": "91739ceb61c3a4f1f7ded6d4d8fc65f5f5c2ba98679fca0018d383c466467644",
+        "external/media.invitestory.in/saga-of-love/og-image.jpg": "c851d936fe14b5b20500f6fbd71e3fcda867a0bf46a6998702b276b081b2d2e2",
+        "external/fonts.googleapis.com/css2-5f7e6dc2f6.css": "84be8dc31da8e2b960b9c2820888226ed165b7a1dbf1cb8c8df8ad65cf09203c",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+        "assets/styles-CyopAWIO.css": "d2a56cab3228b9eda1d1353e3364d13b560a59ad4a8bd547d4eee060d222cf3b",
+        "assets/lotus-lCFuqOQX.webp": "7fcac3e126a0b694ae1d1fdd2ddfa8a6ce7fc45ef42983a9570b062a944bf4bb",
+        "assets/index-CwGDgeeH.js": "00cf339ec33cd458b8ff5f69afce0980e63a1d8eac44db0996b6ab7d5b8b6241",
+        "assets/jaali-CjkqZpoD.webp": "68ff09ef92bf9151fa66f673a389769c76f3fff96e6efcc6e0a11a40c1e28099"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/story-1.webp",
+          "before": 110932,
+          "after": 110932,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/hero-arch.webp",
+          "before": 214848,
+          "after": 214848,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gate-panel.webp",
+          "before": 278204,
+          "after": 278204,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/map-preview.webp",
+          "before": 136568,
+          "after": 136568,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-3.webp",
+          "before": 162742,
+          "after": 162742,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-2.webp",
+          "before": 133502,
+          "after": 133502,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/footer-floral.webp",
+          "before": 129384,
+          "after": 129384,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/saga-of-love/og-image.jpg",
+          "before": 208466,
+          "after": 208466,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/lotus-lCFuqOQX.webp",
+          "before": 31126,
+          "after": 31126,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/jaali-CjkqZpoD.webp",
+          "before": 20104,
+          "after": 20104,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 1425876,
+      "assetBytesAfter": 1425876,
+      "optionalDependencyFallbacks": [
+        {
+          "file": "assets/index-CwGDgeeH.js",
+          "missing": "./Aurora-BOmNvkF7.js",
+          "fallback": "no optional Aurora overlay"
+        }
+      ],
+      "exportRepairs": []
+    },
+    {
+      "id": 30,
+      "name": "Lantern Madurai",
+      "source": "https://lantern-madurai.invitestory.in/",
+      "slug": "lantern-madurai",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lantern-madurai",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "c6087d193b4edbc63c757fbc5bfe081069f9475f412938123f3a247bb08c85b5",
+        "editable/wedding-data.js": "4524d87771ec8ed8f41314edd316879b1effa0a5300b9182beb0604463ce2dbb",
+        "editable/assets/aarav-ananya-opening.mp4": "2fc70224ccf29eb0baac7f1949b9e2014e3f936ec77e086283718a4aa92bdc40",
+        "editable/assets/entrance-first-frame.png": "ee7d4511e945c217c973fb13f784d510a691b617ac7d748c3ce25617f65f109e",
+        "editable/assets/invitation-reference.png": "e6dc832c59844c4914e51b6f2dd13b4b6bd5dbc62cb0baa23139f3acc63c54e5",
+        "editable/assets/haldi-mehendi.png": "6a8751936c974a02f2916bead38ee0da8ee0ec394278cf7f710c566ecee859ec",
+        "editable/assets/og-aarav-ananya.png": "1f761363ce6ec9f86735fd52b201e8685e8ada2bf02cee3013cb48c615c9a21e",
+        "external/fonts.googleapis.com/css2-b4b7f1b684.css": "bd40b621c1104dc74a6ca70183f750db9b41523713fdc545c0516635c594faf9",
+        "external/fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpcyp6COKv.woff2": "b587e9bbe83a2164e63b707e0eeee4a5db113f4e51d8eba4c331b385657f89de",
+        "external/fonts.gstatic.com/s/italiana/v21/QldNNTtLsx4E__B0XTmUY3tWxg.woff2": "55dd9f625e6c29eb48dbc4c44f932b4f97be9c874886c67fe6005da637832055",
+        "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+        "assets/index-BEdYU7DH.css": "025ac224ce476c78f7be5b5b4ea3d55f898f68b7067970bca8efbb0e1f7008f5",
+        "assets/index-C-L_hRfU.js": "4e0dec3e99e8b20b43ce6c215a8f81322bd944bea4f4f0f0f20ed211bf98c84e"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/aarav-ananya-opening.mp4",
+          "before": 7165317,
+          "after": 7084744,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/entrance-first-frame.webp",
+          "before": 2950032,
+          "after": 2165472,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/invitation-reference.webp",
+          "before": 2781788,
+          "after": 2082870,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/haldi-mehendi.webp",
+          "before": 3045768,
+          "after": 2234170,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/og-aarav-ananya.webp",
+          "before": 2903685,
+          "after": 2181962,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 18846590,
+      "assetBytesAfter": 15749218,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 31,
+      "name": "Lotus Leaf Bengaluru",
+      "source": "https://lotus-leaf-bengaluru.invitestory.in/",
+      "slug": "lotus-leaf-bengaluru",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lotus-leaf-bengaluru",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "2454312ab1291e2ea829500568cb6657435586f1a39ea3790779d62782530b1b",
+        "editable/wedding-data.js": "7d5ecc6d2e355f0763a9ed8425151d8d8823b4de18d21d03b4de77ade757266d",
+        "editable/assets/aarav-ananya-og.jpg": "a4263ba065baedafe26f5b2e00aa7068cccd4efc12136a7c9b2ff780d3e4ee98",
+        "editable/assets/sm.mp4": "dc51fdcb3681ad0f9497d8a85548e72926db1dd9fddf8f317eedc813ae6059ac",
+        "editable/assets/flow-first-frame.webp": "deba3ddbb5d9cffa1b890427bf10fb104b6d5240fe62b1f1d72595e44edbaba8",
+        "editable/assets/aarav-ananya-story.webp": "7a4278256d24987ee467c8bb315c7921178574d66589a9eb37857a69643443d3",
+        "editable/assets/aarav-ananya-hero.webp": "35ca9e47ee9a3fde6d43a1fd36c54e40d269f7cd0a54a4c223b5b9d2ccc485f6",
+        "external/fonts.googleapis.com/css2-01da2f8115.css": "b9647b4f6977046b500ec267b9a387935e9232fb12a5ed59d496b09877427ef3",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjNk9IfqxUQ.woff": "a442d16ffebebb3fbf555778c345707ef980d326af8a1ae67dfaa00c0f2571ff",
+        "external/fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RnipYvQwI.woff2": "bed175405601c464daf50397db785d55b6c9d93c1be428a4ff7c3fb5a4e23c19",
+        "external/fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRsgW7TdXc.woff2": "036f74a716b3b07b93d28c3476f1e35e6cac4da371be4034477b84764d545960",
+        "assets/index-Fwiizu_u.css": "473f0ad26f4793a054115f29bdae432297fee0fd8cd10ca07347d02de31fa45e",
+        "assets/index-DLpsKpIv.js": "92da05b0d19c6e5056d9a2234ffccd5e723711493975a52c16f78e3a249127cc"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/aarav-ananya-og.jpg",
+          "before": 149341,
+          "after": 149341,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/sm.mp4",
+          "before": 2383615,
+          "after": 2383614,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/flow-first-frame.webp",
+          "before": 475850,
+          "after": 475850,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/aarav-ananya-story.webp",
+          "before": 422146,
+          "after": 422146,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/aarav-ananya-hero.webp",
+          "before": 570806,
+          "after": 570806,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 4001758,
+      "assetBytesAfter": 4001757,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 21,
+      "name": "Rajwada Royale \u2013 Alt",
+      "source": "https://rajwada-royale.invitestory.in/",
+      "slug": "rajwada-royale",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/rajwada-royale",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "ff13f289f5b777dd635e7d6c50c2e36709a790e18926d1658d9c1d794f4711d6",
+        "editable/wedding-data.js": "cefc95fc85c09d005ba4ee2c894e5d131730e94d1ca656ee4220c1dbfc6d70b9",
+        "editable/assets/garland.png": "8b67e928735cd04640cf9f5fc2b0558a7f3458591dd92073a160d8ac619f3e63",
+        "editable/assets/ambient-shehnai.mp3": "c8049065da0aad4e44ec5b73f18b12b87c4302edf522dd2e63f599a5fb0cce3d",
+        "editable/assets/gallery-4.jpg": "addefe89852beec4af693aae394c1f7e9037b4d69dad0a931295a41acd583faf",
+        "editable/assets/gallery-1.jpg": "56375fedd9184ce32da4cd969e206ce5a7c0043ecc0f4c1c1847f71d40719e06",
+        "editable/assets/story-1.jpg": "dff1215aa4bf7c5fbd0397f3f5086715292d08ce647cd04b997b7bb6992f8bcc",
+        "editable/assets/floral-corner.png": "0f6bb976d3f8e259ccdeee6d182024dcbed46218b0ddf9c71c05e52b5fe6e986",
+        "editable/assets/gallery-2.jpg": "cc512e13dc52a1f04946d7bcaade586f004f3f79433cfb1c337715df502c0727",
+        "editable/assets/lantern.png": "c81fbc1d6f0dd4ea9993c4791b5cb5ae40c66945fed9cb2002cf8a2f7ea434f5",
+        "editable/assets/story-3.jpg": "1ecd9d74f815f13fcb3217b6c58c76559db6b48fa83b8feb6c59ca87bf2acaa9",
+        "editable/assets/story-2.jpg": "1b9c2e2f1d91620d65e1a809c543dc315dfe89f33e6415f58fcfc432d90af38a",
+        "editable/assets/gallery-3.jpg": "6a07d79d3b8339e09c639bb91a98f0d4bd4ff8e7b9a62a32e69437ce134e4f14",
+        "editable/assets/door-panel.png": "07b2d39d8bb2eb6e0908388d1a4e3bc29edcb809dba3d6e47157458f9624adc0",
+        "editable/assets/couple.png": "bed305b9a5588319ccbcfaeff895d31ace269dc260ab861d19d0c096c5ab5a2a",
+        "editable/assets/footer-floral.jpg": "05bdfb12ce0ba473725896e418fe36671a18b3b299af5adc7350a1e77ce0490b",
+        "assets/cormorant-garamond-cyrillic-400-normal-DD2KOZkl.woff2": "0d23162e67528fdc5fe1b12bedc525a69bbdc86d5d9f3c2ee9e9ee459934ecd4",
+        "assets/cormorant-garamond-cyrillic-400-normal-CVFrM67f.woff": "11a86b7cdc25186a0a119cfc4e9269032ae8b11aa9e70acf98e48ac5d05e390d",
+        "assets/marcellus-latin-400-normal-AvMY561b.woff": "7083fa63e075a796f4beef9293fbc29a80be738d84bbfd89a20ddcdfc5c82198",
+        "assets/cormorant-garamond-cyrillic-500-normal-CyAY5ZLS.woff2": "30aec8d9cdb4ea84534ffcd7c58b0f06069f63dc177b5aafd7438627dfe10fb8",
+        "assets/marcellus-latin-ext-400-normal-D06jIo1e.woff": "49f576474f6fd788afc306ae219e828d9333a86a17ead9aba8f8fc3d4b9d78a8",
+        "assets/cormorant-garamond-latin-ext-600-italic-CcucBqPp.woff": "3425906c483e92b99ecb9f38e569d8393a8f8afbbf6ea10aee0ccc9036b4c694",
+        "assets/cormorant-garamond-cyrillic-ext-400-normal-W3Dto7M0.woff2": "02a3bbfd23dfcfac40ad87d8954078cd96f8a85e661fc73617245fe06d2aa4ea",
+        "assets/cormorant-garamond-vietnamese-400-normal-6K-YXo6g.woff2": "eddcd28ffd8e111c669789b2978019359bb67b2e2696e566364fd37133c20a3b",
+        "assets/cormorant-garamond-latin-600-italic-DCuhXWyK.woff2": "0b6719b25266b8f7f0b48e84eb8094db8d243c5b089a5fa48d350bc93f57127b",
+        "assets/cormorant-garamond-latin-600-italic-BcJbkSJ4.woff": "7878d364f770f06894c7e5a20e572ff5b77024002b594dd31afd22cc3437deca",
+        "assets/index-BrMSd8jH.js": "c0d4373010682633550b868df3bccc8206636ae7ec377566b19ca33d46c1429f",
+        "assets/styles-D75Ml1pI.css": "3941586845266b683dc8cbc64d12950616d89e62f648772b544fa816b35d7d11",
+        "assets/cormorant-garamond-vietnamese-500-normal-BZGLGj12.woff2": "f245c41ee20c58be0acd85ac9e3060f8ff9a2dba455892ff37c1e11b9133eda0",
+        "assets/cormorant-garamond-latin-ext-500-normal-CH1kM7og.woff2": "3de1b0f23516d8ff77cc1a5af88b6c19037a375ec52729a8a5633998f58aa609",
+        "assets/cormorant-garamond-latin-500-normal-BsRWmXhO.woff2": "8197bf53615ddc8c423f444c7f0eec63b7fa0ba093fcfbec60dfdd28429b0fc8",
+        "assets/cormorant-garamond-cyrillic-ext-500-normal-Yta7XZ9C.woff2": "acab2d007aaa8b005a573cf1389f8f4f35bfb3413e2f6d59af49fbcc3668d925",
+        "assets/cormorant-garamond-vietnamese-600-italic-Bdap-eNg.woff": "2309369773e2085fdb2db937eefaed795f4a114f31c66d0f6aca480b1954fd46",
+        "assets/karla-latin-wght-normal-C3-ma4ov.woff2": "cd614fed3fa0bf1b083d1a127a593081e2a1aa732ad61481eb12baee212c933d",
+        "assets/cormorant-garamond-cyrillic-600-italic-DP5iIMI9.woff": "0f8adb18a5680b91f91e01d7c6da2e05377ae2822abdff1aab3f9c0312de22fb",
+        "assets/marcellus-latin-ext-400-normal-DkjSXVBo.woff2": "1d5a9870851a0dac4c92c1237b792886704b46050162afc2a0b1990f4f0095a3",
+        "assets/cormorant-garamond-latin-ext-400-normal-uvC0WHQr.woff": "751bcaa2bf2f07cb2b03f6c83e548dc254d3161741245fa96b372e78cf4c4055",
+        "assets/cormorant-garamond-vietnamese-500-normal-DqXqCC0q.woff": "b981d0af206e554e32a75cd806da1c266576843e6696d5df8d32f43e26935848",
+        "assets/cormorant-garamond-cyrillic-ext-500-normal-lsPpqi9g.woff": "94ff60604efd714cd2da16316554a894e969e9b8e779231921743aff5d51b046",
+        "assets/cormorant-garamond-vietnamese-400-normal-4uxlocMh.woff": "d2eac685abd3003ac60c4a208fe1d2febceba397964db73df656b1d2d62e2b24",
+        "assets/cormorant-garamond-cyrillic-ext-600-italic-o1-A_FsB.woff2": "a4be182ad5c9fdfa821ac1be04111a8651ba55956529e22300146315fa5d2699",
+        "assets/cormorant-garamond-cyrillic-600-italic-Bp4BYShX.woff2": "cb92ea139b34821f3145ff5735ef3ffcfb3070125fa75c73fbd993c7e9a861cb",
+        "assets/cormorant-garamond-latin-ext-600-italic-DYtrqAWE.woff2": "b367d9fced0c6964c5e7deeeb323e0d12ddc7ddc1b406e3c190724c0c71eacb4",
+        "assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2": "14291dd5043b30e82448f15e1e7556a740c9e89378efc91d22c6324ae229f04c",
+        "assets/cormorant-garamond-latin-400-normal-B7YtguxJ.woff": "b926f33f9d3d5cb64e639b8fe9ad5380560a63f3e7a29d212f2b80a2d22ec051",
+        "assets/cormorant-garamond-cyrillic-500-normal-DkJXBcIH.woff": "77aa93b818437cd94c9b77eb8f06593a7401696bc05af21cb199ec8fa540c706",
+        "assets/cormorant-garamond-latin-ext-400-normal-Drx2k2n9.woff2": "375a088756d1cb10eb91a9a7de18ad5e9858689abe76496dd78e560fef0bbebb",
+        "assets/cormorant-garamond-latin-400-normal-B-1hWBU7.woff2": "8048ac209bec741e1c29cd0cfac5aac1c0c2ba8c3ddbd4a58fa9bd92ef5c63c2",
+        "assets/cormorant-garamond-vietnamese-600-italic-C3DTNE_9.woff2": "f9a18e48b7e18b782057e6e12fb98462a209d4d06b8234c9e8ac7f746dec8979",
+        "assets/paper-BIWUKCos.jpg": "c3e4e69ccff5cd69c345fa2cd2527c1887d979ba9ba235d8f4fc4b3ec7489cf7",
+        "assets/cormorant-garamond-latin-500-normal-zIXX3Q-H.woff": "314ee3edd5ddcdef5cf2374c1126b8be9f7f1ebd6c5c66a23c237f3b836a3ec1",
+        "assets/cormorant-garamond-cyrillic-ext-600-italic-Vv_u9p1E.woff": "75544f6c40b7b76a3995b1ccba0e6b1150a2410e74d03d835a5bac64ad81370a",
+        "assets/marcellus-latin-400-normal-86dSXJnk.woff2": "8a539799d12e3a144273288055490f57e1eee84da7a9145f085bc522e80719c3",
+        "assets/cormorant-garamond-latin-ext-500-normal-DYeaGGzO.woff": "08ef933798b9939e6c79d08b68c0aad8c0024d5ea25c2c1b00da51aa5ffb38c3",
+        "assets/cormorant-garamond-cyrillic-ext-400-normal-DLdKLAvx.woff": "2373fdbd96854b3a6868d3ea36019d0e6f2f48c9990de8f80f0ae867fbaa4a53"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/garland.webp",
+          "before": 702889,
+          "after": 522094,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-4.jpg",
+          "before": 224564,
+          "after": 224564,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gallery-1.jpg",
+          "before": 244719,
+          "after": 244719,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-1.jpg",
+          "before": 191047,
+          "after": 191047,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/floral-corner.webp",
+          "before": 1065647,
+          "after": 722678,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/gallery-2.jpg",
+          "before": 197563,
+          "after": 197563,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/lantern.webp",
+          "before": 809064,
+          "after": 524306,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/story-3.jpg",
+          "before": 202585,
+          "after": 202585,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-2.jpg",
+          "before": 238353,
+          "after": 238353,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/gallery-3.jpg",
+          "before": 203118,
+          "after": 203118,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/door-panel.webp",
+          "before": 1426974,
+          "after": 939654,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 1958200,
+          "after": 1306198,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/footer-floral.jpg",
+          "before": 215021,
+          "after": 215021,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/paper-BIWUKCos.webp",
+          "before": 18459,
+          "after": 5456,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 7698203,
+      "assetBytesAfter": 5737356,
+      "optionalDependencyFallbacks": [
+        {
+          "file": "assets/index-BrMSd8jH.js",
+          "missing": "./lenis-DoixeXP8.js",
+          "fallback": "native scrolling"
+        },
+        {
+          "file": "assets/index-BrMSd8jH.js",
+          "missing": "./Aurora-DG0zjwYb.js",
+          "fallback": "no optional Aurora overlay"
+        }
+      ],
+      "exportRepairs": []
+    },
+    {
+      "id": 22,
+      "name": "Rajmahal Palace",
+      "source": "https://rajmahal-palace.invitestory.in/",
+      "slug": "rajmahal-palace",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/rajmahal-palace",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "08dbf0d344807893233a0a86df25f8170aeca9ee1142f27ad63f1d6383ddf275",
+        "editable/wedding-data.js": "9788a63c4542d8505c5facf4873fc19a452f589daf69ddbeb92563965fbe3d24",
+        "editable/assets/ganesha.png": "8755e412ecfd8377c039480c5d203d787fd80cc814ee9f2c37ef2d899e029465",
+        "editable/assets/hero-bg.png": "ed40adf2e208ac4585ffabfc09bbd70b8e7b7bd92e484bdb31a81c81346ba126",
+        "editable/assets/diya.png": "acdd1f74db6d15e0bdf26b128e6acba14efc8efdb5099adfc5960087b1215ed4",
+        "editable/assets/footer-garland.png": "4e11c83d5029f25d4a637ead8110550336e5570839092da7857a72180cedbe40",
+        "editable/assets/couple.png": "485c16c2e42566cb8076a0824fe02122c0385396237e4bec6c29ae2f3fa9b361",
+        "editable/assets/mandala.png": "53f7da4b30bc57771a7624edea4f6edf1a95b7c63935c1abf261648ca72d3600",
+        "external/media.invitestory.in/rajmahal-palace/assets/og-image.jpg": "c05cd1290f92c275266339694e6f23b61710d7b6b19c04343260911e57f0dead",
+        "external/fonts.googleapis.com/css2-07365ea972.css": "24bb1be590e85e1e7fd0049a5811d208b83a364760b86d548527050af7f620ce",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/index-DnBXbGkD.css": "77ed13f912aa278f66f0397c12f8d7d28795fae664987d0b8ce9bb9231e6a8b9",
+        "assets/index-OIk1B1Dk.js": "b453d094d8593d1d16218be1ba27962319716dd65d0ab4f6a42a1483e44d7190"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/ganesha.webp",
+          "before": 609014,
+          "after": 446638,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/hero-bg.webp",
+          "before": 2394411,
+          "after": 1700336,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/diya.webp",
+          "before": 695589,
+          "after": 523244,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/footer-garland.webp",
+          "before": 879081,
+          "after": 733146,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 2184991,
+          "after": 1622944,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/mandala.webp",
+          "before": 1955214,
+          "after": 1392900,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/rajmahal-palace/assets/og-image.jpg",
+          "before": 104275,
+          "after": 104275,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 8822575,
+      "assetBytesAfter": 6523483,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 23,
+      "name": "Midnight Stargaze",
+      "source": "https://midnight-stargaze.invitestory.in/",
+      "slug": "midnight-stargaze",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/midnight-stargaze",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "469cd6f9351932ce2d8a119a3d4117693c53b63489c8f93818e9ecdba57ea809",
+        "editable/wedding-data.js": "9303db4ca3b6657e1305f39af454d862175f9b6d36408251bbfb3676f8b67a00",
+        "editable/assets/ganesha.png": "8755e412ecfd8377c039480c5d203d787fd80cc814ee9f2c37ef2d899e029465",
+        "editable/assets/venue-palace.webp": "28e038b5239b4758c2526cd401f259476b35831f7b3a3120f1e28dac06a3a3f5",
+        "editable/assets/couple.webp": "43474d841626808c8e5f8904b75765936b276a7540c4d29ed09f6d9d90f3e36a",
+        "editable/assets/lantern.webp": "a06f3984dba138cce0dce9ece4d670fd2004ddf918655c329d31b90e6b7821ce",
+        "external/media.invitestory.in/midnight-stargaze/assets/garland-top.webp": "b64df9093713aa82c9dc5b247c77462fd4943e135f883433308d83f192069ab9",
+        "external/media.invitestory.in/midnight-stargaze/assets/navy-texture.webp": "87b7e40f606ffb62dafa49931dd0b114ea1e8f47662ec29da0a7649a3f4eb358",
+        "external/media.invitestory.in/midnight-stargaze/assets/mandala.png": "53f7da4b30bc57771a7624edea4f6edf1a95b7c63935c1abf261648ca72d3600",
+        "external/fonts.googleapis.com/css2-07365ea972.css": "24bb1be590e85e1e7fd0049a5811d208b83a364760b86d548527050af7f620ce",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/index-3-78T76B.css": "bbac75cf0f2f4c52eb7fc4db4e5274fe6eb2db71becf723cf4deeabe1c6234ec",
+        "assets/index-B7GbZwnv.js": "17e53d84a3e3a1399a5c98456ae9ded6a277de5701e387c89f8c67c0c573a03a",
+        "assets/lantern.webp": "a06f3984dba138cce0dce9ece4d670fd2004ddf918655c329d31b90e6b7821ce"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/ganesha.webp",
+          "before": 609014,
+          "after": 446638,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/venue-palace.webp",
+          "before": 174270,
+          "after": 174270,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 190388,
+          "after": 190388,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/lantern.webp",
+          "before": 52302,
+          "after": 52302,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/midnight-stargaze/assets/garland-top.webp",
+          "before": 374436,
+          "after": 374436,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/midnight-stargaze/assets/navy-texture.webp",
+          "before": 143704,
+          "after": 143704,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/midnight-stargaze/assets/mandala.webp",
+          "before": 1955214,
+          "after": 1392900,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "assets/lantern.webp",
+          "before": 52302,
+          "after": 52302,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 3551630,
+      "assetBytesAfter": 2826940,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 24,
+      "name": "Petal Path Palace",
+      "source": "https://petal-path-palace.invitestory.in/",
+      "slug": "petal-path-palace",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/petal-path-palace",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "083085bfbe358ba2aa5570c890f0ceff12cc122bb12303bafa0bf1642817ec59",
+        "editable/wedding-data.js": "ccbda183a750138b3e2a5ff9d4bd37787fcd8a6b02ca4ec62fe35d49738634ae",
+        "editable/assets/05-sky-palace.png": "4d473b93d239941e4888b235408362e11e33d9aeed8043bf9b33fcd6b05d5a01",
+        "editable/assets/01-arch-frame.png": "e0cc04b6eca339bb481c632ed875d8bbef4826783e2bea2c64bbeb820e61ade9",
+        "editable/assets/intro-veil.png": "f8baccfa4b8709a5c6ecaefe33c136da263be1d33d317aea7adf753d2258ac8f",
+        "editable/assets/04-garden-guests.png": "2bc37943f5acf43549d12bd9c83033ee79037595c19122e64ac7e1bb8cb20391",
+        "editable/assets/02-foreground-guests.png": "daf64112a17f6092ea2ea99fbea6e119547dce41a09f366e62dac99fa054b5d5",
+        "editable/assets/03-couple.png": "b03acdce6da576506e4ce5429b613390c786dec5caa0255b796232a135770d6b",
+        "editable/assets/source-full.png": "05e48e4a7059f2adc1f3c75aaedee8274a8d578e09c1a34a734655fefc9a2689",
+        "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+        "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "assets/index-B-yBjE0R.css": "66d141c8d6070abb3d42d4e40c88ef2927f492a9b5c2f2adc922af5ac867dc0e",
+        "assets/index-CxJ6pamB.js": "a10e46a3f503471ed8c2d4a597f8b5e4533f420200cb2609344eb24d5059e988"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/05-sky-palace.webp",
+          "before": 1424281,
+          "after": 951674,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/01-arch-frame.webp",
+          "before": 1759903,
+          "after": 1179076,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/intro-veil.webp",
+          "before": 18199,
+          "after": 5168,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/04-garden-guests.webp",
+          "before": 1791681,
+          "after": 1224892,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/02-foreground-guests.webp",
+          "before": 1260846,
+          "after": 834986,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/03-couple.webp",
+          "before": 1064838,
+          "after": 673492,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/source-full.webp",
+          "before": 1016916,
+          "after": 675150,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 8336664,
+      "assetBytesAfter": 5544438,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 25,
+      "name": "Lakeview Lanterns",
+      "source": "https://lakeview-lanterns.invitestory.in/",
+      "slug": "lakeview-lanterns",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lakeview-lanterns",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "8fad3bb79fd1722d6e8fbedf0f8bbc759601c90180c6c8609a5fdf3ee6224bf3",
+        "editable/wedding-data.js": "66694dd09b929924401ffb2ab9f575d3365f20ab9bc95e7e5776ec72aef07a0b",
+        "editable/assets/opener-diya-v1.png": "bdc12191d9d1066ce6e6125b618bfec51016be6a74664093fe331129d4c759b0",
+        "editable/assets/hero-lakeview-teal-v1.png": "41dbe974723f1f50cbbeb5e827c78a4315cdcc2754fc9ea3a0bd470cb3584bda",
+        "editable/assets/hero-couple-v2.png": "24074815697c439f12050feac6fa4bbb6a09eee7691f579248787caf87e1142e",
+        "external/media.invitestory.in/lakeview-lanterns/assets/reference.png": "d37af30fffa040ba764755e2414f1f073a46d15f8859d94d9752632604bf669c",
+        "external/media.invitestory.in/lakeview-lanterns/assets/layers/lantern-sprite.png": "c45caf33372f073f2ded8d2b71d8a800ca4bc53849cf75aa5fcaab54965100b5",
+        "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+        "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "assets/index-BTbTLFfy.js": "5c84dfe7d4a8425d2a9fcc200c4d0dae6a782ed912393fc047c5d7a279065057",
+        "assets/index-ohagFVcT.css": "82c3d37db6e76cf6213342835ccd5ff4ccbece46b6108f05db47e639ad74348f"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/opener-diya-v1.webp",
+          "before": 1806554,
+          "after": 1138076,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/hero-lakeview-teal-v1.webp",
+          "before": 1674770,
+          "after": 1221902,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/hero-couple-v2.webp",
+          "before": 2841959,
+          "after": 1835724,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/lakeview-lanterns/assets/reference.webp",
+          "before": 986781,
+          "after": 700938,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/lakeview-lanterns/assets/layers/lantern-sprite.webp",
+          "before": 1195261,
+          "after": 756064,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 8505325,
+      "assetBytesAfter": 5652704,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 26,
+      "name": "Moonlit Lotus Barge",
+      "source": "https://moonlit-lotus-barge.invitestory.in/",
+      "slug": "moonlit-lotus-barge",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/moonlit-lotus-barge",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "6135fef9c67202391e9e85ad20d468801caa5df56103a94f8a7bee2f720f7e71",
+        "editable/wedding-data.js": "1d7c2071d248f9164c2fbc857e60d572d336707a7d214366340158ddc5a26aca",
+        "editable/assets/sky.webp": "d69000facc20eba45788ecd45b410eb857842f94de52a198051ccfb6160332d5",
+        "editable/assets/barge.png": "73ab7ff3114cbed7d4044c6ef9a59f5ecf1f31f52601155a3a5d23b556437476",
+        "editable/assets/intro-end.webp": "1c7cdab948e952016a11571887f47303cc74517b9dafbf6cc6c6b2d8f1393e45",
+        "editable/assets/social-card.webp": "50813ae866901dbc10806ec2f12cc603e42986fe2b0e1ad6527fa5a5d2d5c6e1",
+        "editable/assets/couple.png": "91d85eb842d07030811c51e42bc40ee71101036078b42474ba53886511f98c89",
+        "editable/assets/water-palace.webp": "93b81cf98edfbd8720bfb31d55b72687e647ab0a177957b44d2f41fe5ebf3c26",
+        "editable/assets/intro-poster.webp": "56c3b0804d669fce5654222cb39d1cac7fa8bcb85b65b93b0c6500c2b0bf3a86",
+        "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/foreground-lotus.png": "85ebca300073152486ecfad01ebc094d2e50088ad9519060a6121c459b170169",
+        "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/diya.png": "cc7ec452fd7dad13228a986b0011630c31760bd3298533b71c90aa4e211b4aca",
+        "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/ornamental-frame.png": "36e655cfbba5b82c1e788ef5ad044bb46af7ba22c4699b8e038f3ca99e42b0dd",
+        "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/lotus-mandap.png": "761fa2faa871ca279b843417e04efcb753f18dae4cbeead997e8696b5d4abf5b",
+        "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/floating-petals.png": "e270fded5ffdca210a3952deb7a491099986756e5a82be2834adabd9c8a62845",
+        "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+        "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "assets/index-BDbVLStM.js": "fc3a8df957f7cdd9c95a7ffd2eae9f9617b32b87107cd3b14de7c1713ad9a6cd",
+        "assets/index-D3Yo6peG.css": "b95d28ed444f89ed46b0a2b93eba6a530b47b117c1bd093d1b40dcd94d588f85",
+        "assets/lotus/sky.webp": "d69000facc20eba45788ecd45b410eb857842f94de52a198051ccfb6160332d5",
+        "assets/lotus/intro-journey.mp4": "e3f7cae41ef51253ebb65d6930543d87f5ce73a9c2012173d0e64630fa99948c",
+        "assets/lotus/water-palace.webp": "93b81cf98edfbd8720bfb31d55b72687e647ab0a177957b44d2f41fe5ebf3c26"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/sky.webp",
+          "before": 17692,
+          "after": 17692,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/barge.webp",
+          "before": 1164276,
+          "after": 751422,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/intro-end.webp",
+          "before": 234092,
+          "after": 234092,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/social-card.webp",
+          "before": 122638,
+          "after": 122638,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple.webp",
+          "before": 1258236,
+          "after": 798360,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/water-palace.webp",
+          "before": 79778,
+          "after": 79778,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/intro-poster.webp",
+          "before": 201390,
+          "after": 201390,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/foreground-lotus.webp",
+          "before": 1396427,
+          "after": 931650,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/diya.webp",
+          "before": 564979,
+          "after": 367236,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/ornamental-frame.webp",
+          "before": 346631,
+          "after": 228058,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/lotus-mandap.webp",
+          "before": 1364774,
+          "after": 924196,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/floating-petals.webp",
+          "before": 631963,
+          "after": 424002,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "assets/lotus/sky.webp",
+          "before": 17692,
+          "after": 17692,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/lotus/intro-journey.mp4",
+          "before": 345638,
+          "after": 345638,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "assets/lotus/water-palace.webp",
+          "before": 79778,
+          "after": 79778,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 7825984,
+      "assetBytesAfter": 5523622,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 27,
+      "name": "Ganesha Gopuram",
+      "source": "https://ganesha-gopuram.invitestory.in/",
+      "slug": "ganesha-gopuram",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ganesha-gopuram",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+        "index.html": "49173cfe14d206319b2357a9bd35f66467df414c8f6988b3c0a361871758a3ea",
+        "editable/wedding-data.js": "8d715de864b37a22c3c4c174e9e26e50cac0f3d65b7ab650e8065cd73fa4a4ed",
+        "editable/assets/video/poster.png": "886364a542846a1141dd084054a8388537597cbdaffa1de3c9776943449530df",
+        "editable/assets/video/intro.mp4": "9d5ab4832ed40755fa8c3029deb89800a336020790c79d00ae0d8fec96347019",
+        "external/media.invitestory.in/ganesha-gopuram/assets/reference.png": "771012e0bb8e369ba43df015e2afee64ff2193ded375527143e4aa36cfbad84f",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-04-gold-frame.png": "65f36bf49e0f36ea9a5d2c892a5eea3e93193abe49ea93e1f920e20047788e8d",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/family-welcome-card.png": "2ea09f0b0a3cf9ee9e78bf6396fb074b02a732d6f15a5b38b8a22c2cdf0ab166",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/cover-welcome.png": "a7e2d38c260eba1f5f22f4527da9bc277c328fc529b8faf7980b91ee4e97be76",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/ganesha-icon.png": "424d1c48ff9bc93c1047150cbc7dc4d5fbf0b93ff99cc77d6ad4d19b62114c8e",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/butterflies-sprite.png": "1cb4df8b85245d5d9e50bb8502a8dccdb45a8532f6e68e44333e23f33b87b862",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-03-props.png": "2fc342eca5afe767245fac156edfc18a3978de31cabd4a3a9f87bdaba03fb7b8",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-02-toran.png": "1e23180b794f47c49e03f603989a5948ce7f3bc1d0930aa4ef09c8f07452420e",
+        "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-01-backdrop.png": "0d43130ea2975aee063e16ab38bae4bcfb677821cb6125665eb5cc33bd04beb9",
+        "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+        "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+        "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "assets/index-H7dJ6ZK0.js": "2bd424b4889a7bceac51ef3ddb555858c7d94a7666a2f3c5d59718a5953693a2",
+        "assets/index-XMeAJffG.css": "ea72237c0fe2844ce6e4d19f4aa8c6e6407de87a1c4e268deb9714c8a1d6c32f"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/video/poster.png",
+          "before": 1287930,
+          "after": 1287930,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/video/intro.mp4",
+          "before": 969153,
+          "after": 969152,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/reference.webp",
+          "before": 2413120,
+          "after": 1678420,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-04-gold-frame.webp",
+          "before": 113564,
+          "after": 103886,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/family-welcome-card.webp",
+          "before": 545724,
+          "after": 523700,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/cover-welcome.webp",
+          "before": 652694,
+          "after": 616504,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/ganesha-icon.webp",
+          "before": 65569,
+          "after": 60986,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/butterflies-sprite.webp",
+          "before": 72143,
+          "after": 65804,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-03-props.webp",
+          "before": 208167,
+          "after": 198024,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-02-toran.webp",
+          "before": 341595,
+          "after": 318130,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/ganesha-gopuram/assets/layers/layer-01-backdrop.webp",
+          "before": 360843,
+          "after": 342644,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 7030502,
+      "assetBytesAfter": 6165180,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 28,
+      "name": "Wax Seal Royale",
+      "source": "https://wax-seal-royale.invitestory.in/",
+      "slug": "wax-seal-royale",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/wax-seal-royale",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "b4c4a6f9ae511e2754b597dd5d65c86b0aef06bb082c6bca77a88eb46b78ceb1",
+        "css/tilda-blocks-page155232023.min-4d5d6fdfae.css": "3ef1b15a6aaa72610b516bcf09d1ddd8f70a2fcc0d22e993ffe257e33158033e",
+        "css/tilda-animation-2.0.min.css": "4367cfe21925829103cb1d8a3e599fde37dcf00e90c8303c904e5db1f5816292",
+        "css/custom.css": "b1dde80367ba9504dc4c64e57060f4ae6360491e8541931ee065d0be928fb169",
+        "css/tilda-grid-3.0.min.css": "0b5f664c528f466606c93195975f671fc46c3a9c10fee54426c2cd1cf89b1fec",
+        "css/tilda-forms-1.0.min.css": "313f15c1e6632f8223ab6444e94263914474c1ce285ddde1e7b4aeadc15555e3",
+        "css/tilda-popup-1.1.min.css": "6f284e1ae65f2f2b636e361febafaa49d1aa0a3322c713be9238725b39948101",
+        "css/fonts.css": "cde88a43834e8d37ec6562bc3e18eb9cdbba974956ea19b77c9e980264981b46",
+        "images/cdn/local-favicon.svg": "06ea37683395e536d4f3c15fa8a25d679be0525233c1d31b45f7f256755e6678",
+        "images/cdn/left-element_1.png": "739fba004e70a6c57dad28b8c1944ddb3f908908c1a94f32d2b4b3725ea3a6f9",
+        "images/cdn/noroot_9.png": "6888b095b360a89b12eb109e560b043221cd358d95192ed9c4c25742180a1061",
+        "images/cdn/noroot_8.png": "5044cea6aec1d81c6f11d69e5b8ab2e4bc21cdd504530d0ca9a629b05e0f8c0a",
+        "images/cdn/noroot_13.png": "c165d95e30a5da2cdd2f7ee0948fbb989ea06940f54838969291f3918e5d8aed",
+        "images/cdn/noroot.png": "b5d37eb20cc8cb7cf96dcbf4a4c3ad0014ba36ac12e3d75a47b32362b434c2f1",
+        "images/cdn/noroot_11.png": "f08661a6ed9eaf69fa478c673ae4416fee8286c8b38543afb26d90adbcd337e9",
+        "images/cdn/noroot_6.png": "33160dcd2e1c9da345c6dda75a7e0a8d8b66da34cfc7fe175f611c00eb7fcab3",
+        "images/cdn/noroot_14.png": "2f9e0c283a7d4c09da4150396603aeaf68fa4efe057117025ff8470514dca86c",
+        "images/cdn/acomm-decor.png": "a5400b8927f0a68338b124600588087f97f9f7339cea013de930b7e83354ac47",
+        "images/cdn/noroot_7.png": "ae5b681c0cb7ed28e43a0257ba7ad9e71b15b0a7c295a1c51aaf47225accda55",
+        "images/cdn/noroot_5.png": "1513249e9419cd7b732975bd2b4fc9cd2587f93a7dd5042733c2b421b7143eda",
+        "images/cdn/noroot_4.png": "f9f8bf1d1c553ec6dbf57e29e52d925800cb9ab8df19adb5915dcd24ebfd62a2",
+        "images/cdn/Rectangle_270.svg": "f4f3156f8e968bd427e94e89287b83bcce461f82c0c4657bcfa09eb70347fa82",
+        "images/cdn/right-element_1.png": "0b1de3295b4088e4eb6f53dce579c83d84c36f4965ab1dd4829217f4600b1c87",
+        "js/tilda-zero-1.1.min.js": "61fdae2e2a8c3721699044a3fd51425af351aff123aad42d45f20c7b2a89e81f",
+        "js/tilda-animation-sbs-1.0.min.js": "ebe77a6fbd3e4fb742ff37bb3347e1a4c3fa2c4d275807e54554ba246b9e11b5",
+        "js/tilda-popup-1.0.min.js": "22dd5ef26241412d3a0872d24e45000751ea3414fcf0b8d331413f6be6e5eb1c",
+        "js/tilda-fallback-1.0.min.js": "cdf65e26b905a653bce60df182886b032b606940391badb1e3a655f434ca446c",
+        "js/tilda-forms-1.0.min.js": "7f79eb4c5080506c34db1882e52177ffa4f8c1320890b1df62ef1f547ae3eb92",
+        "js/tilda-scripts-3.0.min.js": "c82d6e0f0f4e4080e9cecc7858b8d66195e7f5896eaab04b38ae90573ff08d92",
+        "js/tilda-events-1.0.min.js": "5ef75137fa784d916c1731eb5c3700fdadaf7babc8c55a933cb52910249ce576",
+        "js/tilda-animation-2.0.min.js": "c764f6558612179a585b3b4e0f4e952a12142d0b158c5b570160cdf3db82b524",
+        "js/tilda-lazyload-1.0.min.js": "2f718826160d39cd3a9b9e23b5044ea7143c1413dce1779c4e68b750745193c0",
+        "js/tilda-blocks-page155232023.min-4d5d6fdfae.js": "ebe56ce14de88e2361f614ba8fd65c6ebcb2d77265959dde6317535861f7d90b",
+        "js/tilda-zero-scale-1.0.min.js": "cafa1dd9be7eb11f84470c3cb4261b4992a5d81aec22f42a27cb264f0efc6986",
+        "js/tilda-polyfill-1.0.min.js": "1082d43aff97bd0ae8de1f3267b6242268525abcc44b34e0e35e5583f8b9ddd1",
+        "editable/wedding-data.js": "0e01acbfee4a3f880f32e35fbf606fe7d5c3106f02f9b26203e11819bbcf3d16",
+        "editable/assets/1782224012851.mp4": "c6c181da568ef517a1c925b9f2197c5e403b397e26d2643fe24968fd1c9600f7",
+        "editable/assets/ChatGPT Image Jun 23, 2026, 04_40_29 PM.png": "5e5eda53015358d53417d3a11269f5a2c1d9cd2de419073c4118f23ccd61bcbe",
+        "editable/assets/Swans2.mov": "447e700289aaadad44efb5110b85de5f0d91f7d2ea9047b45527a3457bcf2709",
+        "editable/assets/Einaudi_ Divenire (1) (1).mp3": "08d268fee3d790adbe9db32e0bd115c83f321680cdc8d7b977b03ace22b13e3f",
+        "editable/assets/cdn/623915249_2629494717_3.png": "b6f862cbe39c2d34ffc371dde159d4e0e955bd4884e140dc3f66e476fa642c19",
+        "editable/assets/cdn/rose_-_Copy.png": "13eb7a82d1950eb562460a934b479abd1c2f00761eb36516a505861d2e1ed815",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_3.png": "b6f862cbe39c2d34ffc371dde159d4e0e955bd4884e140dc3f66e476fa642c19",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/ChatGPT_Image_May_25.png": "d4c15896c51461594d8dfdf93bf3348fa0002b71236bf423cbe55388ed8a99a0",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_2.png": "b6f862cbe39c2d34ffc371dde159d4e0e955bd4884e140dc3f66e476fa642c19",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_1.png": "6dd322c0a55559c1c1a8be24e50bbd9ab661d63def9f2f0d8d27278eb8f59c21",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_4.png": "8cddc9f387acf78d9708477fee1f264ae6923683246560f6a9cab76cac115180",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_12.png": "ac5d4eadcfea0780ba0703af353bb4264ab6684032040e009ec88d70299f2f95",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_1.png": "548550744c675d7d4d9db8fd0a63c0f5854e5503e9fc916e762e46a620bf2e8e",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy.png": "13eb7a82d1950eb562460a934b479abd1c2f00761eb36516a505861d2e1ed815",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_3.png": "4d8938b3234aefffdf76dc5ca796b8acc7a56258c55c0198d1bc3c775a858022",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_10.png": "e28c016132b09902ce8d9d7a0a362307adbc6bc4a407e30541b0e9e6b0eb251b",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_2.png": "c27fc716e555f84080744e92e0ec73c35dbad01aedcadf28708d6d21bfba1c33",
+        "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy_1.png": "13eb7a82d1950eb562460a934b479abd1c2f00761eb36516a505861d2e1ed815",
+        "external/media.invitestory.in/wax-seal-royale/fonts/Amiri-Bold.woff": "608c2a0a0c60a21ed098ee1012695a163a6c7f9e060ab746f71da41f637f1b5c",
+        "external/media.invitestory.in/wax-seal-royale/fonts/SourceSans3-Regular.woff": "62e270156c8b0178a77f4031aae0ec82729b45dcf3c7a601b15c76104ae5120b",
+        "external/media.invitestory.in/wax-seal-royale/fonts/BeauRivage-Regular.woff": "c9e3c71e071c1704c1b8798231f6a576aaba50b5a754bce6d4e843f65974fb81",
+        "fonts/ArticaPro.woff": "45fee8d121ab4c78bbfb893f9b1a7f3cd4e95213a2612294f942c57c37118636",
+        "fonts/GT_Super_Display_Lig.woff": "859150a4b507daac2235c4da54feeb6aebd99176eaedf751d2adbf71d0280f23",
+        "fonts/Ovo-Regular.woff2": "bfce9e4011f5f29d7dd5056211c26b5396d5fd7427aa21b4840af300d3e3368d",
+        "fonts/ImperialScript-Regul.woff": "2a217d631d732859edc4cb91995cb6d7a8ac6d8ef8d5db0f11395c4041a40797",
+        "fonts/decotype-thuluth-reg.woff": "2f3aca559488cf1d9bdf57e2c2628e6de7eab5d554a1671c2d932386b5b9cdad",
+        "fonts/Canela-Light-Trial.woff": "739841c05cc22c32f329bdde895726e8fd1ddfc4bf184b5aa33e6b16eaa48ca2",
+        "fonts/ReemKufi-Regular.woff2": "98e2a2095228d1e83ac8c0a073089cac568c2a04912a58eefcf465e5a05804d7",
+        "fonts/Rufina-Bold.woff": "2861c42a555f542ceb9b8b938926d49e9f4e68b5acf2138ebf5786a50909f361",
+        "fonts/Rufina-Regular.woff": "8c8efaf1b309f48734de39fcb28610f72b51d80e4fd70dadc113a48403877cf9",
+        "fonts/TheSilverEditorial-R.woff": "afd105b161dc88416e4bb71099a49bf0c948b4adf222f83e46c75a2724070f21",
+        "fonts/google/cinzel-latin-ext.woff2": "bd11c74f54739723a68677a077d6d562f3e5d09b9bb822eb658ee5314d1a9614",
+        "fonts/google/ovo-latin.woff2": "c8c6bb6c9b0d49b1cee90ec5ec771fc31b946ebd815b0dacaef1f71e86391727",
+        "fonts/google/cinzel-latin.woff2": "ef95296c778719c3d658a8284d65078100450948851b9114485ada01d9d3d3f8"
+      },
+      "optimizations": [
+        {
+          "path": "images/cdn/left-element_1.webp",
+          "before": 19371,
+          "after": 14610,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_9.webp",
+          "before": 13358,
+          "after": 9622,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_8.webp",
+          "before": 11989,
+          "after": 9226,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_13.webp",
+          "before": 10965,
+          "after": 8350,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot.webp",
+          "before": 17251,
+          "after": 13092,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_11.webp",
+          "before": 30060,
+          "after": 21362,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_6.webp",
+          "before": 29417,
+          "after": 21104,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_14.webp",
+          "before": 61595,
+          "after": 42364,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/acomm-decor.webp",
+          "before": 20896,
+          "after": 16908,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_7.webp",
+          "before": 17610,
+          "after": 13996,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_5.webp",
+          "before": 12822,
+          "after": 9470,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/noroot_4.webp",
+          "before": 13145,
+          "after": 9296,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "images/cdn/right-element_1.webp",
+          "before": 19603,
+          "after": 14706,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/1782224012851.mp4",
+          "before": 1564391,
+          "after": 1523138,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/ChatGPT Image Jun 23, 2026, 04_40_29 PM.webp",
+          "before": 2238513,
+          "after": 1534944,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/cdn/623915249_2629494717_3.webp",
+          "before": 714552,
+          "after": 428480,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/cdn/rose_-_Copy.webp",
+          "before": 1568367,
+          "after": 968388,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_3.webp",
+          "before": 714552,
+          "after": 428480,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/ChatGPT_Image_May_25.webp",
+          "before": 2312259,
+          "after": 1766684,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_2.webp",
+          "before": 714552,
+          "after": 428480,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_1.webp",
+          "before": 1968558,
+          "after": 1279714,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/623915249_2629494717_4.webp",
+          "before": 1239963,
+          "after": 821354,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_12.webp",
+          "before": 604140,
+          "after": 342954,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_1.webp",
+          "before": 535584,
+          "after": 303146,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy.webp",
+          "before": 1568367,
+          "after": 968388,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_3.webp",
+          "before": 698923,
+          "after": 457288,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_10.webp",
+          "before": 201203,
+          "after": 139334,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/noroot_2.webp",
+          "before": 636139,
+          "after": 422548,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/wax-seal-royale/images/cdn/rose_-_Copy_1.webp",
+          "before": 1568367,
+          "after": 968388,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 19126512,
+      "assetBytesAfter": 12985814,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 32,
+      "name": "Diya Haveli",
+      "source": "https://diya-haveli.invitestory.in/",
+      "slug": "diya-haveli",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/diya-haveli",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "index.html": "e9fb0d4d597adab6842394fb922d3448a4a742ff7ca920a92cd5cebd7fa45431",
+        "editable/wedding-data.js": "435bf6a3f8571296fa57f36a306552d4f6cb63a7426085c1b8b49fabbf2dbcfd",
+        "editable/assets/wedding-hands.jpg": "6eeac98237994f9e7436e5d11d3ba2610e5cd34ba7dc435084b871ed60e3bf6c",
+        "editable/assets/lotus.mp4": "834e05da6b89f417d702d4dd446d1dc816e7447a6af208cfbf04d24cf50b22d5",
+        "editable/assets/palace-courtyard.jpg": "28249c59c0dcd16b2d539f84dcecf5a72c9740a8bbc7a3ca84e2f735956b95ff",
+        "editable/assets/story-question.jpg": "067167f42165721d75444a43fc19f5a64c6678ead586a578156fe29865c89c8b",
+        "editable/assets/story-first-meeting.jpg": "c86e22898d41086e201f18cc602f0e41555af04fd83ac970cedb869f8f891b44",
+        "editable/assets/story-beginning.jpg": "880fdc900d26fc1fecd8e751bc13a2fba203f94da26c957c42600cefdc776a20",
+        "editable/assets/openr.mp4": "28fe34a89abc72a128fde124961da74e75d23b60de687ab7dddf45567dd65953",
+        "external/media.invitestory.in/diya-haveli/r2.png": "13c067cda9e71524932e7c84212a9e746de93e968f8955f335268ae7ab6708b3",
+        "external/media.invitestory.in/diya-haveli/last_frame.jpeg": "857f57f45c302c7fe3199651d9ed215a39b92cd1af582f0502ae99a9b0f8eb9a",
+        "external/media.invitestory.in/diya-haveli/r3.png": "9e9c50c1ad7a6cc1872ce1245fa8196f45ffd1cf04dd62a6a585d001f28360fc",
+        "external/media.invitestory.in/diya-haveli/r1.png": "3857c496d70f56cc31d88f19e8521ea33f6291621ec619f6629641c8209e1a45",
+        "external/fonts.googleapis.com/css2-048a8066a0.css": "7aab43b906112b8474b09236f386230bbeb406580677d65ac452e8633e7ed4f1",
+        "external/fonts.googleapis.com/css2-2e4c37bdb7.css": "6a3885390d8656221c5a8c1e51bf27c52c5fc51b4d543c6c000c5a95a2b278e8",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+        "assets/styles-MquUU_rN.css": "e42e3b2d679015349623e95ac7e07c2b99b3a65a962513795484012e7ae6aa70",
+        "assets/index-NkhRmeND.js": "beee3ffe567cb1be9fc5d1f4c3d16b5c9eb7ad68d9512f5e5fe7a9a7d3d93d6f",
+        "assets/routes-B4KIa_IW.js": "2dc3bd531c5f6de34a356cab4309afb63d4d56fbae09d40005641b8dbd4c54c6"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/wedding-hands.jpg",
+          "before": 155389,
+          "after": 155389,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/lotus.mp4",
+          "before": 2202217,
+          "after": 2125549,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/palace-courtyard.jpg",
+          "before": 255028,
+          "after": 255028,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-question.jpg",
+          "before": 234426,
+          "after": 234426,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-first-meeting.jpg",
+          "before": 305941,
+          "after": 305941,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/story-beginning.jpg",
+          "before": 271307,
+          "after": 271307,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/openr.mp4",
+          "before": 11718327,
+          "after": 11718295,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "external/media.invitestory.in/diya-haveli/r2.webp",
+          "before": 2691623,
+          "after": 2027454,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/diya-haveli/last_frame.jpeg",
+          "before": 160050,
+          "after": 160050,
+          "method": "original retained"
+        },
+        {
+          "path": "external/media.invitestory.in/diya-haveli/r3.webp",
+          "before": 2442055,
+          "after": 1881014,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "external/media.invitestory.in/diya-haveli/r1.webp",
+          "before": 2357950,
+          "after": 1796756,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 22794313,
+      "assetBytesAfter": 20931209,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 33,
+      "name": "Gilded Hall",
+      "source": "https://gilded-hall.invitestory.in/",
+      "slug": "gilded-hall",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/gilded-hall",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "index.html": "27c8221e065f1ea249c681d3878d306fce6c906e6a7819908224589f497c94a8",
+        "editable/wedding-data.js": "8e4f4369f70667e6e58a661882bf1cf666b0e932e9ff1749f8896d68ccf07276",
+        "editable/assets/couple.mp4": "956e10998f0a661b2f2a15046fda9bca860708739808aea4726852429a6a388e",
+        "editable/assets/divider.png": "f892c10e38f57050ea80d5f922a2ae4cd4f6a71a724f8931704ca9c858007281",
+        "editable/assets/hall.png": "da285b8f802673ddac3db7f61c735439c8df560cc8dff3679ddf8d9e3dc7f55c",
+        "editable/assets/floral.png": "c4d0bc4890bf842e3ceb5440d3730e30067dcbed34391521d2e8beba6cdd92ee",
+        "editable/assets/petals.png": "7ec51e7440e2c2da7837404076ef0e53616829f1f248c84296c445d1aa420e63",
+        "editable/assets/intro.mp4": "12e603c6c62eaf211030615dba570f90197be5cdc467b27f16ba1dacd9bcf042",
+        "editable/assets/cover.png": "89283e18e8de29fa4ecd80fc6b641b422ef67b41c1ea7bc13268df03102f5471",
+        "external/fonts.googleapis.com/css2-3c9e6a6ae3.css": "4319163690cdc16d23fc41992e66b9957690f911584b72e7fe00873026f4d924",
+        "external/fonts.googleapis.com/css2-fde818cf20.css": "4bf8a6af2410c2e4ad12b8120191549cfe216c612573d3ff4904f95ff791b452",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+        "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+        "assets/styles-B1fytZJn.css": "5276d7301eb8df76aa956954018b1555cd40bb3d66833cea47b4ec3a44e7f8ba",
+        "assets/routes-CK47TV5P.js": "a7b36d560f97a0315fc461297b98067455998caf45f2e8a5b7a150fb84f26246",
+        "assets/index-Dosgw5rC.js": "bdcc44e60aecf0994bc009637d65d2039016d72f31eaefbab784e3db6c87d314"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/couple.mp4",
+          "before": 4989295,
+          "after": 4912904,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/divider.webp",
+          "before": 422457,
+          "after": 332724,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/hall.webp",
+          "before": 1677783,
+          "after": 1334848,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/floral.webp",
+          "before": 962824,
+          "after": 618706,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/petals.webp",
+          "before": 1382153,
+          "after": 917232,
+          "method": "verified lossless WebP"
+        },
+        {
+          "path": "editable/assets/intro.mp4",
+          "before": 5719280,
+          "after": 5638710,
+          "method": "MP4 stream copy with fast-start"
+        },
+        {
+          "path": "editable/assets/cover.webp",
+          "before": 1700514,
+          "after": 1355254,
+          "method": "verified lossless WebP"
+        }
+      ],
+      "assetBytesBefore": 16854306,
+      "assetBytesAfter": 15110378,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 34,
+      "name": "Slide to Shaadi",
+      "source": "https://slide-to-shaadi.invitestory.in/",
+      "slug": "slide-to-shaadi",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/slide-to-shaadi",
+      "status": "staged",
+      "routingPatches": 1,
+      "originalFileHashes": {
+        "index.html": "2f9b2c488ce7d6c9ef23fce78b310d6048367554ceffe128d00658f4ec6dded1",
+        "editable/wedding-data.js": "48a5bfaf0efdecccca3956c7dc6373e819aa2da8a6cb3ee454bfaca548df01b4",
+        "editable/assets/wedding-lockscreen.jpg": "51ac42db86ae1d759956e434c67a9c6c122d441590015e993f242afea4ec89ea",
+        "editable/assets/ornament-divider.jpg": "2b8dce6ce23e3689b53b589681dcc78f2cdc820b487ba3be74440fd65a80b1a6",
+        "editable/assets/couple-avatar.jpg": "82ec5106b809bd93c8958d19755e4a932e185a48eca524f6bc491d1c6cccfb37",
+        "external/fonts.googleapis.com/css2-c91799fb12.css": "5296dfbd4dad5c217f3ccdc1805bf30741ac99f2f1564d47c68b31a6f3e75370",
+        "external/fonts.googleapis.com/css2-fa6ab76fc3.css": "4bf795d604eb2b8235a679bea2340b1661edc1dd1769939167a487a9b36e6126",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+        "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+        "external/fonts.gstatic.com/s/manrope/v20/xn7gYHE41ni1AdIRsgW7TdXc.woff2": "036f74a716b3b07b93d28c3476f1e35e6cac4da371be4034477b84764d545960",
+        "assets/styles-DP1slGf3.css": "aec4184b000fc290c8ce865fa11ed1587413aec90aa4507a3c76c6f328add543",
+        "assets/routes-BWCofe85.js": "e766a6b26b0c7ed1ed174e4c0c42122a0d66476680b2ce05c9ac83319128f956",
+        "assets/index-AcQTVbCu.js": "1fcad57c7b20593ae9edd568b05677a28ffcf4b63cfaeb030f4b5b206132643e"
+      },
+      "optimizations": [
+        {
+          "path": "editable/assets/wedding-lockscreen.jpg",
+          "before": 265947,
+          "after": 265947,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/ornament-divider.jpg",
+          "before": 179116,
+          "after": 179116,
+          "method": "original retained"
+        },
+        {
+          "path": "editable/assets/couple-avatar.jpg",
+          "before": 268763,
+          "after": 268763,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 713826,
+      "assetBytesAfter": 713826,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    },
+    {
+      "id": 16,
+      "name": "Lake Pichola Royal",
+      "source": "https://lake-pichola-royal.invitestory.in/",
+      "slug": "lake-pichola-royal",
+      "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lake-pichola-royal",
+      "status": "staged",
+      "routingPatches": 0,
+      "originalFileHashes": {
+        "index.html": "475fc83b40d05009a6b8c351d52e7be2f4d1b19ea24350f833da45743f3fc63e",
+        "sections/dock.js": "1641ce13261b2aa24ce4fb625a1e2faa57dd863caf1770e2b667338c09dad40b",
+        "sections/navbar.js": "3591bcb86a069b19953b3fdee5d77c09fec3c8dbe5365f4ff3256ce6e56b5fa1",
+        "sections/itinerary.js": "9a4247fc9631d7a230f5e4f17dd853065736f6bb88ce8ac5204e88f7a94af78c",
+        "sections/story.js": "10b4f5ba34177486e1e3fdb71ce140b93c185fedf143d642500b2f342ed8d945",
+        "sections/gallery.js": "e52ff12321400566704ea470bdf3c085fa1ab56403b371eabdb311286f62aeca",
+        "sections/countdown.js": "9dd46079b9978e75f86d70194a2dca2e8319171b6b5aafb54f845bf43aff2291",
+        "sections/hero.js": "43a8956282e7f0483831dfe7e7f39d62705e09f344706731fcdade2f721f9573",
+        "sections/details.js": "88b25b00cede7261160a238081bb6e18e23636f249c3d9b9ceffdd6c0986195d",
+        "sections/footer.js": "c6c72d85c120e35061834bdcd0eaec3d0577bc730c81a06ba339741cf54379fc",
+        "content/wedding-data.js": "946742314a545667e2868ba14747d35640df8e36e19f5b145e5da2cd7034813f",
+        "styles/theme.css": "77668ed4f77d53e5d7c0fc29b51c52dc19bdd67f34aea94af32c8321dd800d67",
+        "styles/responsive.css": "73bea1b5a3ff3f947052641ceed8e9c1c385c0f566376244937491733b0da06c",
+        "styles/fonts.css": "10e3bcd0f5ca2bf1d5e7c39b20f38e1bf9a11e4f3e1f6432eac38792782045c4",
+        "styles/utilities.css": "04996489295cf99aee53dbbbb0b8f66b88c0a6b1761059e702ad3cad1a392629",
+        "styles/base.css": "1a7895cd54666892a4c483be050cd8a450fd372bcaca77ea67840ef8ce1d0a56",
+        "scripts/icons.js": "fb4e9d388f772a9da24e8fa8565a5c84b1b7cbbe601c6453e27bec6e44a98d7a",
+        "scripts/dock.js": "4f2fdeea31a17d67de95bf3c10d81a417981a00f93e863bacf79577e9eca4b55",
+        "scripts/navbar.js": "1409704ee08485ed985ee3ac3703465f2aa8a0e36b5a9e6d33ea3fc374650b3c",
+        "scripts/itinerary.js": "9bb7be65111c4a706d821d34d57c8da5f3e54c9928841d9125094548965d1f00",
+        "scripts/effects.js": "40a371ce508e2105d9182f2c8f9bdd921cd3ccfac7ae3976f3d88e73a05b2baa",
+        "scripts/card-tilt.js": "c7d296fb1413a24f4c20fa82b0e09313e481b62aeb2e8b397f0f19fec5810134",
+        "scripts/gallery.js": "d5b32db41a5f00f9f2696f070c2479e46342e3dbf179fb436a4e37489b70d295",
+        "scripts/itinerary-ics.js": "69e43cfb0ded3ed4f406e7f7be62410e292893c84774f94cd77d4dac736afdc5",
+        "scripts/main.js": "dc2f9ee0c0046af3b0416d8757dc3a7757cfede132f48b7ba4e686bdf17af889",
+        "scripts/countdown.js": "27dbd1fd8218d7c501f421905b836f18f09c8bff4ed024a271ebcac8e2a35c8d",
+        "scripts/hero.js": "168a5923dcfe6ba5bf84b3fc063294b3dfe02711083995af022ce111a2e63a1f",
+        "scripts/details.js": "21e0b9ad2c1e21af0bc0d410af18a233d5ce1227e7cb6dc6eb1bee6cde77dcda",
+        "scripts/calendar.js": "558b42ad412442417ce95d00ac0ce7cef5ac3f24808c324ce3efee0efe24ec7e",
+        "scripts/reveal.js": "80f1254aed236bb5d30096e663ff5ee51078094e7fcbfc2e88163b014194efb1",
+        "scripts/footer.js": "3d804f6820b2a0d116f468e7c730927a4a8e3f575e2416c460a18eb7598a709f",
+        "scripts/vendor/confetti.js": "502e44c4d7d2ff158a0105ca811b8c4fe57bfed54381187624dad85920b463ae",
+        "assets/images/event_vivah.jpg": "0620ed3f1095fb93976c410a600754c2985e882016b9a536ca2c3518cb5e224a",
+        "assets/images/royal-couple.jpg": "aa0c32e0af0e86b6d5bf714b3ebb2026861d4984855634866d0158eea35c473c",
+        "assets/images/event_sangeet.jpg": "b2e2fa349f7f0d3584489e96845876790be4fd9409597f3f89a5d9e8f728a93f",
+        "assets/images/event_mehendi.jpg": "fec15f2eb2c77d2842102ed9ae597d9bbce41ce71a91feecc2637698e8f17547",
+        "assets/images/hero_twilight.jpg": "23fa402f1fb33c7c9632c6a70c3bd1ee96c87cd3affc03c8c2afb978b3f0d7b8",
+        "assets/images/event_reception.jpg": "2af7e92743dc50e5a66b8811702b51abb71106229da7ec8edb12b51fa2cae19a",
+        "assets/audio/indian-flute-and-sitar.mp3": "7e1c5715443c6fb2e4af66af3316adce4638f2f8c53680d70665aeed41d74cf5",
+        "assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXPT7Sh2E-.woff2": "d81677a89bc8f7aafac1ad022251f69691457465e98b56d6ec5a86d622ffc29d",
+        "assets/fonts/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtXK-F2qC0s.woff": "f781cbcbe65df93756c69a31669ffaa6af5dee2b980477e43bf69bb857789b1b",
+        "assets/fonts/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+        "assets/fonts/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+        "assets/fonts/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545"
+      },
+      "optimizations": [
+        {
+          "path": "assets/images/event_vivah.jpg",
+          "before": 1118671,
+          "after": 1118671,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/images/royal-couple.jpg",
+          "before": 1067989,
+          "after": 1067989,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/images/event_sangeet.jpg",
+          "before": 1169623,
+          "after": 1169623,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/images/event_mehendi.jpg",
+          "before": 1227140,
+          "after": 1227140,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/images/hero_twilight.jpg",
+          "before": 913813,
+          "after": 913813,
+          "method": "original retained"
+        },
+        {
+          "path": "assets/images/event_reception.jpg",
+          "before": 1263121,
+          "after": 1263121,
+          "method": "original retained"
+        }
+      ],
+      "assetBytesBefore": 6760357,
+      "assetBytesAfter": 6760357,
+      "optionalDependencyFallbacks": [],
+      "exportRepairs": []
+    }
+  ]
+}

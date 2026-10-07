@@ -1,0 +1,77 @@
+{
+  "id": 33,
+  "name": "Gilded Hall",
+  "source": "https://gilded-hall.invitestory.in/",
+  "slug": "gilded-hall",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/gilded-hall",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "index.html": "27c8221e065f1ea249c681d3878d306fce6c906e6a7819908224589f497c94a8",
+    "editable/wedding-data.js": "8e4f4369f70667e6e58a661882bf1cf666b0e932e9ff1749f8896d68ccf07276",
+    "editable/assets/couple.mp4": "956e10998f0a661b2f2a15046fda9bca860708739808aea4726852429a6a388e",
+    "editable/assets/divider.png": "f892c10e38f57050ea80d5f922a2ae4cd4f6a71a724f8931704ca9c858007281",
+    "editable/assets/hall.png": "da285b8f802673ddac3db7f61c735439c8df560cc8dff3679ddf8d9e3dc7f55c",
+    "editable/assets/floral.png": "c4d0bc4890bf842e3ceb5440d3730e30067dcbed34391521d2e8beba6cdd92ee",
+    "editable/assets/petals.png": "7ec51e7440e2c2da7837404076ef0e53616829f1f248c84296c445d1aa420e63",
+    "editable/assets/intro.mp4": "12e603c6c62eaf211030615dba570f90197be5cdc467b27f16ba1dacd9bcf042",
+    "editable/assets/cover.png": "89283e18e8de29fa4ecd80fc6b641b422ef67b41c1ea7bc13268df03102f5471",
+    "external/fonts.googleapis.com/css2-3c9e6a6ae3.css": "4319163690cdc16d23fc41992e66b9957690f911584b72e7fe00873026f4d924",
+    "external/fonts.googleapis.com/css2-fde818cf20.css": "4bf8a6af2410c2e4ad12b8120191549cfe216c612573d3ff4904f95ff791b452",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+    "external/fonts.gstatic.com/s/jost/v20/92zatBhPNqw77obX5RYk.woff2": "3f54f524331ab6fc477d6b88bbce44af904c24b8a7896ab5c77eafdae7cf9545",
+    "assets/styles-B1fytZJn.css": "5276d7301eb8df76aa956954018b1555cd40bb3d66833cea47b4ec3a44e7f8ba",
+    "assets/routes-CK47TV5P.js": "a7b36d560f97a0315fc461297b98067455998caf45f2e8a5b7a150fb84f26246",
+    "assets/index-Dosgw5rC.js": "bdcc44e60aecf0994bc009637d65d2039016d72f31eaefbab784e3db6c87d314"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/couple.mp4",
+      "before": 4989295,
+      "after": 4912904,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/divider.webp",
+      "before": 422457,
+      "after": 332724,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/hall.webp",
+      "before": 1677783,
+      "after": 1334848,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/floral.webp",
+      "before": 962824,
+      "after": 618706,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/petals.webp",
+      "before": 1382153,
+      "after": 917232,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/intro.mp4",
+      "before": 5719280,
+      "after": 5638710,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/cover.webp",
+      "before": 1700514,
+      "after": 1355254,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 16854306,
+  "assetBytesAfter": 15110378,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

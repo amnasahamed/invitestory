@@ -1,0 +1,49 @@
+{
+  "id": 6,
+  "name": "Kalyana Mandapam",
+  "source": "https://kalyana-mandapam.invitestory.in/",
+  "slug": "kalyana-mandapam",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/kalyana-mandapam",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "65433d2195887d5476e110690bba7137b782700ef5ac835066759ff40f477509",
+    "editable/wedding-data.js": "012aa09fa3bbef26c5afbfb21ddf15a323c080f41374fdc4c271798f0cb9d9d5",
+    "editable/assets/garland-top.webp": "2b0ee78a2ce7fdab2596fe761893631ab3cb14ce59e69bd4e258105adf5fe01a",
+    "editable/assets/couple.webp": "f377c46ae228e6f5629ad7c688223481cb86bdd4f62cf096506761bdf6f770c3",
+    "editable/assets/mandap-footer.webp": "feb5fc91fd55d580c082d908423944077b9b773e241aaccd7bfad13005a963e0",
+    "assets/texture-bg.webp": "42929db6ac2e14c091abdbcb9972c883fa49fded642fe9a1d7376cb735482185",
+    "assets/index-BcS--ptf.js": "9c51bac391ed9bd0c9055f14380e2a2c0e0f069052fd74853378f59f3c25ee9a",
+    "assets/index-yVHCWpVH.css": "8e47cf8d086a7dc5bfdb1fe46002bc7c7e581e4589a3045c4373bc9e48c9fee8"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/garland-top.webp",
+      "before": 568462,
+      "after": 568462,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 290248,
+      "after": 290248,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/mandap-footer.webp",
+      "before": 298360,
+      "after": 298360,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/texture-bg.webp",
+      "before": 92822,
+      "after": 92822,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 1249892,
+  "assetBytesAfter": 1249892,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

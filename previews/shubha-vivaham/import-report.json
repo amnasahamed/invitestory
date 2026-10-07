@@ -1,0 +1,68 @@
+{
+  "id": 5,
+  "name": "Shubha Vivaham",
+  "source": "https://shubha-vivaham.invitestory.in/",
+  "slug": "shubha-vivaham",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/shubha-vivaham",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "7f7ba332774e0be19fe9661e8759854e40ae684565a148a11f8bc3de6a995079",
+    "editable/wedding-data.js": "ee62836d69776c0a25ca5279b7618a756b88bf1b580a9026046c15c96c1ee7f8",
+    "editable/assets/couple.png": "dca58f73e33b69637df41880b67af7e8799d211cfb51ec53fedf644096b72d48",
+    "external/media.invitestory.in/shubha-vivaham/assets/footer-overlay.png": "7a2ef449a49e944d77f62f3a3fadb1684c6ac9f30d3cd9b8c9379a4d34069009",
+    "external/media.invitestory.in/shubha-vivaham/assets/bg-texture.png": "9110a85136c714e2e0da2bc1ea013ac44e636d3bb3c96bba255517b0ce87d1c1",
+    "external/media.invitestory.in/shubha-vivaham/assets/og-image.jpg": "7e06a8f4601b0c5daf8f13ebfbd8454208bb58f634cf8668c3f4d19741a939ff",
+    "external/media.invitestory.in/shubha-vivaham/assets/banana-leaves.png": "748a602c4540b81121ee2e8c29ed6361f7bc0f3ab9b97a2bd916c0fff1ffc313",
+    "external/media.invitestory.in/shubha-vivaham/assets/toran-top.png": "e103c5230241761fe8edeb52e40a85c73cdeaecf7125fc8501b3b19166b83423",
+    "external/fonts.googleapis.com/css2-1836f8b6f7.css": "5547763fe8755edff6a10d12874c16ef5510f5643969756ac97fd1592bc15582",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3ZmX5slCNuHLi8bLeY9MK7whWMhyjYrHtKky2F7g.woff2": "c0972d8823201eb0c79f486fe7933526826fab264db28d51938978a7e5332edf",
+    "external/fonts.gstatic.com/s/cinzel/v26/8vIJ7ww63mVu7gtL9G78HEY.woff2": "fb658f6d3a09dfa881b0cae73c0b1ea747f78f326dee19a36dd4e14a7a310489",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "assets/index-B2yKB5Bb.css": "808524bb50e4917934d2ddd7d17ceb81abaf6a9cd29c12cee5d19f21eb072e4d",
+    "assets/index-D4tjOMjU.js": "beeed7f300796ce3606ccd79482977ca374d8aa52cd2dd86205d5d4f7045619a"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 1379326,
+      "after": 1052930,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/shubha-vivaham/assets/footer-overlay.webp",
+      "before": 622433,
+      "after": 488536,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/shubha-vivaham/assets/bg-texture.webp",
+      "before": 2378446,
+      "after": 1629480,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/shubha-vivaham/assets/og-image.jpg",
+      "before": 123279,
+      "after": 123279,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/shubha-vivaham/assets/banana-leaves.webp",
+      "before": 833159,
+      "after": 596366,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/shubha-vivaham/assets/toran-top.webp",
+      "before": 569970,
+      "after": 446056,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 5906613,
+  "assetBytesAfter": 4336647,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

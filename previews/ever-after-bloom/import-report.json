@@ -1,0 +1,148 @@
+{
+  "id": 18,
+  "name": "Ever After Bloom",
+  "source": "https://ever-after-bloom.invitestory.in/",
+  "slug": "ever-after-bloom",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ever-after-bloom",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "dd821076a9b03adc2173c93956226aea3d92482d7578fc4339c5d3a2e9c24586",
+    "index.html": "606aa2195d65b86e143aae0f703ae71a980a1fe606870ae8826a0efa3e99fa12",
+    "editable/wedding-data.js": "30b68c15ff5f8aa2d7eb0ab6d5d2654c9e66039aab90c2cd16b2406b8d692124",
+    "editable/assets/gold-flourish.png": "3e4c9648ae45ce8d317893e9b6d5b4141068674846de9371cdee6d3b0ec418f8",
+    "editable/assets/sunset-sky.jpg": "58ac676aff825b3022d7150f499ec661adfd6fed15083e049f19df5ddd90c22c",
+    "editable/assets/scene-balcony.jpg": "22a19a6ca3510485f16c58aeb7800edaac9a38ea9f45a04891c7cec6df6bc2d8",
+    "editable/assets/invite-open.mp4": "3c2f83249de6258595d1c94d18133887b5017ea0de9264ca90f88a04c96778e4",
+    "editable/assets/map-plate.jpg": "6e281c6dbf9c716a2792d1343eca58bc7409597093f52797ef8d1e1611b9a485",
+    "editable/assets/hero-palace.jpg": "d5972a4ed254b5fabde28a1fcb3f98eed1f2e3c87b77c8b2f00d8a9f7544d083",
+    "editable/assets/wedding-car.png": "789e20163552e624e8ff8b87ba740e98e22efad5c541c51e34f464a520425c3a",
+    "editable/assets/garden-courtyard.jpg": "735342855f8a9ab811b8f37d0636520a5b9ecf949b73350fe317fa1ab4f81926",
+    "editable/assets/lantern.png": "5cfdc9b155c07bdc88c7966de6d78e64de10f8875d6a249f654c05cc1466434f",
+    "editable/assets/couple-lanterns.png": "230679cc5d9eb3d0d85e8e5cd0f653d2d5bfb27c04cb10cd91ef49bd56366cb2",
+    "editable/assets/invite-seal.png": "6383b511b91d8718bdd8ee175ecc22f92965d67c7494c73b950dc812025abcff",
+    "editable/assets/scene-dancing.jpg": "84ef98f254c549adbb574f48359f93b5faeb4e81c264d50e357c9ca704918d02",
+    "editable/assets/scene-hands.jpg": "adf53017e9d7a45c61bb7f34a7f9216eadf86a84aec13c0c47f9606c85bd7dca",
+    "editable/assets/portrait-bride.jpg": "6199f497383799740750e92aea183323f0188999b84a0d44e9a4fb6718ec9795",
+    "editable/assets/scene-walking.jpg": "6a62cc083112450245737ff389a56481a46a3f0a2f9d5f3522228ad3ccbbde6e",
+    "editable/assets/portrait-groom.jpg": "3a9bcf48e6fa7feff2d7114254caf9e2e9784dda3f37fcb12638a1761261dd1b",
+    "editable/assets/bougainvillea.png": "9adad112ebbf73eb97396441470050cf2e6db22f19b9db2493f63c15f8de9dab",
+    "external/fonts.googleapis.com/css2-7b506d0618.css": "82e0bd6002a214dc38b7f75409ac5507fc2efe558de5431da89a22b151777c9e",
+    "external/fonts.googleapis.com/css2-062b797faa.css": "c0da9e997c4d10d908758312ba9587dd6efe8549a719edd289d4bfe03d9687ca",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/karla/v33/qkBbXvYC6trAT4RXJNu25A.woff2": "137fc096f5e7235ad569d8afae3b2a167acc0cf842b6081067ace7f147da9f1b",
+    "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+    "assets/routes-RO7ZGgkY.js": "0817c6ae4421a331432e17137a6455df04ec78860dc3d95ae20f30f144a2fd5b",
+    "assets/styles-DMO58HcY.css": "fc408e65dd9b2d8ec54d1574683d05194097dece28c20f628049f6fb0b6a299c",
+    "assets/index-09N2lWIL.js": "fbbf6306e62fd7986b62667ea5b384f29a3837ceb1bbd66506e526db22322c42"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/gold-flourish.webp",
+      "before": 201310,
+      "after": 153922,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/sunset-sky.jpg",
+      "before": 227356,
+      "after": 227356,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/scene-balcony.jpg",
+      "before": 176533,
+      "after": 176533,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/invite-open.mp4",
+      "before": 3471947,
+      "after": 3383157,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/map-plate.jpg",
+      "before": 305636,
+      "after": 305636,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/hero-palace.jpg",
+      "before": 235729,
+      "after": 235729,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/wedding-car.webp",
+      "before": 1254506,
+      "after": 852336,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/garden-courtyard.jpg",
+      "before": 350157,
+      "after": 350157,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/lantern.webp",
+      "before": 716562,
+      "after": 485254,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/couple-lanterns.webp",
+      "before": 783582,
+      "after": 505988,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/invite-seal.webp",
+      "before": 2282744,
+      "after": 1645106,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/scene-dancing.jpg",
+      "before": 214880,
+      "after": 214880,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/scene-hands.jpg",
+      "before": 182229,
+      "after": 182229,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/portrait-bride.jpg",
+      "before": 184556,
+      "after": 184556,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/scene-walking.jpg",
+      "before": 257766,
+      "after": 257766,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/portrait-groom.jpg",
+      "before": 153206,
+      "after": 153206,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/bougainvillea.webp",
+      "before": 1140261,
+      "after": 762708,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 12138960,
+  "assetBytesAfter": 10076519,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

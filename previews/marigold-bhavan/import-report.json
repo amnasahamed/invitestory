@@ -1,0 +1,60 @@
+{
+  "id": 1,
+  "name": "Marigold Bhavan",
+  "source": "https://marigold-bhavan.invitestory.in/",
+  "slug": "marigold-bhavan",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/marigold-bhavan",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "favicon.ico": "4ff6649eacbe7660fba7e10c7ba9755b51336cde6ad1f5dcf5b3a3efba570964",
+    "index.html": "8cfaaa486f282071f79fd995d1d704934a3b6cd6411685a04649755fdf50197a",
+    "editable/wedding-data.js": "2465af23ee2324c49ab541310a1138564592f9844df3b645de5f26370da57d43",
+    "editable/assets/footer-bg.jpg": "87a7b6f2c955e7b0843d28c598daef6ec65db5003fdb0d23c1cea585a4f79acb",
+    "editable/assets/map.jpg": "4df5957afb5f8b4aac58ed9af13a0835d2d649864a1449681b4b32ab6e147d15",
+    "editable/assets/couple.png": "65ba058d65fd580619a761615afa09d0f9f15c4f7b6cb48586ad3259bf003138",
+    "external/fonts.googleapis.com/css2-abe2d3246c.css": "395da8222ad4479dbb606f33a02f6000b88f2beb5d461e7ebc6c7840d0eb2195",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDDOjNk9IfqxUQ.woff": "f514bf32a396ed41137c6bdd0507151c73c4ccafba499494e006a98ce823a384",
+    "external/fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpcyp6COKv.woff2": "b587e9bbe83a2164e63b707e0eeee4a5db113f4e51d8eba4c331b385657f89de",
+    "external/fonts.gstatic.com/s/josefinsans/v34/Qw3aZQNVED7rKGKxtqIqX5EkD3Z_dH0.woff2": "83a90ef9ac158f10699d82b8acebdef4582059f4c1fb961da5f853727c488b17",
+    "assets/styles-DJO19CfA.css": "afdb2b40c567138fb936cdef26555f1de313cb787bde2c1c63fdb0b6db70fcd7",
+    "assets/index-2d1L6cXj.js": "ff8c407d2bcef5e80125332d0acca065a86def43a43a4044791fd78d07eaa6f5"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/footer-bg.jpg",
+      "before": 147451,
+      "after": 147451,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/map.jpg",
+      "before": 152622,
+      "after": 152622,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 1105124,
+      "after": 1105124,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 1711970,
+      "after": 1105124,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 2012043,
+  "assetBytesAfter": 1405197,
+  "optionalDependencyFallbacks": [
+    {
+      "file": "assets/index-2d1L6cXj.js",
+      "missing": "./lenis-DoixeXP8.js",
+      "fallback": "native scrolling"
+    }
+  ],
+  "exportRepairs": []
+}

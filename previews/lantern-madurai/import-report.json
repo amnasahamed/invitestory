@@ -1,0 +1,60 @@
+{
+  "id": 30,
+  "name": "Lantern Madurai",
+  "source": "https://lantern-madurai.invitestory.in/",
+  "slug": "lantern-madurai",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/lantern-madurai",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "c6087d193b4edbc63c757fbc5bfe081069f9475f412938123f3a247bb08c85b5",
+    "editable/wedding-data.js": "4524d87771ec8ed8f41314edd316879b1effa0a5300b9182beb0604463ce2dbb",
+    "editable/assets/aarav-ananya-opening.mp4": "2fc70224ccf29eb0baac7f1949b9e2014e3f936ec77e086283718a4aa92bdc40",
+    "editable/assets/entrance-first-frame.png": "ee7d4511e945c217c973fb13f784d510a691b617ac7d748c3ce25617f65f109e",
+    "editable/assets/invitation-reference.png": "e6dc832c59844c4914e51b6f2dd13b4b6bd5dbc62cb0baa23139f3acc63c54e5",
+    "editable/assets/haldi-mehendi.png": "6a8751936c974a02f2916bead38ee0da8ee0ec394278cf7f710c566ecee859ec",
+    "editable/assets/og-aarav-ananya.png": "1f761363ce6ec9f86735fd52b201e8685e8ada2bf02cee3013cb48c615c9a21e",
+    "external/fonts.googleapis.com/css2-b4b7f1b684.css": "bd40b621c1104dc74a6ca70183f750db9b41523713fdc545c0516635c594faf9",
+    "external/fonts.gstatic.com/s/parisienne/v14/E21i_d3kivvAkxhLEVZpcyp6COKv.woff2": "b587e9bbe83a2164e63b707e0eeee4a5db113f4e51d8eba4c331b385657f89de",
+    "external/fonts.gstatic.com/s/italiana/v21/QldNNTtLsx4E__B0XTmUY3tWxg.woff2": "55dd9f625e6c29eb48dbc4c44f932b4f97be9c874886c67fe6005da637832055",
+    "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+    "assets/index-BEdYU7DH.css": "025ac224ce476c78f7be5b5b4ea3d55f898f68b7067970bca8efbb0e1f7008f5",
+    "assets/index-C-L_hRfU.js": "4e0dec3e99e8b20b43ce6c215a8f81322bd944bea4f4f0f0f20ed211bf98c84e"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/aarav-ananya-opening.mp4",
+      "before": 7165317,
+      "after": 7084744,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/entrance-first-frame.webp",
+      "before": 2950032,
+      "after": 2165472,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/invitation-reference.webp",
+      "before": 2781788,
+      "after": 2082870,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/haldi-mehendi.webp",
+      "before": 3045768,
+      "after": 2234170,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/og-aarav-ananya.webp",
+      "before": 2903685,
+      "after": 2181962,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 18846590,
+  "assetBytesAfter": 15749218,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

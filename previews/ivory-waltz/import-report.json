@@ -1,0 +1,75 @@
+{
+  "id": 17,
+  "name": "Ivory Waltz",
+  "source": "https://ivory-waltz.invitestory.in/",
+  "slug": "ivory-waltz",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/ivory-waltz",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "001518ff47fb3f58e958963dc910eb39091b932d2510cf027e94e3889178bfa4",
+    "editable/wedding-data.js": "2a487206e7dfe22fad7f4afd7ab8540b693fb5c304d1c2196903913d545f44c7",
+    "editable/assets/hero-composite.jpg": "5cd2b3bb7a64210551190b0b9b68cbf5eae20748ff6afce12a285ea675188436",
+    "editable/assets/layer-01-background.png": "25cf8e5af068fa68954d22915547aff505bc899aaf5aff2e3c46c14bc6dd40ec",
+    "editable/assets/layer-03-groom.png": "1f77dca2da9aaaa55feee5c7a29b15af9fe49271d7b2142337fc79cb2dc5a4d2",
+    "editable/assets/layer-04-bride.png": "be286a58b7c48b7be12fbe55fc5a6e3747cd851d23294a96ec15a7581d998b60",
+    "editable/assets/layer-02-shadows.png": "1bb267c944b970a07c587e7f3533113cdf208c6636fff7e9205653c747153300",
+    "editable/assets/layer-couple.png": "74757925d2b3ae79afcff0142dc588e8361edb04c6889eb1e2aeef2a5290c896",
+    "editable/assets/layer-05-bouquet.png": "f2a3606126e145a7755be2c471485ddfc0be31d570b50055754a70bec3fa9e2a",
+    "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+    "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "assets/index-mGGyI97A.js": "a744e0285eba328113e7c9f2044dfeffdfb25b81ec8bddd23d6e53ce86974c1d",
+    "assets/index-pQKWR5sE.css": "5fc65ece02ea268dc7153a96bb2fcc3abae27bbb2d7da47bc117620bc84c98e3"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/hero-composite.jpg",
+      "before": 231764,
+      "after": 231764,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/layer-01-background.webp",
+      "before": 1767288,
+      "after": 1359292,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/layer-03-groom.webp",
+      "before": 1099657,
+      "after": 770942,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/layer-04-bride.webp",
+      "before": 1097617,
+      "after": 771242,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/layer-02-shadows.webp",
+      "before": 979432,
+      "after": 719080,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/layer-couple.webp",
+      "before": 325820,
+      "after": 205310,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/layer-05-bouquet.webp",
+      "before": 747156,
+      "after": 528730,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 6248734,
+  "assetBytesAfter": 4586360,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

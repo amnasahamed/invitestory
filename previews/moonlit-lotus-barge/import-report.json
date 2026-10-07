@@ -1,0 +1,131 @@
+{
+  "id": 26,
+  "name": "Moonlit Lotus Barge",
+  "source": "https://moonlit-lotus-barge.invitestory.in/",
+  "slug": "moonlit-lotus-barge",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/moonlit-lotus-barge",
+  "status": "staged",
+  "routingPatches": 0,
+  "originalFileHashes": {
+    "index.html": "6135fef9c67202391e9e85ad20d468801caa5df56103a94f8a7bee2f720f7e71",
+    "editable/wedding-data.js": "1d7c2071d248f9164c2fbc857e60d572d336707a7d214366340158ddc5a26aca",
+    "editable/assets/sky.webp": "d69000facc20eba45788ecd45b410eb857842f94de52a198051ccfb6160332d5",
+    "editable/assets/barge.png": "73ab7ff3114cbed7d4044c6ef9a59f5ecf1f31f52601155a3a5d23b556437476",
+    "editable/assets/intro-end.webp": "1c7cdab948e952016a11571887f47303cc74517b9dafbf6cc6c6b2d8f1393e45",
+    "editable/assets/social-card.webp": "50813ae866901dbc10806ec2f12cc603e42986fe2b0e1ad6527fa5a5d2d5c6e1",
+    "editable/assets/couple.png": "91d85eb842d07030811c51e42bc40ee71101036078b42474ba53886511f98c89",
+    "editable/assets/water-palace.webp": "93b81cf98edfbd8720bfb31d55b72687e647ab0a177957b44d2f41fe5ebf3c26",
+    "editable/assets/intro-poster.webp": "56c3b0804d669fce5654222cb39d1cac7fa8bcb85b65b93b0c6500c2b0bf3a86",
+    "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/foreground-lotus.png": "85ebca300073152486ecfad01ebc094d2e50088ad9519060a6121c459b170169",
+    "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/diya.png": "cc7ec452fd7dad13228a986b0011630c31760bd3298533b71c90aa4e211b4aca",
+    "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/ornamental-frame.png": "36e655cfbba5b82c1e788ef5ad044bb46af7ba22c4699b8e038f3ca99e42b0dd",
+    "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/lotus-mandap.png": "761fa2faa871ca279b843417e04efcb753f18dae4cbeead997e8696b5d4abf5b",
+    "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/floating-petals.png": "e270fded5ffdca210a3952deb7a491099986756e5a82be2834adabd9c8a62845",
+    "external/fonts.googleapis.com/css2-73b569e721.css": "80e2578f76ceca684fa66b8ee749ee6267d4e1961d0f17e54a28bfa33831991a",
+    "external/fonts.gstatic.com/s/outfit/v15/QGYvz_MVcBeNP4N5tkFtc4A.woff2": "d6e7b967ce89a09508c7243f2fd45edc78931e8a75052d4afc490f3e87aa0891",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd58jDOjNk9IfqxUQ.woff": "6de859eacb98d8ee22df792558dd611314360db84ca4ab06d6dca6524d420ace",
+    "external/fonts.gstatic.com/s/greatvibes/v21/RWmMoKWR9v4ksMfaWd_JN-XHg6MKDA.woff2": "136c898af910211c3881fba9c89fda016c8f953d7b1c646149bb833ff4e25348",
+    "assets/index-BDbVLStM.js": "fc3a8df957f7cdd9c95a7ffd2eae9f9617b32b87107cd3b14de7c1713ad9a6cd",
+    "assets/index-D3Yo6peG.css": "b95d28ed444f89ed46b0a2b93eba6a530b47b117c1bd093d1b40dcd94d588f85",
+    "assets/lotus/sky.webp": "d69000facc20eba45788ecd45b410eb857842f94de52a198051ccfb6160332d5",
+    "assets/lotus/intro-journey.mp4": "e3f7cae41ef51253ebb65d6930543d87f5ce73a9c2012173d0e64630fa99948c",
+    "assets/lotus/water-palace.webp": "93b81cf98edfbd8720bfb31d55b72687e647ab0a177957b44d2f41fe5ebf3c26"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/sky.webp",
+      "before": 17692,
+      "after": 17692,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/barge.webp",
+      "before": 1164276,
+      "after": 751422,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/intro-end.webp",
+      "before": 234092,
+      "after": 234092,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/social-card.webp",
+      "before": 122638,
+      "after": 122638,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/couple.webp",
+      "before": 1258236,
+      "after": 798360,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "editable/assets/water-palace.webp",
+      "before": 79778,
+      "after": 79778,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/intro-poster.webp",
+      "before": 201390,
+      "after": 201390,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/foreground-lotus.webp",
+      "before": 1396427,
+      "after": 931650,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/diya.webp",
+      "before": 564979,
+      "after": 367236,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/ornamental-frame.webp",
+      "before": 346631,
+      "after": 228058,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/lotus-mandap.webp",
+      "before": 1364774,
+      "after": 924196,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/moonlit-lotus-barge/assets/lotus/floating-petals.webp",
+      "before": 631963,
+      "after": 424002,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "assets/lotus/sky.webp",
+      "before": 17692,
+      "after": 17692,
+      "method": "original retained"
+    },
+    {
+      "path": "assets/lotus/intro-journey.mp4",
+      "before": 345638,
+      "after": 345638,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "assets/lotus/water-palace.webp",
+      "before": 79778,
+      "after": 79778,
+      "method": "original retained"
+    }
+  ],
+  "assetBytesBefore": 7825984,
+  "assetBytesAfter": 5523622,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

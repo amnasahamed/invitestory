@@ -1,0 +1,25 @@
+[
+  {
+    "id": 1,
+    "name": "Marigold Bhavan",
+    "source": "https://marigold-bhavan.invitestory.in/",
+    "slug": "marigold-bhavan",
+    "status": "incomplete",
+    "requiresReview": [
+      "Computed JavaScript asset paths",
+      "External scripts and backend calls",
+      "RSVP forms must stay in demo mode",
+      "Opening animation and mobile layout"
+    ],
+    "downloadedBytes": 0,
+    "savedBytes": 0,
+    "assets": [],
+    "failures": [
+      {
+        "url": "https://marigold-bhavan.invitestory.in/",
+        "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+      }
+    ],
+    "external": []
+  }
+]

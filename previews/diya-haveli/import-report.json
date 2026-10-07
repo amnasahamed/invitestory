@@ -1,0 +1,103 @@
+{
+  "id": 32,
+  "name": "Diya Haveli",
+  "source": "https://diya-haveli.invitestory.in/",
+  "slug": "diya-haveli",
+  "sourceDirectory": "/Users/amnas/Desktop/invitestory_optimised_templates-main/diya-haveli",
+  "status": "staged",
+  "routingPatches": 1,
+  "originalFileHashes": {
+    "index.html": "e9fb0d4d597adab6842394fb922d3448a4a742ff7ca920a92cd5cebd7fa45431",
+    "editable/wedding-data.js": "435bf6a3f8571296fa57f36a306552d4f6cb63a7426085c1b8b49fabbf2dbcfd",
+    "editable/assets/wedding-hands.jpg": "6eeac98237994f9e7436e5d11d3ba2610e5cd34ba7dc435084b871ed60e3bf6c",
+    "editable/assets/lotus.mp4": "834e05da6b89f417d702d4dd446d1dc816e7447a6af208cfbf04d24cf50b22d5",
+    "editable/assets/palace-courtyard.jpg": "28249c59c0dcd16b2d539f84dcecf5a72c9740a8bbc7a3ca84e2f735956b95ff",
+    "editable/assets/story-question.jpg": "067167f42165721d75444a43fc19f5a64c6678ead586a578156fe29865c89c8b",
+    "editable/assets/story-first-meeting.jpg": "c86e22898d41086e201f18cc602f0e41555af04fd83ac970cedb869f8f891b44",
+    "editable/assets/story-beginning.jpg": "880fdc900d26fc1fecd8e751bc13a2fba203f94da26c957c42600cefdc776a20",
+    "editable/assets/openr.mp4": "28fe34a89abc72a128fde124961da74e75d23b60de687ab7dddf45567dd65953",
+    "external/media.invitestory.in/diya-haveli/r2.png": "13c067cda9e71524932e7c84212a9e746de93e968f8955f335268ae7ab6708b3",
+    "external/media.invitestory.in/diya-haveli/last_frame.jpeg": "857f57f45c302c7fe3199651d9ed215a39b92cd1af582f0502ae99a9b0f8eb9a",
+    "external/media.invitestory.in/diya-haveli/r3.png": "9e9c50c1ad7a6cc1872ce1245fa8196f45ffd1cf04dd62a6a585d001f28360fc",
+    "external/media.invitestory.in/diya-haveli/r1.png": "3857c496d70f56cc31d88f19e8521ea33f6291621ec619f6629641c8209e1a45",
+    "external/fonts.googleapis.com/css2-048a8066a0.css": "7aab43b906112b8474b09236f386230bbeb406580677d65ac452e8633e7ed4f1",
+    "external/fonts.googleapis.com/css2-2e4c37bdb7.css": "6a3885390d8656221c5a8c1e51bf27c52c5fc51b4d543c6c000c5a95a2b278e8",
+    "external/fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjoq3FNsS8.woff2": "481075f7235bcb130b16eaf7f318a18a177cc9bd61128fed2a8f891ef766b87f",
+    "external/fonts.gstatic.com/s/marcellus/v14/wEO_EBrOk8hQLDvIAF8FVPAN3Eo.woff2": "b3a7f6bf92650f3e875ad32f01717655177cd30fe0402ee3d69ad42e7fc3b93e",
+    "assets/styles-MquUU_rN.css": "e42e3b2d679015349623e95ac7e07c2b99b3a65a962513795484012e7ae6aa70",
+    "assets/index-NkhRmeND.js": "beee3ffe567cb1be9fc5d1f4c3d16b5c9eb7ad68d9512f5e5fe7a9a7d3d93d6f",
+    "assets/routes-B4KIa_IW.js": "2dc3bd531c5f6de34a356cab4309afb63d4d56fbae09d40005641b8dbd4c54c6"
+  },
+  "optimizations": [
+    {
+      "path": "editable/assets/wedding-hands.jpg",
+      "before": 155389,
+      "after": 155389,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/lotus.mp4",
+      "before": 2202217,
+      "after": 2125549,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "editable/assets/palace-courtyard.jpg",
+      "before": 255028,
+      "after": 255028,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-question.jpg",
+      "before": 234426,
+      "after": 234426,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-first-meeting.jpg",
+      "before": 305941,
+      "after": 305941,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/story-beginning.jpg",
+      "before": 271307,
+      "after": 271307,
+      "method": "original retained"
+    },
+    {
+      "path": "editable/assets/openr.mp4",
+      "before": 11718327,
+      "after": 11718295,
+      "method": "MP4 stream copy with fast-start"
+    },
+    {
+      "path": "external/media.invitestory.in/diya-haveli/r2.webp",
+      "before": 2691623,
+      "after": 2027454,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/diya-haveli/last_frame.jpeg",
+      "before": 160050,
+      "after": 160050,
+      "method": "original retained"
+    },
+    {
+      "path": "external/media.invitestory.in/diya-haveli/r3.webp",
+      "before": 2442055,
+      "after": 1881014,
+      "method": "verified lossless WebP"
+    },
+    {
+      "path": "external/media.invitestory.in/diya-haveli/r1.webp",
+      "before": 2357950,
+      "after": 1796756,
+      "method": "verified lossless WebP"
+    }
+  ],
+  "assetBytesBefore": 22794313,
+  "assetBytesAfter": 20931209,
+  "optionalDependencyFallbacks": [],
+  "exportRepairs": []
+}

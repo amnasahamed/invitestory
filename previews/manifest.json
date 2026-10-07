@@ -1,0 +1,179 @@
+{
+  "designs": [
+    {
+      "id": 1,
+      "name": "Marigold Bhavan",
+      "url": "/previews/marigold-bhavan/"
+    },
+    {
+      "id": 3,
+      "name": "Toran Telugu",
+      "url": "/previews/toran-telugu/"
+    },
+    {
+      "id": 5,
+      "name": "Shubha Vivaham",
+      "url": "/previews/shubha-vivaham/"
+    },
+    {
+      "id": 6,
+      "name": "Kalyana Mandapam",
+      "url": "/previews/kalyana-mandapam/"
+    },
+    {
+      "id": 7,
+      "name": "Sage Parchment",
+      "url": "/previews/sage-parchment/"
+    },
+    {
+      "id": 29,
+      "name": "Seashell Vows",
+      "url": "/previews/seashell-vows/"
+    },
+    {
+      "id": 8,
+      "name": "Emerald Nikah",
+      "url": "/previews/emerald-nikah/"
+    },
+    {
+      "id": 9,
+      "name": "Noor-e-Zahra",
+      "url": "/previews/noor-e-zahra/"
+    },
+    {
+      "id": 10,
+      "name": "Royal Reception",
+      "url": "/previews/royal-reception/"
+    },
+    {
+      "id": 11,
+      "name": "Kerala Sands",
+      "url": "/previews/kerala-sands/"
+    },
+    {
+      "id": 12,
+      "name": "Meadow Nikah",
+      "url": "/previews/meadow-nikah/"
+    },
+    {
+      "id": 13,
+      "name": "Grand Line Voyage",
+      "url": "/previews/grand-line-voyage/"
+    },
+    {
+      "id": 14,
+      "name": "Ghibli Selfie",
+      "url": "/previews/ghibli-selfie/"
+    },
+    {
+      "id": 15,
+      "name": "Ghibli Portrait",
+      "url": "/previews/ghibli-portrait/"
+    },
+    {
+      "id": 17,
+      "name": "Ivory Waltz",
+      "url": "/previews/ivory-waltz/"
+    },
+    {
+      "id": 18,
+      "name": "Ever After Bloom",
+      "url": "/previews/ever-after-bloom/"
+    },
+    {
+      "id": 19,
+      "name": "Saga of Love",
+      "url": "/previews/saga-of-love/"
+    },
+    {
+      "id": 30,
+      "name": "Lantern Madurai",
+      "url": "/previews/lantern-madurai/"
+    },
+    {
+      "id": 31,
+      "name": "Lotus Leaf Bengaluru",
+      "url": "/previews/lotus-leaf-bengaluru/"
+    },
+    {
+      "id": 21,
+      "name": "Rajwada Royale \u2013 Alt",
+      "url": "/previews/rajwada-royale/"
+    },
+    {
+      "id": 22,
+      "name": "Rajmahal Palace",
+      "url": "/previews/rajmahal-palace/"
+    },
+    {
+      "id": 23,
+      "name": "Midnight Stargaze",
+      "url": "/previews/midnight-stargaze/"
+    },
+    {
+      "id": 24,
+      "name": "Petal Path Palace",
+      "url": "/previews/petal-path-palace/"
+    },
+    {
+      "id": 25,
+      "name": "Lakeview Lanterns",
+      "url": "/previews/lakeview-lanterns/"
+    },
+    {
+      "id": 26,
+      "name": "Moonlit Lotus Barge",
+      "url": "/previews/moonlit-lotus-barge/"
+    },
+    {
+      "id": 27,
+      "name": "Ganesha Gopuram",
+      "url": "/previews/ganesha-gopuram/"
+    },
+    {
+      "id": 28,
+      "name": "Wax Seal Royale",
+      "url": "/previews/wax-seal-royale/"
+    },
+    {
+      "id": 32,
+      "name": "Diya Haveli",
+      "url": "/previews/diya-haveli/"
+    },
+    {
+      "id": 33,
+      "name": "Gilded Hall",
+      "url": "/previews/gilded-hall/"
+    },
+    {
+      "id": 34,
+      "name": "Slide to Shaadi",
+      "url": "/previews/slide-to-shaadi/"
+    },
+    {
+      "id": 16,
+      "name": "Lake Pichola Royal",
+      "url": "/previews/lake-pichola-royal/"
+    },
+    {
+      "id": 35,
+      "name": "Magnolia Reverie",
+      "url": "/dearly/aubergine-magnolia/?studio-preview=1"
+    },
+    {
+      "id": 36,
+      "name": "Golden Camellia",
+      "url": "/dearly/cinnamon-camellia/?studio-preview=1"
+    },
+    {
+      "id": 37,
+      "name": "Something Blue",
+      "url": "/dearly/cobalt-iris/?studio-preview=1"
+    },
+    {
+      "id": 38,
+      "name": "The Dahlia Garden",
+      "url": "/dearly/petrol-dahlia/?studio-preview=1"
+    }
+  ]
+}
