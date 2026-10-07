@@ -105,8 +105,32 @@ def stage(design, source):
 def repair_archived_exports(folder):
     """Resolve namespace and subdirectory defects in archived production copies."""
     repairs = []
+    entry = folder / 'index.html'
+    if entry.exists():
+        original = entry.read_text()
+        # Browsers do not support video as a link-preload destination. The
+        # video's own preload setting controls loading instead.
+        text = re.sub(r'<link\b(?=[^>]*\brel=["\']preload["\'])(?=[^>]*\bas=["\']video["\'])[^>]*>', '', original, flags=re.I)
+        if text != original:
+            entry.write_text(text)
+            repairs.append({'file': 'index.html', 'repair': 'Remove unsupported video link preload'})
+    # These decorative files are absent from the archived exports. Use existing
+    # local artwork only when an original is unavailable; never replace photos.
+    missing_artwork = {
+        'marigold-bhavan': {'paper-DO4RrJfl.jpg': '/assets/preview-paper-grain.svg'},
+        'toran-telugu': {'paper-texture-DgpYz7nq.jpg': '/assets/preview-paper-grain.svg',
+                         'footer-bg-PVOXZvic.jpg': '../editable/assets/hero-flatlay.jpg'},
+        'sage-parchment': {'jaali-fNNuOcAD.jpg': '/assets/preview-jaali.svg'},
+    }.get(folder.name, {})
     for file in folder.rglob('*.js'):
         original = text = file.read_text()
+        for missing, replacement in missing_artwork.items():
+            if not (file.parent / missing).exists():
+                pattern = r'new URL\(([`\'\"])' + re.escape(missing) + r'\1,import\.meta\.url\)'
+                text, count = re.subn(pattern, lambda _: 'new URL(' + json.dumps(replacement) + ',import.meta.url)', text)
+                if count:
+                    repairs.append({'file': str(file.relative_to(folder)), 'repair': 'Missing decorative asset fallback',
+                                    'missing': missing, 'replacement': replacement})
         start = text.find('var _w=window.WEDDING_DATA')
         if start >= 0:
             end = text.find(';', start) + 1

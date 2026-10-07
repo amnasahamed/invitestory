@@ -218,6 +218,9 @@ const InviteInteractions = (() => {
   }
   function artworkTransition(from,to,source) {
     if(reduced() || !from || !to || from.bottom<0 || from.top>innerHeight) return;
+    // A hidden/loading poster can have a zero-sized rectangle when closing.
+    // Skip that decorative flight rather than constructing infinite keyframes.
+    if(![from,to].every(rect=>['left','top','width','height'].every(key=>Number.isFinite(rect[key])) && rect.width>0 && rect.height>0)) return;
     const ghost=document.createElement('img');ghost.src=source;ghost.className='interaction-artwork-flight';
     Object.assign(ghost.style,{left:from.left+'px',top:from.top+'px',width:from.width+'px',height:from.height+'px'});
     document.body.appendChild(ghost);

@@ -88,6 +88,34 @@ source templates. Browser results are saved in `preview-browser-audit.json`.
 
 The changes are local and have not been deployed.
 
+## Console repair, 8 October 2026
+
+The archived Marigold and Toran exports reference missing paper textures, and
+Sage references a missing jaali texture. These now use existing site SVGs at
+`/assets/preview-paper-grain.svg` and `/assets/preview-jaali.svg`. Toran also
+references an absent footer background; that uses its own existing hero-flatlay
+image. These are decorative substitutions, not recovered originals or lossless
+conversions of those absent files. The importer retains these fallbacks on
+re-import when the originals are still missing.
+
+Removed Lotus Leaf's unsupported `as="video"` link preload. The artwork flight
+now skips zero-sized or non-finite rectangles, preventing infinite scale values
+when a hidden poster is closed. Regression checks cover the animation and
+bundle-relative image/video URLs (including backgrounds, which the prior
+initial-image browser audit did not cover).
+
+The iframe sandbox warning remains: same-origin access is required for tab
+name storage and direct preview controls. Combining `allow-scripts` and
+`allow-same-origin` does not provide a dependable security boundary for these
+same-origin scripts. Proper isolation requires a separate preview origin and
+an explicit messaging bridge. Removing the sandbox or its same-origin token
+just to silence the warning would respectively weaken restrictions or break
+current functionality. The two documented React SSR recoveries also remain.
+
+29 Node tests and five importer tests pass. Modified bundles pass syntax checks.
+A fresh browser visual check was not completed because the local server could
+not bind under the current sandbox. These fixes have not been deployed.
+
 ## Name customization validation
 
 All 35 data formats accept both custom names. Browser checks confirmed both

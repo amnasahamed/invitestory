@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync, readFileSync} from 'node:fs';
+import {existsSync, readFileSync, readdirSync} from 'node:fs';
 
 const source = readFileSync(new URL('../scripts.js', import.meta.url), 'utf8');
 const manifest = JSON.parse(readFileSync(new URL('../previews/manifest.json', import.meta.url), 'utf8'));
@@ -31,4 +31,24 @@ test('shared font URLs reference existing immutable content files', () => {
     }
   }
   assert.ok(sharedReferences > 0);
+});
+
+test('bundle-relative image and video URLs resolve, including decorative backgrounds', () => {
+  function walk(folder) {
+    return readdirSync(folder, {withFileTypes: true}).flatMap(entry => {
+      const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), folder);
+      return entry.isDirectory() ? walk(url) : [url];
+    });
+  }
+  let checked = 0;
+  for (const file of walk(new URL('../previews/', import.meta.url)).filter(url => url.pathname.endsWith('.js'))) {
+    for (const match of readFileSync(file, 'utf8').matchAll(/new URL\(([`'"])([^`'"]+)\1,\s*import\.meta\.url\)/g)) {
+      const path = match[2];
+      if (!/\.(?:jpg|jpeg|png|webp|svg|mp4)$/.test(path) || /^https?:/.test(path)) continue;
+      checked++;
+      const target = path.startsWith('/') ? new URL('..' + path, import.meta.url) : new URL(path, file);
+      assert.ok(existsSync(target), `missing background/media ${path} in ${file.pathname}`);
+    }
+  }
+  assert.ok(checked >= 4);
 });
