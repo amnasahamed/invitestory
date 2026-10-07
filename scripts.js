@@ -2400,8 +2400,10 @@ function updatePaymentButtonsForCurrency() {
     const prices = getItemPrices(currentItem);
     const priceText = formatPrice(prices.priceINR, prices.priceUSD);
     if (previewModalPrice) previewModalPrice.textContent = priceText;
-    document.getElementById("preview-sheet-price").textContent = priceText;
-    document.getElementById("preview-pay-label").textContent = `${document.body.classList.contains("atelier-home") ? "Review & book ·" : "Customize & Order —"} ${priceText}`;
+    const sheetPrice = document.getElementById("preview-sheet-price");
+    const payLabel = document.getElementById("preview-pay-label");
+    if (sheetPrice) sheetPrice.textContent = priceText;
+    if (payLabel) payLabel.textContent = `${document.body.classList.contains("atelier-home") ? "Review & book ·" : "Customize & Order —"} ${priceText}`;
   }
   const rzpBtn = document.getElementById("preview-instant-pay-btn");
   if (rzpBtn) {
@@ -2850,6 +2852,11 @@ function setPreviewViewMode(mode) {
 }
 
 function syncPreviewViewRig() {
+  // Don't composite a live mobile invitation as a rotating phone texture.
+  if(window.matchMedia('(max-width: 760px), (pointer: coarse)').matches){
+    previewState.viewMode='flat';
+    phonePhysicsDisableGyroscope();
+  }
   const rig = document.getElementById("preview-phone-3d-rig");
   const btn3D = document.getElementById("view-mode-3d");
   const btnFlat = document.getElementById("view-mode-flat");
@@ -2970,11 +2977,14 @@ function openPreview(id, updateUrl = true) {
   if (tierBadge) {
     const tierLabel = item.tier === 4 ? "Dearly" : item.tier === 3 ? "Luxury" : "Premium";
     tierBadge.textContent = `${tierLabel} Collection`;
-    document.getElementById("preview-sheet-collection").textContent = tierLabel;
+    const collectionLabel = document.getElementById("preview-sheet-collection");
+    if (collectionLabel) collectionLabel.textContent = tierLabel;
     tierBadge.setAttribute("data-tier", String(item.tier));
   }
-  document.getElementById("preview-sheet-title").textContent = item.name;
-  document.getElementById("preview-sheet-price").textContent = formatPrice(prices.priceINR, prices.priceUSD);
+  const sheetTitle = document.getElementById("preview-sheet-title");
+  const sheetPrice = document.getElementById("preview-sheet-price");
+  if (sheetTitle) sheetTitle.textContent = item.name;
+  if (sheetPrice) sheetPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
   syncPreviewFavourite();
   // Dual CTA labels: primary Pay, secondary Ask
   const payLabel = document.getElementById("preview-pay-label");
@@ -3025,7 +3035,8 @@ function openPreview(id, updateUrl = true) {
   previewIframe.classList.remove("is-loaded");
   previewLoader.classList.remove("is-hidden");
   startLoaderPulse();
-  previewIframe.src = typeof InviteInteractions !== "undefined" ? InviteInteractions.demoURL(item) : (item.localDemoUrl || item.demoUrl);
+  if (typeof PreviewController !== "undefined" && PreviewController) PreviewController.open(item);
+  else previewIframe.src = item.localDemoUrl || item.demoUrl;
 
   // Sync tier-tab active state to current template
   updatePreviewTierTabs(item.tier);
@@ -3074,6 +3085,7 @@ function updatePreviewScale() {
   // Keep templates at their original mobile resolution as the phone resizes.
   const screen = document.getElementById("phone-screen-viewport");
   if (window.matchMedia("(max-width: 760px)").matches) {
+    syncPreviewViewRig();
     // Let the external invitation respond to the real phone width, without shrinking its text.
     screen.style.transform = "none";
     previewIframeWrap.style.transform = "";
@@ -3109,7 +3121,8 @@ function closePreview(updateUrl = true) {
 
   // Detach iframe src after the close transition so we don't keep a network
   // request alive for a demo the user already saw.
-  setTimeout(() => {
+  if (typeof PreviewController !== "undefined" && PreviewController) PreviewController.close();
+  else setTimeout(() => {
     if (previewModal.classList.contains("is-open")) return;
     previewIframe.src = "about:blank";
     previewIframe.classList.remove("is-loaded");
@@ -3465,8 +3478,10 @@ function phonePhysicsDisableGyroscope() {
 function previewNavigate(direction) {
   const item = TEMPLATE_DATABASE[previewState.currentIndex];
   if (!item) return;
-  const next = (previewState.currentIndex + direction + TEMPLATE_DATABASE.length) % TEMPLATE_DATABASE.length;
-  openPreview(TEMPLATE_DATABASE[next].id);
+  const next = typeof PreviewController !== "undefined" && PreviewController
+    ? PreviewController.adjacent(TEMPLATE_DATABASE,item.id,direction)
+    : TEMPLATE_DATABASE[(previewState.currentIndex + direction + TEMPLATE_DATABASE.length) % TEMPLATE_DATABASE.length];
+  if (next) openPreview(next.id);
 }
 function previewNext() { previewNavigate(1); }
 function previewPrev() { previewNavigate(-1); }
@@ -3825,9 +3840,12 @@ function setupPreviewModal() {
   previewIframe.addEventListener("load", () => {
     // Skip the initial about:blank load
     if (previewIframe.src === "about:blank" || previewIframe.src === window.location.href + "about:blank") return;
-    previewIframe.classList.add("is-loaded");
-    previewLoader.classList.add("is-hidden");
-    stopLoaderPulse();
+    // The preview controller owns readiness and the loading screen.
+    if (typeof PreviewController === "undefined" || !PreviewController) {
+      previewIframe.classList.add("is-loaded");
+      previewLoader.classList.add("is-hidden");
+      stopLoaderPulse();
+    }
     // Pointer events inside a same-origin invitation do not bubble to the viewer.
     // Listen without preventing any invitation click or scrolling gesture.
     try {

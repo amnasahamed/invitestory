@@ -13,6 +13,21 @@ RUNTIME_EXTENSIONS = {'.html', '.css', '.js', '.mjs', '.json', '.png', '.jpg', '
 TEXT_EXTENSIONS = {'.html', '.css', '.js', '.mjs', '.json'}
 
 
+def repair_mobile_canvas(folder):
+    """Cap full-screen particle buffers, preserving CSS size and coordinates."""
+    changes = []
+    for file in folder.rglob('*.js'):
+        text = file.read_text()
+        if 'window.innerWidth*devicePixelRatio' not in text or 'window.innerHeight*devicePixelRatio' not in text:
+            continue
+        for old in ('window.innerWidth*devicePixelRatio', 'window.innerHeight*devicePixelRatio',
+                    'setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0)'):
+            text = text.replace(old, old.replace('devicePixelRatio', 'Math.min(devicePixelRatio||1,2)'))
+        file.write_text(text)
+        changes.append(file.relative_to(folder).as_posix())
+    return changes
+
+
 def stage(design, source):
     original = source / design['slug']
     folder = DEST / design['slug']
@@ -92,10 +107,11 @@ def stage(design, source):
     if module_data.exists() and 'export const weddingData' in module_data.read_text():
         module_data.write_text(module_data.read_text() + '\nwindow.InvitationNames?.applyData(weddingData);\n')
     export_repairs = repair_archived_exports(folder)
+    mobile_canvas_repairs = repair_mobile_canvas(folder)
     repairs = repair_optional_dependencies(folder)
     report = {**design, 'sourceDirectory': str(original), 'status': 'staged', 'routingPatches': routing_patches,
               'originalFileHashes': original_hashes, 'optimizations': records, 'optionalDependencyFallbacks': repairs,
-              'exportRepairs': export_repairs,
+              'exportRepairs': export_repairs, 'mobileCanvasRepairs': mobile_canvas_repairs,
               'assetBytesBefore': sum(r['before'] for r in records), 'assetBytesAfter': sum(r['after'] for r in records)}
     (folder / 'import-report.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f"{design['slug']}: {report['assetBytesBefore']} → {report['assetBytesAfter']} asset bytes", flush=True)

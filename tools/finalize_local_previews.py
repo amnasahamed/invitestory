@@ -8,7 +8,7 @@ import re
 import shutil
 from urllib.parse import unquote
 from import_previews import ROOT, DEST, catalogue
-from stage_local_previews import repair_optional_dependencies, repair_archived_exports
+from stage_local_previews import repair_optional_dependencies, repair_archived_exports, repair_mobile_canvas
 
 
 def main():
@@ -34,6 +34,7 @@ def main():
             file.write_text(text)
         report['optionalDependencyFallbacks'] = report.get('optionalDependencyFallbacks', []) + repair_optional_dependencies(folder)
         report['exportRepairs'] = report.get('exportRepairs', []) + repair_archived_exports(folder)
+        report['mobileCanvasRepairs'] = report.get('mobileCanvasRepairs', []) + repair_mobile_canvas(folder)
         records = report['optimizations']
         # Count each input exactly once, including a pilot that was imported twice.
         original_assets = [original / p for p in report['originalFileHashes'] if Path(p).suffix in ('.png', '.jpg', '.jpeg', '.webp', '.mp4')]

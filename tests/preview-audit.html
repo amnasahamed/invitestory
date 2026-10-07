@@ -21,6 +21,8 @@ for (const design of manifest.designs.slice(offset, offset + limit)) {
       rendered:(text.trim().length > 10 || [...doc.images].some(image => image.complete && image.naturalWidth > 0)) && !/^404\b|^Not Found$/i.test(text.trim()),
       textLength:text.length, title:doc.title,
       namesPresent:!expected.first && !expected.second ? null : [expected.first,expected.second].filter(Boolean).every(name => text.toLocaleLowerCase().includes(name.toLocaleLowerCase())),
+      styles:[...doc.querySelectorAll('link[rel="stylesheet"]')].map(link=>({url:link.href,loaded:!!link.sheet})),
+      bodyFont:getComputedStyle(doc.body).fontFamily,
       loadedImages:[...doc.images].filter(image => image.currentSrc && image.complete && image.naturalWidth > 0).length,
       failedImages:[...doc.images].filter(image => image.currentSrc && image.complete && image.naturalWidth === 0).map(image => image.currentSrc),
       errors:child.InvitationDemoDiagnostics?.errors || [],

@@ -1,0 +1,10 @@
+/* Catalogue iframe only: retain artwork and opening animations while avoiding
+   large offscreen blur surfaces on phone GPUs. Standalone demos stay original. */
+@media (max-width: 760px), (pointer: coarse) {
+  html[data-catalogue-preview] *,
+  html[data-catalogue-preview] *::before,
+  html[data-catalogue-preview] *::after {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}

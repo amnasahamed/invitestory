@@ -3,6 +3,21 @@
   'use strict';
   const errors = [];
   window.InvitationDemoDiagnostics = { errors, recoveries: [] };
+  if(window.parent!==window){
+    // Stop decoding media in backgrounded Android tabs. Resume only media
+    // that was playing; preserve anything the visitor paused themselves.
+    const playing=new Set();
+    document.addEventListener('visibilitychange',()=>{
+      if(document.hidden){
+        document.querySelectorAll('video,audio').forEach(media=>{
+          if(!media.paused && !media.ended){playing.add(media);media.pause();}
+        });
+      }else{
+        playing.forEach(media=>{if(media.isConnected)media.play()?.catch(()=>{});});
+        playing.clear();
+      }
+    });
+  }
   window.addEventListener('error', event => {
     errors.push({message:event.message || event.target?.src || event.target?.href || 'Resource failed',
       file:event.filename || '', line:event.lineno || 0, column:event.colno || 0});

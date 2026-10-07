@@ -200,15 +200,9 @@ const InviteInteractions = (() => {
     if(wasSaved) notify(`${item.name} removed`,()=>toggleSavedDesign(id),'Undo');
     else {if(!reduced())document.querySelector(`#template-card-${id} .sales-save-design`)?.animate([{transform:'scale(.85)'},{transform:'scale(1.1)'},{transform:'scale(1)'}],{duration:220});notify(`${item.name} saved`,openShortlist,'View');}
   }
-  let previewOrigin=null, posterTimer, posterReadyTimer, poster, previewItem=null, previewLoadVersion=0;
-  const previewQuotes = [
-    'Every beautiful celebration begins with an invitation.',
-    'Two hearts. A thousand memories. One beautiful beginning.',
-    'A little glimpse of the day you will remember forever.',
-    'Your story deserves a beautiful beginning.'
-  ];
+  let previewOrigin=null, poster, previewItem=null;
   const localDearly = {35:'aubergine-magnolia',36:'cinnamon-camellia',37:'cobalt-iris',38:'petrol-dahlia'};
-  function demoURL(item){return localDearly[item.id] ? `dearly/${localDearly[item.id]}/?studio-preview=1` : (item.localDemoUrl || item.demoUrl);}
+  function demoURL(item){return item.localDemoUrl || item.demoUrl;}
   function demoAPI(){try{return document.getElementById('preview-modal-iframe').contentWindow.InvitationPreview;}catch{return null;}}
   function demoAction(action){const api=demoAPI();if(!api)return;if(action==='open' && api.state().opened)api.goto('invitation');else if(typeof api[action]==='function')api[action]();}
   let demoTools, chapters, paletteTools, explore;
@@ -236,28 +230,13 @@ const InviteInteractions = (() => {
   function afterPreview(item) {
     if(!document.body.classList.contains('browse-home') || !poster) return;
     previewItem=item;
-    previewLoadVersion++;
-    clearTimeout(posterReadyTimer);
     if(explore){explore.hidden=true;explore.open=false;}
     if(paletteTools){paletteTools.hidden=!localDearly[item.id];paletteTools.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(Number(button.dataset.previewPalette)===item.id)));}
     if(chapters){chapters.hidden=!localDearly[item.id];chapters.querySelectorAll('button').forEach(button=>{button.disabled=true;button.setAttribute('aria-pressed',String(button.dataset.chapter==='opening'));});}
     if(demoTools) {demoTools.hidden=!localDearly[item.id];demoTools.querySelectorAll('button').forEach(button=>button.disabled=true);}
-    poster.querySelector('img').src=item.image;
-    if(!reduced())poster.querySelector('img').animate([{opacity:.5},{opacity:1}],{duration:180});
-    poster.hidden=false;poster.classList.remove('is-ready');
-    poster.querySelector('blockquote').textContent=previewQuotes[item.id % previewQuotes.length];
-    poster.querySelector('p').textContent='Preparing your invitation preview…';
-    poster.querySelector('a').href=item.demoUrl;
-    poster.querySelector('a').hidden=true;
-    poster.querySelector('button').hidden=true;
-    clearTimeout(posterTimer);
-    posterTimer=setTimeout(()=>{if(!poster.hidden && !poster.classList.contains('is-ready')){poster.querySelector('p').textContent='Taking a little longer. Retry, or open the full demo.';poster.querySelector('button').hidden=false;poster.querySelector('a').hidden=false;}},8000);
     requestAnimationFrame(()=>{if(previewOrigin?.id===item.id) artworkTransition(previewOrigin.rect,poster.getBoundingClientRect(),item.image);});
   }
   function beforePreviewClose() {
-    clearTimeout(posterTimer);
-    clearTimeout(posterReadyTimer);
-    previewLoadVersion++;
     if(previewOrigin){const origin=document.querySelector(`#template-card-${previewOrigin.id} .template-card-img`);if(origin)previewState.savedScrollY=Math.max(0,origin.getBoundingClientRect().top+window.scrollY-previewOrigin.rect.top);}
     if(previewOrigin && previewItem && poster) {
       const target=document.querySelector(`#template-card-${previewOrigin.id} .template-card-img`);
@@ -373,10 +352,7 @@ const InviteInteractions = (() => {
     actions.querySelector('button').addEventListener('click',openFinder);
     savedButton=document.createElement('button');savedButton.type='button';savedButton.className='interaction-secondary';savedButton.addEventListener('click',openShortlist);actions.appendChild(savedButton);updateSavedButton();
     feedback=document.createElement('div');feedback.className='interaction-feedback';feedback.hidden=true;feedback.setAttribute('role','status');document.body.appendChild(feedback);
-    poster=document.createElement('div');poster.className='interaction-preview-poster';poster.hidden=true;
-    poster.innerHTML='<img alt=""><div><span class="interaction-preview-loading-label">A moment before forever</span><blockquote></blockquote><p role="status"></p><div class="interaction-preview-loading-actions"><button type="button" class="interaction-secondary" hidden>Retry preview</button><a class="interaction-secondary" target="_blank" rel="noopener" hidden>Open full demo ↗</a></div></div>';
-    document.getElementById('phone-screen-viewport').appendChild(poster);
-    poster.querySelector('button').addEventListener('click',()=>{if(previewItem){document.getElementById('preview-modal-iframe').src=demoURL(previewItem);afterPreview(previewItem);}});
+    poster=PreviewController.poster;
     demoTools=document.createElement('div');demoTools.className='interaction-demo-controls';demoTools.hidden=true;
     demoTools.innerHTML='<button type="button" data-demo-action="open">Open invitation</button><button type="button" data-demo-action="replay">Replay opening</button><button type="button" data-demo-action="sound">Sound off</button>';
     document.querySelector('#preview-modal .preview-modal-toolbar').prepend(demoTools);
@@ -390,32 +366,9 @@ const InviteInteractions = (() => {
     explore=document.createElement('details');explore.className='interaction-preview-explore';explore.hidden=true;explore.innerHTML='<summary>Explore this invitation</summary>';paletteTools.before(explore);explore.append(paletteTools,chapters,demoTools);
     paletteTools.addEventListener('click',event=>{const choice=event.target.closest('[data-preview-palette]');if(choice && Number(choice.dataset.previewPalette)!==previewItem?.id)openPreview(Number(choice.dataset.previewPalette));});
     demoTools.addEventListener('click',event=>{const button=event.target.closest('[data-demo-action]');if(!button)return;const wasOpened=Boolean(demoAPI()?.state().opened);demoAction(button.dataset.demoAction);if(button.dataset.demoAction!=='sound'){const chapter=button.dataset.demoAction==='open' && wasOpened?'invitation':'opening';chapters.querySelectorAll('button').forEach(choice=>choice.setAttribute('aria-pressed',String(choice.dataset.chapter===chapter)));explore.open=false;document.getElementById('guest-chapter-status').textContent=`Guest view · ${chapter==='opening'?1:2} of 4`;explore.querySelector('summary').textContent=button.dataset.demoAction==='replay'?'Playing the opening':'Explore this invitation';schedulePreviewScale();}if(button.dataset.demoAction==='sound')setTimeout(()=>{button.textContent=demoAPI()?.state().sound?'Sound on':'Sound off';button.setAttribute('aria-pressed',String(Boolean(demoAPI()?.state().sound)));},150);});
-    document.getElementById('preview-modal-iframe').addEventListener('load',()=>{
-      if(!previewItem) return;
-      const version=previewLoadVersion, frame=document.getElementById('preview-modal-iframe');
-      clearTimeout(posterReadyTimer);
-      function revealWhenReady(){
-        if(version!==previewLoadVersion || !previewItem)return;
-        try {
-          const doc=frame.contentDocument;
-          const expected=new URL(demoURL(previewItem),location.href);
-          // Ignore about:blank and stale loads when browsing quickly. Wait for
-          // rendered content and visible artwork, rather than just iframe load.
-          if(!doc || doc.location.pathname!==expected.pathname)return;
-          const text=doc.body?.innerText.trim()||'';
-          const visibleImages=[...doc.images].filter(image=>{const rect=image.getBoundingClientRect();return rect.width>0 && rect.height>0 && rect.top<frame.clientHeight && rect.bottom>0 && image.getAttribute('loading')!=='lazy';});
-          const rendered=text.length>10 || visibleImages.some(image=>image.complete && image.naturalWidth>0);
-          if(!rendered || /^(404\b|Not Found\b)/i.test(text) || visibleImages.some(image=>!image.complete || !image.naturalWidth)){
-            if(!poster.querySelector('button').hidden)return;
-            posterReadyTimer=setTimeout(revealWhenReady,100);return;
-          }
-        } catch { /* External fallback demos use their load event. */ }
-        if(demoTools)demoTools.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
-        if(chapters)chapters.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
-        clearTimeout(posterTimer);poster.classList.add('is-ready');
-        posterReadyTimer=setTimeout(()=>{if(version===previewLoadVersion)poster.hidden=true;},reduced()?0:180);
-      }
-      posterReadyTimer=setTimeout(revealWhenReady,0);
+    PreviewController.onReady(()=>{
+      if(demoTools)demoTools.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
+      if(chapters)chapters.querySelectorAll('button').forEach(button=>button.disabled=!demoAPI());
     });
     const sharedCurrency=new URLSearchParams(location.search).get('currency');
     if(sharedCurrency==='INR' || sharedCurrency==='USD')document.getElementById(`currency-${sharedCurrency.toLowerCase()}`).click();
@@ -432,7 +385,7 @@ const InviteInteractions = (() => {
     window.addEventListener('pagehide',persistContext);
     document.addEventListener('visibilitychange',()=>{if(document.hidden)persistContext();});
     const clearContext=document.createElement('button');clearContext.type='button';clearContext.className='interaction-secondary';clearContext.textContent='Reset browsing';clearContext.addEventListener('click',()=>{try{localStorage.removeItem(contextKey);}catch{}resetFilters();matchReasons.clear();document.getElementById('catalogue-header').scrollIntoView({behavior:reduced()?'instant':'smooth'});});actions.appendChild(clearContext);
-    if(document.getElementById('preview-modal').classList.contains('is-open')) {const item=TEMPLATE_DATABASE[previewState.currentIndex];if(item){afterPreview(item);if(demoAPI()){demoTools.querySelectorAll('button').forEach(button=>button.disabled=false);chapters.querySelectorAll('button').forEach(button=>button.disabled=false);poster.hidden=true;}}}
+    if(document.getElementById('preview-modal').classList.contains('is-open')) {const item=TEMPLATE_DATABASE[previewState.currentIndex];if(item){afterPreview(item);if(demoAPI()){demoTools.querySelectorAll('button').forEach(button=>button.disabled=false);chapters.querySelectorAll('button').forEach(button=>button.disabled=false);}}}
     afterCatalogue();
     const search = document.getElementById('search-input');
     search.addEventListener('click',()=>{if(matchMedia('(max-width:760px)').matches) openSearch();});

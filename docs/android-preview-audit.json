@@ -1,0 +1,853 @@
+{
+  "environment": "Desktop Chromium; local invitation iframe at 390 × 844. Not physical Android verification.",
+  "results": [
+    {
+      "id": 1,
+      "name": "Marigold Bhavan",
+      "url": "/previews/marigold-bhavan/",
+      "rendered": true,
+      "textLength": 892,
+      "title": "InviteStory — Sample Template",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/marigold-bhavan/assets/styles-DJO19CfA.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Cormorant Garamond\", Georgia, serif",
+      "loadedImages": 1,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 3,
+      "name": "Toran Telugu",
+      "url": "/previews/toran-telugu/",
+      "rendered": true,
+      "textLength": 1750,
+      "title": "InviteStory — Sample Template",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/toran-telugu/assets/styles-BgdVW63E.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Karla, system-ui, sans-serif",
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 5,
+      "name": "Shubha Vivaham",
+      "url": "/previews/shubha-vivaham/",
+      "rendered": true,
+      "textLength": 915,
+      "title": "Ananya ❤ Rohit — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/shubha-vivaham/external/fonts.googleapis.com/css2-1836f8b6f7.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/shubha-vivaham/assets/index-B2yKB5Bb.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Cormorant Garamond\", Georgia, serif",
+      "loadedImages": 10,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 6,
+      "name": "Kalyana Mandapam",
+      "url": "/previews/kalyana-mandapam/",
+      "rendered": true,
+      "textLength": 1905,
+      "title": "Meghana ❤ Karthik — Shubha Muhurtham",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/kalyana-mandapam/assets/index-yVHCWpVH.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, ui-sans-serif, system-ui, sans-serif",
+      "loadedImages": 9,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 7,
+      "name": "Sage Parchment",
+      "url": "/previews/sage-parchment/",
+      "rendered": true,
+      "textLength": 1386,
+      "title": "Surya & Jayesh — Engagement Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/sage-parchment/assets/styles-DHpdJjWo.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Karla, system-ui, sans-serif",
+      "loadedImages": 11,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 29,
+      "name": "Seashell Vows",
+      "url": "/previews/seashell-vows/",
+      "rendered": true,
+      "textLength": 564,
+      "title": "Aarav & Ananya | Wedding Invitation, 14 Feb 2026",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/seashell-vows/external/fonts.googleapis.com/css2-6476c501f8.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/seashell-vows/assets/styles-CbBzkN6m.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/seashell-vows/external/fonts.googleapis.com/css2-86ad40e56c.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/seashell-vows/assets/styles-CbBzkN6m.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, system-ui, sans-serif",
+      "loadedImages": 6,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 8,
+      "name": "Emerald Nikah",
+      "url": "/previews/emerald-nikah/",
+      "rendered": true,
+      "textLength": 2560,
+      "title": "InviteStory — Sample Template",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/emerald-nikah/assets/styles-BBCSj1GG.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, sans-serif",
+      "loadedImages": 3,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 9,
+      "name": "Noor-e-Zahra",
+      "url": "/previews/noor-e-zahra/",
+      "rendered": true,
+      "textLength": 1293,
+      "title": "InviteStory — Sample Template",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/noor-e-zahra/assets/styles-oy5_5gfv.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Karla, ui-sans-serif, system-ui, sans-serif",
+      "loadedImages": 6,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 10,
+      "name": "Royal Reception",
+      "url": "/previews/royal-reception/",
+      "rendered": true,
+      "textLength": 1210,
+      "title": "InviteStory — Sample Template",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/royal-reception/assets/styles-k_wyScDq.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, sans-serif",
+      "loadedImages": 8,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 11,
+      "name": "Kerala Sands",
+      "url": "/previews/kerala-sands/",
+      "rendered": true,
+      "textLength": 1206,
+      "title": "Aarav & Diya — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/kerala-sands/assets/styles-xl0qPzWF.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, ui-sans-serif, system-ui, sans-serif",
+      "loadedImages": 5,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 12,
+      "name": "Meadow Nikah",
+      "url": "/previews/meadow-nikah/",
+      "rendered": true,
+      "textLength": 1345,
+      "title": "Erfana & Sukail — Wedding Reception Invitation | 30 Aug 2026",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/meadow-nikah/external/fonts.googleapis.com/css2-12dbab0da7.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/meadow-nikah/assets/styles-DX-39EG5.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, ui-sans-serif, system-ui, sans-serif",
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 13,
+      "name": "Grand Line Voyage",
+      "url": "/previews/grand-line-voyage/",
+      "rendered": true,
+      "textLength": 1659,
+      "title": "The Grand Line of Marriage — Aanya & Vikram's Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/grand-line-voyage/external/fonts.googleapis.com/css2-b1e778a487.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/grand-line-voyage/assets/styles-CtT-Ivkq.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Plus Jakarta Sans\", Outfit, Mukta, system-ui, -apple-system, sans-serif",
+      "loadedImages": 12,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 14,
+      "name": "Ghibli Selfie",
+      "url": "/previews/ghibli-selfie/",
+      "rendered": true,
+      "textLength": 489,
+      "title": "InviteStory — Sample Template",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/ghibli-selfie/assets/styles-BZkC9aYC.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, ui-sans-serif, system-ui, sans-serif",
+      "loadedImages": 10,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 15,
+      "name": "Ghibli Portrait",
+      "url": "/previews/ghibli-portrait/",
+      "rendered": true,
+      "textLength": 1789,
+      "title": "Amelia & James — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/ghibli-portrait/external/fonts.googleapis.com/css2-ee1adbc530.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/ghibli-portrait/assets/index-DLKeitWv.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, \"Helvetica Neue\", sans-serif",
+      "loadedImages": 6,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 17,
+      "name": "Ivory Waltz",
+      "url": "/previews/ivory-waltz/",
+      "rendered": true,
+      "textLength": 1536,
+      "title": "Ayesha ❤ Ibrahim — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/ivory-waltz/external/fonts.googleapis.com/css2-73b569e721.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/ivory-waltz/assets/index-pQKWR5sE.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Outfit, \"Helvetica Neue\", sans-serif",
+      "loadedImages": 9,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 18,
+      "name": "Ever After Bloom",
+      "url": "/previews/ever-after-bloom/",
+      "rendered": true,
+      "textLength": 1761,
+      "title": "Aarohi & Ishaan — An Illustrated Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/ever-after-bloom/assets/styles-DMO58HcY.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/ever-after-bloom/external/fonts.googleapis.com/css2-7b506d0618.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/ever-after-bloom/assets/styles-DMO58HcY.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/ever-after-bloom/external/fonts.googleapis.com/css2-062b797faa.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Karla, ui-sans-serif, system-ui, sans-serif",
+      "loadedImages": 21,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 19,
+      "name": "Saga of Love",
+      "url": "/previews/saga-of-love/",
+      "rendered": true,
+      "textLength": 1216,
+      "title": "Suman & Manasa — Wedding Invitation | 21.08.2026",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/saga-of-love/assets/styles-CyopAWIO.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Karla, system-ui, sans-serif",
+      "loadedImages": 11,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 30,
+      "name": "Lantern Madurai",
+      "url": "/previews/lantern-madurai/",
+      "rendered": true,
+      "textLength": 1880,
+      "title": "Aarav & Ananya · Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/lantern-madurai/assets/index-BEdYU7DH.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Marcellus, Georgia, serif",
+      "loadedImages": 1,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 31,
+      "name": "Lotus Leaf Bengaluru",
+      "url": "/previews/lotus-leaf-bengaluru/",
+      "rendered": true,
+      "textLength": 1273,
+      "title": "Aarav & Ananya | Our Wedding",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/lotus-leaf-bengaluru/assets/index-Fwiizu_u.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Manrope, sans-serif",
+      "loadedImages": 3,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 21,
+      "name": "Rajwada Royale – Alt",
+      "url": "/previews/rajwada-royale/",
+      "rendered": true,
+      "textLength": 1651,
+      "title": "InviteStory — Sample Template",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/rajwada-royale/assets/styles-D75Ml1pI.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Karla Variable\", Karla, system-ui, sans-serif",
+      "loadedImages": 8,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 22,
+      "name": "Rajmahal Palace",
+      "url": "/previews/rajmahal-palace/",
+      "rendered": true,
+      "textLength": 1552,
+      "title": "Ananya ❤ Arjun — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/rajmahal-palace/external/fonts.googleapis.com/css2-07365ea972.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/rajmahal-palace/assets/index-DnBXbGkD.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, sans-serif",
+      "loadedImages": 15,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 23,
+      "name": "Midnight Stargaze",
+      "url": "/previews/midnight-stargaze/",
+      "rendered": true,
+      "textLength": 1850,
+      "title": "Sheetal ❤ Shubham — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/midnight-stargaze/external/fonts.googleapis.com/css2-07365ea972.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/midnight-stargaze/assets/index-3-78T76B.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, sans-serif",
+      "loadedImages": 15,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 24,
+      "name": "Petal Path Palace",
+      "url": "/previews/petal-path-palace/",
+      "rendered": true,
+      "textLength": 1531,
+      "title": "Harleen ❤ Kabir — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/petal-path-palace/external/fonts.googleapis.com/css2-73b569e721.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/petal-path-palace/assets/index-B-yBjE0R.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Outfit, \"Helvetica Neue\", sans-serif",
+      "loadedImages": 10,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 25,
+      "name": "Lakeview Lanterns",
+      "url": "/previews/lakeview-lanterns/",
+      "rendered": true,
+      "textLength": 1988,
+      "title": "Aarav & Meera — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/lakeview-lanterns/external/fonts.googleapis.com/css2-73b569e721.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/lakeview-lanterns/assets/index-ohagFVcT.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Outfit, system-ui, sans-serif",
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 26,
+      "name": "Moonlit Lotus Barge",
+      "url": "/previews/moonlit-lotus-barge/",
+      "rendered": true,
+      "textLength": 1377,
+      "title": "Dev and Ishani | Moonlit Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/moonlit-lotus-barge/external/fonts.googleapis.com/css2-73b569e721.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/moonlit-lotus-barge/assets/index-D3Yo6peG.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Outfit, system-ui, sans-serif",
+      "loadedImages": 9,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 27,
+      "name": "Ganesha Gopuram",
+      "url": "/previews/ganesha-gopuram/",
+      "rendered": true,
+      "textLength": 144,
+      "title": "Arjun & Priya — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/ganesha-gopuram/external/fonts.googleapis.com/css2-73b569e721.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/ganesha-gopuram/assets/index-XMeAJffG.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Outfit, system-ui, sans-serif",
+      "loadedImages": 2,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 28,
+      "name": "Wax Seal Royale",
+      "url": "/previews/wax-seal-royale/",
+      "rendered": true,
+      "textLength": 704,
+      "title": "The Sacred Garden",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/wax-seal-royale/css/tilda-grid-3.0.min.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/wax-seal-royale/css/tilda-blocks-page155232023.min-4d5d6fdfae.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/wax-seal-royale/css/tilda-animation-2.0.min.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/wax-seal-royale/css/tilda-popup-1.1.min.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/wax-seal-royale/css/tilda-forms-1.0.min.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/wax-seal-royale/css/fonts.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/wax-seal-royale/css/custom.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Times",
+      "loadedImages": 27,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 32,
+      "name": "Diya Haveli",
+      "url": "/previews/diya-haveli/",
+      "rendered": true,
+      "textLength": 2623,
+      "title": "Aarav & Meera — Wedding Invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/diya-haveli/assets/styles-MquUU_rN.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/diya-haveli/external/fonts.googleapis.com/css2-048a8066a0.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/diya-haveli/assets/styles-MquUU_rN.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/diya-haveli/external/fonts.googleapis.com/css2-2e4c37bdb7.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Marcellus, serif",
+      "loadedImages": 11,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": [
+        "Minified React error #419; visit https://react.dev/errors/419 for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Gilded Hall",
+      "url": "/previews/gilded-hall/",
+      "rendered": true,
+      "textLength": 1120,
+      "title": "Aarav & Ananya — 12 . 12 . 2026",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/gilded-hall/assets/styles-B1fytZJn.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/gilded-hall/external/fonts.googleapis.com/css2-3c9e6a6ae3.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/gilded-hall/assets/styles-B1fytZJn.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/gilded-hall/external/fonts.googleapis.com/css2-fde818cf20.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, system-ui, sans-serif",
+      "loadedImages": 5,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": [
+        "Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Slide to Shaadi",
+      "url": "/previews/slide-to-shaadi/",
+      "rendered": true,
+      "textLength": 151,
+      "title": "Aarav & Meera — Slide to Answer Wedding Invite",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/slide-to-shaadi/external/fonts.googleapis.com/css2-fa6ab76fc3.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/slide-to-shaadi/assets/styles-DP1slGf3.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/slide-to-shaadi/external/fonts.googleapis.com/css2-c91799fb12.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/slide-to-shaadi/assets/styles-DP1slGf3.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Manrope, system-ui, sans-serif",
+      "loadedImages": 2,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 16,
+      "name": "Lake Pichola Royal",
+      "url": "/previews/lake-pichola-royal/",
+      "rendered": true,
+      "textLength": 5176,
+      "title": "Aarav & Ananya — Royal Wedding Celebration | Lake Pichola, Udaipur",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/previews/lake-pichola-royal/styles/fonts.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/lake-pichola-royal/styles/base.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/lake-pichola-royal/styles/utilities.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/lake-pichola-royal/styles/theme.css",
+          "loaded": true
+        },
+        {
+          "url": "http://localhost:7100/previews/lake-pichola-royal/styles/responsive.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "Jost, sans-serif",
+      "loadedImages": 15,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 35,
+      "name": "Magnolia Reverie",
+      "url": "/dearly/aubergine-magnolia/?studio-preview=1",
+      "rendered": true,
+      "textLength": 1726,
+      "title": "Alex & Jamie | Dearly wedding invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/dearly/aubergine-magnolia/css/invitation.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Cormorant Garamond\", Georgia, serif",
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 36,
+      "name": "Golden Camellia",
+      "url": "/dearly/cinnamon-camellia/?studio-preview=1",
+      "rendered": true,
+      "textLength": 1727,
+      "title": "Alex & Jamie | Dearly wedding invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/dearly/cinnamon-camellia/css/invitation.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Cormorant Garamond\", Georgia, serif",
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 37,
+      "name": "Something Blue",
+      "url": "/dearly/cobalt-iris/?studio-preview=1",
+      "rendered": true,
+      "textLength": 1740,
+      "title": "Alex & Jamie | Dearly wedding invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/dearly/cobalt-iris/css/invitation.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Cormorant Garamond\", Georgia, serif",
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    },
+    {
+      "id": 38,
+      "name": "The Dahlia Garden",
+      "url": "/dearly/petrol-dahlia/?studio-preview=1",
+      "rendered": true,
+      "textLength": 1738,
+      "title": "Alex & Jamie | Dearly wedding invitation",
+      "namesPresent": null,
+      "styles": [
+        {
+          "url": "http://localhost:7100/dearly/petrol-dahlia/css/invitation.css",
+          "loaded": true
+        }
+      ],
+      "bodyFont": "\"Cormorant Garamond\", Georgia, serif",
+      "loadedImages": 4,
+      "failedImages": [],
+      "errors": [],
+      "recoveries": []
+    }
+  ]
+}

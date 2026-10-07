@@ -14,7 +14,7 @@
   function sync(){const personalized=Boolean(applied.first||applied.second);edit.textContent='Edit names';reset.hidden=!personalized;skip.textContent=personalized?'Keep current names':'Skip for now';}
   function dismiss(){dialog.close();edit.focus({preventScroll:true});}
   function open(automatic=false){if(dialog.open)return;seen=true;try{sessionStorage.setItem(seenKey,'1');}catch{}sync();dialog.showModal();(automatic===true?document.getElementById('preview-names-title'):first).focus({preventScroll:true});}
-  function reload(){const frame=document.getElementById('preview-modal-iframe');if(frame?.getAttribute('src') && frame.getAttribute('src')!=='about:blank')frame.src=frame.src;}
+  function reload(){if(typeof PreviewController!=='undefined' && PreviewController){PreviewController.retry();return;}const frame=document.getElementById('preview-modal-iframe');if(frame?.getAttribute('src') && frame.getAttribute('src')!=='about:blank')frame.src=frame.src;}
   edit.addEventListener('click',open);
   skip.addEventListener('click',dismiss);
   document.getElementById('preview-names-close').addEventListener('click',dismiss);
