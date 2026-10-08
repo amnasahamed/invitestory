@@ -8,7 +8,7 @@
     "start": "node --env-file=.env dist/serve.mjs",
     "test": "node --test tests/*.test.mjs",
     "build:bundle": "esbuild serve.mjs --bundle --platform=node --format=esm --packages=external --sourcemap=external --sources-content=true --outfile=dist/serve.mjs",
-    "build": "npm run build:bundle && posthog-cli --dotenv-file .env sourcemap process --directory dist --release-name invitestory && node -e \"require('node:fs').rmSync('dist/serve.mjs.map', { force: true })\"",
+    "build": "node build.mjs",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
