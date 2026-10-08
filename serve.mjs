@@ -4,6 +4,8 @@ import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 import { htmlToMarkdown, estimateTokens } from "./html-to-markdown.mjs";
 import designMeta from "./design-meta.js";
+import { posthog } from "./posthog.js";
+import { flushPostHogLogs, posthogLogger } from "./posthog-logs.js";
 
 const root = fileURLToPath(new URL(".", import.meta.url));
 
@@ -130,6 +132,24 @@ createServer(async (req, res) => {
         }, null, 2));
         return;
       }
+
+      posthog?.capture({
+        event: "x402_order_initiated",
+        properties: {
+          payment_protocol: "x402",
+          payment_status: "verified",
+        },
+      });
+      posthogLogger?.emit({
+        severityText: "INFO",
+        body: "x402 order initiation completed",
+        attributes: {
+          operation: "x402_order_initiation",
+          payment_protocol: "x402",
+          outcome: "completed",
+        },
+      });
+      await Promise.allSettled([posthog?.flush(), flushPostHogLogs()]);
 
       res.writeHead(200, {
         "Content-Type": "application/json; charset=utf-8",
@@ -315,8 +335,27 @@ createServer(async (req, res) => {
       res.end(body);
     }
   } catch (err) {
+    posthog?.captureException(err);
+    posthogLogger?.emit({
+      severityText: "ERROR",
+      body: "server request failed",
+      attributes: {
+        operation: "http_request",
+        outcome: "failed",
+      },
+    });
+    await Promise.allSettled([posthog?.flush(), flushPostHogLogs()]);
     res.writeHead(500).end(String(err));
   }
 }).listen(port, host, () => {
   console.log(`InviteStory server running with Link headers, Markdown for Agents & RFC 9727 API Catalog support → http://localhost:${port}/`);
+  posthogLogger?.emit({
+    severityText: "INFO",
+    body: "InviteStory Node server started",
+    attributes: {
+      operation: "server_startup",
+      outcome: "ready",
+    },
+  });
+  void flushPostHogLogs();
 });

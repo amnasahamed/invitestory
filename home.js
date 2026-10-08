@@ -23,22 +23,6 @@ function setupHomeCollectionCards(container) {
 
 function setupHomeShowroom() {
   if (!document.body.classList.contains('atelier-home')) return;
-  document.getElementById('search-input').placeholder = 'Search a design or tradition';
-  if (document.body.classList.contains('browse-home')) {
-    const catalogue = document.getElementById('catalogue-header');
-    const experience = document.querySelector('.atelier-experience');
-    const strip = document.querySelector('.studio-details-strip');
-    catalogue.after(experience);
-    experience.appendChild(strip);
-    const palettes = document.createElement('details');
-    palettes.className = 'browse-signature-palettes';
-    palettes.innerHTML = '<summary>See Dearly colour options</summary>';
-    palettes.appendChild(document.querySelector('.atelier-hero-product'));
-    experience.appendChild(palettes);
-    const discovery = document.getElementById('invitation-discovery');
-    document.querySelector('.controls-card').after(discovery);
-  }
-
   const currencyLayout = window.matchMedia('(max-width: 760px)');
   const setCurrencyLabels = () => {
     for (const code of ['INR', 'USD']) {

@@ -3564,39 +3564,43 @@ function initAnimations() {
 
   gsap.registerPlugin(window.ScrollTrigger, window.ScrollToPlugin);
 
-  // --- Hero entrance (runs once on page load) ---
-  if (document.querySelector(".hero-headline")) {
-    gsap.from(".hero-headline", {
-      y: 28, duration: 1, ease: "power3.out"
-    });
-  }
-  if (document.querySelector(".hero-subheadline")) {
-    gsap.from(".hero-subheadline", {
-      y: 18, duration: 0.8, delay: 0.15, ease: "power3.out"
-    });
-  }
-  if (document.querySelector(".hero-process-line")) {
-    gsap.from(".hero-process-line", {
-      y: 14, duration: 0.7, delay: 0.25, ease: "power3.out"
-    });
-  }
-  if (document.querySelector(".hero-action-wrapper")) {
-    gsap.from(".hero-action-wrapper", {
-      y: 16, duration: 0.7, delay: 0.35, ease: "power3.out"
-    });
-  }
-  if (document.querySelector(".hero-proof-strip")) {
-    gsap.from(".hero-proof-strip", {
-      y: 14, duration: 0.65, delay: 0.45, ease: "power3.out"
-    });
-  }
-  if (document.querySelector(".hero-design-marquee, .hero-showroom-showcase")) {
-    const heroDesignTargets = document.querySelectorAll(".showroom-card");
-    if (heroDesignTargets.length) {
-      gsap.from(heroDesignTargets, {
-        y: 30, duration: 0.8, stagger: 0.1, delay: 0.55, ease: "power3.out"
+  // Keep the browsing heading stable from the first paint.
+  if (!document.body.classList.contains("browse-home")) {
+    // --- Hero entrance (runs once on page load) ---
+    if (document.querySelector(".hero-headline")) {
+      gsap.from(".hero-headline", {
+        y: 28, duration: 1, ease: "power3.out"
       });
     }
+    if (document.querySelector(".hero-subheadline")) {
+      gsap.from(".hero-subheadline", {
+        y: 18, duration: 0.8, delay: 0.15, ease: "power3.out"
+      });
+    }
+    if (document.querySelector(".hero-process-line")) {
+      gsap.from(".hero-process-line", {
+        y: 14, duration: 0.7, delay: 0.25, ease: "power3.out"
+      });
+    }
+    if (document.querySelector(".hero-action-wrapper")) {
+      gsap.from(".hero-action-wrapper", {
+        y: 16, duration: 0.7, delay: 0.35, ease: "power3.out"
+      });
+    }
+    if (document.querySelector(".hero-proof-strip")) {
+      gsap.from(".hero-proof-strip", {
+        y: 14, duration: 0.65, delay: 0.45, ease: "power3.out"
+      });
+    }
+    if (document.querySelector(".hero-design-marquee, .hero-showroom-showcase")) {
+      const heroDesignTargets = document.querySelectorAll(".showroom-card");
+      if (heroDesignTargets.length) {
+        gsap.from(heroDesignTargets, {
+          y: 30, duration: 0.8, stagger: 0.1, delay: 0.55, ease: "power3.out"
+        });
+      }
+    }
+
   }
 
   // --- Pricing cards stagger as they scroll into view ---
@@ -4269,7 +4273,7 @@ function setupResponsivePlaceholder() {
   const MOBILE_PLACEHOLDER  = "Search templates…";
   const mq = window.matchMedia("(max-width: 768px)");
   const apply = () => {
-    input.placeholder = mq.matches ? MOBILE_PLACEHOLDER : DESKTOP_PLACEHOLDER;
+    input.placeholder = document.body.classList.contains("browse-home") ? "Search a design or tradition" : mq.matches ? MOBILE_PLACEHOLDER : DESKTOP_PLACEHOLDER;
   };
   apply();
   if (mq.addEventListener) mq.addEventListener("change", apply);

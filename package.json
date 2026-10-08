@@ -12,5 +12,11 @@
   },
   "devDependencies": {
     "wrangler": "^4.129.0"
+  },
+  "dependencies": {
+    "@opentelemetry/exporter-logs-otlp-http": "^0.223.0",
+    "@opentelemetry/resources": "^2.12.0",
+    "@opentelemetry/sdk-logs": "^0.223.0",
+    "posthog-node": "^5.55.0"
   }
 }

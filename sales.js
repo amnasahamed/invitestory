@@ -136,25 +136,28 @@ function setupMobileSalesLayout() {
     return home;
   });
   // Designs lead into the buying decision; optional collection browsing stays out of that path.
-  if (catalogue && pricingSection) catalogue.after(pricingSection);
-  let dearlyDetails = null;
-  if (dearly && pricingSection) {
+  const staticBrowseLayout = document.body.classList.contains("browse-home");
+  if (!staticBrowseLayout && catalogue && pricingSection) catalogue.after(pricingSection);
+  let dearlyDetails = document.querySelector(".sales-dearly-showcase");
+  if (!dearlyDetails && dearly && pricingSection) {
     dearlyDetails = document.createElement("details");
     dearlyDetails.className = "sales-dearly-showcase";
     dearlyDetails.innerHTML = '<summary>Explore the Dearly collection <span>Wax-seal designs · Email RSVP · 24h first draft</span></summary>';
     pricingSection.after(dearlyDetails);
     dearlyDetails.appendChild(dearly);
   }
-  if (proof && pricingSection) (dearlyDetails || pricingSection).after(proof);
-  if (how && document.body.classList.contains("studio-home") && catalogue) catalogue.after(how);
-  else if (how && proof) proof.after(how);
+  if (!staticBrowseLayout) {
+    if (proof && pricingSection) (dearlyDetails || pricingSection).after(proof);
+    if (how && document.body.classList.contains("studio-home") && catalogue) catalogue.after(how);
+    else if (how && proof) proof.after(how);
+  }
   const guides = document.querySelector(".guides-section");
   const finalCta = document.querySelector(".final-cta");
-  if (guides && finalCta) finalCta.after(guides);
+  if (!staticBrowseLayout && guides && finalCta) finalCta.after(guides);
   const tiersHome = tiers ? document.createComment("Tier navigation desktop position") : null;
   if (tiersHome) tiers.before(tiersHome);
   const studio = document.body.classList.contains("studio-home");
-  if (studio && how && proof) how.after(proof);
+  if (!staticBrowseLayout && studio && how && proof) how.after(proof);
   const viewModes = document.querySelector(".view-mode-toggle-wrap");
   const finder = document.querySelector(".sales-style-finder");
   const viewModesHome = document.createComment("View mode desktop position");

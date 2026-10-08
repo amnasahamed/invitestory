@@ -625,3 +625,7 @@
   .studio-home .atelier-experience .studio-details-strip .container { gap:20px; padding-block:16px; }
   .studio-home .atelier-experience .browse-signature-palettes { padding-inline:20px; }
 }
+
+/* Reserve the first catalogue rows while scripts load, without moving later sections into view. */
+.studio-home .catalogue-placeholder { aspect-ratio:4 / 5; border-radius:16px; background:#f3f3f0; margin-bottom:96px; }
+.catalogue-loading-label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
