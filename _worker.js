@@ -1,3 +1,4 @@
+import { websiteBridge } from "./website-bridge.js";
 import designMeta from "./design-meta.js";
 
 function injectOpenGraphTags(html, meta) {
@@ -34,6 +35,8 @@ export default {
   async fetch(request, env) {
     try {
       const url = new URL(request.url);
+
+      if (url.pathname.startsWith("/api/website/")) return await websiteBridge(request, env);
 
       if (url.pathname === "/digital-wedding-invitations") {
         url.pathname = "/digital-wedding-invitations.html";

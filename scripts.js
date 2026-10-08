@@ -1811,7 +1811,7 @@ function updateOrderDrawerTotal() {
   if (typeof updateSalesOrder === "function") updateSalesOrder();
 }
 
-function proceedFromOrderDrawerToCheckout() {
+async function proceedFromOrderDrawerToCheckout() {
   const isINR = currentCurrency === "INR";
   const currencyCode = isINR ? "INR" : "USD";
   const totalVal = orderDrawerState.total;
@@ -1865,6 +1865,7 @@ function proceedFromOrderDrawerToCheckout() {
     },
     handler: function (response) {
       window.__lastPaymentOk = true;
+      window.InviteWebsite?.paid();
       trackMetaEvent("Purchase", {
         content_name: name,
         content_ids: selectedContentIds,
@@ -1885,6 +1886,17 @@ function proceedFromOrderDrawerToCheckout() {
     }
   };
 
+  if (window.InviteWebsite) {
+    try {
+      const secure = await window.InviteWebsite.checkout({designId:orderDrawerState.template?.id || null,tier,currency:currencyCode,express:Boolean(expressChecked),emailRsvp:Boolean(emailRsvpChecked)});
+      if (secure) {
+        options.order_id=secure.orderId;options.key=secure.keyId;options.amount=secure.amount;options.currency=secure.currency;
+      }
+    } catch (error) {
+      showToast({title:"Checkout could not open",message:error.message||"Please try again or contact us on WhatsApp.",type:"error"});
+      return;
+    }
+  }
   if (typeof Razorpay !== "undefined") {
     trackConversionEvent("begin_checkout", { content_name: name, content_ids: selectedContentIds, content_type: "product", value: totalVal, currency: currencyCode });
     const rzp = new Razorpay(options);

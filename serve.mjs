@@ -1,3 +1,4 @@
+import { websiteBridge } from "./website-bridge.js";
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
@@ -7,7 +8,7 @@ import designMeta from "./design-meta.js";
 import { posthog } from "./posthog.js";
 import { flushPostHogLogs, posthogLogger } from "./posthog-logs.js";
 
-const root = fileURLToPath(new URL(".", import.meta.url));
+const root = fileURLToPath(new URL(import.meta.url.endsWith("/dist/serve.mjs") ? "../" : ".", import.meta.url));
 
 function injectOpenGraphTags(html, meta) {
   if (!meta) return html;
@@ -73,6 +74,15 @@ createServer(async (req, res) => {
     const parsedUrl = new URL(req.url, `http://${req.headers.host || "localhost"}`);
     const pathname = decodeURIComponent(parsedUrl.pathname);
 
+    if (pathname.startsWith("/api/website/")) {
+      const chunks=[];let size=0;
+      for await (const chunk of req) {size+=chunk.length;if(size>8192){res.writeHead(413);res.end();return;}chunks.push(chunk);}
+      const headers=new Headers();for(const [key,value] of Object.entries(req.headers))if(value)headers.set(key,Array.isArray(value)?value.join(", "):value);
+      headers.set("CF-Connecting-IP",req.socket.remoteAddress||"local");
+      const request=new Request(parsedUrl,{method:req.method,headers,body:["GET","HEAD"].includes(req.method)?undefined:Buffer.concat(chunks)});
+      const response=await websiteBridge(request,process.env);
+      res.writeHead(response.status,Object.fromEntries(response.headers));res.end(await response.text());return;
+    }
     // Health check endpoint
     if (pathname === "/health" || pathname === "/healthz") {
       const healthData = JSON.stringify({ status: "ok", timestamp: new Date().toISOString() });

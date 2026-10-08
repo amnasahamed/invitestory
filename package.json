@@ -5,12 +5,15 @@
   "private": true,
   "scripts": {
     "dev": "node serve.mjs",
-    "start": "node serve.mjs",
+    "start": "node --env-file=.env dist/serve.mjs",
     "test": "node --test tests/*.test.mjs",
-    "build": "echo 'No build required'",
+    "build:bundle": "esbuild serve.mjs --bundle --platform=node --format=esm --packages=external --sourcemap=external --sources-content=true --outfile=dist/serve.mjs",
+    "build": "npm run build:bundle && posthog-cli --dotenv-file .env sourcemap process --directory dist --release-name invitestory && node -e \"require('node:fs').rmSync('dist/serve.mjs.map', { force: true })\"",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
+    "@posthog/cli": "^0.18.9",
+    "esbuild": "^0.28.2",
     "wrangler": "^4.129.0"
   },
   "dependencies": {

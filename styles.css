@@ -10729,3 +10729,10 @@ a.template-card-wa-link {
 #preview-modal .preview-sheet-details .preview-collection-switcher .preview-tier-tab {font-size:12px;color:var(--invitation-ink,#263d34);}
 #preview-modal .preview-sheet-details h3 {white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;}
 @media(max-width:360px){#preview-modal .preview-sheet-details {gap:8px;}#preview-modal .preview-sheet-details .preview-collection-switcher {width:180px;}#preview-modal .preview-sheet-details .preview-collection-switcher .preview-tier-tab {font-size:11px;}}
+
+/* Optional preview contact capture. */
+#preview-modal .preview-whatsapp-fields {grid-column:1/-1;display:grid;gap:12px;}
+#preview-modal .preview-whatsapp-consent {display:flex;align-items:flex-start;gap:8px;line-height:1.5;}
+#preview-modal .preview-whatsapp-consent input {width:18px;height:18px;flex-shrink:0;margin-top:2px;}
+#preview-modal #preview-whatsapp-notice {font-size:13px;line-height:1.5;margin-top:12px;}
+.website-verification {position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100000;padding:12px;background:white;box-shadow:0 4px 24px #0003;}

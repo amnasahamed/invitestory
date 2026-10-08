@@ -10,6 +10,7 @@
     "directory": ".",
     "binding": "ASSETS",
     "run_worker_first": [
+      "/api/website/*",
       "/",
       "/index.html",
       "/digital-wedding-invitations",

@@ -28,15 +28,16 @@
     if(!valid(value.first)||!valid(value.second)){status.textContent='Use letters, spaces, apostrophes, dots or hyphens for names.';return;}
     try {sessionStorage.setItem(key,JSON.stringify(value));}catch{status.textContent='Your browser could not save names for this tab.';return;}
     applied=value;first.value=value.first;second.value=value.second;
-    status.textContent='Names stay in this browser tab. Other details are samples.';
+    status.textContent='Names stay in this tab unless you choose WhatsApp saving. Other details are samples.';
     sync();reload();dismiss();
   });
   form.addEventListener('reset',event=>{
     event.preventDefault();try {sessionStorage.removeItem(key);}catch{}
-    applied={};first.value='';second.value='';status.textContent='Names stay in this browser tab. Other details are samples.';
+    applied={};first.value='';second.value='';status.textContent='Names stay in this tab unless you choose WhatsApp saving. Other details are samples.';
     sync();reload();dismiss();
   });
   function previewChanged(){if(!preview.classList.contains('is-open')){if(dialog.open)dialog.close();return;}if(!seen && !applied.first && !applied.second)open(true);}
   new MutationObserver(previewChanged).observe(preview,{attributes:true,attributeFilter:['class']});
+  window.InvitePreviewNames={restore(value){applied=value;first.value=value.first||'';second.value=value.second||'';seen=true;sync();}};
   sync();previewChanged();
 })();
