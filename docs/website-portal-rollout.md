@@ -2,13 +2,13 @@
 
 ## Behaviour
 
-The optional name prompt accepts a WhatsApp number only when the visitor grants the displayed preview/reminder permission. Names-only previews continue locally. Consent is versioned as `preview-reminders-v1`; the checkbox starts unchecked. Capturing contact details never assigns a salesperson or creates an attributed staff lead.
+The optional name prompt keeps WhatsApp saving in a collapsed disclosure. It accepts a number only when the visitor grants the displayed preview/reminder permission. Consent is cleared after saving so editing names cannot silently create another enquiry. Names-only previews continue locally. Consent is versioned as `preview-reminders-v2`; the checkbox starts unchecked. Capturing contact details never assigns a salesperson or creates an attributed staff lead.
 
 After capture the website offers a WhatsApp confirmation link containing `PREVIEW <challenge>`. The existing authenticated live inbound webhook verifies the challenge only for that same phone number. Historical messages cannot activate sending. Automated sends require confirmation, current consent and an enabled reminder setting. STOP revokes the contact's preview-reminder permission.
 
 Saved preview links contain an expiring bearer token in the URL fragment; names and phone numbers are not in the link. Tokens are stored as hashes and expire after 30 days. The restore secret derives the token for outgoing messages. Avoid rotating this secret without a migration plan; rotation invalidates existing links/delivery verification.
 
-Two persisted message steps exist: requested preview delivery and one reminder (45 minutes after last website activity by default). The five-minute scheduler processes due work. Names/design edits do not replenish the allowance. Automation pauses for staff ownership, linked orders, opt-out or verified purchase. Provider uncertainty is held for reconciliation and is never blindly retried. It cannot recall a message already accepted by WhatsApp.
+Two persisted message steps exist: requested preview delivery and one reminder (at least 60 minutes after both last website activity and a confirmed delivered/read webhook for the saved-preview message). The five-minute scheduler processes due work. Names/design edits do not replenish the allowance. Follow-ups are restricted to 9am–8pm IST, expire 24 hours after number confirmation and are capped at one per contact in seven days. Automation pauses for a customer reply, staff ownership, linked orders, opt-out or verified purchase. Failed preview delivery cancels the follow-up. Typed STOP and template STOP/Help buttons are handled by the live webhook parser. Provider uncertainty is held for reconciliation and is never blindly retried. It cannot recall a message already accepted by WhatsApp.
 
 The current implementation reuses the Gupshup provider adapter, account selection, conversations/messages and delivery-status webhook processing. It uses a dedicated persisted automation job claim rather than the human inbox outbox: the latter requires an active authorised staff sender. Automation messages are excluded from staff introduction attribution. Existing staff-authored outbound queue behaviour is preserved.
 
@@ -56,7 +56,7 @@ Configure Razorpay webhook URL `https://staff.invitestory.in/api/webhooks/razorp
 
 ## Local validation and rollout
 
-Migration `0069_website_previews.sql` is additive. Apply the full migration history to an isolated local D1 database before deploying code that reads the new tables. The SQLite fallback suite also applies the complete history to an in-memory database, never production.
+Migrations `0069_website_previews.sql` and `0070_website_preview_delivery.sql` are additive. The latter records the first confirmed preview delivery and raises delays below 60 minutes to 60. Old preview jobs without delivery evidence will not send a reminder; no historical delivery times are guessed. Apply the full migration history to an isolated local D1 database before deploying code that reads the new tables. The SQLite fallback suite also applies the complete history to an in-memory database, never production.
 
 From the staff repository:
 

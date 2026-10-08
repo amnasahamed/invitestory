@@ -210,6 +210,8 @@
         api_host: 'https://us.i.posthog.com',
         defaults: '2026-05-30',
         person_profiles: 'identified_only',
+        cross_subdomain_cookies: true,
+        opt_out_capturing_by_default: ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname),
     });
   </script>
 </head>
@@ -1196,9 +1198,9 @@
   <script src="webmcp.js"></script>
   <script src="paid-order.js"></script>
   <script src="preview-controller.js?v=20261008-android-1"></script>
-  <script src="scripts.js?v=20261008-lean-1"></script>
+  <script src="scripts.js?v=20261009-posthog-1"></script>
   <script src="sales.js?v=20261007-clarity-2"></script>
-<script src="preview-names.js?v=20261008-modular-1"></script>
-<script src="website-integration.js?v=20261008-1"></script>
+<script src="preview-names.js?v=20261009-preview-first-1"></script>
+<script src="website-integration.js?v=20261008-natural-flow-1"></script>
 </body>
 </html>

@@ -28,25 +28,26 @@
  function storeToken(value){token=value;try{sessionStorage.setItem('invitestory.previewToken',value);}catch{}}
  ready.then(async c=>{
   if(c.enabled&&form) {
-   const fields=document.createElement('div');fields.className='preview-whatsapp-fields';
-   fields.innerHTML='<label>WhatsApp number <span>(optional)</span><input name="whatsapp" type="tel" autocomplete="tel" maxlength="25" placeholder="+91" data-private="true" data-clarity-mask="true" class="ph-no-capture"></label><label class="preview-whatsapp-consent"><input name="whatsappConsent" type="checkbox"><span></span></label>';
+   const fields=document.createElement('details');fields.className='preview-whatsapp-fields';
+   fields.innerHTML='<summary>Save this preview on WhatsApp <span>(optional)</span></summary><p>Keep the link for later. You can preview your names without a number.</p><label>WhatsApp number <span>(optional)</span><input name="whatsapp" type="tel" autocomplete="tel" maxlength="25" placeholder="+91" data-private="true" data-clarity-mask="true" class="ph-no-capture"></label><label class="preview-whatsapp-consent"><input name="whatsappConsent" type="checkbox"><span></span></label>';
    fields.querySelector('.preview-whatsapp-consent span').textContent=c.consentWording;
    form.querySelector('.preview-names-actions').before(fields);
+   form.addEventListener('reset',()=>{fields.querySelector('[name=whatsappConsent]').checked=false;});
    form.addEventListener('submit',()=>{
     const phone=fields.querySelector('[name=whatsapp]').value.trim(),consent=fields.querySelector('[name=whatsappConsent]').checked,design=selected();
     if(!phone||!consent||!design)return;
     const first=form.elements.first.value.trim(),second=form.elements.second.value.trim();
     if((!first&&!second)||[first,second].some(n=>! /^[\p{L}\p{M}\p{N} .’'\-]*$/u.test(n)))return;
-    notice.textContent='Saving your WhatsApp preview…';
+    notice.textContent='Saving your preview for later…';
     const attribution={};for(const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term']){try{attribution[k]=new URLSearchParams(location.search).get(k)||sessionStorage.getItem('ist_'+k)||'';}catch{}}
     const snapshot={phone,first,second,designId:design.id,consent:true,consentVersion:c.consentVersion,attribution};
     const key=JSON.stringify(snapshot);
     let clientKey=crypto.randomUUID();try{const prior=JSON.parse(sessionStorage.getItem('invitestory.captureRetry')||'null');if(prior?.key===key)clientKey=prior.clientKey;else sessionStorage.setItem('invitestory.captureRetry',JSON.stringify({key,clientKey}));}catch{}
     verification('capture').then(turnstileToken=>api('capture',{...snapshot,clientKey,turnstileToken})).then(result=>{
-     storeToken(result.token);notice.replaceChildren();
+     storeToken(result.token);notice.replaceChildren();fields.querySelector('[name=whatsappConsent]').checked=false;
      if(result.verified){notice.textContent='Your preview is saved.';return;}
-     notice.append('Confirm your number to receive the saved preview and reminders. ');
-     const link=document.createElement('a');link.textContent='Confirm on WhatsApp';link.href='https://wa.me/'+c.businessNumber.replace(/\D/g,'')+'?text='+encodeURIComponent('PREVIEW '+result.verification);link.target='_blank';link.rel='noopener';notice.append(link);
+     notice.append('Your names are ready. Send the prefilled WhatsApp message to confirm where to save your preview. ');
+     const link=document.createElement('a');link.textContent='Confirm on WhatsApp';link.href='https://wa.me/'+c.businessNumber.replace(/\D/g,'')+'?text='+encodeURIComponent('Please send my saved InviteStory preview.\nPREVIEW '+result.verification);link.target='_blank';link.rel='noopener';notice.append(link);const saved=document.createElement('a');saved.textContent='Open saved preview';saved.href=location.origin+'/#saved-preview='+result.token;notice.append(' · ',saved);
     }).catch(()=>{notice.textContent='Your names are previewed. WhatsApp saving did not complete; edit names to try again.';});
    });
   }

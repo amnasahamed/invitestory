@@ -1,0 +1,10 @@
+--- a/wrangler.jsonc
++++ b/wrangler.jsonc
+@@ -9,6 +9,7 @@
+ // from a session authenticated against account `918c02c9…`.
+ "account_id": "918c02c9d16c654bbac88d316f9b6e3f",
+   "main": "src/index.ts",
++  "keep_vars": true,
+   "compatibility_date": "2026-09-15",
+   "compatibility_flags": [
+     "nodejs_compat"

@@ -1,0 +1,312 @@
+--- a/src/website_previews.ts
++++ b/src/website_previews.ts
+@@ -5,9 +5,9 @@
+ import { whatsAppAccount } from "./whatsapp_accounts.js";
+ import { websiteDesigns } from "./website_catalogue.js";
+ import { digest, restoreToken } from "./website_crypto.js";
+-export const consentVersion = "preview-reminders-v1";
++export const consentVersion = "preview-reminders-v2";
+ export const consentWording =
+-	"Send my preview link and up to two purchase reminders from InviteStory on WhatsApp. Reply STOP to stop reminders.";
++	"Send my saved preview and one follow-up about ordering from InviteStory on WhatsApp. Reply STOP to stop messages.";
+ export class WebsiteInputError extends Error {}
+ export type WebsiteEnv = Record<string, string | undefined>;
+ export type Enquiry = {
+@@ -203,8 +203,15 @@
+ 		]);
+ 		return;
+ 	}
+-	const match = text.trim().match(/^PREVIEW ([a-f0-9]{24})$/i);
+-	if (!match) return;
++	const match = text.trim().match(/(?:^|\n)PREVIEW ([a-f0-9]{24})$/i);
++	if (!match) {
++        // A human reply starts a conversation; let staff respond instead of nudging again.
++        if (text.trim()) await db.batch([
++          db.prepare("UPDATE website_preview_followups SET state='cancelled',cancellation_reason='Customer replied; staff follow-up' WHERE state='pending' AND step=1 AND enquiry_id IN (SELECT id FROM website_preview_enquiries WHERE customer_id=? AND verified_at IS NOT NULL)").bind(customer.id),
++          db.prepare("UPDATE website_preview_enquiries SET status='paused' WHERE customer_id=? AND status='open' AND verified_at IS NOT NULL").bind(customer.id),
++        ]);
++        return;
++    }
+ 	await db
+ 		.prepare(
+ 			`UPDATE website_preview_enquiries SET verified_at=datetime('now') WHERE customer_id=? AND verification_hash=? AND status='open' AND verified_at IS NULL AND julianday(created_at)>julianday('now','-1 day')`,
+@@ -235,20 +242,26 @@
+ 	return db
+ 		.prepare(`SELECT e.*,c.primary_phone_e164 AS phone FROM website_preview_enquiries e JOIN customers c ON c.id=e.customer_id
+  WHERE e.id=? AND e.status='open' AND e.verified_at IS NOT NULL AND julianday(e.expires_at)>julianday('now')
+- AND (?=0 OR julianday(e.last_activity_at)<=julianday('now',?))
++ AND (?=0 OR (
++   julianday(e.last_activity_at)<=julianday('now',?)
++   AND julianday(e.verified_at)>julianday('now','-1 day')
++   AND EXISTS(SELECT 1 FROM website_preview_followups delivery WHERE delivery.enquiry_id=e.id AND delivery.step=0 AND delivery.state='submitted' AND julianday(delivery.delivery_confirmed_at)<=julianday('now',?))
++   AND NOT EXISTS(SELECT 1 FROM website_preview_followups sent JOIN website_preview_enquiries prior ON prior.id=sent.enquiry_id WHERE prior.customer_id=e.customer_id AND sent.enquiry_id<>e.id AND sent.step=1 AND sent.state IN ('submitted','sending','uncertain') AND julianday(sent.claimed_at)>julianday('now','-7 days'))
++ ))
+  AND (SELECT event FROM customer_messaging_consents WHERE customer_id=e.customer_id AND purpose='preview_reminders' ORDER BY id DESC LIMIT 1)='granted'
+  AND e.claimed_by IS NULL AND NOT EXISTS(SELECT 1 FROM pasted_leads p WHERE p.phone_e164=c.primary_phone_e164 AND p.status IN ('open','won'))
+- AND NOT EXISTS(SELECT 1 FROM website_payment_intakes p WHERE p.enquiry_id=e.id AND p.state='captured')
++ AND NOT EXISTS(SELECT 1 FROM website_payment_intakes p JOIN website_preview_enquiries paid ON paid.id=p.enquiry_id WHERE paid.customer_id=e.customer_id AND p.state='captured' AND julianday(p.created_at)>=julianday(e.created_at))
+  AND NOT EXISTS(SELECT 1 FROM designer_jobs j WHERE j.id=e.order_id)
+  AND NOT EXISTS(SELECT 1 FROM conversations cv WHERE cv.customer_id=e.customer_id AND (cv.sales_owner_user_id IS NOT NULL OR cv.linked_order_id IS NOT NULL))
+- AND NOT EXISTS(SELECT 1 FROM website_preview_followups f JOIN website_preview_enquiries x ON x.id=f.enquiry_id WHERE x.customer_id=e.customer_id AND f.enquiry_id<>e.id AND f.state IN ('submitted','sending','uncertain') AND julianday(x.created_at)>julianday('now','-1 day'))`)
+-		.bind(id, step, `-${delay} minutes`)
++ AND NOT EXISTS(SELECT 1 FROM website_preview_followups f JOIN website_preview_enquiries x ON x.id=f.enquiry_id WHERE x.customer_id=e.customer_id AND f.enquiry_id<>e.id AND f.state IN ('submitted','sending','uncertain') AND julianday(f.claimed_at)>julianday('now','-1 day'))`)
++		.bind(id, step, `-${delay} minutes`, `-${delay} minutes`)
+ 		.first<Enquiry>();
+ }
+ export async function runWebsiteFollowups(
+ 	db: D1Database,
+ 	env: WebsiteEnv,
+ 	send: OutboundSendFn = sendViaGupshup,
++	now = new Date(),
+ ) {
+ 	// A crashed sending job is uncertain; never automatically send it again.
+ 	await db
+@@ -266,12 +279,16 @@
+ 		!env.WEBSITE_RESTORE_SECRET
+ 	)
+ 		return;
++    await db.prepare("UPDATE website_preview_followups SET state='cancelled',cancellation_reason='Follow-up window expired' WHERE state='pending' AND step=1 AND enquiry_id IN (SELECT id FROM website_preview_enquiries WHERE verified_at IS NOT NULL AND julianday(verified_at)<=julianday('now','-1 day'))").run();
++    // Requested preview delivery may run anytime; unsolicited follow-ups stay in daytime IST.
++    const indiaHour = new Date(now.getTime() + 330 * 60000).getUTCHours();
++    const reminderDaytime = indiaHour >= 9 && indiaHour < 20;
+ 	const delay = Math.min(
+ 		1440,
+ 		Math.max(
+-			10,
+-			Number(await getAppSetting(db, "website_reminder_delay_minutes", "45")) ||
+-				45,
++			60,
++			Number(await getAppSetting(db, "website_reminder_delay_minutes", "60")) ||
++				60,
+ 		),
+ 	);
+ 	const rows = await db
+@@ -280,6 +297,7 @@
+ 		)
+ 		.all<{ id: number; enquiry_id: string; step: number }>();
+ 	for (const job of rows.results) {
++        if (job.step === 1 && !reminderDaytime) continue;
+ 		let e = await eligible(db, job.enquiry_id, job.step, delay);
+ 		if (!e) continue;
+ 		const templateId =
+--- a/src/routes/website_previews.ts
++++ b/src/routes/website_previews.ts
+@@ -140,6 +140,7 @@
+ });
+ app.get("/website-enquiries", async (c) => {
+ 	const actor = c.get("staff"),
++        sendingEnabled = (await getAppSetting(c.env.DB, "website_reminders_enabled", "0")) === "1",
+ 		manager = ["admin", "manager"].includes(actor.role),
+ 		csrf = escapeHtml(getCookie(c, "csrf") || "");
+ 	const rows = await c.env.DB.prepare(
+@@ -154,7 +155,7 @@
+ 		: { results: [] };
+ 	const form = (id: string, action: string, label: string, fields = "") =>
+ 		`<form method="post" action="/website-enquiries/${id}/${action}?csrf_token=${csrf}"><input type="hidden" name="csrf_token" value="${csrf}">${fields}<button class="btn btn-secondary btn-sm">${label}</button></form>`;
+-	const content = `<section class="card website-intro"><h1>Website enquiries</h1><p>Preview interest is tracked separately from staff sales attribution. Automated messaging is ${(await getAppSetting(c.env.DB, "website_reminders_enabled", "0")) === "1" ? "enabled" : "disabled"}. Numbers must be confirmed in WhatsApp before sending.</p>${manager ? `<details class="section-disclosure"><summary>Reminder settings</summary>${form("settings", "save", "Save reminder settings", `<label>Sending <select name="enabled"><option value="0">Disabled</option><option value="1">Enabled</option></select></label><label>Delay in minutes <input type="number" name="delay" min="10" max="1440" value="${escapeHtml(await getAppSetting(c.env.DB, "website_reminder_delay_minutes", "45"))}"></label>`)}</details>` : ""}</section>
++	const content = `<section class="card website-intro"><h1>Website enquiries</h1><p>Preview interest is tracked separately from staff sales attribution. Automated messaging is ${sendingEnabled ? "enabled" : "disabled"}. Numbers must be confirmed in WhatsApp before sending.</p>${manager ? `<details class="section-disclosure"><summary>Reminder settings</summary>${form("settings", "save", "Save reminder settings", `<label>Sending <select name="enabled"><option value="0"${!sendingEnabled ? " selected" : ""}>Disabled</option><option value="1"${sendingEnabled ? " selected" : ""}>Enabled</option></select></label><label>Delay in minutes <input type="number" name="delay" min="60" max="1440" value="${Math.max(60, Number(await getAppSetting(c.env.DB, "website_reminder_delay_minutes", "60")) || 60)}"></label>`)}</details>` : ""}</section>
+  <section class="card"><div class="table-scroll"><table><thead><tr><th>Customer / preview</th><th>Status</th><th>Actions</th></tr></thead><tbody>${rows.results.map((e) => `<tr><td>${escapeHtml(e.first_name)} &amp; ${escapeHtml(e.second_name)}<br>${escapeHtml(e.phone)}<br>${escapeHtml(websiteDesigns.find((d) => d.id === e.design_id)?.name || "")}<br><a href="/customers/${e.customer_id}">Customer context</a><br>Source: ${escapeHtml(JSON.parse(e.attribution_json).utm_source || "website")}</td><td>${escapeHtml(e.status)}<br>${e.verified_at ? "Number confirmed" : "Awaiting WhatsApp confirmation"}</td><td><div class="record-actions">${form(e.id, "claim", "Claim / take over")}${form(e.id, "pause", "Pause reminders")}${form(e.id, "opt-out", "Opt out")}<details><summary>Link paid order</summary>${form(e.id, "convert", "Link paid order", `<input name="order_id" type="number" min="1" required aria-label="Paid order ID" placeholder="Order ID">`)}</details></div></td></tr>`).join("") || '<tr><td colspan="3">No enquiries available.</td></tr>'}</tbody></table></div></section>
+  ${manager ? `<section class="card"><h2>Website payment intake</h2><p>Captured payments stop reminders immediately. Reconcile a payment to its order to record it once through the existing ledger.</p>${intakes.results.map((p) => `<div>${escapeHtml(p.razorpay_payment_id || p.razorpay_order_id || p.id)} · ${escapeHtml(p.state)} / ${escapeHtml(p.last_payment_state)} · ${p.amount / 100} ${escapeHtml(p.currency)}${form(p.id, "link-payment", "Reconcile to order", `<input name="order_id" type="number" min="1" required placeholder="Order ID">`)}</div>`).join("")}</section>` : ""}`;
+ 	return c.html(
+@@ -172,7 +173,7 @@
+ 		delay = Number(f.delay);
+ 	if (
+ 		!Number.isInteger(delay) ||
+-		delay < 10 ||
++		delay < 60 ||
+ 		delay > 1440 ||
+ 		!["0", "1"].includes(String(f.enabled))
+ 	)
+--- a/src/webhooks/processor.ts
++++ b/src/webhooks/processor.ts
+@@ -386,7 +386,7 @@
+       businessPhone:businessPhone||null,
+       displayName: raw.profile?.name ?? raw.senderName ?? null,
+       messageType: mapMessageType(type),
+-      body: typeof textObj.body === 'string' ? textObj.body : typeof raw.body === 'string' ? raw.body : null,
++      body: typeof textObj.body === 'string' ? textObj.body : typeof raw.body === 'string' ? raw.body : typeof raw.button?.text === 'string' ? raw.button.text : typeof raw.interactive?.button_reply?.title === 'string' ? raw.interactive.button_reply.title : typeof raw.interactive?.list_reply?.title === 'string' ? raw.interactive.list_reply.title : null,
+       caption: typeof named.caption === 'string' ? named.caption : null,
+       mediaId:
+         pickFirstString(named, ['id', 'mediaId', 'media_id']) ??
+@@ -453,6 +453,7 @@
+ 
+ function mapMessageType(type: string): string {
+   const known = new Set(['text', 'image', 'audio', 'video', 'document', 'location', 'unsupported']);
++  if (type === 'button' || type === 'interactive') return 'text';
+   if (type === 'link' || type === 'sticker') return 'unsupported';
+   if (known.has(type)) return type;
+   return 'unsupported';
+@@ -870,6 +871,11 @@
+   const current = STATUS_RANK[row.delivery_status ?? ''] ?? 0;
+   if (next === 0 || next < current) return false; // Unknown or regressive: never move state backwards.
+   await db.prepare(`UPDATE messages SET delivery_status = ? WHERE id = ?`).bind(s.status, row.id).run();
++  if (s.status === 'delivered' || s.status === 'read') {
++    await db.prepare("UPDATE website_preview_followups SET delivery_confirmed_at=COALESCE(delivery_confirmed_at,datetime('now')) WHERE message_id=? AND step=0").bind(row.id).run();
++  } else if (s.status === 'failed') {
++    await db.prepare("UPDATE website_preview_followups SET state='cancelled',cancellation_reason='Saved preview delivery failed' WHERE step=1 AND state='pending' AND enquiry_id IN (SELECT enquiry_id FROM website_preview_followups WHERE message_id=? AND step=0)").bind(row.id).run();
++  }
+   return true;
+ }
+ 
+--- a/test/website_previews.test.ts
++++ b/test/website_previews.test.ts
+@@ -4,7 +4,7 @@
+ 	capturePreview,
+ 	byToken,
+ 	websiteInbound,
+-	runWebsiteFollowups,
++	runWebsiteFollowups as sweepWebsiteFollowups,
+ 	consentVersion,
+ 	cancelEnquiry,
+ } from "../src/website_previews.js";
+@@ -17,6 +17,9 @@
+ import { setAppSetting } from "../src/db/settings.js";
+ import { signSession } from "../src/auth.js";
+ import routes from "../src/routes/website_previews.js";
++function runWebsiteFollowups(db: D1Database, configuration: any, send: any, now = new Date('2026-10-08T06:00:00Z')) {
++ return sweepWebsiteFollowups(db,configuration,send,now);
++}
+ const secret = "synthetic-restore-secret-32-characters";
+ const webhook = "synthetic-webhook-secret";
+ let sequence = 6000000000;
+@@ -308,7 +311,7 @@
+ 		e = (await byToken(env.DB, result.token))!;
+ 	await websiteInbound(env.DB, e.phone, "PREVIEW " + result.verification);
+ 	await env.DB.prepare(
+-		"UPDATE website_preview_followups SET state='cancelled' WHERE enquiry_id=? AND step=0",
++		"UPDATE website_preview_followups SET state='submitted',claimed_at=datetime('now','-2 hours'),delivery_confirmed_at=datetime('now','-2 hours') WHERE enquiry_id=? AND step=0",
+ 	)
+ 		.bind(e.id)
+ 		.run();
+@@ -528,3 +531,99 @@
+  expect(await autoAttributeOpeningLead(env.DB,conversation.id,introduction,async()=>owner)).toBe(owner);
+  await setAppSetting(env.DB,'auto_lead_attribution','0');
+ });
++
++async function quietSetup() {
++ const {result}=await capture(),e=(await byToken(env.DB,result.token))!;
++ await websiteInbound(env.DB,e.phone,'Please send my saved InviteStory preview.\nPREVIEW '+result.verification);
++ await setAppSetting(env.DB,'whatsapp_business_number','918281583882');
++ await setAppSetting(env.DB,'website_reminders_enabled','1');
++ await setAppSetting(env.DB,'website_reminder_delay_minutes','10');
++ const configuration={WEBSITE_RESTORE_SECRET:secret,WEBSITE_PREVIEW_TEMPLATE_ID:'synthetic-preview',WEBSITE_REMINDER_TEMPLATE_ID:'synthetic-reminder',GUPSHUP_API_KEY:'synthetic'};
++ await env.DB.prepare("UPDATE website_preview_enquiries SET last_activity_at=datetime('now','-2 hours') WHERE id=?").bind(e.id).run();
++ const delivered=()=>env.DB.prepare("UPDATE website_preview_followups SET state='submitted',claimed_at=datetime('now','-2 hours'),delivery_confirmed_at=datetime('now','-2 hours') WHERE enquiry_id=? AND step=0").bind(e.id).run();
++ return {result,e,configuration,delivered};
++}
++it('sends the requested preview first, waits at least an hour, then sends only one follow-up',async()=>{
++ const {e,configuration}=await quietSetup();
++ const send=vi.fn(async()=>({providerMessageId:'synthetic-'+crypto.randomUUID()}));
++ await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).toHaveBeenCalledTimes(1);
++ expect(send.mock.calls[0][0].template.id).toBe('synthetic-preview');
++ await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).toHaveBeenCalledTimes(1);
++ await env.DB.prepare("UPDATE website_preview_followups SET claimed_at=datetime('now','-2 hours'),delivery_confirmed_at=datetime('now','-2 hours') WHERE enquiry_id=? AND step=0").bind(e.id).run();
++ await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).toHaveBeenCalledTimes(2);
++ expect(send.mock.calls[1][0].template.id).toBe('synthetic-reminder');
++ await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).toHaveBeenCalledTimes(2);
++});
++it('does not send a reminder without a submitted preview or while the visitor is still browsing',async()=>{
++ const {e,configuration,delivered}=await quietSetup();
++ await env.DB.prepare("UPDATE website_preview_followups SET state='uncertain',claimed_at=datetime('now') WHERE enquiry_id=? AND step=0").bind(e.id).run();
++ const send=vi.fn();
++ await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).not.toHaveBeenCalled();
++ await delivered();
++ await env.DB.prepare("UPDATE website_preview_enquiries SET last_activity_at=datetime('now') WHERE id=?").bind(e.id).run();
++ await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).not.toHaveBeenCalled();
++});
++it('keeps follow-ups in 9am-8pm IST and cancels stale follow-ups rather than nudging days later',async()=>{
++ const {e,configuration,delivered}=await quietSetup();await delivered();const send=vi.fn();
++ await runWebsiteFollowups(env.DB,configuration,send,new Date('2026-10-08T16:00:00Z'));
++ expect(send).not.toHaveBeenCalled();
++ await env.DB.prepare("UPDATE website_preview_enquiries SET verified_at=datetime('now','-2 days') WHERE id=?").bind(e.id).run();
++ await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).not.toHaveBeenCalled();
++ expect((await env.DB.prepare('SELECT state FROM website_preview_followups WHERE enquiry_id=? AND step=1').bind(e.id).first<any>()).state).toBe('cancelled');
++});
++it('caps follow-ups to one per contact in seven days even if another preview is requested',async()=>{
++ const {e,configuration,delivered}=await quietSetup();await delivered();
++ const second=await capture({phone:e.phone});const next=(await byToken(env.DB,second.result.token))!;
++ await env.DB.prepare("UPDATE website_preview_followups SET state='submitted',claimed_at=datetime('now','-2 days') WHERE enquiry_id=? AND step=1").bind(next.id).run();
++ const send=vi.fn();await runWebsiteFollowups(env.DB,configuration,send);
++ expect(send).not.toHaveBeenCalled();
++ await cancelEnquiry(env.DB,next.id,'paused','Synthetic cleanup');
++});
++it('stops pending follow-ups when a verified customer asks for help',async()=>{
++ const {e,configuration,delivered}=await quietSetup();await delivered();
++ await websiteInbound(env.DB,e.phone,'Can you help me with the design?');
++ expect((await env.DB.prepare('SELECT status FROM website_preview_enquiries WHERE id=?').bind(e.id).first<any>()).status).toBe('paused');
++ const send=vi.fn();await runWebsiteFollowups(env.DB,configuration,send);expect(send).not.toHaveBeenCalled();
++});
++it('handles actual template STOP and interactive Help button replies through the webhook processor',async()=>{
++ const {processGupshupEnvelope}=await import('../src/webhooks/processor.js');
++ for(const button of ['STOP','Help']) {
++  const {e,configuration,delivered}=await quietSetup();await delivered();
++  const message={from:e.phone.replace(/\D/g,''),id:'synthetic-button-'+crypto.randomUUID(),timestamp:String(Math.floor(Date.now()/1000)),...(button==='STOP'?{type:'button',button:{text:'STOP',payload:'stop'}}:{type:'interactive',interactive:{type:'button_reply',button_reply:{id:'help',title:'Help'}}})};
++  const envelope={object:'whatsapp_business_account',entry:[{id:'synthetic-waba',changes:[{field:'messages',value:{metadata:{display_phone_number:'918281583882'},messages:[message]}}]}]};
++  const processed=await processGupshupEnvelope(env.DB,envelope,{ingestEnabled:true});
++  expect(processed.messagesStored).toBe(1);
++  expect((await env.DB.prepare('SELECT body FROM messages WHERE provider_message_id=?').bind(message.id).first<any>()).body).toBe(button);
++  expect((await env.DB.prepare('SELECT status FROM website_preview_enquiries WHERE id=?').bind(e.id).first<any>()).status).toBe(button==='STOP'?'opted_out':'paused');
++  const send=vi.fn();await runWebsiteFollowups(env.DB,configuration,send);expect(send).not.toHaveBeenCalled();
++ }
++});
++it('waits for a real delivery callback and cancels a reminder if saved-preview delivery fails',async()=>{
++ const {processGupshupEnvelope}=await import('../src/webhooks/processor.js');
++ for(const status of ['delivered','failed']) {
++  const {e,configuration}=await quietSetup();const providerId='synthetic-dlr-'+crypto.randomUUID();
++  const send=vi.fn(async()=>({providerMessageId:providerId}));await runWebsiteFollowups(env.DB,configuration,send);
++  await env.DB.prepare("UPDATE website_preview_followups SET claimed_at=datetime('now','-2 hours') WHERE enquiry_id=? AND step=0").bind(e.id).run();
++  await runWebsiteFollowups(env.DB,configuration,send);expect(send).toHaveBeenCalledTimes(1);
++  const envelope={object:'whatsapp_business_account',entry:[{id:'synthetic-waba',changes:[{field:'messages',value:{statuses:[{id:providerId,status,timestamp:String(Math.floor(Date.now()/1000))}]}}]}]};
++  await processGupshupEnvelope(env.DB,envelope,{ingestEnabled:true});
++  const job=await env.DB.prepare('SELECT delivery_confirmed_at FROM website_preview_followups WHERE enquiry_id=? AND step=0').bind(e.id).first<any>();
++  expect(Boolean(job.delivery_confirmed_at)).toBe(status==='delivered');
++  await runWebsiteFollowups(env.DB,configuration,send);expect(send).toHaveBeenCalledTimes(1);
++  if(status==='failed')expect((await env.DB.prepare('SELECT state FROM website_preview_followups WHERE enquiry_id=? AND step=1').bind(e.id).first<any>()).state).toBe('cancelled');
++  await cancelEnquiry(env.DB,e.id,'paused','Synthetic cleanup');
++ }
++});
++it('suppresses an older preview follow-up when the same customer pays through another saved preview',async()=>{
++ const {e,configuration,delivered}=await quietSetup();await delivered();
++ const other=await capture({phone:e.phone});const p=await payment(other.result.token);await captured(p.result.orderId);
++ const send=vi.fn();await runWebsiteFollowups(env.DB,configuration,send);expect(send).not.toHaveBeenCalled();
++ await cancelEnquiry(env.DB,e.id,'paused','Synthetic cleanup');
++});
+--- /dev/null
++++ b/migrations/0070_website_preview_delivery.sql
+@@ -0,0 +1,2 @@
++ALTER TABLE website_preview_followups ADD COLUMN delivery_confirmed_at TEXT;
++UPDATE app_settings SET value='60' WHERE key='website_reminder_delay_minutes' AND CAST(value AS INTEGER)<60;
+--- a/docs/WEBSITE_PREVIEW_INTEGRATION.md
++++ b/docs/WEBSITE_PREVIEW_INTEGRATION.md
+@@ -2,13 +2,13 @@
+ 
+ ## Behaviour
+ 
+-The optional name prompt accepts a WhatsApp number only when the visitor grants the displayed preview/reminder permission. Names-only previews continue locally. Consent is versioned as `preview-reminders-v1`; the checkbox starts unchecked. Capturing contact details never assigns a salesperson or creates an attributed staff lead.
++The optional name prompt keeps WhatsApp saving in a collapsed disclosure. It accepts a number only when the visitor grants the displayed preview/reminder permission. Consent is cleared after saving so editing names cannot silently create another enquiry. Names-only previews continue locally. Consent is versioned as `preview-reminders-v2`; the checkbox starts unchecked. Capturing contact details never assigns a salesperson or creates an attributed staff lead.
+ 
+ After capture the website offers a WhatsApp confirmation link containing `PREVIEW <challenge>`. The existing authenticated live inbound webhook verifies the challenge only for that same phone number. Historical messages cannot activate sending. Automated sends require confirmation, current consent and an enabled reminder setting. STOP revokes the contact's preview-reminder permission.
+ 
+ Saved preview links contain an expiring bearer token in the URL fragment; names and phone numbers are not in the link. Tokens are stored as hashes and expire after 30 days. The restore secret derives the token for outgoing messages. Avoid rotating this secret without a migration plan; rotation invalidates existing links/delivery verification.
+ 
+-Two persisted message steps exist: requested preview delivery and one reminder (45 minutes after last website activity by default). The five-minute scheduler processes due work. Names/design edits do not replenish the allowance. Automation pauses for staff ownership, linked orders, opt-out or verified purchase. Provider uncertainty is held for reconciliation and is never blindly retried. It cannot recall a message already accepted by WhatsApp.
++Two persisted message steps exist: requested preview delivery and one reminder (at least 60 minutes after both last website activity and a confirmed delivered/read webhook for the saved-preview message). The five-minute scheduler processes due work. Names/design edits do not replenish the allowance. Follow-ups are restricted to 9am–8pm IST, expire 24 hours after number confirmation and are capped at one per contact in seven days. Automation pauses for a customer reply, staff ownership, linked orders, opt-out or verified purchase. Failed preview delivery cancels the follow-up. Typed STOP and template STOP/Help buttons are handled by the live webhook parser. Provider uncertainty is held for reconciliation and is never blindly retried. It cannot recall a message already accepted by WhatsApp.
+ 
+ The current implementation reuses the Gupshup provider adapter, account selection, conversations/messages and delivery-status webhook processing. It uses a dedicated persisted automation job claim rather than the human inbox outbox: the latter requires an active authorised staff sender. Automation messages are excluded from staff introduction attribution. Existing staff-authored outbound queue behaviour is preserved.
+ 
+@@ -56,7 +56,7 @@
+ 
+ ## Local validation and rollout
+ 
+-Migration `0069_website_previews.sql` is additive. Apply the full migration history to an isolated local D1 database before deploying code that reads the new tables. The SQLite fallback suite also applies the complete history to an in-memory database, never production.
++Migrations `0069_website_previews.sql` and `0070_website_preview_delivery.sql` are additive. The latter records the first confirmed preview delivery and raises delays below 60 minutes to 60. Old preview jobs without delivery evidence will not send a reminder; no historical delivery times are guessed. Apply the full migration history to an isolated local D1 database before deploying code that reads the new tables. The SQLite fallback suite also applies the complete history to an in-memory database, never production.
+ 
+ From the staff repository:
+ 

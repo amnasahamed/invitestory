@@ -15,7 +15,7 @@ Prepared 8 October 2026 from the local website and staff portal source. This is 
 
 ## Proposed customer experience
 
-Keep the current optional names dialog. Add an optional WhatsApp number and an unchecked permission control naming InviteStory, preview delivery, and up to two purchase reminders. Personalisation continues when no number is supplied or capture fails; only consented contacts enter messaging automation. Update the current browser-only privacy wording when server storage is introduced.
+Keep the current optional names dialog. Add an optional WhatsApp number and an unchecked permission control naming InviteStory, preview delivery, and one follow-up about ordering. Personalisation continues when no number is supplied or capture fails; only consented contacts enter messaging automation. Update the current browser-only privacy wording when server storage is introduced.
 
 Initial rollout: one purchase reminder approximately 30–60 minutes after inactivity, configurable and disabled by default until provider templates and conversion suppression are ready. Five-minute cron resolution is sufficient. Do not repeat reminders when the visitor edits names or changes designs.
 
@@ -83,7 +83,7 @@ Work across these two repositories:
 
 Read the applicable repository instructions and inspect the current code and migration history before editing. Implement the complete local integration, including frontend changes, portal backend routes, additive D1 migrations, portal UI, payment reconciliation, reminder scheduling, opt-out handling and meaningful tests. Use the proposal as the starting design and adapt it to the actual architecture, documenting material deviations.
 
-Keep the preview free and the current name-personalisation step skippable. Add an optional WhatsApp number and explicit unchecked permission for preview delivery and up to two purchase reminders. Names-only personalisation must still work. Start with one reminder, defaulting to 45 minutes after inactivity, with a configurable delay and a global sending switch disabled by default. A website capture failure must not block previewing or checkout.
+Keep the preview free and the current name-personalisation step skippable. Add an optional WhatsApp number and explicit unchecked permission for preview delivery and one follow-up about ordering. Names-only personalisation must still work. Start with one reminder, waiting at least 60 minutes after inactivity and confirmed preview delivery, with a configurable delay and a global sending switch disabled by default. A website capture failure must not block previewing or checkout.
 
 Reuse existing customers, phone normalisation, staff lead ownership, orders, ledger rules, Gupshup messaging, business-number routing and delivery recovery. Store website enquiries separately from staff-attributed leads. Do not create fake staff claims, overwrite existing owners, inflate staff metrics or misclassify automated messages as staff introductions. Add preview context to authorised portal screens and a website-enquiries view with claim/link, pause and conversion actions.
 

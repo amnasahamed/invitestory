@@ -76,7 +76,7 @@ function getAttributionNotes() {
 getUtmCampaignParams();
 
 /**
- * Multi-Platform Conversion Tracker for GA4, Google Ads, and Meta Pixel.
+ * Multi-Platform Conversion Tracker for PostHog, GA4, Google Ads, and Meta Pixel.
  * Configured events:
  * - purchase: Primary Google Ads conversion with order value and transaction ID
  * - whatsapp_click: Secondary conversion (observation only, not equal to purchase)
@@ -84,7 +84,48 @@ getUtmCampaignParams();
  * - select_design: Template preview / selection event
  * - view_package: Package card impression / interaction
  */
+const recordedPostHogPayments = new Set();
+
+function trackPostHogEvent(eventName, params = {}) {
+  // Use product metadata only; never send form values, names or WhatsApp messages.
+  if (["localhost", "127.0.0.1", "::1", "[::1]"].includes(window.location.hostname)) return;
+  if (typeof window.posthog?.capture !== "function") return;
+  try {
+    const names = {
+      select_design: "template_viewed", view_order: "order_cta_clicked",
+      whatsapp_click: "whatsapp_cta_clicked", begin_checkout: "checkout_started",
+      purchase: "payment_succeeded", save_design: "template_saved",
+      resume_design: "template_resumed", share_shortlist: "shortlist_shared",
+      style_finder_complete: "style_finder_completed", view_package: "collection_viewed"
+    };
+    const ids = params.content_ids || [];
+    const designId = params.design_id || params.item_id || (ids.length === 1 ? ids[0] : null);
+    const item = designId ? TEMPLATE_DATABASE.find(design => design.id === Number(designId)) : null;
+    const tier = item?.tier || params.package_tier;
+    const properties = { source_event: eventName };
+    if (item) Object.assign(properties, {
+      template_id: String(item.id), template_name: item.name,
+      template_slug: getDesignSlug(item), style: item.style
+    });
+    if (tier) properties.collection = packageName(tier);
+    for (const key of ["currency", "value", "cta_location", "filter_type", "filter_value", "result_count", "query_length", "reason"]) {
+      if (params[key] !== undefined) properties[key] = params[key];
+    }
+    if (eventName === "whatsapp_click") properties.destination = "whatsapp";
+    if (eventName === "purchase") {
+      if (!params.transaction_id || recordedPostHogPayments.has(params.transaction_id)) return;
+      properties.transaction_id = params.transaction_id;
+      properties.payment_confirmation = "browser_callback";
+    }
+    window.posthog.capture(names[eventName] || eventName, properties);
+    if (eventName === "purchase") recordedPostHogPayments.add(params.transaction_id);
+  } catch (_) {
+    // Analytics must never interrupt a preview, enquiry or payment.
+  }
+}
+
 function trackConversionEvent(eventName, params = {}) {
+  trackPostHogEvent(eventName, params);
   try {
     const contentIds = (params.content_ids || (params.item_id ? [params.item_id] : [])).map(String);
     const isINR = (typeof currentCurrency !== "undefined" ? currentCurrency : "INR") === "INR";
@@ -1302,10 +1343,11 @@ function renderCatalogue() {
     const initial = item.name.split(/[\s&]+/).filter(Boolean).slice(0, 2).map(w => w[0]).join("").toUpperCase();
 
     card.innerHTML = `
-      <div class="template-card-media" data-preview-trigger="${item.id}" role="button" tabindex="0" title="Preview ${item.name}">
+      <div class="template-card-media" data-preview-trigger="${item.id}" role="button" tabindex="0" aria-label="Preview ${item.name} invitation" title="Preview ${item.name}">
         <img src="${imgSrc}" alt="InviteStory - ${item.name} Digital Wedding Invitation Template" class="template-card-img" loading="lazy" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
         <div class="template-card-fallback-initial" style="display: none;">${initial}</div>
         <div class="template-card-overlay" aria-hidden="true"></div>
+        <span class="template-preview-hint" aria-hidden="true">View invitation <span>↗</span></span>
       </div>
       ${typeof salesSaveButton === "function" ? salesSaveButton(item) : ""}
 
@@ -1719,6 +1761,7 @@ function openOrderDrawerForPackage(tier) {
   trackConversionEvent("view_order", {
     content_name: `${name} Package`,
     content_category: "Package",
+    package_tier: pTier,
     value: orderDrawerState.total,
     currency: currentCurrency === "INR" ? "INR" : "USD",
     num_items: 1
@@ -1852,6 +1895,7 @@ async function proceedFromOrderDrawerToCheckout() {
     modal: {
       ondismiss: function () {
         if (!window.__lastPaymentOk) {
+          trackPostHogEvent("checkout_cancelled", { content_ids: selectedContentIds, package_tier: tier, currency: currencyCode, value: totalVal });
           const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My checkout for "${name}" (${currencyCode === "INR" ? "₹" : "$"}${totalVal}) was cancelled. Could you please assist me?`)}`;
           showToast({
             title: "Payment not completed",
@@ -1893,14 +1937,16 @@ async function proceedFromOrderDrawerToCheckout() {
         options.order_id=secure.orderId;options.key=secure.keyId;options.amount=secure.amount;options.currency=secure.currency;
       }
     } catch (error) {
+      trackPostHogEvent("checkout_unavailable", { content_ids: selectedContentIds, package_tier: tier, reason: "gateway_unavailable" });
       showToast({title:"Checkout could not open",message:error.message||"Please try again or contact us on WhatsApp.",type:"error"});
       return;
     }
   }
   if (typeof Razorpay !== "undefined") {
-    trackConversionEvent("begin_checkout", { content_name: name, content_ids: selectedContentIds, content_type: "product", value: totalVal, currency: currencyCode });
+    trackConversionEvent("begin_checkout", { content_name: name, content_ids: selectedContentIds, package_tier: tier, content_type: "product", value: totalVal, currency: currencyCode });
     const rzp = new Razorpay(options);
     rzp.on("payment.failed", function () {
+      trackPostHogEvent("payment_failed", { content_ids: selectedContentIds, package_tier: tier, currency: currencyCode, value: totalVal });
       const waUrl = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory! My payment for ${name} failed. Can you please assist me?`)}`;
       showToast({
         title: "Payment didn’t go through",
@@ -1911,6 +1957,7 @@ async function proceedFromOrderDrawerToCheckout() {
     });
     rzp.open();
   } else {
+    trackPostHogEvent("checkout_unavailable", { content_ids: selectedContentIds, package_tier: tier, reason: "payment_sdk_unavailable" });
     showToast({
       title: "Opening checkout",
       message: "Please wait a moment, then try again.",
@@ -1923,7 +1970,7 @@ function askOrderDrawerOnWhatsApp() {
   const isINR = currentCurrency === "INR";
   const name = orderDrawerState.template ? `"${orderDrawerState.template.name}" (${packageName(orderDrawerState.tier)} Suite)` : `${packageName(orderDrawerState.tier)} Package`;
   const price = isINR ? `₹${orderDrawerState.total.toLocaleString("en-IN")}` : `$${orderDrawerState.total}`;
-  trackConversionEvent("whatsapp_click", { cta_location: "order_drawer", content_name: name, value: orderDrawerState.total, currency: currentCurrency });
+  trackConversionEvent("whatsapp_click", { cta_location: "order_drawer", content_ids: orderDrawerState.template ? [String(orderDrawerState.template.id)] : [], package_tier: orderDrawerState.tier, content_name: name, value: orderDrawerState.total, currency: currentCurrency });
   const msg = `Hi InviteStory! I'm on the website looking at ${name} (${price}). I have a few questions about wedding details and delivery before booking. Can you please assist me?`;
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(msg)}`, "_blank");
 }
@@ -3209,6 +3256,7 @@ function setupCurrencySwitcher() {
 // Setup inputs and tabs handlers
 function setupCatalogueHandlers() {
   if (searchInput) {
+    let searchTrackingTimer;
     searchInput.addEventListener("input", (e) => {
       if (typeof resetDiscovery === "function") resetDiscovery();
       searchQuery = e.target.value;
@@ -3218,6 +3266,14 @@ function setupCatalogueHandlers() {
         clearSearchBtn.style.display = "none";
       }
       renderCatalogue();
+      clearTimeout(searchTrackingTimer);
+      searchTrackingTimer = setTimeout(() => {
+        if (!searchQuery.trim()) return;
+        trackPostHogEvent("catalogue_searched", {
+          query_length: searchQuery.trim().length,
+          result_count: getFilteredTemplates().length
+        });
+      }, 650);
     });
   }
 
@@ -3236,6 +3292,7 @@ function setupCatalogueHandlers() {
       if (typeof resetDiscovery === "function") resetDiscovery();
       activeTierFilter = parseInt(radio.value, 10);
       renderCatalogue();
+      trackPostHogEvent("catalogue_filtered", { filter_type: "collection", filter_value: activeTierFilter === 0 ? "All" : packageName(activeTierFilter), result_count: getFilteredTemplates().length });
 
       // Smooth-scroll the catalogue into view so users see the filtered
       // templates immediately after tapping a tier in the floating glider.
@@ -3278,6 +3335,7 @@ function setupCatalogueHandlers() {
       });
 
       renderCatalogue();
+      trackPostHogEvent("catalogue_filtered", { filter_type: "style", filter_value: activeTagFilter, result_count: getFilteredTemplates().length });
     });
   }
 
@@ -3289,6 +3347,12 @@ function setupCatalogueHandlers() {
       if (!trigger) return;
       const id = parseInt(trigger.getAttribute("data-preview-trigger"), 10);
       if (!Number.isNaN(id)) openPreview(id);
+    });
+    templatesGrid.addEventListener("keydown", (e) => {
+      const trigger = e.target.closest('[data-preview-trigger][role="button"]');
+      if (!trigger || !["Enter", " "].includes(e.key)) return;
+      e.preventDefault();
+      openPreview(Number(trigger.dataset.previewTrigger));
     });
   }
 
@@ -4219,6 +4283,29 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTrustMarquee();
   setupResponsivePlaceholder();
   setupHeaderCtaHandlers();
+  if (typeof PreviewController !== "undefined" && PreviewController) {
+    let lastReadyVersion = -1;
+    PreviewController.onReady(item => {
+      const version = PreviewController.state().version;
+      if (version === lastReadyVersion) return;
+      lastReadyVersion = version;
+      trackPostHogEvent("template_preview_ready", { item_id: String(item.id) });
+    });
+  }
+  if (typeof IntersectionObserver !== "undefined") {
+    const sections = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        trackPostHogEvent(entry.target.id === "pricing" ? "pricing_viewed" : "catalogue_viewed");
+        sections.unobserve(entry.target);
+      });
+    }, { rootMargin: "0px 0px -80px 0px" });
+    ["catalogue-header", "pricing"].forEach(id => {
+      const section = document.getElementById(id);
+      if (section) sections.observe(section);
+    });
+  }
+  document.getElementById("hero-explore-btn")?.addEventListener("click", () => trackPostHogEvent("catalogue_cta_clicked", { cta_location: "hero" }));
 
   // Initial draw
   updateTierLabels();
@@ -4248,12 +4335,12 @@ document.addEventListener("DOMContentLoaded", () => {
   document.addEventListener("click", (e) => {
     const waLink = e.target.closest('a[href*="wa.me"]');
     if (!waLink || waLink.id === "floating-whatsapp") return;
-    const location = waLink.closest("header") ? "header"
+    const location = waLink.dataset.ctaLocation || (waLink.closest("header") ? "header"
       : waLink.closest("footer") ? "footer"
       : waLink.closest(".final-cta-section") ? "final_cta"
       : waLink.closest("#custom-modal") ? "custom_modal"
-      : waLink.closest(".hero-section") ? "hero"
-      : "page_link";
+      : waLink.closest(".hero-section, .studio-hero") ? "hero"
+      : "page_link");
     trackConversionEvent("whatsapp_click", {
       cta_location: location,
       content_name: waLink.getAttribute("aria-label") || waLink.title || waLink.innerText.trim().slice(0, 50) || "WhatsApp Link"

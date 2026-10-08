@@ -211,7 +211,7 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css?v=20261008-lean-1">
   <link rel="stylesheet" href="sales.css?v=20261008-lean-1">
-  <link rel="stylesheet" href="home.css?v=20261008-first-paint-1">
+  <link rel="stylesheet" href="home.css?v=20261009-posthog-1">
   <link rel="stylesheet" href="interactions.css?v=20261008-loading-1">
   <link rel="stylesheet" href="preview-themes.css?v=20261008-controls-hop-1">
   <!-- PostHog Analytics -->
@@ -221,6 +221,8 @@
         api_host: 'https://us.i.posthog.com',
         defaults: '2026-05-30',
         person_profiles: 'identified_only',
+        cross_subdomain_cookies: true,
+        opt_out_capturing_by_default: ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname),
     });
   </script>
 </head>
@@ -254,10 +256,13 @@
       <div class="hero-copy">
         <p class="hero-kicker">Digital invitations. Personal by design.</p>
         <h1 class="hero-headline" id="home-heading">Find an invitation that feels like you.</h1>
-        <p class="hero-subheadline">Explore the designs. We personalize your choice, ready to share in one beautiful link.</p>
+        <p class="hero-subheadline">Preview a design, then let us personalize it with your names, photos and wedding details.</p>
+        <p class="hero-service-note"><strong data-sales-price="2" data-sales-price-prefix="From ">From ₹1,999</strong><span>Personalization &amp; hosting included</span></p>
         <div class="hero-action-wrapper">
-          <a href="#catalogue-header" class="hero-primary-cta" id="hero-explore-btn">Find your invitation <span aria-hidden="true">↗</span></a>
+          <a href="#catalogue-header" class="hero-primary-cta" id="hero-explore-btn">Explore designs <span aria-hidden="true">↗</span></a>
+          <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20could%20you%20help%20me%20choose%20a%20wedding%20invitation%3F" target="_blank" rel="noopener" class="hero-whatsapp-cta" data-cta-location="hero">Ask on WhatsApp <span aria-hidden="true">↗</span></a>
         </div>
+        <p class="hero-preview-note">Preview free. First draft within 48h after payment &amp; complete details.</p>
       </div>
 
     </div>
@@ -1331,11 +1336,11 @@
   <script src="preview-themes.js?v=20261007-2"></script>
   <script src="paid-order.js"></script>
   <script src="preview-controller.js?v=20261008-android-1"></script>
-  <script src="scripts.js?v=20261008-first-paint-1"></script>
+  <script src="scripts.js?v=20261009-posthog-1"></script>
   <script src="sales.js?v=20261008-first-paint-1"></script>
   <script src="home.js?v=20261008-first-paint-1"></script>
   <script src="interactions.js?v=20261008-modular-1"></script>
-<script src="preview-names.js?v=20261008-modular-1"></script>
-<script src="website-integration.js?v=20261008-1"></script>
+<script src="preview-names.js?v=20261009-preview-first-1"></script>
+<script src="website-integration.js?v=20261008-natural-flow-1"></script>
 </body>
 </html>

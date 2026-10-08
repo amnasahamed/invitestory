@@ -1,8 +1,19 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "invitestorywebsite",
+  "account_id": "918c02c9d16c654bbac88d316f9b6e3f",
   "main": "_worker.js",
+  "keep_vars": true,
+  "routes": [
+    { "pattern": "invitestory.in", "custom_domain": true, "enabled": true, "previews_enabled": false },
+    { "pattern": "www.invitestory.in", "custom_domain": true, "enabled": true, "previews_enabled": false }
+  ],
   "compatibility_date": "2026-09-03",
+  "vars": {
+    "WEBSITE_INTEGRATION_ENABLED": "1",
+    "WEBSITE_PORTAL_ORIGIN": "https://staff.invitestory.in",
+    "WEBSITE_TURNSTILE_SITE_KEY": "0x4AAAAAAFRNi40QtwvXjJdp"
+  },
   "observability": {
     "enabled": true
   },

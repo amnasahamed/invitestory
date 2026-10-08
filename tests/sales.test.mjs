@@ -15,13 +15,60 @@ function website() {
     getElementById: id => elements.get(id) ?? null,
     querySelector: selector => elements.get(selector) ?? null, querySelectorAll: selector => Array.isArray(elements.get(selector)) ? elements.get(selector) : [], addEventListener() {},
   };
-  const window = { location, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
+  const window = { location, posthog: { capture: (...args) => calls.push(['posthog', ...args]) }, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
   const context = vm.createContext({ document, window, location, history: window.history, navigator: { userAgent: 'test', maxTouchPoints: 0 }, localStorage: store, sessionStorage: store, URL, URLSearchParams, console, setTimeout, clearTimeout, queueMicrotask });
   vm.runInContext(readFileSync(new URL('../scripts.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../sales.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../interactions.js', import.meta.url), 'utf8'), context);
   return { elements, calls, run: source => vm.runInContext(source, context) };
 }
+
+test('PostHog receives catalogue metadata without form values, contact details or raw searches', () => {
+  const site = website();
+  site.run("trackConversionEvent('select_design', {item_id:'35', value:4999, currency:'INR', first:'Private name', phone:'Private number', query:'Private search', message:'Private message'})");
+  const event = site.calls.find(call => call[0] === 'posthog');
+  assert.equal(event[1], 'template_viewed');
+  assert.equal(event[2].template_slug, 'dearly-magnolia');
+  assert.equal(event[2].template_name, 'Magnolia Reverie');
+  assert.equal(event[2].collection, 'Dearly Exclusive');
+  assert.equal(event[2].value, 4999);
+  for (const key of ['first', 'phone', 'query', 'message']) assert.equal(key in event[2], false);
+  assert.equal(site.calls.some(call => call[0] === 'ga' && call[2] === 'select_design'), true);
+});
+
+test('PostHog separates WhatsApp intent from checkout and deduplicates browser payment callbacks', () => {
+  const site = website();
+  site.run("askTemplateOnWhatsApp(35); trackConversionEvent('view_order', {content_ids:['35']}); trackConversionEvent('begin_checkout', {content_ids:['35']});");
+  assert.deepEqual(site.calls.filter(call => call[0] === 'posthog').map(call => call[1]), ['whatsapp_cta_clicked', 'order_cta_clicked', 'checkout_started']);
+  site.run("trackConversionEvent('purchase', {value:4999}); trackConversionEvent('purchase', {content_ids:['35'], transaction_id:'payment_test', value:4999, currency:'INR'}); trackConversionEvent('purchase', {transaction_id:'payment_test', value:4999});");
+  const payments = site.calls.filter(call => call[0] === 'posthog' && call[1] === 'payment_succeeded');
+  assert.equal(payments.length, 1);
+  assert.equal(payments[0][2].payment_confirmation, 'browser_callback');
+  assert.equal(site.calls.some(call => call[0] === 'posthog' && call[1] === 'order_completed'), false);
+});
+
+test('a missing or failed PostHog SDK never prevents enquiries or other conversion tracking', () => {
+  const site = website();
+  site.run("window.posthog = undefined; askTemplateOnWhatsApp(1); window.posthog = {capture(){throw new Error('Unavailable')}}; askTemplateOnWhatsApp(35);");
+  assert.equal(site.calls.filter(call => call[0] === 'open').length, 2);
+  assert.equal(site.calls.filter(call => call[0] === 'meta' && call[2] === 'Contact').length, 2);
+  assert.equal(site.calls.filter(call => call[0] === 'ga' && call[2] === 'whatsapp_click').length, 2);
+});
+
+test('local development does not send custom events to the production PostHog project', () => {
+  const site = website();
+  site.run("window.location.href = 'http://127.0.0.1:7100/'; trackConversionEvent('select_design', {item_id:'35'});");
+  assert.equal(site.calls.some(call => call[0] === 'posthog'), false);
+});
+
+test('catalogue result counts follow the same collection, style and search filters as the designs shown', () => {
+  const site = website();
+  assert.equal(site.run('getFilteredTemplates().length'), 35);
+  assert.equal(site.run("activeTierFilter = 4; getFilteredTemplates().length"), 4);
+  assert.equal(site.run("searchQuery = 'magnolia'; getFilteredTemplates().length"), 1);
+  assert.equal(site.run("searchQuery = 'unmatched'; getFilteredTemplates().length"), 0);
+  assert.equal(site.run("searchQuery = ''; activeTagFilter = 'traditional'; getFilteredTemplates().length"), 0);
+});
 
 test('Premium and Luxury totals charge only selected extras; Dearly charges neither included extra', () => {
   const site = website();
