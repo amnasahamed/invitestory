@@ -263,3 +263,31 @@ test('bespoke quote uses the INR equivalent plus 30% in every USD enquiry surfac
   site.run("currentCurrency = 'INR'; openCustomModal()");
   assert.equal(price.textContent,'₹12,000');
 });
+
+test('payment reassurance follows standard, Express and included Dearly timing', () => {
+  const site = website();
+  const reassurance = {textContent:''};
+  const modal = {querySelector: selector => selector === '.order-drawer-guarantee' ? reassurance : null, querySelectorAll: () => []};
+  const express = {checked:false};
+  site.elements.set('order-drawer-modal', modal);
+  site.elements.set('order-drawer-addon-express', express);
+  site.run('orderDrawerState.tier = 2; updateSalesOrder()');
+  assert.match(reassurance.textContent, /48h after payment and complete details/);
+  express.checked = true;
+  site.run('updateSalesOrder()');
+  assert.match(reassurance.textContent, /24h after payment and complete details/);
+  express.checked = false;
+  site.run('orderDrawerState.tier = 4; updateSalesOrder()');
+  assert.match(reassurance.textContent, /24h after payment and complete details/);
+});
+
+test('preview performance events retain timing and outcome without personalized values', () => {
+  const site = website();
+  site.run("trackPostHogEvent('template_preview_ended', {item_id:'29', elapsed_ms:8300, retry_count:1, preview_device:'mobile', preview_ready:false, exit_reason:'close', first:'Private name', phone:'Private number', previewUrl:'https://example.com/?name=private'})");
+  const event=site.calls.find(call=>call[0]==='posthog');
+  assert.equal(event[1],'template_preview_ended');
+  assert.equal(event[2].template_name,'Seashell Vows');
+  assert.equal(event[2].elapsed_ms,8300);assert.equal(event[2].retry_count,1);
+  assert.equal(event[2].preview_ready,false);assert.equal(event[2].exit_reason,'close');
+  for(const key of ['first','phone','previewUrl'])assert.equal(key in event[2],false);
+});

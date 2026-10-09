@@ -54,28 +54,19 @@ function setupHomeShowroom() {
       menu.focus();
     }
   });
-  const image = document.getElementById('atelier-envelope-image');
-  const preview = document.getElementById('hero-preview-btn');
-  document.querySelectorAll('[data-hero-design]').forEach(choice => {
-    choice.addEventListener('click', () => {
-      const item = TEMPLATE_DATABASE.find(design => design.id === Number(choice.dataset.heroDesign));
-      if (!item) return;
-      document.querySelectorAll('[data-hero-design]').forEach(button => {
-        const selected = button === choice;
-        button.setAttribute('aria-pressed', String(selected));
-        button.classList.toggle('is-selected', selected);
-      });
-      preview.dataset.designId = String(item.id);
-      preview.setAttribute('aria-label', `Open the ${item.name} live invitation`);
-      document.getElementById('atelier-product-name').textContent = item.name;
-      image.alt = `${item.name} embossed floral envelope and wax seal`;
-      image.src = item.image;
-      preview.classList.remove('is-switching');
-      requestAnimationFrame(() => preview.classList.add('is-switching'));
-    });
-  });
-  preview.addEventListener('animationend', () => preview.classList.remove('is-switching'));
-
+  const openingVideo = document.getElementById('hero-opening-video');
+  if (openingVideo) {
+    // Stop playback when attention moves to a preview or away from the page.
+    document.addEventListener('visibilitychange', () => { if (document.hidden) openingVideo.pause(); });
+    window.addEventListener('pagehide', () => openingVideo.pause());
+    const previewModal = document.getElementById('preview-modal');
+    if (previewModal) new MutationObserver(() => {
+      if (previewModal.classList.contains('is-open')) openingVideo.pause();
+    }).observe(previewModal, { attributes: true, attributeFilter: ['class'] });
+    new IntersectionObserver(entries => {
+      if (!entries[0].isIntersecting) openingVideo.pause();
+    }).observe(openingVideo);
+  }
   const reviews = {
     6: { quote: '“Thank You Mam for making this invitation beautiful”', context: 'A customer’s message after seeing their invitation.', file: 'review-07.webp' },
     5: { quote: '“Sir everyone like it”', context: 'A customer’s reply after sharing the invitation with their family.', file: 'review-06.webp' },

@@ -14,7 +14,7 @@
   function sync(){const personalized=Boolean(applied.first||applied.second);edit.textContent=personalized?'Edit names':'Add your names';reset.hidden=!personalized;skip.textContent=personalized?'Keep current names':'Skip for now';}
   function dismiss(){dialog.close();edit.focus({preventScroll:true});}
   function open(){if(dialog.open)return;sync();dialog.showModal();first.focus({preventScroll:true});}
-  function reload(){if(typeof PreviewController!=='undefined' && PreviewController){PreviewController.retry();return;}const frame=document.getElementById('preview-modal-iframe');if(frame?.getAttribute('src') && frame.getAttribute('src')!=='about:blank')frame.src=frame.src;}
+  function reload(){if(typeof PreviewController!=='undefined' && PreviewController){PreviewController.retry('names_changed');return;}const frame=document.getElementById('preview-modal-iframe');if(frame?.getAttribute('src') && frame.getAttribute('src')!=='about:blank')frame.src=frame.src;}
   edit.addEventListener('click',open);
   skip.addEventListener('click',dismiss);
   document.getElementById('preview-names-close').addEventListener('click',dismiss);

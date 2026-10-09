@@ -193,3 +193,21 @@
   #preview-modal .preview-sheet-details h3 { font-size: 16px; white-space: normal; line-height: 1.2; text-overflow: clip; }
   #preview-modal .preview-sheet-summary .preview-collection-switcher { width: 166px; }
 }
+
+/* Make collection differences visible before expanding the complete feature list. */
+.studio-home .pricing-card-tagline > strong { display:block; font-weight:600; color:#173e35; margin-bottom:10px; }
+.sales-package-facts { margin:0; font-size:12px; line-height:1.5; }
+.sales-package-facts > div { display:flex; justify-content:space-between; gap:14px; margin:5px 0; }
+.sales-package-facts dt { color:#5c6a64; flex-shrink:0; }
+.sales-package-facts dd { margin:0; text-align:right; color:#173e35; }
+.sales-payment-reassurance { margin:0 0 10px; color:var(--order-ink); font:500 13px/1.5 var(--font-body); text-align:center; }
+.sales-order-terms { font:400 12px/1.6 var(--font-body); color:var(--order-muted); margin:12px 0; }
+.sales-order-terms a { color:var(--order-ink); text-decoration:underline; text-underline-offset:3px; }
+.sales-order-proof { margin:12px 0; }
+.sales-order-proof .sales-proof-open { padding:8px 0; gap:10px; }
+.sales-order-proof .sales-proof-open img { width:36px; height:42px; }
+.sales-order-proof .sales-proof-open q { font-size:13px; }
+@media(max-width:760px) {
+  .studio-home .pricing-card .pricing-card-tagline { grid-column:1 / -1; margin:12px 0 0; }
+  .sales-payment-reassurance { font-size:12px; }
+}

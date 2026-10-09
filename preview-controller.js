@@ -21,9 +21,21 @@ function previewPendingStyles(doc) {
 
 function createPreviewController(options) {
   const {frame, loader, modal, poster, baseURL, schedule=setTimeout, cancel=clearTimeout,
-    reduced=()=>false, onResize=()=>{}, onStopLoading=()=>{}}=options;
+    reduced=()=>false, onResize=()=>{}, onStopLoading=()=>{},
+    now=()=>globalThis.performance?.now() ?? Date.now(), onMetric=()=>{}}=options;
   const listeners=new Set(), timers=new Set();
   let current=null, version=0, phase='closed', collapsed=Boolean(options.toggle), checkTimer=null;
+  let startedAt=0, retryCount=0, attemptEnded=true;
+  function metric(event,properties={}){
+    if(!current)return;
+    try{onMetric(event,{item_id:String(current.id),elapsed_ms:Math.max(0,Math.round(now()-startedAt)),
+      retry_count:retryCount,preview_device:options.mobile?.matches?'mobile':'desktop',...properties});}catch{}
+  }
+  function endAttempt(reason){
+    if(!current || attemptEnded)return;
+    metric('template_preview_ended',{exit_reason:reason,preview_ready:phase==='ready'});
+    attemptEnded=true;
+  }
   const quotes=['Every beautiful celebration begins with an invitation.',
     'Two hearts. A thousand memories. One beautiful beginning.',
     'A little glimpse of the day you will remember forever.',
@@ -43,7 +55,9 @@ function createPreviewController(options) {
   }
   function reveal(){
     if(phase!=='loading' && phase!=='waiting')return;
-    clearTimers();setPhase('ready');frame.classList.add('is-loaded');loader.classList.add('is-hidden');onStopLoading();
+    clearTimers();setPhase('ready');
+    if(!attemptEnded)metric('template_preview_ready',{load_time_ms:Math.max(0,Math.round(now()-startedAt))});
+    frame.classList.add('is-loaded');loader.classList.add('is-hidden');onStopLoading();
     listeners.forEach(callback=>callback(current));
     if(poster){poster.classList.add('is-ready');later(()=>{poster.hidden=true;},reduced()?0:180);}
   }
@@ -65,8 +79,11 @@ function createPreviewController(options) {
     if(ready){reveal();return;}
     if(attempt<120 && !checkTimer)checkTimer=later(()=>{checkTimer=null;check(attempt+1,externalLoaded);},250);
   }
-  function open(item){
-    clearTimers();version++;current=item;setPhase('loading');renderControls();
+  function open(item,trigger='open'){
+    endAttempt(trigger==='open'?'switch':trigger);
+    retryCount=trigger==='retry' && current?.id===item.id ? retryCount+1 : 0;
+    clearTimers();version++;current=item;startedAt=now();attemptEnded=false;setPhase('loading');renderControls();
+    metric('template_preview_started',{preview_trigger:trigger});
     frame.classList.remove('is-loaded');loader.classList.remove('is-hidden');
     if(poster){
       poster.hidden=false;poster.classList.remove('is-ready');
@@ -82,6 +99,7 @@ function createPreviewController(options) {
       setPhase('waiting');
       let stylesMissing=false;
       try{stylesMissing=previewPendingStyles(frame.contentDocument).length>0;}catch{}
+      if(!attemptEnded)metric('template_preview_delayed',{waiting_reason:stylesMissing?'styles_pending':'content_pending'});
       if(poster){poster.querySelector('p').textContent=stylesMissing?'The preview styles haven’t loaded. Retry, or open the full demo.':'Taking a little longer. Retry, or open the full demo.';poster.querySelector('button').hidden=false;poster.querySelector('a').hidden=false;}
     },8000);
     later(()=>check(),0);
@@ -92,8 +110,9 @@ function createPreviewController(options) {
     if(phase==='ready'){listeners.forEach(callback=>callback(current));return;}
     check(0,true);
   }
-  function retry(){if(current)open(current);}
+  function retry(reason='retry'){if(current)open(current,typeof reason==='string'?reason:'retry');}
   function close(){
+    endAttempt('close');
     clearTimers();version++;current=null;setPhase('closed');collapsed=Boolean(options.toggle && options.mobile?.matches);renderControls();
     if(poster)poster.hidden=true;
     // Release animation/video memory promptly on phones; preserve the desktop
@@ -105,6 +124,7 @@ function createPreviewController(options) {
     return index<0 || !catalogue.length ? null : catalogue[(index+direction+catalogue.length)%catalogue.length];
   }
   return {open,close,retry,loaded,adjacent,poster,demoURL,
+    recordPageExit(){endAttempt('page_exit');},
     onReady(callback){listeners.add(callback);return()=>listeners.delete(callback);},
     toggleControls(){collapsed=!collapsed;renderControls();},renderControls,
     state:()=>({phase,item:current,version,collapsed})};
@@ -122,10 +142,12 @@ const PreviewController = (()=>{
   }
   const mobile=window.matchMedia('(max-width: 760px)'), toggle=document.getElementById('preview-details-toggle');
   const controller=createPreviewController({frame,modal,poster,mobile,toggle,
+    onMetric:(event,properties)=>{if(typeof trackPostHogEvent==='function')trackPostHogEvent(event,properties);},
     loader:document.getElementById('preview-modal-loader'),baseURL:location.href,
     reduced:()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches,
     onResize:()=>{if(typeof schedulePreviewScale==='function')schedulePreviewScale();},
     onStopLoading:()=>{if(typeof stopLoaderPulse==='function')stopLoaderPulse();}});
+  window.addEventListener('pagehide',controller.recordPageExit);
   frame.addEventListener('load',controller.loaded);
   poster?.querySelector('button').addEventListener('click',controller.retry);
   toggle?.addEventListener('click',controller.toggleControls);

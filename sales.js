@@ -117,7 +117,7 @@ function updateMobileBookingBar() {
   bar.querySelector("strong").textContent = item.name;
   bar.querySelector("small").textContent = `${formatPrice(getItemPrices(item).priceINR, getItemPrices(item).priceUSD)}${document.body.classList.contains("atelier-home") ? "" : " · Personalized for you"}`;
   const book = bar.querySelector(".sales-mobile-book-btn");
-  book.setAttribute("aria-label", `Review and book ${item.name}`);
+  book.setAttribute("aria-label", `Choose ${item.name} and review the price`);
 }
 
 function setupMobileSalesLayout() {
@@ -195,7 +195,7 @@ function setupMobileSalesLayout() {
     document.querySelectorAll(".sales-order-disclosure, .studio-package-details").forEach(details => { details.open = !mobile.matches; });
     updateMobileBookingBar();
   };
-  document.body.insertAdjacentHTML("beforeend", '<aside id="sales-mobile-booking" class="sales-mobile-booking" aria-label="Your selected invitation" hidden><img alt="" width="32" height="42"><div><strong></strong><small></small></div><button type="button" class="sales-mobile-book-btn" onclick="bookChosenDesign()">Review &amp; book</button><button type="button" class="sales-mobile-book-close" onclick="dismissMobileBookingBar()" aria-label="Hide booking shortcut">×</button></aside>');
+  document.body.insertAdjacentHTML("beforeend", '<aside id="sales-mobile-booking" class="sales-mobile-booking" aria-label="Your selected invitation" hidden><img alt="" width="32" height="42"><div><strong></strong><small></small></div><button type="button" class="sales-mobile-book-btn" onclick="bookChosenDesign()">Choose design</button><button type="button" class="sales-mobile-book-close" onclick="dismissMobileBookingBar()" aria-label="Hide booking shortcut">×</button></aside>');
   apply();
   mobile.addEventListener("change", apply);
   const heroForShortcut = () => document.querySelector(".hero");
@@ -409,7 +409,7 @@ function updateSalesOrder() {
   const delivery = document.getElementById("order-drawer-delivery-tag");
   if (delivery) delivery.textContent = express ? "First draft within 24h" : "First draft within 48h";
   const reassurance = modal.querySelector(".order-drawer-guarantee");
-  if (reassurance) reassurance.textContent = "Review before final approval. Free revision requests for 24 hours after your first draft.";
+  if (reassurance) reassurance.textContent = `First draft within ${express ? "24" : "48"}h after payment and complete details.`;
   const firstDraft = modal.querySelectorAll(".order-step-title")[2];
   if (firstDraft) firstDraft.textContent = express ? "First draft within 24h" : "First draft within 48h";
   const expressDescription = document.getElementById("order-addon-express-sub");
@@ -499,30 +499,30 @@ function setupSalesGuidance() {
     if (title) title.textContent = "Make it yours.";
     const subtitle = content.querySelector(".order-drawer-subtitle");
     if (subtitle) subtitle.textContent = "We personalize it for you. Share your details on WhatsApp after booking.";
-    header?.insertAdjacentHTML("afterend", '<ol class="sales-booking-progress" aria-label="Booking steps"><li><span aria-hidden="true">✓</span> <span id="sales-chosen-step">Design chosen</span></li><li aria-current="step">Review &amp; book</li><li>We personalize</li></ol>');
+    header?.insertAdjacentHTML("afterend", '<ol class="sales-booking-progress" aria-label="Booking steps"><li><span aria-hidden="true">✓</span> <span id="sales-chosen-step">Design chosen</span></li><li aria-current="step">Review price</li><li>We personalize</li></ol>');
     content.querySelector(".order-drawer-card")?.insertAdjacentHTML("afterend", '<p id="sales-order-essentials" class="sales-order-essentials"></p>');
     const payText = document.getElementById("order-drawer-cta-text");
-    if (payText) payText.textContent = "Pay & book";
+    if (payText) payText.textContent = "Pay";
     content.querySelector(".order-drawer-features ul")?.insertAdjacentHTML("beforeend", '<li id="sales-order-rsvp"></li>');
     content.querySelector(".order-drawer-addons")?.insertAdjacentHTML("afterend", '<aside id="sales-dearly-suggestion" class="sales-dearly-suggestion" hidden></aside>');
-    content.querySelector(".order-drawer-total-bar")?.insertAdjacentHTML("afterend", `<div class="sales-customer-proof sales-order-proof">${customerProof(5)}</div>`);
+    content.querySelector(".order-drawer-total-bar")?.insertAdjacentHTML("afterend", `<p class="sales-order-terms">Hosting until one month after your event ends. Free revision requests for 24 hours after your first draft. <a href="refund-and-editing-policy.html" target="_blank" rel="noopener">Refund &amp; editing policy</a></p><div class="sales-customer-proof sales-order-proof">${customerProof(5)}</div>`);
     content.querySelector(".order-step-desc")?.insertAdjacentHTML("afterend", '<p class="sales-policy-note">Customization starts after payment and complete details. <a href="refund-and-editing-policy.html" target="_blank" rel="noopener">Refund & editing policy</a></p>');
     const immediate = content.querySelectorAll(".order-step-desc")[1];
     if (immediate) immediate.textContent = "Send your names, dates, venues and photos using our short checklist.";
     const support = content.querySelector(".order-drawer-wa-btn");
     if (support) support.lastChild.textContent = " Ask about this design & delivery";
-    for (const [selector, label] of [[".order-drawer-features", "Everything included in your invitation"], [".order-drawer-steps-box", "What happens after you book?"]]) {
+    const details = document.createElement("details");
+    details.className = "sales-order-disclosure";
+    const summary = document.createElement("summary");
+    summary.textContent = "Order details & what happens after payment";
+    details.appendChild(summary);
+    for (const selector of [".order-drawer-features", ".order-drawer-steps-box"]) {
       const section = content.querySelector(selector);
-      if (!section) continue;
-      const details = document.createElement("details");
-      details.className = "sales-order-disclosure";
-      const summary = document.createElement("summary");
-      summary.textContent = label;
-      details.append(summary, section);
-      const supportBlock = content.querySelector(".order-drawer-wa-alt");
-      if (supportBlock) supportBlock.before(details);
-      else content.appendChild(details);
+      if (section) details.appendChild(section);
     }
+    const supportBlock = content.querySelector(".order-drawer-wa-alt");
+    if (supportBlock) supportBlock.before(details);
+    else content.appendChild(details);
   }
   const toolbar = document.querySelector(".preview-modal-toolbar");
   if (toolbar) toolbar.insertAdjacentHTML("beforeend", '<p id="sales-preview-context" class="sales-preview-context"></p>');
@@ -558,7 +558,9 @@ function setupStudioPricing(container) {
   if (!document.body.classList.contains("studio-home")) return;
   const heading = container.querySelector(".section-title");
   if (heading) heading.textContent = "Choose your kind of invitation.";
-  const descriptions = ["Your photos, story, music and guest replies.", "Everything in Premium, with a cinematic opening.", "Wax-seal opening, Email RSVP and a 24h first draft."];
+  const descriptions = ["Interactive invitation", "Cinematic invitation", "Wax-seal invitation"];
+  const openings = ["Story-led layouts", "Cinematic reveals", "Floral wax-seal reveal"];
+  const collections = ["Premium", "Luxury", "Dearly"];
   container.querySelectorAll(".pricing-card").forEach((card, index) => {
     const features = card.querySelector(".pricing-card-features");
     if (!features) return;
@@ -569,15 +571,17 @@ function setupStudioPricing(container) {
     features.before(details);
     details.appendChild(features);
     const tagline = card.querySelector(".pricing-card-tagline");
-    if (tagline) tagline.textContent = descriptions[index];
+    if (tagline) tagline.innerHTML = `<strong>${descriptions[index]}</strong><dl class="sales-package-facts"><div><dt>Opening</dt><dd>${openings[index]}</dd></div><div><dt>Guest replies</dt><dd>${index === 2 ? "Email RSVP included" : "WhatsApp RSVP included"}</dd></div><div><dt>First draft</dt><dd>Within ${index === 2 ? "24" : "48"}h*</dd></div></dl>`;
+    const browseLabel = card.querySelector("[data-pay-label]");
+    if (browseLabel) browseLabel.textContent = `Browse ${collections[index]} designs`;
     const note = card.querySelector(".pkg-microcopy");
-    if (note) note.textContent = `First draft within ${index === 2 ? "24" : "48"}h after payment and complete details.`;
+    if (note) note.textContent = "*After payment and complete details. Approve your draft before sharing.";
   });
   const grid = container.querySelector(".pricing-grid");
   const comparison = container.querySelector(".sales-package-comparison");
   if (grid && comparison) grid.after(comparison);
   const value = container.querySelector(".sales-value-price");
-  if (value) value.textContent = "Unlimited guests. Personalization and hosting included. No subscription.";
+  if (value) value.textContent = "Every collection includes personalization, music, venue maps and unlimited sharing. Hosting until one month after your event ends. One-time payment.";
   if (typeof setupHomeCollectionCards === "function") setupHomeCollectionCards(container);
   const planner = container.querySelector(".sales-delivery-planner");
   if (planner) {

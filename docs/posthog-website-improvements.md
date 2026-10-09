@@ -25,7 +25,10 @@ The report showed three rageclicks. Their count alone does not identify the fail
 | `catalogue_filtered` | Collection/style changed; includes current result count |
 | `catalogue_searched` | Nonempty search after a 650ms pause; length and result count only |
 | `template_viewed` | Design selected/opened; not proof the frame finished loading |
-| `template_preview_ready` | Preview controller confirms loaded content; deduplicated per controller version |
+| `template_preview_ready` | Preview controller confirms usable content once per attempt, with load timing |
+| `template_preview_started` | Initial opening, retry or names-only reload begins |
+| `template_preview_delayed` | Still waiting after eight seconds; not necessarily a failure |
+| `template_preview_ended` | Attempt ends with reason, elapsed time and whether it was ready |
 | `preview_names_applied` | Names applied; actual name values excluded |
 | `template_saved`, `template_resumed`, `shortlist_shared`, `style_finder_completed` | Existing discovery actions |
 | `pricing_viewed`, `collection_viewed` | Pricing section exposure and existing package interaction |

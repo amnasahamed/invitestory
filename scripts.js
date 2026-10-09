@@ -108,7 +108,7 @@ function trackPostHogEvent(eventName, params = {}) {
       template_slug: getDesignSlug(item), style: item.style
     });
     if (tier) properties.collection = packageName(tier);
-    for (const key of ["currency", "value", "cta_location", "filter_type", "filter_value", "result_count", "query_length", "reason"]) {
+    for (const key of ["currency", "value", "cta_location", "filter_type", "filter_value", "result_count", "query_length", "reason", "elapsed_ms", "load_time_ms", "retry_count", "preview_device", "preview_trigger", "preview_ready", "exit_reason", "waiting_reason"]) {
       if (params[key] !== undefined) properties[key] = params[key];
     }
     if (eventName === "whatsapp_click") properties.destination = "whatsapp";
@@ -1148,7 +1148,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Your music, venue directions + WhatsApp RSVP</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>First draft within 48h</span></li>
           </ul>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="selectTier(2, true)"><span data-pay-label>Choose a design</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-2" onclick="selectTier(2, true)"><span data-pay-label>Browse Premium designs</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(2)">${askIcon}<span>Ask about Premium</span></button>
           <p class="pkg-microcopy">First draft within 48 hours after payment + complete details. Review before final approval. · UPI / GPay / PhonePe</p>
         </div>
@@ -1168,7 +1168,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>All wedding events, with animated transitions</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>First draft within 48h; optional 24h Express</span></li>
           </ul>
-          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="selectTier(3, true)"><span data-pay-label>Choose a design</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="selectTier(3, true)"><span data-pay-label>Browse Luxury designs</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)">${askIcon}<span>Ask about Luxury</span></button>
           <p class="pkg-microcopy">First draft within 48 hours after payment + complete details. Review before final approval. · UPI / GPay / PhonePe</p>
         </div>
@@ -1189,7 +1189,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Photo gallery included on request &amp; botanical motion</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>First draft within 24h, included</span></li>
           </ul>
-          <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="selectTier(4, true)"><span data-pay-label>Choose a Dearly design</span></button>
+          <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="selectTier(4, true)"><span data-pay-label>Browse Dearly designs</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(4)">${askIcon}<span>Ask about Dearly</span></button>
           <p class="pkg-microcopy">First draft within 24h after payment + complete details. Review before final approval.</p>
         </div>
@@ -1376,8 +1376,8 @@ function renderCatalogue() {
           </div>
 
           <div class="template-card-actions">
-            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="openOrderDrawerForTemplate(${item.id})" aria-label="Customize and order ${item.name} design">
-              <span>Customize &amp; Order</span>
+            <button type="button" class="btn template-btn-pay tier-btn-${item.tier}" onclick="openOrderDrawerForTemplate(${item.id})" aria-label="Choose ${item.name} and review the price">
+              <span>Choose design</span>
             </button>
             <button type="button" class="btn template-btn-preview-primary tier-btn-${item.tier}" data-preview-trigger="${item.id}" aria-label="Preview ${item.name} invitation demo">
               <span>Preview <span class="btn-text-invitation">invitation</span> →</span>
@@ -1989,7 +1989,7 @@ function updatePaymentButtonsForCurrency() {
     const sheetPrice = document.getElementById("preview-sheet-price");
     const payLabel = document.getElementById("preview-pay-label");
     if (sheetPrice) sheetPrice.textContent = priceText;
-    if (payLabel) payLabel.textContent = `${document.body.classList.contains("atelier-home") ? "Choose design ·" : "Customize & Order —"} ${priceText}`;
+    if (payLabel) payLabel.textContent = `Choose design · ${priceText}`;
   }
   const rzpBtn = document.getElementById("preview-instant-pay-btn");
   if (rzpBtn) {
@@ -2561,7 +2561,7 @@ function openPreview(id, updateUrl = true) {
   // Dual CTA labels: primary Pay, secondary Ask
   const payLabel = document.getElementById("preview-pay-label");
   if (payLabel) {
-    payLabel.textContent = `${document.body.classList.contains("atelier-home") ? "Choose design ·" : "Customize & Order —"} ${formatPrice(prices.priceINR, prices.priceUSD)}`;
+    payLabel.textContent = `Choose design · ${formatPrice(prices.priceINR, prices.priceUSD)}`;
   }
   const askLabel = document.getElementById("preview-ask-label");
   if (askLabel) askLabel.textContent = "WhatsApp";
@@ -4287,15 +4287,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTrustMarquee();
   setupResponsivePlaceholder();
   setupHeaderCtaHandlers();
-  if (typeof PreviewController !== "undefined" && PreviewController) {
-    let lastReadyVersion = -1;
-    PreviewController.onReady(item => {
-      const version = PreviewController.state().version;
-      if (version === lastReadyVersion) return;
-      lastReadyVersion = version;
-      trackPostHogEvent("template_preview_ready", { item_id: String(item.id) });
-    });
-  }
   if (typeof IntersectionObserver !== "undefined") {
     const sections = new IntersectionObserver(entries => {
       entries.forEach(entry => {
