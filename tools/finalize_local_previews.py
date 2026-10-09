@@ -9,6 +9,20 @@ import shutil
 from urllib.parse import unquote
 from import_previews import ROOT, DEST, catalogue
 from stage_local_previews import repair_optional_dependencies, repair_archived_exports, repair_mobile_canvas
+from localize_preview_media import localize, OLD as MEDIA_SOURCE, NEW as MEDIA_TARGET
+
+
+def imported_path(folder, path):
+    original = folder / path
+    migrated = folder / path.replace(MEDIA_SOURCE, MEDIA_TARGET)
+    return original if original.exists() else migrated
+
+
+def imported_asset_size(folder, path):
+    asset = imported_path(folder, path)
+    if not asset.exists():
+        asset = asset.with_suffix('.webp')
+    return asset.stat().st_size
 
 
 def main():
@@ -20,7 +34,7 @@ def main():
         original = Path(report['sourceDirectory'])
         rewrites = {}
         for source_path in report['originalFileHashes']:
-            old = folder / source_path
+            old = imported_path(folder, source_path)
             if not old.exists() and old.suffix in ('.png', '.jpg', '.jpeg') and old.with_suffix('.webp').exists():
                 rewrites[old] = old.with_suffix('.webp')
         for file in folder.rglob('*'):
@@ -39,7 +53,7 @@ def main():
         # Count each input exactly once, including a pilot that was imported twice.
         original_assets = [original / p for p in report['originalFileHashes'] if Path(p).suffix in ('.png', '.jpg', '.jpeg', '.webp', '.mp4')]
         report['assetBytesBefore'] = sum(p.stat().st_size for p in original_assets)
-        report['assetBytesAfter'] = sum((folder / p.relative_to(original)).stat().st_size if (folder / p.relative_to(original)).exists() else (folder / p.relative_to(original)).with_suffix('.webp').stat().st_size for p in original_assets)
+        report['assetBytesAfter'] = sum(imported_asset_size(folder, p.relative_to(original).as_posix()) for p in original_assets)
         reports.append(report)
 
     # Share byte-identical fonts through content-addressed URLs. CSS always uses
@@ -91,6 +105,8 @@ def main():
                'assetBytesAfter': sum(r['assetBytesAfter'] for r in reports), 'sharedFontSavings': original_font_bytes - current_font_bytes,
                'originalExportsPreserved': True, 'templates': reports}
     (ROOT / 'docs/preview-import-summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+    for report in reports:
+        localize(DEST / report['slug'])
     print(json.dumps({k:v for k,v in summary.items() if k != 'templates'}))
 
 

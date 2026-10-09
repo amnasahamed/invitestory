@@ -52,3 +52,29 @@ test('bundle-relative image and video URLs resolve, including decorative backgro
   }
   assert.ok(checked >= 4);
 });
+
+test('mirrored media uses local artwork URLs that resolve in HTML, CSS and bundles', () => {
+  let checked = 0;
+  for (const design of readdirSync(new URL('../previews/', import.meta.url), {withFileTypes: true}).filter(entry => entry.isDirectory())) {
+    const folder = new URL(`../previews/${design.name}/`, import.meta.url);
+    function walk(directory) {
+      return readdirSync(directory, {withFileTypes: true}).flatMap(entry => {
+        const url = new URL(entry.name + (entry.isDirectory() ? '/' : ''), directory);
+        return entry.isDirectory() ? walk(url) : [url];
+      });
+    }
+    for (const file of walk(folder).filter(url => /\.(?:html|css|js|mjs)$/.test(url.pathname))) {
+      const text = readFileSync(file, 'utf8');
+      assert.ok(!text.includes('external/media.invitestory.in/'), `blocked media path in ${file.pathname}`);
+      for (const match of text.matchAll(/(?:\.\.\/)*assets\/artwork\/[^\s"'`<>),;]+/g)) {
+        const path = match[0].split(/[?#]/)[0];
+        // CSS URLs and new URL(..., import.meta.url) are file-relative;
+        // ordinary image src strings in bundles resolve against the document.
+        const target = new URL(path, path.startsWith('../') ? file : folder);
+        assert.ok(existsSync(target), `missing artwork ${path} in ${file.pathname}`);
+        checked++;
+      }
+    }
+  }
+  assert.ok(checked >= 50);
+});

@@ -8,6 +8,8 @@ from pathlib import Path
 import re
 import shutil
 from import_previews import ROOT, DEST, catalogue, lossless_image, stream_copy_video
+from localize_preview_media import localize, OLD as MEDIA_SOURCE, NEW as MEDIA_TARGET
+from repair_preview_assets import repair_assets
 
 RUNTIME_EXTENSIONS = {'.html', '.css', '.js', '.mjs', '.json', '.png', '.jpg', '.jpeg', '.webp', '.gif', '.svg', '.avif', '.ico', '.woff', '.woff2', '.ttf', '.otf', '.mp4', '.mov', '.webm', '.mp3', '.ogg', '.wav'}
 TEXT_EXTENSIONS = {'.html', '.css', '.js', '.mjs', '.json'}
@@ -109,6 +111,9 @@ def stage(design, source):
     export_repairs = repair_archived_exports(folder)
     mobile_canvas_repairs = repair_mobile_canvas(folder)
     repairs = repair_optional_dependencies(folder)
+    localize(folder)
+    for record in records:
+        record['path'] = record['path'].replace(MEDIA_SOURCE, MEDIA_TARGET)
     report = {**design, 'sourceDirectory': str(original), 'status': 'staged', 'routingPatches': routing_patches,
               'originalFileHashes': original_hashes, 'optimizations': records, 'optionalDependencyFallbacks': repairs,
               'exportRepairs': export_repairs, 'mobileCanvasRepairs': mobile_canvas_repairs,
@@ -121,6 +126,8 @@ def stage(design, source):
 def repair_archived_exports(folder):
     """Resolve namespace and subdirectory defects in archived production copies."""
     repairs = []
+    for path in repair_assets(folder):
+        repairs.append({'file': path, 'repair': 'Repair catalogue artwork and optional media references'})
     entry = folder / 'index.html'
     if entry.exists():
         original = entry.read_text()

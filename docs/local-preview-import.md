@@ -35,6 +35,26 @@ HTTP text compression and response headers must be checked after deployment.
 
 ## Export compatibility
 
+Mirrored media uses `assets/artwork/` paths. Paths containing the former media
+hostname were blocked by the browser client and showed broken decorative images
+in Seashell Vows. Staging and finalization apply this migration automatically;
+`python3 tools/localize_preview_media.py` also repairs existing exports without
+changing asset bytes. Original import reports retain their source paths.
+
+Run `python3 tools/audit_design_assets.py` to check literal asset references in
+all 35 designs, including Dearly. It checks HTML, CSS, bundled media, fonts and
+module-relative paths. `python3 -m unittest discover -s tests -p '*_test.py'`
+includes the catalogue audit and path-resolution regression checks.
+The October 9 audit is saved in `docs/design-assets-audit.json`, with separate
+image, media, font and JavaScript validation results. These are local checks;
+browser interaction and live deployment verification are recorded separately.
+
+Noor-e-Zahra uses its existing mosque illustration in the venue card because
+the export did not include the referenced map image. Diya Haveli exposes its
+optional music control only when `WEDDING_DATA.media.audio` is configured;
+the export's default audio path had no corresponding file. Social-preview
+images also use valid local artwork rather than template placeholders.
+
 The importer fixes root asset paths, router basenames, missing optimized-image
 references, vendor/editable-data name collisions and malformed archived bundle
 declarations. Missing optional Lenis chunks fall back to native scrolling;

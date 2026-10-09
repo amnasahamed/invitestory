@@ -1,0 +1,2001 @@
+{
+  "scope": "Static literal references; generated and interactive loading require the browser audit",
+  "designCount": 35,
+  "checkedReferences": 1148,
+  "missingCount": 0,
+  "designs": [
+    {
+      "id": 1,
+      "name": "Marigold Bhavan",
+      "url": "/previews/marigold-bhavan/",
+      "checkedReferences": 20,
+      "assets": [
+        "assets/preview-paper-grain.svg",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/b587e9bbe83a2164e63b707e.woff2",
+        "previews/_shared/f514bf32a396ed41137c6bdd.woff",
+        "previews/demo-guard.js",
+        "previews/marigold-bhavan/assets/index-2d1L6cXj.js",
+        "previews/marigold-bhavan/assets/styles-DJO19CfA.css",
+        "previews/marigold-bhavan/editable/assets/couple.webp",
+        "previews/marigold-bhavan/editable/assets/footer-bg.jpg",
+        "previews/marigold-bhavan/editable/assets/map.jpg",
+        "previews/marigold-bhavan/editable/wedding-data.js",
+        "previews/marigold-bhavan/external/fonts.googleapis.com/css2-abe2d3246c.css",
+        "previews/marigold-bhavan/external/fonts.gstatic.com/s/josefinsans/v34/Qw3aZQNVED7rKGKxtqIqX5EkD3Z_dH0.woff2",
+        "previews/marigold-bhavan/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Marigold Bhavan",
+        "decoded": 4,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 3,
+      "name": "Toran Telugu",
+      "url": "/previews/toran-telugu/",
+      "checkedReferences": 30,
+      "assets": [
+        "assets/preview-paper-grain.svg",
+        "previews/_shared/137fc096f5e7235ad569d8af.woff2",
+        "previews/_shared/17f7c699cf11ee00b1134e92.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/toran-telugu/assets/index-BmbkA8aA.js",
+        "previews/toran-telugu/assets/styles-BgdVW63E.css",
+        "previews/toran-telugu/editable/assets/couple-1.jpg",
+        "previews/toran-telugu/editable/assets/couple-2.jpg",
+        "previews/toran-telugu/editable/assets/couple-3.jpg",
+        "previews/toran-telugu/editable/assets/couple-4.jpg",
+        "previews/toran-telugu/editable/assets/gopuram.webp",
+        "previews/toran-telugu/editable/assets/hero-flatlay.jpg",
+        "previews/toran-telugu/editable/assets/jasmine-strand.webp",
+        "previews/toran-telugu/editable/wedding-data.js",
+        "previews/toran-telugu/external/fonts.googleapis.com/css2-a70786b470.css",
+        "previews/toran-telugu/external/fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1_PZJEZG-e9gHhdI4-NBbfd2ys3SjJCx1sztrpLpI.woff2",
+        "previews/toran-telugu/favicon.ico"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Toran Telugu",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 5,
+      "name": "Shubha Vivaham",
+      "url": "/previews/shubha-vivaham/",
+      "checkedReferences": 17,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/_shared/fb658f6d3a09dfa881b0cae7.woff2",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/shubha-vivaham/assets/artwork/shubha-vivaham/assets/banana-leaves.webp",
+        "previews/shubha-vivaham/assets/artwork/shubha-vivaham/assets/bg-texture.webp",
+        "previews/shubha-vivaham/assets/artwork/shubha-vivaham/assets/footer-overlay.webp",
+        "previews/shubha-vivaham/assets/artwork/shubha-vivaham/assets/og-image.jpg",
+        "previews/shubha-vivaham/assets/artwork/shubha-vivaham/assets/toran-top.webp",
+        "previews/shubha-vivaham/assets/index-B2yKB5Bb.css",
+        "previews/shubha-vivaham/assets/index-D4tjOMjU.js",
+        "previews/shubha-vivaham/editable/assets/couple.webp",
+        "previews/shubha-vivaham/editable/wedding-data.js",
+        "previews/shubha-vivaham/external/fonts.googleapis.com/css2-1836f8b6f7.css"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Shubha Vivaham",
+        "decoded": 6,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 6,
+      "name": "Kalyana Mandapam",
+      "url": "/previews/kalyana-mandapam/",
+      "checkedReferences": 13,
+      "assets": [
+        "previews/demo-guard.js",
+        "previews/kalyana-mandapam/assets/index-BcS--ptf.js",
+        "previews/kalyana-mandapam/assets/index-yVHCWpVH.css",
+        "previews/kalyana-mandapam/assets/texture-bg.webp",
+        "previews/kalyana-mandapam/editable/assets/couple.webp",
+        "previews/kalyana-mandapam/editable/assets/garland-top.webp",
+        "previews/kalyana-mandapam/editable/assets/mandap-footer.webp",
+        "previews/kalyana-mandapam/editable/wedding-data.js",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Kalyana Mandapam",
+        "decoded": 4,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 7,
+      "name": "Sage Parchment",
+      "url": "/previews/sage-parchment/",
+      "checkedReferences": 32,
+      "assets": [
+        "assets/preview-jaali.svg",
+        "previews/_shared/137fc096f5e7235ad569d8af.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/sage-parchment/assets/artwork/sage-parchment/og-image.jpg",
+        "previews/sage-parchment/assets/artwork/sage-parchment/src/assets/hero-arch.jpg",
+        "previews/sage-parchment/assets/index-FTKWP6I9.js",
+        "previews/sage-parchment/assets/styles-DHpdJjWo.css",
+        "previews/sage-parchment/editable/assets/footer-floral.jpg",
+        "previews/sage-parchment/editable/assets/gate-panel.jpg",
+        "previews/sage-parchment/editable/assets/hero-arch.jpg",
+        "previews/sage-parchment/editable/assets/lotus.webp",
+        "previews/sage-parchment/editable/assets/map-preview.jpg",
+        "previews/sage-parchment/editable/assets/story-1.jpg",
+        "previews/sage-parchment/editable/assets/story-2.jpg",
+        "previews/sage-parchment/editable/assets/story-3.jpg",
+        "previews/sage-parchment/editable/wedding-data.js",
+        "previews/sage-parchment/external/fonts.googleapis.com/css2-5f7e6dc2f6.css",
+        "previews/sage-parchment/favicon.ico"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Sage Parchment",
+        "decoded": 11,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 29,
+      "name": "Seashell Vows",
+      "url": "/previews/seashell-vows/",
+      "checkedReferences": 43,
+      "assets": [
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/f514bf32a396ed41137c6bdd.woff",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/seashell-vows/assets/artwork/seashell-vows/src/assets/bougainvillea-divider.webp",
+        "previews/seashell-vows/assets/artwork/seashell-vows/src/assets/floral-spray.webp",
+        "previews/seashell-vows/assets/artwork/seashell-vows/src/assets/lantern-constellation.webp",
+        "previews/seashell-vows/assets/artwork/seashell-vows/src/assets/opener-frames/lantern-reveal-first.webp",
+        "previews/seashell-vows/assets/artwork/seashell-vows/src/assets/watercolor-lantern.webp",
+        "previews/seashell-vows/assets/footer-wash-DG1rtX_C.jpg",
+        "previews/seashell-vows/assets/index-B9M5EMSq.js",
+        "previews/seashell-vows/assets/routes-CfpvyV9Z.js",
+        "previews/seashell-vows/assets/styles-CbBzkN6m.css",
+        "previews/seashell-vows/assets/venue-map-Wf_iSDI1.jpg",
+        "previews/seashell-vows/editable/assets/couple-walking.webp",
+        "previews/seashell-vows/editable/assets/footer-wash-DG1rtX_C.jpg",
+        "previews/seashell-vows/editable/assets/hero-arch.jpg",
+        "previews/seashell-vows/editable/assets/rings-seashell-vignette.webp",
+        "previews/seashell-vows/editable/assets/venue-map-Wf_iSDI1.jpg",
+        "previews/seashell-vows/editable/assets/wedding-opener.mp4",
+        "previews/seashell-vows/editable/wedding-data.js",
+        "previews/seashell-vows/external/fonts.googleapis.com/css2-6476c501f8.css",
+        "previews/seashell-vows/external/fonts.googleapis.com/css2-86ad40e56c.css",
+        "previews/seashell-vows/external/fonts.gstatic.com/s/petitformalscript/v19/B50TF6xQr2TXJBnGOFME6u5OR83oRP5qoHzqOYgY.woff2"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Seashell Vows",
+        "decoded": 12,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/seashell-vows/editable/assets/wedding-opener.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Emerald Nikah",
+      "url": "/previews/emerald-nikah/",
+      "checkedReferences": 34,
+      "assets": [
+        "previews/_shared/04a9d9d65ffd962c9cd30cc8.woff2",
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/17f7c699cf11ee00b1134e92.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6b6e5a32d44e6f4eac874be6.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/_shared/c2dfa37eb5cf904a534d0c63.woff2",
+        "previews/demo-guard.js",
+        "previews/emerald-nikah/assets/index-BFujBVD8.js",
+        "previews/emerald-nikah/assets/styles-BBCSj1GG.css",
+        "previews/emerald-nikah/editable/assets/bride.jpg",
+        "previews/emerald-nikah/editable/assets/daisies.webp",
+        "previews/emerald-nikah/editable/assets/divider.webp",
+        "previews/emerald-nikah/editable/assets/groom.jpg",
+        "previews/emerald-nikah/editable/assets/hero-bg.jpg",
+        "previews/emerald-nikah/editable/assets/mandala.webp",
+        "previews/emerald-nikah/editable/assets/map.jpg",
+        "previews/emerald-nikah/editable/assets/roses.webp",
+        "previews/emerald-nikah/editable/wedding-data.js",
+        "previews/emerald-nikah/external/fonts.googleapis.com/css2-e60879549b.css",
+        "previews/emerald-nikah/external/fonts.gstatic.com/s/amiri/v30/J7afnpd8CGxBHpUrtLMS7JNK.woff2",
+        "previews/emerald-nikah/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Emerald Nikah",
+        "decoded": 9,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 9,
+      "name": "Noor-e-Zahra",
+      "url": "/previews/noor-e-zahra/",
+      "checkedReferences": 31,
+      "assets": [
+        "previews/_shared/04a9d9d65ffd962c9cd30cc8.woff2",
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/137fc096f5e7235ad569d8af.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6b6e5a32d44e6f4eac874be6.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/_shared/fb658f6d3a09dfa881b0cae7.woff2",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/noor-e-zahra/assets/index-DJiECBMo.js",
+        "previews/noor-e-zahra/assets/styles-oy5_5gfv.css",
+        "previews/noor-e-zahra/editable/assets/bride.jpg",
+        "previews/noor-e-zahra/editable/assets/floral-corner.webp",
+        "previews/noor-e-zahra/editable/assets/gold-flourish.webp",
+        "previews/noor-e-zahra/editable/assets/groom.jpg",
+        "previews/noor-e-zahra/editable/assets/mandala.webp",
+        "previews/noor-e-zahra/editable/assets/masjid.webp",
+        "previews/noor-e-zahra/editable/assets/paper-texture.jpg",
+        "previews/noor-e-zahra/editable/wedding-data.js",
+        "previews/noor-e-zahra/external/fonts.googleapis.com/css2-e45b5c1357.css",
+        "previews/noor-e-zahra/favicon.ico"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Noor-e-Zahra",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 10,
+      "name": "Royal Reception",
+      "url": "/previews/royal-reception/",
+      "checkedReferences": 29,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/royal-reception/assets/index-v0zxlr5R.js",
+        "previews/royal-reception/assets/styles-k_wyScDq.css",
+        "previews/royal-reception/editable/assets/bride.webp",
+        "previews/royal-reception/editable/assets/butterfly.webp",
+        "previews/royal-reception/editable/assets/couple-hero.webp",
+        "previews/royal-reception/editable/assets/groom.webp",
+        "previews/royal-reception/editable/assets/lotus-cluster.webp",
+        "previews/royal-reception/editable/assets/mandala-texture.jpg",
+        "previews/royal-reception/editable/assets/map-preview.jpg",
+        "previews/royal-reception/editable/assets/swirl-band.webp",
+        "previews/royal-reception/editable/wedding-data.js",
+        "previews/royal-reception/external/fonts.googleapis.com/css2-9facd44c61.css",
+        "previews/royal-reception/favicon.ico"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Royal Reception",
+        "decoded": 9,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 11,
+      "name": "Kerala Sands",
+      "url": "/previews/kerala-sands/",
+      "checkedReferences": 23,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/demo-guard.js",
+        "previews/kerala-sands/assets/artwork/kerala-sands/images/floral-corner.webp",
+        "previews/kerala-sands/assets/artwork/kerala-sands/images/garland.webp",
+        "previews/kerala-sands/assets/artwork/kerala-sands/images/mandala-texture.jpg",
+        "previews/kerala-sands/assets/index-cdc8IQTD.js",
+        "previews/kerala-sands/assets/styles-xl0qPzWF.css",
+        "previews/kerala-sands/editable/assets/bride.webp",
+        "previews/kerala-sands/editable/assets/couple-hero.webp",
+        "previews/kerala-sands/editable/assets/groom.webp",
+        "previews/kerala-sands/editable/assets/map-preview.jpg",
+        "previews/kerala-sands/editable/wedding-data.js",
+        "previews/kerala-sands/external/fonts.googleapis.com/css2-7e2498fbed.css",
+        "previews/kerala-sands/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Kerala Sands",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 12,
+      "name": "Meadow Nikah",
+      "url": "/previews/meadow-nikah/",
+      "checkedReferences": 36,
+      "assets": [
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/demo-guard.js",
+        "previews/meadow-nikah/assets/index-DF9DML25.js",
+        "previews/meadow-nikah/assets/styles-DX-39EG5.css",
+        "previews/meadow-nikah/editable/assets/ChatGPT Image Aug 12, 2026 at 11_08_45 PM.webp",
+        "previews/meadow-nikah/editable/assets/bride.jpg",
+        "previews/meadow-nikah/editable/assets/gallery-1.jpg",
+        "previews/meadow-nikah/editable/assets/gallery-2.jpg",
+        "previews/meadow-nikah/editable/assets/gallery-3.jpg",
+        "previews/meadow-nikah/editable/assets/gallery-4.jpg",
+        "previews/meadow-nikah/editable/assets/gallery-5.jpg",
+        "previews/meadow-nikah/editable/assets/gallery-6.jpg",
+        "previews/meadow-nikah/editable/assets/groom.jpg",
+        "previews/meadow-nikah/editable/assets/hero.jpg",
+        "previews/meadow-nikah/editable/assets/map.jpg",
+        "previews/meadow-nikah/editable/wedding-data.js",
+        "previews/meadow-nikah/external/fonts.googleapis.com/css2-12dbab0da7.css",
+        "previews/meadow-nikah/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Meadow Nikah",
+        "decoded": 12,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/meadow-nikah/editable/assets/Continuous_wedding_invitation_an\u2026_202608122343.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Grand Line Voyage",
+      "url": "/previews/grand-line-voyage/",
+      "checkedReferences": 44,
+      "assets": [
+        "previews/_shared/c2dfa37eb5cf904a534d0c63.woff2",
+        "previews/_shared/d6e7b967ce89a09508c7243f.woff2",
+        "previews/_shared/fb658f6d3a09dfa881b0cae7.woff2",
+        "previews/demo-guard.js",
+        "previews/grand-line-voyage/assets/artwork/grand-line-voyage/op-coin.webp",
+        "previews/grand-line-voyage/assets/artwork/grand-line-voyage/op-deck-texture.png",
+        "previews/grand-line-voyage/assets/artwork/grand-line-voyage/op-log-pose.webp",
+        "previews/grand-line-voyage/assets/artwork/grand-line-voyage/op-treasure-chest.webp",
+        "previews/grand-line-voyage/assets/index-BIrKTpvw.js",
+        "previews/grand-line-voyage/assets/styles-CtT-Ivkq.css",
+        "previews/grand-line-voyage/editable/assets/op-bride.webp",
+        "previews/grand-line-voyage/editable/assets/op-couple-panel.webp",
+        "previews/grand-line-voyage/editable/assets/op-groom.webp",
+        "previews/grand-line-voyage/editable/assets/op-hero-ship.webp",
+        "previews/grand-line-voyage/editable/assets/op-map-v1.webp",
+        "previews/grand-line-voyage/editable/wedding-data.js",
+        "previews/grand-line-voyage/external/fonts.googleapis.com/css2-71c8d3c756.css",
+        "previews/grand-line-voyage/external/fonts.googleapis.com/css2-b1e778a487.css",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/cinzeldecorative/v19/daaHSScvJGqLYhG8nNt8KPPswUAPniZQa-lGQzaLlA.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbEeiVmf-2fW7A.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbEyjlmf-2fW7A.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbF6iFmf-2fW7A.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbFmi1mf-2fW7A.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/mukta/v17/iJWHBXyXfDDVXbFqj1mf-2fW7A.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/mukta/v17/iJWKBXyXfDDVXYnDp3uS0Q.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/plusjakartasans/v12/LDIoaomQNQcsA88c7O9yZ4KMCoOg4Jo02SuCgQ.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/titanone/v17/mFTzWbsGxbbS_J5cQcjyljIh2Eo.woff2",
+        "previews/grand-line-voyage/external/fonts.gstatic.com/s/yatraone/v16/C8ch4copsHzj8p7NaF0xxlOHbRE.woff2",
+        "previews/grand-line-voyage/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Grand Line Voyage",
+        "decoded": 10,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 14,
+      "name": "Ghibli Selfie",
+      "url": "/previews/ghibli-selfie/",
+      "checkedReferences": 26,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/demo-guard.js",
+        "previews/ghibli-selfie/assets/index-D-DATC24.js",
+        "previews/ghibli-selfie/assets/styles-BZkC9aYC.css",
+        "previews/ghibli-selfie/editable/assets/bouquet.webp",
+        "previews/ghibli-selfie/editable/assets/butterfly.webp",
+        "previews/ghibli-selfie/editable/assets/cloud-a.webp",
+        "previews/ghibli-selfie/editable/assets/couple.webp",
+        "previews/ghibli-selfie/editable/assets/gramophone.webp",
+        "previews/ghibli-selfie/editable/assets/mosque.webp",
+        "previews/ghibli-selfie/editable/assets/petal.webp",
+        "previews/ghibli-selfie/editable/wedding-data.js",
+        "previews/ghibli-selfie/external/fonts.googleapis.com/css2-afefae8748.css",
+        "previews/ghibli-selfie/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Ghibli Selfie",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 15,
+      "name": "Ghibli Portrait",
+      "url": "/previews/ghibli-portrait/",
+      "checkedReferences": 38,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/demo-guard.js",
+        "previews/ghibli-portrait/assets/index-DLKeitWv.css",
+        "previews/ghibli-portrait/assets/index-Dmcb-76g.js",
+        "previews/ghibli-portrait/editable/assets/body-bride.webp",
+        "previews/ghibli-portrait/editable/assets/body-groom.webp",
+        "previews/ghibli-portrait/editable/assets/childhood-bride.webp",
+        "previews/ghibli-portrait/editable/assets/childhood-groom.webp",
+        "previews/ghibli-portrait/editable/assets/family-bride.webp",
+        "previews/ghibli-portrait/editable/assets/family-groom.webp",
+        "previews/ghibli-portrait/editable/assets/gallery-1.webp",
+        "previews/ghibli-portrait/editable/assets/gallery-2.webp",
+        "previews/ghibli-portrait/editable/assets/gallery-3.webp",
+        "previews/ghibli-portrait/editable/assets/gallery-4.webp",
+        "previews/ghibli-portrait/editable/assets/gallery-5.webp",
+        "previews/ghibli-portrait/editable/assets/gallery-6.webp",
+        "previews/ghibli-portrait/editable/assets/portrait-bride.webp",
+        "previews/ghibli-portrait/editable/assets/portrait-groom.webp",
+        "previews/ghibli-portrait/editable/wedding-data.js",
+        "previews/ghibli-portrait/external/fonts.googleapis.com/css2-ee1adbc530.css",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Ghibli Portrait",
+        "decoded": 14,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 17,
+      "name": "Ivory Waltz",
+      "url": "/previews/ivory-waltz/",
+      "checkedReferences": 24,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/_shared/d6e7b967ce89a09508c7243f.woff2",
+        "previews/demo-guard.js",
+        "previews/ivory-waltz/assets/index-mGGyI97A.js",
+        "previews/ivory-waltz/assets/index-pQKWR5sE.css",
+        "previews/ivory-waltz/editable/assets/hero-composite.jpg",
+        "previews/ivory-waltz/editable/assets/layer-01-background.webp",
+        "previews/ivory-waltz/editable/assets/layer-02-shadows.webp",
+        "previews/ivory-waltz/editable/assets/layer-03-groom.webp",
+        "previews/ivory-waltz/editable/assets/layer-04-bride.webp",
+        "previews/ivory-waltz/editable/assets/layer-05-bouquet.webp",
+        "previews/ivory-waltz/editable/assets/layer-couple.webp",
+        "previews/ivory-waltz/editable/wedding-data.js",
+        "previews/ivory-waltz/external/fonts.googleapis.com/css2-73b569e721.css",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Ivory Waltz",
+        "decoded": 7,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 18,
+      "name": "Ever After Bloom",
+      "url": "/previews/ever-after-bloom/",
+      "checkedReferences": 69,
+      "assets": [
+        "previews/_shared/137fc096f5e7235ad569d8af.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/_shared/b3a7f6bf92650f3e875ad32f.woff2",
+        "previews/demo-guard.js",
+        "previews/ever-after-bloom/assets/index-09N2lWIL.js",
+        "previews/ever-after-bloom/assets/routes-RO7ZGgkY.js",
+        "previews/ever-after-bloom/assets/styles-DMO58HcY.css",
+        "previews/ever-after-bloom/editable/assets/bougainvillea.webp",
+        "previews/ever-after-bloom/editable/assets/couple-lanterns.webp",
+        "previews/ever-after-bloom/editable/assets/garden-courtyard.jpg",
+        "previews/ever-after-bloom/editable/assets/gold-flourish.webp",
+        "previews/ever-after-bloom/editable/assets/hero-palace.jpg",
+        "previews/ever-after-bloom/editable/assets/invite-open.mp4",
+        "previews/ever-after-bloom/editable/assets/invite-seal.webp",
+        "previews/ever-after-bloom/editable/assets/lantern.webp",
+        "previews/ever-after-bloom/editable/assets/map-plate.jpg",
+        "previews/ever-after-bloom/editable/assets/portrait-bride.jpg",
+        "previews/ever-after-bloom/editable/assets/portrait-groom.jpg",
+        "previews/ever-after-bloom/editable/assets/scene-balcony.jpg",
+        "previews/ever-after-bloom/editable/assets/scene-dancing.jpg",
+        "previews/ever-after-bloom/editable/assets/scene-hands.jpg",
+        "previews/ever-after-bloom/editable/assets/scene-walking.jpg",
+        "previews/ever-after-bloom/editable/assets/sunset-sky.jpg",
+        "previews/ever-after-bloom/editable/assets/wedding-car.webp",
+        "previews/ever-after-bloom/editable/wedding-data.js",
+        "previews/ever-after-bloom/external/fonts.googleapis.com/css2-062b797faa.css",
+        "previews/ever-after-bloom/external/fonts.googleapis.com/css2-7b506d0618.css",
+        "previews/ever-after-bloom/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Ever After Bloom",
+        "decoded": 17,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/ever-after-bloom/editable/assets/invite-open.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 19,
+      "name": "Saga of Love",
+      "url": "/previews/saga-of-love/",
+      "checkedReferences": 28,
+      "assets": [
+        "previews/_shared/137fc096f5e7235ad569d8af.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/saga-of-love/assets/artwork/saga-of-love/og-image.jpg",
+        "previews/saga-of-love/assets/index-CwGDgeeH.js",
+        "previews/saga-of-love/assets/jaali-CjkqZpoD.webp",
+        "previews/saga-of-love/assets/lotus-lCFuqOQX.webp",
+        "previews/saga-of-love/assets/styles-CyopAWIO.css",
+        "previews/saga-of-love/editable/assets/footer-floral.webp",
+        "previews/saga-of-love/editable/assets/gate-panel.webp",
+        "previews/saga-of-love/editable/assets/hero-arch.webp",
+        "previews/saga-of-love/editable/assets/map-preview.webp",
+        "previews/saga-of-love/editable/assets/story-1.webp",
+        "previews/saga-of-love/editable/assets/story-2.webp",
+        "previews/saga-of-love/editable/assets/story-3.webp",
+        "previews/saga-of-love/external/fonts.googleapis.com/css2-5f7e6dc2f6.css",
+        "previews/saga-of-love/favicon.ico"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Saga of Love",
+        "decoded": 11,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 30,
+      "name": "Lantern Madurai",
+      "url": "/previews/lantern-madurai/",
+      "checkedReferences": 20,
+      "assets": [
+        "previews/_shared/b3a7f6bf92650f3e875ad32f.woff2",
+        "previews/_shared/b587e9bbe83a2164e63b707e.woff2",
+        "previews/demo-guard.js",
+        "previews/lantern-madurai/assets/index-BEdYU7DH.css",
+        "previews/lantern-madurai/assets/index-C-L_hRfU.js",
+        "previews/lantern-madurai/editable/assets/aarav-ananya-opening.mp4",
+        "previews/lantern-madurai/editable/assets/entrance-first-frame.webp",
+        "previews/lantern-madurai/editable/assets/haldi-mehendi.webp",
+        "previews/lantern-madurai/editable/assets/invitation-reference.webp",
+        "previews/lantern-madurai/editable/assets/og-aarav-ananya.webp",
+        "previews/lantern-madurai/editable/wedding-data.js",
+        "previews/lantern-madurai/external/fonts.googleapis.com/css2-b4b7f1b684.css",
+        "previews/lantern-madurai/external/fonts.gstatic.com/s/italiana/v21/QldNNTtLsx4E__B0XTmUY3tWxg.woff2",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Lantern Madurai",
+        "decoded": 4,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/lantern-madurai/editable/assets/aarav-ananya-opening.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 31,
+      "name": "Lotus Leaf Bengaluru",
+      "url": "/previews/lotus-leaf-bengaluru/",
+      "checkedReferences": 21,
+      "assets": [
+        "previews/_shared/036f74a716b3b07b93d28c34.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/demo-guard.js",
+        "previews/lotus-leaf-bengaluru/assets/index-DLpsKpIv.js",
+        "previews/lotus-leaf-bengaluru/assets/index-Fwiizu_u.css",
+        "previews/lotus-leaf-bengaluru/editable/assets/aarav-ananya-hero.webp",
+        "previews/lotus-leaf-bengaluru/editable/assets/aarav-ananya-og.jpg",
+        "previews/lotus-leaf-bengaluru/editable/assets/aarav-ananya-story.webp",
+        "previews/lotus-leaf-bengaluru/editable/assets/flow-first-frame.webp",
+        "previews/lotus-leaf-bengaluru/editable/assets/sm.mp4",
+        "previews/lotus-leaf-bengaluru/editable/wedding-data.js",
+        "previews/lotus-leaf-bengaluru/external/fonts.googleapis.com/css2-01da2f8115.css",
+        "previews/lotus-leaf-bengaluru/external/fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5wDDOjNk9IfqxUQ.woff",
+        "previews/lotus-leaf-bengaluru/external/fonts.gstatic.com/s/italianno/v18/dg4n_p3sv6gCJkwzT6RnipYvQwI.woff2",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Lotus Leaf Bengaluru",
+        "decoded": 4,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/lotus-leaf-bengaluru/editable/assets/sm.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 21,
+      "name": "Rajwada Royale \u2013 Alt",
+      "url": "/previews/rajwada-royale/",
+      "checkedReferences": 73,
+      "assets": [
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-400-normal-CVFrM67f.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-400-normal-DD2KOZkl.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-500-normal-CyAY5ZLS.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-500-normal-DkJXBcIH.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-600-italic-Bp4BYShX.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-600-italic-DP5iIMI9.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-ext-400-normal-DLdKLAvx.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-ext-400-normal-W3Dto7M0.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-ext-500-normal-Yta7XZ9C.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-ext-500-normal-lsPpqi9g.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-ext-600-italic-Vv_u9p1E.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-cyrillic-ext-600-italic-o1-A_FsB.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-400-normal-B-1hWBU7.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-400-normal-B7YtguxJ.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-500-normal-BsRWmXhO.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-500-normal-zIXX3Q-H.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-600-italic-BcJbkSJ4.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-600-italic-DCuhXWyK.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-ext-400-normal-Drx2k2n9.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-ext-400-normal-uvC0WHQr.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-ext-500-normal-CH1kM7og.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-ext-500-normal-DYeaGGzO.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-ext-600-italic-CcucBqPp.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-latin-ext-600-italic-DYtrqAWE.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-vietnamese-400-normal-4uxlocMh.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-vietnamese-400-normal-6K-YXo6g.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-vietnamese-500-normal-BZGLGj12.woff2",
+        "previews/rajwada-royale/assets/cormorant-garamond-vietnamese-500-normal-DqXqCC0q.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-vietnamese-600-italic-Bdap-eNg.woff",
+        "previews/rajwada-royale/assets/cormorant-garamond-vietnamese-600-italic-C3DTNE_9.woff2",
+        "previews/rajwada-royale/assets/index-BrMSd8jH.js",
+        "previews/rajwada-royale/assets/karla-latin-ext-wght-normal-Dq0rrjgs.woff2",
+        "previews/rajwada-royale/assets/karla-latin-wght-normal-C3-ma4ov.woff2",
+        "previews/rajwada-royale/assets/marcellus-latin-400-normal-86dSXJnk.woff2",
+        "previews/rajwada-royale/assets/marcellus-latin-400-normal-AvMY561b.woff",
+        "previews/rajwada-royale/assets/marcellus-latin-ext-400-normal-D06jIo1e.woff",
+        "previews/rajwada-royale/assets/marcellus-latin-ext-400-normal-DkjSXVBo.woff2",
+        "previews/rajwada-royale/assets/paper-BIWUKCos.webp",
+        "previews/rajwada-royale/assets/styles-D75Ml1pI.css",
+        "previews/rajwada-royale/editable/assets/ambient-shehnai.mp3",
+        "previews/rajwada-royale/editable/assets/couple.webp",
+        "previews/rajwada-royale/editable/assets/door-panel.webp",
+        "previews/rajwada-royale/editable/assets/floral-corner.webp",
+        "previews/rajwada-royale/editable/assets/footer-floral.jpg",
+        "previews/rajwada-royale/editable/assets/gallery-1.jpg",
+        "previews/rajwada-royale/editable/assets/gallery-2.jpg",
+        "previews/rajwada-royale/editable/assets/gallery-3.jpg",
+        "previews/rajwada-royale/editable/assets/gallery-4.jpg",
+        "previews/rajwada-royale/editable/assets/garland.webp",
+        "previews/rajwada-royale/editable/assets/lantern.webp",
+        "previews/rajwada-royale/editable/assets/story-1.jpg",
+        "previews/rajwada-royale/editable/assets/story-2.jpg",
+        "previews/rajwada-royale/editable/assets/story-3.jpg",
+        "previews/rajwada-royale/editable/wedding-data.js",
+        "previews/rajwada-royale/favicon.ico"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Rajwada Royale \u2013 Alt",
+        "decoded": 15,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/rajwada-royale/editable/assets/ambient-shehnai.mp3",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "32.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 22,
+      "name": "Rajmahal Palace",
+      "url": "/previews/rajmahal-palace/",
+      "checkedReferences": 23,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/rajmahal-palace/assets/artwork/rajmahal-palace/assets/og-image.jpg",
+        "previews/rajmahal-palace/assets/index-DnBXbGkD.css",
+        "previews/rajmahal-palace/assets/index-OIk1B1Dk.js",
+        "previews/rajmahal-palace/editable/assets/couple.webp",
+        "previews/rajmahal-palace/editable/assets/diya.webp",
+        "previews/rajmahal-palace/editable/assets/footer-garland.webp",
+        "previews/rajmahal-palace/editable/assets/ganesha.webp",
+        "previews/rajmahal-palace/editable/assets/hero-bg.webp",
+        "previews/rajmahal-palace/editable/assets/mandala.webp",
+        "previews/rajmahal-palace/editable/wedding-data.js",
+        "previews/rajmahal-palace/external/fonts.googleapis.com/css2-07365ea972.css"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Rajmahal Palace",
+        "decoded": 7,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 23,
+      "name": "Midnight Stargaze",
+      "url": "/previews/midnight-stargaze/",
+      "checkedReferences": 21,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/demo-guard.js",
+        "previews/midnight-stargaze/assets/artwork/midnight-stargaze/assets/garland-top.webp",
+        "previews/midnight-stargaze/assets/artwork/midnight-stargaze/assets/mandala.webp",
+        "previews/midnight-stargaze/assets/artwork/midnight-stargaze/assets/navy-texture.webp",
+        "previews/midnight-stargaze/assets/index-3-78T76B.css",
+        "previews/midnight-stargaze/assets/index-B7GbZwnv.js",
+        "previews/midnight-stargaze/assets/lantern.webp",
+        "previews/midnight-stargaze/editable/assets/couple.webp",
+        "previews/midnight-stargaze/editable/assets/ganesha.webp",
+        "previews/midnight-stargaze/editable/assets/venue-palace.webp",
+        "previews/midnight-stargaze/editable/wedding-data.js",
+        "previews/midnight-stargaze/external/fonts.googleapis.com/css2-07365ea972.css",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Midnight Stargaze",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 24,
+      "name": "Petal Path Palace",
+      "url": "/previews/petal-path-palace/",
+      "checkedReferences": 31,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/_shared/d6e7b967ce89a09508c7243f.woff2",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/petal-path-palace/assets/index-B-yBjE0R.css",
+        "previews/petal-path-palace/assets/index-CxJ6pamB.js",
+        "previews/petal-path-palace/editable/assets/01-arch-frame.webp",
+        "previews/petal-path-palace/editable/assets/02-foreground-guests.webp",
+        "previews/petal-path-palace/editable/assets/03-couple.webp",
+        "previews/petal-path-palace/editable/assets/04-garden-guests.webp",
+        "previews/petal-path-palace/editable/assets/05-sky-palace.webp",
+        "previews/petal-path-palace/editable/assets/intro-veil.webp",
+        "previews/petal-path-palace/editable/assets/source-full.webp",
+        "previews/petal-path-palace/external/fonts.googleapis.com/css2-73b569e721.css",
+        "previews/petal-path-palace/favicon.ico"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Petal Path Palace",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 25,
+      "name": "Lakeview Lanterns",
+      "url": "/previews/lakeview-lanterns/",
+      "checkedReferences": 19,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/_shared/d6e7b967ce89a09508c7243f.woff2",
+        "previews/demo-guard.js",
+        "previews/lakeview-lanterns/assets/artwork/lakeview-lanterns/assets/layers/lantern-sprite.webp",
+        "previews/lakeview-lanterns/assets/artwork/lakeview-lanterns/assets/reference.webp",
+        "previews/lakeview-lanterns/assets/index-BTbTLFfy.js",
+        "previews/lakeview-lanterns/assets/index-ohagFVcT.css",
+        "previews/lakeview-lanterns/editable/assets/hero-couple-v2.webp",
+        "previews/lakeview-lanterns/editable/assets/hero-lakeview-teal-v1.webp",
+        "previews/lakeview-lanterns/editable/assets/opener-diya-v1.webp",
+        "previews/lakeview-lanterns/editable/wedding-data.js",
+        "previews/lakeview-lanterns/external/fonts.googleapis.com/css2-73b569e721.css",
+        "previews/lakeview-lanterns/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Lakeview Lanterns",
+        "decoded": 6,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 26,
+      "name": "Moonlit Lotus Barge",
+      "url": "/previews/moonlit-lotus-barge/",
+      "checkedReferences": 31,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/_shared/d6e7b967ce89a09508c7243f.woff2",
+        "previews/demo-guard.js",
+        "previews/moonlit-lotus-barge/assets/artwork/moonlit-lotus-barge/assets/lotus/diya.webp",
+        "previews/moonlit-lotus-barge/assets/artwork/moonlit-lotus-barge/assets/lotus/floating-petals.webp",
+        "previews/moonlit-lotus-barge/assets/artwork/moonlit-lotus-barge/assets/lotus/foreground-lotus.webp",
+        "previews/moonlit-lotus-barge/assets/artwork/moonlit-lotus-barge/assets/lotus/lotus-mandap.webp",
+        "previews/moonlit-lotus-barge/assets/artwork/moonlit-lotus-barge/assets/lotus/ornamental-frame.webp",
+        "previews/moonlit-lotus-barge/assets/index-BDbVLStM.js",
+        "previews/moonlit-lotus-barge/assets/index-D3Yo6peG.css",
+        "previews/moonlit-lotus-barge/assets/lotus/intro-journey.mp4",
+        "previews/moonlit-lotus-barge/editable/assets/barge.webp",
+        "previews/moonlit-lotus-barge/editable/assets/couple.webp",
+        "previews/moonlit-lotus-barge/editable/assets/intro-end.webp",
+        "previews/moonlit-lotus-barge/editable/assets/intro-poster.webp",
+        "previews/moonlit-lotus-barge/editable/assets/sky.webp",
+        "previews/moonlit-lotus-barge/editable/assets/social-card.webp",
+        "previews/moonlit-lotus-barge/editable/assets/water-palace.webp",
+        "previews/moonlit-lotus-barge/editable/wedding-data.js",
+        "previews/moonlit-lotus-barge/external/fonts.googleapis.com/css2-73b569e721.css",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Moonlit Lotus Barge",
+        "decoded": 14,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/moonlit-lotus-barge/assets/lotus/intro-journey.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 864,
+                "height": 1536
+              }
+            ],
+            "format": {
+              "duration": "3.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 27,
+      "name": "Ganesha Gopuram",
+      "url": "/previews/ganesha-gopuram/",
+      "checkedReferences": 24,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/6de859eacb98d8ee22df7925.woff",
+        "previews/_shared/d6e7b967ce89a09508c7243f.woff2",
+        "previews/demo-guard.js",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/butterflies-sprite.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/cover-welcome.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/family-welcome-card.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/ganesha-icon.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/layer-01-backdrop.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/layer-02-toran.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/layer-03-props.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/layers/layer-04-gold-frame.webp",
+        "previews/ganesha-gopuram/assets/artwork/ganesha-gopuram/assets/reference.webp",
+        "previews/ganesha-gopuram/assets/index-H7dJ6ZK0.js",
+        "previews/ganesha-gopuram/assets/index-XMeAJffG.css",
+        "previews/ganesha-gopuram/editable/assets/video/intro.mp4",
+        "previews/ganesha-gopuram/editable/assets/video/poster.png",
+        "previews/ganesha-gopuram/editable/wedding-data.js",
+        "previews/ganesha-gopuram/external/fonts.googleapis.com/css2-73b569e721.css",
+        "previews/ganesha-gopuram/favicon.ico",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Ganesha Gopuram",
+        "decoded": 11,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/ganesha-gopuram/editable/assets/video/intro.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1080
+              }
+            ],
+            "format": {
+              "duration": "8.041667"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 28,
+      "name": "Wax Seal Royale",
+      "url": "/previews/wax-seal-royale/",
+      "checkedReferences": 74,
+      "assets": [
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/fonts/Amiri-Bold.woff",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/fonts/BeauRivage-Regular.woff",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/fonts/SourceSans3-Regular.woff",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/623915249_2629494717_1.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/623915249_2629494717_2.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/623915249_2629494717_3.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/623915249_2629494717_4.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/ChatGPT_Image_May_25.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/noroot_1.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/noroot_10.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/noroot_12.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/noroot_2.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/noroot_3.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/rose_-_Copy.webp",
+        "previews/wax-seal-royale/assets/artwork/wax-seal-royale/images/cdn/rose_-_Copy_1.webp",
+        "previews/wax-seal-royale/css/custom.css",
+        "previews/wax-seal-royale/css/fonts.css",
+        "previews/wax-seal-royale/css/tilda-animation-2.0.min.css",
+        "previews/wax-seal-royale/css/tilda-blocks-page155232023.min-4d5d6fdfae.css",
+        "previews/wax-seal-royale/css/tilda-forms-1.0.min.css",
+        "previews/wax-seal-royale/css/tilda-grid-3.0.min.css",
+        "previews/wax-seal-royale/css/tilda-popup-1.1.min.css",
+        "previews/wax-seal-royale/editable/assets/1782224012851.mp4",
+        "previews/wax-seal-royale/editable/assets/ChatGPT Image Jun 23, 2026, 04_40_29 PM.webp",
+        "previews/wax-seal-royale/editable/assets/Einaudi_ Divenire (1) (1).mp3",
+        "previews/wax-seal-royale/editable/assets/Swans2.mov",
+        "previews/wax-seal-royale/editable/wedding-data.js",
+        "previews/wax-seal-royale/fonts/ArticaPro.woff",
+        "previews/wax-seal-royale/fonts/Canela-Light-Trial.woff",
+        "previews/wax-seal-royale/fonts/GT_Super_Display_Lig.woff",
+        "previews/wax-seal-royale/fonts/ImperialScript-Regul.woff",
+        "previews/wax-seal-royale/fonts/Ovo-Regular.woff2",
+        "previews/wax-seal-royale/fonts/ReemKufi-Regular.woff2",
+        "previews/wax-seal-royale/fonts/Rufina-Bold.woff",
+        "previews/wax-seal-royale/fonts/Rufina-Regular.woff",
+        "previews/wax-seal-royale/fonts/TheSilverEditorial-R.woff",
+        "previews/wax-seal-royale/fonts/decotype-thuluth-reg.woff",
+        "previews/wax-seal-royale/fonts/google/cinzel-latin-ext.woff2",
+        "previews/wax-seal-royale/fonts/google/cinzel-latin.woff2",
+        "previews/wax-seal-royale/fonts/google/ovo-latin.woff2",
+        "previews/wax-seal-royale/images/cdn/Rectangle_270.svg",
+        "previews/wax-seal-royale/images/cdn/acomm-decor.webp",
+        "previews/wax-seal-royale/images/cdn/left-element_1.webp",
+        "previews/wax-seal-royale/images/cdn/local-favicon.svg",
+        "previews/wax-seal-royale/images/cdn/noroot.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_11.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_13.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_14.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_4.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_5.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_6.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_7.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_8.webp",
+        "previews/wax-seal-royale/images/cdn/noroot_9.webp",
+        "previews/wax-seal-royale/images/cdn/right-element_1.webp",
+        "previews/wax-seal-royale/js/tilda-animation-2.0.min.js",
+        "previews/wax-seal-royale/js/tilda-animation-sbs-1.0.min.js",
+        "previews/wax-seal-royale/js/tilda-blocks-page155232023.min-4d5d6fdfae.js",
+        "previews/wax-seal-royale/js/tilda-events-1.0.min.js",
+        "previews/wax-seal-royale/js/tilda-fallback-1.0.min.js",
+        "previews/wax-seal-royale/js/tilda-forms-1.0.min.js",
+        "previews/wax-seal-royale/js/tilda-lazyload-1.0.min.js",
+        "previews/wax-seal-royale/js/tilda-polyfill-1.0.min.js",
+        "previews/wax-seal-royale/js/tilda-popup-1.0.min.js",
+        "previews/wax-seal-royale/js/tilda-scripts-3.0.min.js",
+        "previews/wax-seal-royale/js/tilda-zero-1.1.min.js",
+        "previews/wax-seal-royale/js/tilda-zero-scale-1.0.min.js"
+      ],
+      "missing": [],
+      "externalDependencies": [
+        "https://neo.tildacdn.com/js/tilda-fallback-advanced-1.0.min.js",
+        "https://www.google.com/recaptcha/api.js?render=explicit"
+      ],
+      "rasterValidation": {
+        "name": "Wax Seal Royale",
+        "decoded": 28,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/wax-seal-royale/editable/assets/1782224012851.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "6.016000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "previews/wax-seal-royale/editable/assets/Swans2.mov",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "previews/wax-seal-royale/editable/assets/Einaudi_ Divenire (1) (1).mp3",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "326.281429"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 32,
+      "name": "Diya Haveli",
+      "url": "/previews/diya-haveli/",
+      "checkedReferences": 32,
+      "assets": [
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/b3a7f6bf92650f3e875ad32f.woff2",
+        "previews/demo-guard.js",
+        "previews/diya-haveli/assets/artwork/diya-haveli/last_frame.jpeg",
+        "previews/diya-haveli/assets/artwork/diya-haveli/r1.webp",
+        "previews/diya-haveli/assets/artwork/diya-haveli/r2.webp",
+        "previews/diya-haveli/assets/artwork/diya-haveli/r3.webp",
+        "previews/diya-haveli/assets/index-NkhRmeND.js",
+        "previews/diya-haveli/assets/routes-B4KIa_IW.js",
+        "previews/diya-haveli/assets/styles-MquUU_rN.css",
+        "previews/diya-haveli/editable/assets/lotus.mp4",
+        "previews/diya-haveli/editable/assets/openr.mp4",
+        "previews/diya-haveli/editable/assets/palace-courtyard.jpg",
+        "previews/diya-haveli/editable/assets/story-beginning.jpg",
+        "previews/diya-haveli/editable/assets/story-first-meeting.jpg",
+        "previews/diya-haveli/editable/assets/story-question.jpg",
+        "previews/diya-haveli/editable/assets/wedding-hands.jpg",
+        "previews/diya-haveli/editable/wedding-data.js",
+        "previews/diya-haveli/external/fonts.googleapis.com/css2-048a8066a0.css",
+        "previews/diya-haveli/external/fonts.googleapis.com/css2-2e4c37bdb7.css",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Diya Haveli",
+        "decoded": 9,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/diya-haveli/editable/assets/lotus.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "previews/diya-haveli/editable/assets/openr.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              },
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 1172,
+                "height": 1764
+              }
+            ],
+            "format": {
+              "duration": "5.085170"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 33,
+      "name": "Gilded Hall",
+      "url": "/previews/gilded-hall/",
+      "checkedReferences": 38,
+      "assets": [
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/b3a7f6bf92650f3e875ad32f.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/demo-guard.js",
+        "previews/gilded-hall/assets/index-Dosgw5rC.js",
+        "previews/gilded-hall/assets/routes-CK47TV5P.js",
+        "previews/gilded-hall/assets/styles-B1fytZJn.css",
+        "previews/gilded-hall/editable/assets/couple.mp4",
+        "previews/gilded-hall/editable/assets/cover.webp",
+        "previews/gilded-hall/editable/assets/divider.webp",
+        "previews/gilded-hall/editable/assets/floral.webp",
+        "previews/gilded-hall/editable/assets/hall.webp",
+        "previews/gilded-hall/editable/assets/intro.mp4",
+        "previews/gilded-hall/editable/assets/petals.webp",
+        "previews/gilded-hall/editable/wedding-data.js",
+        "previews/gilded-hall/external/fonts.googleapis.com/css2-3c9e6a6ae3.css",
+        "previews/gilded-hall/external/fonts.googleapis.com/css2-fde818cf20.css",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Gilded Hall",
+        "decoded": 5,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/gilded-hall/editable/assets/couple.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "previews/gilded-hall/editable/assets/intro.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              },
+              {
+                "codec_name": "aac",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 34,
+      "name": "Slide to Shaadi",
+      "url": "/previews/slide-to-shaadi/",
+      "checkedReferences": 24,
+      "assets": [
+        "previews/_shared/036f74a716b3b07b93d28c34.woff2",
+        "previews/_shared/481075f7235bcb130b16eaf7.woff2",
+        "previews/_shared/c0972d8823201eb0c79f486f.woff2",
+        "previews/demo-guard.js",
+        "previews/names.js",
+        "previews/slide-to-shaadi/assets/index-AcQTVbCu.js",
+        "previews/slide-to-shaadi/assets/routes-BWCofe85.js",
+        "previews/slide-to-shaadi/assets/styles-DP1slGf3.css",
+        "previews/slide-to-shaadi/editable/assets/couple-avatar.jpg",
+        "previews/slide-to-shaadi/editable/assets/ornament-divider.jpg",
+        "previews/slide-to-shaadi/editable/assets/wedding-lockscreen.jpg",
+        "previews/slide-to-shaadi/editable/wedding-data.js",
+        "previews/slide-to-shaadi/external/fonts.googleapis.com/css2-c91799fb12.css",
+        "previews/slide-to-shaadi/external/fonts.googleapis.com/css2-fa6ab76fc3.css"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Slide to Shaadi",
+        "decoded": 3,
+        "errors": []
+      },
+      "mediaValidation": []
+    },
+    {
+      "id": 16,
+      "name": "Lake Pichola Royal",
+      "url": "/previews/lake-pichola-royal/",
+      "checkedReferences": 72,
+      "assets": [
+        "previews/_shared/136c898af910211c3881fba9.woff2",
+        "previews/_shared/3f54f524331ab6fc477d6b88.woff2",
+        "previews/_shared/fb658f6d3a09dfa881b0cae7.woff2",
+        "previews/demo-guard.js",
+        "previews/lake-pichola-royal/assets/audio/indian-flute-and-sitar.mp3",
+        "previews/lake-pichola-royal/assets/fonts/nuFRD-vYSZviVYUb_rj3ij__anPXDTnCjmHKM4nYO7KN_qiTbtXK-F2qC0s.woff",
+        "previews/lake-pichola-royal/assets/fonts/nuFiD-vYSZviVYUb_rj3ij__anPXPT7Sh2E-.woff2",
+        "previews/lake-pichola-royal/assets/images/event_mehendi.jpg",
+        "previews/lake-pichola-royal/assets/images/event_reception.jpg",
+        "previews/lake-pichola-royal/assets/images/event_sangeet.jpg",
+        "previews/lake-pichola-royal/assets/images/event_vivah.jpg",
+        "previews/lake-pichola-royal/assets/images/hero_twilight.jpg",
+        "previews/lake-pichola-royal/assets/images/royal-couple.jpg",
+        "previews/lake-pichola-royal/content/wedding-data.js",
+        "previews/lake-pichola-royal/scripts/calendar.js",
+        "previews/lake-pichola-royal/scripts/card-tilt.js",
+        "previews/lake-pichola-royal/scripts/countdown.js",
+        "previews/lake-pichola-royal/scripts/details.js",
+        "previews/lake-pichola-royal/scripts/dock.js",
+        "previews/lake-pichola-royal/scripts/effects.js",
+        "previews/lake-pichola-royal/scripts/footer.js",
+        "previews/lake-pichola-royal/scripts/gallery.js",
+        "previews/lake-pichola-royal/scripts/hero.js",
+        "previews/lake-pichola-royal/scripts/icons.js",
+        "previews/lake-pichola-royal/scripts/itinerary-ics.js",
+        "previews/lake-pichola-royal/scripts/itinerary.js",
+        "previews/lake-pichola-royal/scripts/main.js",
+        "previews/lake-pichola-royal/scripts/navbar.js",
+        "previews/lake-pichola-royal/scripts/reveal.js",
+        "previews/lake-pichola-royal/scripts/vendor/confetti.js",
+        "previews/lake-pichola-royal/sections/countdown.js",
+        "previews/lake-pichola-royal/sections/details.js",
+        "previews/lake-pichola-royal/sections/dock.js",
+        "previews/lake-pichola-royal/sections/footer.js",
+        "previews/lake-pichola-royal/sections/gallery.js",
+        "previews/lake-pichola-royal/sections/hero.js",
+        "previews/lake-pichola-royal/sections/itinerary.js",
+        "previews/lake-pichola-royal/sections/navbar.js",
+        "previews/lake-pichola-royal/sections/story.js",
+        "previews/lake-pichola-royal/styles/base.css",
+        "previews/lake-pichola-royal/styles/fonts.css",
+        "previews/lake-pichola-royal/styles/responsive.css",
+        "previews/lake-pichola-royal/styles/theme.css",
+        "previews/lake-pichola-royal/styles/utilities.css",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Lake Pichola Royal",
+        "decoded": 6,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "previews/lake-pichola-royal/assets/audio/indian-flute-and-sitar.mp3",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "147.226094"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "Magnolia Reverie",
+      "url": "/dearly/aubergine-magnolia/?studio-preview=1",
+      "checkedReferences": 27,
+      "assets": [
+        "dearly/aubergine-magnolia/assets/botanical.webp",
+        "dearly/aubergine-magnolia/assets/dearly.svg",
+        "dearly/aubergine-magnolia/assets/envelope-first.webp",
+        "dearly/aubergine-magnolia/assets/envelope-last.webp",
+        "dearly/aubergine-magnolia/assets/hero-first.webp",
+        "dearly/aubergine-magnolia/assets/motion-sprig.webp",
+        "dearly/aubergine-magnolia/assets/timeline-flower.webp",
+        "dearly/aubergine-magnolia/css/invitation.css",
+        "dearly/aubergine-magnolia/css/typography.css",
+        "dearly/aubergine-magnolia/fonts/Cormorant-Medium.ttf",
+        "dearly/aubergine-magnolia/fonts/Cormorant-Regular.ttf",
+        "dearly/aubergine-magnolia/fonts/Cormorant-Semibold.ttf",
+        "dearly/aubergine-magnolia/fonts/ImperialScript.woff",
+        "dearly/aubergine-magnolia/fonts/Parisienne-Regular.ttf",
+        "dearly/aubergine-magnolia/js/invitation.js",
+        "dearly/aubergine-magnolia/js/motion.js",
+        "dearly/aubergine-magnolia/js/rsvp.js",
+        "dearly/aubergine-magnolia/js/themes.js",
+        "dearly/aubergine-magnolia/media/hero-poster.webp",
+        "dearly/aubergine-magnolia/media/hero.mp4",
+        "dearly/aubergine-magnolia/media/music.mp3",
+        "dearly/aubergine-magnolia/media/opening-poster.webp",
+        "dearly/aubergine-magnolia/media/opening.mp4",
+        "dearly/aubergine-magnolia/wedding-data.js",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Magnolia Reverie",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "dearly/aubergine-magnolia/media/opening.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "6.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/aubergine-magnolia/media/music.mp3",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "71.392653"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/aubergine-magnolia/media/hero.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 36,
+      "name": "Golden Camellia",
+      "url": "/dearly/cinnamon-camellia/?studio-preview=1",
+      "checkedReferences": 27,
+      "assets": [
+        "dearly/cinnamon-camellia/assets/botanical.webp",
+        "dearly/cinnamon-camellia/assets/dearly.svg",
+        "dearly/cinnamon-camellia/assets/envelope-first.webp",
+        "dearly/cinnamon-camellia/assets/envelope-last.webp",
+        "dearly/cinnamon-camellia/assets/hero-first.webp",
+        "dearly/cinnamon-camellia/assets/motion-sprig.webp",
+        "dearly/cinnamon-camellia/assets/timeline-flower.webp",
+        "dearly/cinnamon-camellia/css/invitation.css",
+        "dearly/cinnamon-camellia/css/typography.css",
+        "dearly/cinnamon-camellia/fonts/Cormorant-Medium.ttf",
+        "dearly/cinnamon-camellia/fonts/Cormorant-Regular.ttf",
+        "dearly/cinnamon-camellia/fonts/Cormorant-Semibold.ttf",
+        "dearly/cinnamon-camellia/fonts/ImperialScript.woff",
+        "dearly/cinnamon-camellia/fonts/Parisienne-Regular.ttf",
+        "dearly/cinnamon-camellia/js/invitation.js",
+        "dearly/cinnamon-camellia/js/motion.js",
+        "dearly/cinnamon-camellia/js/rsvp.js",
+        "dearly/cinnamon-camellia/js/themes.js",
+        "dearly/cinnamon-camellia/media/hero-poster.webp",
+        "dearly/cinnamon-camellia/media/hero.mp4",
+        "dearly/cinnamon-camellia/media/music.mp3",
+        "dearly/cinnamon-camellia/media/opening-poster.webp",
+        "dearly/cinnamon-camellia/media/opening.mp4",
+        "dearly/cinnamon-camellia/wedding-data.js",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Golden Camellia",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "dearly/cinnamon-camellia/media/opening.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "6.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/cinnamon-camellia/media/music.mp3",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "72.024014"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/cinnamon-camellia/media/hero.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 37,
+      "name": "Something Blue",
+      "url": "/dearly/cobalt-iris/?studio-preview=1",
+      "checkedReferences": 27,
+      "assets": [
+        "dearly/cobalt-iris/assets/botanical.webp",
+        "dearly/cobalt-iris/assets/dearly.svg",
+        "dearly/cobalt-iris/assets/envelope-first.webp",
+        "dearly/cobalt-iris/assets/envelope-last.webp",
+        "dearly/cobalt-iris/assets/hero-first.webp",
+        "dearly/cobalt-iris/assets/motion-sprig.webp",
+        "dearly/cobalt-iris/assets/timeline-flower.webp",
+        "dearly/cobalt-iris/css/invitation.css",
+        "dearly/cobalt-iris/css/typography.css",
+        "dearly/cobalt-iris/fonts/Cormorant-Medium.ttf",
+        "dearly/cobalt-iris/fonts/Cormorant-Regular.ttf",
+        "dearly/cobalt-iris/fonts/Cormorant-Semibold.ttf",
+        "dearly/cobalt-iris/fonts/ImperialScript.woff",
+        "dearly/cobalt-iris/fonts/Parisienne-Regular.ttf",
+        "dearly/cobalt-iris/js/invitation.js",
+        "dearly/cobalt-iris/js/motion.js",
+        "dearly/cobalt-iris/js/rsvp.js",
+        "dearly/cobalt-iris/js/themes.js",
+        "dearly/cobalt-iris/media/hero-poster.webp",
+        "dearly/cobalt-iris/media/hero.mp4",
+        "dearly/cobalt-iris/media/music.mp3",
+        "dearly/cobalt-iris/media/opening-poster.webp",
+        "dearly/cobalt-iris/media/opening.mp4",
+        "dearly/cobalt-iris/wedding-data.js",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "Something Blue",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "dearly/cobalt-iris/media/opening.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "6.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/cobalt-iris/media/music.mp3",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "75.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/cobalt-iris/media/hero.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    },
+    {
+      "id": 38,
+      "name": "The Dahlia Garden",
+      "url": "/dearly/petrol-dahlia/?studio-preview=1",
+      "checkedReferences": 27,
+      "assets": [
+        "dearly/petrol-dahlia/assets/botanical.webp",
+        "dearly/petrol-dahlia/assets/dearly.svg",
+        "dearly/petrol-dahlia/assets/envelope-first.webp",
+        "dearly/petrol-dahlia/assets/envelope-last.webp",
+        "dearly/petrol-dahlia/assets/hero-first.webp",
+        "dearly/petrol-dahlia/assets/motion-sprig.webp",
+        "dearly/petrol-dahlia/assets/timeline-flower.webp",
+        "dearly/petrol-dahlia/css/invitation.css",
+        "dearly/petrol-dahlia/css/typography.css",
+        "dearly/petrol-dahlia/fonts/Cormorant-Medium.ttf",
+        "dearly/petrol-dahlia/fonts/Cormorant-Regular.ttf",
+        "dearly/petrol-dahlia/fonts/Cormorant-Semibold.ttf",
+        "dearly/petrol-dahlia/fonts/ImperialScript.woff",
+        "dearly/petrol-dahlia/fonts/Parisienne-Regular.ttf",
+        "dearly/petrol-dahlia/js/invitation.js",
+        "dearly/petrol-dahlia/js/motion.js",
+        "dearly/petrol-dahlia/js/rsvp.js",
+        "dearly/petrol-dahlia/js/themes.js",
+        "dearly/petrol-dahlia/media/hero-poster.webp",
+        "dearly/petrol-dahlia/media/hero.mp4",
+        "dearly/petrol-dahlia/media/music.mp3",
+        "dearly/petrol-dahlia/media/opening-poster.webp",
+        "dearly/petrol-dahlia/media/opening.mp4",
+        "dearly/petrol-dahlia/wedding-data.js",
+        "previews/names.js"
+      ],
+      "missing": [],
+      "externalDependencies": [],
+      "rasterValidation": {
+        "name": "The Dahlia Garden",
+        "decoded": 8,
+        "errors": []
+      },
+      "mediaValidation": [
+        {
+          "path": "dearly/petrol-dahlia/media/opening.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "6.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/petrol-dahlia/media/music.mp3",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "mp3",
+                "codec_type": "audio"
+              }
+            ],
+            "format": {
+              "duration": "75.000000"
+            }
+          },
+          "error": ""
+        },
+        {
+          "path": "dearly/petrol-dahlia/media/hero.mp4",
+          "valid": true,
+          "details": {
+            "programs": [],
+            "stream_groups": [],
+            "streams": [
+              {
+                "codec_name": "h264",
+                "codec_type": "video",
+                "width": 720,
+                "height": 1280
+              }
+            ],
+            "format": {
+              "duration": "8.000000"
+            }
+          },
+          "error": ""
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "date": "2026-10-09",
+    "rasterImagesDecoded": 318,
+    "rasterImageFailures": 0,
+    "audioVideoFilesChecked": 28,
+    "audioVideoFailures": 0,
+    "referencedFontHeadersChecked": 107,
+    "fontFailures": 0,
+    "javascriptFilesParsed": 122,
+    "cloudflareDryRun": "passed",
+    "browserVerification": "pending: local static server execution approval was unavailable",
+    "liveDeployment": "not performed"
+  }
+}

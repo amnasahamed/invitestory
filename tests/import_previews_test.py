@@ -12,6 +12,7 @@ module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
 sys.path.insert(0, str(Path(__file__).parents[1] / 'tools'))
 from stage_local_previews import repair_archived_exports, repair_optional_dependencies
+from localize_preview_media import localize
 
 
 class Response(io.BytesIO):
@@ -22,6 +23,22 @@ class Response(io.BytesIO):
 
 
 class ImporterTests(unittest.TestCase):
+    def test_local_artwork_paths_preserve_bytes_and_relative_references(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            image = root / 'external/media.invitestory.in/example/flower.webp'
+            image.parent.mkdir(parents=True)
+            image.write_bytes(b'original artwork')
+            (root / 'index.html').write_text('<img src="external/media.invitestory.in/example/flower.webp">')
+            (root / 'style.css').write_text('background:url(../external/media.invitestory.in/example/flower.webp)')
+            (root / 'import-report.json').write_text('{"source":"external/media.invitestory.in/example/flower.webp"}')
+            self.assertEqual(localize(root), 1)
+            self.assertEqual((root / 'assets/artwork/example/flower.webp').read_bytes(), b'original artwork')
+            self.assertIn('assets/artwork/example/flower.webp', (root / 'index.html').read_text())
+            self.assertIn('../assets/artwork/example/flower.webp', (root / 'style.css').read_text())
+            self.assertIn('external/media.invitestory.in/', (root / 'import-report.json').read_text())
+            self.assertEqual(localize(root), 0)
+
     def test_editable_data_namespace_preserves_vendor_function(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder) / 'example'
