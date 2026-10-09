@@ -53,3 +53,17 @@ test('controller navigation crosses collection boundaries and wraps',()=>{
   assert.equal(f.controller.adjacent(catalogue,3,1).id,1);
   assert.equal(f.controller.adjacent(catalogue,1,-1).id,3);
 });
+
+test('mobile starts compact, expands optional tools, and resets when closed',()=>{
+  const f=fixture();f.controller.open(f.design('a'));
+  assert.equal(f.modal.classList.contains('is-details-hidden'),true);
+  assert.equal(f.toggle.textContent,'More options');
+  f.controller.toggleControls();
+  assert.equal(f.modal.classList.contains('is-details-hidden'),false);
+  f.controller.open(f.design('b'));
+  assert.equal(f.controller.state().collapsed,false);
+  f.controller.close();f.controller.open(f.design('a'));
+  assert.equal(f.modal.classList.contains('is-details-hidden'),true);
+  f.mobile.matches=false;f.controller.renderControls();
+  assert.equal(f.modal.classList.contains('is-details-hidden'),false);
+});

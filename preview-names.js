@@ -11,7 +11,7 @@
   let applied={};
   try {applied=JSON.parse(sessionStorage.getItem(key))||{};}catch{}
   first.value=applied.first||'';second.value=applied.second||'';
-  function sync(){const personalized=Boolean(applied.first||applied.second);edit.textContent=personalized?'Edit names':'Try your names';reset.hidden=!personalized;skip.textContent=personalized?'Keep current names':'Skip for now';}
+  function sync(){const personalized=Boolean(applied.first||applied.second);edit.textContent=personalized?'Edit names':'Add your names';reset.hidden=!personalized;skip.textContent=personalized?'Keep current names':'Skip for now';}
   function dismiss(){dialog.close();edit.focus({preventScroll:true});}
   function open(){if(dialog.open)return;sync();dialog.showModal();first.focus({preventScroll:true});}
   function reload(){if(typeof PreviewController!=='undefined' && PreviewController){PreviewController.retry();return;}const frame=document.getElementById('preview-modal-iframe');if(frame?.getAttribute('src') && frame.getAttribute('src')!=='about:blank')frame.src=frame.src;}

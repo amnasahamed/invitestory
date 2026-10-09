@@ -1285,12 +1285,8 @@ function updateTierNavCounts() {
   });
 }
 
-// --- Render Catalogue Items as Premium Full-Bleed Image Cards ---
-function renderCatalogue() {
-  if (!templatesGrid) return;
-  updateTierNavCounts();
-
-  let filtered = TEMPLATE_DATABASE.filter(item => {
+function getFilteredTemplates() {
+  return TEMPLATE_DATABASE.filter(item => {
     if (activeTierFilter !== 0 && item.tier !== activeTierFilter) return false;
     if (activeTagFilter !== "all" && !item.tags.includes(activeTagFilter)) return false;
     if (searchQuery.trim() !== "") {
@@ -1302,6 +1298,14 @@ function renderCatalogue() {
     }
     return true;
   });
+}
+
+// --- Render Catalogue Items as Premium Full-Bleed Image Cards ---
+function renderCatalogue() {
+  if (!templatesGrid) return;
+  updateTierNavCounts();
+
+  let filtered = getFilteredTemplates();
   if (typeof getDiscoveryDesigns === "function") filtered = getDiscoveryDesigns(filtered);
   if (typeof renderDiscoveryStatus === "function") renderDiscoveryStatus(filtered.length);
 
@@ -1985,7 +1989,7 @@ function updatePaymentButtonsForCurrency() {
     const sheetPrice = document.getElementById("preview-sheet-price");
     const payLabel = document.getElementById("preview-pay-label");
     if (sheetPrice) sheetPrice.textContent = priceText;
-    if (payLabel) payLabel.textContent = `${document.body.classList.contains("atelier-home") ? "Review & book ·" : "Customize & Order —"} ${priceText}`;
+    if (payLabel) payLabel.textContent = `${document.body.classList.contains("atelier-home") ? "Choose design ·" : "Customize & Order —"} ${priceText}`;
   }
   const rzpBtn = document.getElementById("preview-instant-pay-btn");
   if (rzpBtn) {
@@ -2557,7 +2561,7 @@ function openPreview(id, updateUrl = true) {
   // Dual CTA labels: primary Pay, secondary Ask
   const payLabel = document.getElementById("preview-pay-label");
   if (payLabel) {
-    payLabel.textContent = `${document.body.classList.contains("atelier-home") ? "Review & book ·" : "Customize & Order —"} ${formatPrice(prices.priceINR, prices.priceUSD)}`;
+    payLabel.textContent = `${document.body.classList.contains("atelier-home") ? "Choose design ·" : "Customize & Order —"} ${formatPrice(prices.priceINR, prices.priceUSD)}`;
   }
   const askLabel = document.getElementById("preview-ask-label");
   if (askLabel) askLabel.textContent = "WhatsApp";

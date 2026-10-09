@@ -120,41 +120,38 @@
 .studio-home #preview-modal .preview-sheet-details .preview-collection-switcher {width:192px;}
 @media(max-width:360px){.studio-home #preview-modal .preview-sheet-details .preview-collection-switcher {width:180px;}}
 
-/* Mobile focus mode frees space without reloading the invitation. */
+/* Compact mobile dock: essentials stay visible; optional tools expand on request. */
 #preview-details-toggle { display:none; }
 @media(max-width:760px) {
   .studio-home #preview-modal .preview-modal-toolbar {
     display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center;
+    padding:8px 10px; gap:6px; border-radius:16px 16px 0 0;
   }
-  .studio-home #preview-modal :is(.preview-sheet-summary,.preview-secondary-actions,.interaction-preview-explore) { grid-column:1 / -1; }
+  .studio-home #preview-modal :is(.preview-sheet-summary,.preview-browse-controls,.preview-secondary-actions,.interaction-preview-explore) { grid-column:1 / -1; }
+  .studio-home #preview-modal .preview-sheet-summary { min-height:22px; }
+  .studio-home #preview-modal .preview-sheet-details { width:100%; }
+  .studio-home #preview-modal .preview-sheet-details h3 { font-size:14px; line-height:22px; }
+  .studio-home #preview-modal .preview-browse-controls {
+    position:static; inset:auto; width:100%; padding:0; border:0;
+    display:grid; grid-template-columns:44px minmax(0,1fr) minmax(64px,.65fr) 44px;
+    gap:6px; pointer-events:auto;
+  }
+  .studio-home #preview-modal .preview-browse-controls button { box-shadow:none; border-radius:10px; }
+  .studio-home #preview-modal .preview-browse-controls .preview-side-arrow { padding:0; }
+  .studio-home #preview-modal .preview-browse-controls .preview-side-arrow > span:not([aria-hidden]) { display:none; }
   .studio-home #preview-modal #preview-instant-pay-btn { grid-column:1; font-size:13px; gap:5px; min-width:0; padding-inline:10px; }
+  .studio-home #preview-modal #preview-instant-pay-btn > span[aria-hidden] { display:none; }
   .studio-home #preview-modal #preview-details-toggle {
     display:inline-flex; align-items:center; justify-content:center;
-    min-height:44px; padding:8px 10px; border:1px solid #ce9b6f;
-    border-radius:22px; background:#ffe0bf; color:#59351b;
-    font:600 12px var(--font-body); white-space:nowrap; cursor:pointer; touch-action:manipulation;
-    transition:background-color 180ms ease,border-color 180ms ease;
+    min-height:44px; padding:8px 10px; border:1px solid var(--invitation-border);
+    border-radius:10px; background:var(--invitation-surface); color:var(--invitation-ink);
+    font:500 12px var(--font-body); white-space:nowrap; cursor:pointer; touch-action:manipulation;
   }
-  .studio-home #preview-modal.is-open #preview-details-toggle { animation:preview-controls-hide-hop 4s ease-in-out 2; }
-  .studio-home #preview-modal #preview-details-toggle[aria-expanded='false'] { background:#ccebe3; color:#174c40; border-color:#78b3a3; }
-  .studio-home #preview-modal.is-open #preview-details-toggle[aria-expanded='false'] { animation-name:preview-controls-show-hop; }
-  .studio-home #preview-modal #preview-details-toggle:hover { border-color:currentColor; }
-  .studio-home #preview-modal #preview-details-toggle:active { animation:none; transform:translateY(1px); }
-  .studio-home #preview-modal.is-details-hidden :is(.preview-floating-controls,.preview-browse-controls,.preview-sheet-summary,.preview-secondary-actions,.interaction-preview-explore,.sales-preview-context,.preview-sheet-signoff) { display:none; }
+  .studio-home #preview-modal #preview-details-toggle:hover { background:var(--invitation-soft); }
+  .studio-home #preview-modal #preview-details-toggle:active { transform:translateY(1px); }
+  .studio-home #preview-modal.is-details-hidden :is(.preview-floating-controls,.preview-collection-switcher,.preview-secondary-actions,.interaction-preview-explore,.sales-preview-context,.preview-sheet-signoff) { display:none; }
   .studio-home #preview-modal.is-details-hidden .preview-top-controls { justify-content:flex-end; }
   .studio-home #preview-modal.is-details-hidden .preview-modal-panel { grid-template-rows:minmax(0,1fr) auto; }
-}
-/* A few small hops, then rest; changing state starts the cue again. */
-@keyframes preview-controls-hide-hop {
-  0%, 12%, 24%, 100% { transform:translateY(0); }
-  6% { transform:translateY(-4px); }
-  18% { transform:translateY(-2px); }
-}
-@keyframes preview-controls-show-hop {
-  0%, 12%, 24%, 100% { transform:translateY(0); }
-  6% { transform:translateY(-4px); }
-  18% { transform:translateY(-2px); }
-}
-@media(prefers-reduced-motion:reduce) {
-  .studio-home #preview-modal.is-open #preview-details-toggle[aria-expanded] { animation:none; transition:none; }
+  .studio-home #preview-modal:not(.is-details-hidden) .preview-sheet-details { flex-wrap:wrap; }
+  .studio-home #preview-modal:not(.is-details-hidden) .preview-sheet-details .preview-collection-switcher { width:100%; }
 }

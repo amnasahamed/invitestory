@@ -23,7 +23,7 @@ function createPreviewController(options) {
   const {frame, loader, modal, poster, baseURL, schedule=setTimeout, cancel=clearTimeout,
     reduced=()=>false, onResize=()=>{}, onStopLoading=()=>{}}=options;
   const listeners=new Set(), timers=new Set();
-  let current=null, version=0, phase='closed', collapsed=false, checkTimer=null;
+  let current=null, version=0, phase='closed', collapsed=Boolean(options.toggle), checkTimer=null;
   const quotes=['Every beautiful celebration begins with an invitation.',
     'Two hearts. A thousand memories. One beautiful beginning.',
     'A little glimpse of the day you will remember forever.',
@@ -38,7 +38,7 @@ function createPreviewController(options) {
   function renderControls(){
     const hidden=Boolean(options.mobile?.matches && collapsed);
     modal.classList.toggle('is-details-hidden',hidden);
-    if(options.toggle){options.toggle.textContent=hidden?'Show controls':'Hide controls';options.toggle.setAttribute('aria-expanded',String(!hidden));}
+    if(options.toggle){options.toggle.textContent=hidden?'More options':'Less options';options.toggle.setAttribute('aria-expanded',String(!hidden));options.toggle.setAttribute('aria-label',hidden?'More preview options: collections, sharing and help':'Show fewer preview options');}
     onResize();
   }
   function reveal(){
@@ -66,7 +66,7 @@ function createPreviewController(options) {
     if(attempt<120 && !checkTimer)checkTimer=later(()=>{checkTimer=null;check(attempt+1,externalLoaded);},250);
   }
   function open(item){
-    clearTimers();version++;current=item;setPhase('loading');
+    clearTimers();version++;current=item;setPhase('loading');renderControls();
     frame.classList.remove('is-loaded');loader.classList.remove('is-hidden');
     if(poster){
       poster.hidden=false;poster.classList.remove('is-ready');
@@ -94,7 +94,7 @@ function createPreviewController(options) {
   }
   function retry(){if(current)open(current);}
   function close(){
-    clearTimers();version++;current=null;setPhase('closed');collapsed=false;renderControls();
+    clearTimers();version++;current=null;setPhase('closed');collapsed=Boolean(options.toggle && options.mobile?.matches);renderControls();
     if(poster)poster.hidden=true;
     // Release animation/video memory promptly on phones; preserve the desktop
     // close transition. Reopening still invalidates this cleanup.
@@ -121,6 +121,18 @@ const PreviewController = (()=>{
     document.getElementById('phone-screen-viewport').appendChild(poster);
   }
   const mobile=window.matchMedia('(max-width: 760px)'), toggle=document.getElementById('preview-details-toggle');
+  // On phones, keep essential actions outside the artwork in the compact dock.
+  // Restore the existing desktop layout when the viewport grows.
+  const browse=modal.querySelector('.preview-browse-controls');
+  const toolbar=modal.querySelector('.preview-modal-toolbar');
+  const browseHome=browse ? document.createComment('Desktop browse controls') : null;
+  if(browseHome)browse.before(browseHome);
+  function positionBrowse(){
+    if(!toggle || !browse || !toolbar)return;
+    if(mobile.matches)toolbar.querySelector('.preview-sheet-summary').after(browse);
+    else browseHome.after(browse);
+  }
+  positionBrowse();
   const controller=createPreviewController({frame,modal,poster,mobile,toggle,
     loader:document.getElementById('preview-modal-loader'),baseURL:location.href,
     reduced:()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -129,7 +141,7 @@ const PreviewController = (()=>{
   frame.addEventListener('load',controller.loaded);
   poster?.querySelector('button').addEventListener('click',controller.retry);
   toggle?.addEventListener('click',controller.toggleControls);
-  mobile.addEventListener('change',controller.renderControls);
+  mobile.addEventListener('change',()=>{positionBrowse();controller.renderControls();});
   controller.renderControls();
   return controller;
 })();
