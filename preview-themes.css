@@ -120,23 +120,23 @@
 .studio-home #preview-modal .preview-sheet-details .preview-collection-switcher {width:192px;}
 @media(max-width:360px){.studio-home #preview-modal .preview-sheet-details .preview-collection-switcher {width:180px;}}
 
-/* Compact mobile dock: essentials stay visible; optional tools expand on request. */
+/* Mobile actions float over the artwork; optional tools expand in the compact footer. */
 #preview-details-toggle { display:none; }
 @media(max-width:760px) {
   .studio-home #preview-modal .preview-modal-toolbar {
     display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center;
     padding:8px 10px; gap:6px; border-radius:16px 16px 0 0;
   }
-  .studio-home #preview-modal :is(.preview-sheet-summary,.preview-browse-controls,.preview-secondary-actions,.interaction-preview-explore) { grid-column:1 / -1; }
+  .studio-home #preview-modal :is(.preview-sheet-summary,.preview-secondary-actions,.interaction-preview-explore) { grid-column:1 / -1; }
   .studio-home #preview-modal .preview-sheet-summary { min-height:22px; }
   .studio-home #preview-modal .preview-sheet-details { width:100%; }
   .studio-home #preview-modal .preview-sheet-details h3 { font-size:14px; line-height:22px; }
   .studio-home #preview-modal .preview-browse-controls {
-    position:static; inset:auto; width:100%; padding:0; border:0;
+    position:absolute; inset:auto 8px 8px; width:auto; padding:0; border:0;
     display:grid; grid-template-columns:44px minmax(0,1fr) minmax(64px,.65fr) 44px;
-    gap:6px; pointer-events:auto;
+    gap:6px; pointer-events:none;
   }
-  .studio-home #preview-modal .preview-browse-controls button { box-shadow:none; border-radius:10px; }
+  .studio-home #preview-modal .preview-browse-controls button { pointer-events:auto; box-shadow:0 3px 12px #00000018; border-radius:10px; }
   .studio-home #preview-modal .preview-browse-controls .preview-side-arrow { padding:0; }
   .studio-home #preview-modal .preview-browse-controls .preview-side-arrow > span:not([aria-hidden]) { display:none; }
   .studio-home #preview-modal #preview-instant-pay-btn { grid-column:1; font-size:13px; gap:5px; min-width:0; padding-inline:10px; }

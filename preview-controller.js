@@ -121,18 +121,6 @@ const PreviewController = (()=>{
     document.getElementById('phone-screen-viewport').appendChild(poster);
   }
   const mobile=window.matchMedia('(max-width: 760px)'), toggle=document.getElementById('preview-details-toggle');
-  // On phones, keep essential actions outside the artwork in the compact dock.
-  // Restore the existing desktop layout when the viewport grows.
-  const browse=modal.querySelector('.preview-browse-controls');
-  const toolbar=modal.querySelector('.preview-modal-toolbar');
-  const browseHome=browse ? document.createComment('Desktop browse controls') : null;
-  if(browseHome)browse.before(browseHome);
-  function positionBrowse(){
-    if(!toggle || !browse || !toolbar)return;
-    if(mobile.matches)toolbar.querySelector('.preview-sheet-summary').after(browse);
-    else browseHome.after(browse);
-  }
-  positionBrowse();
   const controller=createPreviewController({frame,modal,poster,mobile,toggle,
     loader:document.getElementById('preview-modal-loader'),baseURL:location.href,
     reduced:()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches,
@@ -141,7 +129,7 @@ const PreviewController = (()=>{
   frame.addEventListener('load',controller.loaded);
   poster?.querySelector('button').addEventListener('click',controller.retry);
   toggle?.addEventListener('click',controller.toggleControls);
-  mobile.addEventListener('change',()=>{positionBrowse();controller.renderControls();});
+  mobile.addEventListener('change',controller.renderControls);
   controller.renderControls();
   return controller;
 })();
