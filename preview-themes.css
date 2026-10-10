@@ -42,7 +42,10 @@
 
 /* Labeled viewer controls: viewing tools above, browsing actions in the footer. */
 .studio-home #preview-modal .preview-top-controls {
-  position:absolute; inset:8px 8px auto;
+  /* A modal sibling stays above the iframe and outside the scrolling panel. */
+  position:absolute; top:calc(max(8px, env(safe-area-inset-top)) + 8px);
+  left:max(24px, calc((100% - 464px) / 2), calc(env(safe-area-inset-left) + 8px));
+  right:max(24px, calc((100% - 464px) / 2), calc(env(safe-area-inset-right) + 8px));
   z-index:60; display:flex; align-items:center; justify-content:space-between; gap:12px;
   pointer-events:none;
 }
@@ -71,9 +74,13 @@
 .studio-home #preview-modal .preview-browse-controls #preview-favourite-btn[aria-pressed='true'] svg { fill:currentColor; }
 .studio-home #preview-modal .preview-modal-panel { position:relative; height:100%; max-height:100%; }
 @media (max-width:760px) {
-  .studio-home #preview-modal .preview-top-controls { left:8px; right:8px; gap:6px; }
+  .studio-home #preview-modal .preview-top-controls {
+    left:max(16px, calc((100% - 464px) / 2), calc(env(safe-area-inset-left) + 8px));
+    right:max(16px, calc((100% - 464px) / 2), calc(env(safe-area-inset-right) + 8px));
+    gap:6px;
+  }
   .studio-home #preview-modal .preview-top-controls .preview-floating-controls { gap:6px; }
-  .studio-home #preview-modal .preview-top-controls .preview-viewer-pill { padding:0 8px; }
+  .studio-home #preview-modal .preview-top-controls .preview-viewer-pill { position:absolute; top:52px; left:0; padding:0 8px; }
   .studio-home #preview-modal .preview-top-controls :is(.preview-expand-btn,.preview-modal-close) { padding:0 10px; gap:6px; }
   .studio-home #preview-modal .preview-modal-panel { max-height:100%; }
 }
@@ -149,8 +156,7 @@
   }
   .studio-home #preview-modal #preview-details-toggle:hover { background:var(--invitation-soft); }
   .studio-home #preview-modal #preview-details-toggle:active { transform:translateY(1px); }
-  .studio-home #preview-modal.is-details-hidden :is(.preview-floating-controls,.preview-collection-switcher,.preview-secondary-actions,.interaction-preview-explore,.sales-preview-context,.preview-sheet-signoff) { display:none; }
-  .studio-home #preview-modal.is-details-hidden .preview-top-controls { justify-content:flex-end; }
+  .studio-home #preview-modal.is-details-hidden :is(.preview-viewer-pill,.preview-collection-switcher,.preview-secondary-actions,.interaction-preview-explore,.sales-preview-context,.preview-sheet-signoff) { display:none; }
   .studio-home #preview-modal.is-details-hidden .preview-modal-panel { grid-template-rows:minmax(0,1fr) auto; }
   .studio-home #preview-modal:not(.is-details-hidden) .preview-sheet-details { flex-wrap:wrap; }
   .studio-home #preview-modal:not(.is-details-hidden) .preview-sheet-details .preview-collection-switcher { width:100%; }
