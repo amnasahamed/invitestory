@@ -291,3 +291,40 @@ test('preview performance events retain timing and outcome without personalized 
   assert.equal(event[2].preview_ready,false);assert.equal(event[2].exit_reason,'close');
   for(const key of ['first','phone','previewUrl'])assert.equal(key in event[2],false);
 });
+
+test('bespoke direct and delegated listeners count one click and preserve price metadata', () => {
+  const site = website();
+  site.elements.set('custom-modal', {classList:{add(){},remove(){}},setAttribute(){}});
+  const link = {id:'custom-modal-wa-btn', href:''};
+  site.elements.set('custom-modal-wa-btn', link);
+  site.elements.set('click-target', {closest: () => link});
+  site.run("currentCurrency = 'INR'; openCustomModal()");
+  link.onclick();
+  site.run("trackWhatsAppLinkClick({target:document.getElementById('click-target')})");
+  const events = site.calls.filter(c => c[0] === 'posthog');
+  assert.equal(events.length, 1);
+  assert.equal(events[0][2].cta_location, 'custom_modal');
+  assert.equal(events[0][2].value, 12000);
+  assert.equal(events[0][2].currency, 'INR');
+});
+
+test('delegation retains generic and inactive bespoke links and excludes floating tracking', () => {
+  const site = website();
+  const link = {id:'custom-modal-wa-btn',dataset:{},closest:()=>null,getAttribute:()=>null,innerText:'WhatsApp'};
+  site.elements.set('click-target', {closest:()=>link});
+  site.run("trackWhatsAppLinkClick({target:document.getElementById('click-target')})");
+  link.id = 'floating-whatsapp';
+  site.run("trackWhatsAppLinkClick({target:document.getElementById('click-target')})");
+  link.id = ''; link.dataset.ctaLocation = 'hero';
+  site.run("trackWhatsAppLinkClick({target:document.getElementById('click-target')})");
+  assert.deepEqual(site.calls.filter(c=>c[0]==='posthog').map(c=>c[2].cta_location), ['page_link','hero']);
+});
+
+test('explicit payment summary clicks have fixed metadata even without a receipt', () => {
+  const site = website();
+  site.run('sendDetailsOnWhatsApp()');
+  const event = site.calls.find(c=>c[0]==='posthog');
+  assert.equal(event[1], 'whatsapp_cta_clicked');
+  assert.equal(JSON.stringify(event[2]), JSON.stringify({source_event:'whatsapp_click',cta_location:'payment_success',destination:'whatsapp'}));
+  assert.equal(site.calls.filter(c=>c[0]==='open').length,1);
+});
