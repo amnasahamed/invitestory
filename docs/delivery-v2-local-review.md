@@ -1,5 +1,7 @@
 # Delivery v2: INR and USD implementation, unpublished
 
+> Historical implementation report. The later [staged release plan](delivery-staged-release.md) supersedes rollout/rollback, fresh-legacy rejection, inactive-UI and associated test-count statements below. [Production access evidence](delivery-production-access.md) records the remaining publication gates. Prior patches are preserved.
+
 Latest scope: user approved USD12 at double the existing USD24 fee, i.e. $18. All NEW versioned orders in both currencies use 48h standard, optional 24h (+799 INR / $9) or 12h (+1499 INR / $18). Dearly includes Email RSVP but no free expedited speed for new INR or USD purchases. Base prices and other offers are unchanged. The USD price question is resolved; publication remains held.
 
 Bases: website main 50a1dae241971030772a50fdb9e0a2025258e1b8; staff d46fb571396c886a164e89a1f983dc8e1a706f88; Dearly submodule 8422091867db8952f31e9571552e39c5642ea6aa. Earlier local commits f7c0aaa and 1dd5fab (website), 42973e8 (staff), and 0b68781 (Dearly), plus their existing patches, remain preserved. This report supersedes the earlier INR-only scope. Actual deployed-source equivalence is unverified. No applicable AGENTS.md was present in either repository.

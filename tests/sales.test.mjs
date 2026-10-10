@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
 function website() {
-  const elements = new Map();
+  const elements = new Map(['order-delivery-speeds','delivery-standard_48h','delivery-express_24h','delivery-express_12h'].map(id=>[id,{checked:id==='delivery-standard_48h'}]));
   const storage = new Map();
   const calls = [];
   const classList = { add() {}, remove() {}, contains() { return false; } };
@@ -17,6 +17,7 @@ function website() {
   };
   const window = { location, posthog: { capture: (...args) => calls.push(['posthog', ...args]) }, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
   const context = vm.createContext({ document, window, location, history: window.history, navigator: { userAgent: 'test', maxTouchPoints: 0 }, localStorage: store, sessionStorage: store, URL, URLSearchParams, console, setTimeout, clearTimeout, queueMicrotask });
+  vm.runInContext(readFileSync(new URL('../paid-order.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../scripts.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../sales.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../interactions.js', import.meta.url), 'utf8'), context);
@@ -356,5 +357,54 @@ test('USD versioned totals keep base and RSVP prices, charge one speed for all p
  for(const tier of [2,3,4])for(const [speed,fee,hours] of [['standard_48h',0,48],['express_24h',9,24],['express_12h',18,12]]){
   radio.value=speed;site.run(`orderDrawerState.tier=${tier};updateOrderDrawerTotal()`);
   assert.equal(site.run('orderDrawerState.total'),({2:29,3:45,4:75}[tier])+fee+(tier===4?0:24));assert.equal(site.run('deliveryHoursForOrder()'),hours);
+ }
+});
+
+test('staged legacy drawer retains reviewed Dearly terms when activation arrives during checkout', async()=>{
+ const site=website();site.run(`window.active=false;window.opens=0;showToast=()=>{};
+ window.InviteWebsite={deliveryV2Enabled:()=>window.active,legacyCheckoutEnabled:()=>true,ready:new Promise(r=>window.readyResolve=r),checkout:async request=>{window.sent=request;return {amount:7500,currency:'USD',orderId:'fixture',keyId:'fixture'};}};
+ var Razorpay=class {constructor(o){window.options=o;}on(){}open(){window.opens++;}};
+ currentCurrency='USD';orderDrawerState.tier=4;orderDrawerState.total=75;orderDeliveryContract=false;`);
+ const pending=site.run('proceedFromOrderDrawerToCheckout()');
+ site.run('window.active=true;window.readyResolve()');await pending;
+ assert.equal(site.run('window.opens'),1);assert.equal(site.run('window.sent.express'),true);
+ assert.equal(site.run('window.sent.checkoutVersion'),undefined);assert.equal(site.run('window.options.amount'),7500);
+});
+
+test('displayed v2 contract never falls back to legacy when availability is withdrawn', async()=>{
+ const site=website();site.run(`window.sent=0;window.opens=0;showToast=()=>{};orderDeliveryContract=true;
+ window.InviteWebsite={deliveryV2Enabled:()=>false,legacyCheckoutEnabled:()=>true,checkout:async()=>{window.sent++;}};
+ var Razorpay=class {on(){}open(){window.opens++;}};`);
+ await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.sent'),0);assert.equal(site.run('window.opens'),0);
+});
+
+test('marketing shows only legacy offers before capability activation',()=>{
+ const site=website();site.run('window.InviteWebsite={deliveryV2Enabled:()=>false}');
+ const old=site.run('packageComparison()');assert.doesNotMatch(old,/12h first draft/);assert.match(old,/<td>Within 24h<\/td>/);
+ site.run('window.InviteWebsite.deliveryV2Enabled=()=>true');const active=site.run('packageComparison()');assert.match(active,/12h first draft/);
+});
+
+test('partial runtime or DOM never exposes v2 offers',()=>{
+ for(const missing of ['sales','interactions','receipt','DOM']){
+  const site=website();site.run('window.InviteWebsite={deliveryV2Enabled:()=>true}');assert.equal(site.run('usesNewDelivery()'),true);
+  if(missing==='sales')site.run('delete window.deliverySalesVersion');
+  if(missing==='interactions')site.run('delete window.deliveryInteractionsVersion');
+  if(missing==='receipt')site.run('delete InvitePaidOrder.deliveryVersion');
+  if(missing==='DOM')site.elements.delete('delivery-express_12h');
+  assert.equal(site.run('usesNewDelivery()'),false,missing);
+ }
+});
+
+test('mixed receipt reader blocks saved v2 payment without touching its retry identity',async()=>{
+ const site=website();site.run(`window.requests=0;window.cleaned=0;showToast=()=>{};delete InvitePaidOrder.deliveryVersion;
+ window.InviteWebsite={pendingCheckouts:()=>[{clientKey:'saved-key',request:{checkoutVersion:2}}],resumeCheckout:async()=>{window.requests++;},paid:()=>window.cleaned++};`);
+ await site.run("resumeSavedCheckout('saved-key')");assert.equal(site.run('window.requests'),0);assert.equal(site.run('window.cleaned'),0);
+});
+
+test('old integration resolved secure capability preserves legacy checkout, but null response never opens unsigned payment',async()=>{
+ for(const secure of [true,false]){
+  const site=website();site.run(`window.opens=0;showToast=()=>{};window.InviteWebsite={ready:Promise.resolve({checkoutEnabled:true}),checkout:async()=>${secure?"({amount:199900,currency:'INR',orderId:'fixture',keyId:'fixture'})":"null"}};
+  var Razorpay=class {on(){}open(){window.opens++;}};orderDrawerState.tier=2;orderDrawerState.total=1999;`);
+  await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.opens'),secure?1:0);
  }
 });

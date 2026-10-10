@@ -184,3 +184,12 @@ test('explicit currency capabilities are respected; only an absent list implies 
  }
  const f=fixture({config:{...v2Config,deliveryV2Currencies:undefined}});f.checkoutResult=quote12();assert.equal((await f.api.checkout(v2Selection)).amount,349800);
 });
+
+test('secure legacy compatibility stays available before and after v2 activation, but never enables unsigned or outage fallback',async()=>{
+ for(const config of [{checkoutEnabled:true,siteKey:'fixture-key'},{...v2Config,deliveryV2SalesEnabled:false},v2Config]){
+  const f=fixture({config});await f.api.ready;assert.equal(f.api.legacyCheckoutEnabled(),true);
+ }
+ for(const config of [{checkoutEnabled:false},{enabled:false},{checkoutEnabled:true,unavailable:true}]){
+  const f=fixture({config});await f.api.ready;assert.equal(f.api.legacyCheckoutEnabled(),false);
+ }
+});

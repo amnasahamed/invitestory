@@ -47,3 +47,14 @@ test('new USD receipt uses12h snapshot while historical USD Dearly remains24h',(
  assert.match(order.summary({...old,amountText:'$93',checkoutVersion:2,deliverySnapshot:snapshot}).delivery,/12 hours/);
  assert.match(order.summary({...old,checkoutVersion:2,deliverySnapshot:{...snapshot,currency:'INR'}}).delivery,/unavailable/);
 });
+
+test('new receipt reader recovers v2 promise from cached old thank-you HTML without reinterpreting historic links',()=>{
+ const snapshot={speed:'express_12h',firstDraftHours:12,currency:'USD',startsAfter:'payment_and_complete_details'};
+ const query=new URLSearchParams({checkout_version:'2',delivery_snapshot:JSON.stringify(snapshot)});
+ const mixed=vm.createContext({URLSearchParams,location:{pathname:'/thank-you.html',search:'?'+query}});
+ vm.runInContext(readFileSync(new URL('../paid-order.js',import.meta.url),'utf8'),mixed);
+ const details={currency:'USD',express:false};assert.match(mixed.InvitePaidOrder.summary(details).delivery,/12 hours/);
+ mixed.location.search='?checkout_version=2&delivery_snapshot=broken';assert.match(mixed.InvitePaidOrder.summary(details).delivery,/unavailable/);
+ mixed.location.search='?express=1';assert.match(mixed.InvitePaidOrder.summary({...details,express:true}).delivery,/24 hours/);
+ mixed.location.pathname='/index.html';mixed.location.search='?'+query;assert.match(mixed.InvitePaidOrder.summary(details).delivery,/48 hours/);
+});

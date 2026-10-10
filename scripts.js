@@ -775,7 +775,7 @@ const TEMPLATE_DATABASE = [
     accentColor: "#682e49",
     tags: ["exclusive", "dearly", "wax-seal", "rsvp", "botanical"],
     desc: "Deep plum aubergine with ivory magnolia botanicals, animated wax-seal unboxing, built-in email RSVP & couple photo gallery included when requested.",
-    promise: "Wax seal unboxing and included Email RSVP. New orders: 48h standard, optional 24h/12h delivery."
+    promise: "Wax seal unboxing and included Email RSVP. Review available delivery speeds and included benefits before payment."
   },
   {
     id: 36,
@@ -895,9 +895,21 @@ function packageBasePrice(tier) {
 
 // New purchases use a currency-aware acknowledged contract; saved legacy attempts retain their terms.
 const DELIVERY_SPEEDS = {standard_48h:{hours:48,fee:0,feeUSD:0},express_24h:{hours:24,fee:799,feeUSD:9},express_12h:{hours:12,fee:1499,feeUSD:18}};
-function usesNewDelivery(){return window.InviteWebsite?.deliveryV2Enabled?.(currentCurrency) === true;}
+function deliveryRuntimeReady(){return window.deliverySalesVersion===2 && (typeof InviteInteractions==="undefined" || window.deliveryInteractionsVersion===2) && typeof InvitePaidOrder!=="undefined" && InvitePaidOrder.deliveryVersion===2 && ['order-delivery-speeds','delivery-standard_48h','delivery-express_24h','delivery-express_12h'].every(id=>document.getElementById(id));}
+function usesNewDelivery(){return deliveryRuntimeReady() && window.InviteWebsite?.deliveryV2Enabled?.(currentCurrency) === true;}
+let orderDeliveryContract;
+function orderUsesNewDelivery(){return orderDeliveryContract ?? usesNewDelivery();}
+let legacyGatewayConfiguration;
+function legacyDeliveryAvailable(){return window.InviteWebsite?.legacyCheckoutEnabled ? window.InviteWebsite.legacyCheckoutEnabled()===true : legacyGatewayConfiguration?.checkoutEnabled===true&&!legacyGatewayConfiguration.unavailable;}
+// Refresh public offers after capability discovery, without changing an open drawer's agreement.
+window.refreshDeliveryOffers=function(){
+  renderPricingSection();
+  updateTierLabels();
+  const note=document.getElementById('preview-multievent-note');
+  if(note&&!note.hidden&&TEMPLATE_DATABASE[previewState.currentIndex]?.tier===4)note.textContent=usesNewDelivery() ? 'Wax-Seal Unboxing · Email RSVP & Guest List · 48h standard · Optional 24h / 12h' : 'Wax-Seal Unboxing · Email RSVP & Guest List · 24h included';
+};
 function orderDeliverySpeed(){
-  if(usesNewDelivery())return document.querySelector('input[name="order-delivery-speed"]:checked')?.value || 'standard_48h';
+  if(orderUsesNewDelivery())return document.querySelector('input[name="order-delivery-speed"]:checked')?.value || 'standard_48h';
   return orderDrawerState.tier===4||document.getElementById('order-drawer-addon-express')?.checked?'express_24h':'standard_48h';
 }
 function deliveryFeeForOrder(){const speed=DELIVERY_SPEEDS[orderDeliverySpeed()];return currentCurrency==='INR'?speed?.fee||0:speed?.feeUSD||0;}
@@ -905,7 +917,7 @@ function deliveryHoursForOrder(){return DELIVERY_SPEEDS[orderDeliverySpeed()]?.h
 function resetDeliverySpeed(){const input=document.getElementById('delivery-standard_48h');if(input)input.checked=true;}
 function renderCheckoutRetries(){
  const box=document.getElementById('order-checkout-retries');if(!box)return;box.replaceChildren();
- if(!usesNewDelivery()){const note=document.createElement('p');note.textContent='New bookings are currently unavailable. You can resume a saved payment below or contact our team.';box.append(note);}
+ if(!usesNewDelivery()&&!legacyDeliveryAvailable()){const note=document.createElement('p');note.textContent='New bookings are currently unavailable. You can resume a saved payment below or contact our team.';box.append(note);}
  try{for(const attempt of window.InviteWebsite?.pendingCheckouts?.()||[]){
   const r=attempt.request,button=document.createElement('button');button.type='button';button.className='sales-text-button';
   const hours=r.checkoutVersion===2?DELIVERY_SPEEDS[r.deliverySpeed]?.hours:(r.express||r.tier===4?24:48);
@@ -916,6 +928,8 @@ function renderCheckoutRetries(){
 async function resumeSavedCheckout(clientKey){
  if(orderDrawerCheckoutPending)return;orderDrawerCheckoutPending=true;
  try{
+  const saved=window.InviteWebsite.pendingCheckouts?.().find(attempt=>attempt.clientKey===clientKey);
+  if(saved?.request.checkoutVersion===2&&!deliveryRuntimeReady())throw new Error('Please refresh this page to load your saved delivery promise before continuing payment.');
   const secure=await window.InviteWebsite.resumeCheckout(clientKey),r=secure.request;
   if(!Number.isSafeInteger(secure.amount)||secure.amount<=0||secure.currency!==r.currency)throw new Error('The saved payment amount could not be verified.');
   const box=document.getElementById('order-checkout-retries');if(!box)return;box.replaceChildren();
@@ -1199,7 +1213,7 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Everything in Premium, including WhatsApp RSVP</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Cinematic opening — envelope &amp; palace reveals</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>All wedding events, with animated transitions</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>${currentCurrency === "USD" ? "First draft within 48h; 24h +$9 / 12h +$18" : "First draft within 48h; 24h +₹799 / 12h +₹1,499"}</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>${usesNewDelivery() ? (currentCurrency === "USD" ? "First draft within 48h; 24h +$9 / 12h +$18" : "First draft within 48h; 24h +₹799 / 12h +₹1,499") : "First draft within 48h; optional 24h Express"}</span></li>
           </ul>
           <button type="button" class="pricing-card-cta pkg-pay-btn" id="pkg-pay-btn-3" onclick="selectTier(3, true)"><span data-pay-label>Browse Luxury designs</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(3)">${askIcon}<span>Ask about Luxury</span></button>
@@ -1220,11 +1234,11 @@ function renderPricingSection() {
             <li class="pricing-card-feature-item">${checkIcon}<span>Animated wax-seal opening, music, events &amp; venue maps</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Email RSVP notifications + Excel download from the email, included</span></li>
             <li class="pricing-card-feature-item">${checkIcon}<span>Photo gallery included on request &amp; botanical motion</span></li>
-            <li class="pricing-card-feature-item">${checkIcon}<span>${currentCurrency === "USD" ? "First draft within 48h; 24h +$9 / 12h +$18" : "First draft within 48h; 24h +₹799 / 12h +₹1,499"}</span></li>
+            <li class="pricing-card-feature-item">${checkIcon}<span>${usesNewDelivery() ? (currentCurrency === "USD" ? "First draft within 48h; 24h +$9 / 12h +$18" : "First draft within 48h; 24h +₹799 / 12h +₹1,499") : "First draft within 24h, included"}</span></li>
           </ul>
           <button type="button" class="pricing-card-cta pkg-pay-btn pricing-cta-dearly" id="pkg-pay-btn-4" onclick="selectTier(4, true)"><span data-pay-label>Browse Dearly designs</span></button>
           <button type="button" class="pkg-ask-btn" onclick="askPackageOnWhatsApp(4)">${askIcon}<span>Ask about Dearly</span></button>
-          <p class="pkg-microcopy">First draft within 48h; faster options cost extra after payment + complete details. Review before final approval.</p>
+          <p class="pkg-microcopy">${usesNewDelivery() ? "First draft within 48h; faster options cost extra" : "First draft within 24h, included"} after payment + complete details. Review before final approval.</p>
         </div>
       </div>
       <div class="pricing-trust-strip" aria-label="Payment reassurance">
@@ -1646,6 +1660,7 @@ let orderDrawerState = {
 };
 
 function openOrderDrawerForTemplate(id) {
+  orderDeliveryContract=usesNewDelivery();
   let templateId = id;
   if (!templateId && typeof previewState !== "undefined" && previewState.currentIndex >= 0) {
     templateId = TEMPLATE_DATABASE[previewState.currentIndex]?.id;
@@ -1695,7 +1710,7 @@ function openOrderDrawerForTemplate(id) {
   const isDearly = item.tier === 4;
 
   if (expressInput) {
-    if (isDearly && !usesNewDelivery()) {
+    if (isDearly && !orderUsesNewDelivery()) {
       expressInput.checked = true;
       expressInput.disabled = true;
       if (expressPrice) expressPrice.textContent = "Included Free";
@@ -1715,7 +1730,7 @@ function openOrderDrawerForTemplate(id) {
   }
   updateOrderDrawerTotal();
   renderCheckoutRetries();
-  window.InviteWebsite?.ready?.then(()=>{updateOrderDrawerTotal();renderCheckoutRetries();});
+  window.InviteWebsite?.ready?.then(config=>{legacyGatewayConfiguration=config;updateOrderDrawerTotal();renderCheckoutRetries();});
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
@@ -1732,6 +1747,7 @@ function openOrderDrawerForTemplate(id) {
 }
 
 function openOrderDrawerForPackage(tier) {
+  orderDeliveryContract=usesNewDelivery();
   const pTier = Number(tier) || 2;
   const name = packageName(pTier);
   const isDearly = pTier === 4;
@@ -1756,7 +1772,7 @@ function openOrderDrawerForPackage(tier) {
   const styleEl = document.getElementById("order-drawer-item-style");
   if (styleEl) {
     styleEl.textContent = isDearly
-      ? "Wax-Seal Unboxing · Email RSVP · 48h standard · Optional 24h / 12h"
+      ? (orderUsesNewDelivery() ? "Wax-Seal Unboxing · Email RSVP · 48h standard · Optional 24h / 12h" : "Wax-Seal Unboxing · Email RSVP · 24h included")
       : "Wedding schedule · Venue directions · Music · WhatsApp RSVP";
   }
 
@@ -1776,7 +1792,7 @@ function openOrderDrawerForPackage(tier) {
   const wasCheckedOnCard = isExpressSelectedForPackage(pTier);
 
   if (expressInput) {
-    if (isDearly && !usesNewDelivery()) {
+    if (isDearly && !orderUsesNewDelivery()) {
       expressInput.checked = true;
       expressInput.disabled = true;
       if (expressPrice) expressPrice.textContent = "Included Free";
@@ -1796,7 +1812,7 @@ function openOrderDrawerForPackage(tier) {
   }
   updateOrderDrawerTotal();
   renderCheckoutRetries();
-  window.InviteWebsite?.ready?.then(()=>{updateOrderDrawerTotal();renderCheckoutRetries();});
+  window.InviteWebsite?.ready?.then(config=>{legacyGatewayConfiguration=config;updateOrderDrawerTotal();renderCheckoutRetries();});
 
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
@@ -1843,11 +1859,12 @@ function updateOrderDrawerTotal() {
     resetDeliverySpeed();
     const express=document.getElementById('order-drawer-addon-express');if(express){express.checked=orderDrawerState.tier===4;express.disabled=orderDrawerState.tier===4;}
   }
+  if(orderDeliveryContract===undefined)orderDeliveryContract=usesNewDelivery();
   orderDeliveryCurrency=currentCurrency;
-  const v2=usesNewDelivery();
+  const v2=orderUsesNewDelivery();
   const speeds=document.getElementById('order-delivery-speeds');if(speeds)speeds.hidden=!v2;
-  const legacy=document.getElementById('order-addon-express-label');if(legacy)legacy.hidden=true;
-  const pay=document.getElementById('order-drawer-checkout-btn');if(pay)pay.disabled=!v2;
+  const legacy=document.getElementById('order-addon-express-label');if(legacy)legacy.hidden=v2;
+  const pay=document.getElementById('order-drawer-checkout-btn');if(pay)pay.disabled=v2?!usesNewDelivery():!legacyDeliveryAvailable();
   for(const speed of ['express_24h','express_12h']){const label=document.getElementById('delivery-fee-'+speed);if(label)label.textContent='+'+formatPrice(DELIVERY_SPEEDS[speed].fee,DELIVERY_SPEEDS[speed].feeUSD);}
   const isINR = currentCurrency === "INR";
   let basePrice = 1999;
@@ -1915,12 +1932,14 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
   if (orderDrawerCheckoutPending) return;
   orderDrawerCheckoutPending = true;
   try {
-  await window.InviteWebsite?.ready;
+  const displayedV2=orderUsesNewDelivery();
+  legacyGatewayConfiguration=await window.InviteWebsite?.ready;
   const resumed=savedPayment?.secure,request=savedPayment?.request;
   const isINR = (request?.currency || currentCurrency) === "INR";
   const currencyCode = isINR ? "INR" : "USD";
-  const v2 = resumed ? request.checkoutVersion===2 : usesNewDelivery();
-  if(!v2&&!resumed)throw new Error('New bookings are unavailable until secure delivery checkout is enabled. You can review a saved payment or contact our team.');
+  const v2 = resumed ? request.checkoutVersion===2 : displayedV2;
+  if(v2&&!deliveryRuntimeReady())throw new Error('Please refresh this page to load your delivery promise before continuing payment.');
+  if(!resumed && (v2 ? !usesNewDelivery() : !legacyDeliveryAvailable()))throw new Error('Checkout availability changed. Please reopen your order to review its delivery terms, or resume a saved payment.');
   const totalVal = resumed ? resumed.amount/100 : orderDrawerState.total;
   const tier = request?.tier || orderDrawerState.tier;
   const designId = resumed ? request.designId : orderDrawerState.template?.id || null;
@@ -2004,6 +2023,7 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
       const secure = resumed || await window.InviteWebsite.checkout(v2
         ? {checkoutVersion:2,deliverySpeed:speed,designId,tier,currency:currencyCode,emailRsvp:Boolean(emailRsvpChecked)}
         : {designId,tier,currency:currencyCode,express:Boolean(expressChecked),emailRsvp:Boolean(emailRsvpChecked)});
+      if(!secure)throw new Error("Secure checkout is unavailable. Please contact our team before paying.");
       if(v2 && (!secure || secure.checkoutVersion!==2 || secure.deliverySpeed!==speed || secure.deliverySnapshot?.firstDraftHours!==DELIVERY_SPEEDS[speed].hours))throw new Error("The checkout delivery promise could not be verified. Please contact our team before paying.");
       if (secure) {
         if (secure.currency !== currencyCode || secure.amount !== Math.round(totalVal * 100)) {
@@ -2647,7 +2667,7 @@ function openPreview(id, updateUrl = true) {
   const multiNote = document.getElementById("preview-multievent-note");
   if (multiNote) {
     if (item.tier === 4) {
-      multiNote.textContent = "Wax-seal collection Suite · Wax-Seal Unboxing · Email RSVP & Guest List · 48h standard · Optional 24h / 12h";
+      multiNote.textContent = (usesNewDelivery() ? "Wax-seal collection Suite · Wax-Seal Unboxing · Email RSVP & Guest List · 48h standard · Optional 24h / 12h" : "Wax-seal collection Suite · Wax-Seal Unboxing · Email RSVP & Guest List · 24h included");
       multiNote.hidden = false;
     } else if (item.tier === 2 || item.tier === 3) {
       multiNote.textContent = "Multi-event ready: Haldi · Mehendi · Sangeet · Wedding · Reception";
@@ -3244,7 +3264,7 @@ function updateTierLabels() {
     dearlyAmount.textContent = formatPrice(TIER_BASE_PRICE[4].inr, TIER_BASE_PRICE[4].usd);
   }
   if (dearlyNote) {
-    dearlyNote.textContent = currentCurrency === "USD" ? "per invitation · 48h first draft; 24h +$9 / 12h +$18 when available at checkout. After payment + complete details." : "per invitation · 48h first draft; 24h +₹799 / 12h +₹1,499 when available at checkout. After payment + complete details.";
+    dearlyNote.textContent = !usesNewDelivery() ? "per invitation · First draft within 24h after payment + complete details" : currentCurrency === "USD" ? "per invitation · 48h first draft; 24h +$9 / 12h +$18 when available at checkout. After payment + complete details." : "per invitation · 48h first draft; 24h +₹799 / 12h +₹1,499 when available at checkout. After payment + complete details.";
   }
   document.querySelectorAll(".dearly-card-price-pill").forEach(el => {
     el.textContent = formatPrice(TIER_BASE_PRICE[4].inr, TIER_BASE_PRICE[4].usd);
@@ -4210,7 +4230,7 @@ const FAQS = [
   },
   {
     q: "How long does customisation take?",
-    a: "New orders in every collection, including Dearly: first draft within 48 hours, or choose 24 hours (+₹799 / $9) or 12 hours (+₹1,499 / $18). Email RSVP remains included with Dearly. Timing starts after payment and complete details, including overnight. Existing order promises are unchanged. Review and approve the draft before sharing."
+    a: "Review your first-draft timing, included benefits and any delivery fee before payment. Email RSVP is included with Dearly. Timing starts after payment and complete details, including overnight. Existing order promises are unchanged. Review and approve the draft before sharing."
   },
   {
     q: "How long is my invitation link live?",

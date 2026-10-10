@@ -27,6 +27,7 @@
  function selected(){return typeof previewState!=='undefined'?TEMPLATE_DATABASE[previewState.currentIndex]:null;}
  function storeToken(value){token=value;try{sessionStorage.setItem('invitestory.previewToken',value);}catch{}}
  ready.then(async c=>{
+  window.refreshDeliveryOffers?.();
   if(c.enabled&&form) {
    const fields=document.createElement('details');fields.className='preview-whatsapp-fields';
    fields.innerHTML='<summary>Save this preview on WhatsApp <span>(optional)</span></summary><p>Keep the link for later. You can preview your names without a number.</p><label>WhatsApp number <span>(optional)</span><input name="whatsapp" type="tel" autocomplete="tel" maxlength="25" placeholder="+91" data-private="true" data-clarity-mask="true" class="ph-no-capture"></label><label class="preview-whatsapp-consent"><input name="whatsappConsent" type="checkbox"><span></span></label>';
@@ -144,6 +145,7 @@
  window.InviteWebsite={
   ready,
   deliveryV2Enabled:(currency='INR')=>v2Supported(currency)&&configuration.deliveryV2SalesEnabled===true,
+  legacyCheckoutEnabled:()=>configuration.checkoutEnabled===true&&!configuration.unavailable,
   pendingCheckouts(){return readCheckoutAttempts().map(a=>{let request;try{request=JSON.parse(a.key);validateSelection(request);}catch{return null;}return {clientKey:a.clientKey,request};}).filter(Boolean);},
   async resumeCheckout(clientKey){
    const attempt=readCheckoutAttempts().find(a=>a.clientKey===clientKey);if(!attempt)throw checkoutStorageError();

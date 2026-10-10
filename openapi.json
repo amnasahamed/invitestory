@@ -140,7 +140,7 @@
       ],
       "post": {
         "summary": "Secure website checkout (versioned delivery preparation)",
-        "description": "UNPUBLISHED v2 contract proposal. Enable only after verified server capability. INR and USD: 48-hour first draft included, 24-hour +799 INR / 9 USD, 12-hour +1499 INR / 18 USD. Exactly one deliverySpeed; express and unknown fields are rejected. Dearly retains Email RSVP but no included faster speed in v2. Timing begins after payment and complete details. Stored legacy INR and USD retries and purchased promises remain supported separately; fresh purchases require v2. Existing immutable promises are not migrated. A rollback disables fresh v2 sales while retaining stored retries and readers.",
+        "description": "UNPUBLISHED v2 contract proposal. Enable only after verified server capability. INR and USD: 48-hour first draft included, 24-hour +799 INR / 9 USD, 12-hour +1499 INR / 18 USD. Exactly one deliverySpeed; express and unknown fields are rejected. Dearly retains Email RSVP but no included faster speed in v2. Timing begins after payment and complete details. Fresh legacy INR and USD purchases remain accepted with legacy prices and promises during the compatibility transition, including cached clients after activation. New offers require v2; a failed v2 request must never fall back to v1. Stored retries and purchased promises remain unchanged. Existing immutable promises are not migrated. A rollback disables fresh v2 sales while retaining legacy fresh checkout, stored retries and readers.",
         "requestBody": {
           "required": true,
           "content": {
@@ -326,7 +326,7 @@
       ],
       "get": {
         "summary": "Check secure checkout capability before choosing a contract",
-        "description": "UNPUBLISHED preparation: fresh INR and USD v2 checkout requires checkoutEnabled=true, checkoutContracts including 2, deliveryV2SalesEnabled=true, and the selected currency in deliveryV2Currencies when that list is present. If the currency list is absent, existing INR-only v2 capability implies INR support only for backward compatibility; USD requires explicit support. Missing or incompatible required capabilities must block checkout. Stored attempts remain eligible for server reconciliation when new sales are disabled. Production equivalence unverified.",
+        "description": "UNPUBLISHED preparation: fresh INR and USD v2 checkout requires checkoutEnabled=true, checkoutContracts including 2, deliveryV2SalesEnabled=true, and the selected currency in deliveryV2Currencies when that list is present. If the currency list is absent, existing INR-only v2 capability implies INR support only for backward compatibility; USD requires explicit support. Missing or incompatible v2 capabilities must block v2 checkout, never downgrade a displayed v2 offer. Before selecting an offer, a healthy enabled legacy server supports explicit legacy terms. Stored attempts remain eligible for server reconciliation when new sales are disabled. Production equivalence unverified.",
         "responses": {
           "200": {
             "description": "Configuration; other existing configuration fields are omitted from this focused schema.",

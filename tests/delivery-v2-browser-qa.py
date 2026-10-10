@@ -27,11 +27,17 @@ try:
       if state['reject']:route.fulfill(status=400,json={'error':'Mock rejection'});return
       key=r['clientKey'];version=r.get('checkoutVersion',1);tier=r['tier'];cur=r['currency']
       if key not in state['orders']:
-       if version!=2 or state['old'] or not state['enabled'] or cur not in state['currencies']:route.fulfill(status=400,json={'error':'Mock unsupported contract'});return
-       assert 'express' not in r
-       speed=r['deliverySpeed'];fee=fees[cur][speed]
+       if version==2 and (state['old'] or not state['enabled'] or cur not in state['currencies']):route.fulfill(status=400,json={'error':'Mock unsupported contract'});return
+       if version==2:
+        assert 'express' not in r
+        speed=r['deliverySpeed'];fee=fees[cur][speed]
+       else:
+        assert isinstance(r['express'],bool) and 'deliverySpeed' not in r
+        speed='express_24h' if r['express'] or tier==4 else 'standard_48h'
+        fee=0 if tier==4 else fees[cur][speed]
        amount=(bases[cur][tier]+fee+((2000 if cur=='INR' else 24) if r['emailRsvp'] and tier!=4 else 0))*100
-       state['orders'][key]={'orderId':'order_MOCK'+str(len(state['orders'])+1),'keyId':'mock','currency':cur,'amount':amount,'checkoutVersion':2,'deliverySpeed':speed,'deliverySnapshot':{'speed':speed,'firstDraftHours':hours[speed],'surcharge':fee*100,'currency':cur,'startsAfter':'payment_and_complete_details'}}
+       state['orders'][key]={'orderId':'order_MOCK'+str(len(state['orders'])+1),'keyId':'mock','currency':cur,'amount':amount}
+       if version==2:state['orders'][key].update(checkoutVersion=2,deliverySpeed=speed,deliverySnapshot={'speed':speed,'firstDraftHours':hours[speed],'surcharge':fee*100,'currency':cur,'startsAfter':'payment_and_complete_details'})
       response=dict(state['orders'][key]);response['amount']+=1 if state['mismatch'] else 0
       if state['badcurrency']:response['currency']='USD' if cur=='INR' else 'INR'
       route.fulfill(json=response)
@@ -81,8 +87,8 @@ try:
     page.evaluate('Promise.all([proceedFromOrderDrawerToCheckout(),proceedFromOrderDrawerToCheckout()])')
     assert len(state['requests'])==count+1;assert page.evaluate('sdkOpens')==1;assert state['requests'][-1]['clientKey']==rejected
     load();drawer();page.locator('#delivery-express_12h').check();page.evaluate('proceedFromOrderDrawerToCheckout()');assert state['requests'][-1]['clientKey']==rejected
-    # Rollback: no fresh purchases, exact legacy AND versioned attempts can be resumed.
-    state['enabled']=False;load();drawer();assert page.locator('#order-delivery-speeds').is_hidden();assert page.locator('#order-drawer-checkout-btn').is_disabled()
+    # Rollback: fresh legacy sales remain available; exact legacy AND v2 attempts resume.
+    state['enabled']=False;load();drawer();assert page.locator('#order-delivery-speeds').is_hidden();assert page.locator('#order-drawer-checkout-btn').is_enabled()
     for attempt in legacy:
      cur=json.loads(attempt['key'])['currency'];page.evaluate('(id)=>resumeSavedCheckout(id)',attempt['clientKey'])
      assert '24 hours' in page.locator('#order-checkout-retries').inner_text();assert f'{bases[cur][4]:,}' in page.locator('#order-checkout-retries').inner_text()
@@ -98,11 +104,36 @@ try:
      page.goto(origin+'/thank-you.html?package=Dearly&amount=75&express=1&payment_id=pay_OLD&currency='+cur);assert '24 hours' in page.locator('#ty-delivery').inner_text()
      for snapshot in ['', '&delivery_snapshot=%7Bbad', '&delivery_snapshot=%5B%5D']:
       page.goto(origin+'/thank-you.html?checkout_version=2&express=1&currency='+cur+snapshot);assert 'Delivery promise unavailable' in page.locator('#ty-delivery').inner_text()
-    state['old']=True;load();drawer();before=len(state['requests']);page.evaluate('proceedFromOrderDrawerToCheckout()');assert len(state['requests'])==before;assert page.evaluate('sdkOpens')==0
+    # Healthy old server and expanded inactive server both offer/pay explicit legacy terms.
+    for old in [True,False]:
+     state['old']=old;state['enabled']=False;load()
+     assert '12h first draft' not in page.locator('body').inner_text()
+     for tier,base in bases[currency].items():
+      drawer(tier);assert page.locator('#order-delivery-speeds').is_hidden();assert page.locator('#order-drawer-checkout-btn').is_enabled()
+      if tier==4:assert page.locator('#order-drawer-addon-express').is_checked() and page.locator('#order-drawer-addon-express').is_disabled()
+      else:page.locator('#order-drawer-addon-express').check()
+      expected=base+(0 if tier==4 else fees[currency]['express_24h'])
+      assert page.evaluate('orderDrawerState.total')==expected
+      page.evaluate('proceedFromOrderDrawerToCheckout()');assert 'checkoutVersion' not in state['requests'][-1];assert page.evaluate('sdkOptions.amount')==expected*100
+    # Legacy drawer survives activation without adopting a new offer.
+    load();drawer();state['enabled']=True
+    page.evaluate('InviteWebsite.deliveryV2Enabled=()=>true;updateOrderDrawerTotal()')
+    assert page.locator('#order-delivery-speeds').is_hidden();assert page.evaluate('orderDrawerState.total')==bases[currency][4]
+    page.evaluate('proceedFromOrderDrawerToCheckout()');assert 'checkoutVersion' not in state['requests'][-1]
+    # Cached v2 capability with server deactivated: fresh request rejects; never retries v1.
+    load();drawer(2);page.locator('#delivery-express_12h').check();state['enabled']=False
+    before=len(state['requests']);page.evaluate('proceedFromOrderDrawerToCheckout()')
+    assert len(state['requests'])==before+1 and state['requests'][-1]['checkoutVersion']==2;assert page.evaluate('sdkOpens')==0
+    # Withdrawal known to the page keeps reviewed v2 visible but blocks payment.
+    state['enabled']=True;load();drawer();page.locator('#delivery-express_12h').check()
+    page.evaluate('InviteWebsite.deliveryV2Enabled=()=>false;updateOrderDrawerTotal()')
+    assert page.locator('#order-delivery-speeds').is_visible();assert page.locator('#order-drawer-checkout-btn').is_disabled()
+    before=len(state['requests']);page.evaluate('proceedFromOrderDrawerToCheckout()');assert len(state['requests'])==before;assert page.evaluate('sdkOpens')==0
     if currency=='USD':
-     state['old']=False;state['enabled']=True;state['currencies']=['INR'];load();drawer();assert page.locator('#order-drawer-checkout-btn').is_disabled();before=len(state['requests']);page.evaluate('proceedFromOrderDrawerToCheckout()');assert len(state['requests'])==before
+     state['currencies']=['INR'];load();drawer();assert page.locator('#order-delivery-speeds').is_hidden();assert page.locator('#order-drawer-checkout-btn').is_enabled()
+     page.evaluate('proceedFromOrderDrawerToCheckout()');assert 'checkoutVersion' not in state['requests'][-1];assert page.evaluate('sdkOptions.amount')==7500
     assert not errors,errors
-    results.append(f'{entry} {width}px {currency}: all tiers/speeds/totals, currency reset, rejection, amount/currency mismatch, double click, reload UUID, flag-off legacy INR/USD +v2 resume, receipts, old-server gates PASS')
+    results.append(f'{entry} {width}px {currency}: all tiers/speeds/totals, currency reset, rejection, amount/currency mismatch, double click, reload UUID, flag-off legacy INR/USD +v2 resume, receipts, old/new server legacy matrix, activation frozen drawer, cached-v2 rejection, known withdrawal, currency capabilities PASS')
     context.close()
   browser.close()
 finally:server.shutdown()

@@ -1,3 +1,4 @@
+window.deliverySalesVersion=2;
 // Purchase guidance stays on the catalogue; invitations remain in their own iframes.
 const discovery = { savedOnly: false, recommendations: null, shared: null };
 let salesOrderFocus = null;
@@ -142,7 +143,7 @@ function setupMobileSalesLayout() {
   if (!dearlyDetails && dearly && pricingSection) {
     dearlyDetails = document.createElement("details");
     dearlyDetails.className = "sales-dearly-showcase";
-    dearlyDetails.innerHTML = '<summary>Explore the Dearly collection <span>Wax-seal designs · Email RSVP · 48h standard first draft</span></summary>';
+    dearlyDetails.innerHTML = '<summary>Explore the Dearly collection <span>Wax-seal designs · Email RSVP · Review delivery at checkout</span></summary>';
     pricingSection.after(dearlyDetails);
     dearlyDetails.appendChild(dearly);
   }
@@ -293,6 +294,7 @@ function packageComparison() {
   const email = formatPrice(ADDONS.emailRsvp.priceINR, ADDONS.emailRsvp.priceUSD);
   const express = formatPrice(ADDONS.express.priceINR, ADDONS.express.priceUSD);
   const fastest = formatPrice(1499, 18);
+  const newDelivery = typeof usesNewDelivery === "function" && usesNewDelivery();
   return `<details class="sales-package-comparison"><summary id="package-comparison-title">Compare RSVP, events and draft timing</summary><p>Every design belongs to one collection. Compare what is included before you choose.</p>
     <div class="sales-comparison-scroll" tabindex="0" role="region" aria-label="Compare all three invitation packages"><table><caption class="sales-visually-hidden">Invitation package prices, opening styles, RSVP and delivery</caption><thead><tr><th scope="col">Your invitation</th><th scope="col">Premium<br><span>${premium}</span></th><th scope="col">Luxury<br><span>${luxury}</span></th><th scope="col">Dearly<br><span>${dearly}</span></th></tr></thead><tbody>
       <tr><th scope="row">The opening</th><td>Story-led layouts</td><td>Cinematic reveals</td><td>Botanical wax-seal opening</td></tr>
@@ -300,9 +302,9 @@ function packageComparison() {
       <tr><th scope="row">Music, photos & maps</th><td>Included</td><td>Included</td><td>Included</td></tr>
       <tr><th scope="row">Guest replies</th><td>WhatsApp RSVP included</td><td>WhatsApp RSVP included</td><td>Email RSVP included</td></tr>
       <tr><th scope="row">Email RSVP</th><td>Optional +${email}</td><td>Optional +${email}</td><td>Included at no extra cost</td></tr>
-      <tr><th scope="row">First draft*</th><td>Within 48h</td><td>Within 48h</td><td>Within 48h</td></tr>
-      <tr><th scope="row">24h express</th><td>Optional +${express}</td><td>Optional +${express}</td><td>Optional +${express}</td></tr>
-      <tr><th scope="row">12h first draft</th><td>Optional +${fastest}</td><td>Optional +${fastest}</td><td>Optional +${fastest}</td></tr>
+      <tr><th scope="row">First draft*</th><td>Within 48h</td><td>Within 48h</td><td>Within ${newDelivery ? "48" : "24"}h</td></tr>
+      <tr><th scope="row">24h express</th><td>Optional +${express}</td><td>Optional +${express}</td><td>${newDelivery ? `Optional +${express}` : "Included"}</td></tr>
+      ${newDelivery ? `<tr><th scope="row">12h first draft</th><td>Optional +${fastest}</td><td>Optional +${fastest}</td><td>Optional +${fastest}</td></tr>` : ""}
       <tr><th scope="row">See the difference</th><td><button type="button" onclick="openPreview(1)">Preview Premium</button></td><td><button type="button" onclick="openPreview(21)">Preview Luxury</button></td><td><button type="button" onclick="openPreview(35)">Preview Dearly</button></td></tr>
     </tbody></table></div><p class="sales-comparison-footnote">*After payment and complete details. New-order speeds are subject to availability at checkout; existing orders keep their purchased promise. Review before final approval. Free revision requests for 24 hours after your first draft.</p></details>`;
 }
@@ -384,7 +386,7 @@ function updateDeliveryPlan() {
   const days = Math.round((Date.UTC(share.getFullYear(), share.getMonth(), share.getDate()) - Date.UTC(ready.getFullYear(), ready.getMonth(), ready.getDate())) / 86400000);
   if (days < 0) result.textContent = "Your complete details need to arrive before your planned sharing date. Ask us what is possible.";
   else if (days < 2) result.textContent = `${dates}That is a tight turnaround. Express is within 24h after payment + complete details, then you have a 24h revision window. Check with us before booking.`;
-  else if (days < 3) result.textContent = `${dates}Express gives you more room to review: a first draft within 24h, then a 24h revision window. Check the speed shown at checkout: all new orders, including Dearly, pay for faster delivery. Existing promises stay unchanged.`;
+  else if (days < 3) result.textContent = `${dates}Express gives you more room to review: a first draft within 24h, then a 24h revision window. Check the speed and included benefits shown at checkout. Existing promises stay unchanged.`;
   else result.textContent = `${dates}Standard gives you a first draft within 48h, then a 24h window for revision requests. Send complete details early so you have time to review.`;
 }
 
@@ -401,7 +403,7 @@ function updateSalesOrder() {
   if (!modal) return;
   const tier = orderDrawerState.tier;
   const isDearly = tier === 4;
-  const newDelivery = typeof usesNewDelivery === "function" && usesNewDelivery();
+  const newDelivery = typeof orderUsesNewDelivery === "function" && orderUsesNewDelivery();
   const express = isDearly || document.getElementById("order-drawer-addon-express")?.checked;
   const hours = typeof deliveryHoursForOrder === "function" ? deliveryHoursForOrder() : (express ? 24 : 48);
   const chosenStep = document.getElementById("sales-chosen-step");
@@ -417,7 +419,7 @@ function updateSalesOrder() {
   const firstDraft = modal.querySelectorAll(".order-step-title")[2];
   if (firstDraft) firstDraft.textContent = `First draft within ${hours}h`;
   const expressDescription = document.getElementById("order-addon-express-sub");
-  if (expressDescription) expressDescription.textContent = "First draft within 24h after payment + complete details";
+  if (expressDescription) expressDescription.textContent = isDearly && !newDelivery ? "First draft within 24h, included with Dearly" : "First draft within 24h after payment + complete details";
   const upgrade = document.getElementById("sales-dearly-suggestion");
   if (upgrade) {
     const email = document.getElementById("order-drawer-addon-email-rsvp")?.checked;
@@ -428,7 +430,7 @@ function updateSalesOrder() {
       const dearlyPrice = packageBasePrice(4) + deliveryCost;
       const difference = orderDrawerState.total - dearlyPrice;
       const cost = formatPrice(TIER_BASE_PRICE[4].inr + (currentCurrency === "INR" ? deliveryCost : 0), TIER_BASE_PRICE[4].usd + (currentCurrency === "USD" ? deliveryCost : 0));
-      upgrade.innerHTML = `<strong>A Dearly suite is ${cost}, with Email RSVP included${newDelivery ? ` and the same ${hours}h first-draft speed` : ""}.</strong><p>${difference >= 0 ? `Your current selection is ${difference === 0 ? "the same price" : `${formatPrice(currentCurrency === "INR" ? difference : 0, currentCurrency === "USD" ? difference : 0)} more`}.` : "Compare the package before choosing."} Dearly has its own four botanical designs and a wax-seal opening. Your current design stays selected unless you choose another.</p><button type="button" onclick="compareDearlyFromOrder()">Compare the four Dearly designs</button>`;
+      upgrade.innerHTML = `<strong>A Dearly suite is ${cost}, with Email RSVP included${newDelivery ? ` and the same ${hours}h first-draft speed` : " + express included"}.</strong><p>${difference >= 0 ? `Your current selection is ${difference === 0 ? "the same price" : `${formatPrice(currentCurrency === "INR" ? difference : 0, currentCurrency === "USD" ? difference : 0)} more`}.` : "Compare the package before choosing."} Dearly has its own four botanical designs and a wax-seal opening. Your current design stays selected unless you choose another.</p><button type="button" onclick="compareDearlyFromOrder()">Compare the four Dearly designs</button>`;
     }
   }
   if (typeof InviteInteractions !== "undefined") InviteInteractions.syncOrder();
@@ -576,7 +578,7 @@ function setupStudioPricing(container) {
     features.before(details);
     details.appendChild(features);
     const tagline = card.querySelector(".pricing-card-tagline");
-    if (tagline) tagline.innerHTML = `<strong>${descriptions[index]}</strong><dl class="sales-package-facts"><div><dt>Opening</dt><dd>${openings[index]}</dd></div><div><dt>Guest replies</dt><dd>${index === 2 ? "Email RSVP included" : "WhatsApp RSVP included"}</dd></div><div><dt>First draft</dt><dd>Within 48h*</dd></div></dl>`;
+    if (tagline) tagline.innerHTML = `<strong>${descriptions[index]}</strong><dl class="sales-package-facts"><div><dt>Opening</dt><dd>${openings[index]}</dd></div><div><dt>Guest replies</dt><dd>${index === 2 ? "Email RSVP included" : "WhatsApp RSVP included"}</dd></div><div><dt>First draft</dt><dd>Within ${index === 2 && !(typeof usesNewDelivery === "function" && usesNewDelivery()) ? "24" : "48"}h*</dd></div></dl>`;
     const browseLabel = card.querySelector("[data-pay-label]");
     if (browseLabel) browseLabel.textContent = `Browse ${collections[index]} designs`;
     const note = card.querySelector(".pkg-microcopy");
