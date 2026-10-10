@@ -1858,7 +1858,11 @@ function updateOrderDrawerTotal() {
   if (typeof updateSalesOrder === "function") updateSalesOrder();
 }
 
+let orderDrawerCheckoutPending = false;
 async function proceedFromOrderDrawerToCheckout() {
+  if (orderDrawerCheckoutPending) return;
+  orderDrawerCheckoutPending = true;
+  try {
   const isINR = currentCurrency === "INR";
   const currencyCode = isINR ? "INR" : "USD";
   const totalVal = orderDrawerState.total;
@@ -1877,6 +1881,7 @@ async function proceedFromOrderDrawerToCheckout() {
   closeOrderDrawer(false);
 
   const selectedContentIds = orderDrawerState.template ? [String(orderDrawerState.template.id)] : [];
+  let checkoutClientKey;
 
   const options = {
     key: window.RAZORPAY_KEY_ID || "rzp_live_YOUR_KEY_HERE",
@@ -1913,7 +1918,7 @@ async function proceedFromOrderDrawerToCheckout() {
     },
     handler: function (response) {
       window.__lastPaymentOk = true;
-      window.InviteWebsite?.paid();
+      window.InviteWebsite?.paid(checkoutClientKey);
       trackMetaEvent("Purchase", {
         content_name: name,
         content_ids: selectedContentIds,
@@ -1938,6 +1943,7 @@ async function proceedFromOrderDrawerToCheckout() {
     try {
       const secure = await window.InviteWebsite.checkout({designId:orderDrawerState.template?.id || null,tier,currency:currencyCode,express:Boolean(expressChecked),emailRsvp:Boolean(emailRsvpChecked)});
       if (secure) {
+        checkoutClientKey=secure.clientKey;
         options.order_id=secure.orderId;options.key=secure.keyId;options.amount=secure.amount;options.currency=secure.currency;
       }
     } catch (error) {
@@ -1967,6 +1973,9 @@ async function proceedFromOrderDrawerToCheckout() {
       message: "Please wait a moment, then try again.",
       type: "info"
     });
+  }
+  } finally {
+    orderDrawerCheckoutPending = false;
   }
 }
 
