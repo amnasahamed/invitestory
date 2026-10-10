@@ -113,7 +113,7 @@ test('uncontracted delivery fields fail closed before configuration, fallback or
  }
 });
 
-const v2Config={enabled:true,checkoutEnabled:true,siteKey:'fixture-key',checkoutContracts:[1,2],deliveryV2SalesEnabled:true};
+const v2Config={enabled:true,checkoutEnabled:true,siteKey:'fixture-key',checkoutContracts:[1,2],deliveryV2Currencies:['INR','USD'],deliveryV2SalesEnabled:true};
 const v2Selection={checkoutVersion:2,deliverySpeed:'express_12h',designId:1,tier:2,currency:'INR',emailRsvp:false};
 function quote12(){return {orderId:'order_mock',keyId:'key_mock',amount:349800,currency:'INR',checkoutVersion:2,deliverySpeed:'express_12h',deliverySnapshot:{speed:'express_12h',firstDraftHours:12,surcharge:149900,currency:'INR',startsAfter:'payment_and_complete_details'}};}
 test('new client never sends v2 to old/disabled/malformed-capability server or unsigned fallback',async()=>{
@@ -129,8 +129,8 @@ test('v2 requires exact version/speed/snapshot acknowledgement and keeps uncerta
  }
  f.checkoutResult=quote12();assert.equal((await f.api.checkout(v2Selection)).clientKey,first.clientKey);assert.equal(f.generated,1);
 });
-test('v2 rejects unknown, contradictory, multiple and USD delivery choices before a request',async()=>{
- for(const input of [{...v2Selection,express:true},{...v2Selection,deliverySpeed:['express_12h']},{...v2Selection,currency:'USD'},{...v2Selection,deliverySpeed:'express_6h'},{...v2Selection,deliveryHours:12},{...v2Selection,amount:1},{...v2Selection,checkoutVersion:3}]){
+test('v2 rejects unknown, contradictory, multiple and unsupported currency choices before a request',async()=>{
+ for(const input of [{...v2Selection,express:true},{...v2Selection,deliverySpeed:['express_12h']},{...v2Selection,currency:'EUR'},{...v2Selection,deliverySpeed:'express_6h'},{...v2Selection,deliveryHours:12},{...v2Selection,amount:1},{...v2Selection,checkoutVersion:3}]){
   const f=fixture({config:v2Config});await assert.rejects(f.api.checkout(input),/not available/);assert.equal(f.requests.length,1);assert.equal(f.generated,0);
  }
 });
@@ -155,4 +155,32 @@ test('v2 backend rejection keeps retry identity and concurrent clicks share the 
  f.checkoutStatus=200;f.checkoutResult=quote12();let release;f.hold=new Promise(resolve=>release=resolve);
  const a=f.api.checkout(v2Selection),b=f.api.checkout(v2Selection);await new Promise(setImmediate);assert.equal(f.requests.filter(r=>r.body).length,2);release();
  const values=await Promise.all([a,b]);assert.equal(values[0].clientKey,prior);assert.equal(values[1].clientKey,prior);assert.equal(f.generated,1);
+});
+
+test('USD v2 requires explicit currency capability, including against prior INR-only v2 server',async()=>{
+ const usd={...v2Selection,currency:'USD'};
+ for(const config of [{...v2Config,deliveryV2Currencies:undefined},{...v2Config,deliveryV2Currencies:['INR']},{...v2Config,deliveryV2Currencies:'USD'}]){
+  const f=fixture({config});await assert.rejects(f.api.checkout(usd),/not available/);assert.equal(f.requests.length,1);assert.equal(f.storage.size,0);
+ }
+});
+test('USD v2 verifies cents, currency and stored promise, then resumes through sales rollback',async()=>{
+ const usd={...v2Selection,currency:'USD'},response={...quote12(),amount:4700,currency:'USD',deliverySnapshot:{...quote12().deliverySnapshot,surcharge:1800,currency:'USD'}};
+ const f=fixture({config:v2Config});f.checkoutResult=response;const original=await f.api.checkout(usd);
+ for(const snap of [{...response.deliverySnapshot,surcharge:149900},{...response.deliverySnapshot,currency:'INR'}]){
+  f.checkoutResult={...response,deliverySnapshot:snap};await assert.rejects(f.api.checkout(usd),/could not be verified/);assert.equal(f.requests.at(-1).body.clientKey,original.clientKey);
+ }
+ const rollback=fixture({config:{...v2Config,deliveryV2SalesEnabled:false},storage:f.storage});rollback.checkoutResult=response;
+ assert.equal((await rollback.api.resumeCheckout(original.clientKey)).clientKey,original.clientKey);assert.equal(rollback.generated,0);
+});
+test('legacy USD Dearly retry remains original request and UUID after both-currency upgrade',async()=>{
+ const clientKey='00000000-0000-4000-8000-000000000009',request={designId:35,tier:4,currency:'USD',express:true,emailRsvp:true};
+ const storage=new Map([[storageKey,JSON.stringify({key:JSON.stringify(request),clientKey})]]),f=fixture({config:v2Config,storage});f.checkoutResult={orderId:'order_old',keyId:'mock',currency:'USD',amount:7500};
+ const result=await f.api.resumeCheckout(clientKey);assert.equal(result.amount,7500);assert.equal(result.request.express,true);assert.equal(result.checkoutVersion,undefined);assert.equal(f.generated,0);assert.deepEqual(f.requests.at(-1).body,{...request,clientKey,turnstileToken:'fixture-only'});
+});
+
+test('explicit currency capabilities are respected; only an absent list implies legacy INR v2',async()=>{
+ for(const currencies of [['USD'],null,'INR']){
+  const f=fixture({config:{...v2Config,deliveryV2Currencies:currencies}});await assert.rejects(f.api.checkout(v2Selection),/not available/);assert.equal(f.requests.length,1);assert.equal(f.generated,0);
+ }
+ const f=fixture({config:{...v2Config,deliveryV2Currencies:undefined}});f.checkoutResult=quote12();assert.equal((await f.api.checkout(v2Selection)).amount,349800);
 });

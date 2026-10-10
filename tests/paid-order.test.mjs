@@ -39,3 +39,11 @@ test('versioned receipts use the immutable speed snapshot and reject invalid pro
  }
  for(const snapshot of [undefined,{speed:'express_12h',firstDraftHours:24},{speed:['express_12h'],firstDraftHours:12,currency:'INR',startsAfter:'payment_and_complete_details'}])assert.match(order.summary({checkoutVersion:2,express:true,deliverySnapshot:snapshot}).delivery,/unavailable/);
 });
+
+test('new USD receipt uses12h snapshot while historical USD Dearly remains24h',()=>{
+ const old={...base,currency:'USD',packageName:'Dearly',amountText:'$75',express:true,addons:['Express 24h Delivery (included)','Email RSVP (included)']};
+ assert.match(order.summary(old).delivery,/24 hours/);
+ const snapshot={speed:'express_12h',firstDraftHours:12,currency:'USD',surcharge:1800,startsAfter:'payment_and_complete_details'};
+ assert.match(order.summary({...old,amountText:'$93',checkoutVersion:2,deliverySnapshot:snapshot}).delivery,/12 hours/);
+ assert.match(order.summary({...old,checkoutVersion:2,deliverySnapshot:{...snapshot,currency:'INR'}}).delivery,/unavailable/);
+});

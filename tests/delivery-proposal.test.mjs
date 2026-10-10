@@ -12,11 +12,11 @@ test('Dearly retains included Email RSVP while INR express is optional',()=>{
  assert.equal(standard.emailRsvp,true);assert.equal(standard.hours,48);assert.equal(fast.rsvp,0);assert.equal(fast.total,6498);
  assert.equal(quote({tier:2,emailRsvp:true}).total,3999);
 });
-test('USD behavior is unchanged and 12h has no invented price',()=>{
+test('approved USD12 costs18 with Dearly speed optional and currency reset',()=>{
  assert.equal(quote({tier:2,currency:'USD',speed:'express24',emailRsvp:true}).total,62);
  assert.equal(quote({tier:3,currency:'USD'}).total,45);
- const dearly=quote({tier:4,currency:'USD'});assert.equal(dearly.total,75);assert.equal(dearly.hours,24);assert.equal(dearly.emailRsvp,true);
- assert.throws(()=>quote({currency:'USD',speed:'express12'}),/unresolved/);
+ const dearly=quote({tier:4,currency:'USD'});assert.equal(dearly.total,75);assert.equal(dearly.hours,48);assert.equal(dearly.emailRsvp,true);
+ assert.equal(quote({currency:'USD',speed:'express12'}).total,47);assert.equal(quote({tier:4,currency:'USD',speed:'express12'}).total,93);
  const switched=switchCurrency({tier:2,currency:'INR',speed:'express12'},'USD');assert.equal(switched.speed,'standard');assert.equal(quote(switched).total,29);
  assert.equal(quote(switchCurrency(switched,'INR')).total,1999);
 });

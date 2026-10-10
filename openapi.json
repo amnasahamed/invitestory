@@ -140,7 +140,7 @@
       ],
       "post": {
         "summary": "Secure website checkout (versioned delivery preparation)",
-        "description": "UNPUBLISHED v2 contract proposal. Enable only after verified server capability. INR-only: 48-hour first draft included, 24-hour +799 INR, 12-hour +1499 INR. Exactly one deliverySpeed; express and unknown fields are rejected. Dearly retains Email RSVP but no included faster speed in v2. Timing begins after payment and complete details. Legacy USD behavior and stored legacy retries remain supported separately. Existing immutable promises are not migrated. A rollback disables fresh v2 sales while retaining stored retries and readers.",
+        "description": "UNPUBLISHED v2 contract proposal. Enable only after verified server capability. INR and USD: 48-hour first draft included, 24-hour +799 INR / 9 USD, 12-hour +1499 INR / 18 USD. Exactly one deliverySpeed; express and unknown fields are rejected. Dearly retains Email RSVP but no included faster speed in v2. Timing begins after payment and complete details. Stored legacy INR and USD retries and purchased promises remain supported separately; fresh purchases require v2. Existing immutable promises are not migrated. A rollback disables fresh v2 sales while retaining stored retries and readers.",
         "requestBody": {
           "required": true,
           "content": {
@@ -174,7 +174,8 @@
                   "currency": {
                     "type": "string",
                     "enum": [
-                      "INR"
+                      "INR",
+                      "USD"
                     ]
                   },
                   "tier": {
@@ -235,7 +236,8 @@
                     "currency": {
                       "type": "string",
                       "enum": [
-                        "INR"
+                        "INR",
+                        "USD"
                       ]
                     },
                     "checkoutVersion": {
@@ -283,14 +285,17 @@
                           "enum": [
                             0,
                             79900,
-                            149900
+                            149900,
+                            900,
+                            1800
                           ],
-                          "description": "INR minor units, corresponding to the selected speed."
+                          "description": "Minor units in the selected currency: INR 0/79900/149900 or USD 0/900/1800 for 48/24/12 hours."
                         },
                         "currency": {
                           "type": "string",
                           "enum": [
-                            "INR"
+                            "INR",
+                            "USD"
                           ]
                         },
                         "startsAfter": {
@@ -321,7 +326,7 @@
       ],
       "get": {
         "summary": "Check secure checkout capability before choosing a contract",
-        "description": "UNPUBLISHED preparation: fresh INR v2 checkout requires checkoutEnabled=true, checkoutContracts including 2, and deliveryV2SalesEnabled=true. Missing or incompatible capabilities must block checkout. Stored attempts remain eligible for server reconciliation when new sales are disabled. USD remains on the legacy contract. Production equivalence unverified.",
+        "description": "UNPUBLISHED preparation: fresh INR and USD v2 checkout requires checkoutEnabled=true, checkoutContracts including 2, deliveryV2SalesEnabled=true, and the selected currency in deliveryV2Currencies when that list is present. If the currency list is absent, existing INR-only v2 capability implies INR support only for backward compatibility; USD requires explicit support. Missing or incompatible required capabilities must block checkout. Stored attempts remain eligible for server reconciliation when new sales are disabled. Production equivalence unverified.",
         "responses": {
           "200": {
             "description": "Configuration; other existing configuration fields are omitted from this focused schema.",
@@ -345,6 +350,20 @@
                     },
                     "deliveryV2SalesEnabled": {
                       "type": "boolean"
+                    },
+                    "deliveryV2Currencies": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "enum": [
+                          "INR",
+                          "USD"
+                        ]
+                      },
+                      "example": [
+                        "INR",
+                        "USD"
+                      ]
                     }
                   }
                 }

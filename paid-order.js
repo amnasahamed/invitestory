@@ -4,7 +4,7 @@
   function delivery(details){
     if(details.checkoutVersion===2){
       const snapshot=details.deliverySnapshot,hours={standard_48h:48,express_24h:24,express_12h:12};
-      if(!snapshot||typeof snapshot.speed!=='string'||!Object.hasOwn(hours,snapshot.speed)||snapshot.firstDraftHours!==hours[snapshot.speed]||snapshot.currency!=='INR'||snapshot.startsAfter!=='payment_and_complete_details')return 'Delivery promise unavailable — please confirm with our team';
+      if(!snapshot||typeof snapshot.speed!=='string'||!Object.hasOwn(hours,snapshot.speed)||snapshot.firstDraftHours!==hours[snapshot.speed]||!['INR','USD'].includes(snapshot.currency)||snapshot.currency!==(details.currency||'INR')||snapshot.startsAfter!=='payment_and_complete_details')return 'Delivery promise unavailable — please confirm with our team';
       return `First draft within ${snapshot.firstDraftHours} hours after payment and all required details (elapsed hours, including overnight)`;
     }
     return details.express?'First draft within 24 hours after payment and all required details':'First draft within 48 hours after payment and all required details';

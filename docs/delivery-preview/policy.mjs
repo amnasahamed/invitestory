@@ -3,15 +3,13 @@
 export function quote({tier=2,currency='INR',speed='standard',emailRsvp=false}) {
   if(![2,3,4].includes(tier)||!['INR','USD'].includes(currency))throw Error('Invalid package or currency');
   if(!['standard','express24','express12'].includes(speed))throw Error('Select exactly one delivery speed');
-  if(currency==='USD'&&speed==='express12')throw Error('USD 12-hour price is unresolved');
-  // USD intentionally retains current Dearly included 24h behavior.
-  const actual=currency==='USD'&&tier===4?'express24':speed;
+  const actual=speed;
   const base=currency==='INR'?({2:1999,3:2999,4:4999}[tier]):({2:29,3:45,4:75}[tier]);
-  const delivery=currency==='INR'?({standard:0,express24:799,express12:1499}[actual]):(actual==='express24'&&tier!==4?9:0);
+  const delivery=currency==='INR'?({standard:0,express24:799,express12:1499}[actual]):({standard:0,express24:9,express12:18}[actual]);
   const rsvp=tier===4?0:emailRsvp?(currency==='INR'?2000:24):0;
   return {speed:actual,hours:{standard:48,express24:24,express12:12}[actual],delivery,rsvp,total:base+delivery+rsvp,emailRsvp:tier===4||emailRsvp};
 }
 export function switchCurrency(selection,currency){
-  // Never map a paid 12h selection to a made-up USD price.
-  return {...selection,currency,speed:currency==='USD'&&selection.speed==='express12'?'standard':selection.speed};
+  // Match the storefront: currency changes reset the displayed choice to standard.
+  return {...selection,currency,speed:'standard'};
 }

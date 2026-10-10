@@ -348,3 +348,13 @@ test('resumed checkout uses the saved design and original terms even when anothe
  await site.run(`proceedFromOrderDrawerToCheckout({request:{designId:1,tier:2,currency:'INR',express:true,emailRsvp:false},secure:{orderId:'order_saved',keyId:'mock',amount:279800,currency:'INR',clientKey:'saved'}})`);
  assert.equal(site.run('window.opened'),1);assert.equal(site.run('window.options.notes.template_id'),'1');assert.equal(site.run('window.options.amount'),279800);
 });
+
+test('USD versioned totals keep base and RSVP prices, charge one speed for all packages',()=>{
+ const site=website(),radio={value:'standard_48h'},email={checked:true};
+ site.elements.set('input[name="order-delivery-speed"]:checked',radio);site.elements.set('order-drawer-addon-email-rsvp',email);
+ site.run("window.InviteWebsite={deliveryV2Enabled:()=>true};currentCurrency='USD';orderDrawerState.isPackage=true;");
+ for(const tier of [2,3,4])for(const [speed,fee,hours] of [['standard_48h',0,48],['express_24h',9,24],['express_12h',18,12]]){
+  radio.value=speed;site.run(`orderDrawerState.tier=${tier};updateOrderDrawerTotal()`);
+  assert.equal(site.run('orderDrawerState.total'),({2:29,3:45,4:75}[tier])+fee+(tier===4?0:24));assert.equal(site.run('deliveryHoursForOrder()'),hours);
+ }
+});
