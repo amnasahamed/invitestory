@@ -1,3 +1,5 @@
+> Historical preparation record. Superseded by [coordinated v2 implementation review](delivery-v2-local-review.md); original findings below describe the earlier source-blocked stage.
+
 # Delivery speeds: unpublished local preparation
 
 Status: RELEASE HOLD. Partial implementation only; not ready for checkout or publication.

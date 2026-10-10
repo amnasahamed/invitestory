@@ -108,20 +108,51 @@
   try{sessionStorage.setItem(checkoutStorageKey,value);if(sessionStorage.getItem(checkoutStorageKey)!==value)throw checkoutStorageError();}catch{throw checkoutStorageError();}
   return attempt.clientKey;
  }
+ const speedHours={standard_48h:48,express_24h:24,express_12h:12};
+ function v2Supported(){return configuration.checkoutEnabled===true&&Array.isArray(configuration.checkoutContracts)&&configuration.checkoutContracts.includes(2);}
+ function validateSelection(selection){
+  if(selection.checkoutVersion===2){
+   const allowed=['checkoutVersion','deliverySpeed','designId','tier','currency','emailRsvp','token'];
+   if(Object.keys(selection).some(k=>!allowed.includes(k))||selection.currency!=='INR'||typeof selection.deliverySpeed!=='string'||!Object.hasOwn(speedHours,selection.deliverySpeed)||typeof selection.emailRsvp!=='boolean'||![2,3,4].includes(selection.tier))throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
+  }else if(['checkoutVersion','deliverySpeed','deliveryAddon','deliveryHours','deliverySnapshot','firstDraftHours'].some(field=>Object.hasOwn(selection,field)))throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
+ }
+ function validateResponse(result,request){
+  if(request.checkoutVersion!==2)return;
+  const snap=result.deliverySnapshot,fee={standard_48h:0,express_24h:79900,express_12h:149900}[request.deliverySpeed];
+  if(result.checkoutVersion!==2||result.deliverySpeed!==request.deliverySpeed||result.currency!=='INR'||!Number.isSafeInteger(result.amount)||result.amount<=0||!snap||snap.speed!==request.deliverySpeed||snap.firstDraftHours!==speedHours[request.deliverySpeed]||snap.surcharge!==fee||snap.currency!=='INR'||snap.startsAfter!=='payment_and_complete_details')throw new Error('The checkout delivery promise could not be verified. Please contact our team before paying.');
+ }
+ async function submitCheckout(request,savedAttempt){
+  validateSelection(request);await ready;
+  if(configuration.unavailable)throw new Error('Secure checkout is temporarily unavailable. Please try again or contact us.');
+  const key=savedAttempt?.key||JSON.stringify(request);
+  if(request.checkoutVersion===2){
+   if(!v2Supported())throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
+   if(configuration.deliveryV2SalesEnabled!==true&&!readCheckoutAttempts().some(a=>a.key===key))throw new Error('New INR delivery bookings are currently unavailable. Saved payments can still be resumed.');
+  }
+  if(!configuration.checkoutEnabled){if(savedAttempt)throw new Error('Secure checkout is temporarily unavailable.');return null;}
+  if(window.isSecureContext!==true)throw new Error('Please open this page over HTTPS to use secure checkout.');
+  if(checkoutInFlight.has(key))return checkoutInFlight.get(key);
+  const clientKey=checkoutKey(key);
+  if(savedAttempt&&savedAttempt.clientKey!==clientKey)throw checkoutStorageError();
+  const pending=(async()=>{
+   const result=await api('checkout',{...request,clientKey,turnstileToken:await verification('checkout')});
+   validateResponse(result,request);return {...result,clientKey,request};
+  })();
+  checkoutInFlight.set(key,pending);
+  try{return await pending;}finally{checkoutInFlight.delete(key);}
+ }
  window.InviteWebsite={
   ready,
+  deliveryV2Enabled:()=>v2Supported()&&configuration.deliveryV2SalesEnabled===true,
+  pendingCheckouts(){return readCheckoutAttempts().map(a=>{let request;try{request=JSON.parse(a.key);validateSelection(request);}catch{return null;}return {clientKey:a.clientKey,request};}).filter(Boolean);},
+  async resumeCheckout(clientKey){
+   const attempt=readCheckoutAttempts().find(a=>a.clientKey===clientKey);if(!attempt)throw checkoutStorageError();
+   // Replay the exact saved JSON identity, including its original preview token.
+   return submitCheckout(JSON.parse(attempt.key),attempt);
+  },
   async checkout(selection){
-   // The portal contract only supports the existing Boolean express (24h).
-   // Reject proposed speed fields before any fallback, storage or payment request.
-   if(['deliverySpeed','deliveryAddon','deliveryHours'].some(field=>Object.hasOwn(selection,field)))throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
-   await ready;if(configuration.unavailable)throw new Error('Secure checkout is temporarily unavailable. Please try again or contact us.');if(!configuration.checkoutEnabled)return null;
-   if(window.isSecureContext!==true)throw new Error('Please open this page over HTTPS to use secure checkout.');
-   const request={...selection,token:token||undefined},key=JSON.stringify(request);
-   if(checkoutInFlight.has(key))return checkoutInFlight.get(key);
-   const clientKey=checkoutKey(key);
-   const pending=(async()=>({...await api('checkout',{...request,clientKey,turnstileToken:await verification('checkout')}),clientKey}))();
-   checkoutInFlight.set(key,pending);
-   try{return await pending;}finally{checkoutInFlight.delete(key);}
+   validateSelection(selection);
+   return submitCheckout({...selection,token:token||undefined});
   },
   paid(clientKey){
    if(!uuidPattern.test(clientKey))return;

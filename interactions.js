@@ -257,7 +257,8 @@ const InviteInteractions = (() => {
     const dearly=orderDrawerState.tier===4;
     const base=document.getElementById('order-drawer-base-price').textContent;
     const rows=[['Invitation, personalization & hosting',base]];
-    if(dearly || document.getElementById('order-drawer-addon-express').checked)rows.push(['24h first draft',dearly?'Included':formatPrice(ADDONS.express.priceINR,ADDONS.express.priceUSD)]);
+    if(usesNewDelivery()){const speed=DELIVERY_SPEEDS[orderDeliverySpeed()];rows.push([`${speed.hours}h first draft`,speed.fee?formatPrice(speed.fee,0):'Included']);}
+    else if(dearly || document.getElementById('order-drawer-addon-express').checked)rows.push(['24h first draft',dearly?'Included':formatPrice(ADDONS.express.priceINR,ADDONS.express.priceUSD)]);
     if(dearly || document.getElementById('order-drawer-addon-email-rsvp').checked)rows.push(['Email RSVP',dearly?'Included':formatPrice(ADDONS.emailRsvp.priceINR,ADDONS.emailRsvp.priceUSD)]);
     summary.innerHTML='<h4>Price breakdown</h4><dl>'+rows.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')+'</dl>';
     const total=document.getElementById('order-drawer-total-val');

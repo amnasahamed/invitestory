@@ -1,11 +1,19 @@
 /* Shared receipt and WhatsApp wording for every successful checkout. */
 (function(root){
   const clean=value=>String(value||'').replace(/[\r\n]+/g,' ').trim();
+  function delivery(details){
+    if(details.checkoutVersion===2){
+      const snapshot=details.deliverySnapshot,hours={standard_48h:48,express_24h:24,express_12h:12};
+      if(!snapshot||typeof snapshot.speed!=='string'||!Object.hasOwn(hours,snapshot.speed)||snapshot.firstDraftHours!==hours[snapshot.speed]||snapshot.currency!=='INR'||snapshot.startsAfter!=='payment_and_complete_details')return 'Delivery promise unavailable — please confirm with our team';
+      return `First draft within ${snapshot.firstDraftHours} hours after payment and all required details (elapsed hours, including overnight)`;
+    }
+    return details.express?'First draft within 24 hours after payment and all required details':'First draft within 48 hours after payment and all required details';
+  }
   function summary(details){
     const addons=Array.isArray(details.addons)?details.addons.map(clean).filter(Boolean):[];
     return {
       addons:addons.join(', ')||'None selected',
-      delivery:details.express?'First draft within 24 hours after payment and all required details':'First draft within 48 hours after payment and all required details'
+      delivery:delivery(details)
     };
   }
   function message(details){

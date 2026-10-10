@@ -16,7 +16,7 @@ const storageKey='invitestory.checkoutRetry';
 const selection={designId:1,tier:2,currency:'INR',express:false,emailRsvp:false};
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
 function fixture({storage=new Map(),secure=true,noUUID=false,noCrypto=false,configStatus=200,config={enabled:true,checkoutEnabled:true,siteKey:'fixture-key'}}={}) {
- const state={storage,requests:[],verification:0,generated:0,mode:'',rejectCheckout:false,rejectVerification:false,hold:null};
+ const state={storage,requests:[],verification:0,generated:0,mode:'',rejectCheckout:false,rejectVerification:false,hold:null,checkoutResult:null,checkoutStatus:200};
  const crypto=noCrypto?undefined:{
   ...(noUUID?{}:{randomUUID(){state.generated++;return `00000000-0000-4000-8000-${String(state.generated).padStart(12,'0')}`;}}),
   getRandomValues(bytes){state.generated++;bytes.fill(state.generated);return bytes;}
@@ -31,7 +31,7 @@ function fixture({storage=new Map(),secure=true,noUUID=false,noCrypto=false,conf
    assert.equal(url,'/api/website/checkout');
    if(state.hold)await state.hold;
    if(state.rejectCheckout)throw new TypeError('Fixture uncertain response');
-   return Response.json({orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR'});
+   return Response.json(state.checkoutResult||{orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR'},{status:state.checkoutStatus});
   }
  };
  vm.runInNewContext(source,context);return Object.assign(state,{api:window.InviteWebsite});
@@ -111,4 +111,48 @@ test('uncontracted delivery fields fail closed before configuration, fallback or
   const f=fixture({config});await assert.rejects(f.api.checkout({...selection,[field]:12}),/not available/);
   assert.equal(f.generated,0);assert.equal(f.verification,0);assert.equal(f.requests.length,1);assert.equal(f.storage.size,0);
  }
+});
+
+const v2Config={enabled:true,checkoutEnabled:true,siteKey:'fixture-key',checkoutContracts:[1,2],deliveryV2SalesEnabled:true};
+const v2Selection={checkoutVersion:2,deliverySpeed:'express_12h',designId:1,tier:2,currency:'INR',emailRsvp:false};
+function quote12(){return {orderId:'order_mock',keyId:'key_mock',amount:349800,currency:'INR',checkoutVersion:2,deliverySpeed:'express_12h',deliverySnapshot:{speed:'express_12h',firstDraftHours:12,surcharge:149900,currency:'INR',startsAfter:'payment_and_complete_details'}};}
+test('new client never sends v2 to old/disabled/malformed-capability server or unsigned fallback',async()=>{
+ for(const config of [{enabled:true,checkoutEnabled:true,siteKey:'mock'},{...v2Config,checkoutEnabled:false},{...v2Config,checkoutContracts:'12'}]){
+  const f=fixture({config});await assert.rejects(f.api.checkout(v2Selection),/not available/);assert.equal(f.requests.length,1);assert.equal(f.storage.size,0);
+ }
+});
+test('v2 requires exact version/speed/snapshot acknowledgement and keeps uncertain IDs',async()=>{
+ const f=fixture({config:v2Config});f.checkoutResult=quote12();
+ const first=await f.api.checkout(v2Selection);assert.equal(first.deliverySnapshot.firstDraftHours,12);assert.equal('express' in f.requests[1].body,false);
+ for(const bad of [{...quote12(),checkoutVersion:undefined},{...quote12(),deliverySpeed:'express_24h'},{...quote12(),deliverySnapshot:{...quote12().deliverySnapshot,surcharge:79900}},{...quote12(),currency:'USD'},{...quote12(),deliverySnapshot:{...quote12().deliverySnapshot,startsAfter:'payment'}}]){
+  f.checkoutResult=bad;await assert.rejects(f.api.checkout(v2Selection),/could not be verified/);assert.equal(f.requests.at(-1).body.clientKey,first.clientKey);
+ }
+ f.checkoutResult=quote12();assert.equal((await f.api.checkout(v2Selection)).clientKey,first.clientKey);assert.equal(f.generated,1);
+});
+test('v2 rejects unknown, contradictory, multiple and USD delivery choices before a request',async()=>{
+ for(const input of [{...v2Selection,express:true},{...v2Selection,deliverySpeed:['express_12h']},{...v2Selection,currency:'USD'},{...v2Selection,deliverySpeed:'express_6h'},{...v2Selection,deliveryHours:12},{...v2Selection,amount:1},{...v2Selection,checkoutVersion:3}]){
+  const f=fixture({config:v2Config});await assert.rejects(f.api.checkout(input),/not available/);assert.equal(f.requests.length,1);assert.equal(f.generated,0);
+ }
+});
+test('rollback hides new sales but preserves v2 reader and resumes exact pending identity',async()=>{
+ const f=fixture({config:v2Config});f.checkoutResult=quote12();const prior=await f.api.checkout(v2Selection);
+ const rollback=fixture({config:{...v2Config,deliveryV2SalesEnabled:false},storage:f.storage});rollback.checkoutResult=quote12();
+ assert.equal(rollback.api.deliveryV2Enabled(),false);
+ assert.equal((await rollback.api.resumeCheckout(prior.clientKey)).clientKey,prior.clientKey);assert.equal(rollback.generated,0);
+ assert.equal((await rollback.api.checkout(v2Selection)).clientKey,prior.clientKey);
+ await assert.rejects(rollback.api.checkout({...v2Selection,designId:2}),/currently unavailable/);
+ assert.equal(rollback.generated,0);assert.equal(JSON.parse(f.storage.get(storageKey)).attempts.length,1);
+});
+test('resuming old singleton after upgrade preserves its exact token and UUID without migration loss',async()=>{
+ const oldId='00000000-0000-4000-8000-000000000009',request={...selection,token:'original-token'},raw={key:JSON.stringify(request),clientKey:oldId};
+ const storage=new Map([[storageKey,JSON.stringify(raw)],['invitestory.previewToken','replacement-token']]);
+ const f=fixture({config:v2Config,storage});const result=await f.api.resumeCheckout(oldId);
+ assert.equal(result.clientKey,oldId);assert.equal(f.requests.at(-1).body.token,'original-token');assert.equal(JSON.parse(storage.get(storageKey)).attempts[0].key,raw.key);assert.equal(f.generated,0);
+});
+test('v2 backend rejection keeps retry identity and concurrent clicks share the request',async()=>{
+ const f=fixture({config:v2Config});f.checkoutStatus=400;f.checkoutResult={error:'Mock backend rejected'};
+ await assert.rejects(f.api.checkout(v2Selection),/Mock backend rejected/);const prior=f.requests.at(-1).body.clientKey;
+ f.checkoutStatus=200;f.checkoutResult=quote12();let release;f.hold=new Promise(resolve=>release=resolve);
+ const a=f.api.checkout(v2Selection),b=f.api.checkout(v2Selection);await new Promise(setImmediate);assert.equal(f.requests.filter(r=>r.body).length,2);release();
+ const values=await Promise.all([a,b]);assert.equal(values[0].clientKey,prior);assert.equal(values[1].clientKey,prior);assert.equal(f.generated,1);
 });

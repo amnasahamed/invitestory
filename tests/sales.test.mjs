@@ -26,14 +26,14 @@ function website() {
 test('concurrent Pay presses open one checkout and payment cleanup uses the captured attempt ID',async()=>{
  const site=website();
  site.run(`window.opens=0; window.checkouts=0;
-  window.InviteWebsite={checkout(){window.checkouts++;return new Promise(resolve=>window.resolveCheckout=resolve);},paid(key){window.paidKey=key;}};
+  window.InviteWebsite={deliveryV2Enabled:()=>true,checkout(){window.checkouts++;return new Promise(resolve=>window.resolveCheckout=resolve);},paid(key){window.paidKey=key;}};
   var Razorpay=class {constructor(options){window.checkoutOptions=options;}on(){}open(){window.opens++;}};
   handlePaidSuccess=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;
  `);
  const pending=site.run('proceedFromOrderDrawerToCheckout()');
  await site.run('proceedFromOrderDrawerToCheckout()');
  assert.equal(site.run('window.checkouts'),1);
- site.run("window.resolveCheckout({clientKey:'00000000-0000-4000-8000-000000000009',orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR'})");
+ site.run("window.resolveCheckout({clientKey:'00000000-0000-4000-8000-000000000009',orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR',checkoutVersion:2,deliverySpeed:'standard_48h',deliverySnapshot:{speed:'standard_48h',firstDraftHours:48,surcharge:0,currency:'INR',startsAfter:'payment_and_complete_details'}})");
  await pending;assert.equal(site.run('window.opens'),1);
  assert.equal(site.run('window.checkoutOptions.amount'),199900);
  assert.equal(site.run('window.checkoutOptions.order_id'),'fixture-order');
@@ -43,7 +43,7 @@ test('concurrent Pay presses open one checkout and payment cleanup uses the capt
 
 test('checkout failure releases the Pay guard for a deliberate retry without opening the SDK',async()=>{
  const site=website();site.run(`window.attempts=0;window.opens=0;showToast=()=>{};
- window.InviteWebsite={async checkout(){window.attempts++;throw new Error('Fixture failure');}};
+ window.InviteWebsite={deliveryV2Enabled:()=>true,async checkout(){window.attempts++;throw new Error('Fixture failure');}};
  var Razorpay=class {on(){}open(){window.opens++;}};`);
  await site.run('proceedFromOrderDrawerToCheckout()');await site.run('proceedFromOrderDrawerToCheckout()');
  assert.equal(site.run('window.attempts'),2);assert.equal(site.run('window.opens'),0);
@@ -321,7 +321,30 @@ test('preview performance events retain timing and outcome without personalized 
 
 test('server quote mismatch or rejection never opens payment or clears retry identity',async()=>{
  for(const response of ['{amount:1,currency:"INR"}','{amount:199900,currency:"USD"}','null']){
-  const site=website();site.run(`window.opens=0;window.cleaned=0;window.InviteWebsite={checkout:async()=>{${response==='null'?'throw new Error("Mock backend rejection")':`return ${response}`}},paid(){window.cleaned++;}};var Razorpay=class {constructor(){} on(){} open(){window.opens++;}};showToast=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;`);
+  const site=website();site.run(`window.opens=0;window.cleaned=0;window.InviteWebsite={deliveryV2Enabled:()=>true,checkout:async()=>{${response==='null'?'throw new Error("Mock backend rejection")':`return ${response}`}},paid(){window.cleaned++;}};var Razorpay=class {constructor(){} on(){} open(){window.opens++;}};showToast=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;`);
   await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.opens'),0);assert.equal(site.run('window.cleaned'),0);
  }
+});
+
+test('v2 INR totals charge exactly one speed including Dearly; RSVP stays included',()=>{
+ const site=website(),radio={value:'standard_48h'},email={checked:true};
+ site.elements.set('input[name="order-delivery-speed"]:checked',radio);site.elements.set('order-drawer-addon-email-rsvp',email);
+ site.run('window.InviteWebsite={deliveryV2Enabled:()=>true};orderDrawerState.isPackage=true;');
+ for(const tier of [2,3,4])for(const [speed,fee,hours] of [['standard_48h',0,48],['express_24h',799,24],['express_12h',1499,12]]){
+  radio.value=speed;site.run(`orderDrawerState.tier=${tier};updateOrderDrawerTotal()`);
+  assert.equal(site.run('orderDrawerState.total'),({2:1999,3:2999,4:4999}[tier])+fee+(tier===4?0:2000));assert.equal(site.run('deliveryHoursForOrder()'),hours);
+ }
+});
+
+test('success receipt link carries versioned delivery while legacy links stay legacy',()=>{
+ const site=website(),link={href:''};site.elements.set('payment-success-modal',{classList:{add(){}},setAttribute(){}});site.elements.set('pay-success-thankyou-link',link);
+ site.run(`var InvitePaidOrder={summary:()=>({addons:'',delivery:''})};showPaymentSuccess({packageName:'Dearly',amountText:'₹6,498',paymentId:'mock',checkoutVersion:2,deliverySnapshot:{speed:'express_12h',firstDraftHours:12,currency:'INR',startsAfter:'payment_and_complete_details'}})`);
+ const q=new URL(link.href,'https://example.test').searchParams;assert.equal(q.get('checkout_version'),'2');assert.equal(JSON.parse(q.get('delivery_snapshot')).firstDraftHours,12);
+ site.run("showPaymentSuccess({packageName:'Dearly',amountText:'₹4,999',paymentId:'old',express:true})");assert.equal(new URL(link.href,'https://example.test').searchParams.has('checkout_version'),false);
+});
+
+test('resumed checkout uses the saved design and original terms even when another design is selected',async()=>{
+ const site=website();site.run(`window.InviteWebsite={};window.opened=0;var Razorpay=class {constructor(o){window.options=o}on(){}open(){window.opened++}};orderDrawerState.template=TEMPLATE_DATABASE.find(d=>d.id===35);`);
+ await site.run(`proceedFromOrderDrawerToCheckout({request:{designId:1,tier:2,currency:'INR',express:true,emailRsvp:false},secure:{orderId:'order_saved',keyId:'mock',amount:279800,currency:'INR',clientKey:'saved'}})`);
+ assert.equal(site.run('window.opened'),1);assert.equal(site.run('window.options.notes.template_id'),'1');assert.equal(site.run('window.options.amount'),279800);
 });

@@ -40,14 +40,7 @@
     "/api/commerce/order": {
       "post": {
         "summary": "Order and customize digital wedding invitation",
-        "description": "Initiates payment and custom order generation for an interactive wedding card template.",
-        "x-payment-info": {
-          "intent": "charge",
-          "method": "stripe",
-          "amount": 1999,
-          "currency": "INR",
-          "description": "InviteStory interactive wedding invitation design, custom soundtrack, venue maps, and hosting valid until 1 month after event end date."
-        },
+        "description": "Legacy commerce metadata only; this repository does not verify an implemented payment or delivery contract at this path. Do not use its advertised response or payment metadata to create purchases. Secure website checkout is a separate staff service.",
         "requestBody": {
           "required": true,
           "content": {
@@ -66,14 +59,13 @@
                   "eventDate": {
                     "type": "string",
                     "example": "2026-11-20"
-                  },
-                  "deliveryAddon": {
-                    "type": "string",
-                    "enum": ["standard_24h", "express_12h"],
-                    "default": "standard_24h"
                   }
                 },
-                "required": ["templateId", "coupleNames", "eventDate"]
+                "required": [
+                  "templateId",
+                  "coupleNames",
+                  "eventDate"
+                ]
               }
             }
           }
@@ -86,9 +78,15 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "orderId": { "type": "string" },
-                    "status": { "type": "string" },
-                    "estimatedDelivery": { "type": "string" }
+                    "orderId": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "estimatedDelivery": {
+                      "type": "string"
+                    }
                   }
                 }
               }
@@ -105,7 +103,8 @@
               }
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
     "/health": {
@@ -123,6 +122,229 @@
                     "status": {
                       "type": "string",
                       "example": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/website/checkout": {
+      "servers": [
+        {
+          "url": "https://staff.invitestory.in",
+          "description": "Authoritative checkout service; local v2 proposal, production equivalence unverified."
+        }
+      ],
+      "post": {
+        "summary": "Secure website checkout (versioned delivery preparation)",
+        "description": "UNPUBLISHED v2 contract proposal. Enable only after verified server capability. INR-only: 48-hour first draft included, 24-hour +799 INR, 12-hour +1499 INR. Exactly one deliverySpeed; express and unknown fields are rejected. Dearly retains Email RSVP but no included faster speed in v2. Timing begins after payment and complete details. Legacy USD behavior and stored legacy retries remain supported separately. Existing immutable promises are not migrated. A rollback disables fresh v2 sales while retaining stored retries and readers.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "checkoutVersion",
+                  "deliverySpeed",
+                  "currency",
+                  "tier",
+                  "emailRsvp",
+                  "clientKey"
+                ],
+                "properties": {
+                  "checkoutVersion": {
+                    "type": "integer",
+                    "enum": [
+                      2
+                    ]
+                  },
+                  "deliverySpeed": {
+                    "type": "string",
+                    "enum": [
+                      "standard_48h",
+                      "express_24h",
+                      "express_12h"
+                    ]
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": [
+                      "INR"
+                    ]
+                  },
+                  "tier": {
+                    "type": "integer",
+                    "enum": [
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  "designId": {
+                    "type": "integer",
+                    "nullable": true
+                  },
+                  "emailRsvp": {
+                    "type": "boolean"
+                  },
+                  "clientKey": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Persist and reuse for retries of the identical selection; never replace an uncertain attempt."
+                  },
+                  "token": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Authoritative order response; verify amount, currency, checkoutVersion, deliverySpeed and deliverySnapshot before launching payment. Amount and snapshot surcharge are in minor units.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "orderId",
+                    "keyId",
+                    "amount",
+                    "currency",
+                    "checkoutVersion",
+                    "deliverySpeed",
+                    "deliverySnapshot"
+                  ],
+                  "properties": {
+                    "orderId": {
+                      "type": "string"
+                    },
+                    "keyId": {
+                      "type": "string"
+                    },
+                    "amount": {
+                      "type": "integer",
+                      "description": "Authoritative total in minor units."
+                    },
+                    "currency": {
+                      "type": "string",
+                      "enum": [
+                        "INR"
+                      ]
+                    },
+                    "checkoutVersion": {
+                      "type": "integer",
+                      "enum": [
+                        2
+                      ]
+                    },
+                    "deliverySpeed": {
+                      "type": "string",
+                      "enum": [
+                        "standard_48h",
+                        "express_24h",
+                        "express_12h"
+                      ]
+                    },
+                    "deliverySnapshot": {
+                      "type": "object",
+                      "required": [
+                        "speed",
+                        "firstDraftHours",
+                        "surcharge",
+                        "currency",
+                        "startsAfter"
+                      ],
+                      "properties": {
+                        "speed": {
+                          "type": "string",
+                          "enum": [
+                            "standard_48h",
+                            "express_24h",
+                            "express_12h"
+                          ]
+                        },
+                        "firstDraftHours": {
+                          "type": "integer",
+                          "enum": [
+                            48,
+                            24,
+                            12
+                          ]
+                        },
+                        "surcharge": {
+                          "type": "integer",
+                          "enum": [
+                            0,
+                            79900,
+                            149900
+                          ],
+                          "description": "INR minor units, corresponding to the selected speed."
+                        },
+                        "currency": {
+                          "type": "string",
+                          "enum": [
+                            "INR"
+                          ]
+                        },
+                        "startsAfter": {
+                          "type": "string",
+                          "enum": [
+                            "payment_and_complete_details"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid/contradictory selection, unsupported contract, refresh required, or disabled fresh v2 sales; no automatic legacy fallback."
+          }
+        }
+      }
+    },
+    "/api/website/config": {
+      "servers": [
+        {
+          "url": "https://staff.invitestory.in",
+          "description": "Authoritative checkout service; local v2 proposal, production equivalence unverified."
+        }
+      ],
+      "get": {
+        "summary": "Check secure checkout capability before choosing a contract",
+        "description": "UNPUBLISHED preparation: fresh INR v2 checkout requires checkoutEnabled=true, checkoutContracts including 2, and deliveryV2SalesEnabled=true. Missing or incompatible capabilities must block checkout. Stored attempts remain eligible for server reconciliation when new sales are disabled. USD remains on the legacy contract. Production equivalence unverified.",
+        "responses": {
+          "200": {
+            "description": "Configuration; other existing configuration fields are omitted from this focused schema.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "checkoutEnabled": {
+                      "type": "boolean"
+                    },
+                    "checkoutContracts": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer"
+                      },
+                      "example": [
+                        1,
+                        2
+                      ]
+                    },
+                    "deliveryV2SalesEnabled": {
+                      "type": "boolean"
                     }
                   }
                 }

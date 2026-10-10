@@ -31,3 +31,11 @@ test('historic express=true remains 24h even with untrusted proposed speed field
  assert.ok(order.message(historic).includes('Email RSVP (included)'));
  assert.ok(order.summary({...historic,express:false}).delivery.includes('48 hours'));
 });
+
+test('versioned receipts use the immutable speed snapshot and reject invalid promises',()=>{
+ for(const [speed,hours] of [['standard_48h',48],['express_24h',24],['express_12h',12]]){
+  const details={...base,checkoutVersion:2,express:true,deliverySnapshot:{speed,firstDraftHours:hours,currency:'INR',startsAfter:'payment_and_complete_details'}};
+  assert.ok(order.summary(details).delivery.includes(`${hours} hours`));assert.ok(order.summary(details).delivery.includes('including overnight'));
+ }
+ for(const snapshot of [undefined,{speed:'express_12h',firstDraftHours:24},{speed:['express_12h'],firstDraftHours:12,currency:'INR',startsAfter:'payment_and_complete_details'}])assert.match(order.summary({checkoutVersion:2,express:true,deliverySnapshot:snapshot}).delivery,/unavailable/);
+});
