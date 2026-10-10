@@ -24,3 +24,10 @@ test('Dearly included services stay explicit and malformed receipt extras do not
  assert.ok(msg.includes('Email RSVP (included)'));
  assert.equal(order.summary({...base,addons:{unexpected:true}}).addons,'None selected');
 });
+
+test('historic express=true remains 24h even with untrusted proposed speed fields',()=>{
+ const historic={...base,packageName:'Dearly',express:true,deliverySpeed:'express12',deliveryHours:12,addons:['Express 24h Delivery (included)','Email RSVP (included)']};
+ assert.ok(order.summary(historic).delivery.includes('24 hours'));
+ assert.ok(order.message(historic).includes('Email RSVP (included)'));
+ assert.ok(order.summary({...historic,express:false}).delivery.includes('48 hours'));
+});

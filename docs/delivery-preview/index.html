@@ -1,0 +1,21 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Delivery proposal — local review</title>
+<style>body{font:17px system-ui;margin:24px auto;padding:0 20px;max-width:580px;background:#faf7f0;color:#272522}label{display:block;padding:12px 0}select,button{font:inherit;padding:10px}fieldset{margin:24px 0;border:1px solid #aaa;border-radius:8px}output{display:block;font-size:24px;margin:20px 0}small{display:block}button{width:100%}</style>
+<h1>Choose your first-draft speed</h1><p>Local proposal only. Checkout is unavailable pending the staff portal pricing contract.</p>
+<label>Design package <select id="tier"><option value="2">Premium</option><option value="3">Luxury</option><option value="4">Dearly</option></select></label>
+<label>Currency <select id="currency"><option>INR</option><option>USD</option></select></label>
+<fieldset><legend>Delivery speed</legend><label><input type="radio" name="speed" value="standard" checked> Standard · 48 hours <span id="standard-price"></span></label><label><input type="radio" name="speed" value="express24"> 24 hours <span id="express24-price"></span></label><label><input type="radio" name="speed" value="express12"> 12 hours <span id="express12-price"></span></label></fieldset>
+<label><input type="checkbox" id="rsvp"> Email RSVP <span id="rsvp-price"></span></label>
+<p>Timing starts after payment and complete details. Hours include overnight.</p><output id="total" aria-live="polite"></output><p id="promise"></p><p id="notice" role="status"></p><button disabled>Checkout unavailable in this preview</button>
+<script type="module">
+import {quote,switchCurrency} from './policy.mjs';
+let selection={tier:2,currency:'INR',speed:'standard',emailRsvp:false};
+const $=id=>document.getElementById(id);
+function render(){const q=quote(selection),usd=selection.currency==='USD',included=usd&&selection.tier===4,money=n=>new Intl.NumberFormat('en-IN',{style:'currency',currency:selection.currency,maximumFractionDigits:0}).format(n);
+ document.querySelectorAll('[name=speed]').forEach(el=>{el.checked=el.value===q.speed;el.disabled=included||(usd&&el.value==='express12');});
+ $('standard-price').textContent=included?'· Not offered for existing USD Dearly':'· Included';$('express24-price').textContent=included?'· Included':`· +${money(usd?9:799)}`;$('express12-price').textContent=usd?'· Price unresolved':`· +${money(1499)}`;
+ $('rsvp').checked=q.emailRsvp;$('rsvp').disabled=selection.tier===4;$('rsvp-price').textContent=selection.tier===4?'· Included':`· +${money(usd?24:2000)}`;
+ $('total').textContent=`Estimated total: ${money(q.total)}`;$('promise').textContent=`First draft within ${q.hours} hours after payment and complete details.`;
+ $('notice').textContent=usd?'Existing USD pricing and Dearly benefits preserved. No USD 12-hour price is defined.':'Proposed new orders: Dearly includes Email RSVP; delivery upgrades cost extra.';
+}
+$('tier').onchange=e=>{selection.tier=Number(e.target.value);render();};$('currency').onchange=e=>{selection=switchCurrency(selection,e.target.value);render();};$('rsvp').onchange=e=>{selection.emailRsvp=e.target.checked;render();};document.querySelectorAll('[name=speed]').forEach(el=>el.onchange=()=>{selection.speed=el.value;render();});render();
+</script></html>

@@ -105,3 +105,10 @@ test('verification failure retains the saved ID for retry without sending checko
  assert.equal(f.requests.length,1);const saved=JSON.parse(f.storage.get(storageKey)).attempts[0].clientKey;
  f.rejectVerification=false;assert.equal((await f.api.checkout(selection)).clientKey,saved);assert.equal(f.generated,1);
 });
+
+test('uncontracted delivery fields fail closed before configuration, fallback or retry mutation',async()=>{
+ for(const field of ['deliverySpeed','deliveryAddon','deliveryHours'])for(const config of [{enabled:true,checkoutEnabled:true},{enabled:false,checkoutEnabled:false}]){
+  const f=fixture({config});await assert.rejects(f.api.checkout({...selection,[field]:12}),/not available/);
+  assert.equal(f.generated,0);assert.equal(f.verification,0);assert.equal(f.requests.length,1);assert.equal(f.storage.size,0);
+ }
+});

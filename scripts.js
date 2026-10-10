@@ -1943,6 +1943,9 @@ async function proceedFromOrderDrawerToCheckout() {
     try {
       const secure = await window.InviteWebsite.checkout({designId:orderDrawerState.template?.id || null,tier,currency:currencyCode,express:Boolean(expressChecked),emailRsvp:Boolean(emailRsvpChecked)});
       if (secure) {
+        if (secure.currency !== currencyCode || secure.amount !== Math.round(totalVal * 100)) {
+          throw new Error("The checkout price differs from your selection. Please contact our team before paying.");
+        }
         checkoutClientKey=secure.clientKey;
         options.order_id=secure.orderId;options.key=secure.keyId;options.amount=secure.amount;options.currency=secure.currency;
       }

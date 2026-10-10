@@ -318,3 +318,10 @@ test('preview performance events retain timing and outcome without personalized 
   assert.equal(event[2].preview_ready,false);assert.equal(event[2].exit_reason,'close');
   for(const key of ['first','phone','previewUrl'])assert.equal(key in event[2],false);
 });
+
+test('server quote mismatch or rejection never opens payment or clears retry identity',async()=>{
+ for(const response of ['{amount:1,currency:"INR"}','{amount:199900,currency:"USD"}','null']){
+  const site=website();site.run(`window.opens=0;window.cleaned=0;window.InviteWebsite={checkout:async()=>{${response==='null'?'throw new Error("Mock backend rejection")':`return ${response}`}},paid(){window.cleaned++;}};var Razorpay=class {constructor(){} on(){} open(){window.opens++;}};showToast=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;`);
+  await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.opens'),0);assert.equal(site.run('window.cleaned'),0);
+ }
+});

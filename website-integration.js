@@ -110,7 +110,11 @@
  }
  window.InviteWebsite={
   ready,
-  async checkout(selection){await ready;if(configuration.unavailable)throw new Error('Secure checkout is temporarily unavailable. Please try again or contact us.');if(!configuration.checkoutEnabled)return null;
+  async checkout(selection){
+   // The portal contract only supports the existing Boolean express (24h).
+   // Reject proposed speed fields before any fallback, storage or payment request.
+   if(['deliverySpeed','deliveryAddon','deliveryHours'].some(field=>Object.hasOwn(selection,field)))throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
+   await ready;if(configuration.unavailable)throw new Error('Secure checkout is temporarily unavailable. Please try again or contact us.');if(!configuration.checkoutEnabled)return null;
    if(window.isSecureContext!==true)throw new Error('Please open this page over HTTPS to use secure checkout.');
    const request={...selection,token:token||undefined},key=JSON.stringify(request);
    if(checkoutInFlight.has(key))return checkoutInFlight.get(key);
