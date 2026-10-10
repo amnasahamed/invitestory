@@ -1593,6 +1593,7 @@ function closePaymentSuccess() {
 
 /** Primary button inside the success panel — opens WhatsApp with the paid prefill. */
 function sendDetailsOnWhatsApp() {
+  trackPostHogEvent("whatsapp_click", { cta_location: "payment_success" });
   const d = window.__lastPayment;
   if (!d) {
     window.open("https://wa.me/918281583882?text=" + encodeURIComponent("Hi InviteStory! I just paid on the website — here are my wedding details:"), "_blank");
@@ -4212,6 +4213,23 @@ function setupFaqHandlers() {
   });
 }
 
+function trackWhatsAppLinkClick(e) {
+  const waLink = e.target.closest('a[href*="wa.me"]');
+  if (!waLink || waLink.id === "floating-whatsapp") return;
+  // The bespoke handler owns tracking and preserves its price metadata.
+  if (waLink.id === "custom-modal-wa-btn" && typeof waLink.onclick === "function") return;
+  const location = waLink.dataset.ctaLocation || (waLink.closest("header") ? "header"
+    : waLink.closest("footer") ? "footer"
+    : waLink.closest(".final-cta-section") ? "final_cta"
+    : waLink.closest("#custom-modal") ? "custom_modal"
+    : waLink.closest(".hero-section, .studio-hero") ? "hero"
+    : "page_link");
+  trackConversionEvent("whatsapp_click", {
+    cta_location: location,
+    content_name: waLink.getAttribute("aria-label") || waLink.title || waLink.innerText.trim().slice(0, 50) || "WhatsApp Link"
+  });
+}
+
 function openCustomModal() {
   const modal = document.getElementById("custom-modal");
   if (!modal) return;
@@ -4327,20 +4345,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  document.addEventListener("click", (e) => {
-    const waLink = e.target.closest('a[href*="wa.me"]');
-    if (!waLink || waLink.id === "floating-whatsapp") return;
-    const location = waLink.dataset.ctaLocation || (waLink.closest("header") ? "header"
-      : waLink.closest("footer") ? "footer"
-      : waLink.closest(".final-cta-section") ? "final_cta"
-      : waLink.closest("#custom-modal") ? "custom_modal"
-      : waLink.closest(".hero-section, .studio-hero") ? "hero"
-      : "page_link");
-    trackConversionEvent("whatsapp_click", {
-      cta_location: location,
-      content_name: waLink.getAttribute("aria-label") || waLink.title || waLink.innerText.trim().slice(0, 50) || "WhatsApp Link"
-    });
-  }, { passive: true });
+  document.addEventListener("click", trackWhatsAppLinkClick, { passive: true });
 
   // Show the floating tier nav on all viewports.
   // (Previously it was removed from the DOM on mobile — now it stays.)
