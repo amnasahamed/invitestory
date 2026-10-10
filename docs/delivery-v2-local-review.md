@@ -34,6 +34,8 @@ The old /api/commerce/order OpenAPI timing enum/payment metadata was not the sec
 - Independent backend and frontend reviewers found no remaining code blockers. Frontend61 targeted tests passed; final capability refinement25 checkout tests passed. Documentation was corrected to match the absent-versus-explicit currency-list semantics. git diff --check passed.
 - Screenshots: /tmp/delivery-v2-INR-390.png, /tmp/delivery-v2-USD-390.png, /tmp/delivery-v2-INR-1440.png, /tmp/delivery-v2-USD-1440.png. USD mobile screenshot visually inspected: +$9/+$18, Dearly RSVP included, $93 total at12h.
 
+Latest USD75 copy correction verification: full website suite107/107 passed again (/tmp/dearly-base75-tests.log); Chromium at390x844 and1440x900 verified dearly/index.html and dearly.html both show USD75, checkout totals75/84/93, included RSVP and unchanged INR4999 (/tmp/dearly-base75-browser.log). Active Dearly/main price-copy search found no remaining USD80 reference. Historical audit documents and prior test evidence/bundles are preserved. Exact latest files: dearly/index.html, dearly/README.md, the parent dearly gitlink and this review document. Staff application and pricing code are unchanged.
+
 ## Remaining blockers and operational limits
 
 The release hold still forbids pushes, PR publication, merges, deployments, real orders/payments and infrastructure/credential changes; none occurred. Production source/configuration/migration equivalence and a coordinated rollout remain unverified/unperformed. The known baseline dashboard test failure remains separate from this work.
@@ -42,7 +44,7 @@ No verified complete-details timestamp exists in this integration. Staff must ve
 
 Cutover availability: fresh legacy purchases in BOTH currencies are now rejected, even when the new-sales flag is off. Deploying the backend before coordinated client/capability activation would pause all fresh website sales. Existing pending INR/USD legacy and v2 payments remain supported. No production flag was changed.
 
-Pre-existing copy discrepancy retained under the instruction not to change base prices: dearly/index.html still displays $80, whereas the authoritative staff and main website Dearly base is $75. This submodule base-price discrepancy is outside the delivery patch and should be reconciled before publication; neither base figure was changed by this task.
+Resolved with explicit user approval to keep Dearly at USD75: corrected the stale USD80 display in dearly/index.html and the related base-price row in dearly/README.md. README timing documentation now matches the already-approved delivery options. Authoritative checkout/catalogue bases remain INR4999 / USD75. Other tiers, add-on prices, historical orders and pending payment amounts were not changed. Historical audit documents retain their original findings.
 
 ## Safe rollback and local delivery
 
