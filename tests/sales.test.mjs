@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
 
 function website() {
-  const elements = new Map();
+  const elements = new Map(['order-delivery-speeds','delivery-standard_48h','delivery-express_24h','delivery-express_12h'].map(id=>[id,{checked:id==='delivery-standard_48h'}]));
   const storage = new Map();
   const calls = [];
   const classList = { add() {}, remove() {}, contains() { return false; } };
@@ -17,6 +17,7 @@ function website() {
   };
   const window = { location, posthog: { capture: (...args) => calls.push(['posthog', ...args]) }, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
   const context = vm.createContext({ document, window, location, history: window.history, navigator: { userAgent: 'test', maxTouchPoints: 0 }, localStorage: store, sessionStorage: store, URL, URLSearchParams, console, setTimeout, clearTimeout, queueMicrotask });
+  vm.runInContext(readFileSync(new URL('../paid-order.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../scripts.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../sales.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../interactions.js', import.meta.url), 'utf8'), context);
@@ -26,14 +27,14 @@ function website() {
 test('concurrent Pay presses open one checkout and payment cleanup uses the captured attempt ID',async()=>{
  const site=website();
  site.run(`window.opens=0; window.checkouts=0;
-  window.InviteWebsite={checkout(){window.checkouts++;return new Promise(resolve=>window.resolveCheckout=resolve);},paid(key){window.paidKey=key;}};
+  window.InviteWebsite={deliveryV2Enabled:()=>true,checkout(){window.checkouts++;return new Promise(resolve=>window.resolveCheckout=resolve);},paid(key){window.paidKey=key;}};
   var Razorpay=class {constructor(options){window.checkoutOptions=options;}on(){}open(){window.opens++;}};
   handlePaidSuccess=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;
  `);
  const pending=site.run('proceedFromOrderDrawerToCheckout()');
  await site.run('proceedFromOrderDrawerToCheckout()');
  assert.equal(site.run('window.checkouts'),1);
- site.run("window.resolveCheckout({clientKey:'00000000-0000-4000-8000-000000000009',orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR'})");
+ site.run("window.resolveCheckout({clientKey:'00000000-0000-4000-8000-000000000009',orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR',checkoutVersion:2,deliverySpeed:'standard_48h',deliverySnapshot:{speed:'standard_48h',firstDraftHours:48,surcharge:0,currency:'INR',startsAfter:'payment_and_complete_details'}})");
  await pending;assert.equal(site.run('window.opens'),1);
  assert.equal(site.run('window.checkoutOptions.amount'),199900);
  assert.equal(site.run('window.checkoutOptions.order_id'),'fixture-order');
@@ -43,7 +44,7 @@ test('concurrent Pay presses open one checkout and payment cleanup uses the capt
 
 test('checkout failure releases the Pay guard for a deliberate retry without opening the SDK',async()=>{
  const site=website();site.run(`window.attempts=0;window.opens=0;showToast=()=>{};
- window.InviteWebsite={async checkout(){window.attempts++;throw new Error('Fixture failure');}};
+ window.InviteWebsite={deliveryV2Enabled:()=>true,async checkout(){window.attempts++;throw new Error('Fixture failure');}};
  var Razorpay=class {on(){}open(){window.opens++;}};`);
  await site.run('proceedFromOrderDrawerToCheckout()');await site.run('proceedFromOrderDrawerToCheckout()');
  assert.equal(site.run('window.attempts'),2);assert.equal(site.run('window.opens'),0);
@@ -317,4 +318,93 @@ test('preview performance events retain timing and outcome without personalized 
   assert.equal(event[2].elapsed_ms,8300);assert.equal(event[2].retry_count,1);
   assert.equal(event[2].preview_ready,false);assert.equal(event[2].exit_reason,'close');
   for(const key of ['first','phone','previewUrl'])assert.equal(key in event[2],false);
+});
+
+test('server quote mismatch or rejection never opens payment or clears retry identity',async()=>{
+ for(const response of ['{amount:1,currency:"INR"}','{amount:199900,currency:"USD"}','null']){
+  const site=website();site.run(`window.opens=0;window.cleaned=0;window.InviteWebsite={deliveryV2Enabled:()=>true,checkout:async()=>{${response==='null'?'throw new Error("Mock backend rejection")':`return ${response}`}},paid(){window.cleaned++;}};var Razorpay=class {constructor(){} on(){} open(){window.opens++;}};showToast=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;`);
+  await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.opens'),0);assert.equal(site.run('window.cleaned'),0);
+ }
+});
+
+test('v2 INR totals charge exactly one speed including Dearly; RSVP stays included',()=>{
+ const site=website(),radio={value:'standard_48h'},email={checked:true};
+ site.elements.set('input[name="order-delivery-speed"]:checked',radio);site.elements.set('order-drawer-addon-email-rsvp',email);
+ site.run('window.InviteWebsite={deliveryV2Enabled:()=>true};orderDrawerState.isPackage=true;');
+ for(const tier of [2,3,4])for(const [speed,fee,hours] of [['standard_48h',0,48],['express_24h',799,24],['express_12h',1499,12]]){
+  radio.value=speed;site.run(`orderDrawerState.tier=${tier};updateOrderDrawerTotal()`);
+  assert.equal(site.run('orderDrawerState.total'),({2:1999,3:2999,4:4999}[tier])+fee+(tier===4?0:2000));assert.equal(site.run('deliveryHoursForOrder()'),hours);
+ }
+});
+
+test('success receipt link carries versioned delivery while legacy links stay legacy',()=>{
+ const site=website(),link={href:''};site.elements.set('payment-success-modal',{classList:{add(){}},setAttribute(){}});site.elements.set('pay-success-thankyou-link',link);
+ site.run(`var InvitePaidOrder={summary:()=>({addons:'',delivery:''})};showPaymentSuccess({packageName:'Dearly',amountText:'₹6,498',paymentId:'mock',checkoutVersion:2,deliverySnapshot:{speed:'express_12h',firstDraftHours:12,currency:'INR',startsAfter:'payment_and_complete_details'}})`);
+ const q=new URL(link.href,'https://example.test').searchParams;assert.equal(q.get('checkout_version'),'2');assert.equal(JSON.parse(q.get('delivery_snapshot')).firstDraftHours,12);
+ site.run("showPaymentSuccess({packageName:'Dearly',amountText:'₹4,999',paymentId:'old',express:true})");assert.equal(new URL(link.href,'https://example.test').searchParams.has('checkout_version'),false);
+});
+
+test('resumed checkout uses the saved design and original terms even when another design is selected',async()=>{
+ const site=website();site.run(`window.InviteWebsite={};window.opened=0;var Razorpay=class {constructor(o){window.options=o}on(){}open(){window.opened++}};orderDrawerState.template=TEMPLATE_DATABASE.find(d=>d.id===35);`);
+ await site.run(`proceedFromOrderDrawerToCheckout({request:{designId:1,tier:2,currency:'INR',express:true,emailRsvp:false},secure:{orderId:'order_saved',keyId:'mock',amount:279800,currency:'INR',clientKey:'saved'}})`);
+ assert.equal(site.run('window.opened'),1);assert.equal(site.run('window.options.notes.template_id'),'1');assert.equal(site.run('window.options.amount'),279800);
+});
+
+test('USD versioned totals keep base and RSVP prices, charge one speed for all packages',()=>{
+ const site=website(),radio={value:'standard_48h'},email={checked:true};
+ site.elements.set('input[name="order-delivery-speed"]:checked',radio);site.elements.set('order-drawer-addon-email-rsvp',email);
+ site.run("window.InviteWebsite={deliveryV2Enabled:()=>true};currentCurrency='USD';orderDrawerState.isPackage=true;");
+ for(const tier of [2,3,4])for(const [speed,fee,hours] of [['standard_48h',0,48],['express_24h',9,24],['express_12h',18,12]]){
+  radio.value=speed;site.run(`orderDrawerState.tier=${tier};updateOrderDrawerTotal()`);
+  assert.equal(site.run('orderDrawerState.total'),({2:29,3:45,4:75}[tier])+fee+(tier===4?0:24));assert.equal(site.run('deliveryHoursForOrder()'),hours);
+ }
+});
+
+test('staged legacy drawer retains reviewed Dearly terms when activation arrives during checkout', async()=>{
+ const site=website();site.run(`window.active=false;window.opens=0;showToast=()=>{};
+ window.InviteWebsite={deliveryV2Enabled:()=>window.active,legacyCheckoutEnabled:()=>true,ready:new Promise(r=>window.readyResolve=r),checkout:async request=>{window.sent=request;return {amount:7500,currency:'USD',orderId:'fixture',keyId:'fixture'};}};
+ var Razorpay=class {constructor(o){window.options=o;}on(){}open(){window.opens++;}};
+ currentCurrency='USD';orderDrawerState.tier=4;orderDrawerState.total=75;orderDeliveryContract=false;`);
+ const pending=site.run('proceedFromOrderDrawerToCheckout()');
+ site.run('window.active=true;window.readyResolve()');await pending;
+ assert.equal(site.run('window.opens'),1);assert.equal(site.run('window.sent.express'),true);
+ assert.equal(site.run('window.sent.checkoutVersion'),undefined);assert.equal(site.run('window.options.amount'),7500);
+});
+
+test('displayed v2 contract never falls back to legacy when availability is withdrawn', async()=>{
+ const site=website();site.run(`window.sent=0;window.opens=0;showToast=()=>{};orderDeliveryContract=true;
+ window.InviteWebsite={deliveryV2Enabled:()=>false,legacyCheckoutEnabled:()=>true,checkout:async()=>{window.sent++;}};
+ var Razorpay=class {on(){}open(){window.opens++;}};`);
+ await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.sent'),0);assert.equal(site.run('window.opens'),0);
+});
+
+test('marketing shows only legacy offers before capability activation',()=>{
+ const site=website();site.run('window.InviteWebsite={deliveryV2Enabled:()=>false}');
+ const old=site.run('packageComparison()');assert.doesNotMatch(old,/12h first draft/);assert.match(old,/<td>Within 24h<\/td>/);
+ site.run('window.InviteWebsite.deliveryV2Enabled=()=>true');const active=site.run('packageComparison()');assert.match(active,/12h first draft/);
+});
+
+test('partial runtime or DOM never exposes v2 offers',()=>{
+ for(const missing of ['sales','interactions','receipt','DOM']){
+  const site=website();site.run('window.InviteWebsite={deliveryV2Enabled:()=>true}');assert.equal(site.run('usesNewDelivery()'),true);
+  if(missing==='sales')site.run('delete window.deliverySalesVersion');
+  if(missing==='interactions')site.run('delete window.deliveryInteractionsVersion');
+  if(missing==='receipt')site.run('delete InvitePaidOrder.deliveryVersion');
+  if(missing==='DOM')site.elements.delete('delivery-express_12h');
+  assert.equal(site.run('usesNewDelivery()'),false,missing);
+ }
+});
+
+test('mixed receipt reader blocks saved v2 payment without touching its retry identity',async()=>{
+ const site=website();site.run(`window.requests=0;window.cleaned=0;showToast=()=>{};delete InvitePaidOrder.deliveryVersion;
+ window.InviteWebsite={pendingCheckouts:()=>[{clientKey:'saved-key',request:{checkoutVersion:2}}],resumeCheckout:async()=>{window.requests++;},paid:()=>window.cleaned++};`);
+ await site.run("resumeSavedCheckout('saved-key')");assert.equal(site.run('window.requests'),0);assert.equal(site.run('window.cleaned'),0);
+});
+
+test('old integration resolved secure capability preserves legacy checkout, but null response never opens unsigned payment',async()=>{
+ for(const secure of [true,false]){
+  const site=website();site.run(`window.opens=0;showToast=()=>{};window.InviteWebsite={ready:Promise.resolve({checkoutEnabled:true}),checkout:async()=>${secure?"({amount:199900,currency:'INR',orderId:'fixture',keyId:'fixture'})":"null"}};
+  var Razorpay=class {on(){}open(){window.opens++;}};orderDrawerState.tier=2;orderDrawerState.total=1999;`);
+  await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.opens'),secure?1:0);
+ }
 });

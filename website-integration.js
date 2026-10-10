@@ -27,6 +27,7 @@
  function selected(){return typeof previewState!=='undefined'?TEMPLATE_DATABASE[previewState.currentIndex]:null;}
  function storeToken(value){token=value;try{sessionStorage.setItem('invitestory.previewToken',value);}catch{}}
  ready.then(async c=>{
+  window.refreshDeliveryOffers?.();
   if(c.enabled&&form) {
    const fields=document.createElement('details');fields.className='preview-whatsapp-fields';
    fields.innerHTML='<summary>Save this preview on WhatsApp <span>(optional)</span></summary><p>Keep the link for later. You can preview your names without a number.</p><label>WhatsApp number <span>(optional)</span><input name="whatsapp" type="tel" autocomplete="tel" maxlength="25" placeholder="+91" data-private="true" data-clarity-mask="true" class="ph-no-capture"></label><label class="preview-whatsapp-consent"><input name="whatsappConsent" type="checkbox"><span></span></label>';
@@ -108,16 +109,52 @@
   try{sessionStorage.setItem(checkoutStorageKey,value);if(sessionStorage.getItem(checkoutStorageKey)!==value)throw checkoutStorageError();}catch{throw checkoutStorageError();}
   return attempt.clientKey;
  }
+ const speedHours={standard_48h:48,express_24h:24,express_12h:12};
+ function v2Supported(currency='INR'){return configuration.checkoutEnabled===true&&Array.isArray(configuration.checkoutContracts)&&configuration.checkoutContracts.includes(2)&&(configuration.deliveryV2Currencies===undefined?currency==='INR':Array.isArray(configuration.deliveryV2Currencies)&&configuration.deliveryV2Currencies.includes(currency));}
+ function validateSelection(selection){
+  if(selection.checkoutVersion===2){
+   const allowed=['checkoutVersion','deliverySpeed','designId','tier','currency','emailRsvp','token'];
+   if(Object.keys(selection).some(k=>!allowed.includes(k))||!['INR','USD'].includes(selection.currency)||typeof selection.deliverySpeed!=='string'||!Object.hasOwn(speedHours,selection.deliverySpeed)||typeof selection.emailRsvp!=='boolean'||![2,3,4].includes(selection.tier))throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
+  }else if(['checkoutVersion','deliverySpeed','deliveryAddon','deliveryHours','deliverySnapshot','firstDraftHours'].some(field=>Object.hasOwn(selection,field)))throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
+ }
+ function validateResponse(result,request){
+  if(request.checkoutVersion!==2)return;
+  const snap=result.deliverySnapshot,fee=(request.currency==='INR'?{standard_48h:0,express_24h:79900,express_12h:149900}:{standard_48h:0,express_24h:900,express_12h:1800})[request.deliverySpeed];
+  if(result.checkoutVersion!==2||result.deliverySpeed!==request.deliverySpeed||result.currency!==request.currency||!Number.isSafeInteger(result.amount)||result.amount<=0||!snap||snap.speed!==request.deliverySpeed||snap.firstDraftHours!==speedHours[request.deliverySpeed]||snap.surcharge!==fee||snap.currency!==request.currency||snap.startsAfter!=='payment_and_complete_details')throw new Error('The checkout delivery promise could not be verified. Please contact our team before paying.');
+ }
+ async function submitCheckout(request,savedAttempt){
+  validateSelection(request);await ready;
+  if(configuration.unavailable)throw new Error('Secure checkout is temporarily unavailable. Please try again or contact us.');
+  const key=savedAttempt?.key||JSON.stringify(request);
+  if(request.checkoutVersion===2){
+   if(!v2Supported(request.currency))throw new Error('This delivery option is not available in secure checkout yet. Please contact our team.');
+   if(configuration.deliveryV2SalesEnabled!==true&&!readCheckoutAttempts().some(a=>a.key===key))throw new Error('New delivery bookings are currently unavailable. Saved payments can still be resumed.');
+  }
+  if(!configuration.checkoutEnabled){if(savedAttempt)throw new Error('Secure checkout is temporarily unavailable.');return null;}
+  if(window.isSecureContext!==true)throw new Error('Please open this page over HTTPS to use secure checkout.');
+  if(checkoutInFlight.has(key))return checkoutInFlight.get(key);
+  const clientKey=checkoutKey(key);
+  if(savedAttempt&&savedAttempt.clientKey!==clientKey)throw checkoutStorageError();
+  const pending=(async()=>{
+   const result=await api('checkout',{...request,clientKey,turnstileToken:await verification('checkout')});
+   validateResponse(result,request);return {...result,clientKey,request};
+  })();
+  checkoutInFlight.set(key,pending);
+  try{return await pending;}finally{checkoutInFlight.delete(key);}
+ }
  window.InviteWebsite={
   ready,
-  async checkout(selection){await ready;if(configuration.unavailable)throw new Error('Secure checkout is temporarily unavailable. Please try again or contact us.');if(!configuration.checkoutEnabled)return null;
-   if(window.isSecureContext!==true)throw new Error('Please open this page over HTTPS to use secure checkout.');
-   const request={...selection,token:token||undefined},key=JSON.stringify(request);
-   if(checkoutInFlight.has(key))return checkoutInFlight.get(key);
-   const clientKey=checkoutKey(key);
-   const pending=(async()=>({...await api('checkout',{...request,clientKey,turnstileToken:await verification('checkout')}),clientKey}))();
-   checkoutInFlight.set(key,pending);
-   try{return await pending;}finally{checkoutInFlight.delete(key);}
+  deliveryV2Enabled:(currency='INR')=>v2Supported(currency)&&configuration.deliveryV2SalesEnabled===true,
+  legacyCheckoutEnabled:()=>configuration.checkoutEnabled===true&&!configuration.unavailable,
+  pendingCheckouts(){return readCheckoutAttempts().map(a=>{let request;try{request=JSON.parse(a.key);validateSelection(request);}catch{return null;}return {clientKey:a.clientKey,request};}).filter(Boolean);},
+  async resumeCheckout(clientKey){
+   const attempt=readCheckoutAttempts().find(a=>a.clientKey===clientKey);if(!attempt)throw checkoutStorageError();
+   // Replay the exact saved JSON identity, including its original preview token.
+   return submitCheckout(JSON.parse(attempt.key),attempt);
+  },
+  async checkout(selection){
+   validateSelection(selection);
+   return submitCheckout({...selection,token:token||undefined});
   },
   paid(clientKey){
    if(!uuidPattern.test(clientKey))return;

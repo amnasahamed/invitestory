@@ -1,11 +1,28 @@
 /* Shared receipt and WhatsApp wording for every successful checkout. */
 (function(root){
   const clean=value=>String(value||'').replace(/[\r\n]+/g,' ').trim();
+  function delivery(details){
+    // A cached older thank-you HTML reader may omit v2 fields from its details object.
+    // Only recover explicitly versioned receipt URLs; never infer speed from legacy express.
+    if(details.checkoutVersion===undefined && /\/thank-you(?:\.html)?$/.test(root.location?.pathname||'')){
+      const query=new URLSearchParams(root.location.search||'');
+      if(query.get('checkout_version')==='2'){
+        let snapshot;try{snapshot=JSON.parse(query.get('delivery_snapshot')||'null');}catch{}
+        details={...details,checkoutVersion:2,deliverySnapshot:snapshot};
+      }
+    }
+    if(details.checkoutVersion===2){
+      const snapshot=details.deliverySnapshot,hours={standard_48h:48,express_24h:24,express_12h:12};
+      if(!snapshot||typeof snapshot.speed!=='string'||!Object.hasOwn(hours,snapshot.speed)||snapshot.firstDraftHours!==hours[snapshot.speed]||!['INR','USD'].includes(snapshot.currency)||snapshot.currency!==(details.currency||'INR')||snapshot.startsAfter!=='payment_and_complete_details')return 'Delivery promise unavailable — please confirm with our team';
+      return `First draft within ${snapshot.firstDraftHours} hours after payment and all required details (elapsed hours, including overnight)`;
+    }
+    return details.express?'First draft within 24 hours after payment and all required details':'First draft within 48 hours after payment and all required details';
+  }
   function summary(details){
     const addons=Array.isArray(details.addons)?details.addons.map(clean).filter(Boolean):[];
     return {
       addons:addons.join(', ')||'None selected',
-      delivery:details.express?'First draft within 24 hours after payment and all required details':'First draft within 48 hours after payment and all required details'
+      delivery:delivery(details)
     };
   }
   function message(details){
@@ -23,5 +40,5 @@
     lines.push('', 'Please confirm my order and share the checklist for names, event dates, venue details, photos and any other information you need.');
     return lines.join('\n');
   }
-  root.InvitePaidOrder={summary,message};
+  root.InvitePaidOrder={summary,message,deliveryVersion:2};
 })(globalThis);

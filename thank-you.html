@@ -11,7 +11,7 @@
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
-  <script src="paid-order.js"></script>
+  <script src="paid-order.js?v=20261010-delivery-bridge-2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -38,7 +38,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payment Received — InviteStory</title>
-  <meta name="description" content="Your InviteStory payment is confirmed. Send your wedding details on WhatsApp. First draft within 48 hours, or 24 hours with Express or Dearly, after payment and complete details.">
+  <meta name="description" content="Your InviteStory payment is confirmed. Send your wedding details on WhatsApp. Your purchased first-draft speed applies after payment and complete details.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" href="logo/noappicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,10 +122,18 @@
       var addons = [];
       try { addons = JSON.parse(q.get("addons") || "[]"); } catch {}
       var details = {packageName:pkg, amountText:amountStr, paymentId:pid, designName:q.get("design") || "", addons:addons, express:q.get("express")==="1", currency:q.get("currency") || "INR", previewNames:q.get("names") || "", utm_source:utmSource, utm_campaign:utmCampaign, utm_term:utmTerm, utm_content:utmContent};
-      var summary = InvitePaidOrder.summary(details);
+      if (q.get("checkout_version") === "2") details.checkoutVersion = 2;
+      try {
+        var deliverySnapshot = JSON.parse(q.get("delivery_snapshot") || "null");
+        if (q.get("checkout_version") === "2" && deliverySnapshot && typeof deliverySnapshot === "object" && !Array.isArray(deliverySnapshot)) {
+          details.deliverySnapshot = deliverySnapshot;
+        }
+      } catch {}
+      var incompatibleReader = details.checkoutVersion === 2 && InvitePaidOrder.deliveryVersion !== 2;
+      var summary = incompatibleReader ? {addons: Array.isArray(addons) ? addons.join(', ') : '', delivery: 'Please refresh this page to load your purchased delivery promise, or confirm it with our team.'} : InvitePaidOrder.summary(details);
       document.getElementById("ty-addons").textContent = summary.addons;
       document.getElementById("ty-delivery").textContent = summary.delivery;
-      var msg = InvitePaidOrder.message(details);
+      var msg = incompatibleReader ? 'Hello InviteStory, please confirm the purchased delivery promise for payment ' + pid + '. My receipt needs refreshing.' : InvitePaidOrder.message(details);
       var waBtn = document.getElementById("ty-wa-btn");
       waBtn.href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
 
