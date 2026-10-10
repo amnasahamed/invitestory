@@ -23,6 +23,33 @@ function website() {
   return { elements, calls, run: source => vm.runInContext(source, context) };
 }
 
+test('concurrent Pay presses open one checkout and payment cleanup uses the captured attempt ID',async()=>{
+ const site=website();
+ site.run(`window.opens=0; window.checkouts=0;
+  window.InviteWebsite={checkout(){window.checkouts++;return new Promise(resolve=>window.resolveCheckout=resolve);},paid(key){window.paidKey=key;}};
+  var Razorpay=class {constructor(options){window.checkoutOptions=options;}on(){}open(){window.opens++;}};
+  handlePaidSuccess=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;
+ `);
+ const pending=site.run('proceedFromOrderDrawerToCheckout()');
+ await site.run('proceedFromOrderDrawerToCheckout()');
+ assert.equal(site.run('window.checkouts'),1);
+ site.run("window.resolveCheckout({clientKey:'00000000-0000-4000-8000-000000000009',orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR'})");
+ await pending;assert.equal(site.run('window.opens'),1);
+ assert.equal(site.run('window.checkoutOptions.amount'),199900);
+ assert.equal(site.run('window.checkoutOptions.order_id'),'fixture-order');
+ site.run("window.checkoutOptions.handler({razorpay_payment_id:'fixture-payment'})");
+ assert.equal(site.run('window.paidKey'),'00000000-0000-4000-8000-000000000009');
+});
+
+test('checkout failure releases the Pay guard for a deliberate retry without opening the SDK',async()=>{
+ const site=website();site.run(`window.attempts=0;window.opens=0;showToast=()=>{};
+ window.InviteWebsite={async checkout(){window.attempts++;throw new Error('Fixture failure');}};
+ var Razorpay=class {on(){}open(){window.opens++;}};`);
+ await site.run('proceedFromOrderDrawerToCheckout()');await site.run('proceedFromOrderDrawerToCheckout()');
+ assert.equal(site.run('window.attempts'),2);assert.equal(site.run('window.opens'),0);
+ assert.equal(site.calls.filter(call=>call[0]==='posthog'&&call[1]==='checkout_unavailable').length,2);
+});
+
 test('PostHog receives catalogue metadata without form values, contact details or raw searches', () => {
   const site = website();
   site.run("trackConversionEvent('select_design', {item_id:'35', value:4999, currency:'INR', first:'Private name', phone:'Private number', query:'Private search', message:'Private message'})");

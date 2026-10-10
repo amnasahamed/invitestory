@@ -74,13 +74,58 @@
  frame?.addEventListener('load',()=>{
   try{frame.contentWindow.addEventListener('pointerdown',activity,{passive:true});frame.contentWindow.addEventListener('scroll',activity,{passive:true});activity();}catch{}
  });
+ const checkoutStorageKey='invitestory.checkoutRetry',checkoutInFlight=new Map();
+ const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+ let checkoutAttempts;
+ function checkoutStorageError(){return new Error('Checkout could not safely save your payment attempt. Please allow browser storage or contact us before retrying.');}
+ function readCheckoutAttempts(){
+  try{
+   const raw=sessionStorage.getItem(checkoutStorageKey);if(raw===null)return [];
+   const saved=JSON.parse(raw),attempts=Array.isArray(saved?.attempts)?saved.attempts:[saved];
+   const keys=new Set(),ids=new Set();
+   for(const attempt of attempts){
+    if(!attempt||typeof attempt.key!=='string'||!uuidPattern.test(attempt.clientKey)||keys.has(attempt.key)||ids.has(attempt.clientKey))throw checkoutStorageError();
+    keys.add(attempt.key);ids.add(attempt.clientKey);
+   }
+   return attempts;
+  }catch{throw checkoutStorageError();}
+ }
+ function checkoutAttemptId(){
+  if(typeof globalThis.crypto?.randomUUID==='function')return crypto.randomUUID();
+  if(typeof globalThis.crypto?.getRandomValues!=='function')throw new Error('Secure checkout is not supported in this browser. Please use an updated browser.');
+  const bytes=crypto.getRandomValues(new Uint8Array(16));bytes[6]=(bytes[6]&15)|64;bytes[8]=(bytes[8]&63)|128;
+  const hex=Array.from(bytes,b=>b.toString(16).padStart(2,'0')).join('');
+  return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20)}`;
+ }
+ function checkoutKey(key){
+  const saved=readCheckoutAttempts();
+  if(!checkoutAttempts)checkoutAttempts=saved;
+  // Do not rotate IDs after an uncertain response, storage failure, or selection change.
+  if(saved.some(a=>!checkoutAttempts.some(b=>a.key===b.key&&a.clientKey===b.clientKey)))throw checkoutStorageError();
+  let attempt=checkoutAttempts.find(a=>a.key===key);
+  if(!attempt){attempt={key,clientKey:checkoutAttemptId()};checkoutAttempts.push(attempt);}
+  const value=JSON.stringify({attempts:checkoutAttempts});
+  try{sessionStorage.setItem(checkoutStorageKey,value);if(sessionStorage.getItem(checkoutStorageKey)!==value)throw checkoutStorageError();}catch{throw checkoutStorageError();}
+  return attempt.clientKey;
+ }
  window.InviteWebsite={
   ready,
   async checkout(selection){await ready;if(configuration.unavailable)throw new Error('Secure checkout is temporarily unavailable. Please try again or contact us.');if(!configuration.checkoutEnabled)return null;
-   const request={...selection,token:token||undefined},key=JSON.stringify(request);let clientKey;
-   try{const prior=JSON.parse(sessionStorage.getItem('invitestory.checkoutRetry')||'null');clientKey=prior?.key===key?prior.clientKey:crypto.randomUUID();sessionStorage.setItem('invitestory.checkoutRetry',JSON.stringify({key,clientKey}));}catch{clientKey=crypto.randomUUID();}
-   return api('checkout',{...request,clientKey,turnstileToken:await verification('checkout')});
+   if(window.isSecureContext!==true)throw new Error('Please open this page over HTTPS to use secure checkout.');
+   const request={...selection,token:token||undefined},key=JSON.stringify(request);
+   if(checkoutInFlight.has(key))return checkoutInFlight.get(key);
+   const clientKey=checkoutKey(key);
+   const pending=(async()=>({...await api('checkout',{...request,clientKey,turnstileToken:await verification('checkout')}),clientKey}))();
+   checkoutInFlight.set(key,pending);
+   try{return await pending;}finally{checkoutInFlight.delete(key);}
   },
-  paid(){try{sessionStorage.removeItem('invitestory.checkoutRetry');}catch{}}
+  paid(clientKey){
+   if(!uuidPattern.test(clientKey))return;
+   try{
+    const remaining=readCheckoutAttempts().filter(a=>a.clientKey!==clientKey);
+    const value=JSON.stringify({attempts:remaining});sessionStorage.setItem(checkoutStorageKey,value);
+    if(sessionStorage.getItem(checkoutStorageKey)===value)checkoutAttempts=remaining;
+   }catch{} // Retain the existing IDs if cleanup fails; never manufacture a replacement.
+  }
  };
 })();
