@@ -36,6 +36,20 @@ export default {
     try {
       const url = new URL(request.url);
 
+      // Upgrade existing worker-first page routes before serving HTML or personalization.
+      // Keep API semantics and deployment routing unchanged.
+      if (url.protocol === "http:" && !url.port && !url.username && !url.password &&
+          ["invitestory.in", "www.invitestory.in"].includes(url.hostname) &&
+          ["/", "/index.html", "/digital-wedding-invitations", "/dearly", "/dearly/"].includes(url.pathname) &&
+          ["GET", "HEAD"].includes(request.method)) {
+        url.protocol = "https:";
+        return new Response(null, { status: 307, headers: {
+          Location: url.href,
+          "Cache-Control": "no-store",
+          "Referrer-Policy": "no-referrer"
+        } });
+      }
+
       if (url.pathname.startsWith("/api/website/")) return await websiteBridge(request, env);
 
       if (url.pathname === "/digital-wedding-invitations") {

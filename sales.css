@@ -211,3 +211,10 @@
   .studio-home .pricing-card .pricing-card-tagline { grid-column:1 / -1; margin:12px 0 0; }
   .sales-payment-reassurance { font-size:12px; }
 }
+
+/* One first-draft speed per new INR order. */
+#order-delivery-speeds { border: 0; padding: 0; margin: 16px 0; min-width: 0; }
+#order-delivery-speeds legend { font-weight: 700; margin-bottom: 6px; }
+#order-delivery-speeds .order-addon-item { gap: 12px; margin: 8px 0; }
+#order-delivery-speeds input[type=radio] { flex: 0 0 22px; width: 22px; height: 22px; accent-color: #173e35; }
+#order-checkout-retries button { display: block; margin: 8px 0; max-width: 100%; white-space: normal; }
