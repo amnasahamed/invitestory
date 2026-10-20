@@ -21,7 +21,11 @@
 
   <!-- Meta Pixel Code -->
   <script>
-    window.META_PIXEL_ID = window.META_PIXEL_ID || '877558961848422';
+    // Primary business-owned Meta Pixel / Dataset ID
+    window.META_PIXEL_ID = window.META_PIXEL_ID || '972146648686360';
+    // Temporary migration Meta Pixel ID (to be retired after new dataset transition)
+    window.META_PIXEL_MIGRATION_ID = window.META_PIXEL_MIGRATION_ID || '877558961848422';
+
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -30,10 +34,20 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', window.META_PIXEL_ID);
-    fbq('track', 'PageView');
+
+    // Confirm pixels initialize only once, including during SPA navigation
+    if (!window.__metaPixelsInitialized) {
+      fbq('init', window.META_PIXEL_ID);
+      fbq('init', window.META_PIXEL_MIGRATION_ID);
+      fbq('track', 'PageView');
+      window.__metaPixelsInitialized = true;
+    }
   </script>
-  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=877558961848422&ev=PageView&noscript=1" /></noscript>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=972146648686360&ev=PageView&noscript=1" alt="" />
+    <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=877558961848422&ev=PageView&noscript=1" alt="" />
+  </noscript>
+  <!-- End Meta Pixel Code -->
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,6 +112,7 @@
       var pkg = q.get("package") || "—";
       var amountStr = q.get("amount") || "—";
       var pid = q.get("payment_id") || "—";
+      var orderId = q.get("order_id") || "";
       var design = q.get("design") || "To be confirmed on WhatsApp";
 
       // Attribution retrieval: URL query params with storage fallback
@@ -121,7 +136,7 @@
 
       var addons = [];
       try { addons = JSON.parse(q.get("addons") || "[]"); } catch {}
-      var details = {packageName:pkg, amountText:amountStr, paymentId:pid, designName:q.get("design") || "", addons:addons, express:q.get("express")==="1", currency:q.get("currency") || "INR", previewNames:q.get("names") || "", utm_source:utmSource, utm_campaign:utmCampaign, utm_term:utmTerm, utm_content:utmContent};
+      var details = {packageName:pkg, amountText:amountStr, paymentId:pid, orderId:orderId, designName:q.get("design") || "", addons:addons, express:q.get("express")==="1", currency:q.get("currency") || "INR", previewNames:q.get("names") || "", utm_source:utmSource, utm_campaign:utmCampaign, utm_term:utmTerm, utm_content:utmContent};
       if (q.get("checkout_version") === "2") details.checkoutVersion = 2;
       try {
         var deliverySnapshot = JSON.parse(q.get("delivery_snapshot") || "null");
@@ -152,11 +167,26 @@
         }
       });
 
-      // Primary conversion: purchase with deduplication by payment_id
-      if (pid && pid !== "—") {
-        var storageKey = "tracked_purchase_" + pid;
-        if (!sessionStorage.getItem(storageKey)) {
-          sessionStorage.setItem(storageKey, "1");
+      // Primary conversion: purchase with deduplication by payment_id and order_id
+      var hasPaymentRef = (pid && pid !== "—") || Boolean(orderId);
+      if (hasPaymentRef) {
+        var storageKey = "tracked_purchase_" + (pid && pid !== "—" ? pid : orderId);
+        var resolvedOrderId = orderId || (pid && pid !== "—" && pid.startsWith("order_") ? pid : "");
+        var metaOrderId = resolvedOrderId || (pid && pid !== "—" ? pid : "");
+        var metaStorageKey = "tracked_meta_purchase_order:" + metaOrderId;
+
+        var alreadyTracked = false;
+        try {
+          alreadyTracked = Boolean(sessionStorage.getItem(storageKey) || sessionStorage.getItem(metaStorageKey));
+        } catch (_) {}
+
+        if (!alreadyTracked) {
+          try {
+            sessionStorage.setItem(storageKey, "1");
+            sessionStorage.setItem(metaStorageKey, "1");
+            if (pid && pid !== "—") sessionStorage.setItem("tracked_purchase_" + pid, "1");
+            if (orderId) sessionStorage.setItem("tracked_purchase_" + orderId, "1");
+          } catch (_) {}
 
           // Parse numeric amount
           var numericAmount = 1999;
@@ -169,7 +199,7 @@
           // 1. Google Analytics 4 purchase event with full keyword & campaign attribution
           if (typeof gtag === "function") {
             var gaPayload = {
-              transaction_id: pid,
+              transaction_id: pid !== "—" ? pid : orderId,
               value: numericAmount,
               currency: currency,
               items: [{
@@ -200,21 +230,29 @@
                 send_to: targetSendTo,
                 value: numericAmount,
                 currency: currency,
-                transaction_id: pid
+                transaction_id: pid !== "—" ? pid : orderId
               };
               if (gclid) adsData.gclid = gclid;
               gtag("event", "conversion", adsData);
             }
           }
 
-          // 2. Meta Pixel Purchase
+          // 2. Meta Pixel Purchase (deduplicated with CAPI via stable eventID: order:{order_id})
           if (typeof fbq === "function") {
-            fbq("track", "Purchase", {
+            var newPixelId = window.META_PIXEL_ID || "972146648686360";
+            var oldPixelId = window.META_PIXEL_MIGRATION_ID || "877558961848422"; // Temporary migration Pixel
+            var purchasePayload = {
               value: numericAmount,
               currency: currency,
               content_name: pkg,
               content_type: "product"
-            });
+            };
+            var eventOptions = metaOrderId ? { eventID: "order:" + metaOrderId } : undefined;
+
+            fbq("trackSingle", newPixelId, "Purchase", purchasePayload, eventOptions);
+            if (oldPixelId) {
+              fbq("trackSingle", oldPixelId, "Purchase", purchasePayload, eventOptions);
+            }
           }
         }
       }

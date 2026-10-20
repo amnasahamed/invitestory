@@ -445,3 +445,55 @@ test('old integration resolved secure capability preserves legacy checkout, but 
   await site.run('proceedFromOrderDrawerToCheckout()');assert.equal(site.run('window.opens'),secure?1:0);
  }
 });
+
+test('dual Meta Pixel sends Purchase via trackSingle to both new dataset and migration pixel with order:order_id eventID', () => {
+  const site = website();
+  assert.equal(site.run('window.META_PIXEL_ID'), '972146648686360');
+  assert.equal(site.run('window.META_PIXEL_MIGRATION_ID'), '877558961848422');
+
+  site.run("trackConversionEvent('purchase', { order_id: 'order_test_999', transaction_id: 'pay_test_999', value: 1999, currency: 'INR' });");
+
+  const purchaseCalls = site.calls.filter(call => call[0] === 'meta' && call[1] === 'trackSingle' && call[3] === 'Purchase');
+  assert.equal(purchaseCalls.length, 2);
+
+  // First call to new business-owned dataset
+  assert.equal(purchaseCalls[0][2], '972146648686360');
+  assert.equal(purchaseCalls[0][4].value, 1999);
+  assert.equal(purchaseCalls[0][4].currency, 'INR');
+  assert.equal(purchaseCalls[0][5]?.eventID, 'order:order_test_999');
+
+  // Second call to temporary migration pixel
+  assert.equal(purchaseCalls[1][2], '877558961848422');
+  assert.equal(purchaseCalls[1][4].value, 1999);
+  assert.equal(purchaseCalls[1][4].currency, 'INR');
+  assert.equal(purchaseCalls[1][5]?.eventID, 'order:order_test_999');
+
+  // Repeating the same purchase must be deduplicated
+  site.run("trackConversionEvent('purchase', { order_id: 'order_test_999', transaction_id: 'pay_test_999', value: 1999, currency: 'INR' });");
+  const purchaseCallsAfterRepeat = site.calls.filter(call => call[0] === 'meta' && call[1] === 'trackSingle' && call[3] === 'Purchase');
+  assert.equal(purchaseCallsAfterRepeat.length, 2);
+});
+
+test('rapid repeated clicks on WhatsApp or Checkout are debounced to prevent duplicate Meta events', () => {
+  const site = website();
+  site.run("trackConversionEvent('whatsapp_click'); trackConversionEvent('whatsapp_click');");
+  const contactCalls = site.calls.filter(call => call[0] === 'meta' && call[2] === 'Contact');
+  assert.equal(contactCalls.length, 1);
+
+  site.run("trackConversionEvent('begin_checkout', { content_ids: ['1'], value: 1999 }); trackConversionEvent('begin_checkout', { content_ids: ['1'], value: 1999 });");
+  const checkoutCalls = site.calls.filter(call => call[0] === 'meta' && call[2] === 'InitiateCheckout');
+  assert.equal(checkoutCalls.length, 1);
+});
+
+test('trackMetaEvent alias correctly formats Lead, Contact, and ViewContent', () => {
+  const site = website();
+  site.run("trackMetaEvent('Lead', { content_name: 'Form Submission' });");
+  site.run("trackMetaEvent('Contact', { content_name: 'WhatsApp' });");
+  site.run("trackMetaEvent('ViewContent', { content_ids: ['35'], value: 4999 });");
+
+  const metaEvents = site.calls.filter(call => call[0] === 'meta' && call[1] === 'track').map(c => c[2]);
+  assert.equal(metaEvents.includes('Lead'), true);
+  assert.equal(metaEvents.includes('Contact'), true);
+  assert.equal(metaEvents.includes('ViewContent'), true);
+});
+

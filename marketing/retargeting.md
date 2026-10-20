@@ -2,7 +2,7 @@
 
 Status: website events and campaign materials prepared. No advertising account, audiences, campaign or budget has been changed. Platform/account and daily budget remain to be supplied.
 
-The site already configures GA4 G-JS52597LF1 and Meta Pixel 877558961848422. Google Ads account and conversion-label settings are currently empty. These IDs come from existing source; account ownership and live receipt of events have not been verified.
+The site configures GA4 G-JS52597LF1, the primary business-owned Meta Pixel / Dataset ID 972146648686360, and temporary migration Meta Pixel 877558961848422 (running alongside for migration and to be retired after the new dataset collects sufficient data). Google Ads account and conversion-label settings are currently empty.
 
 Local browser verification reported that Meta blocks this preview origin under the pixel's traffic permission settings. This may be the expected exclusion of localhost. Check receipt on invitestory.in in Events Manager after deployment; if the live domain is also blocked, the account owner must correct the allowlist before running the campaign.
 

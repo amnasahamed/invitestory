@@ -85,6 +85,24 @@ getUtmCampaignParams();
  * - view_package: Package card impression / interaction
  */
 const recordedPostHogPayments = new Set();
+// Meta Pixel dataset configuration: new business-owned Pixel and temporary migration Pixel
+window.META_PIXEL_ID = window.META_PIXEL_ID || "972146648686360";
+window.META_PIXEL_MIGRATION_ID = window.META_PIXEL_MIGRATION_ID || "877558961848422"; // Temporary migration Pixel (to be retired)
+const recordedMetaPurchases = new Set();
+const recentMetaEvents = new Map();
+
+function isRapidMetaDuplicate(key, windowMs = 500) {
+  if (!key) return false;
+  const now = Date.now();
+  const last = recentMetaEvents.get(key) || 0;
+  if (now - last < windowMs) return true;
+  recentMetaEvents.set(key, now);
+  if (recentMetaEvents.size > 100) {
+    const firstKey = recentMetaEvents.keys().next().value;
+    recentMetaEvents.delete(firstKey);
+  }
+  return false;
+}
 
 function trackPostHogEvent(eventName, params = {}) {
   // Use product metadata only; never send form values, names or WhatsApp messages.
@@ -172,42 +190,103 @@ function trackConversionEvent(eventName, params = {}) {
       }
     }
 
-    // 2. Meta Pixel (fbq) Mapping
+    // 2. Meta Pixel (fbq) Mapping (Dual-Pixel: New Dataset + Temporary Migration Dataset)
     if (typeof window.fbq === "function") {
+      const newPixelId = window.META_PIXEL_ID || "972146648686360";
+      const oldPixelId = window.META_PIXEL_MIGRATION_ID || "877558961848422"; // Temporary migration Pixel (to be retired)
+
       if (eventName === "purchase" || eventName === "Purchase") {
-        window.fbq("track", "Purchase", {
-          value: eventValue,
-          currency: eventCurrency,
-          content_type: "product",
-          content_ids: contentIds,
-          content_name: params.content_name || params.package_name || "Digital Wedding Invitation"
-        });
+        const orderId = params.order_id || (params.transaction_id && String(params.transaction_id).startsWith("order_") ? params.transaction_id : "");
+        const resolvedId = orderId || params.transaction_id || "";
+        const dedupeKey = orderId ? `order:${orderId}` : (resolvedId ? `payment:${resolvedId}` : "");
+
+        let alreadyRecorded = false;
+        if (dedupeKey) {
+          if (recordedMetaPurchases.has(dedupeKey)) alreadyRecorded = true;
+          try {
+            if (sessionStorage.getItem(`tracked_meta_purchase_${dedupeKey}`) || (params.transaction_id && sessionStorage.getItem(`tracked_purchase_${params.transaction_id}`))) {
+              alreadyRecorded = true;
+            }
+          } catch (_) {}
+        }
+
+        if (!alreadyRecorded) {
+          if (dedupeKey) {
+            recordedMetaPurchases.add(dedupeKey);
+            try {
+              sessionStorage.setItem(`tracked_meta_purchase_${dedupeKey}`, "1");
+              if (params.transaction_id) sessionStorage.setItem(`tracked_purchase_${params.transaction_id}`, "1");
+              if (orderId) sessionStorage.setItem(`tracked_purchase_${orderId}`, "1");
+            } catch (_) {}
+          }
+
+          const purchasePayload = {
+            value: eventValue,
+            currency: eventCurrency,
+            content_type: "product",
+            content_ids: contentIds,
+            content_name: params.content_name || params.package_name || "Digital Wedding Invitation"
+          };
+          // CAPI alignment: exact stable event ID order:{order_id} matching staff portal Conversions API
+          const eventOptions = resolvedId ? { eventID: `order:${resolvedId}` } : undefined;
+
+          // Track Purchase to new business-owned dataset
+          window.fbq("trackSingle", newPixelId, "Purchase", purchasePayload, eventOptions);
+          // Track Purchase to temporary migration dataset alongside new dataset
+          if (oldPixelId) {
+            window.fbq("trackSingle", oldPixelId, "Purchase", purchasePayload, eventOptions);
+          }
+        }
       } else if (eventName === "begin_checkout" || eventName === "InitiateCheckout") {
-        window.fbq("track", "InitiateCheckout", {
-          value: eventValue,
-          currency: eventCurrency,
-          content_type: "product",
-          content_ids: contentIds,
-          content_name: params.content_name || params.package_name || "Digital Wedding Invitation"
-        });
-      } else if (eventName === "whatsapp_click" || eventName === "Lead") {
-        window.fbq("track", "Contact", {
-          content_name: params.content_name || params.design_name || params.package_name || "WhatsApp Enquiry",
-          value: eventValue,
-          currency: eventCurrency
-        });
+        const dedupeKey = `begin_checkout:${contentIds.join(",") || params.content_name || ""}`;
+        if (!isRapidMetaDuplicate(dedupeKey)) {
+          window.fbq("track", "InitiateCheckout", {
+            value: eventValue,
+            currency: eventCurrency,
+            content_type: "product",
+            content_ids: contentIds,
+            content_name: params.content_name || params.package_name || "Digital Wedding Invitation"
+          });
+        }
+      } else if (eventName === "whatsapp_click" || eventName === "Contact" || eventName === "contact") {
+        const dedupeKey = `contact:${contentIds.join(",") || params.design_id || params.item_id || params.design_name || params.content_name || params.cta_location || ""}`;
+        if (!isRapidMetaDuplicate(dedupeKey)) {
+          window.fbq("track", "Contact", {
+            content_name: params.content_name || params.design_name || params.package_name || "WhatsApp Enquiry",
+            value: eventValue,
+            currency: eventCurrency
+          });
+        }
+      } else if (eventName === "lead" || eventName === "Lead") {
+        const dedupeKey = `lead:${contentIds.join(",") || params.design_id || params.item_id || params.design_name || params.content_name || params.cta_location || ""}`;
+        if (!isRapidMetaDuplicate(dedupeKey)) {
+          window.fbq("track", "Lead", {
+            content_name: params.content_name || params.design_name || params.package_name || "Lead Enquiry",
+            value: eventValue,
+            currency: eventCurrency
+          });
+        }
       } else if (eventName === "select_design" || eventName === "ViewContent") {
-        window.fbq("track", "ViewContent", {
-          content_name: params.item_name || params.content_name,
-          content_ids: contentIds,
-          content_type: "product",
-          value: eventValue,
-          currency: eventCurrency
-        });
+        const dedupeKey = `select_design:${contentIds.join(",") || params.item_id || ""}`;
+        if (!isRapidMetaDuplicate(dedupeKey)) {
+          window.fbq("track", "ViewContent", {
+            content_name: params.item_name || params.content_name,
+            content_ids: contentIds,
+            content_type: "product",
+            value: eventValue,
+            currency: eventCurrency
+          });
+        }
       } else if (eventName === "save_design") {
-        window.fbq("track", "AddToWishlist", { content_ids: contentIds, content_type: "product", content_name: params.content_name, value: eventValue, currency: eventCurrency });
+        const dedupeKey = `save_design:${contentIds.join(",") || ""}`;
+        if (!isRapidMetaDuplicate(dedupeKey)) {
+          window.fbq("track", "AddToWishlist", { content_ids: contentIds, content_type: "product", content_name: params.content_name, value: eventValue, currency: eventCurrency });
+        }
       } else if (["view_order", "style_finder_complete", "share_shortlist", "resume_design", "consider_dearly"].includes(eventName)) {
-        window.fbq("trackCustom", eventName, { content_ids: contentIds, content_name: params.content_name, currency: eventCurrency, value: eventValue });
+        const dedupeKey = `${eventName}:${contentIds.join(",") || ""}`;
+        if (!isRapidMetaDuplicate(dedupeKey)) {
+          window.fbq("trackCustom", eventName, { content_ids: contentIds, content_name: params.content_name, currency: eventCurrency, value: eventValue });
+        }
       }
     }
   } catch (err) {
@@ -222,6 +301,8 @@ function trackMetaEvent(eventName, params = {}) {
   if (eventName === "InitiateCheckout") standardName = "begin_checkout";
   else if (eventName === "Purchase") standardName = "purchase";
   else if (eventName === "ViewContent") standardName = "select_design";
+  else if (eventName === "Lead" || eventName === "lead") standardName = "lead";
+  else if (eventName === "Contact" || eventName === "contact") standardName = "whatsapp_click";
   trackConversionEvent(standardName, params);
 }
 
@@ -1623,6 +1704,7 @@ function showPaymentSuccess(details) {
       currency: details.currency || "INR",
       names: details.previewNames || ""
     });
+    if (details.orderId) q.set("order_id", details.orderId);
     if(details.checkoutVersion===2 && details.deliverySnapshot){q.set("checkout_version","2");q.set("delivery_snapshot",JSON.stringify(details.deliverySnapshot));}
     const attr = getAttributionNotes();
     Object.keys(attr).forEach(k => { if (attr[k]) q.set(k, attr[k]); });
@@ -1998,13 +2080,15 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
     handler: function (response) {
       window.__lastPaymentOk = true;
       window.InviteWebsite?.paid(checkoutClientKey);
+      const paidOrderId = response.razorpay_order_id || options.order_id || "";
       trackMetaEvent("Purchase", {
         content_name: name,
         content_ids: selectedContentIds,
         content_category: "Digital Wedding Invitation",
         value: totalVal,
         currency: currencyCode,
-        transaction_id: response.razorpay_payment_id
+        transaction_id: response.razorpay_payment_id,
+        order_id: paidOrderId
       });
       handlePaidSuccess({
         packageName: packageName(tier),
@@ -2012,6 +2096,7 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
         totalVal,
         currency: currencyCode,
         paymentId: response.razorpay_payment_id,
+        orderId: paidOrderId,
         designName: paidDesignName,
         addons: paidAddons, express: Boolean(expressChecked),
         ...(v2 ? {checkoutVersion:2,deliverySnapshot} : {})
