@@ -225,8 +225,8 @@
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css?v=20261008-lean-1">
-  <link rel="stylesheet" href="sales.css?v=20261010-delivery-bridge-2">
-  <link rel="stylesheet" href="home.css?v=20261009-home-streamlined-1">
+  <link rel="stylesheet" href="sales.css?v=20261029-uiux-1">
+  <link rel="stylesheet" href="home.css?v=20261029-uiux-2">
   <link rel="stylesheet" href="interactions.css?v=20261009-shortlist-clarity-1">
   <link rel="stylesheet" href="preview-themes.css?v=20261010-persistent-controls-1">
   <!-- PostHog Analytics -->
@@ -266,32 +266,56 @@
     </div>
   </header>
 
-  <section class="hero hero-showroom studio-hero" aria-labelledby="home-heading">
+  <section class="hero hero-showroom studio-hero hero-stage" aria-labelledby="home-heading">
     <div class="container hero-layout">
       <div class="hero-copy">
-        <p class="hero-kicker">Digital invitations. Personal by design.</p>
-        <h1 class="hero-headline" id="home-heading">Find an invitation that feels like you.</h1>
-        <p class="hero-subheadline">Preview a design, then let us personalize it with your names, photos and wedding details.</p>
+        <h1 class="hero-headline" id="home-heading">Find an invitation that <em>feels like you.</em></h1>
+        <p class="hero-subheadline">Pick a design. We add your names, photos and events. Your guests open it on WhatsApp.</p>
         <p class="hero-service-note"><strong data-sales-price="2" data-sales-price-prefix="From ">From ₹1,999</strong><span>Personalization &amp; hosting included</span></p>
         <div class="hero-action-wrapper">
           <a href="#catalogue-header" class="hero-primary-cta" id="hero-explore-btn">Explore designs <span aria-hidden="true">↗</span></a>
           <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20could%20you%20help%20me%20choose%20a%20wedding%20invitation%3F" target="_blank" rel="noopener" class="hero-whatsapp-cta" data-cta-location="hero">Ask on WhatsApp <span aria-hidden="true">↗</span></a>
         </div>
-        <p class="hero-preview-note">Preview free. First-draft timing confirmed before payment; timing starts after payment &amp; complete details.</p>
+        <p class="hero-preview-note">Preview free. You approve your draft before anyone sees it.</p>
       </div>
+      <!-- The product in use: a real invitation opening on a phone, with what guests can do labelled around it. -->
       <figure class="hero-invitation-demo" aria-labelledby="hero-demo-title">
-        <video id="hero-opening-video" class="hero-opening-video" controls playsinline muted preload="none" poster="assets/seashell-demo-poster.webp" width="540" height="912" aria-label="Watch the Seashell Vows invitation opening">
-          <source src="previews/seashell-vows/editable/assets/wedding-opener.mp4" type="video/mp4">
-          Your browser cannot play this video. Use the live invitation button to try the design.
-        </video>
+        <div class="hero-phone-stage">
+          <button type="button" class="hero-phone" id="hero-demo-open" onclick="document.getElementById('hero-opening-video').pause();openPreview(29)" aria-label="Open the Seashell Vows sample invitation">
+            <span class="hero-phone-screen">
+              <video id="hero-opening-video" class="hero-opening-video" muted loop playsinline preload="none" poster="assets/hero-invite-poster.webp" width="480" height="854" aria-hidden="true">
+                <source src="assets/hero-invite-loop.mp4" type="video/mp4">
+              </video>
+              <span class="hero-phone-invite" aria-hidden="true">
+                <span class="hero-phone-kicker">Together with our families</span>
+                <span class="hero-phone-names">Aarav <em>&amp;</em> Ananya</span>
+                <span class="hero-phone-tap">Tap to open</span>
+              </span>
+            </span>
+          </button>
+          <ul class="hero-phone-notes" aria-label="What your guests can do">
+            <li class="hero-note-opening"><span class="hero-note-dot"></span>Opens like a film</li>
+            <li class="hero-note-map"><span class="hero-note-dot"></span>Venue map in one tap</li>
+            <li class="hero-note-rsvp"><span class="hero-note-dot"></span>RSVP on WhatsApp</li>
+          </ul>
+        </div>
         <figcaption class="hero-demo-caption">
-          <p class="hero-demo-eyebrow">See what your guests receive</p>
-          <h2 id="hero-demo-title">An invitation they can open, explore and reply to.</h2>
-          <p>Watch the opening, then try the full invitation with your names, events, venue maps and RSVP.</p>
-          <button type="button" id="hero-demo-open" class="hero-demo-open" onclick="document.getElementById('hero-opening-video').pause();openPreview(29)">Try live invitation <span aria-hidden="true">↗</span></button>
-          <p class="hero-demo-design">Seashell Vows · <span data-sales-price="2">₹1,999</span><br>Sample names and details. Preview free.</p>
+          <span id="hero-demo-title">Seashell Vows · <span data-sales-price="2">₹1,999</span> · sample names</span>
+          <button type="button" class="hero-demo-open" onclick="document.getElementById('hero-opening-video').pause();openPreview(29)">Try it live <span aria-hidden="true">↗</span></button>
         </figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- Early reassurance: real customer words and the three things buyers ask first. -->
+  <section class="home-proof-strip" aria-label="Why couples trust InviteStory">
+    <div class="container home-proof-strip-inner">
+      <div id="hero-customer-proof" class="sales-customer-proof"></div>
+      <ul class="home-proof-facts">
+        <li><strong>Made by our team</strong><span>Personalized by hand</span></li>
+        <li><strong>Approve before you share</strong><span>Free changes for 24h</span></li>
+        <li><strong>Pay by UPI</strong><span>GPay · PhonePe · Paytm</span></li>
+      </ul>
     </div>
   </section>
 
@@ -408,10 +432,10 @@
           <div class="how-step">
             <div class="how-step-icon" aria-hidden="true">3</div>
             <h3 class="how-step-title">Review. Then share.</h3>
-            <p class="how-step-desc">Your first-draft timing and any delivery fee are confirmed before payment. Timing starts after payment and complete details. Approve, then share your link.</p>
+            <p class="how-step-desc">We send your first draft on the timing shown at checkout. Approve it, then share your link.</p>
           </div>
         </div>
-        <p class="how-steps-tagline">Approve your draft before sharing. Free revision requests for 24 hours after your first draft.</p>
+        <p class="how-steps-tagline">Free revision requests for 24 hours after your first draft.</p>
       </div>
       </div>
     </div>
@@ -421,15 +445,16 @@
   <!-- SECTION 4: SOCIAL PROOF                                        -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <section class="social-proof">
-    <div id="hero-customer-proof" class="sales-customer-proof container"></div>
     <div class="container">
       <h2 class="section-title">The nicest part?<br><em>What comes back.</em></h2>
       <p class="section-subtitle">A few words from the people we’ve invited for. Read their original WhatsApp conversations.</p>
 
-      <div class="atelier-testimonial" aria-live="polite">
-        <div class="atelier-quote-copy"><blockquote id="atelier-customer-quote">“Thank You Mam for making this invitation beautiful”</blockquote><p id="atelier-customer-context">A customer’s message after seeing their invitation.</p><button type="button" class="atelier-text-link" id="atelier-review-original" onclick="openLightbox(Number(this.dataset.reviewIndex))" data-review-index="6">Read the original chat <span aria-hidden="true">↗</span></button><div class="atelier-review-selector" role="group" aria-label="Customer conversation"><button type="button" data-customer-review="6" aria-pressed="true">The invitation</button><button type="button" data-customer-review="5" aria-pressed="false">The family</button><button type="button" data-customer-review="8" aria-pressed="false">The service</button></div></div>
-        <button type="button" class="atelier-chat-image" id="atelier-review-image-button" onclick="openLightbox(Number(this.dataset.reviewIndex))" data-review-index="6" aria-label="Read the original customer conversation"><img id="atelier-review-image" src="assets/reviews/review-07.webp" alt="Original customer WhatsApp conversation thanking InviteStory for their invitation" width="400" height="600" loading="lazy"></button>
-      </div>
+      <!-- Three real chats at once: several voices persuade more than one quote behind tabs. -->
+      <ul class="atelier-review-row">
+        <li><button type="button" class="atelier-review-card" onclick="openLightbox(6)" aria-label="Read the original chat: Thank You Mam for making this invitation beautiful"><span class="atelier-review-shot"><img src="assets/reviews/review-07.webp" alt="Original customer WhatsApp conversation thanking InviteStory for their invitation" width="400" height="600" loading="lazy"></span><blockquote>“Thank You Mam for making this invitation beautiful”</blockquote><span class="atelier-review-context">After seeing their invitation · <span class="atelier-review-link">Read the chat ↗</span></span></button></li>
+        <li><button type="button" class="atelier-review-card" onclick="openLightbox(5)" aria-label="Read the original chat: Sir everyone like it"><span class="atelier-review-shot"><img src="assets/reviews/review-06.webp" alt="Original customer WhatsApp conversation saying the family liked the invitation" width="400" height="600" loading="lazy"></span><blockquote>“Sir everyone like it”</blockquote><span class="atelier-review-context">After sharing it with the family · <span class="atelier-review-link">Read the chat ↗</span></span></button></li>
+        <li><button type="button" class="atelier-review-card" onclick="openLightbox(8)" aria-label="Read the original chat: Thank you sir! I appreciate your work!"><span class="atelier-review-shot"><img src="assets/reviews/review-09.webp" alt="Original customer WhatsApp conversation thanking the team after delivery" width="400" height="600" loading="lazy"></span><blockquote>“Thank you sir! I appreciate your work!”</blockquote><span class="atelier-review-context">After delivery · <span class="atelier-review-link">Read the chat ↗</span></span></button></li>
+      </ul>
       <details class="atelier-all-reviews"><summary>More customer conversations</summary>
       <!-- ── WhatsApp Customer Chats Showcase ── -->
       <div class="wa-reviews-showcase">
@@ -464,8 +489,8 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               </span>
               <div class="trust-text">
-                <strong>First-draft timing confirmed before payment</strong>
-                <span>After payment &amp; receipt of details</span>
+                <strong>Draft timing shown before you pay</strong>
+                <span>Starts once we have your details</span>
               </div>
             </div>
             <div class="trust-item">
@@ -572,7 +597,7 @@
         </div>
       </div>
       <div class="pricing-trust-strip" aria-label="Payment reassurance">
-        <span>Secure UPI payment</span><span>Human-built for you</span><span>First-draft timing confirmed before payment</span>
+        <span>Secure UPI payment</span><span>Human-built for you</span><span>Approve before you share</span>
       </div>
       <p class="pricing-swipe-hint" id="pricing-swipe-hint">Swipe to compare all three collections</p>
       <div class="pricing-dots" id="pricing-dots" role="tablist" aria-label="Package cards">
@@ -594,7 +619,7 @@
         <p class="dearly-showroom-subtitle">A wax seal opens to reveal your wedding story, with floral animation and Email RSVP for guest replies.</p>
         <div class="dearly-showroom-price-badge">
           <span class="dearly-price-amount" data-inr="4999" data-usd="75">₹4,999</span>
-          <span class="dearly-price-note">per invitation · First-draft timing confirmed before payment; timing starts after payment + complete details</span>
+          <span class="dearly-price-note">per invitation · Personalization included</span>
         </div>
       </div>
 
@@ -744,7 +769,7 @@
           <span>Chat on WhatsApp</span>
         </a>
       </div>
-      <p class="final-cta-micro">Human-customized · Secure payment · First-draft timing confirmed before payment</p>
+      <p class="final-cta-micro">Human-customized · Secure UPI payment · Approve before you share</p>
     </div>
   </section>
 
@@ -788,7 +813,7 @@
       <div class="footer-top">
         <div class="footer-brand">
           <img src="logo/just logo.png" alt="InviteStory Logo - Digital Wedding Cards" class="footer-logo" loading="lazy">
-          <p>Hand-crafted interactive digital wedding invitations with venue maps, countdown and music; first-draft timing confirmed before payment, starting after payment and complete details.</p>
+          <p>Hand-crafted interactive digital wedding invitations with venue maps, countdown and music.</p>
         </div>
         <div>
           <h4 class="footer-heading">Explore</h4>
@@ -845,12 +870,12 @@
     </header>
     <div class="preview-modal-panel">
       <div class="preview-device-row">
-        <nav class="preview-browse-controls" aria-label="Browse invitation designs"><button type="button" class="preview-side-arrow side-arrow-prev" id="preview-side-prev" aria-label="Previous template"><span aria-hidden="true">‹</span><span>Previous</span></button><button type="button" id="preview-names-edit" title="Preview this invitation with your names" aria-haspopup="dialog" aria-controls="preview-names-dialog">Add your names</button>
+        <nav class="preview-browse-controls" aria-label="Browse invitation designs"><button type="button" class="preview-side-arrow side-arrow-prev" id="preview-side-prev" aria-label="Previous design"><span aria-hidden="true">‹</span><span>Previous</span></button><button type="button" id="preview-names-edit" title="Preview this invitation with your names" aria-haspopup="dialog" aria-controls="preview-names-dialog">Add your names</button>
           <button type="button" class="preview-icon-btn" id="preview-favourite-btn" onclick="togglePreviewFavourite()" aria-label="Save design to favourites" aria-pressed="false">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg><span data-favourite-label>Save</span>
           </button>
 
-<button type="button" class="preview-side-arrow side-arrow-next" id="preview-side-next" aria-label="Next template"><span>Next</span><span aria-hidden="true">›</span></button></nav>
+<button type="button" class="preview-side-arrow side-arrow-next" id="preview-side-next" aria-label="Next design"><span>Next</span><span aria-hidden="true">›</span></button></nav>
       <div class="preview-studio-shadow" aria-hidden="true"></div>
       <div class="preview-gallery-device preview-phone-3d-rig is-flat-mode" id="preview-phone-3d-rig">
         <div class="preview-phone-chassis" aria-hidden="true">
@@ -964,7 +989,7 @@
           <span aria-hidden="true">✦</span><span id="preview-pay-label">Choose design · ₹1,999</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg>
         </button>
-        <button type="button" id="preview-details-toggle" aria-expanded="false" aria-label="More preview options: collections, sharing and help">More options</button>
+        <button type="button" id="preview-details-toggle" aria-expanded="false" aria-label="Share this design, switch collection or get help">Share &amp; more</button>
         <div class="preview-secondary-actions">
           <button type="button" class="preview-toolbar-btn preview-secondary-whatsapp" id="preview-buy-btn">
             <img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true">
@@ -1216,7 +1241,7 @@
 
       <!-- Optional Add-ons -->
       <div class="order-drawer-addons">
-        <div class="order-addons-title">Optional Add-ons:</div>
+        <div class="order-addons-title">Optional extras</div>
         <div class="order-addon-options">
           <fieldset id="order-delivery-speeds" hidden>
             <legend>First-draft delivery — choose one speed</legend>
@@ -1346,13 +1371,13 @@
   <!-- WebMCP Agent Tools & JS Scripts -->
   <script src="webmcp.js"></script>
   <script src="preview-themes.js?v=20261007-2"></script>
-  <script src="paid-order.js?v=20261010-delivery-bridge-2"></script>
-  <script src="preview-controller.js?v=20261009-preview-metrics-1"></script>
-  <script src="scripts.js?v=20261010-delivery-bridge-2"></script>
-  <script src="sales.js?v=20261010-delivery-bridge-2"></script>
-  <script src="home.js?v=20261009-home-streamlined-1"></script>
-  <script src="interactions.js?v=20261010-delivery-bridge-2"></script>
+  <script src="paid-order.js?v=20261029-uiux-1"></script>
+  <script src="preview-controller.js?v=20261029-uiux-1"></script>
+  <script src="scripts.js?v=20261029-uiux-1"></script>
+  <script src="sales.js?v=20261029-uiux-1"></script>
+  <script src="home.js?v=20261029-uiux-1"></script>
+  <script src="interactions.js?v=20261029-uiux-1"></script>
 <script src="preview-names.js?v=20261009-preview-metrics-1"></script>
-<script src="website-integration.js?v=20261010-delivery-bridge-2"></script>
+<script src="website-integration.js?v=20261029-uiux-1"></script>
 </body>
 </html>

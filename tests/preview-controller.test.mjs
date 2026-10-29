@@ -57,7 +57,7 @@ test('controller navigation crosses collection boundaries and wraps',()=>{
 test('mobile starts compact, expands optional tools, and resets when closed',()=>{
   const f=fixture();f.controller.open(f.design('a'));
   assert.equal(f.modal.classList.contains('is-details-hidden'),true);
-  assert.equal(f.toggle.textContent,'More options');
+  assert.equal(f.toggle.textContent,'Share & more');
   f.controller.toggleControls();
   assert.equal(f.modal.classList.contains('is-details-hidden'),false);
   f.controller.open(f.design('b'));

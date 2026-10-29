@@ -34,6 +34,16 @@ function setupHomeShowroom() {
   };
   setCurrencyLabels();
   currencyLayout.addEventListener('change', setCurrencyLabels);
+  // On phones the currency switch lives in the menu, leaving the header for the logo, WhatsApp and Menu.
+  const currencySwitch = document.querySelector('.header-actions .currency-switch-container');
+  const headerActions = document.querySelector('.header-actions');
+  const placeCurrency = () => {
+    if (!currencySwitch || !headerActions) return;
+    if (currencyLayout.matches) document.getElementById('home-navigation')?.appendChild(currencySwitch);
+    else headerActions.prepend(currencySwitch);
+  };
+  placeCurrency();
+  currencyLayout.addEventListener('change', placeCurrency);
   const menu = document.querySelector('.atelier-menu-toggle');
   const nav = document.getElementById('home-navigation');
   const closeMenu = () => {
@@ -56,37 +66,25 @@ function setupHomeShowroom() {
   });
   const openingVideo = document.getElementById('hero-opening-video');
   if (openingVideo) {
-    // Stop playback when attention moves to a preview or away from the page.
-    document.addEventListener('visibilitychange', () => { if (document.hidden) openingVideo.pause(); });
-    window.addEventListener('pagehide', () => openingVideo.pause());
+    // The muted loop plays only while on screen and the page is in front; a preview, another tab,
+    // reduced motion or data saver leave the still poster.
+    const stillOnly = window.matchMedia('(prefers-reduced-motion: reduce)').matches || navigator.connection?.saveData;
     const previewModal = document.getElementById('preview-modal');
-    if (previewModal) new MutationObserver(() => {
-      if (previewModal.classList.contains('is-open')) openingVideo.pause();
-    }).observe(previewModal, { attributes: true, attributeFilter: ['class'] });
+    let inView = false;
+    const syncPlayback = () => {
+      const previewOpen = previewModal?.classList.contains('is-open');
+      if (inView && !stillOnly && !document.hidden && !previewOpen) openingVideo.play().catch(() => {});
+      else openingVideo.pause();
+    };
+    document.addEventListener('visibilitychange', syncPlayback);
+    window.addEventListener('pagehide', () => openingVideo.pause());
+    if (previewModal) new MutationObserver(syncPlayback).observe(previewModal, { attributes: true, attributeFilter: ['class'] });
     new IntersectionObserver(entries => {
-      if (!entries[0].isIntersecting) openingVideo.pause();
-    }).observe(openingVideo);
+      // Fast scrolls can batch several entries; only the latest reflects where the phone is now.
+      inView = entries[entries.length - 1].isIntersecting;
+      syncPlayback();
+    }, { threshold: 0.4 }).observe(openingVideo);
   }
-  const reviews = {
-    6: { quote: '“Thank You Mam for making this invitation beautiful”', context: 'A customer’s message after seeing their invitation.', file: 'review-07.webp' },
-    5: { quote: '“Sir everyone like it”', context: 'A customer’s reply after sharing the invitation with their family.', file: 'review-06.webp' },
-    8: { quote: '“Thank you sir! I appreciate your work!”', context: 'A customer’s message to the team after delivery.', file: 'review-09.webp' }
-  };
-  document.querySelectorAll('[data-customer-review]').forEach(button => {
-    button.addEventListener('click', () => {
-      const index = Number(button.dataset.customerReview);
-      const review = reviews[index];
-      if (!review) return;
-      document.querySelectorAll('[data-customer-review]').forEach(choice => choice.setAttribute('aria-pressed', String(choice === button)));
-      document.getElementById('atelier-customer-quote').textContent = review.quote;
-      document.getElementById('atelier-customer-context').textContent = review.context;
-      const photo = document.getElementById('atelier-review-image');
-      photo.src = `assets/reviews/${review.file}`;
-      photo.alt = `Original WhatsApp conversation: ${review.quote}`;
-      document.getElementById('atelier-review-original').dataset.reviewIndex = String(index);
-      document.getElementById('atelier-review-image-button').dataset.reviewIndex = String(index);
-    });
-  });
   setupHomeCollectionCards(document.getElementById('pricing'));
 }
 document.addEventListener('DOMContentLoaded', setupHomeShowroom);

@@ -14,7 +14,7 @@
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
-  <script src="paid-order.js?v=20261010-delivery-bridge-2"></script>
+  <script src="paid-order.js?v=20261029-uiux-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -58,21 +58,33 @@
   <link rel="icon" type="image/png" href="logo/noappicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;1,400&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .ty-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: linear-gradient(180deg, #0d0714 0%, #170f22 60%, #0d0714 100%); }
-    .ty-card { max-width: 480px; width: 100%; text-align: center; background: #171222; border: 1px solid rgba(223,184,119,.4); border-radius: 20px; padding: 36px 28px; color: #f3edda; }
-    .ty-check { font-size: 3rem; margin-bottom: 8px; }
-    .ty-card h1 { color: #fff; font-size: 1.6rem; margin-bottom: 8px; }
-    .ty-card p { color: rgba(243,237,218,.85); font-size: .94rem; line-height: 1.65; }
-    .ty-receipt { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 14px 16px; margin: 18px 0; display: flex; flex-direction: column; gap: 8px; font-size: .88rem; }
-    .ty-receipt > div { display: flex; justify-content: space-between; gap: 12px; }
-    .ty-receipt dt { color: rgba(243,237,218,.65); }
-    .ty-receipt dd { margin: 0; color: #fff; font-weight: 700; text-align: right; word-break: break-all; }
-    .ty-wa { display: block; min-height: 52px; line-height: 52px; border-radius: 9999px; background: linear-gradient(135deg,#1fa855 0%,#157a3e 100%); color: #fff; font-weight: 700; font-family: Outfit,sans-serif; text-decoration: none; margin-bottom: 12px; }
-    .ty-back { color: #ecd9ac; font-size: .88rem; font-weight: 600; }
-    .ty-steps { text-align: left; margin: 18px 0 22px; padding-left: 20px; font-size: .88rem; display: flex; flex-direction: column; gap: 8px; }
+    /* Matches the homepage: sage, ivory and serif, so the moment after paying feels like the same brand. */
+    .ty-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 16px; background: #f6f8f6; font-family: Outfit, sans-serif; }
+    .ty-card { max-width: 500px; width: 100%; background: #fff; border: 1px solid #d5e0da; border-radius: 24px; padding: 36px 28px 28px; color: #173e35; box-shadow: 0 20px 50px #173e3512; }
+    .ty-logo { display: block; width: 120px; margin: 0 0 28px; }
+    .ty-check { display: inline-flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin-bottom: 14px; border-radius: 50%; background: #dfeae3; }
+    .ty-card h1 { margin: 0 0 8px; color: #173e35; font: 500 38px/1.05 "Cormorant Garamond", serif; letter-spacing: -.02em; }
+    .ty-card h1 em { font-style: italic; font-weight: 400; }
+    .ty-card > p { margin: 0; color: #44564f; font-size: 15px; line-height: 1.6; }
+    .ty-next { margin: 22px 0 16px; padding: 18px; border-radius: 16px; background: #edf2ef; }
+    .ty-next h2 { margin: 0 0 10px; font: 600 15px/1.4 Outfit, sans-serif; color: #173e35; }
+    .ty-steps { margin: 0 0 16px; padding: 0; list-style: none; counter-reset: ty; display: grid; gap: 10px; font-size: 14px; line-height: 1.5; color: #44564f; }
+    .ty-steps li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; counter-increment: ty; }
+    .ty-steps li::before { content: counter(ty); display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #173e35; color: #fff; font-size: 12px; font-weight: 600; }
+    .ty-wa { display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; border-radius: 999px; background: #173e35; color: #fff; font: 600 15px Outfit, sans-serif; text-decoration: none; }
+    .ty-wa:hover { background: #285448; }
+    .ty-wa:focus-visible, .ty-back:focus-visible { outline: 3px solid #173e35; outline-offset: 3px; }
+    .ty-receipt { margin: 0 0 18px; padding: 4px 0; display: grid; font-size: 14px; }
+    .ty-receipt > div { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px solid #e3ebe6; }
+    .ty-receipt > div:last-child { border-bottom: 0; }
+    .ty-receipt dt { color: #5c6a64; }
+    .ty-receipt dd { margin: 0; color: #173e35; font-weight: 600; text-align: right; word-break: break-all; }
+    .ty-receipt-title { margin: 0 0 4px; font: 600 13px/1.4 Outfit, sans-serif; color: #5c6a64; }
+    .ty-back { display: inline-flex; min-height: 44px; align-items: center; color: #173e35; font-size: 14px; text-decoration: underline; text-underline-offset: 4px; }
+    @media (max-width: 480px) { .ty-card { padding: 28px 20px 22px; } .ty-card h1 { font-size: 32px; } }
   </style>
   <!-- PostHog Analytics -->
   <script>
@@ -87,9 +99,20 @@
 <body>
   <main class="ty-wrap">
     <div class="ty-card">
-      <div class="ty-check" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#25d366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
-      <h1>Payment received!</h1>
-      <p>Thank you for choosing InviteStory. Send us your order summary on WhatsApp. Our team will confirm your details and guide you through the next steps.</p>
+      <img src="assets/logo.png" alt="InviteStory" class="ty-logo" width="120" height="40">
+      <div class="ty-check" aria-hidden="true"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#173e35" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h1>Payment received. <em>Thank you!</em></h1>
+      <p>Your invitation is booked. One last step and our team can start.</p>
+      <section class="ty-next" aria-labelledby="ty-next-title">
+        <h2 id="ty-next-title">Send us your details on WhatsApp</h2>
+        <ol class="ty-steps">
+          <li>Tap the button. Your order summary is already filled in.</li>
+          <li>Send names, dates, venues and photos. We reply with a short checklist.</li>
+          <li>Your first draft starts once we have everything. You approve it before anyone sees it.</li>
+        </ol>
+        <a href="https://wa.me/918281583882" id="ty-wa-btn" target="_blank" rel="noopener" class="ty-wa">Send order summary on WhatsApp →</a>
+      </section>
+      <p class="ty-receipt-title">Your receipt</p>
       <dl class="ty-receipt">
         <div><dt>Package</dt><dd id="ty-package">—</dd></div>
         <div><dt>Amount paid</dt><dd id="ty-amount">—</dd></div>
@@ -98,13 +121,7 @@
         <div><dt>Extras / services</dt><dd id="ty-addons">—</dd></div>
         <div><dt>Delivery</dt><dd id="ty-delivery">—</dd></div>
       </dl>
-      <div class="ty-steps">
-        <div><strong>1.</strong> Tap below to open WhatsApp with your payment details pre-filled.</div>
-        <div><strong>2.</strong> Send names, dates, photos &amp; venue (we reply with a short checklist).</div>
-        <div><strong>3.</strong> Your first-draft timeframe begins after payment and complete details. Review and approve before sharing.</div>
-      </div>
-      <a href="https://wa.me/918281583882" id="ty-wa-btn" target="_blank" rel="noopener" class="ty-wa">Send order summary on WhatsApp →</a>
-      <a href="index.html#pricing" class="ty-back">← Back to packages</a>
+      <a href="index.html" class="ty-back">← Back to InviteStory</a>
     </div>
   </main>
   <script>

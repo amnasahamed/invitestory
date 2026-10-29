@@ -17,6 +17,31 @@ function getDiscoveryDesigns(items) {
   return items;
 }
 
+// A first look shows a short mix of every collection, so proof and pricing stay within reach.
+const FEATURED_PER_TIER = { 2: 4, 3: 2, 4: 2 };
+let catalogueExpanded = false;
+
+function isDefaultBrowse() {
+  if (discovery.savedOnly || discovery.recommendations || discovery.shared) return false;
+  return !(typeof searchQuery === "string" && searchQuery) && !(typeof activeTierFilter === "number" && activeTierFilter) && !(typeof activeTagFilter === "string" && activeTagFilter !== "all");
+}
+
+function isShowingFeatured(count) {
+  const featuredCount = Object.values(FEATURED_PER_TIER).reduce((sum, n) => sum + n, 0);
+  return document.body.classList.contains("browse-home") && !catalogueExpanded && isDefaultBrowse() && count > featuredCount;
+}
+
+function getFeaturedDesigns(items) {
+  if (!isShowingFeatured(items.length)) return items;
+  const shown = {};
+  return items.filter(item => (shown[item.tier] = (shown[item.tier] || 0) + 1) <= (FEATURED_PER_TIER[item.tier] || 0));
+}
+
+function showAllDesigns() {
+  catalogueExpanded = true;
+  renderCatalogue();
+}
+
 function resetDiscovery() {
   discovery.savedOnly = false;
   discovery.recommendations = null;
@@ -27,6 +52,7 @@ function resetDiscovery() {
 }
 
 function browseAllDesigns() {
+  catalogueExpanded = true;
   resetFilters();
   document.getElementById("templates-grid")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
@@ -106,7 +132,9 @@ function updateMobileBookingBar() {
   const note = document.getElementById("pricing-selected-design");
   const noteRect = note?.getBoundingClientRect?.();
   const selectedBookingVisible = Boolean(note && !note.hidden && noteRect && noteRect.bottom > 68 && noteRect.top < window.innerHeight - 80);
-  const visible = Boolean(item && mobile && pastHero && !selectedBookingVisible && !overlay && !typing && !salesBookingDismissed);
+  // While browsing the catalogue the collection filter owns the bottom of the screen; never stack both bars.
+  const browsingCatalogue = typeof isCatalogueInView === "function" && isCatalogueInView();
+  const visible = Boolean(item && mobile && pastHero && !browsingCatalogue && !selectedBookingVisible && !overlay && !typing && !salesBookingDismissed);
   bar.hidden = !visible;
   document.body.classList.toggle("sales-has-booking-shortcut", visible);
   if (!item) return;
@@ -234,7 +262,12 @@ function renderDiscoveryStatus(count) {
   const status = document.getElementById("discovery-status");
   if (!footer || !status) return;
   status.textContent = discovery.savedOnly ? `${count} saved ${count === 1 ? "design" : "designs"}` : discovery.recommendations ? `${count} recommendations for your style` : discovery.shared ? `${count} designs in this shared shortlist` : `${count} ${count === 1 ? "design" : "designs"} to explore`;
-  footer.innerHTML = `<button type="button" class="sales-browse-all" onclick="browseAllDesigns()">Reset and browse all designs</button>`;
+  if (isShowingFeatured(count)) {
+    status.textContent = `A few to start with · ${count} designs in all`;
+    footer.innerHTML = `<button type="button" class="sales-browse-all sales-see-all" onclick="showAllDesigns()">See all ${count} designs</button>`;
+  } else {
+    footer.innerHTML = isDefaultBrowse() ? "" : `<button type="button" class="sales-browse-all" onclick="browseAllDesigns()">Reset and browse all designs</button>`;
+  }
   if (discovery.savedOnly && count === 0) {
     // renderCatalogue supplies the empty-state container immediately after this call.
     queueMicrotask(() => {
@@ -419,7 +452,7 @@ function updateSalesOrder() {
   const firstDraft = modal.querySelectorAll(".order-step-title")[2];
   if (firstDraft) firstDraft.textContent = `First draft within ${hours}h`;
   const expressDescription = document.getElementById("order-addon-express-sub");
-  if (expressDescription) expressDescription.textContent = isDearly && !newDelivery ? "First draft within 24h, included with Dearly" : "First draft within 24h after payment + complete details";
+  if (expressDescription) expressDescription.textContent = isDearly && !newDelivery ? "First draft within 24h, included with Dearly" : "Your first draft in 24h instead of 48h";
   const upgrade = document.getElementById("sales-dearly-suggestion");
   if (upgrade) {
     const email = document.getElementById("order-drawer-addon-email-rsvp")?.checked;
@@ -581,12 +614,17 @@ function setupStudioPricing(container) {
     if (tagline) tagline.innerHTML = `<strong>${descriptions[index]}</strong><dl class="sales-package-facts"><div><dt>Opening</dt><dd>${openings[index]}</dd></div><div><dt>Guest replies</dt><dd>${index === 2 ? "Email RSVP included" : "WhatsApp RSVP included"}</dd></div><div><dt>First draft</dt><dd>Within ${index === 2 && !(typeof usesNewDelivery === "function" && usesNewDelivery()) ? "24" : "48"}h*</dd></div></dl>`;
     const browseLabel = card.querySelector("[data-pay-label]");
     if (browseLabel) browseLabel.textContent = `Browse ${collections[index]} designs`;
-    const note = card.querySelector(".pkg-microcopy");
-    if (note) note.textContent = "*After payment and complete details. Approve your draft before sharing.";
+    card.querySelector(".pkg-microcopy")?.remove();
   });
   const grid = container.querySelector(".pricing-grid");
   const comparison = container.querySelector(".sales-package-comparison");
   if (grid && comparison) grid.after(comparison);
+  if (grid) {
+    const footnote = document.createElement("p");
+    footnote.className = "pkg-microcopy pricing-footnote";
+    footnote.textContent = "*Draft timing starts after payment and complete details. Approve your draft before sharing.";
+    grid.after(footnote);
+  }
   const value = container.querySelector(".sales-value-price");
   if (value) value.textContent = "Every collection includes personalization, music, venue maps and unlimited sharing. Hosting until one month after your event ends. One-time payment.";
   if (typeof setupHomeCollectionCards === "function") setupHomeCollectionCards(container);
@@ -623,11 +661,9 @@ function setupStudioSalesSections() {
     const extras = document.createElement("details");
     extras.className = "studio-other-options";
     extras.innerHTML = '<summary>DIY options and wedding guides</summary>';
-    final.before(extras);
+    // Cheaper and reading-only options come after the final ask, not before it.
+    final.after(extras);
     extras.append(budget, guides);
   }
-  const proof = document.getElementById("hero-customer-proof");
-  const proofSubtitle = document.querySelector(".social-proof .section-subtitle");
-  if (proof && proofSubtitle) proofSubtitle.after(proof);
   if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
 }

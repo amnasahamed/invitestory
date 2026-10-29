@@ -499,6 +499,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 13,
     name: "Grand Line Voyage",
+    hidden: true,
     image: "assets/preview/11.png",
     tier: 2,
     priceINR: 1999,
@@ -688,6 +689,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 24,
     name: "Petal Path Palace",
+    hidden: true,
     image: "assets/preview/21.png",
     tier: 3,
     priceINR: 2999,
@@ -705,6 +707,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 25,
     name: "Lakeview Lanterns",
+    hidden: true,
     image: "assets/preview/22.png",
     tier: 3,
     priceINR: 2999,
@@ -722,6 +725,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 26,
     name: "Moonlit Lotus Barge",
+    hidden: true,
     image: "assets/preview/23.png",
     tier: 3,
     priceINR: 2999,
@@ -807,6 +811,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 34,
     name: "Slide to Shaadi",
+    hidden: true,
     image: "assets/preview/34.png",
     tier: 3,
     priceINR: 2999,
@@ -824,6 +829,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 16,
     name: "Lake Pichola Royal",
+    hidden: true,
     image: "assets/preview/14.png",
     tier: 3,
     priceINR: 2999,
@@ -928,6 +934,11 @@ if (isAdsLandingPage) {
       TEMPLATE_DATABASE.splice(i, 1);
     }
   }
+}
+
+// Designs flagged `hidden` stay reachable by direct link (?design=slug) but are left out of browsing.
+function getListedDesigns() {
+  return TEMPLATE_DATABASE.filter(item => !item.hidden);
 }
 
 // --- 2. State Management ---
@@ -1396,10 +1407,11 @@ function selectTier(tierNum, smoothScroll = false) {
 
 // Dynamically sync floating bottom navigation counts with current TEMPLATE_DATABASE
 function updateTierNavCounts() {
-  const allCount = TEMPLATE_DATABASE.length;
-  const premiumCount = TEMPLATE_DATABASE.filter(t => t.tier === 2).length;
-  const luxuryCount = TEMPLATE_DATABASE.filter(t => t.tier === 3).length;
-  const dearlyCount = TEMPLATE_DATABASE.filter(t => t.tier === 4).length;
+  const listed = getListedDesigns();
+  const allCount = listed.length;
+  const premiumCount = listed.filter(t => t.tier === 2).length;
+  const luxuryCount = listed.filter(t => t.tier === 3).length;
+  const dearlyCount = listed.filter(t => t.tier === 4).length;
 
   const labels = document.querySelectorAll("#tier-radio-group label");
   labels.forEach(label => {
@@ -1414,7 +1426,7 @@ function updateTierNavCounts() {
 }
 
 function getFilteredTemplates() {
-  return TEMPLATE_DATABASE.filter(item => {
+  return getListedDesigns().filter(item => {
     if (activeTierFilter !== 0 && item.tier !== activeTierFilter) return false;
     if (activeTagFilter !== "all" && !item.tags.includes(activeTagFilter)) return false;
     if (searchQuery.trim() !== "") {
@@ -1429,6 +1441,15 @@ function getFilteredTemplates() {
 }
 
 // --- Render Catalogue Items as Premium Full-Bleed Image Cards ---
+// One short line that tells similar-looking cards apart: the tradition, or a Dearly design's colour.
+function cardStyleLabel(item) {
+  if (item.collection === "dearly") {
+    const colour = (item.image.match(/dearly\/([a-z]+)-/) || [])[1] || "";
+    return `${colour.charAt(0).toUpperCase()}${colour.slice(1)} · Wax-seal opening`;
+  }
+  return (item.style || "").replace(/\s*\(.*?\)\s*/g, "").trim();
+}
+
 function renderCatalogue() {
   if (!templatesGrid) return;
   updateTierNavCounts();
@@ -1436,6 +1457,7 @@ function renderCatalogue() {
   let filtered = getFilteredTemplates();
   if (typeof getDiscoveryDesigns === "function") filtered = getDiscoveryDesigns(filtered);
   if (typeof renderDiscoveryStatus === "function") renderDiscoveryStatus(filtered.length);
+  if (typeof getFeaturedDesigns === "function") filtered = getFeaturedDesigns(filtered);
 
   templatesGrid.innerHTML = "";
 
@@ -1487,6 +1509,7 @@ function renderCatalogue() {
         <div class="template-card-info-side">
           <div class="template-card-header">
             <h3 class="template-card-title">${item.name}</h3>
+            <p class="template-card-style">${cardStyleLabel(item)}</p>
             <div class="template-card-tags">
               ${item.tier === 4 ? '<span class="template-tag tag-dearly">Dearly Exclusive</span>' : ''}
               ${item.style ? `<span class="template-tag tag-style">${item.style}</span>` : ''}
@@ -1998,7 +2021,7 @@ function updateOrderDrawerTotal() {
   const expressPriceEl = document.getElementById("order-addon-express-price");
   if (expressPriceEl) setOrderAddonPrice(expressPriceEl, ADDONS.express, isDearly && !v2);
   const addonsTitleEl = document.querySelector("#order-drawer-modal .order-addons-title");
-  if (addonsTitleEl) addonsTitleEl.textContent = isDearly ? "Email RSVP included with your Dearly suite:" : "Optional Add-ons:";
+  if (addonsTitleEl) addonsTitleEl.textContent = isDearly ? "Email RSVP is included with Dearly" : "Optional extras";
   const includedValueEl = document.getElementById("order-drawer-included-value");
   if (includedValueEl) {
     includedValueEl.hidden = !isDearly;
@@ -2764,7 +2787,8 @@ function openPreview(id, updateUrl = true) {
   }
   updatePaymentButtonsForCurrency();
   if (previewCounterBadge) {
-    previewCounterBadge.textContent = `${idx + 1} / ${TEMPLATE_DATABASE.length}`;
+    const listed = getListedDesigns();
+    previewCounterBadge.textContent = item.hidden ? "" : `${listed.indexOf(item) + 1} / ${listed.length}`;
   }
   if (previewFullscreenBtn) {
     previewFullscreenBtn.href = item.demoUrl;
@@ -3230,13 +3254,16 @@ function phonePhysicsDisableGyroscope() {
   }
 }
 
-// Browse the complete catalogue in order, wrapping at either end.
+// Browse the listed catalogue in order, wrapping at either end. A hidden design opened by
+// direct link keeps its place so next/prev lead into the listed designs around it.
 function previewNavigate(direction) {
   const item = TEMPLATE_DATABASE[previewState.currentIndex];
   if (!item) return;
+  const catalogue = TEMPLATE_DATABASE.filter(t => !t.hidden || t.id === item.id);
+  const index = catalogue.indexOf(item);
   const next = typeof PreviewController !== "undefined" && PreviewController
-    ? PreviewController.adjacent(TEMPLATE_DATABASE,item.id,direction)
-    : TEMPLATE_DATABASE[(previewState.currentIndex + direction + TEMPLATE_DATABASE.length) % TEMPLATE_DATABASE.length];
+    ? PreviewController.adjacent(catalogue,item.id,direction)
+    : catalogue[(index + direction + catalogue.length) % catalogue.length];
   if (next) openPreview(next.id);
 }
 function previewNext() { previewNavigate(1); }
@@ -3245,7 +3272,7 @@ function previewPrev() { previewNavigate(-1); }
 // Return to the last design viewed in this collection during the session.
 function previewJumpTier(tier) {
   const item = TEMPLATE_DATABASE.find(template => template.id === previewState.lastDesignByTier[tier] && template.tier === tier)
-    || TEMPLATE_DATABASE.find(template => template.tier === tier);
+    || getListedDesigns().find(template => template.tier === tier);
   if (!item || TEMPLATE_DATABASE[previewState.currentIndex]?.id === item.id) return;
   openPreview(item.id);
 }
@@ -4685,6 +4712,15 @@ function setupMobilePricingCarousel() {
   window.addEventListener("load", () => setTimeout(run, 30), { once: true });
 }
 
+// The collection filter only means something while the catalogue fills the screen.
+function isCatalogueInView() {
+  const cat = document.getElementById("catalogue-header");
+  if (!cat) return false;
+  const rect = cat.getBoundingClientRect();
+  const vh = window.innerHeight || 0;
+  return rect.top < vh * 0.6 && rect.bottom > vh * 0.4;
+}
+
 function setupTierNavVisibility() {
   const nav = document.querySelector(".tier-floating-nav");
   const catalogue = document.querySelector(".catalogue-section, #catalogue, #catalogue-header");
@@ -4694,7 +4730,15 @@ function setupTierNavVisibility() {
   const mq = window.matchMedia("(max-width: 768px)");
 
   const update = () => {
-    if (nav.classList.contains("sales-inline-tiers") || nav.classList.contains("home-collection-nav")) {
+    if (nav.classList.contains("home-collection-nav")) {
+      const show = isCatalogueInView();
+      nav.classList.toggle("is-outside-catalogue", !show);
+      nav.setAttribute("aria-hidden", String(!show));
+      nav.inert = !show;
+      if (typeof updateMobileBookingBar === "function") updateMobileBookingBar();
+      return;
+    }
+    if (nav.classList.contains("sales-inline-tiers")) {
       nav.classList.remove("is-hidden-for-pricing");
       nav.style.opacity = "";
       nav.style.transform = "";

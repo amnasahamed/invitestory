@@ -50,7 +50,7 @@ function createPreviewController(options) {
   function renderControls(){
     const hidden=Boolean(options.mobile?.matches && collapsed);
     modal.classList.toggle('is-details-hidden',hidden);
-    if(options.toggle){options.toggle.textContent=hidden?'More options':'Less options';options.toggle.setAttribute('aria-expanded',String(!hidden));options.toggle.setAttribute('aria-label',hidden?'More preview options: collections, sharing and help':'Show fewer preview options');}
+    if(options.toggle){options.toggle.textContent=hidden?'Share & more':'Done';options.toggle.setAttribute('aria-expanded',String(!hidden));options.toggle.setAttribute('aria-label',hidden?'Share this design, switch collection or get help':'Hide sharing and collection options');}
     onResize();
   }
   function reveal(){

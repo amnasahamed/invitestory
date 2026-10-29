@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs';
 
 // Keep new HTML from reusing cached pre-contract code across the checkout boundary.
 test('checkout pages reference one coordinated delivery asset revision', () => {
-  const revision = '20261010-delivery-bridge-2';
+  const revision = '20261029-uiux-1';
   const expected = {
     'index.html': ['scripts.js', 'sales.js', 'interactions.js', 'website-integration.js', 'paid-order.js', 'sales.css'],
     'digital-wedding-invitations.html': ['scripts.js', 'sales.js', 'website-integration.js', 'paid-order.js', 'sales.css'],

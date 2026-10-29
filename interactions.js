@@ -37,7 +37,7 @@ const InviteInteractions = (() => {
   }
   function matches(query) {
     const q = query.trim().toLowerCase();
-    return TEMPLATE_DATABASE.filter(item => !q || `${item.name} ${item.style} ${item.desc} ${item.tags.join(' ')}`.toLowerCase().includes(q));
+    return getListedDesigns().filter(item => !q ||`${item.name} ${item.style} ${item.desc} ${item.tags.join(' ')}`.toLowerCase().includes(q));
   }
   function setSearch(query) {
     const input = document.getElementById('search-input');
@@ -77,12 +77,12 @@ const InviteInteractions = (() => {
   function rankMatches(style, tradition, tier) {
     const feeling = feelings.find(choice=>choice.value===style);
     if(!feeling) return [];
-    return TEMPLATE_DATABASE.filter(item=>(!tier || item.tier===Number(tier)) && (tradition==='all' || item.tags.includes(tradition))).map(item=>({item,score:feeling.tags.filter(tag=>`${item.style} ${item.tags.join(' ')} ${item.desc}`.toLowerCase().includes(tag)).length})).filter(match=>match.score>0).sort((a,b)=>b.score-a.score || a.item.id-b.item.id).slice(0,3).map(match=>match.item);
+    return getListedDesigns().filter(item=>(!tier ||item.tier===Number(tier)) && (tradition==='all' || item.tags.includes(tradition))).map(item=>({item,score:feeling.tags.filter(tag=>`${item.style} ${item.tags.join(' ')} ${item.desc}`.toLowerCase().includes(tag)).length})).filter(match=>match.score>0).sort((a,b)=>b.score-a.score || a.item.id-b.item.id).slice(0,3).map(match=>match.item);
   }
   function openFinder() {
     let step=0;
     const answers={style:'',tradition:'all',tier:0};
-    openSheet('finder','Find our three','',root=>{
+    openSheet('finder','Help me choose','',root=>{
       const render=()=>{
         const titles=['What feels like you?','Any traditions to reflect?','Which collection?'];
         const options=step===0 ? feelings.map(choice=>({value:choice.value,label:choice.label,image:itemById(choice.image)?.image})) : step===1 ? [{value:'all',label:'Open to every style'},{value:'traditional',label:'Traditional Indian'},{value:'south-indian',label:'South Indian'},{value:'islamic',label:'Islamic'}] : [{value:0,label:'Explore all collections'},{value:2,label:`Premium · ${formatPrice(1999,29)}`},{value:3,label:`Luxury · ${formatPrice(2999,45)}`},{value:4,label:`Dearly · ${formatPrice(4999,75)}`}];
@@ -107,6 +107,8 @@ const InviteInteractions = (() => {
   }
   function afterCatalogue() {
     if(!document.body.classList.contains('browse-home')) return;
+    // Utility buttons appear only once they would do something.
+    if(resetButton) resetButton.hidden=typeof isDefaultBrowse==='function' && isDefaultBrowse();
     const grid = document.getElementById('templates-grid');
     const count = grid.querySelectorAll('.template-card,.match-card').length;
     grid.setAttribute('aria-label', `${count} invitation designs`);
@@ -126,10 +128,10 @@ const InviteInteractions = (() => {
     if(empty && !discovery.savedOnly) empty.innerHTML = '<h3>No exact match yet</h3><p>Try another style, or broaden your search.</p><button type="button" class="interaction-secondary" onclick="InviteInteractions.clearSearch()">Clear search</button><button type="button" class="interaction-secondary" onclick="resetFilters()">See all designs</button>';
   }
   function clearSearch(){setSearch('');}
-  let savedButton, feedback, feedbackTimer;
+  let savedButton, resetButton, feedback, feedbackTimer;
   let compareIds=new Set();
   const savedItems=()=>[...previewFavourites].map(itemById).filter(Boolean);
-  function updateSavedButton(){if(savedButton){savedButton.textContent=`View saved (${savedItems().length})`;savedButton.setAttribute('aria-label',`Open shortlist, ${savedItems().length} saved designs`);}}
+  function updateSavedButton(){if(savedButton){savedButton.hidden=!savedItems().length;savedButton.textContent=`View saved (${savedItems().length})`;savedButton.setAttribute('aria-label',`Open shortlist, ${savedItems().length} saved designs`);}}
   function notify(message,action,label){
     clearTimeout(feedbackTimer);
     if(!sheet?.open && feedback){
@@ -353,7 +355,7 @@ const InviteInteractions = (() => {
     const oldFinder=document.querySelector('.sales-style-finder');
     if(oldFinder) oldFinder.hidden=true;
     const actions=document.createElement('div');actions.className='interaction-discovery-actions';
-    actions.innerHTML='<button type="button" class="interaction-secondary" id="interaction-find-three">Find our three</button>';
+    actions.innerHTML='<button type="button" class="interaction-secondary" id="interaction-find-three">Help me choose</button>';
     document.querySelector('.filter-tags-row')?.after(actions);
     // Some catalogue versions name the horizontal row differently.
     if(!actions.isConnected) document.querySelector('.controls-card').appendChild(actions);
@@ -392,7 +394,7 @@ const InviteInteractions = (() => {
     contextObserver.observe(document.getElementById('catalogue-header'));
     window.addEventListener('pagehide',persistContext);
     document.addEventListener('visibilitychange',()=>{if(document.hidden)persistContext();});
-    const clearContext=document.createElement('button');clearContext.type='button';clearContext.className='interaction-secondary';clearContext.textContent='Reset browsing';clearContext.addEventListener('click',()=>{try{localStorage.removeItem(contextKey);}catch{}resetFilters();matchReasons.clear();document.getElementById('catalogue-header').scrollIntoView({behavior:reduced()?'instant':'smooth'});});actions.appendChild(clearContext);
+    const clearContext=resetButton=document.createElement('button');clearContext.type='button';clearContext.className='interaction-secondary';clearContext.textContent='Reset browsing';clearContext.addEventListener('click',()=>{try{localStorage.removeItem(contextKey);}catch{}resetFilters();matchReasons.clear();document.getElementById('catalogue-header').scrollIntoView({behavior:reduced()?'instant':'smooth'});});actions.appendChild(clearContext);
     if(document.getElementById('preview-modal').classList.contains('is-open')) {const item=TEMPLATE_DATABASE[previewState.currentIndex];if(item){afterPreview(item);if(demoAPI()){demoTools.querySelectorAll('button').forEach(button=>button.disabled=false);chapters.querySelectorAll('button').forEach(button=>button.disabled=false);}}}
     afterCatalogue();
     const search = document.getElementById('search-input');

@@ -91,7 +91,8 @@ test('local development does not send custom events to the production PostHog pr
 
 test('catalogue result counts follow the same collection, style and search filters as the designs shown', () => {
   const site = website();
-  assert.equal(site.run('getFilteredTemplates().length'), 35);
+  assert.equal(site.run('getFilteredTemplates().length'), 29);
+  assert.equal(site.run("activeTierFilter = 3; getFilteredTemplates().length"), 7);
   assert.equal(site.run("activeTierFilter = 4; getFilteredTemplates().length"), 4);
   assert.equal(site.run("searchQuery = 'magnolia'; getFilteredTemplates().length"), 1);
   assert.equal(site.run("searchQuery = 'unmatched'; getFilteredTemplates().length"), 0);
@@ -130,11 +131,33 @@ test('discovery defaults to the full catalogue and preserves shared shortlist or
   assert.equal(site.run('JSON.stringify(getDiscoveryDesigns(TEMPLATE_DATABASE).map(item => item.id))'), '[21]');
 });
 
-test('preview arrows traverse all 35 designs across collections and wrap both ways', () => {
+test('homepage starts with a short mix of collections until the visitor asks for all', () => {
+  const site = website();
+  site.run("document.body.classList = { contains: name => name === 'browse-home', add() {}, remove() {} };");
+  const featured = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).map(item => item.tier))');
+  assert.deepEqual(JSON.parse(featured), [2, 2, 2, 2, 3, 3, 4, 4]);
+  site.run("activeTagFilter = 'royal';");
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 35);
+  site.run("activeTagFilter = 'all'; catalogueExpanded = true;");
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 35);
+});
+
+test('hidden designs stay out of browsing but still open from a direct link', () => {
+  const site = website();
+  const hidden = ['grand-line-voyage', 'lake-pichola-royal', 'lakeview-lanterns', 'moonlit-lotus-barge', 'petal-path-palace', 'slide-to-shaadi'];
+  assert.equal(site.run('JSON.stringify(TEMPLATE_DATABASE.filter(item => item.hidden).map(item => item.slug).sort())'), JSON.stringify(hidden));
+  assert.equal(site.run('getFilteredTemplates().some(item => item.hidden)'), false);
+  for (const slug of hidden) assert.equal(site.run(`findTemplateByQuery(${JSON.stringify(slug)})?.slug`), slug);
+  site.run('const visits=[]; openPreview=id=>{visits.push(id);previewState.currentIndex=TEMPLATE_DATABASE.findIndex(item=>item.id===id);};');
+  site.run('previewState.currentIndex=TEMPLATE_DATABASE.findIndex(item=>item.slug==="slide-to-shaadi"); previewNext(); previewNext();');
+  assert.equal(site.run('visits.some(id => TEMPLATE_DATABASE.find(item => item.id === id).hidden)'), false);
+});
+
+test('preview arrows traverse all 29 listed designs across collections and wrap both ways', () => {
   const site = website();
   site.run('const visits=[]; openPreview=id=>{visits.push(id);previewState.currentIndex=TEMPLATE_DATABASE.findIndex(item=>item.id===id);};previewState.currentIndex=0;');
-  for (let i=0;i<35;i++) site.run('previewNext()');
-  assert.equal(site.run('new Set(visits).size'), 35);
+  for (let i=0;i<29;i++) site.run('previewNext()');
+  assert.equal(site.run('new Set(visits).size'), 29);
   assert.equal(site.run('previewState.currentIndex'), 0);
   site.run('previewPrev()');
   assert.equal(site.run('previewState.currentIndex'), 34);
