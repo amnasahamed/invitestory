@@ -609,6 +609,16 @@ export default {
     "desc": "Gilded Hall interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
     "url": "https://www.invitestory.in/?design=gilded-hall"
   },
+  "39": {
+    "id": 39,
+    "name": "Burgundy Reverie",
+    "slug": "burgundy-reverie",
+    "image": "assets/preview/39.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/39.png",
+    "title": "InviteStory – Burgundy Reverie Wedding Invitation",
+    "desc": "Burgundy Reverie luxury wedding invitation with a cinematic velvet-curtain opening, music, personalized names, scratch-reveal date, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=burgundy-reverie"
+  },
   "slide-to-shaadi": {
     "id": 34,
     "name": "Slide to Shaadi",
@@ -618,5 +628,15 @@ export default {
     "title": "InviteStory – Slide to Shaadi Wedding Invitation",
     "desc": "Slide to Shaadi interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
     "url": "https://www.invitestory.in/?design=slide-to-shaadi"
+  },
+  "burgundy-reverie": {
+    "id": 39,
+    "name": "Burgundy Reverie",
+    "slug": "burgundy-reverie",
+    "image": "assets/preview/39.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/39.png",
+    "title": "InviteStory – Burgundy Reverie Wedding Invitation",
+    "desc": "Burgundy Reverie luxury wedding invitation with a cinematic velvet-curtain opening, music, personalized names, scratch-reveal date, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=burgundy-reverie"
   }
 };

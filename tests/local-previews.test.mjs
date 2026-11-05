@@ -5,11 +5,11 @@ import {existsSync, readFileSync, readdirSync} from 'node:fs';
 const source = readFileSync(new URL('../scripts.js', import.meta.url), 'utf8');
 const manifest = JSON.parse(readFileSync(new URL('../previews/manifest.json', import.meta.url), 'utf8'));
 
-test('all 35 catalogue previews resolve to existing local entry points', () => {
+test('all 36 catalogue previews resolve to existing local entry points', () => {
   const urls = [...source.matchAll(/localDemoUrl: "([^"]+)"/g)].map(match => match[1]);
-  assert.equal(urls.length, 35);
-  assert.equal(new Set(urls).size, 35);
-  assert.equal(manifest.designs.length, 35);
+  assert.equal(urls.length, 36);
+  assert.equal(new Set(urls).size, 36);
+  assert.equal(manifest.designs.length, 36);
   for (const design of manifest.designs) {
     assert.ok(urls.includes(design.url), `manifest mismatch: ${design.name}`);
     assert.ok(design.url.startsWith('/previews/') || design.url.startsWith('/dearly/'));

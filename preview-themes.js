@@ -1,4 +1,4 @@
-/* Palettes art-directed against all 35 catalogue covers, not extracted at runtime.
+/* Palettes art-directed against all 36 catalogue covers, not extracted at runtime.
    Order of fields: family, stage, surface, ink, action, decorative highlight. */
 const PreviewThemes = (() => {
   const palettes = {
@@ -36,7 +36,8 @@ const PreviewThemes = (() => {
     35:['botanical','#351323','#fbf0ea','#4c2034','#682e49','#c9988f'],
     36:['botanical','#64351f','#fff4e6','#542d1c','#8b4e2b','#c69a64'],
     37:['botanical','#142c44','#f0f5f8','#253f56','#294e7b','#97b0c4'],
-    38:['botanical','#112f2e','#f3f3e8','#23423d','#174b49','#b4af84']
+    38:['botanical','#112f2e','#f3f3e8','#23423d','#174b49','#b4af84'],
+    39:['cinematic','#4a0715','#fff5ed','#4b232a','#761f35','#c49a63']
   };
   const neutral=['paper','#edf2ef','#ffffff','#173e35','#173e35','#547c6b'];
   const rgb=hex=>hex.slice(1).match(/../g).map(value=>parseInt(value,16));

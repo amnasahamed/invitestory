@@ -62,13 +62,25 @@
   text-decoration:none; white-space:nowrap; cursor:pointer; touch-action:manipulation;
 }
 .studio-home #preview-modal .preview-top-controls .preview-modal-close { order:initial; }
+.studio-home #preview-modal .preview-top-controls .preview-expand-btn {
+  background:#dfeee5;
+  color:#214d3b;
+  border-color:#b9d6c5;
+}
+.studio-home #preview-modal .preview-top-controls .preview-modal-close {
+  background:#F7E9E7;
+  color:#70433F;
+  border-color:#E8CECA;
+}
 .studio-home #preview-modal .preview-browse-controls {
   display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; width:100%;
   padding-bottom:10px; border-bottom:1px solid var(--invitation-border);
 }
 .studio-home #preview-modal .preview-browse-controls .preview-side-arrow > span[aria-hidden] { font-size:24px; line-height:1; }
 .studio-home #preview-modal .preview-browse-controls #preview-favourite-btn { order:initial; }
-.studio-home #preview-modal .preview-top-controls :is(button,a):hover,
+.studio-home #preview-modal .preview-top-controls .preview-expand-btn:hover { background:#d1e7da; }
+.studio-home #preview-modal .preview-top-controls .preview-modal-close:hover { background:#F1DAD7; }
+.studio-home #preview-modal .preview-top-controls .preview-viewer-pill :is(button,a):hover,
 .studio-home #preview-modal .preview-browse-controls button:hover { background:var(--invitation-soft); transform:none; }
 .studio-home #preview-modal .preview-browse-controls #preview-favourite-btn[aria-pressed='true'] { background:var(--invitation-accent); color:var(--invitation-on-accent); }
 .studio-home #preview-modal .preview-browse-controls #preview-favourite-btn[aria-pressed='true'] svg { fill:currentColor; }
@@ -102,6 +114,20 @@
 .studio-home #preview-modal .preview-sheet-details h3 { margin:0; font-size:15px; line-height:1.2; }
 .studio-home #preview-modal .preview-sheet-meta { display:none; }
 .studio-home #preview-modal #preview-instant-pay-btn { min-height:44px; padding-block:8px; }
+.studio-home #preview-modal #preview-instant-pay-btn {
+  font-weight:700;
+  box-shadow:0 5px 14px #173e3526;
+}
+.studio-home #preview-modal .preview-browse-controls #preview-names-edit {
+  background:var(--invitation-surface,#fff);
+  color:var(--invitation-ink,#173e35);
+  border-color:var(--invitation-border,#d5e0da);
+  box-shadow:0 2px 8px #173e3514;
+}
+.studio-home #preview-modal .preview-browse-controls #preview-names-edit:hover {
+  background:var(--invitation-soft,#edf2ef);
+  box-shadow:0 3px 10px #173e351c;
+}
 .studio-home #preview-modal .preview-secondary-actions { display:grid; grid-template-columns:1fr 1.15fr .7fr; gap:4px; }
 .studio-home #preview-modal .preview-secondary-actions .preview-toolbar-btn { min-height:44px; padding:6px 4px; font-size:12px; gap:4px; }
 /* Service details stay available to assistive technology and in the FAQ / booking review. */

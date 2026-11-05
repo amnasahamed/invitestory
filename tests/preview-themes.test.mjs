@@ -7,7 +7,7 @@ vm.runInContext(readFileSync(new URL('../preview-themes.js',import.meta.url),'ut
 const themes=vm.runInContext('PreviewThemes',context);
 const ids=[...readFileSync(new URL('../scripts.js',import.meta.url),'utf8').matchAll(/id: (\d+),\s+name:/g)].map(match=>Number(match[1]));
 test('every catalogue design has a distinct art-directed palette with readable labels and actions',()=>{
- assert.equal(ids.length,35);
+ assert.equal(ids.length,36);
  const stages=new Set();
  for(const id of ids) {
   const theme=themes.themeFor(id);
@@ -15,7 +15,7 @@ test('every catalogue design has a distinct art-directed palette with readable l
   stages.add(theme.stage);
   for(const [foreground,background] of [[theme.ink,theme.surface],[theme.muted,theme.surface],[theme.onAccent,theme.accent],[theme.ink,theme.soft]])assert.ok(themes.contrast(foreground,background)>=4.5,`design ${id}: ${foreground} on ${background}`);
  }
- assert.equal(stages.size,35);
+ assert.equal(stages.size,36);
 });
 test('booking uses the chosen design palette and package-only review resets to neutral',()=>{
  const properties=new Map();

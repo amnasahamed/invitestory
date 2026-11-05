@@ -844,6 +844,23 @@ const TEMPLATE_DATABASE = [
     desc: "Inspired by the Udaipur Lake Palace on Lake Pichola. Regal hues, gold outlines, and slow, gorgeous water reflections.",
     promise: "Royal elegance inspired by Rajasthan's heritage."
   },
+  {
+    id: 39,
+    name: "Burgundy Reverie",
+    image: "assets/preview/39.png",
+    tier: 3,
+    priceINR: 2999,
+    priceUSD: 45,
+    originalPriceINR: 2999,
+    originalPriceUSD: 45,
+    demoUrl: "https://burgundy-reverie.invitestory.in/",
+    localDemoUrl: "/previews/burgundy-reverie/",
+    style: "Burgundy Curtain Reveal",
+    accentColor: "#6f1727",
+    tags: ["luxury", "royal", "cinematic", "burgundy", "curtain-reveal"],
+    desc: "Deep burgundy velvet curtains open into a gold-lit palace invitation with music, an interactive scratch-to-reveal date, countdown, events, directions and RSVP.",
+    promise: "A theatrical burgundy reveal with refined palace romance."
+  },
   // --- TIER 4: The Dearly Collection (Wax-seal collection / ₹4,999 / $75) ---
   {
     id: 35,

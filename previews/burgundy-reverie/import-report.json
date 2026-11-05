@@ -1,0 +1,19 @@
+{
+  "slug": "burgundy-reverie",
+  "name": "Burgundy Reverie",
+  "collection": "Luxury",
+  "source": "burgundy-love-invitestory-main.zip",
+  "editableData": "editable/wedding-data.js",
+  "previewImage": "../../assets/preview/39.png",
+  "features": [
+    "cinematic curtain reveal",
+    "background music",
+    "editable couple and family details",
+    "scratch-to-reveal wedding date",
+    "live countdown",
+    "editable event programme",
+    "directions",
+    "calendar link",
+    "RSVP email"
+  ]
+}

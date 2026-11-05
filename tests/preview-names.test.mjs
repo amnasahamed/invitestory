@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../previews/names.js',import.meta.url),'utf8');
 function runtime(names){const window={addEventListener(){}};vm.runInNewContext(source,{window,sessionStorage:{getItem:()=>JSON.stringify(names)}});return window;}
-test('all 35 template data formats accept both names without changing media or parents',()=>{
+test('all 36 template data formats accept both names without changing media or parents',()=>{
  const manifest=JSON.parse(fs.readFileSync(new URL('../previews/manifest.json',import.meta.url),'utf8'));
  for(const design of manifest.designs){
   const folder=new URL('../'+design.url.split('?')[0].slice(1),import.meta.url);

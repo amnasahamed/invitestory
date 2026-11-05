@@ -91,8 +91,8 @@ test('local development does not send custom events to the production PostHog pr
 
 test('catalogue result counts follow the same collection, style and search filters as the designs shown', () => {
   const site = website();
-  assert.equal(site.run('getFilteredTemplates().length'), 29);
-  assert.equal(site.run("activeTierFilter = 3; getFilteredTemplates().length"), 7);
+  assert.equal(site.run('getFilteredTemplates().length'), 30);
+  assert.equal(site.run("activeTierFilter = 3; getFilteredTemplates().length"), 8);
   assert.equal(site.run("activeTierFilter = 4; getFilteredTemplates().length"), 4);
   assert.equal(site.run("searchQuery = 'magnolia'; getFilteredTemplates().length"), 1);
   assert.equal(site.run("searchQuery = 'unmatched'; getFilteredTemplates().length"), 0);
@@ -124,7 +124,7 @@ test('Premium and Luxury totals charge only selected extras; Dearly charges neit
 
 test('discovery defaults to the full catalogue and preserves shared shortlist order', () => {
   const site = website();
-  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 35);
+  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 36);
   site.run('discovery.shared = [35, 1, 999];');
   assert.equal(site.run('JSON.stringify(getDiscoveryDesigns(TEMPLATE_DATABASE).map(item => item.id))'), '[35,1]');
   site.run('discovery.savedOnly = true; previewFavourites.add(21);');
@@ -137,9 +137,9 @@ test('homepage starts with a short mix of collections until the visitor asks for
   const featured = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).map(item => item.tier))');
   assert.deepEqual(JSON.parse(featured), [2, 2, 2, 2, 3, 3, 4, 4]);
   site.run("activeTagFilter = 'royal';");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 35);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 36);
   site.run("activeTagFilter = 'all'; catalogueExpanded = true;");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 35);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 36);
 });
 
 test('hidden designs stay out of browsing but still open from a direct link', () => {
@@ -153,14 +153,14 @@ test('hidden designs stay out of browsing but still open from a direct link', ()
   assert.equal(site.run('visits.some(id => TEMPLATE_DATABASE.find(item => item.id === id).hidden)'), false);
 });
 
-test('preview arrows traverse all 29 listed designs across collections and wrap both ways', () => {
+test('preview arrows traverse all 30 listed designs across collections and wrap both ways', () => {
   const site = website();
   site.run('const visits=[]; openPreview=id=>{visits.push(id);previewState.currentIndex=TEMPLATE_DATABASE.findIndex(item=>item.id===id);};previewState.currentIndex=0;');
-  for (let i=0;i<29;i++) site.run('previewNext()');
-  assert.equal(site.run('new Set(visits).size'), 29);
+  for (let i=0;i<30;i++) site.run('previewNext()');
+  assert.equal(site.run('new Set(visits).size'), 30);
   assert.equal(site.run('previewState.currentIndex'), 0);
   site.run('previewPrev()');
-  assert.equal(site.run('previewState.currentIndex'), 34);
+  assert.equal(site.run('previewState.currentIndex'), 35);
   assert.equal(site.run('TEMPLATE_DATABASE[previewState.currentIndex].tier'), 4);
 });
 
