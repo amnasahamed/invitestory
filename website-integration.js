@@ -71,10 +71,15 @@
   const design=selected();if(!design)return;lastActivity=Date.now();api('activity',{token,designId:design.id}).catch(()=>{});
  }
  window.addEventListener('pointerdown',activity,{passive:true});
+ function bindPreviewActivity(){
  const frame=document.getElementById('preview-modal-iframe');
- frame?.addEventListener('load',()=>{
+ const loaded=()=>{
   try{frame.contentWindow.addEventListener('pointerdown',activity,{passive:true});frame.contentWindow.addEventListener('scroll',activity,{passive:true});activity();}catch{}
- });
+ };
+ frame?.addEventListener('load',loaded);loaded();
+ }
+ bindPreviewActivity();
+ window.addEventListener('previewframechange',bindPreviewActivity);
  const checkoutStorageKey='invitestory.checkoutRetry',checkoutInFlight=new Map();
  const uuidPattern=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
  let checkoutAttempts;

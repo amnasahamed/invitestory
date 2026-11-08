@@ -125,7 +125,7 @@ function updateMobileBookingBar() {
   if (!bar) return;
   const item = lastChosenDesign();
   const mobile = window.matchMedia("(max-width: 760px)").matches;
-  const hero = document.querySelector(".hero");
+  const hero = document.querySelector("#invitation-archive") || document.querySelector(".hero");
   const pastHero = !hero || hero.getBoundingClientRect().bottom < 80;
   const overlay = document.querySelector(".interaction-sheet[open], #preview-modal.is-open, #order-drawer-modal.is-open, #wa-lightbox.active, #payment-success-modal.is-open");
   const typing = /^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement?.tagName || "");
@@ -227,7 +227,7 @@ function setupMobileSalesLayout() {
   document.body.insertAdjacentHTML("beforeend", '<aside id="sales-mobile-booking" class="sales-mobile-booking" aria-label="Your selected invitation" hidden><img alt="" width="32" height="42"><div><strong></strong><small></small></div><button type="button" class="sales-mobile-book-btn" onclick="bookChosenDesign()">Choose design</button><button type="button" class="sales-mobile-book-close" onclick="dismissMobileBookingBar()" aria-label="Hide booking shortcut">×</button></aside>');
   apply();
   mobile.addEventListener("change", apply);
-  const heroForShortcut = () => document.querySelector(".hero");
+  const heroForShortcut = () => document.querySelector("#invitation-archive") || document.querySelector(".hero");
   let scheduled = false;
   const schedule = () => {
     if (scheduled) return;
@@ -263,11 +263,22 @@ function renderDiscoveryStatus(count) {
   if (!footer || !status) return;
   status.textContent = discovery.savedOnly ? `${count} saved ${count === 1 ? "design" : "designs"}` : discovery.recommendations ? `${count} recommendations for your style` : discovery.shared ? `${count} designs in this shared shortlist` : `${count} ${count === 1 ? "design" : "designs"} to explore`;
   if (isShowingFeatured(count)) {
-    status.textContent = `A few to start with · ${count} designs in all`;
+    const shown = Object.values(FEATURED_PER_TIER).reduce((sum, n) => sum + n, 0);
+    status.textContent = `Showing ${shown} of ${count} designs · A selection from every collection`;
     footer.innerHTML = `<button type="button" class="sales-browse-all sales-see-all" onclick="showAllDesigns()">See all ${count} designs</button>`;
   } else {
     footer.innerHTML = isDefaultBrowse() ? "" : `<button type="button" class="sales-browse-all" onclick="browseAllDesigns()">Reset and browse all designs</button>`;
   }
+  if (!isShowingFeatured(count) && !isDefaultBrowse()) {
+    const collection = activeTierFilter ? packageName(activeTierFilter) : '';
+    const style = activeTagFilter !== 'all' ? (document.querySelector(`#filter-tags [data-tag="${activeTagFilter}"]`)?.textContent || activeTagFilter) : '';
+    const context = [collection, style, searchQuery ? `“${searchQuery}”` : ''].filter(Boolean);
+    if (context.length) status.textContent += ` · ${context.join(' / ')}`;
+  }
+  const reset = document.getElementById('catalogue-reset-btn');
+  const all = document.getElementById('catalogue-show-all-btn');
+  if (reset) reset.hidden = isDefaultBrowse();
+  if (all) { all.hidden = !isShowingFeatured(count); all.textContent = `View all ${count} designs`; }
   if (discovery.savedOnly && count === 0) {
     // renderCatalogue supplies the empty-state container immediately after this call.
     queueMicrotask(() => {
@@ -382,6 +393,12 @@ function updateSelectedDesignNote(item = lastChosenDesign()) {
 }
 
 function updateSalesPrices() {
+  const heroPrice = document.getElementById('archive-design-price');
+  const heroDesign = heroPrice && TEMPLATE_DATABASE.find(item => String(item.id) === heroPrice.dataset.designId);
+  if (heroDesign) {
+    const prices = getItemPrices(heroDesign);
+    heroPrice.textContent = formatPrice(prices.priceINR, prices.priceUSD);
+  }
   document.querySelectorAll("[data-sales-price]").forEach(element => {
     const base = TIER_BASE_PRICE[Number(element.dataset.salesPrice)];
     if (base) element.textContent = `${element.dataset.salesPricePrefix || (element.closest(".hero-offer-line") ? "From " : "")}${formatPrice(base.inr, base.usd)}`;
@@ -526,7 +543,7 @@ function setupSalesGuidance() {
     mount.id = "invitation-discovery";
     document.querySelector(".controls-card").before(mount);
   }
-  mount.innerHTML = `<div id="saved-designs" class="sales-saved-designs"></div><details class="sales-style-finder"><summary>Not sure where to start? Find three designs for your style.</summary><form id="style-finder-form"><label>The feeling we like<select id="finder-style"><option value="traditional">Traditional</option><option value="modern">Modern & minimal</option><option value="royal">Royal & cinematic</option><option value="botanical">Floral & botanical</option><option value="illustrated">Illustrated & playful</option></select></label><label>Our package<select id="finder-package"><option value="0">Show all packages</option><option value="2">Premium</option><option value="3">Luxury</option><option value="4">Dearly</option></select></label><button type="submit">Find our three designs</button></form><p id="finder-explanation" aria-live="polite"></p></details><p id="discovery-status" class="sales-discovery-status" aria-live="polite"></p>`;
+  mount.innerHTML = `<div id="saved-designs" class="sales-saved-designs"></div><details class="sales-style-finder"><summary>Not sure where to start? Find three designs for your style.</summary><form id="style-finder-form"><label>The feeling we like<select id="finder-style"><option value="traditional">Traditional</option><option value="modern">Modern & minimal</option><option value="royal">Royal & cinematic</option><option value="botanical">Floral & botanical</option><option value="illustrated">Illustrated & playful</option></select></label><label>Our package<select id="finder-package"><option value="0">Show all packages</option><option value="2">Premium</option><option value="3">Luxury</option><option value="4">Dearly</option></select></label><button type="submit">Find our three designs</button></form><p id="finder-explanation" aria-live="polite"></p></details><div class="catalogue-results-bar"><p id="discovery-status" class="sales-discovery-status" aria-live="polite"></p><button type="button" id="catalogue-show-all-btn" onclick="showAllDesigns()" hidden>View all designs</button><button type="button" id="catalogue-reset-btn" onclick="browseAllDesigns()" hidden>Clear filters · Show all</button></div>`;
   if (!document.getElementById("catalogue-discovery-footer")) templatesGrid.insertAdjacentHTML("afterend", '<div id="catalogue-discovery-footer" class="catalogue-discovery-footer"></div>');
   document.getElementById("style-finder-form").addEventListener("submit", findStyleMatches);
   const sharedIds = (new URLSearchParams(location.search).get("shortlist") || "").split(",").map(Number).filter(id => TEMPLATE_DATABASE.some(item => item.id === id));

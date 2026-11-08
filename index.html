@@ -221,14 +221,17 @@
   <!-- Google Fonts: Cormorant Garamond luxury serif + Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Noto+Sans+Devanagari:wght@500;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css?v=20261008-lean-1">
   <link rel="stylesheet" href="sales.css?v=20261029-uiux-1">
   <link rel="stylesheet" href="home.css?v=20261029-uiux-2">
+  <link rel="stylesheet" href="archive-mood.css?v=20261106-1">
   <link rel="stylesheet" href="interactions.css?v=20261009-shortlist-clarity-1">
   <link rel="stylesheet" href="preview-themes.css?v=20261010-persistent-controls-1">
+  <link rel="stylesheet" href="catalogue-refinement.css?v=20261106-1">
+  <link rel="stylesheet" href="preview-gallery.css?v=20261106-1">
   <!-- PostHog Analytics -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="gu mu yu bu ku init Qu Zu Wu Vu Yu el Gu ec zu lc uc cc hc dc vc capture getExtension Ju fu mc calculateEventProperties gc register register_once register_for_session unregister unregister_for_session wc Uu yc getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys onActiveMatchingSurveysChanged renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync kc identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset Sc shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty bc rc createPersonProfile setInternalOrTestUser Cu xu opt_in_capturing opt_out_capturing  has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing nc debug il Os getPageViewId captureTraceFeedback captureTraceMetric Nu".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
@@ -266,56 +269,62 @@
     </div>
   </header>
 
-  <section class="hero hero-showroom studio-hero hero-stage" aria-labelledby="home-heading">
-    <div class="container hero-layout">
-      <div class="hero-copy">
-        <h1 class="hero-headline" id="home-heading">Find an invitation that <em>feels like you.</em></h1>
-        <p class="hero-subheadline">Pick a design. We add your names, photos and events. Your guests open it on WhatsApp.</p>
-        <p class="hero-service-note"><strong data-sales-price="2" data-sales-price-prefix="From ">From ₹1,999</strong><span>Personalization &amp; hosting included</span></p>
-        <div class="hero-action-wrapper">
-          <a href="#catalogue-header" class="hero-primary-cta" id="hero-explore-btn">Explore designs <span aria-hidden="true">↗</span></a>
-          <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20could%20you%20help%20me%20choose%20a%20wedding%20invitation%3F" target="_blank" rel="noopener" class="hero-whatsapp-cta" data-cta-location="hero">Ask on WhatsApp <span aria-hidden="true">↗</span></a>
+  <section class="invite-archive" id="invitation-archive" aria-labelledby="home-heading">
+    <div class="archive-grain" aria-hidden="true"></div>
+    <div class="archive-kanji archive-kanji-left" aria-hidden="true">शुभ</div>
+    <div class="archive-kanji archive-kanji-right" aria-hidden="true">विवाह</div>
+    <div class="archive-intro">
+      <p class="archive-eyebrow">INVITESTORY — INTERACTIVE INVITATION GALLERY</p>
+      <h1 id="home-heading">An invitation. <em>Unmistakably yours.</em></h1>
+    </div>
+    <div class="archive-shadow" aria-hidden="true"></div>
+    <div class="archive-shelf" id="archive-shelf" aria-label="Invitation design carousel. Drag, scroll, or use the arrow keys to browse.">
+      <div class="archive-stage" id="archive-stage"></div>
+    </div>
+    <div class="archive-caption" aria-live="polite">
+      <button class="archive-arrow archive-arrow-prev" type="button" aria-label="Previous invitation">←</button>
+      <div class="archive-caption-copy">
+        <div class="archive-mask"><h2 id="archive-title">Seashell Vows</h2></div>
+        <div class="archive-mask"><p id="archive-subtitle">COASTAL / MODERN / INTERACTIVE</p></div>
+        <i aria-hidden="true"></i>
+        <div class="archive-mask"><p id="archive-meta">LIVE PREVIEW — PERSONALIZED FOR YOU</p></div>
+        <div class="archive-design-actions">
+          <button class="archive-play" id="archive-open" type="button" aria-label="Open selected invitation">View invitation <span aria-hidden="true">↗</span></button>
+          <a class="archive-book" id="archive-book" href="https://wa.me/918281583882" target="_blank" rel="noopener">Book now <span aria-hidden="true">↗</span></a>
         </div>
-        <p class="hero-preview-note">Preview free. You approve your draft before anyone sees it.</p>
+        <p class="archive-price"><strong id="archive-design-price" aria-live="polite"></strong><span>Personalization &amp; hosting included</span></p>
       </div>
-      <!-- The product in use: a real invitation opening on a phone, with what guests can do labelled around it. -->
-      <figure class="hero-invitation-demo" aria-labelledby="hero-demo-title">
-        <div class="hero-phone-stage">
-          <button type="button" class="hero-phone" id="hero-demo-open" onclick="document.getElementById('hero-opening-video').pause();openPreview(29)" aria-label="Open the Seashell Vows sample invitation">
-            <span class="hero-phone-screen">
-              <video id="hero-opening-video" class="hero-opening-video" muted loop playsinline preload="none" poster="assets/hero-invite-poster.webp" width="480" height="854" aria-hidden="true">
-                <source src="assets/hero-invite-loop.mp4" type="video/mp4">
-              </video>
-              <span class="hero-phone-invite" aria-hidden="true">
-                <span class="hero-phone-kicker">Together with our families</span>
-                <span class="hero-phone-names">Aarav <em>&amp;</em> Ananya</span>
-                <span class="hero-phone-tap">Tap to open</span>
-              </span>
-            </span>
-          </button>
-          <ul class="hero-phone-notes" aria-label="What your guests can do">
-            <li class="hero-note-opening"><span class="hero-note-dot"></span>Opens like a film</li>
-            <li class="hero-note-map"><span class="hero-note-dot"></span>Venue map in one tap</li>
-            <li class="hero-note-rsvp"><span class="hero-note-dot"></span>RSVP on WhatsApp</li>
-          </ul>
-        </div>
-        <figcaption class="hero-demo-caption">
-          <span id="hero-demo-title">Seashell Vows · <span data-sales-price="2">₹1,999</span> · sample names</span>
-          <button type="button" class="hero-demo-open" onclick="document.getElementById('hero-opening-video').pause();openPreview(29)">Try it live <span aria-hidden="true">↗</span></button>
-        </figcaption>
-      </figure>
+      <button class="archive-arrow archive-arrow-next" type="button" aria-label="Next invitation">→</button>
+    </div>
+    <div class="archive-ruler" id="archive-ruler" aria-label="Jump to an invitation design">
+      <div class="archive-ruler-line"></div>
+      <div class="archive-ruler-ticks" id="archive-ruler-ticks"></div>
+      <div class="archive-ruler-dot" id="archive-ruler-dot"></div>
+    </div>
+    <div class="archive-footerline">
+      <span>FROM <b data-sales-price="2">₹1,999</b> — PERSONALIZATION &amp; HOSTING INCLUDED</span>
+      <a href="#catalogue-header">VIEW ALL DESIGNS ↘</a>
     </div>
   </section>
 
   <!-- Early reassurance: real customer words and the three things buyers ask first. -->
   <section class="home-proof-strip" aria-label="Why couples trust InviteStory">
     <div class="container home-proof-strip-inner">
-      <div id="hero-customer-proof" class="sales-customer-proof"></div>
+      <div class="home-proof-editorial">
+      <div class="home-proof-quote">
+        <p class="home-proof-eyebrow">A note from our couples</p>
+        <blockquote>“Thank You Mam for making this invitation beautiful”</blockquote>
+        <button class="home-proof-source" type="button" onclick="openLightbox(6)" aria-label="Read the original customer chat">
+          <img src="assets/reviews/review-07.webp" alt="Original customer WhatsApp conversation thanking InviteStory for their invitation" width="400" height="600" loading="lazy">
+          <span>Read the original chat <span aria-hidden="true">↗</span></span>
+        </button>
+      </div>
       <ul class="home-proof-facts">
-        <li><strong>Made by our team</strong><span>Personalized by hand</span></li>
-        <li><strong>Approve before you share</strong><span>Free changes for 24h</span></li>
-        <li><strong>Pay by UPI</strong><span>GPay · PhonePe · Paytm</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="m15 4 5 5M4 20l5-1L21 7l-4-4L5 15z"/></svg><div><strong>Personalized by our team</strong><span>Your names, photos and celebrations</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m7 12 3 3 7-7"/></svg><div><strong>Approve before sharing</strong><span>Review your draft before sharing with guests</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18m-5 5h2"/></svg><div><strong>Secure UPI payment</strong><span>GPay · PhonePe · Paytm</span></div></li>
       </ul>
+      </div>
     </div>
   </section>
 
@@ -334,8 +343,8 @@
     <div class="container">
       <!-- Catalogue Section Header -->
       <div class="catalogue-section-header">
-        <h2 class="section-title">Find the one that <em>feels like you.</em></h2>
-        <p class="section-subtitle">From familiar traditions to a fresh perspective. Preview a design as your guests will see it.</p>
+        <h2 class="section-title">Find your invitation.</h2>
+        <p class="catalogue-intro">Explore the designs, try a live invitation, then review your one-time price.</p>
         
 
       </div>
@@ -1372,12 +1381,14 @@
   <script src="webmcp.js"></script>
   <script src="preview-themes.js?v=20261007-2"></script>
   <script src="paid-order.js?v=20261029-uiux-1"></script>
-  <script src="preview-controller.js?v=20261029-uiux-1"></script>
-  <script src="scripts.js?v=20261029-uiux-1"></script>
-  <script src="sales.js?v=20261029-uiux-1"></script>
+  <script src="preview-controller.js?v=20261106-catalogue-1"></script>
+  <script src="scripts.js?v=20261106-catalogue-1"></script>
+  <script src="sales.js?v=20261106-catalogue-1"></script>
   <script src="home.js?v=20261029-uiux-1"></script>
+  <script src="archive-hero.js?v=20261106-full-catalogue-2"></script>
   <script src="interactions.js?v=20261029-uiux-1"></script>
 <script src="preview-names.js?v=20261105-action-hierarchy-1"></script>
 <script src="website-integration.js?v=20261029-uiux-1"></script>
+<script src="preview-gallery.js?v=20261106-1"></script>
 </body>
 </html>

@@ -1140,7 +1140,7 @@ if (typeof document !== "undefined" && document.documentElement) {
 const previewModal      = document.getElementById("preview-modal");
 const previewModalTitle = document.getElementById("preview-modal-title");
 const previewModalTag   = document.querySelector(".preview-modal-style-tag");
-const previewIframe     = document.getElementById("preview-modal-iframe");
+let previewIframe     = document.getElementById("preview-modal-iframe");
 const previewIframeWrap = document.getElementById("preview-modal-iframe-wrap");
 const previewLoader     = document.getElementById("preview-modal-loader");
 const previewTierTabs   = document.querySelectorAll(".preview-tier-tab");
@@ -2805,7 +2805,8 @@ function openPreview(id, updateUrl = true) {
   updatePaymentButtonsForCurrency();
   if (previewCounterBadge) {
     const listed = getListedDesigns();
-    previewCounterBadge.textContent = item.hidden ? "" : `${listed.indexOf(item) + 1} / ${listed.length}`;
+    previewCounterBadge.textContent = item.hidden ? "Private design" : `Design ${listed.indexOf(item) + 1} of ${listed.length}`;
+    if (window.PreviewGallery) window.PreviewGallery.render(item);
   }
   if (previewFullscreenBtn) {
     previewFullscreenBtn.href = item.demoUrl;
@@ -2833,7 +2834,7 @@ function openPreview(id, updateUrl = true) {
   previewLoader.classList.remove("is-hidden");
   startLoaderPulse();
   if (typeof PreviewController !== "undefined" && PreviewController) PreviewController.open(item);
-  else previewIframe.src = item.localDemoUrl || item.demoUrl;
+  else previewIframe.src = item.collection === 'dearly' ? item.demoUrl : (item.localDemoUrl || item.demoUrl);
 
   // Sync tier-tab active state to current template
   updatePreviewTierTabs(item.tier);
@@ -2881,6 +2882,18 @@ function updatePreviewScale() {
 
   // Keep templates at their original mobile resolution as the phone resizes.
   const screen = document.getElementById("phone-screen-viewport");
+  if (!screen) return;
+  const galleryStage = previewModal.querySelector(".preview-gallery-stage");
+  if (galleryStage) {
+    const pillSpace = parseFloat(getComputedStyle(galleryStage).getPropertyValue("--preview-pill-space"));
+    const scale = Math.max(0, Math.min((galleryStage.clientWidth - 96) / 390, (galleryStage.clientHeight - pillSpace - 8) / 844));
+    galleryStage.style.setProperty("--preview-width", `${390 * scale}px`);
+    galleryStage.style.setProperty("--preview-height", `${844 * scale}px`);
+    galleryStage.style.setProperty("--preview-scale", scale);
+    screen.style.transform = `scale(${scale})`;
+    previewIframeWrap.style.transform = "none";
+    return;
+  }
   if (window.matchMedia("(max-width: 760px)").matches) {
     syncPreviewViewRig();
     // Let the external invitation respond to the real phone width, without shrinking its text.
@@ -3274,6 +3287,7 @@ function phonePhysicsDisableGyroscope() {
 // Browse the listed catalogue in order, wrapping at either end. A hidden design opened by
 // direct link keeps its place so next/prev lead into the listed designs around it.
 function previewNavigate(direction) {
+  if (window.PreviewGallery) return window.PreviewGallery.navigate(direction);
   const item = TEMPLATE_DATABASE[previewState.currentIndex];
   if (!item) return;
   const catalogue = TEMPLATE_DATABASE.filter(t => !t.hidden || t.id === item.id);
@@ -3642,7 +3656,16 @@ function setupPreviewModal() {
   if (!previewModal) return;
 
   // Iframe load → fade in iframe, hide loader
-  previewIframe.addEventListener("load", () => {
+  const boundPreviewFrames = new WeakSet();
+  function bindPreviewFrame() {
+    const frame = previewIframe;
+    if (boundPreviewFrames.has(frame)) return;
+    boundPreviewFrames.add(frame);
+    frame.addEventListener("load", onPreviewFrameLoad);
+    onPreviewFrameLoad();
+  }
+  function onPreviewFrameLoad(event) {
+    if (event && event.target !== previewIframe) return;
     // Skip the initial about:blank load
     if (previewIframe.src === "about:blank" || previewIframe.src === window.location.href + "about:blank") return;
     // The preview controller owns readiness and the loading screen.
@@ -3666,7 +3689,9 @@ function setupPreviewModal() {
     } catch (e) {
       // External invitations retain the outer-frame tilt controls.
     }
-  });
+  }
+  bindPreviewFrame();
+  document.addEventListener('previewframechange', bindPreviewFrame);
 
   // Delegated close: any element with [data-preview-close] inside the modal
   previewModal.addEventListener("click", (e) => {

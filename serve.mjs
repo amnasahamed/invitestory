@@ -252,7 +252,7 @@ createServer(async (req, res) => {
       return;
     }
 
-    let filePath = normalize(join(root, pathname));
+    let filePath = normalize(join(root, pathname === "/favicon.ico" ? "/logo/noappicon.png" : pathname));
 
     if (!filePath.startsWith(root)) {
       res.writeHead(403).end("Forbidden");
