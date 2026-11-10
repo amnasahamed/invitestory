@@ -10,9 +10,8 @@
   const next=document.getElementById('preview-names-next'), back=document.getElementById('preview-names-back'), summary=document.getElementById('preview-names-summary');
   const title=document.getElementById('preview-names-title'), intro=dialog.querySelector('.preview-names-intro'), progress=dialog.querySelector('.preview-names-progress'), steps=[...form.querySelectorAll('[data-preview-step]')];
   if(Array.isArray(window.InviteCountryCodes)&&window.InviteCountryCodes.length){
-    const flag=iso=>/^[A-Z]{2}$/.test(iso)?String.fromCodePoint(...[...iso].map(letter=>127397+letter.charCodeAt(0))):'🌐';
     countryCode.replaceChildren(...window.InviteCountryCodes.map(item=>{
-      const option=document.createElement('option');option.value=item.dial;option.dataset.country=item.iso;option.textContent=`${flag(item.iso)} ${item.dial} — ${item.name}`;option.selected=item.iso==='IN';return option;
+      const option=document.createElement('option');option.value=item.dial;option.dataset.country=item.iso;option.textContent=`${item.iso} · ${item.dial} — ${item.name}`;option.selected=item.iso==='IN';return option;
     }));
   }
   const clean=value=>value.trim().replace(/\s+/g,' ').slice(0,50);
