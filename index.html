@@ -6,16 +6,26 @@
   <link rel="preload" as="image" href="assets/preview/29.webp" type="image/webp" fetchpriority="high">
   <meta name="facebook-domain-verification" content="yhfmhy9ctjhm92vsd305ur8dg31rhi" />
 
+  <script>
+    // Keep measurement available without letting third-party SDK startup block
+    // the invitation visitors came to see. Their queues preserve early events.
+    window.deferThirdParty = callback => {
+      const schedule = () => setTimeout(callback, 5000);
+      if (document.readyState === 'complete') schedule();
+      else addEventListener('load', schedule, { once: true });
+    };
+  </script>
   <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ykjlqgwscq");
+    deferThirdParty(() => {
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "ykjlqgwscq");
+    });
   </script>
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -28,6 +38,12 @@
   if (window.GOOGLE_ADS_ID) {
     gtag('config', window.GOOGLE_ADS_ID);
   }
+  deferThirdParty(() => {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1';
+    document.head.appendChild(script);
+  });
 </script>
 
   <!-- Meta Pixel Code -->
@@ -41,9 +57,9 @@
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
+    n.queue=[];deferThirdParty(function(){t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    s.parentNode.insertBefore(t,s)})}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
     // Confirm pixels initialize only once, including during SPA navigation
@@ -222,23 +238,25 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Noto+Sans+Devanagari:wght@500;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261110-svg-icons-1">
-  <link rel="stylesheet" href="sales.css?v=20261110-svg-icons-1">
+  <link rel="stylesheet" href="styles.css?v=20261111-mobile-performance-2">
+  <link rel="stylesheet" href="sales.css?v=20261110-svg-icons-1" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="home.css?v=20261029-uiux-2">
   <link rel="stylesheet" href="archive-mood.css?v=20261106-1">
-  <link rel="stylesheet" href="interactions.css?v=20261009-shortlist-clarity-1">
-  <link rel="stylesheet" href="preview-themes.css?v=20261010-persistent-controls-1">
-  <link rel="stylesheet" href="catalogue-refinement.css?v=20261106-1">
-  <link rel="stylesheet" href="preview-gallery.css?v=20261106-1">
+  <link rel="stylesheet" href="interactions.css?v=20261009-shortlist-clarity-1" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="preview-themes.css?v=20261010-persistent-controls-1" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="catalogue-refinement.css?v=20261106-1" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="preview-gallery.css?v=20261106-1" media="print" onload="this.media='all'">
   <!-- PostHog Analytics -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="gu mu yu bu ku init Qu Zu Wu Vu Yu el Gu ec zu lc uc cc hc dc vc capture getExtension Ju fu mc calculateEventProperties gc register register_once register_for_session unregister unregister_for_session wc Uu yc getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys onActiveMatchingSurveysChanged renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync kc identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset Sc shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty bc rc createPersonProfile setInternalOrTestUser Cu xu opt_in_capturing opt_out_capturing  has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing nc debug il Os getPageViewId captureTraceFeedback captureTraceMetric Nu".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    posthog.init('phc_mE3wzy9se4dUkDt8vYMdMeCNHXTvcfW9vyGLdnz6NXFN', {
-        api_host: 'https://us.i.posthog.com',
-        defaults: '2026-05-30',
-        person_profiles: 'identified_only',
-        cross_subdomain_cookies: true,
-        opt_out_capturing_by_default: ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname),
+    deferThirdParty(() => {
+      posthog.init('phc_mE3wzy9se4dUkDt8vYMdMeCNHXTvcfW9vyGLdnz6NXFN', {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-05-30',
+          person_profiles: 'identified_only',
+          cross_subdomain_cookies: true,
+          opt_out_capturing_by_default: ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname),
+      });
     });
   </script>
 </head>
