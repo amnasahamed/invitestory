@@ -312,7 +312,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 1,
     name: "Marigold Bhavan",
-    image: "assets/preview/1.png",
+    image: "assets/preview/1.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -329,7 +329,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 3,
     name: "Toran Telugu",
-    image: "assets/preview/2.png",
+    image: "assets/preview/2.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -346,7 +346,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 5,
     name: "Shubha Vivaham",
-    image: "assets/preview/3.png",
+    image: "assets/preview/3.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -363,7 +363,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 6,
     name: "Kalyana Mandapam",
-    image: "assets/preview/4.png",
+    image: "assets/preview/4.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -380,7 +380,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 7,
     name: "Sage Parchment",
-    image: "assets/preview/5.png",
+    image: "assets/preview/5.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -397,7 +397,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 29,
     name: "Seashell Vows",
-    image: "assets/preview/29.png",
+    image: "assets/preview/29.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -414,7 +414,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 8,
     name: "Emerald Nikah",
-    image: "assets/preview/6.png",
+    image: "assets/preview/6.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -431,7 +431,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 9,
     name: "Noor-e-Zahra",
-    image: "assets/preview/7.png",
+    image: "assets/preview/7.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -448,7 +448,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 10,
     name: "Royal Reception",
-    image: "assets/preview/8.png",
+    image: "assets/preview/8.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -465,7 +465,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 11,
     name: "Kerala Sands",
-    image: "assets/preview/9.png",
+    image: "assets/preview/9.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -482,7 +482,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 12,
     name: "Meadow Nikah",
-    image: "assets/preview/10.png",
+    image: "assets/preview/10.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -500,7 +500,7 @@ const TEMPLATE_DATABASE = [
     id: 13,
     name: "Grand Line Voyage",
     hidden: true,
-    image: "assets/preview/11.png",
+    image: "assets/preview/11.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -517,7 +517,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 14,
     name: "Ghibli Selfie",
-    image: "assets/preview/12.png",
+    image: "assets/preview/12.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -534,7 +534,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 15,
     name: "Ghibli Portrait",
-    image: "assets/preview/13.png",
+    image: "assets/preview/13.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -551,7 +551,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 17,
     name: "Ivory Waltz",
-    image: "assets/preview/15.png",
+    image: "assets/preview/15.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -568,7 +568,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 18,
     name: "Ever After Bloom",
-    image: "assets/preview/16.png",
+    image: "assets/preview/16.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -585,7 +585,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 19,
     name: "Saga of Love",
-    image: "assets/preview/17.png",
+    image: "assets/preview/17.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -602,7 +602,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 30,
     name: "Lantern Madurai",
-    image: "assets/preview/30.png",
+    image: "assets/preview/30.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -619,7 +619,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 31,
     name: "Lotus Leaf Bengaluru",
-    image: "assets/preview/31.png",
+    image: "assets/preview/31.webp",
     tier: 2,
     priceINR: 1999,
     priceUSD: 29,
@@ -638,7 +638,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 21,
     name: "Rajwada Royale – Alt",
-    image: "assets/preview/18.png",
+    image: "assets/preview/18.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -655,7 +655,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 22,
     name: "Rajmahal Palace",
-    image: "assets/preview/19.png",
+    image: "assets/preview/19.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -672,7 +672,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 23,
     name: "Midnight Stargaze",
-    image: "assets/preview/20.png",
+    image: "assets/preview/20.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -690,7 +690,7 @@ const TEMPLATE_DATABASE = [
     id: 24,
     name: "Petal Path Palace",
     hidden: true,
-    image: "assets/preview/21.png",
+    image: "assets/preview/21.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -708,7 +708,7 @@ const TEMPLATE_DATABASE = [
     id: 25,
     name: "Lakeview Lanterns",
     hidden: true,
-    image: "assets/preview/22.png",
+    image: "assets/preview/22.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -726,7 +726,7 @@ const TEMPLATE_DATABASE = [
     id: 26,
     name: "Moonlit Lotus Barge",
     hidden: true,
-    image: "assets/preview/23.png",
+    image: "assets/preview/23.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -743,7 +743,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 27,
     name: "Ganesha Gopuram",
-    image: "assets/preview/24.png",
+    image: "assets/preview/24.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -760,7 +760,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 28,
     name: "Wax Seal Royale",
-    image: "assets/preview/25.png",
+    image: "assets/preview/25.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -777,7 +777,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 32,
     name: "Diya Haveli",
-    image: "assets/preview/32.png",
+    image: "assets/preview/32.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -794,7 +794,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 33,
     name: "Gilded Hall",
-    image: "assets/preview/33.png",
+    image: "assets/preview/33.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -812,7 +812,7 @@ const TEMPLATE_DATABASE = [
     id: 34,
     name: "Slide to Shaadi",
     hidden: true,
-    image: "assets/preview/34.png",
+    image: "assets/preview/34.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -830,7 +830,7 @@ const TEMPLATE_DATABASE = [
     id: 16,
     name: "Lake Pichola Royal",
     hidden: true,
-    image: "assets/preview/14.png",
+    image: "assets/preview/14.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -847,7 +847,7 @@ const TEMPLATE_DATABASE = [
   {
     id: 39,
     name: "Burgundy Reverie",
-    image: "assets/preview/39.png",
+    image: "assets/preview/39.webp",
     tier: 3,
     priceINR: 2999,
     priceUSD: 45,
@@ -1801,7 +1801,7 @@ function openOrderDrawerForTemplate(id) {
   // Populate visual preview
   const thumbEl = document.getElementById("order-drawer-thumb");
   if (thumbEl) {
-    thumbEl.src = item.image || "assets/preview/1.png";
+    thumbEl.src = item.image || "assets/preview/1.webp";
     thumbEl.alt = item.name;
   }
 
@@ -1884,7 +1884,7 @@ function openOrderDrawerForPackage(tier) {
 
   const thumbEl = document.getElementById("order-drawer-thumb");
   if (thumbEl) {
-    thumbEl.src = isDearly ? "assets/preview/18.png" : pTier === 3 ? "assets/preview/11.png" : "assets/preview/1.png";
+    thumbEl.src = isDearly ? "assets/preview/18.webp" : pTier === 3 ? "assets/preview/11.webp" : "assets/preview/1.webp";
     thumbEl.alt = `${name} Package`;
   }
 
@@ -2053,6 +2053,21 @@ function updateOrderDrawerTotal() {
 }
 
 let orderDrawerCheckoutPending = false;
+let razorpayLoader;
+function ensureRazorpayLoaded() {
+  if (typeof Razorpay !== "undefined") return Promise.resolve(Razorpay);
+  if (!razorpayLoader) {
+    razorpayLoader = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.async = true;
+      script.onload = () => window.Razorpay ? resolve(window.Razorpay) : reject(new Error("Payment service did not start."));
+      script.onerror = () => reject(new Error("Payment service could not be loaded. Please check your connection and try again."));
+      document.head.appendChild(script);
+    });
+  }
+  return razorpayLoader;
+}
 async function proceedFromOrderDrawerToCheckout(savedPayment) {
   if (orderDrawerCheckoutPending) return;
   orderDrawerCheckoutPending = true;
@@ -2167,6 +2182,7 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
       return;
     }
   }
+  await ensureRazorpayLoaded();
   if (typeof Razorpay !== "undefined") {
     trackConversionEvent("begin_checkout", { content_name: name, content_ids: selectedContentIds, package_tier: tier, content_type: "product", value: totalVal, currency: currencyCode });
     const rzp = new Razorpay(options);

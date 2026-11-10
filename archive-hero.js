@@ -27,7 +27,9 @@
   const ribbonContext = ribbon.getContext('2d');
   const paperTexture = document.createElement('canvas');
   const textureContext = paperTexture.getContext('2d');
-  const artwork = items.map(item => { const img = new Image(); img.src = item.image; return img; });
+  // Load only the artwork a visitor can currently see. Loading the whole
+  // catalogue here used to make mobile browsers fetch roughly 16 MB at once.
+  const artwork = new Array(items.length);
   const initialIndex = Math.max(0, items.findIndex(item => item.id === 29));
   let current = initialIndex;
   let target = initialIndex;
@@ -37,6 +39,8 @@
   let startX = 0;
   let startTarget = 0;
   let last = performance.now();
+  let renderRequest = 0;
+  let neighbourWarmup;
   let wheelTimer;
   let playing = null;
   const playbackClose = document.createElement('button');
@@ -68,7 +72,7 @@
     device.className = 'archive-device';
     const screen = document.createElement('span');
     screen.className = 'archive-screen';
-    screen.style.backgroundImage = `url("${item.image}")`;
+    screen.dataset.src = item.image;
     card.screen = screen;
     const hardware = document.createElement('span');
     hardware.className = 'archive-hardware';
@@ -117,8 +121,34 @@
     return base + delta;
   }
 
-  function goTo(index) { stopPlayback(); target = nearestTarget(index); }
-  function step(amount) { stopPlayback(); target = Math.round(target) + amount; }
+  function requestRender() {
+    if (!renderRequest && !document.hidden) renderRequest = requestAnimationFrame(render);
+  }
+
+  function ensureArtwork(index, priority = false) {
+    const safeIndex = mod(index, items.length);
+    if (artwork[safeIndex]) return artwork[safeIndex];
+    const img = new Image();
+    artwork[safeIndex] = img;
+    img.decoding = 'async';
+    img.fetchPriority = priority ? 'high' : 'low';
+    img.onload = requestRender;
+    img.onerror = requestRender;
+    img.src = items[safeIndex].image;
+    cards[safeIndex].screen.style.backgroundImage = `url("${items[safeIndex].image}")`;
+    return img;
+  }
+
+  function warmNearbyArtwork(index) {
+    clearTimeout(neighbourWarmup);
+    neighbourWarmup = setTimeout(() => {
+      ensureArtwork(index - 1);
+      ensureArtwork(index + 1);
+    }, 1200);
+  }
+
+  function goTo(index) { stopPlayback(); target = nearestTarget(index); ensureArtwork(index); requestRender(); }
+  function step(amount) { stopPlayback(); target = Math.round(target) + amount; ensureArtwork(mod(Math.round(target), items.length)); requestRender(); }
   function sizePlayback() {
     if (!playing) return;
     const scale = playing.card.screen.clientWidth / 390;
@@ -163,6 +193,8 @@
 
   function updateActive(index, direction) {
     active = index;
+    ensureArtwork(index, index === initialIndex);
+    warmNearbyArtwork(index);
     const item = items[index];
     const price = document.getElementById('archive-design-price');
     price.dataset.designId = item.id;
@@ -177,9 +209,10 @@
   }
 
   function render(now) {
+    renderRequest = 0;
     const dt = Math.min(.05, (now - last) / 1000 || .016);
     last = now;
-    if (playing) { requestAnimationFrame(render); return; }
+    if (playing) return;
     const ease = reduceMotion ? 1 : 1 - Math.exp(-(dragging ? 18 : 6.2) * dt);
     current += (target - current) * ease;
     const nextActive = mod(Math.round(current), items.length);
@@ -210,7 +243,7 @@
         let index = mod(panel >= focusedPanel ? panel + 1 : panel,items.length);
         if (index === mod(focusedPanel,items.length)) index = mod(index+1,items.length);
         const img = artwork[index];
-        if (img.complete && img.naturalWidth) textureContext.drawImage(img,panel*panelWidth-offset+width/2,0,panelWidth+.2,900);
+        if (img?.complete && img.naturalWidth) textureContext.drawImage(img,panel*panelWidth-offset+width/2,0,panelWidth+.2,900);
       }
     }
     textureContext.globalAlpha = 1;
@@ -280,7 +313,7 @@
     });
     const progress = mod(current, items.length) / (items.length - 1);
     dot.style.left = `${Math.max(0, Math.min(100, progress * 100))}%`;
-    requestAnimationFrame(render);
+    if (dragging || Math.abs(target - current) > .001) requestRender();
   }
 
   document.querySelector('.archive-arrow-prev').addEventListener('click', () => step(-1));
@@ -295,14 +328,16 @@
     if (playing) return;
     dragging = true; dragged = false; startX = event.clientX; startTarget = target;
     shelf.classList.add('is-dragging');
+    requestRender();
   });
   shelf.addEventListener('pointermove', event => {
     if (!dragging) return;
     const dx = event.clientX - startX;
     if (Math.abs(dx) > 5) { dragged = true; shelf.setPointerCapture(event.pointerId); }
     target = startTarget - dx / metrics.unit;
+    requestRender();
   });
-  const endDrag = () => { if (!dragging) return; dragging = false; target = Math.round(target); shelf.classList.remove('is-dragging'); setTimeout(() => { dragged = false; }, 0); };
+  const endDrag = () => { if (!dragging) return; dragging = false; target = Math.round(target); shelf.classList.remove('is-dragging'); requestRender(); setTimeout(() => { dragged = false; }, 0); };
   shelf.addEventListener('pointerup', endDrag);
   shelf.addEventListener('pointercancel', endDrag);
   shelf.addEventListener('wheel', event => {
@@ -310,8 +345,9 @@
     event.preventDefault();
     const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
     target += delta / metrics.unit * .36;
+    requestRender();
     clearTimeout(wheelTimer);
-    wheelTimer = setTimeout(() => { target = Math.round(target); }, 150);
+    wheelTimer = setTimeout(() => { target = Math.round(target); requestRender(); }, 150);
   }, { passive: false });
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && playing) { stopPlayback(true); return; }
@@ -321,8 +357,9 @@
     if (event.key === 'ArrowRight') { event.preventDefault(); step(1); }
     if (event.key === 'Enter') openSelected();
   });
-  addEventListener('resize', measure, { passive: true });
+  addEventListener('resize', () => { measure(); requestRender(); }, { passive: true });
+  document.addEventListener('visibilitychange', requestRender);
   measure();
   updateActive(initialIndex, 1);
-  requestAnimationFrame(render);
+  requestRender();
 })();
