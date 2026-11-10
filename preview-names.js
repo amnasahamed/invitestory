@@ -17,6 +17,7 @@
   }
   const clean=value=>value.trim().replace(/\s+/g,' ').slice(0,50);
   const valid=value=>!value || /^[\p{L}\p{M}\p{N} .’'\-]+$/u.test(value);
+  const statusIcon=type=>type==='success'?'<svg class="preview-status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.6 2.6L16.5 9"/></svg>':'<svg class="preview-status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.45 5.55L19 10l-5.55 1.45L12 17l-1.45-5.55L5 10l5.55-1.45L12 3Z"/><path d="M19 16l.65 2.35L22 19l-2.35.65L19 22l-.65-2.35L16 19l2.35-.65L19 16Z"/></svg>';
   let applied={};
   try {applied=JSON.parse(sessionStorage.getItem(key))||{};}catch{}
   function selectCountry(value={}){
@@ -95,12 +96,12 @@
     applied=value;first.value=value.first;second.value=value.second;mobile.value=value.mobile;
     if(typeof trackPostHogEvent==='function')trackPostHogEvent('preview_names_applied',{item_id:String(TEMPLATE_DATABASE[previewState.currentIndex]?.id||'')});
     captureLead(value).catch(()=>{});
-    status.innerHTML='<span aria-hidden="true">✓</span> Your personalized preview is ready.';
+    status.innerHTML=statusIcon('success')+' Your personalized preview is ready.';
     sync();reload();dismiss();
   });
   form.addEventListener('reset',event=>{
     event.preventDefault();try {sessionStorage.removeItem(key);}catch{}
-    applied={};first.value='';second.value='';mobile.value='';selectCountry();syncMobileGuidance();status.innerHTML='<span aria-hidden="true">✦</span> Your invitation is waiting—complete both steps to see your names in the design.';
+    applied={};first.value='';second.value='';mobile.value='';selectCountry();syncMobileGuidance();status.innerHTML=statusIcon('sparkle')+' Your invitation is waiting—complete both steps to see your names in the design.';
     sync();reload();dismiss();
   });
   // Show the invitation first. Personalization is available on request.
