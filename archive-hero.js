@@ -144,31 +144,13 @@
     clearTimeout(wheelTimer);
     current = target = Math.round(current);
     const item = items[active];
-    const card = cards[active];
-    const frame = document.createElement('iframe');
-    frame.className = 'archive-live-invitation';
-    frame.title = `${item.name} interactive invitation`;
-    frame.allow = 'autoplay; fullscreen';
-    // Dearly demos are hosted separately; this checkout contains their artwork
-    // but not their application entry points.
-    frame.src = item.tier === 4 ? item.demoUrl : (item.localDemoUrl || item.demoUrl);
-    playing = { card, frame };
-    card.removeAttribute('role');
-    card.removeAttribute('tabindex');
-    card.screen.querySelectorAll('.archive-screen-dissolve').forEach(el => el.remove());
-    card.screen.appendChild(frame);
-    card.screen.classList.add('is-playing');
-    root.classList.add('is-playing');
-    sizePlayback();
-    playbackClose.hidden = false;
-    document.getElementById('archive-open').hidden = true;
-    frame.addEventListener('load', () => {
-      // Escape also works when focus is inside same-origin invitations.
-      try { frame.contentDocument.addEventListener('keydown', event => {
-        if (event.key === 'Escape') stopPlayback(true);
-      }); } catch {}
-    });
-    playbackClose.focus({ preventScroll: true });
+    if (typeof openPreview === 'function') {
+      openPreview(item.id);
+      return;
+    }
+    const url = new URL(location.href);
+    url.searchParams.set('design', item.slug || item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
+    location.assign(url.toString());
   }
 
   function swapText(node, value, direction) {
