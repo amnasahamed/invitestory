@@ -382,8 +382,8 @@ const InviteInteractions = (() => {
     });
     const sharedCurrency=new URLSearchParams(location.search).get('currency');
     if(sharedCurrency==='INR' || sharedCurrency==='USD')document.getElementById(`currency-${sharedCurrency.toLowerCase()}`).click();
-    const orderTitle=document.querySelector('#order-drawer-modal .order-drawer-title');if(orderTitle)orderTitle.textContent='Review your invitation';
-    const orderSubtitle=document.querySelector('#order-drawer-modal .order-drawer-subtitle');if(orderSubtitle)orderSubtitle.textContent='We personalize your chosen design. Send your details after booking.';
+    const orderTitle=document.querySelector('#order-drawer-modal .order-drawer-title');if(orderTitle)orderTitle.textContent='Complete your booking';
+    const orderSubtitle=document.querySelector('#order-drawer-modal .order-drawer-subtitle');if(orderSubtitle)orderSubtitle.textContent='Review your invitation and choose any upgrades before payment.';
     const breakdown=document.createElement('section');breakdown.id='interaction-order-breakdown';breakdown.className='interaction-order-breakdown';
     document.querySelector('#order-drawer-modal .order-drawer-total-bar').before(breakdown);
     document.getElementById('order-drawer-total-val').setAttribute('role','status');

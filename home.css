@@ -731,12 +731,16 @@ body.studio-home.browse-home .template-preview-hint { font-size:13px; }
 @media(max-width:760px) { .studio-home .template-card-style { font-size:12px; } }
 
 /* Checkout sheet: extras read as a calm choice, not a warning. */
-.studio-home #order-drawer-modal .order-addons-title { text-transform:none; letter-spacing:0; color:#173e35; font:600 15px/1.4 var(--font-body); padding:0; margin:4px 0 10px; }
+.studio-home #order-drawer-modal .order-addons-title { text-transform:none; letter-spacing:0; color:var(--order-accent,#173e35); font:600 15px/1.4 var(--font-body); padding:0; margin:4px 0 10px; }
 .studio-home #order-drawer-modal .order-addon-name { font-size:15px; }
-.studio-home #order-drawer-modal .order-addon-sub { font-size:13px; color:#5c6a64; }
-.studio-home #order-drawer-modal .order-addon-price { font-size:15px; color:#173e35; }
+.studio-home #order-drawer-modal .order-addon-sub { font-size:13px; color:var(--order-muted,#5c6a64); }
+.studio-home #order-drawer-modal .order-addon-price { font-size:15px; color:var(--order-accent,#173e35); }
 .studio-home #order-drawer-modal .order-drawer-price-label { font-size:13px; }
 .studio-home #order-drawer-modal .sales-payment-reassurance { font-size:13px; }
+#order-drawer-modal[data-invitation-theme] .interaction-order-breakdown { border-color:var(--order-border); }
+#order-drawer-modal[data-invitation-theme] .interaction-order-breakdown h4,
+#order-drawer-modal[data-invitation-theme] .interaction-order-breakdown dd { color:var(--order-ink); }
+#order-drawer-modal[data-invitation-theme] .interaction-order-breakdown dl > div { color:var(--order-muted); }
 
 /* Mobile header: WhatsApp stays one tap away; currency moves into the menu. */
 @media(max-width:760px) {

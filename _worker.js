@@ -1,4 +1,5 @@
 import { websiteBridge } from "./website-bridge.js";
+import { previewLeadBridge } from "./preview-lead.js";
 import designMeta from "./design-meta.js";
 
 function injectOpenGraphTags(html, meta) {
@@ -50,6 +51,7 @@ export default {
         } });
       }
 
+      if (url.pathname === "/api/preview-lead") return await previewLeadBridge(request, env);
       if (url.pathname.startsWith("/api/website/")) return await websiteBridge(request, env);
 
       if (url.pathname === "/digital-wedding-invitations") {

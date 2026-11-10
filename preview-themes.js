@@ -55,7 +55,9 @@ const PreviewThemes = (() => {
     element.dataset.themeFamily=theme.family;
     Object.entries(theme).filter(([key])=>key!=='family').forEach(([key,value])=>element.style.setProperty('--invitation-'+key.replace(/[A-Z]/g,letter=>'-'+letter.toLowerCase()),value));
     if(order) {
-      const tokens={'panel-top':theme.surface,'panel-bottom':theme.surface,ink:theme.ink,muted:theme.muted,accent:theme.accent,surface:theme.surface,soft:theme.soft,border:theme.border,shadow:theme.stage+'40','cta-start':theme.accent,'cta-mid':theme.accent,'cta-end':theme.accent,'cta-ink':theme.onAccent};
+      // Buying UI is intentionally consistent. Artwork palettes belong to the
+      // invitation preview, while checkout keeps InviteStory's trusted brand system.
+      const tokens={'panel-top':'#fffdf8','panel-bottom':'#f4f7f4',ink:'#173e35',muted:'#5c6a64',accent:'#173e35',surface:'#ffffff',soft:'#edf2ef',border:'#d5e0da',shadow:'#173e3528','cta-start':'#173e35','cta-mid':'#173e35','cta-end':'#173e35','cta-ink':'#ffffff','cta-badge':'#ffffff24',green:'#16733e'};
       Object.entries(tokens).forEach(([key,value])=>element.style.setProperty('--order-'+key,value));
     }
   }

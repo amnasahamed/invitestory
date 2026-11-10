@@ -30,12 +30,13 @@
   window.refreshDeliveryOffers?.();
   if(c.enabled&&form) {
    const fields=document.createElement('details');fields.className='preview-whatsapp-fields';
-   fields.innerHTML='<summary>Save this preview on WhatsApp <span>(optional)</span></summary><p>Keep the link for later. You can preview your names without a number.</p><label>WhatsApp number <span>(optional)</span><input name="whatsapp" type="tel" autocomplete="tel" maxlength="25" placeholder="+91" data-private="true" data-clarity-mask="true" class="ph-no-capture"></label><label class="preview-whatsapp-consent"><input name="whatsappConsent" type="checkbox"><span></span></label>';
+   const hasMobileField=Boolean(form.elements.mobile);
+   fields.innerHTML='<summary>Save this preview on WhatsApp <span>(optional)</span></summary><p>Your number is only shared with our team if you select the consent below.</p>'+(hasMobileField?'':'<label>WhatsApp number <span>(optional)</span><input name="whatsapp" type="tel" autocomplete="tel" maxlength="25" placeholder="+91" data-private="true" data-clarity-mask="true" class="ph-no-capture"></label>')+'<label class="preview-whatsapp-consent"><input name="whatsappConsent" type="checkbox"><span></span></label>';
    fields.querySelector('.preview-whatsapp-consent span').textContent=c.consentWording;
-   form.querySelector('.preview-names-actions').before(fields);
+   (form.querySelector('[data-preview-step="2"] .preview-names-actions')||form.querySelector('.preview-names-actions')).before(fields);
    form.addEventListener('reset',()=>{fields.querySelector('[name=whatsappConsent]').checked=false;});
    form.addEventListener('submit',()=>{
-    const phone=fields.querySelector('[name=whatsapp]').value.trim(),consent=fields.querySelector('[name=whatsappConsent]').checked,design=selected();
+    const phoneInput=form.elements.mobile||fields.querySelector('[name=whatsapp]'),phoneValue=phoneInput?.value.trim()||'',phone=hasMobileField?(form.elements.countryCode?.value||'+91')+phoneValue.replace(/\D/g,''):phoneValue,consent=fields.querySelector('[name=whatsappConsent]').checked,design=selected();
     if(!phone||!consent||!design)return;
     const first=form.elements.first.value.trim(),second=form.elements.second.value.trim();
     if((!first&&!second)||[first,second].some(n=>! /^[\p{L}\p{M}\p{N} .’'\-]*$/u.test(n)))return;

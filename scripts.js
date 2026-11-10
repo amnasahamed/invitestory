@@ -1026,7 +1026,6 @@ function deliveryHoursForOrder(){return DELIVERY_SPEEDS[orderDeliverySpeed()]?.h
 function resetDeliverySpeed(){const input=document.getElementById('delivery-standard_48h');if(input)input.checked=true;}
 function renderCheckoutRetries(){
  const box=document.getElementById('order-checkout-retries');if(!box)return;box.replaceChildren();
- if(!usesNewDelivery()&&!legacyDeliveryAvailable()){const note=document.createElement('p');note.textContent='New bookings are currently unavailable. You can resume a saved payment below or contact our team.';box.append(note);}
  try{for(const attempt of window.InviteWebsite?.pendingCheckouts?.()||[]){
   const r=attempt.request,button=document.createElement('button');button.type='button';button.className='sales-text-button';
   const hours=r.checkoutVersion===2?DELIVERY_SPEEDS[r.deliverySpeed]?.hours:(r.express||r.tier===4?24:48);
@@ -1987,7 +1986,10 @@ function updateOrderDrawerTotal() {
   const v2=orderUsesNewDelivery();
   const speeds=document.getElementById('order-delivery-speeds');if(speeds)speeds.hidden=!v2;
   const legacy=document.getElementById('order-addon-express-label');if(legacy)legacy.hidden=v2;
-  const pay=document.getElementById('order-drawer-checkout-btn');if(pay)pay.disabled=v2?!usesNewDelivery():!legacyDeliveryAvailable();
+  const pay=document.getElementById('order-drawer-checkout-btn');if(pay)pay.disabled=false;
+  const modal=document.getElementById('order-drawer-modal');if(modal)modal.classList.remove('is-checkout-unavailable');
+  const ctaText=document.getElementById('order-drawer-cta-text');if(ctaText)ctaText.textContent='Continue to payment';
+  const ctaBadge=document.getElementById('order-drawer-cta-badge');if(ctaBadge)ctaBadge.hidden=false;
   for(const speed of ['express_24h','express_12h']){const label=document.getElementById('delivery-fee-'+speed);if(label)label.textContent='+'+formatPrice(DELIVERY_SPEEDS[speed].fee,DELIVERY_SPEEDS[speed].feeUSD);}
   const isINR = currentCurrency === "INR";
   let basePrice = 1999;
@@ -2038,7 +2040,7 @@ function updateOrderDrawerTotal() {
   const expressPriceEl = document.getElementById("order-addon-express-price");
   if (expressPriceEl) setOrderAddonPrice(expressPriceEl, ADDONS.express, isDearly && !v2);
   const addonsTitleEl = document.querySelector("#order-drawer-modal .order-addons-title");
-  if (addonsTitleEl) addonsTitleEl.textContent = isDearly ? "Email RSVP is included with Dearly" : "Optional extras";
+  if (addonsTitleEl) addonsTitleEl.textContent = isDearly ? "Included services" : "Optional upgrades";
   const includedValueEl = document.getElementById("order-drawer-included-value");
   if (includedValueEl) {
     includedValueEl.hidden = !isDearly;

@@ -799,13 +799,51 @@
       <footer class="preview-modal-toolbar">
 <dialog id="preview-names-dialog" class="preview-names" aria-labelledby="preview-names-title">
           <button type="button" id="preview-names-close" class="preview-names-close" aria-label="Close name customization">×</button>
-          <h2 id="preview-names-title" tabindex="-1">Picture your names here</h2>
-          <p class="preview-names-intro">Try both names across the designs. You can change them anytime.</p>
+          <span class="preview-names-kicker">Personalize your preview</span>
+          <h2 id="preview-names-title" tabindex="-1">See the invitation with your names</h2>
+          <p class="preview-names-intro">Add your details for a more personal preview. You can edit them anytime.</p>
+          <div class="preview-names-progress" aria-label="Step 1 of 2"><span class="is-active">1</span><i></i><span>2</span></div>
           <form id="preview-names-form" class="preview-names-form">
-            <label>Your name<input name="first" type="text" maxlength="50" autocomplete="off" placeholder="Your name"></label>
-            <label>Partner’s name<input name="second" type="text" maxlength="50" autocomplete="off" placeholder="Partner’s name"></label>
-            <div class="preview-names-actions"><button type="submit">See our names</button><button type="button" id="preview-names-skip">Skip for now</button><button type="reset" id="preview-names-reset">Use sample names</button></div>
-            <p id="preview-names-status" role="status">Names stay in this tab unless you choose WhatsApp saving. Other details are samples.</p>
+            <div class="preview-names-step is-active" data-preview-step="1">
+              <label>Your name<input name="first" type="text" maxlength="50" autocomplete="given-name" placeholder="e.g. Ananya" required></label>
+              <label>Partner’s name<input name="second" type="text" maxlength="50" autocomplete="off" placeholder="e.g. Aarav" required></label>
+              <div class="preview-names-actions"><button type="button" id="preview-names-next"><span>Continue</span><span aria-hidden="true">→</span></button><button type="button" id="preview-names-skip">Not now</button></div>
+            </div>
+            <div class="preview-names-step" data-preview-step="2" hidden>
+            <button type="button" id="preview-names-back" class="preview-names-back">← Back</button>
+            <p class="preview-names-summary" id="preview-names-summary"></p>
+            <label class="preview-mobile-label" for="preview-mobile">WhatsApp number <span>Required</span></label>
+            <div class="preview-mobile-field">
+              <select name="countryCode" class="preview-country-code" aria-label="Country calling code">
+                <option value="+91" data-country="IN" selected>🇮🇳 +91</option>
+                <option value="+1" data-country="US">🇺🇸 +1</option>
+                <option value="+1" data-country="CA">🇨🇦 +1</option>
+                <option value="+44" data-country="GB">🇬🇧 +44</option>
+                <option value="+971" data-country="AE">🇦🇪 +971</option>
+                <option value="+966" data-country="SA">🇸🇦 +966</option>
+                <option value="+974" data-country="QA">🇶🇦 +974</option>
+                <option value="+968" data-country="OM">🇴🇲 +968</option>
+                <option value="+965" data-country="KW">🇰🇼 +965</option>
+                <option value="+973" data-country="BH">🇧🇭 +973</option>
+                <option value="+65" data-country="SG">🇸🇬 +65</option>
+                <option value="+60" data-country="MY">🇲🇾 +60</option>
+                <option value="+61" data-country="AU">🇦🇺 +61</option>
+                <option value="+64" data-country="NZ">🇳🇿 +64</option>
+                <option value="+49" data-country="DE">🇩🇪 +49</option>
+                <option value="+33" data-country="FR">🇫🇷 +33</option>
+                <option value="+39" data-country="IT">🇮🇹 +39</option>
+                <option value="+92" data-country="PK">🇵🇰 +92</option>
+                <option value="+880" data-country="BD">🇧🇩 +880</option>
+                <option value="+94" data-country="LK">🇱🇰 +94</option>
+                <option value="+977" data-country="NP">🇳🇵 +977</option>
+              </select>
+              <input id="preview-mobile" name="mobile" type="tel" inputmode="numeric" autocomplete="tel-national" maxlength="14" placeholder="98765 43210" aria-describedby="preview-mobile-help" required data-private="true" data-clarity-mask="true" class="ph-no-capture">
+            </div>
+            <p id="preview-mobile-help" class="preview-mobile-help">Enter a 10-digit Indian mobile number.</p>
+            <div class="preview-names-actions"><button type="submit"><span>See our invitation</span><span aria-hidden="true">→</span></button></div>
+            </div>
+            <button type="reset" id="preview-names-reset">Use sample names</button>
+            <p id="preview-names-status" role="status"><span aria-hidden="true">✦</span> Your invitation is waiting—complete both steps to see your names in the design.</p>
           </form>
         </dialog>
         <div class="preview-toolbar-top-row">
@@ -1220,7 +1258,8 @@
   <script src="preview-controller.js?v=20261029-uiux-1"></script>
   <script src="scripts.js?v=20261029-uiux-1"></script>
   <script src="sales.js?v=20261029-uiux-1"></script>
-<script src="preview-names.js?v=20261009-preview-first-1"></script>
+<script src="country-codes.js?v=20261110-all-countries-1"></script>
+<script src="preview-names.js?v=20261110-whatsapp-gate-1"></script>
 <script src="website-integration.js?v=20261029-uiux-1"></script>
 </body>
 </html>

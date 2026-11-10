@@ -452,6 +452,10 @@ function updateSalesOrder() {
   const modal = document.getElementById("order-drawer-modal");
   if (!modal) return;
   const tier = orderDrawerState.tier;
+  const title = modal.querySelector(".order-drawer-title");
+  if (title) title.textContent = "Complete your booking";
+  const subtitle = modal.querySelector(".order-drawer-subtitle");
+  if (subtitle) subtitle.textContent = "Review your invitation and choose any upgrades before payment.";
   const isDearly = tier === 4;
   const newDelivery = typeof orderUsesNewDelivery === "function" && orderUsesNewDelivery();
   const express = isDearly || document.getElementById("order-drawer-addon-express")?.checked;
@@ -459,7 +463,7 @@ function updateSalesOrder() {
   const chosenStep = document.getElementById("sales-chosen-step");
   if (chosenStep) chosenStep.textContent = orderDrawerState.isPackage ? "Package chosen" : "Design chosen";
   const essentials = document.getElementById("sales-order-essentials");
-  if (essentials) essentials.textContent = `Your music · Venue maps · ${isDearly ? "Email" : "WhatsApp"} RSVP included`;
+  if (essentials) essentials.innerHTML = `<strong>Included</strong><span>Music</span><span>Venue maps</span><span>${isDearly ? "Email" : "WhatsApp"} RSVP</span><span>Personalization</span>`;
   const rsvp = document.getElementById("sales-order-rsvp");
   if (rsvp) rsvp.textContent = isDearly ? "Email RSVP included. Email notifications contain guest names and an Excel download option." : "WhatsApp RSVP included. Guests reply directly on WhatsApp.";
   const delivery = document.getElementById("order-drawer-delivery-tag");
@@ -553,33 +557,20 @@ function setupSalesGuidance() {
   if (content) {
     const header = content.querySelector(".order-drawer-header");
     const title = content.querySelector(".order-drawer-title");
-    if (title) title.textContent = "Make it yours.";
+    if (title) title.textContent = "Complete your booking";
     const subtitle = content.querySelector(".order-drawer-subtitle");
-    if (subtitle) subtitle.textContent = "We personalize it for you. Share your details on WhatsApp after booking.";
-    header?.insertAdjacentHTML("afterend", '<ol class="sales-booking-progress" aria-label="Booking steps"><li><span aria-hidden="true">✓</span> <span id="sales-chosen-step">Design chosen</span></li><li aria-current="step">Review price</li><li>We personalize</li></ol>');
+    if (subtitle) subtitle.textContent = "Review your invitation and choose any upgrades before payment.";
     content.querySelector(".order-drawer-card")?.insertAdjacentHTML("afterend", '<p id="sales-order-essentials" class="sales-order-essentials"></p>');
     const payText = document.getElementById("order-drawer-cta-text");
-    if (payText) payText.textContent = "Pay";
+    if (payText) payText.textContent = "Continue to payment";
     content.querySelector(".order-drawer-features ul")?.insertAdjacentHTML("beforeend", '<li id="sales-order-rsvp"></li>');
     content.querySelector(".order-drawer-addons")?.insertAdjacentHTML("afterend", '<aside id="sales-dearly-suggestion" class="sales-dearly-suggestion" hidden></aside>');
-    content.querySelector(".order-drawer-total-bar")?.insertAdjacentHTML("afterend", `<p class="sales-order-terms">Hosting until one month after your event ends. Free revision requests for 24 hours after your first draft. <a href="refund-and-editing-policy.html" target="_blank" rel="noopener">Refund &amp; editing policy</a></p><div class="sales-customer-proof sales-order-proof">${customerProof(5)}</div>`);
+    content.querySelector(".order-drawer-total-bar")?.insertAdjacentHTML("afterend", `<p class="sales-order-terms">Hosting until one month after your event. Free revision requests for 24 hours after your first draft. <a href="refund-and-editing-policy.html" target="_blank" rel="noopener">Refund &amp; editing policy</a></p>`);
     content.querySelector(".order-step-desc")?.insertAdjacentHTML("afterend", '<p class="sales-policy-note">Customization starts after payment and complete details. <a href="refund-and-editing-policy.html" target="_blank" rel="noopener">Refund & editing policy</a></p>');
     const immediate = content.querySelectorAll(".order-step-desc")[1];
     if (immediate) immediate.textContent = "Send your names, dates, venues and photos using our short checklist.";
     const support = content.querySelector(".order-drawer-wa-btn");
     if (support) support.lastChild.textContent = " Ask about this design & delivery";
-    const details = document.createElement("details");
-    details.className = "sales-order-disclosure";
-    const summary = document.createElement("summary");
-    summary.textContent = "Order details & what happens after payment";
-    details.appendChild(summary);
-    for (const selector of [".order-drawer-features", ".order-drawer-steps-box"]) {
-      const section = content.querySelector(selector);
-      if (section) details.appendChild(section);
-    }
-    const supportBlock = content.querySelector(".order-drawer-wa-alt");
-    if (supportBlock) supportBlock.before(details);
-    else content.appendChild(details);
   }
   const toolbar = document.querySelector(".preview-modal-toolbar");
   if (toolbar) toolbar.insertAdjacentHTML("beforeend", '<p id="sales-preview-context" class="sales-preview-context"></p>');

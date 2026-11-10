@@ -1,4 +1,5 @@
 import { websiteBridge } from "./website-bridge.js";
+import { previewLeadBridge } from "./preview-lead.js";
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
@@ -73,6 +74,15 @@ createServer(async (req, res) => {
   try {
     const parsedUrl = new URL(req.url, `http://${req.headers.host || "localhost"}`);
     const pathname = decodeURIComponent(parsedUrl.pathname);
+
+    if (pathname === "/api/preview-lead") {
+      const chunks=[];let size=0;
+      for await (const chunk of req) {size+=chunk.length;if(size>4096){res.writeHead(413);res.end();return;}chunks.push(chunk);}
+      const headers=new Headers();for(const [key,value] of Object.entries(req.headers))if(value)headers.set(key,Array.isArray(value)?value.join(", "):value);
+      const request=new Request(parsedUrl,{method:req.method,headers,body:["GET","HEAD"].includes(req.method)?undefined:Buffer.concat(chunks)});
+      const response=await previewLeadBridge(request,process.env);
+      res.writeHead(response.status,Object.fromEntries(response.headers));res.end(await response.text());return;
+    }
 
     if (pathname.startsWith("/api/website/")) {
       const chunks=[];let size=0;
