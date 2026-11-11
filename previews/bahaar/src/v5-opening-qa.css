@@ -1,0 +1,4 @@
+.v5-opening-skip { position:absolute; z-index:12; bottom:1.5rem; left:50%; translate:-50% 0; border:1px solid rgba(67,90,72,.3); border-radius:999px; background:#fbf7ef; color:#435a48; padding:.8rem 1.2rem; font:600 .7rem/1.4 Arial,sans-serif; letter-spacing:.08em; cursor:pointer; }
+.v5-opening-skip[hidden] { display:none; }
+.v5-opening-skip:focus-visible { outline:2px solid #435a48; outline-offset:4px; }
+canvas[aria-label="Reveal the wedding date"]:focus-visible { outline:2px solid #fbf7ee; outline-offset:5px; }

@@ -1,0 +1,30 @@
+/* Amber keeps its warm, photographic champagne courtyard identity. */
+.welcome-copy p { color: #634b3b; font-size: 1.18rem; }
+.signature, .closing-names { color: #95613c; }
+.signature span, .closing-names span { color: #906a36; }
+.gift-copy p { color: #634b3b; font-size: 1.13rem; }
+.rsvp-form label > span { color: #77502f; }
+.form-footer small { color: #775e4a; }
+.eyebrow { color: #91643d; font-size: .72rem; letter-spacing: .2em; }
+.floral-divider img { width: min(760px, 93vw); }
+.floral-divider img { transform: translate(-50%, -55%); }
+.floral-divider + .section-pad { padding-top: clamp(96px, 16vw, 150px); }
+.scratch-section { background: #f0e2cd; }
+.scratch-frame-shell { width: min(800px, calc(100% + 24px)); margin-inline: auto; }
+.date-reveal { top: 35%; bottom: 26%; }
+.date-kicker { color: #77502f; }
+.scratch-note { color: #634b3b; font-size: 1.03rem; }
+.gallery-frame { aspect-ratio: 3 / 2; max-height: 680px; border-radius: 2px; }
+.gallery-slide img { filter: none; }
+.gallery-slide figcaption { font-size: 1.25rem; text-shadow: 0 2px 14px #2d1e15; }
+.countdown span { opacity: 1; color: #77502f; font-size: .68rem; letter-spacing: .16em; }
+.closing-quote { font-family: var(--font-display); }
+@media (max-width: 600px) {
+  .gallery-frame { aspect-ratio: 4 / 5; }
+  .gallery-slide img { object-position: 58% center; }
+  .gallery-slide:nth-child(2) img { object-position: 48% center; }
+  .date-main { font-size: clamp(1.05rem, 4.5vw, 1.7rem); }
+  .date-kicker { font-size: .52rem; letter-spacing: .12em; }
+  .date-day { font-size: .7rem; }
+  .section-heading .eyebrow { font-size: .67rem; }
+}

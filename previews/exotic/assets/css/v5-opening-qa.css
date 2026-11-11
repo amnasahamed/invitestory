@@ -1,0 +1,9 @@
+/* Fade the cover without the legacy blur/zoom jump. */
+.rs-cover-out { opacity:0!important; transform:none!important; filter:none!important; }
+#cover video { object-fit:cover; object-position:center; }
+.v3-opening-cue { transition:opacity .25s ease,visibility .25s ease; }
+.v5-opening-active .v3-opening-cue { opacity:0; visibility:hidden; }
+/* Give the venue's calligraphic ascenders room inside its clipping boundary. */
+@media (min-width:481px) {
+  .t049 section:has(img[src*="venue-v2"]) { padding-top:3.4rem; }
+}

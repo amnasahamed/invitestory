@@ -1,0 +1,145 @@
+/* Fresh garden editorial: a real venue image and calmer section hierarchy. */
+.section h2 { text-wrap:balance; line-height:1.08; }
+.welcome .lead { max-width:42rem; margin-inline:auto; }
+.countdown { max-width:48rem; background:rgba(255,253,248,.4); }
+.countdown__unit span { font-size:11px; letter-spacing:.12em; }
+.timeline__marker span { background:#f4e7df; border:1px solid rgba(153,88,98,.35); color:#884d57; box-shadow:0 6px 18px rgba(183,119,127,.1); }
+.timeline__content h3 { font-size:clamp(27px,4vw,36px); }
+.timeline__content p { line-height:1.7; }
+.venue-card { display:block; min-height:0; padding:70px 22px; }
+.v4-venue-image { position:relative; z-index:2; width:min(960px,100%); margin:0 auto 2.7rem; }
+.v4-venue-image img { display:block; width:100%; height:auto; aspect-ratio:3/2; object-fit:cover; object-position:54% 50%; border-radius:12rem 12rem .5rem .5rem / 5rem 5rem .5rem .5rem; box-shadow:0 20px 55px rgba(21,42,25,.24); }
+.venue-card__content { margin-inline:auto; }
+.venue-card__content p,.venue-card__content address { color:#efece2; line-height:1.8; }
+.palette span { transition:translate .3s,box-shadow .3s; border:1px solid rgba(67,90,72,.14); }
+.event-card__date,.event-card__map,.event-card__cal { font-size:11px; }
+.event-card small { line-height:1.7; }
+.gifts-section { background:linear-gradient(130deg,#e0b9b4,#e9ccc4); }
+.gifts-section .lead { color:#405044; }
+.closing { min-height:85svh; background:radial-gradient(ellipse at 50% 20%,rgba(255,252,245,.7),transparent 65%),var(--paper); }
+.closing__content > p:not(.section-kicker) { line-height:1.8; }
+.back-to-top { font-size:11px; min-height:44px; padding-block:14px; }
+[data-section="rsvp"], .rsvp-section, #rsvp, .rsvp, .section.rsvp { display: none !important; }
+
+/* ==========================================================================
+   Bahaar Timeline Floral Scroll Flow & Ease Animation
+   ========================================================================== */
+.timeline {
+  position: relative;
+}
+
+/* Active glowing blush & sage progress line trailing behind the floral */
+.timeline-floral-progress {
+  position: absolute;
+  top: 25px;
+  left: 41px;
+  width: 2px;
+  background: linear-gradient(to bottom, #b7777f, #e9c9c6 50%, #435a48);
+  box-shadow: 0 0 10px rgba(183, 119, 127, 0.7), 0 0 3px rgba(251, 247, 239, 0.9);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.timeline-floral-progress.is-active {
+  opacity: 1;
+}
+
+/* Floating Floral Follower that flows down the timeline line */
+.timeline-floral-cursor {
+  position: absolute;
+  top: 25px;
+  left: 41px;
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  margin-top: -26px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, top, opacity;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-floral-cursor.is-active {
+  opacity: 1;
+}
+
+/* Soft blush garden aura radiating around the blooming floral */
+.timeline-floral-aura {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(251, 243, 244, 0.92) 0%, rgba(183, 119, 127, 0.38) 46%, rgba(67, 90, 72, 0) 72%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: bahaar-floral-pulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes bahaar-floral-pulse {
+  0% { transform: scale(0.88); opacity: 0.65; }
+  100% { transform: scale(1.16); opacity: 0.95; }
+}
+
+.timeline-floral-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.timeline-floral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(52, 65, 56, 0.32)) drop-shadow(0 0 10px rgba(183, 119, 127, 0.5));
+}
+
+/* Milestone marker bloom animation when flower passes */
+.timeline__marker span {
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.35s ease,
+              background-color 0.35s ease,
+              border-color 0.35s ease !important;
+}
+
+.timeline__item.is-bloomed .timeline__marker span {
+  transform: scale(1.22) !important;
+  background: #ffffff !important;
+  border-color: #b7777f !important;
+  color: #b7777f !important;
+  box-shadow: 0 0 0 6px rgba(183, 119, 127, 0.28), 0 0 18px rgba(183, 119, 127, 0.85) !important;
+}
+
+.timeline__item.is-passed .timeline__marker span {
+  background: #f4e1df !important;
+  border-color: #884d57 !important;
+  color: #884d57 !important;
+  box-shadow: 0 0 0 3px rgba(183, 119, 127, 0.18) !important;
+}
+
+@media (max-width: 680px) {
+  .timeline-floral-progress,
+  .timeline-floral-cursor {
+    left: 31px;
+  }
+  .timeline-floral-cursor {
+    width: 46px;
+    height: 46px;
+    margin-left: -23px;
+    margin-top: -23px;
+  }
+}
+
+@media(hover:hover) { .palette span:hover { translate:0 -4px; box-shadow:inset 0 0 0 5px rgba(255,255,255,.6),0 12px 24px rgba(52,65,56,.15); } }
+@media(max-width:480px) { .venue-card { padding:60px 22px; } .v4-venue-image img { aspect-ratio:1.12; border-radius:9rem 9rem .4rem .4rem / 4rem 4rem .4rem .4rem; } .countdown__unit span { font-size:10px; } }
+@media(prefers-reduced-motion:reduce) { .palette span { transition:none; } }

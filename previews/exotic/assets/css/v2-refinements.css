@@ -1,0 +1,14 @@
+/* Exotic: preserve the dark rose-garden editorial world. */
+.rs-dua { white-space: normal; margin-inline: 0; font-family: var(--ff-cormorant), Georgia, serif; line-height: 1.5; }
+.rs-time { min-width: 5.5rem; }
+img[src*="venue"] { object-fit: cover; object-position: 50% 52%; }
+img[src*="collage"] { object-position: 50% 40%; }
+button, a { -webkit-tap-highlight-color: transparent; }
+section.bg-white [class*="text-[#d0bca1]"] { color: #876d49; }
+section.bg-white a[class*="border-[#d0bca1]"] { border-color: #a58b66; font-weight: 500; letter-spacing: .2em; }
+section.bg-white a[class*="border-[#d0bca1]"]:hover { color: #fff; }
+@media (max-width: 480px) {
+  .rs-hero > p.rs-hero-text { width: 100%; padding-inline: 1.5rem; text-align: center; font-size: .6rem; line-height: 1.9; letter-spacing: .28em; }
+  .rs-dua { font-size: 1.35rem; }
+  .rs-scratch-date { font-size: clamp(1.8rem, 8vw, 2.6rem); }
+}

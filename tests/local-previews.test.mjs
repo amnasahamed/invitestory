@@ -5,14 +5,29 @@ import {existsSync, readFileSync, readdirSync} from 'node:fs';
 const source = readFileSync(new URL('../scripts.js', import.meta.url), 'utf8');
 const manifest = JSON.parse(readFileSync(new URL('../previews/manifest.json', import.meta.url), 'utf8'));
 
-test('all 36 catalogue previews resolve to existing local entry points', () => {
+test('every catalogue cover exists in normal repository assets, including Dearly', () => {
+  const catalogue = source.split('const TEMPLATE_DATABASE = [')[1].split('\n];')[0];
+  const images = [...catalogue.matchAll(/image: "([^"]+)"/g)].map(match => match[1]);
+  assert.equal(images.length, manifest.designs.length);
+  for (const image of images) {
+    assert.ok(image.startsWith('assets/'), `cover depends on a separate checkout: ${image}`);
+    assert.ok(existsSync(new URL(`../${image}`, import.meta.url)), `missing cover: ${image}`);
+  }
+  for (const page of ['index.html', 'dearly.html']) {
+    const html = readFileSync(new URL(`../${page}`, import.meta.url), 'utf8');
+    assert.doesNotMatch(html, /(?:src|content)="[^"]*dearly\/[^"\s]+\/assets\/envelope-first\.webp/);
+  }
+});
+
+test('all 44 catalogue previews resolve to existing local entry points', () => {
   const urls = [...source.matchAll(/localDemoUrl: "([^"]+)"/g)].map(match => match[1]);
-  assert.equal(urls.length, 36);
-  assert.equal(new Set(urls).size, 36);
-  assert.equal(manifest.designs.length, 36);
+  assert.equal(urls.length, 44);
+  assert.equal(new Set(urls).size, 44);
+  assert.equal(manifest.designs.length, 44);
   for (const design of manifest.designs) {
     assert.ok(urls.includes(design.url), `manifest mismatch: ${design.name}`);
     assert.ok(design.url.startsWith('/previews/') || design.url.startsWith('/dearly/'));
+    if (design.url.startsWith('/dearly/')) continue;
     const path = design.url.split('?')[0].replace(/^\//, '');
     assert.ok(existsSync(new URL(`../${path}index.html`, import.meta.url)), `missing ${design.name}`);
   }

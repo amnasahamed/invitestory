@@ -4,11 +4,21 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../previews/names.js',import.meta.url),'utf8');
 function runtime(names){const window={addEventListener(){}};vm.runInNewContext(source,{window,sessionStorage:{getItem:()=>JSON.stringify(names)}});return window;}
-test('all 36 template data formats accept both names without changing media or parents',()=>{
+test('all 44 template formats support personalized names without changing media or parents',()=>{
  const manifest=JSON.parse(fs.readFileSync(new URL('../previews/manifest.json',import.meta.url),'utf8'));
+ const nameMap=JSON.parse(fs.readFileSync(new URL('../previews/name-map.json',import.meta.url),'utf8'));
  for(const design of manifest.designs){
+  if(design.url.startsWith('/dearly/'))continue;
   const folder=new URL('../'+design.url.split('?')[0].slice(1),import.meta.url);
   const f=['editable/wedding-data.js','content/wedding-data.js','wedding-data.js'].map(path=>new URL(path,folder)).find(fs.existsSync);
+  if(!f){
+   const html=fs.readFileSync(new URL('index.html',folder),'utf8');
+   const pathname=new URL(design.url,'https://www.invitestory.in').pathname;
+   assert.match(html,/\/previews\/names\.js/,design.name+' names runtime');
+   assert.ok(nameMap[pathname]?.first?.length,design.name+' first-name map');
+   assert.ok(nameMap[pathname]?.second?.length,design.name+' second-name map');
+   continue;
+  }
   const window=runtime({first:'Nikhil',second:'Sana'});
   let dataSource=fs.readFileSync(f,'utf8').replace('export const weddingData =','window.WEDDING_DATA =');
   dataSource=dataSource.replace('window.InvitationNames?.applyData(weddingData);','');

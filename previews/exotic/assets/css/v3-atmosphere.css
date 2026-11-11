@@ -1,0 +1,17 @@
+/* Exotic: brass glints and deep rose-garden editorial surfaces. */
+#coverCard { position:relative; }
+.v3-opening-cue { position:absolute; z-index:5; left:50%; bottom:1.6rem; translate:-50% 0; white-space:nowrap; pointer-events:none; padding:.75rem 1.2rem; border:1px solid rgba(176,141,87,.6); border-radius:999px; background:rgba(249,247,241,.94); color:#695335; box-shadow:0 8px 24px rgba(0,0,0,.16); font:500 .65rem/1.4 var(--ff-cormorant,Georgia,serif); letter-spacing:.22em; text-transform:uppercase; }
+#coverCard:focus-visible { outline:2px solid #b08d57; outline-offset:6px; }
+.t049 { background:#f9f7f1; }
+.t049 section.bg-white { background-color:#f9f7f1; background-image:radial-gradient(ellipse at 0 20%,rgba(93,114,84,.07),transparent 45%),radial-gradient(ellipse at 100% 80%,rgba(176,141,87,.1),transparent 42%); }
+.rs-hero-photo::after { content:""; position:absolute; pointer-events:none; inset:0; background:linear-gradient(115deg,transparent 30%,rgba(208,188,161,.045) 48%,transparent 65%); background-size:220% 100%; animation:exotic-lantern-light 22s ease-in-out infinite alternate; }
+.t049 section:has(img[src*="venue-v2"]) { background-image:radial-gradient(ellipse at 90% 10%,rgba(176,141,87,.12),transparent 55%); }
+.t049 figure img { transition:filter .6s,scale .7s; }
+.t049 a,.t049 button { transition:box-shadow .35s,background-color .3s,color .3s,scale .2s; }
+.t049 a:active,.t049 button:active { scale:.97; }
+.t049 a:focus-visible,.t049 button:focus-visible,.t049 input:focus-visible { outline:2px solid #b08d57; outline-offset:5px; }
+.t049 section.bg-white img[src*="ornament-v2"] { filter:drop-shadow(0 2px 7px rgba(176,141,87,.13)); }
+.v3-section.v3-entered h2 { text-shadow:0 3px 20px rgba(176,141,87,.07); }
+@media(hover:hover) { .t049 figure:hover img { filter:brightness(1.04); scale:1.015; } .t049 a:hover,.t049 button:hover { box-shadow:0 9px 24px -14px rgba(44,36,32,.35); } }
+@keyframes exotic-lantern-light { from { background-position:0 0; } to { background-position:100% 0; } }
+@media(prefers-reduced-motion:reduce) { .rs-hero-photo::after { animation:none; } .t049 figure img,.t049 a,.t049 button { transition:none; } }

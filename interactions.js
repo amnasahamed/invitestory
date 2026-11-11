@@ -211,7 +211,7 @@ const InviteInteractions = (() => {
   }
   let previewOrigin=null, poster, previewItem=null;
   const localDearly = {35:'aubergine-magnolia',36:'cinnamon-camellia',37:'cobalt-iris',38:'petrol-dahlia'};
-  function demoURL(item){return item.localDemoUrl || item.demoUrl;}
+  function demoURL(item){return item.collection === 'dearly' ? item.demoUrl : (item.localDemoUrl || item.demoUrl);}
   function demoAPI(){try{return document.getElementById('preview-modal-iframe').contentWindow.InvitationPreview;}catch{return null;}}
   function demoAction(action){const api=demoAPI();if(!api)return;if(action==='open' && api.state().opened)api.goto('invitation');else if(typeof api[action]==='function')api[action]();}
   let demoTools, chapters, paletteTools, explore;

@@ -1,0 +1,16 @@
+/* Bahaar retains its soft spring editorial identity. */
+:root { --muted: #536252; --rose: #995862; }
+.section-kicker, .countdown__unit span { font-size: 11px; letter-spacing: .16em; }
+.gallery-section { background: #f3eee5; }
+.gallery { width: min(36rem, 100%); height: auto; aspect-ratio: 4 / 5; }
+.gallery__slide { border-radius: 45% 45% 3px 3px / 25% 25% 3px 3px; box-shadow: 0 18px 60px rgba(52,65,56,.12); }
+.gallery__slide:nth-child(even) { border-radius: 45% 45% 3px 3px / 25% 25% 3px 3px; }
+.gallery__slide img { object-position: 50% 38%; }
+.timeline__content time { font-size: 11px; color: #884d57; }
+.timeline__content p { color: #536252; }
+.gallery__dots button { width: 9px; height: 9px; }
+@media (max-width: 480px) {
+  .section { padding: 72px 22px; }
+  .gallery { height: auto; max-height: none; }
+  .countdown__unit span { font-size: 10px; letter-spacing: .1em; }
+}

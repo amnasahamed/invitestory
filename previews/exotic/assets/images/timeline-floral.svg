@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <defs>
+    <!-- Night Jasmine / Moonlight Emerald Halo -->
+    <radialGradient id="exoticGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="30%" stop-color="#d1edd8" stop-opacity="0.7"/>
+      <stop offset="65%" stop-color="#325d48" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#152f27" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Pure Ivory / Star Petal with Subtle Gold Edge -->
+    <linearGradient id="exoticStarPetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#f8fbf6"/>
+      <stop offset="85%" stop-color="#e3eee5"/>
+      <stop offset="100%" stop-color="#c5d8ca"/>
+    </linearGradient>
+
+    <!-- Deep Emerald Leaf -->
+    <linearGradient id="exoticEmeraldLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4e8c6c"/>
+      <stop offset="50%" stop-color="#1e4634"/>
+      <stop offset="100%" stop-color="#0f261c"/>
+    </linearGradient>
+
+    <!-- Star Jasmine Gold Core -->
+    <radialGradient id="exoticGoldStar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="35%" stop-color="#ffe38a"/>
+      <stop offset="75%" stop-color="#d4af37"/>
+      <stop offset="100%" stop-color="#735912"/>
+    </radialGradient>
+
+    <filter id="exoticShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#0a1a13" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <circle cx="80" cy="80" r="76" fill="url(#exoticGlow)"/>
+
+  <g filter="url(#exoticShadow)">
+    <!-- Deep Emerald Gloss Leaves -->
+    <g id="exoticLeaves">
+      <path d="M 80,80 C 105,50 135,42 145,30 C 128,52 118,72 80,80 Z" fill="url(#exoticEmeraldLeaf)"/>
+      <path d="M 80,80 C 55,110 25,118 15,130 C 32,108 42,88 80,80 Z" fill="url(#exoticEmeraldLeaf)"/>
+      <path d="M 80,80 C 50,55 42,25 30,15 C 52,32 72,42 80,80 Z" fill="url(#exoticEmeraldLeaf)"/>
+      <path d="M 80,80 C 110,105 118,135 130,145 C 108,128 88,118 80,80 Z" fill="url(#exoticEmeraldLeaf)"/>
+    </g>
+
+    <!-- Outer 5-Point Star Petals of Raat Rani -->
+    <g id="exoticOuterStar">
+      <path d="M 80,80 C 70,55 68,26 80,14 C 92,26 90,55 80,80 Z" fill="url(#exoticStarPetal)" stroke="#d4af37" stroke-width="0.7"/>
+      <path d="M 80,80 C 70,55 68,26 80,14 C 92,26 90,55 80,80 Z" transform="rotate(72 80 80)" fill="url(#exoticStarPetal)" stroke="#d4af37" stroke-width="0.7"/>
+      <path d="M 80,80 C 70,55 68,26 80,14 C 92,26 90,55 80,80 Z" transform="rotate(144 80 80)" fill="url(#exoticStarPetal)" stroke="#d4af37" stroke-width="0.7"/>
+      <path d="M 80,80 C 70,55 68,26 80,14 C 92,26 90,55 80,80 Z" transform="rotate(216 80 80)" fill="url(#exoticStarPetal)" stroke="#d4af37" stroke-width="0.7"/>
+      <path d="M 80,80 C 70,55 68,26 80,14 C 92,26 90,55 80,80 Z" transform="rotate(288 80 80)" fill="url(#exoticStarPetal)" stroke="#d4af37" stroke-width="0.7"/>
+    </g>
+
+    <!-- Inner Secondary Star Petals (Offset by 36 deg) -->
+    <g id="exoticInnerStar">
+      <g transform="rotate(36 80 80)"><path d="M 80,80 C 72,60 72,38 80,30 C 88,38 88,60 80,80 Z" fill="#ffffff" stroke="#c59f34" stroke-width="0.5"/></g>
+      <g transform="rotate(108 80 80)"><path d="M 80,80 C 72,60 72,38 80,30 C 88,38 88,60 80,80 Z" fill="#ffffff" stroke="#c59f34" stroke-width="0.5"/></g>
+      <g transform="rotate(180 80 80)"><path d="M 80,80 C 72,60 72,38 80,30 C 88,38 88,60 80,80 Z" fill="#ffffff" stroke="#c59f34" stroke-width="0.5"/></g>
+      <g transform="rotate(252 80 80)"><path d="M 80,80 C 72,60 72,38 80,30 C 88,38 88,60 80,80 Z" fill="#ffffff" stroke="#c59f34" stroke-width="0.5"/></g>
+      <g transform="rotate(324 80 80)"><path d="M 80,80 C 72,60 72,38 80,30 C 88,38 88,60 80,80 Z" fill="#ffffff" stroke="#c59f34" stroke-width="0.5"/></g>
+    </g>
+
+    <!-- Central Gold Star Jewel -->
+    <circle cx="80" cy="80" r="14" fill="#faf6e8" stroke="#152f27" stroke-width="0.6"/>
+    <polygon points="80,68 83,76 92,76 85,81 88,89 80,84 72,89 75,81 68,76 77,76" fill="url(#exoticGoldStar)" stroke="#735912" stroke-width="0.5"/>
+    <circle cx="80" cy="80" r="3" fill="#ffffff" opacity="0.95"/>
+  </g>
+</svg>

@@ -53,13 +53,15 @@
       const first=names.first || values('groom')[0] || couple.first || '', second=names.second || values('bride')[0] || couple.second || '';
       couple[field]=`${Array.from(first)[0] || ''} & ${Array.from(second)[0] || ''}`;
     }
+    if (names.first && 'groomInitial' in couple) couple.groomInitial=Array.from(names.first)[0];
+    if (names.second && 'brideInitial' in couple) couple.brideInitial=Array.from(names.second)[0];
     return data;
   }
   window.InvitationNames = {applyData, clean, valid, replace, setMap};
   let weddingData;
   Object.defineProperty(window,'WEDDING_DATA',{configurable:true,get:()=>weddingData,set:value=>{weddingData=applyData(value);}});
   // Static exports and archived text can sit outside their editable data renderer.
-  if(names.first || names.second) window.addEventListener('load', async () => {
+  if(names.first || names.second) window.addEventListener('DOMContentLoaded', async () => {
     const maps=await fetch('/previews/name-map.json').then(r=>r.json());
     setMap(maps[location.pathname.replace(/index\.html$/, '').replace(/\/?$/, '/')] || {});
     // A visitor can choose a name that is also another sample name. Data has

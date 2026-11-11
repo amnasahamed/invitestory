@@ -1,0 +1,5 @@
+/* The film supplies all opening motion; crossfade its final frame into the page. */
+#coverStage { transform: translate(-50%, -50%) !important; }
+#cover.whiten .cover-veil { opacity: 0; }
+#cover { transition: opacity .65s ease; }
+@media (prefers-reduced-motion:reduce) { #cover { transition: none; } }

@@ -1,0 +1,45 @@
+/* Mithril: pearl light, heirloom detail and restrained jewel movement. */
+body { background: radial-gradient(ellipse at 18% 8%, #eee5d5, transparent 52%), #f5f0e8; }
+/* The pale V3 lock artwork needs bronze type with a cream separation halo. */
+.vr-cover-names, .vr-cover-hint, .vr-cover-hint *,
+#coverText h1, #coverText p, #coverText span {
+  color: #65421F !important;
+  text-shadow: 0 1px 2px rgba(255,253,246,.95), 0 0 14px rgba(255,253,246,.85);
+}
+.vr-cover-hint { font-weight: 600; }
+.mithril-v3-surface { position: relative; isolation: isolate; }
+.mithril-v3-art {
+  position: absolute; inset: 0; overflow: hidden; z-index: -1;
+  pointer-events: none; border-radius: inherit;
+  background: radial-gradient(ellipse at 85% 8%, rgba(202,176,129,.13), transparent 55%),
+    radial-gradient(ellipse at 8% 85%, rgba(153,166,149,.09), transparent 55%);
+}
+.mithril-v3-art::after {
+  content: ""; position: absolute; right: -2rem; top: 0;
+  width: min(42%, 13rem); height: min(70%, 21rem);
+  background: url('../images/crystals-v2.webp') right top / 100% auto no-repeat;
+  opacity: .14; transform-origin: top center;
+}
+.mithril-v3-surface:nth-of-type(even) .mithril-v3-art::after { right: auto; left: -2rem; transform: scaleX(-1); }
+/* Motion is progressive: every piece of copy remains visible without JS. */
+[data-v], [data-hero] { opacity: 1; transform: none; filter: none; }
+button, a[href], input, select {
+  -webkit-tap-highlight-color: transparent;
+  transition: box-shadow .25s ease, background-color .25s ease, border-color .25s ease, color .25s ease, scale .2s ease;
+}
+button:not(:disabled):active, a[href]:active { scale: .97; }
+button:focus-visible, a[href]:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid #80633e; outline-offset: 4px;
+}
+input:focus { box-shadow: 0 3px 0 -1px rgba(128,99,62,.28); }
+.mithril-v3-card { transition: box-shadow .45s ease, translate .45s ease; border-radius: 2px; }
+@media (hover:hover) and (pointer:fine) {
+  button:not(:disabled):hover, a[href]:hover { box-shadow: 0 6px 20px rgba(112,87,48,.15); }
+  .mithril-v3-card:hover { box-shadow: 0 16px 40px -22px rgba(78,62,41,.38); translate: 0 -3px; }
+  img[src*='key-v2']:hover { rotate: -2deg; }
+}
+img[src*='key-v2'] { transition: rotate .6s ease; }
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .mithril-v3-card, button, a[href] { translate: none !important; scale: none !important; }
+}

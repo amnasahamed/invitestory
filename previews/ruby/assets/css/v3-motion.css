@@ -1,0 +1,256 @@
+/* Ruby: velvet depth, antique-gold geometry and restrained ceremonial motion. */
+
+/* Independent HTML cue remains readable over the generated text-free film. */
+/* The film supplies its own camera motion; keep its browser layer stationary. */
+.hero .hero-video, .hero.is-open .hero-video {
+  z-index: 0;
+  transform: translateZ(0);
+  transition: none;
+  backface-visibility: hidden;
+}
+.hero .hero-veil { z-index: 1; pointer-events: none; }
+.hero .hero-content { position: relative; z-index: 2; }
+.hero.is-open .hero-content {
+  animation: opener-title-fade .8s ease 5.2s both;
+  transform: none;
+  filter: none;
+}
+@keyframes opener-title-fade { from { opacity: 0; } to { opacity: 1; } }
+#openingMark { display: none; }
+.v3-opening-cue {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: max(16svh, 4rem);
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .8rem;
+  pointer-events: none;
+  color: #fff6e3;
+  font-family: var(--font-body);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 2px 16px rgba(35,12,7,.7);
+  transition: opacity .5s ease, visibility .5s ease;
+}
+.v3-opening-play {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border: 1px solid rgba(255,246,227,.72);
+  border-radius: 50%;
+  background: rgba(55,27,14,.2);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 5px 25px rgba(35,12,7,.12);
+}
+.v3-opening-play::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  margin-left: 3px;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-left: 9px solid currentColor;
+}
+.hero.is-open .v3-opening-cue { opacity: 0; visibility: hidden; }
+.hero .hero-veil, .hero.is-open .hero-veil {
+  background: linear-gradient(to bottom,
+    rgba(39,7,12,.22) 0%, rgba(39,7,12,.54) 22%,
+    rgba(39,7,12,.65) 57%, rgba(39,7,12,.5) 83%, rgba(39,7,12,.36) 100%);
+  transition: none;
+}
+.hero.is-open .hero-content { color: #fff5df; text-shadow: 0 2px 10px rgba(30,3,7,.6); }
+.hero.is-open .hero-welcome, .hero.is-open .couple-names p, .hero.is-open .hero-closing { opacity: 1; }
+
+.welcome-section, .gallery-section, .dress-section {
+  background-color: #f4e7d4;
+  background-image:
+    radial-gradient(ellipse at 0 0, rgba(147,38,47,.065), transparent 55%),
+    radial-gradient(ellipse at 100% 100%, rgba(167,120,52,.12), transparent 62%),
+    repeating-linear-gradient(45deg, transparent 0 44px, rgba(130,88,41,.025) 44px 45px, transparent 45px 89px),
+    repeating-linear-gradient(-45deg, transparent 0 44px, rgba(130,88,41,.025) 44px 45px, transparent 45px 89px);
+}
+.gifts-section, .program-section, .countdown-section {
+  background-image:
+    radial-gradient(ellipse at 50% 0, rgba(255,249,232,.24), transparent 68%),
+    linear-gradient(125deg, rgba(105,16,29,.035), transparent 48%, rgba(201,163,95,.1));
+}
+.section-pad { isolation: isolate; }
+.section-shell { position: relative; z-index: 1; }
+.v3-botanical {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  right: -7rem;
+  top: 6rem;
+  width: clamp(18rem, 30vw, 29rem);
+  height: 16rem;
+  background: url('../images/floral-divider-v2.webp') center / contain no-repeat;
+  opacity: .075;
+  transform: rotate(-68deg);
+  filter: sepia(.3);
+}
+.gifts-section .v3-botanical { right: auto; left: -7rem; transform: rotate(68deg); }
+.v3-botanical { animation: ruby-botanical-glow 22s ease-in-out infinite alternate paused; }
+.v3-botanical.is-inview { animation-play-state: running; }
+@keyframes ruby-botanical-glow { from { opacity: .055; } to { opacity: .095; } }
+.reveal, .reveal.is-visible { opacity: 1; transform: none; transition: none; }
+.event-list article { border-radius: 2px; box-shadow: 0 12px 36px rgba(58,7,12,.09); }
+.gallery-frame { box-shadow: 0 24px 65px rgba(58,7,12,.24), 0 0 0 5px rgba(201,163,95,.1); }
+.gallery-slide img { transition: transform 8s cubic-bezier(.2,.5,.3,1); transform: scale(1.02); }
+.gallery-slide.is-active img { transform: scale(1.055); }
+.gallery-slide { transition: opacity 1.35s ease, transform 7s ease; }
+.gallery-dots button { min-width: 22px; min-height: 22px; background-clip: content-box; padding: 7px; }
+.gallery-dots button.is-active { transform: scale(1.12); }
+.primary-button, .calendar-cta, .event-btn, .venue-map-button, .text-button, .music-toggle {
+  transition: transform .22s ease, box-shadow .3s ease, background .3s ease, color .3s ease, border-color .3s ease;
+}
+button:focus-visible, a:focus-visible, [role='button']:focus-visible {
+  outline: 2px solid #a76e36;
+  outline-offset: 5px;
+}
+.v3-pressed { transform: translateY(1px) scale(.975) !important; box-shadow: none !important; }
+.scratch-wrap.is-revealed { box-shadow: inset 0 0 45px rgba(201,163,95,.18); }
+.event-list article:focus-within { box-shadow: 0 14px 36px rgba(58,7,12,.18); }
+.rsvp-form input, .rsvp-form select, .rsvp-form textarea { transition: border-color .25s, box-shadow .25s, background .25s; }
+.rsvp-form input:focus, .rsvp-form select:focus, .rsvp-form textarea:focus {
+  background: rgba(255,249,232,.25);
+  box-shadow: 0 3px 0 -1px rgba(111,11,23,.25);
+}
+@media (hover: hover) and (pointer: fine) {
+  .primary-button:hover, .calendar-cta:hover, .event-btn:hover, .venue-map-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(58,7,12,.2);
+  }
+  .gallery-frame:hover .gallery-slide.is-active img { transform: scale(1.07); }
+}
+/* ==========================================================================
+   Ruby Timeline Floral Scroll Flow & Ease Animation
+   ========================================================================== */
+.timeline {
+  position: relative;
+}
+
+/* Active glowing golden/ruby progress line flowing behind the floral */
+.timeline-floral-progress {
+  position: absolute;
+  top: 24px;
+  left: 104px;
+  width: 2px;
+  background: linear-gradient(to bottom, #d4a853, #ffccd4 50%, #b82d43);
+  box-shadow: 0 0 10px rgba(232, 76, 99, 0.8), 0 0 3px rgba(255, 237, 240, 0.9);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.timeline-floral-progress.is-active {
+  opacity: 1;
+}
+
+/* Floating Floral Follower that flows down the timeline line */
+.timeline-floral-cursor {
+  position: absolute;
+  top: 24px;
+  left: 104px;
+  width: 54px;
+  height: 54px;
+  margin-left: -27px;
+  margin-top: -27px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, top, opacity;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-floral-cursor.is-active {
+  opacity: 1;
+}
+
+/* Soft velvet ruby aura radiating around the blooming flower */
+.timeline-floral-aura {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(255, 221, 226, 0.9) 0%, rgba(184, 45, 67, 0.38) 45%, rgba(101, 26, 40, 0) 72%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: ruby-floral-pulse 2.6s ease-in-out infinite alternate;
+}
+
+@keyframes ruby-floral-pulse {
+  0% { transform: scale(0.88); opacity: 0.65; }
+  100% { transform: scale(1.15); opacity: 0.95; }
+}
+
+/* Floral transform wrapper for silky smooth scale and rotation easing */
+.timeline-floral-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.timeline-floral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(61, 10, 17, 0.45)) drop-shadow(0 0 10px rgba(232, 76, 99, 0.55));
+}
+
+/* Smooth milestone dot bloom states */
+.timeline article::before {
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.35s ease,
+              background-color 0.35s ease,
+              border-color 0.35s ease !important;
+}
+
+.timeline article.is-bloomed::before {
+  transform: translateX(-50%) scale(1.5) !important;
+  background: #ffffff !important;
+  border-color: #b82d43 !important;
+  box-shadow: 0 0 0 6px rgba(184, 45, 67, 0.28), 0 0 18px rgba(232, 76, 99, 0.85) !important;
+}
+
+.timeline article.is-passed::before {
+  background: #b82d43 !important;
+  border-color: #f7d2d7 !important;
+  box-shadow: 0 0 0 4px rgba(184, 45, 67, 0.16) !important;
+}
+
+@media (max-width: 600px) {
+  .timeline-floral-progress,
+  .timeline-floral-cursor {
+    left: 86px;
+  }
+  .timeline-floral-cursor {
+    width: 48px;
+    height: 48px;
+    margin-left: -24px;
+    margin-top: -24px;
+  }
+}
+
+.rsvp-section, [data-section="rsvp"], #rsvp, .rsvp { display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .gallery-slide img, .gallery-slide.is-active img, .v3-pressed { transform: none !important; }
+}

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f2ebdb" />
+    <meta name="description" content="You are warmly invited to the wedding of Milan &amp; Zoe · 15–18 October 2026." />
+    <title>Milan &amp; Zoe — Wedding Invitation · Gulabi</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2214%22 fill=%22%23b5475a%22/%3E%3C/svg%3E" />
+    <link rel="preload" as="image" href="assets/images/opening-poster-v3.webp" />
+    <link rel="preload" as="font" type="font/woff2" href="assets/fonts/alex-brush.woff2" crossorigin />
+    <link rel="stylesheet" href="assets/css/bloom.css" />
+    <link rel="stylesheet" href="assets/css/v2-refinements.css?v=2.1" />
+    <link rel="stylesheet" href="assets/css/v3-atmosphere.css?v=3.2" />
+    <link rel="stylesheet" href="assets/css/v4-refinements.css?v=4.2" />
+    <link rel="stylesheet" href="assets/css/v5-opening-qa.css?v=5" />
+    <script src="/previews/names.js"></script>
+    <script src="/previews/demo-guard.js"></script>
+    <script src="assets/js/config.js?v=branding-1"></script>
+    <script src="assets/js/v2-images.js?v=2"></script>
+    <script src="assets/js/wed-calendar.js" defer></script>
+    <script src="assets/js/wed-scratch.js" defer></script>
+    <script src="assets/js/wed-petals.js?v=3" defer></script>
+    <script src="assets/js/app.js?v=5" defer></script>
+    <script src="assets/js/v5-opening-guard.js?v=5" defer></script>
+    <script src="assets/js/v3-atmosphere.js?v=3.2" defer></script>
+  <style>/* former Arabic text slots now hold English */.bismillah,.dua,.rs-dua,.rs-arabic,[lang="ar"],[dir="rtl"]{direction:ltr!important;unicode-bidi:normal!important}</style>
+  <meta name="invitation-design" content="Gulabi" />
+  <link rel="stylesheet" href="../collection-branding.css?v=1" />
+</head>
+  <body>
+    <div id="cover" class="cover" role="button" tabindex="0" aria-label="Open the invitation">
+      <div class="cover-stage">
+        <video id="openVideo" class="cover-video" src="assets/video/opening-v3.mp4" poster="assets/images/opening-poster-v3.webp" muted playsinline webkit-playsinline preload="auto"></video>
+        <span class="bud-halo" aria-hidden="true"><i></i><i></i></span>
+      </div>
+      <div class="cover-title" id="coverTitle"></div>
+      <p class="cover-hint" id="coverHint"></p>
+      <button type="button" class="skip" id="skip"></button>
+    </div>
+
+    <main id="page" class="page" aria-live="polite">
+      <section class="hero" id="hero">
+        <div class="hang hang-l"><span class="rs"><img src="assets/images/cluster-v2.webp" alt="" aria-hidden="true" /></span></div>
+        <div class="hang hang-r"><span class="rs"><img src="assets/images/cluster-v2.webp" alt="" aria-hidden="true" /></span></div>
+        <div class="hero-text" id="heroText"></div>
+        <div class="garland gl"><span class="rs"><img src="assets/images/garland-left-v2.webp" alt="" aria-hidden="true" /></span></div>
+        <div class="garland gr"><span class="rs"><img src="assets/images/garland-left-v2.webp" alt="" aria-hidden="true" /></span></div>
+        <p class="tap-hint" id="tapHint" aria-hidden="true"></p>
+        <div class="scroll-cue" aria-hidden="true"><i></i></div>
+      </section>
+      <div id="sections"></div>
+    </main>
+
+    <button type="button" class="music" id="musicBtn" hidden></button>
+    <audio id="music" preload="none" loop></audio>
+    <footer class="collection-signature collection-signature--petal" aria-label="Gulabi invitation design" style="--signature-ink:#873c51;--signature-paper:#fbf1ed">
+    <span class="collection-signature__rule" aria-hidden="true"></span>
+    <span class="collection-signature__name">Gulabi</span>
+    <span class="collection-signature__line">Romance in every petal</span>
+  </footer>
+</body>
+</html>

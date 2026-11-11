@@ -1,0 +1,129 @@
+/* Exotic keeps its dramatic photographs and airy ivory editorial chapters. */
+.t049 section.bg-white { background-image:radial-gradient(ellipse at 0 20%,rgba(93,114,84,.045),transparent 45%),radial-gradient(ellipse at 100% 80%,rgba(176,141,87,.07),transparent 42%); }
+.t049 section.bg-white h2 { text-wrap:balance; }
+.t049 section.bg-white p { text-wrap:pretty; }
+.t049 section.bg-white a { min-height:44px; }
+.t049 .rs-time { font-variant-numeric:lining-nums tabular-nums; }
+.t049 section.bg-white img[src*="ornament-v2"] { max-width:10rem; opacity:.8; }
+.t049 section.bg-white:has(img[src*="venue-v2"]) img[src*="venue-v2"] { border-radius:2px; box-shadow:0 12px 30px rgba(44,36,32,.12); }
+.t049 section.bg-white:has(img[src*="venue-v2"]) h3 { line-height:1.25; }
+.t049 input,.t049 textarea { transition:background-color .3s,border-color .3s,box-shadow .3s; }
+.t049 input:focus,.t049 textarea:focus { background:rgba(208,188,161,.08); box-shadow:0 0 0 3px rgba(176,141,87,.08); }
+.t049 label:has(input:focus-visible) { outline:2px solid #b08d57; outline-offset:4px; }
+.rs-dua { max-width:32rem; margin-inline:auto; }
+.t049 section:has(.rs-time) { background-color:#22372d; background-image:radial-gradient(ellipse at 0 50%,rgba(176,141,87,.15),transparent 60%); color:#f3e9da; overflow:hidden; }
+.t049 section:has(.rs-time) h2,.t049 section:has(.rs-time) p,.t049 section:has(.rs-time) .rs-time { color:#f3e9da; }
+.t049 .rs-time ~ span { color:#f3e9da; }
+.t049 .rs-time + div { background-color:rgba(211,188,148,.5); }
+.t049 section:has(.rs-time) img[src*="ornament-v2"] { opacity:.18; width:8rem; translate:-35% 0; }
+.t049 section:has(.rs-dua) { background-image:radial-gradient(ellipse at 50% 20%,rgba(208,188,161,.17),transparent 70%); }
+.t049 section:has(.rs-monogram),.t049 section:has(.rs-dua) { position:relative; isolation:isolate; overflow:hidden; }
+.t049 section:has(.rs-monogram)::before,.t049 section:has(.rs-dua)::before { content:""; position:absolute; z-index:-1; width:19rem; height:24rem; background:url(../images/pomegranate-branch-v4.webp) center/contain no-repeat; pointer-events:none; opacity:.16; }
+.t049 section:has(.rs-monogram)::before { left:-7rem; top:1rem; rotate:-12deg; }
+.t049 section:has(.rs-dua)::before { right:-8rem; bottom:-4rem; scale:-1 1; rotate:8deg; opacity:.14; }
+.t049 .rs-label { color:#76644c; }
+.t049 input::placeholder,.t049 textarea::placeholder { color:#817467; opacity:1; }
+.t049 .rs-choice:has(input:checked) { background:#6b765d; border-color:#6b765d; color:#fff; }
+.rs-closing,.rs-closing[data-m],.rs-closing [data-m] { opacity:1!important; transform:none!important; filter:none!important; }
+.rs-closing { background-image:url(../images/closing-v2.webp); background-size:cover; background-position:50% 50%; }
+#rsvpBox, section:has(#rsvpBox), div:has(> #rsvpBox), [data-section="rsvp"], .rsvp-section { display: none !important; }
+
+/* ==========================================================================
+   Raat Rani Timeline Floral Scroll Flow & Ease Animation
+   ========================================================================== */
+section:has(.rs-time) {
+  position: relative;
+}
+
+.timeline-floral-progress {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(to bottom, #d3bc94, #fbf7ee 50%, #5d7254);
+  box-shadow: 0 0 10px rgba(211, 188, 148, 0.8), 0 0 3px rgba(251, 247, 238, 0.9);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.timeline-floral-progress.is-active {
+  opacity: 1;
+}
+
+.timeline-floral-cursor {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  margin-top: -26px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, top, opacity;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-floral-cursor.is-active {
+  opacity: 1;
+}
+
+.timeline-floral-aura {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(243, 233, 218, 0.95) 0%, rgba(211, 188, 148, 0.42) 46%, rgba(34, 55, 45, 0) 72%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: exotic-floral-pulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes exotic-floral-pulse {
+  0% { transform: scale(0.88); opacity: 0.65; }
+  100% { transform: scale(1.16); opacity: 0.95; }
+}
+
+.timeline-floral-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.timeline-floral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(16, 24, 40, 0.55)) drop-shadow(0 0 10px rgba(211, 188, 148, 0.7));
+}
+
+.rs-time + div {
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.35s ease,
+              background-color 0.35s ease !important;
+}
+
+.rs-step-row.is-bloomed .rs-time + div {
+  transform: scale(1.6) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 5px rgba(211, 188, 148, 0.35), 0 0 16px rgba(243, 233, 218, 0.9) !important;
+}
+
+.rs-step-row.is-passed .rs-time + div {
+  background-color: #d3bc94 !important;
+  box-shadow: 0 0 0 3px rgba(211, 188, 148, 0.22) !important;
+}
+
+@media(max-width:480px) { .t049 section.bg-white { padding-top:3.4rem; padding-bottom:3.4rem; } .t049 .rs-time { min-width:4.8rem; } }
+@media(prefers-reduced-motion:reduce) { .t049 input,.t049 textarea { transition:none; } }

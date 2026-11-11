@@ -309,6 +309,96 @@ export default {
     "desc": "Slide to Shaadi interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
     "url": "https://www.invitestory.in/?design=slide-to-shaadi"
   },
+  "39": {
+    "id": 39,
+    "name": "Burgundy Reverie",
+    "slug": "burgundy-reverie",
+    "image": "assets/preview/39.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/39.png",
+    "title": "InviteStory – Burgundy Reverie Wedding Invitation",
+    "desc": "Burgundy Reverie luxury wedding invitation with a cinematic velvet-curtain opening, music, personalized names, scratch-reveal date, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=burgundy-reverie"
+  },
+  "40": {
+    "id": 40,
+    "name": "Sunehri",
+    "slug": "sunehri",
+    "image": "assets/preview/40.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/40.png",
+    "title": "InviteStory – Sunehri Wedding Invitation",
+    "desc": "Amber courtyard invitation with a floral door reveal, music, scratch date, gallery, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=sunehri"
+  },
+  "41": {
+    "id": 41,
+    "name": "Gulistan",
+    "slug": "gulistan",
+    "image": "assets/preview/41.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/41.png",
+    "title": "InviteStory – Gulistan Wedding Invitation",
+    "desc": "Pastel garden invitation with a sculpted floral gate, music, wedding timeline, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=gulistan"
+  },
+  "42": {
+    "id": 42,
+    "name": "Gulabi",
+    "slug": "gulabi",
+    "image": "assets/preview/42.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/42.png",
+    "title": "InviteStory – Gulabi Wedding Invitation",
+    "desc": "Vintage rose storybook invitation with an animated bloom, music, event details, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=gulabi"
+  },
+  "43": {
+    "id": 43,
+    "name": "Raat Rani",
+    "slug": "raat-rani",
+    "image": "assets/preview/43.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/43.png",
+    "title": "InviteStory – Raat Rani Wedding Invitation",
+    "desc": "Midnight pomegranate invitation with a cinematic folio reveal, music, collage scenes, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=raat-rani"
+  },
+  "44": {
+    "id": 44,
+    "name": "Aabha",
+    "slug": "aabha",
+    "image": "assets/preview/44.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/44.png",
+    "title": "InviteStory – Aabha Wedding Invitation",
+    "desc": "Pearl and ivory invitation with a golden key reveal, music, schedule, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=aabha"
+  },
+  "45": {
+    "id": 45,
+    "name": "Aranya",
+    "slug": "aranya",
+    "image": "assets/preview/45.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/45.png",
+    "title": "InviteStory – Aranya Wedding Invitation",
+    "desc": "Olive linen botanical invitation with an embossed folio reveal, music, events, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=aranya"
+  },
+  "46": {
+    "id": 46,
+    "name": "Gulnaar",
+    "slug": "gulnaar",
+    "image": "assets/preview/46.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/46.png",
+    "title": "InviteStory – Gulnaar Wedding Invitation",
+    "desc": "Ruby pomegranate invitation with a floral darbar reveal, music, scratch date, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=gulnaar"
+  },
+  "47": {
+    "id": 47,
+    "name": "Noor Mahal",
+    "slug": "noor-mahal",
+    "image": "assets/preview/47.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/47.png",
+    "title": "InviteStory – Noor Mahal Wedding Invitation",
+    "desc": "Ivory jali palace invitation with cinematic doors, music, programme, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=noor-mahal"
+  },
   "marigold-bhavan": {
     "id": 1,
     "name": "Marigold Bhavan",
@@ -609,16 +699,6 @@ export default {
     "desc": "Gilded Hall interactive wedding invitation with custom music, animated couple story scenes, 1-tap Google Maps directions & instant RSVP.",
     "url": "https://www.invitestory.in/?design=gilded-hall"
   },
-  "39": {
-    "id": 39,
-    "name": "Burgundy Reverie",
-    "slug": "burgundy-reverie",
-    "image": "assets/preview/39.png",
-    "imageUrl": "https://www.invitestory.in/assets/preview/39.png",
-    "title": "InviteStory – Burgundy Reverie Wedding Invitation",
-    "desc": "Burgundy Reverie luxury wedding invitation with a cinematic velvet-curtain opening, music, personalized names, scratch-reveal date, directions and RSVP.",
-    "url": "https://www.invitestory.in/?design=burgundy-reverie"
-  },
   "slide-to-shaadi": {
     "id": 34,
     "name": "Slide to Shaadi",
@@ -638,5 +718,85 @@ export default {
     "title": "InviteStory – Burgundy Reverie Wedding Invitation",
     "desc": "Burgundy Reverie luxury wedding invitation with a cinematic velvet-curtain opening, music, personalized names, scratch-reveal date, directions and RSVP.",
     "url": "https://www.invitestory.in/?design=burgundy-reverie"
+  },
+  "sunehri": {
+    "id": 40,
+    "name": "Sunehri",
+    "slug": "sunehri",
+    "image": "assets/preview/40.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/40.png",
+    "title": "InviteStory – Sunehri Wedding Invitation",
+    "desc": "Amber courtyard invitation with a floral door reveal, music, scratch date, gallery, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=sunehri"
+  },
+  "gulistan": {
+    "id": 41,
+    "name": "Gulistan",
+    "slug": "gulistan",
+    "image": "assets/preview/41.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/41.png",
+    "title": "InviteStory – Gulistan Wedding Invitation",
+    "desc": "Pastel garden invitation with a sculpted floral gate, music, wedding timeline, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=gulistan"
+  },
+  "gulabi": {
+    "id": 42,
+    "name": "Gulabi",
+    "slug": "gulabi",
+    "image": "assets/preview/42.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/42.png",
+    "title": "InviteStory – Gulabi Wedding Invitation",
+    "desc": "Vintage rose storybook invitation with an animated bloom, music, event details, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=gulabi"
+  },
+  "raat-rani": {
+    "id": 43,
+    "name": "Raat Rani",
+    "slug": "raat-rani",
+    "image": "assets/preview/43.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/43.png",
+    "title": "InviteStory – Raat Rani Wedding Invitation",
+    "desc": "Midnight pomegranate invitation with a cinematic folio reveal, music, collage scenes, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=raat-rani"
+  },
+  "aabha": {
+    "id": 44,
+    "name": "Aabha",
+    "slug": "aabha",
+    "image": "assets/preview/44.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/44.png",
+    "title": "InviteStory – Aabha Wedding Invitation",
+    "desc": "Pearl and ivory invitation with a golden key reveal, music, schedule, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=aabha"
+  },
+  "aranya": {
+    "id": 45,
+    "name": "Aranya",
+    "slug": "aranya",
+    "image": "assets/preview/45.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/45.png",
+    "title": "InviteStory – Aranya Wedding Invitation",
+    "desc": "Olive linen botanical invitation with an embossed folio reveal, music, events, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=aranya"
+  },
+  "gulnaar": {
+    "id": 46,
+    "name": "Gulnaar",
+    "slug": "gulnaar",
+    "image": "assets/preview/46.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/46.png",
+    "title": "InviteStory – Gulnaar Wedding Invitation",
+    "desc": "Ruby pomegranate invitation with a floral darbar reveal, music, scratch date, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=gulnaar"
+  },
+  "noor-mahal": {
+    "id": 47,
+    "name": "Noor Mahal",
+    "slug": "noor-mahal",
+    "image": "assets/preview/47.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/47.png",
+    "title": "InviteStory – Noor Mahal Wedding Invitation",
+    "desc": "Ivory jali palace invitation with cinematic doors, music, programme, directions and RSVP.",
+    "url": "https://www.invitestory.in/?design=noor-mahal"
   }
 };

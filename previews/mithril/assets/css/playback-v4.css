@@ -1,0 +1,8 @@
+/* Crossfade stationary decoded frames, rather than zooming two video layers. */
+#cover { transition: opacity .75s ease !important; transform:none !important; }
+#heroStage { transform:none !important; transition:none !important; }
+#lockVideo, #heroVideo { backface-visibility:hidden; transform:translateZ(0); }
+#heroVideo, #heroPoster { transition:opacity .3s ease !important; }
+@media(prefers-reduced-motion:reduce) {
+  #cover, #heroVideo, #heroPoster { transition:none !important; }
+}

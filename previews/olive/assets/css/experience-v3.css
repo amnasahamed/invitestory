@@ -1,0 +1,50 @@
+/* Olive: layers of botanical paper and quiet garden movement. */
+html, body { max-width: 100%; overflow-x: clip; }
+.page { width: min(100%, 30rem); }
+.cover-hint span {
+  color: #493D25;
+  background: rgba(255,251,240,.92);
+  border-color: rgba(112,85,41,.48);
+  text-shadow: 0 1px 1px rgba(255,255,255,.75);
+  animation: none;
+}
+.skip { color: #493D25; background: rgba(255,251,240,.86); }
+.sec { isolation: isolate; }
+.olive-v3-art { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.olive-v3-art::before {
+  content: ""; position: absolute; right: -3rem; top: 15%; width: 11rem; height: 18rem;
+  opacity: .105; background: url('../images/sprig-v2.webp') center / contain no-repeat;
+  transform: rotate(-22deg);
+}
+.sec:nth-of-type(even) .olive-v3-art::before { left: -3rem; right: auto; transform: scaleX(-1) rotate(-22deg); }
+.sec.alt { background-image: radial-gradient(ellipse at 90% 5%, rgba(150,161,126,.14), transparent 60%), linear-gradient(rgba(247,242,229,.77),rgba(247,242,229,.77)), url('../images/linen2-v2.webp'); }
+.hero-text { background: radial-gradient(ellipse at 50% 50%, rgba(255,252,242,.48), transparent 70%); }
+.arch { background-image: radial-gradient(ellipse at 50% 0%, rgba(186,169,118,.12), transparent 62%), linear-gradient(rgba(48,61,35,.84),rgba(48,61,35,.84)), url('../images/olive-paper-v2.webp'); }
+.sec.closing .olive-v3-art::before { opacity: .13; filter: brightness(1.25); }
+/* Existing reveal code is complemented by visible-by-default card motion. */
+[data-r] { opacity: 1; transform: none; }
+.frame::before, .frame::after { opacity: 1; transform: none; }
+.arch { clip-path: none; }
+.btn, .choice label, .music {
+  -webkit-tap-highlight-color: transparent;
+  transition: color .25s ease, background-color .25s ease, border-color .25s ease, box-shadow .25s ease, scale .2s ease;
+}
+.btn:active, .music:active { scale: .97; }
+.btn:focus-visible, .music:focus-visible, .skip:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 4px;
+}
+.choice label:has(input:focus-visible) { outline: 2px solid var(--olive); outline-offset: 3px; }
+.fld input:focus, .fld textarea:focus { background: rgba(255,255,255,.22); box-shadow: 0 3px 0 -1px rgba(76,86,54,.2); }
+.ev { position: relative; transition: background-color .35s ease, box-shadow .35s ease; }
+.ev:focus-within { background: rgba(255,248,225,.045); }
+.olive-v3-entered .orn i { animation: olive-v3-medallion 850ms ease-out; }
+@keyframes olive-v3-medallion { from { scale: .7; } to { scale: 1; } }
+@media (hover:hover) and (pointer:fine) {
+  .btn:hover { box-shadow: 0 6px 16px -8px rgba(53,65,35,.4); }
+  .ev:hover { background: rgba(255,248,225,.045); }
+  .choice label:hover { background: rgba(76,86,54,.04); }
+}
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  .btn, .music { scale: none !important; }
+}

@@ -1,0 +1,165 @@
+/* V4: pearl stationery with deliberate space around photography and fashion. */
+.mithril-v4-media .mithril-v3-art::after,
+.mithril-v4-form .mithril-v3-art::after { display: none; }
+.mithril-v4-media .mithril-v3-art { background: none; }
+.mithril-v4-portrait img[src*='portrait-v2'] {
+  border-radius: 9rem 9rem .5rem .5rem;
+  box-shadow: 0 18px 40px -24px rgba(80,65,46,.38);
+}
+.mithril-v4-portrait > div[data-g] { width: min(70vw, 18rem); }
+.mithril-v4-portrait > div[data-g] > img,
+.mithril-v4-portrait > div[data-g] > span { border-radius: 9rem 9rem .5rem .5rem; }
+.mithril-v3-surface:has([data-unit]) { padding-bottom: 1.75rem; }
+.mithril-v3-surface:has([data-unit]) span[class*='uppercase'] {
+  color: #755B3A; font-size: .65rem; letter-spacing: .12em;
+}
+.mithril-v3-surface:not(.mithril-v4-media) .font-pinyon { color: #806035; }
+.mithril-v4-venue p { color: #6D502E; }
+.mithril-v4-form input::placeholder,
+.mithril-v4-form textarea::placeholder { color: #806D54; opacity: 1; }
+.mithril-v4-form input, .mithril-v4-form textarea { color: #654C30; }
+[data-section="rsvp"], .rsvp-section, #rsvp, .rsvp, .mithril-v4-form { display: none !important; }
+
+/* ==========================================================================
+   Mithril / Aabha Celebration Floral Scroll Flow & Ease Animation
+   ========================================================================== */
+.mithril-v4-venue,
+section:has(.mithril-v4-venue) {
+  position: relative;
+}
+
+.timeline-floral-progress {
+  position: absolute;
+  top: 40px;
+  left: 28px;
+  width: 2px;
+  background: linear-gradient(to bottom, #806035, #f3ede3 50%, #5e6a5c);
+  box-shadow: 0 0 10px rgba(128, 96, 53, 0.7), 0 0 3px rgba(243, 237, 227, 0.9);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.timeline-floral-progress.is-active {
+  opacity: 1;
+}
+
+.timeline-floral-cursor {
+  position: absolute;
+  top: 40px;
+  left: 28px;
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  margin-top: -26px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, top, opacity;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-floral-cursor.is-active {
+  opacity: 1;
+}
+
+.timeline-floral-aura {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(255, 252, 246, 0.95) 0%, rgba(200, 180, 150, 0.42) 46%, rgba(101, 88, 70, 0) 72%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: mithril-floral-pulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes mithril-floral-pulse {
+  0% { transform: scale(0.88); opacity: 0.65; }
+  100% { transform: scale(1.16); opacity: 0.95; }
+}
+
+.timeline-floral-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.timeline-floral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(80, 65, 46, 0.35)) drop-shadow(0 0 10px rgba(200, 180, 150, 0.6));
+}
+
+.mithril-v4-venue article {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.mithril-v4-venue.is-bloomed article {
+  transform: translateY(-3px) scale(1.015);
+  box-shadow: 0 20px 48px -20px rgba(101, 76, 48, 0.38) !important;
+}
+
+@media (max-width: 480px) {
+  .timeline-floral-progress,
+  .timeline-floral-cursor {
+    left: 20px;
+  }
+  .timeline-floral-cursor {
+    width: 44px;
+    height: 44px;
+    margin-left: -22px;
+    margin-top: -22px;
+  }
+}
+.mithril-v4-form label { color: #6D5334; }
+.mithril-v4-form > img[src*='crystals-v2'] {
+  height: 5rem; object-fit: cover; object-position: top;
+}
+.mithril-v4-form input:not([type='radio']):not([type='checkbox']) + label[for] {
+  z-index: 1; pointer-events: none; color: #715331 !important;
+}
+.mithril-v4-venue article { overflow: hidden; border-radius: .6rem; }
+.mithril-v4-venue img[src*='venue-v2'] { border-radius: .35rem; }
+.mithril-v4-fashion { padding-bottom: 2.5rem; }
+.mithril-v4-fashion img[src*='dresscode-v2'] {
+  width: min(90%, 31rem); margin-top: 1rem;
+  filter: drop-shadow(0 5px 6px rgba(101,76,48,.05));
+}
+.mithril-v3-surface h2 { text-wrap: balance; }
+.mithril-v3-surface p { text-wrap: pretty; }
+.mithril-v3-surface button, .mithril-v3-surface a[href] { min-height: 44px; }
+.mithril-v4-form input:not([type='radio']):not([type='checkbox']),
+.mithril-v4-form select, .mithril-v4-form textarea {
+  min-height: 48px; border-radius: .4rem;
+  background-color: rgba(255,253,247,.58);
+  transition: background-color .25s, border-color .25s, box-shadow .25s;
+}
+.mithril-v4-form label:has(input[type='radio']),
+.mithril-v4-form label:has(input[type='checkbox']) { min-height: 44px; cursor: pointer; }
+.mithril-v4-form input[type='radio'] + label { min-height:44px; pointer-events:auto; }
+.mithril-v4-form button:disabled { opacity: .6; cursor: progress; }
+.mithril-v4-swatch {
+  box-shadow: 0 0 0 1px rgba(101,76,48,.17), 0 3px 7px rgba(101,76,48,.07);
+  transition: box-shadow .25s, scale .25s;
+}
+@media (hover:hover) and (pointer:fine) {
+  .mithril-v4-swatch:hover { scale: 1.08; box-shadow: 0 0 0 2px rgba(128,99,62,.28); }
+}
+@media (max-width:430px) {
+  .vr-oneline { white-space: normal; font-size: 1.2rem; line-height: 1.6; }
+  .mithril-v4-venue img[src*='venue-v2'] { height: auto; width: 100%; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .mithril-v4-swatch, .mithril-v4-form input, .mithril-v4-form select, .mithril-v4-form textarea { transition: none; scale: none; }
+}

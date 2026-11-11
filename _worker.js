@@ -55,7 +55,8 @@ export default {
       if (url.pathname.startsWith("/api/website/")) return await websiteBridge(request, env);
 
       if (url.pathname === "/digital-wedding-invitations") {
-        url.pathname = "/digital-wedding-invitations.html";
+        // The asset binding resolves extensionless HTML URLs. Asking it for
+        // .html redirects back here and creates a self-redirect loop.
         const newReq = new Request(url.toString(), request);
         return env && env.ASSETS && typeof env.ASSETS.fetch === "function"
           ? env.ASSETS.fetch(newReq)
@@ -63,7 +64,7 @@ export default {
       }
 
       if (url.pathname === "/dearly" || url.pathname === "/dearly/") {
-        url.pathname = "/dearly.html";
+        url.pathname = "/dearly";
         const newReq = new Request(url.toString(), request);
         return env && env.ASSETS && typeof env.ASSETS.fetch === "function"
           ? env.ASSETS.fetch(newReq)

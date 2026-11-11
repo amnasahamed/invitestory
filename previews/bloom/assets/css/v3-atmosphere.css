@@ -1,0 +1,24 @@
+/* Bloom: light crossing handmade paper and quiet manuscript margins. */
+html, body { max-width:100%; overflow-x:clip; }
+.page { width:min(100%,30rem); max-width:100%; }
+/* Keep section headings readable even before legacy reveal observers fire. */
+.sec .h2, .sec h2, .sec h2.write { opacity:1!important; transform:none!important; filter:none!important; -webkit-mask-image:none!important; mask-image:none!important; }
+body.go .names .n1 { animation-delay:.1s; animation-duration:.7s; }
+body.go .names .amp { animation-delay:.35s; animation-duration:.5s; }
+body.go .names .n2 { animation-delay:.5s; animation-duration:.7s; }
+body.go .hero-text > .hero-date { animation-delay:1s; }
+body.go .hero-text > .hero-place { animation-delay:1.15s; }
+.page { isolation: isolate; background-image: radial-gradient(ellipse at 10% 20%,rgba(179,191,159,.14),transparent 45%),radial-gradient(ellipse at 95% 70%,rgba(217,160,163,.12),transparent 42%),linear-gradient(rgba(247,242,228,.78),rgba(247,242,228,.78)),url(../images/paper-v2.webp); }
+.page > section, #sections > section { position: relative; }
+.page::before { content:""; position:absolute; z-index:-1; inset:0; pointer-events:none; background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.22) 45%,transparent 68%); background-size:200% 100%; animation:bloom-paper-light 26s ease-in-out infinite alternate; }
+.hero .hang .rs { animation:bloom-margin-breathe 12s ease-in-out infinite alternate; }
+.hero .hang-r .rs { animation-delay:-6s; }
+.btn, .music, .skip { transition:background-color .25s,border-color .25s,box-shadow .3s,translate .3s; }
+.btn:active, .music:active, .skip:active { scale:.97; }
+.btn:focus-visible, .music:focus-visible, .skip:focus-visible, input:focus-visible, textarea:focus-visible { outline:2px solid var(--rose-deep); outline-offset:5px; }
+.v3-section { scroll-margin-top:2rem; }
+.v3-section.v3-entered .rule img { filter:drop-shadow(0 2px 5px rgba(181,71,90,.1)); }
+@media (hover:hover) { .btn:hover { translate:0 -2px; box-shadow:0 9px 24px -15px rgba(63,90,60,.4); } .flora:hover { filter:drop-shadow(0 3px 7px rgba(63,90,60,.12)); } }
+@keyframes bloom-paper-light { from { background-position:0 0; } to { background-position:100% 0; } }
+@keyframes bloom-margin-breathe { from { rotate:-.7deg; } to { rotate:.7deg; } }
+@media(prefers-reduced-motion:reduce) { .page::before,.hero .hang .rs { animation:none; } .btn,.music,.skip { transition:none; } }

@@ -91,12 +91,21 @@ test('local development does not send custom events to the production PostHog pr
 
 test('catalogue result counts follow the same collection, style and search filters as the designs shown', () => {
   const site = website();
-  assert.equal(site.run('getFilteredTemplates().length'), 30);
-  assert.equal(site.run("activeTierFilter = 3; getFilteredTemplates().length"), 8);
+  assert.equal(site.run('getFilteredTemplates().length'), 38);
+  assert.equal(site.run("activeTierFilter = 3; getFilteredTemplates().length"), 12);
   assert.equal(site.run("activeTierFilter = 4; getFilteredTemplates().length"), 4);
   assert.equal(site.run("searchQuery = 'magnolia'; getFilteredTemplates().length"), 1);
   assert.equal(site.run("searchQuery = 'unmatched'; getFilteredTemplates().length"), 0);
   assert.equal(site.run("searchQuery = ''; activeTagFilter = 'traditional'; getFilteredTemplates().length"), 0);
+});
+
+test('new invitation collection is split evenly between Premium and Luxury pricing', () => {
+  const site = website();
+  const pricing = site.run(`JSON.stringify(TEMPLATE_DATABASE.filter(item => item.id >= 40 && item.id <= 47).map(item => [item.id, item.name, item.priceINR]))`);
+  assert.deepEqual(JSON.parse(pricing), [
+    [40, 'Sunehri', 1999], [41, 'Gulistan', 1999], [42, 'Gulabi', 1999], [46, 'Gulnaar', 1999],
+    [43, 'Raat Rani', 2999], [44, 'Aabha', 2999], [45, 'Aranya', 2999], [47, 'Noor Mahal', 2999]
+  ]);
 });
 
 test('Premium and Luxury totals charge only selected extras; Dearly charges neither included extra', () => {
@@ -124,7 +133,7 @@ test('Premium and Luxury totals charge only selected extras; Dearly charges neit
 
 test('discovery defaults to the full catalogue and preserves shared shortlist order', () => {
   const site = website();
-  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 36);
+  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 44);
   site.run('discovery.shared = [35, 1, 999];');
   assert.equal(site.run('JSON.stringify(getDiscoveryDesigns(TEMPLATE_DATABASE).map(item => item.id))'), '[35,1]');
   site.run('discovery.savedOnly = true; previewFavourites.add(21);');
@@ -137,9 +146,9 @@ test('homepage starts with a short mix of collections until the visitor asks for
   const featured = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).map(item => item.tier))');
   assert.deepEqual(JSON.parse(featured), [2, 2, 2, 2, 3, 3, 4, 4]);
   site.run("activeTagFilter = 'royal';");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 36);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 44);
   site.run("activeTagFilter = 'all'; catalogueExpanded = true;");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 36);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 44);
 });
 
 test('hidden designs stay out of browsing but still open from a direct link', () => {
@@ -153,14 +162,14 @@ test('hidden designs stay out of browsing but still open from a direct link', ()
   assert.equal(site.run('visits.some(id => TEMPLATE_DATABASE.find(item => item.id === id).hidden)'), false);
 });
 
-test('preview arrows traverse all 30 listed designs across collections and wrap both ways', () => {
+test('preview arrows traverse all 38 listed designs across collections and wrap both ways', () => {
   const site = website();
   site.run('const visits=[]; openPreview=id=>{visits.push(id);previewState.currentIndex=TEMPLATE_DATABASE.findIndex(item=>item.id===id);};previewState.currentIndex=0;');
-  for (let i=0;i<30;i++) site.run('previewNext()');
-  assert.equal(site.run('new Set(visits).size'), 30);
+  for (let i=0;i<38;i++) site.run('previewNext()');
+  assert.equal(site.run('new Set(visits).size'), 38);
   assert.equal(site.run('previewState.currentIndex'), 0);
   site.run('previewPrev()');
-  assert.equal(site.run('previewState.currentIndex'), 35);
+  assert.equal(site.run('previewState.currentIndex'), 43);
   assert.equal(site.run('TEMPLATE_DATABASE[previewState.currentIndex].tier'), 4);
 });
 

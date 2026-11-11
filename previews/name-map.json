@@ -285,6 +285,38 @@
       "Diya Nair"
     ]
   },
+  "/previews/amber/": {
+    "first": ["Arman", "Arman Cole"],
+    "second": ["Nina", "Nina Wells"]
+  },
+  "/previews/bahaar/": {
+    "first": ["Theo", "Theo Ashford"],
+    "second": ["Mira", "Mira Vale"]
+  },
+  "/previews/bloom/": {
+    "first": ["Milan"],
+    "second": ["Zoe"]
+  },
+  "/previews/exotic/": {
+    "first": ["Leo"],
+    "second": ["Isla"]
+  },
+  "/previews/mithril/": {
+    "first": ["Kian"],
+    "second": ["Aria"]
+  },
+  "/previews/olive/": {
+    "first": ["Rafael"],
+    "second": ["Ava"]
+  },
+  "/previews/ruby/": {
+    "first": ["Julian", "Julian Hayes"],
+    "second": ["Clara", "Clara Rowe"]
+  },
+  "/previews/zareen/": {
+    "first": ["Kai"],
+    "second": ["Elena"]
+  },
   "/dearly/aubergine-magnolia/": {
     "first": [
       "Alex"

@@ -6,11 +6,11 @@ const calls=[];
 const env={ASSETS:{async fetch(request){
  const path=new URL(request.url).pathname;
  calls.push(path);
- const filename=path==='/'?'index.html':path.slice(1);
+ const filename=path==='/'?'index.html':['/dearly','/digital-wedding-invitations'].includes(path)?path.slice(1)+'.html':path.slice(1);
  try{return new Response(readFileSync(new URL(`../${filename}`,import.meta.url),'utf8'),{headers:{'content-type':'text/html'}});}catch{return new Response('Not found',{status:404});}
 }}};
 test('production aliases serve the intended pages through the asset binding',async()=>{
- for(const [path,expected] of [['/dearly','/dearly.html'],['/dearly/','/dearly.html'],['/digital-wedding-invitations','/digital-wedding-invitations.html']]){
+ for(const [path,expected] of [['/dearly','/dearly'],['/dearly/','/dearly'],['/digital-wedding-invitations','/digital-wedding-invitations']]){
   const response=await worker.fetch(new Request(`https://invitestory.in${path}`),env);
   assert.equal(response.status,200);
   assert.equal(calls.at(-1),expected);

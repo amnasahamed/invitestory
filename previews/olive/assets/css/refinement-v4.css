@@ -1,0 +1,158 @@
+/* V4: tactile garden stationery, quiet copy and balanced botanical framing. */
+/* Start the stationery hierarchy promptly after the envelope completes. */
+body.go .hero-text > :nth-child(1) { animation-delay:.1s; }
+body.go .hero-text > :nth-child(2) { animation-delay:.25s; }
+body.go .names span:nth-child(1) { animation-delay:.4s; }
+body.go .names span:nth-child(2) { animation-delay:.55s; }
+body.go .names span:nth-child(3) { animation-delay:.7s; }
+body.go .hero-text > .rule { animation-delay:.85s; }
+body.go .hero-text > :nth-child(5) { animation-delay:1s; }
+body.go .hero-text > :nth-child(6) { animation-delay:1.1s; }
+.olive-v4-form .olive-v3-art::before,
+.closing .olive-v3-art::before,
+.evsec .olive-v3-art::before { display: none; }
+.sec.closing { background-position: center; }
+.sec { padding-block: clamp(3.25rem, 8vw, 4.2rem); }
+.h2 { text-wrap: balance; }
+.inv .body, .p, .ev .note { text-wrap: pretty; }
+.inv-in { max-width: 23rem; }
+.inv .nm { margin-block: 1.25rem; line-height: 1.38; }
+.inv .divider { width: min(80%, 16rem); margin-bottom: 1.5rem; }
+.frame { background: radial-gradient(ellipse at 50% 50%, rgba(255,253,245,.32), transparent 75%); }
+.cd { margin-top: 1.1rem; }
+.cd b { font-size: 2rem; }
+.cd span { display: block; margin-top: .3rem; }
+.sec:has(.cd) .sprig.br { right: -2.4rem; bottom: -3.7rem; width: 6rem; opacity: .78; }
+.sec:has(.cd) .frame { padding-bottom: 3rem; }
+.sec:has(.cd) .olive-v3-art::before { display: none; }
+.arch .h2 { padding-inline: .4rem; line-height: 1.35; }
+.ev .when { color: #e3cda0; font-weight: 600; }
+.arch .btn { color: #fcf4df; border-color: rgba(238,220,181,.56); }
+.ev { padding-block: 1.9rem; }
+.ev h3 { line-height: 1.35; margin-block: .55rem .4rem; }
+.ev .venue { margin-top: .35rem; }
+.ev .note { line-height: 1.65; margin-top: .65rem; }
+.btn { min-height: 44px; line-height: 1.3; }
+.music { width: 44px; height: 44px; }
+.skip { min-height: 40px; }
+.choice label { min-height: 48px; border-radius: .35rem; }
+.fld input[type=text], .fld input[type=number], .fld textarea {
+  border-radius: .3rem .3rem 0 0; padding-inline: .6rem;
+  min-height: 48px; background-color: rgba(255,253,246,.28);
+}
+.form .btn:disabled { opacity: .6; cursor: progress; }
+.closing .mini { width: 5.2rem; margin-bottom: 1.6rem; }
+.closing .line { max-width: 20rem; margin-inline: auto; }
+[data-section="rsvp"], .rsvp-section, #rsvp, .rsvp, .sec.rsvp { display: none !important; }
+
+/* ==========================================================================
+   Olive Celebrations Floral Scroll Flow & Ease Animation
+   ========================================================================== */
+.arch {
+  position: relative;
+}
+
+.timeline-floral-progress {
+  position: absolute;
+  top: 5rem;
+  left: 28px;
+  width: 2px;
+  background: linear-gradient(to bottom, #cfb27a, #f4ecd9 50%, #4c5636);
+  box-shadow: 0 0 10px rgba(207, 178, 122, 0.75), 0 0 3px rgba(244, 236, 217, 0.9);
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 2px;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.timeline-floral-progress.is-active {
+  opacity: 1;
+}
+
+.timeline-floral-cursor {
+  position: absolute;
+  top: 5rem;
+  left: 28px;
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  margin-top: -26px;
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, top, opacity;
+  transition: opacity 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-floral-cursor.is-active {
+  opacity: 1;
+}
+
+.timeline-floral-aura {
+  position: absolute;
+  inset: -12px;
+  background: radial-gradient(circle, rgba(244, 236, 217, 0.95) 0%, rgba(207, 178, 122, 0.42) 46%, rgba(76, 86, 54, 0) 72%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: olive-floral-pulse 2.8s ease-in-out infinite alternate;
+}
+
+@keyframes olive-floral-pulse {
+  0% { transform: scale(0.88); opacity: 0.65; }
+  100% { transform: scale(1.16); opacity: 0.95; }
+}
+
+.timeline-floral-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+.timeline-floral-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 3px 6px rgba(40, 45, 25, 0.45)) drop-shadow(0 0 10px rgba(207, 178, 122, 0.6));
+}
+
+.ev {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+}
+
+.ev.is-bloomed {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.ev.is-bloomed h3 {
+  color: #cfb27a !important;
+  text-shadow: 0 0 12px rgba(207, 178, 122, 0.35);
+}
+
+@media (max-width: 480px) {
+  .timeline-floral-progress,
+  .timeline-floral-cursor {
+    left: 20px;
+  }
+  .timeline-floral-cursor {
+    width: 44px;
+    height: 44px;
+    margin-left: -22px;
+    margin-top: -22px;
+  }
+}
+
+@media (max-width:380px) {
+  .ev .btns { gap: .6rem; }
+  .ev .btn { padding-inline: .85rem; letter-spacing: .1em; }
+  .arch { padding-inline: 1.15rem; }
+}

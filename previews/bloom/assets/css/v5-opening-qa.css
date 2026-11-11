@@ -1,0 +1,3 @@
+/* The movie and poster retain one stable frame throughout entry. */
+.cover-video,.cover.opening .cover-video { animation:none; transform:none; transition:none; }
+#cover.opening #skip { opacity:1; visibility:visible; pointer-events:auto; }

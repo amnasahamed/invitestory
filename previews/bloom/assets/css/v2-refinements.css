@@ -1,0 +1,20 @@
+/* Bloom: botanical manuscript, restrained pigment, generous paper. */
+:root { --ink: #403d2d; --muted: #625b49; --green: #354f36; --rose: #a23e50; }
+body { background-image: linear-gradient(rgba(226,214,190,.6),rgba(226,214,190,.6)), url(../images/paper-v2.webp); }
+.page { background-image: linear-gradient(rgba(247,242,228,.74),rgba(247,242,228,.74)), url(../images/paper-v2.webp); }
+.closing { background-image: url(../images/paper-v2.webp); }
+@media (max-width: 480px) {
+  html, body { background-image: linear-gradient(rgba(247,242,228,.74),rgba(247,242,228,.74)), url(../images/paper-v2.webp); }
+}
+@media (min-aspect-ratio: 3/4) {
+  .cover { background-image: linear-gradient(rgba(226,214,190,.6),rgba(226,214,190,.6)), url(../images/paper-v2.webp); }
+}
+.eyebrow, .hero-place { font-size: .69rem; letter-spacing: .22em; }
+.lead { color: #625b49; }
+.hang { width: calc(var(--col) * .52); }
+.garland { opacity: .86; }
+.hero-text { z-index: 4; }
+@media (max-width: 430px) {
+  .hero-text { padding-inline: 2.7rem; }
+  .names { font-size: clamp(3rem, 14vw, 3.8rem); }
+}

@@ -161,6 +161,46 @@
       "url": "/previews/burgundy-reverie/"
     },
     {
+      "id": 40,
+      "name": "Sunehri",
+      "url": "/previews/amber/"
+    },
+    {
+      "id": 41,
+      "name": "Gulistan",
+      "url": "/previews/bahaar/"
+    },
+    {
+      "id": 42,
+      "name": "Gulabi",
+      "url": "/previews/bloom/"
+    },
+    {
+      "id": 43,
+      "name": "Raat Rani",
+      "url": "/previews/exotic/"
+    },
+    {
+      "id": 44,
+      "name": "Aabha",
+      "url": "/previews/mithril/"
+    },
+    {
+      "id": 45,
+      "name": "Aranya",
+      "url": "/previews/olive/"
+    },
+    {
+      "id": 46,
+      "name": "Gulnaar",
+      "url": "/previews/ruby/"
+    },
+    {
+      "id": 47,
+      "name": "Noor Mahal",
+      "url": "/previews/zareen/"
+    },
+    {
       "id": 35,
       "name": "Magnolia Reverie",
       "url": "/dearly/aubergine-magnolia/?studio-preview=1"

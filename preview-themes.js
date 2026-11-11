@@ -1,4 +1,4 @@
-/* Palettes art-directed against all 36 catalogue covers, not extracted at runtime.
+/* Palettes art-directed against all catalogue covers, not extracted at runtime.
    Order of fields: family, stage, surface, ink, action, decorative highlight. */
 const PreviewThemes = (() => {
   const palettes = {
@@ -37,7 +37,15 @@ const PreviewThemes = (() => {
     36:['botanical','#64351f','#fff4e6','#542d1c','#8b4e2b','#c69a64'],
     37:['botanical','#142c44','#f0f5f8','#253f56','#294e7b','#97b0c4'],
     38:['botanical','#112f2e','#f3f3e8','#23423d','#174b49','#b4af84'],
-    39:['cinematic','#4a0715','#fff5ed','#4b232a','#761f35','#c49a63']
+    39:['cinematic','#4a0715','#fff5ed','#4b232a','#761f35','#c49a63'],
+    40:['botanical','#a87957','#fff8ef','#4b3427','#8a5738','#d6aa75'],
+    41:['botanical','#e8c9c4','#fffaf5','#4d493b','#6c7659','#bd7e89'],
+    42:['illustrated','#d7b17d','#fff7e8','#4d3b2d','#8e4350','#c68670'],
+    43:['cinematic','#071b14','#f8f0e4','#2d382e','#7c1e32','#b98c54'],
+    44:['cinematic','#e7dfd2','#fffaf3','#55443a','#9a6d3c','#c5a672'],
+    45:['botanical','#8a8b68','#fffaf0','#424637','#65704a','#af9360'],
+    46:['cinematic','#30040a','#fff3e8','#4b2727','#7a1320','#c19455'],
+    47:['cinematic','#cbb99d','#fffaf1','#4d4135','#795532','#c5a36b']
   };
   const neutral=['paper','#edf2ef','#ffffff','#173e35','#173e35','#547c6b'];
   const rgb=hex=>hex.slice(1).match(/../g).map(value=>parseInt(value,16));

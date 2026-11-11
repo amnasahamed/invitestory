@@ -1,0 +1,16 @@
+/* Collection signatures stay outside invitation renderers and opening layers. */
+.collection-signature{box-sizing:border-box;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;width:100%;margin:0;padding:42px 24px 38px;background:var(--signature-paper);color:var(--signature-ink);text-align:center;isolation:isolate;}
+.collection-signature__rule{display:block;width:46px;height:1px;background:currentColor;opacity:.35;margin-bottom:3px;}
+.collection-signature__name{display:block;font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:400;line-height:1.25;letter-spacing:.075em;}
+.collection-signature__line{display:block;font-family:Georgia,'Times New Roman',serif;font-size:10px;line-height:1.6;font-weight:400;letter-spacing:.16em;text-transform:uppercase;}
+.collection-signature--wide .collection-signature__name,.collection-signature--velvet .collection-signature__name{font-size:22px;text-transform:uppercase;letter-spacing:.22em;}
+.collection-signature--garden .collection-signature__name{font-family:'Cormorant Garamond',Georgia,serif;font-size:32px;letter-spacing:.045em;}
+.collection-signature--petal .collection-signature__name{font-style:italic;font-size:32px;letter-spacing:.025em;}
+.collection-signature--night .collection-signature__name{font-family:cormorant,Georgia,serif;font-size:30px;letter-spacing:.12em;}
+.collection-signature--pearl .collection-signature__name{font-size:28px;letter-spacing:.23em;}
+.collection-signature--botanical .collection-signature__name{font-size:24px;letter-spacing:.19em;}
+.collection-signature--palace .collection-signature__name{font-family:bodoni,Georgia,serif;font-size:27px;letter-spacing:.065em;}
+@media(max-width:400px){.collection-signature{padding-inline:16px}.collection-signature__line{font-size:9px;letter-spacing:.13em}}
+@media print{.collection-signature{break-inside:avoid}}
+
+.collection-signature--petal{width:min(100%,30rem);margin-inline:auto;}

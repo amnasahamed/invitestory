@@ -1,0 +1,137 @@
+/* Amber — quiet champagne editorial detail, clear useful type. */
+.amber-editorial-section {
+  background: radial-gradient(ellipse at 8% 15%, rgba(202,155,105,.13), transparent 65%), #f8efe1;
+}
+.amber-editorial-track {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  border-radius: 45% 45% 3px 3px / 12% 12% 3px 3px;
+  box-shadow: 0 16px 38px rgba(81,59,45,.15);
+  position: relative;
+}
+.amber-editorial-track::-webkit-scrollbar { display: none; }
+.amber-editorial-slide {
+  position: relative;
+  margin: 0;
+  flex: 0 0 100%;
+  aspect-ratio: 4 / 5;
+  scroll-snap-align: start;
+  background: #6c5039;
+  overflow: hidden;
+}
+.amber-editorial-slide img { width: 100%; height: 100%; object-fit: cover; object-position: 58% center; display: block; }
+.amber-editorial-slide:nth-child(2) img { object-position: 48% center; }
+.amber-editorial-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(38,24,14,.7)); pointer-events: none; }
+.amber-editorial-slide figcaption {
+  position: absolute;
+  z-index: 1;
+  left: 1.5rem;
+  right: 1.5rem;
+  bottom: 1.65rem;
+  color: #fff6e5;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  text-shadow: 0 1px 8px rgba(30,19,11,.4);
+}
+.amber-editorial-slide figcaption span { display: block; font-family: var(--font-body); font-style: normal; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; margin-bottom: .55rem; }
+.amber-editorial-dots { display: flex; justify-content: center; gap: .15rem; margin-top: 1rem; }
+.amber-editorial-dots button { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.amber-editorial-dots button::after { content: ''; display: block; width: 7px; height: 7px; border: 1px solid #95613c; border-radius: 50%; transition: background .2s, transform .2s; }
+.amber-editorial-dots button[aria-pressed='true']::after { background: #95613c; transform: scale(1.2); }
+@media (min-width: 900px) {
+  .amber-editorial-track { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; overflow: visible; box-shadow: none; border-radius: 0; }
+  .amber-editorial-slide { border-radius: 48% 48% 3px 3px / 16% 16% 3px 3px; box-shadow: 0 12px 30px rgba(81,59,45,.12); }
+  .amber-editorial-slide:nth-child(2) { transform: translateY(1.5rem); }
+  .amber-editorial-dots { display: none; }
+}
+.countdown-section .section-heading h2 {
+  max-width: min(100%, 15ch);
+  margin-inline: auto;
+  font-size: clamp(2.25rem, 9.5vw, 3.8rem);
+  line-height: 1.12;
+  white-space: normal;
+  text-wrap: balance;
+}
+.gift-copy { width: min(100%, 42rem); min-width: 0; }
+.gift-copy p { width: 100%; overflow-wrap: normal; }
+/* Alternate full florals with a quieter transition to give the page rhythm. */
+.floral-divider:has(+ .countdown-section) img,
+.floral-divider:has(+ .dress-section) img,
+.floral-divider:has(+ .rsvp-section) img { display: none; }
+.floral-divider:has(+ .countdown-section)::after,
+.floral-divider:has(+ .dress-section)::after,
+.floral-divider:has(+ .rsvp-section)::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 8rem;
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(160,116,58,.35), transparent);
+}
+.floral-divider + .countdown-section,
+.floral-divider + .dress-section,
+.floral-divider + .rsvp-section { padding-top: 5.5rem; }
+@media (min-width: 700px) {
+  .floral-divider + .countdown-section,
+  .floral-divider + .dress-section,
+  .floral-divider + .rsvp-section { padding-top: 7.5rem; }
+}
+.timeline time { color: #805634; font-size: .72rem; letter-spacing: .08em; }
+.timeline p { color: #765d49; font-size: 1.02rem; line-height: 1.55; }
+.timeline h3 { line-height: 1.15; margin-bottom: .45rem; }
+.timeline article::before { box-shadow: 0 0 0 5px rgba(184,138,69,.08); }
+.venue-section { background: linear-gradient(130deg, #f7ead8, #fcf7ed 52%, #efe0c9); }
+.venue-card { overflow: hidden; background: #513b2d; }
+.venue-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(rgba(50,33,21,.64), rgba(50,33,21,.88)), url('../../media/gallery/01-v2.webp') center 40% / cover;
+  z-index: 0;
+}
+.venue-card::before { z-index: 1; }
+.venue-card .eyebrow { color: #e8c896; }
+.venue-card p { color: #f2e5d3; font-size: 1.12rem; }
+.venue-divider { position: relative; z-index: 1; }
+.venue-map-button { font-size: .68rem; letter-spacing: .12em; background: rgba(255,243,220,.06); }
+.dress-copy p { color: #634b3b; font-size: 1.12rem; max-width: 39rem; margin-inline: auto; }
+.palette { gap: .65rem; padding-block: .6rem; }
+.palette i {
+  width: clamp(2.75rem, 11vw, 3.75rem);
+  height: clamp(4rem, 16vw, 5.25rem);
+  margin-left: 0;
+  border-radius: 50% 50% 3px 3px / 30% 30% 3px 3px;
+  border: 4px solid #f8efe1;
+  box-shadow: 0 4px 15px rgba(90,64,53,.1), 0 0 0 1px rgba(149,97,60,.22);
+}
+.events-section { background: radial-gradient(ellipse at top, #fff9ee, #f4e7d5); }
+.event-list article { background-image: radial-gradient(ellipse at 50% 0, rgba(255,255,255,.36), transparent 70%); }
+.event-list p, .event-date { font-size: .72rem; letter-spacing: .1em; }
+.event-list small { font-size: 1.03rem; }
+.event-btn, .calendar-cta { min-height: 46px; font-size: .66rem; letter-spacing: .1em; }
+.event-date { min-height: 44px; }
+.gift-copy p { max-width: 34rem; margin-inline: auto; }
+.gift-bloom { opacity: .28; }
+.closing-arch { background: linear-gradient(rgba(255,250,240,.58), rgba(255,250,240,.16)); }
+.closing-arch small { color: #805634; opacity: 1; font-size: .65rem; }
+.rsvp-form label > span { font-size: .72rem; letter-spacing: .08em; }
+.rsvp-form input, .rsvp-form select, .rsvp-form textarea { min-height: 48px; }
+.cal-menu { border-radius: 4px; padding: 10px; box-shadow: 0 16px 40px rgba(58,38,22,.2); }
+.cal-menu a, .cal-menu button { min-height: 44px; border-radius: 2px; transition: background .18s ease, padding-left .18s ease; }
+.cal-menu a:active, .cal-menu button:active { background: #eadbc5; }
+.gallery-dots { gap: 2px; }
+.gallery-dots button { min-width: 32px; min-height: 32px; padding: 11px; }
+@media (hover: none) {
+  .event-list article:hover, .palette i:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cal-menu a, .cal-menu button { transition: none; }
+}
