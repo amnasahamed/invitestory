@@ -5,3 +5,7 @@
 # Sample invitations should not compete with the main catalogue in search.
 /previews/*
   X-Robots-Tag: noindex
+
+# Versioned process-film assets are safe to cache across visits.
+/assets/video/*
+  Cache-Control: public, max-age=31536000, immutable

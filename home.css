@@ -137,6 +137,21 @@
 .studio-home .how-step-desc { max-width: 390px; font: 400 13px/1.65 var(--font-body); color: #5c6a64; margin: 0; }
 .studio-home .how-step-arrow { display: none; }
 .studio-home .how-steps-tagline { margin: 28px 0 0 62px; padding: 20px 0 0; text-align: left; border-top: 1px solid #d5e0da; color: #5c6a64; font-size: 12px; line-height: 1.6; }
+.studio-home .how-film { grid-column: 1 / -1; width: min(100%, 960px); min-width: 0; margin: 0 auto; }
+.how-film video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; background: #f4ede0; border: 1px solid #d5e0da; border-radius: 12px; }
+.how-film figcaption { margin-top: 16px; font: 400 14px/1.6 var(--font-body); color: #44564f; text-align: center; }
+.how-film figcaption span { display: block; color: #5c6a64; }
+.how-film-transcript { margin-top: 14px; font: 400 14px/1.7 var(--font-body); color: #44564f; text-align: left; }
+.how-film-transcript summary { min-height: 44px; padding: 10px 0; cursor: pointer; }
+.how-film-transcript p { margin: 12px 0; }
+.how-film-transcript a { color: #173e35; text-decoration: underline; text-underline-offset: 3px; }
+.how-film-credit { padding-top: 12px; border-top: 1px solid #d5e0da; }
+@media (max-width: 767px) {
+  .studio-home .how-it-works .studio-process-layout { grid-template-columns: 1fr; }
+  .studio-home .how-film { grid-row: 2; max-width: 360px; }
+  .studio-home .how-it-works .studio-process-copy { grid-row: 3; }
+  .how-film video { aspect-ratio: 9 / 16; }
+}
 /* Evidence: quotes you can read and conversations you can inspect. */
 .studio-home .social-proof { padding: 80px 0; background: #edf2ef; }
 .studio-home .home-proof-strip { padding: 22px 0; background: #fff; border-top: 1px solid #e3ebe6; border-bottom: 1px solid #e3ebe6; }

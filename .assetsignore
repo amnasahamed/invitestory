@@ -44,3 +44,4 @@ wrangler.jsonc
 /middleware.js
 /api/
 /_worker.js
+/video-assets.js

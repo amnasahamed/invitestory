@@ -1,6 +1,7 @@
 import { websiteBridge } from "./website-bridge.js";
 import { previewLeadBridge } from "./preview-lead.js";
 import designMeta from "./design-meta.js";
+import { serveVideoAsset, videoAssetSizes } from "./video-assets.js";
 
 function injectOpenGraphTags(html, meta) {
   if (!meta) return html;
@@ -36,6 +37,9 @@ export default {
   async fetch(request, env) {
     try {
       const url = new URL(request.url);
+      if (videoAssetSizes[url.pathname] && env?.ASSETS) {
+        return await serveVideoAsset(request, env.ASSETS, videoAssetSizes[url.pathname]);
+      }
 
       // Upgrade existing worker-first page routes before serving HTML or personalization.
       // Keep API semantics and deployment routing unchanged.

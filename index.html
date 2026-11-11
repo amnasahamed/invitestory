@@ -240,7 +240,7 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="styles.css?v=20261111-mobile-fixes-1">
   <link rel="stylesheet" href="sales.css?v=20261111-dearly-assets-1" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="home.css?v=20261029-uiux-2">
+  <link rel="stylesheet" href="home.css?v=20261111-how-it-works-1">
   <link rel="stylesheet" href="archive-mood.css?v=20261106-1">
   <link rel="stylesheet" href="interactions.css?v=20261009-shortlist-clarity-1" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="preview-themes.css?v=20261010-persistent-controls-1" media="print" onload="this.media='all'">
@@ -432,9 +432,9 @@
   <!-- ═══════════════════════════════════════════════════════════════ -->
   <!-- SECTION 3: HOW IT WORKS — Rewritten, customer-oriented copy   -->
   <!-- ═══════════════════════════════════════════════════════════════ -->
-  <section class="how-it-works" id="how-it-works">
+  <section class="how-it-works" id="how-it-works" aria-labelledby="how-it-works-heading">
     <div class="container studio-process-layout">
-      <div class="atelier-service-intro"><p class="atelier-service-label">A design service, from start to send.</p><h2 class="atelier-service-title">Chosen by you.<br><em>Made for you.</em></h2><p>You have a wedding to plan. We’ll take care of the invitation.</p></div>
+      <div class="atelier-service-intro"><p class="atelier-service-label">How it works</p><h2 class="atelier-service-title" id="how-it-works-heading">Chosen by you.<br><em>Made for you.</em></h2><p>You have a wedding to plan. We’ll take care of the invitation.</p></div>
       <div class="studio-process-copy">
       <div class="how-it-works-header">
         <p class="how-section-title">From your first choice to their first look.</p>
@@ -444,25 +444,49 @@
         <div class="how-steps">
           <div class="how-step">
             <div class="how-step-icon" aria-hidden="true">1</div>
-            <h3 class="how-step-title">Choose &amp; book</h3>
-            <p class="how-step-desc">Try the live invitation. Choose your design and review your one-time price before paying.</p>
+            <h3 class="how-step-title">Choose your design</h3>
+            <p class="how-step-desc">Try the live invitations and pick your favourite. Book on the website or talk to us on WhatsApp.</p>
           </div>
           <div class="how-step-arrow">→</div>
           <div class="how-step">
             <div class="how-step-icon" aria-hidden="true">2</div>
-            <h3 class="how-step-title">Send us your details</h3>
-            <p class="how-step-desc">Send your names, photos, dates and venues on WhatsApp. Our team personalizes the design for you.</p>
+            <h3 class="how-step-title">Send your details &amp; pay</h3>
+            <p class="how-step-desc">Share your names, photos, dates and venues on WhatsApp. Pay on the website or through the payment link we send you.</p>
           </div>
           <div class="how-step-arrow">→</div>
           <div class="how-step">
             <div class="how-step-icon" aria-hidden="true">3</div>
             <h3 class="how-step-title">Review. Then share.</h3>
-            <p class="how-step-desc">We send your first draft on the timing shown at checkout. Approve it, then share your link.</p>
+            <p class="how-step-desc">Our team personalizes your invitation and sends the draft on WhatsApp. Review it, approve it, then share your link with family and friends.</p>
           </div>
         </div>
         <p class="how-steps-tagline">Free revision requests for 24 hours after your first draft.</p>
       </div>
       </div>
+      <figure class="how-film">
+        <video id="how-it-works-video" controls playsinline preload="none" width="1920" height="1080"
+          poster="assets/video/how-it-works-horizontal-20261111.jpg"
+          aria-label="How InviteStory works: choose a design, send your details, pay and share your invitation"
+          aria-describedby="how-film-caption">
+          <source src="assets/video/how-it-works-vertical-20261111.mp4" type="video/mp4" media="(max-width: 767px)"
+            data-poster="assets/video/how-it-works-vertical-20261111.jpg">
+          <source src="assets/video/how-it-works-horizontal-20261111.mp4" type="video/mp4"
+            data-poster="assets/video/how-it-works-horizontal-20261111.jpg">
+          Your browser cannot play this video. <a href="assets/video/how-it-works-horizontal-20261111.mp4">Open the video</a> or read the transcript below.
+        </video>
+        <figcaption id="how-film-caption">From your first choice to their first glimpse. <span>45 seconds · English captions</span></figcaption>
+        <details class="how-film-transcript">
+          <summary>Read the video transcript</summary>
+          <p>Your wedding deserves a beautiful first impression. Start with a design you love.</p>
+          <p>Send us your names, wedding date and venue on WhatsApp. We take it from there.</p>
+          <p>Complete your payment through the payment link.</p>
+          <p>Our team brings your invitation to life, with your details beautifully in place.</p>
+          <p>When it is ready, your invitation link arrives on WhatsApp, with a beautiful preview and your names.</p>
+          <p>Share it with your family. One tap, and your celebration unfolds. A little moment of wonder, before the big day.</p>
+          <p>InviteStory. Your story. Their first glimpse.</p>
+          <p class="how-film-credit">Music arranged using <a href="https://tonejs.github.io/audio/salamander/" target="_blank" rel="noopener noreferrer">Salamander Grand Piano</a> by Alexander Holm, licensed under <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener noreferrer">CC BY 3.0</a>.</p>
+        </details>
+      </figure>
     </div>
   </section>
 
@@ -1430,6 +1454,7 @@
   <script src="sales.js?v=20261111-dearly-assets-1"></script>
   <script src="home.js?v=20261029-uiux-1"></script>
   <script src="archive-hero.js?v=20261111-mobile-performance-1"></script>
+  <script src="how-it-works.js?v=20261111-how-it-works-1"></script>
   <script src="interactions.js?v=20261111-dearly-assets-1"></script>
 <script src="country-codes.js?v=20261110-all-countries-1"></script>
 <script src="preview-names.js?v=20261111-country-labels-1"></script>

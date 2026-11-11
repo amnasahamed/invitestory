@@ -24,6 +24,7 @@
     "run_worker_first": [
       "/api/website/*",
       "/api/preview-lead",
+      "/assets/video/*.mp4",
       "/",
       "/index.html",
       "/digital-wedding-invitations",
