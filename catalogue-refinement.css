@@ -15,8 +15,10 @@
 .catalogue-results-bar button[hidden] { display: none; }
 .studio-home.browse-home #templates-grid { align-items: stretch; }
 .studio-home.browse-home #templates-grid .template-card { background: transparent; border: 0; box-shadow: none; }
-.studio-home.browse-home #templates-grid .template-card-media { aspect-ratio: 9 / 16; border-radius: 10px; background: #e8eee7; overflow: hidden; }
-.studio-home.browse-home #templates-grid .template-card-img { width: 100%; height: 100%; object-fit: contain; }
+.studio-home.browse-home #templates-grid .template-card-media { position: relative; aspect-ratio: 9 / 16; border-radius: 10px; background: #e8eee7; overflow: hidden; }
+/* Keep intrinsic image dimensions out of card sizing; every design fills the same frame. */
+.studio-home.browse-home #templates-grid .template-card-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
+.studio-home.browse-home #templates-grid .template-card:hover { transform: none; }
 .studio-home.browse-home #templates-grid .template-preview-hint { inset: auto 8px 8px; padding: 9px 10px; border: 1px solid #ffffffa8; border-radius: 5px; background: #fffffff0; font: 500 11px/1.3 "Inter Tight",sans-serif; color: #315e4d; }
 .studio-home.browse-home #templates-grid .template-card-title { font: 500 21px/1.15 Newsreader,Georgia,serif !important; color: #203e34; min-height: 0; margin: 0 0 5px; }
 .studio-home.browse-home #templates-grid .template-card-style { font: 400 12px/1.5 "Inter Tight",sans-serif; color: #667d70; min-height: 36px; margin: 0 0 10px; }
