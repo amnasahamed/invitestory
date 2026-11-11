@@ -16,8 +16,9 @@
   card.className = 'preview-gallery-card';
   const full = byId('preview-fullscreen-btn');
   full.querySelector('span').textContent = 'Watch full preview';
-  card.append(byId('preview-modal-iframe-wrap'), full);
-  stage.append(card);
+  card.append(byId('preview-modal-iframe-wrap'));
+  // Keep the link outside the scaled artwork so short screens cannot clip it.
+  stage.append(card, full);
   const peeks = [-1, 1].map(direction => {
     const peek = document.createElement('button');
     peek.type = 'button';

@@ -32,7 +32,7 @@
 #preview-modal.preview-gallery #phone-screen-viewport { transform:scale(var(--preview-scale,1)) !important; }
 #preview-modal.preview-gallery #phone-screen-viewport iframe[hidden] { display:none !important; }
 #preview-modal.preview-gallery #preview-modal-iframe-wrap :is(.phone-hardware-btn,.phone-antenna,.phone-notch-container,.phone-glare-layer,.phone-glare-edge) { display:none; }
-#preview-modal.preview-gallery #preview-fullscreen-btn { position:absolute; inset:var(--space-3) auto auto 50%; z-index:20; display:flex; align-items:center; justify-content:center; gap:6px; width:max-content; min-height:32px; padding:7px 12px; transform:translateX(-50%); border:1px solid var(--color-border-dark); border-radius:30px; background:var(--paper-surface); color:var(--ink-primary); box-shadow:0 2px 8px #173e3526; text-decoration:none; font:500 11px/1.2 var(--font-body); }
+#preview-modal.preview-gallery #preview-fullscreen-btn { position:absolute; inset:var(--space-3) auto auto 50%; z-index:20; display:flex; align-items:center; justify-content:center; gap:6px; width:max-content; max-width:calc(100% - 32px); min-height:44px; padding:7px 12px; transform:translateX(-50%); border:1px solid var(--color-border-dark); border-radius:30px; background:var(--paper-surface); color:var(--ink-primary); box-shadow:0 2px 8px #173e3526; text-decoration:none; font:500 11px/1.2 var(--font-body); }
 #preview-modal.preview-gallery #preview-fullscreen-btn svg { width:14px; height:14px; }
 #preview-modal.preview-gallery #preview-fullscreen-btn { transition:none; }
 #preview-modal.preview-gallery .preview-browse-controls { position:static; display:none; flex:none; width:auto; padding:0 var(--space-4); margin:0; border:0; gap:0; pointer-events:auto; }
@@ -89,4 +89,14 @@
 @media(max-height:650px) {
   #preview-modal.preview-gallery .preview-gallery-header { min-height:58px; padding-block:4px; }
   .studio-home #preview-modal.preview-gallery .preview-modal-toolbar { padding-block:8px; gap:6px; }
+}
+/* Use the available height for artwork when a phone is turned sideways. */
+@media(orientation:landscape) and (max-height:500px) and (min-width:560px) {
+  #preview-modal.preview-gallery .preview-gallery-shell { display:grid; grid-template-columns:minmax(0,1fr) 260px; grid-template-rows:58px minmax(28px,1fr) auto; width:min(100%,960px); }
+  #preview-modal.preview-gallery .preview-gallery-header { grid-column:2; grid-row:1; }
+  #preview-modal.preview-gallery .preview-gallery-stage { grid-column:1; grid-row:1 / 4; margin:8px 0 8px 8px; }
+  #preview-modal.preview-gallery .preview-browse-controls { grid-column:2; grid-row:2; align-items:center; }
+  #preview-modal.preview-gallery .preview-modal-toolbar { grid-column:2; grid-row:3; }
+  #preview-modal.preview-gallery .preview-gallery-actions { grid-template-columns:minmax(0,1fr); }
+  #preview-modal.preview-gallery #preview-fullscreen-btn { top:auto; bottom:8px; }
 }

@@ -163,6 +163,9 @@
       gap: 20px;
     }
     .nav-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
       color: var(--muted);
       text-decoration: none;
       font-size: 0.92rem;
@@ -174,6 +177,7 @@
     }
     .btn-wa-header {
       display: inline-flex;
+      min-height: 44px;
       align-items: center;
       gap: 8px;
       background: #25d366;
@@ -611,6 +615,15 @@
         height: 52px;
       }
     }
+    @media (max-width: 600px) {
+      .header-inner { gap: 8px; }
+      .logo-link { flex: 0 0 auto; }
+      .logo-img { height: 28px; }
+      .header-nav { min-width: 0; gap: 8px; }
+      .header-nav .nav-link { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; font-size: 12px; white-space: nowrap; }
+      .btn-wa-header { flex: 0 0 44px; width: 44px; height: 44px; justify-content: center; padding: 0; }
+      .btn-wa-header span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    }
   </style>
   <!-- PostHog Analytics -->
   <script>
@@ -628,14 +641,14 @@
   <header class="dearly-header">
     <div class="container header-inner">
       <a href="https://invitestory.in/" class="logo-link">
-        <img src="assets/logo.png" alt="InviteStory Logo" class="logo-img">
+        <img src="/assets/logo-header.webp" width="256" height="85" alt="InviteStory Logo" class="logo-img">
       </a>
       <nav class="header-nav">
         <a href="https://invitestory.in/#catalogue-header" class="nav-link">All Designs</a>
         <a href="https://invitestory.in/digital-wedding-invitations" class="nav-link">Studio</a>
-        <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20The%20Dearly%20Collection%20%28%E2%82%B94999%20%2F%20%2475%29%21" target="_blank" rel="noopener" class="btn-wa-header">
+        <a href="https://wa.me/918281583882?text=Hi%20InviteStory%2C%20I%27m%20interested%20in%20The%20Dearly%20Collection%20%28%E2%82%B94999%20%2F%20%2475%29%21" target="_blank" rel="noopener" class="btn-wa-header" aria-label="Chat on WhatsApp">
           <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg>
-          Chat on WhatsApp
+          <span>Chat on WhatsApp</span>
         </a>
       </nav>
     </div>
