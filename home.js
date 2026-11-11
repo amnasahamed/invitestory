@@ -23,6 +23,16 @@ function setupHomeCollectionCards(container) {
 
 function setupHomeShowroom() {
   if (!document.body.classList.contains('atelier-home')) return;
+  const floatingWhatsApp = document.getElementById('floating-whatsapp');
+  if (floatingWhatsApp) {
+    let promptSeen = false;
+    try { promptSeen = sessionStorage.getItem('invitestory-whatsapp-prompt-seen') === '1'; } catch (_) {}
+    if (promptSeen) floatingWhatsApp.classList.add('is-collapsed');
+    else window.setTimeout(() => {
+      floatingWhatsApp.classList.add('is-collapsed');
+      try { sessionStorage.setItem('invitestory-whatsapp-prompt-seen', '1'); } catch (_) {}
+    }, 6500);
+  }
   const currencyLayout = window.matchMedia('(max-width: 760px)');
   const setCurrencyLabels = () => {
     for (const code of ['INR', 'USD']) {
