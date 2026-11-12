@@ -15,7 +15,8 @@ function website() {
     getElementById: id => elements.get(id) ?? null,
     querySelector: selector => elements.get(selector) ?? null, querySelectorAll: selector => Array.isArray(elements.get(selector)) ? elements.get(selector) : [], addEventListener() {},
   };
-  const window = { location, dataLayer: [], posthog: { capture: (...args) => calls.push(['posthog', ...args]) }, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
+  const window = { location, dataLayer: [], posthog: { capture: (...args) => calls.push(['posthog', ...args]) }, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, fbq: (...args) => calls.push(['meta', ...args]) };
+  window.gtag = (...args) => { calls.push(['ga', ...args]); window.dataLayer.push(args); };
   const context = vm.createContext({ document, window, location, history: window.history, navigator: { userAgent: 'test', maxTouchPoints: 0 }, localStorage: store, sessionStorage: store, URL, URLSearchParams, console, setTimeout, clearTimeout, queueMicrotask });
   vm.runInContext(readFileSync(new URL('../paid-order.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../scripts.js', import.meta.url), 'utf8'), context);
@@ -84,7 +85,9 @@ test('a missing or failed PostHog SDK never prevents enquiries or other conversi
   site.run("window.posthog = undefined; askTemplateOnWhatsApp(1); window.posthog = {capture(){throw new Error('Unavailable')}}; askTemplateOnWhatsApp(35);");
   assert.equal(site.calls.filter(call => call[0] === 'open').length, 2);
   assert.equal(site.calls.filter(call => call[0] === 'meta' && call[2] === 'Contact').length, 2);
-  assert.equal(site.calls.filter(call => call[0] === 'ga' && call[2] === 'whatsapp_click').length, 2);
+  assert.equal(site.calls.filter(call => call[0] === 'ga' && call[2] === 'whatsapp_cta_clicked').length, 2);
+  assert.equal(site.run("window.dataLayer.filter(entry=>entry.event==='whatsapp_click').length"), 2);
+  assert.equal(site.run("window.dataLayer.filter(entry=>entry[0]==='event'&&entry[1]==='whatsapp_click').length"), 0);
 });
 
 test('local development does not send custom events to the production PostHog project', () => {
@@ -384,13 +387,17 @@ test('delegation retains generic and inactive bespoke links and excludes floatin
   assert.deepEqual(site.calls.filter(c=>c[0]==='posthog').map(c=>c[2].cta_location), ['page_link','hero']);
 });
 
-test('explicit payment summary clicks have fixed metadata even without a receipt', () => {
+test('post-payment WhatsApp launches retain fulfilment analytics without enquiry conversions', () => {
   const site = website();
+  site.run("showPaymentSuccess=()=>{}; InvitePaidOrder={message:()=> 'Order details'}; handlePaidSuccess({paymentId:'pay_fixture'});");
   site.run('sendDetailsOnWhatsApp()');
-  const event = site.calls.find(c=>c[0]==='posthog');
-  assert.equal(event[1], 'whatsapp_cta_clicked');
-  assert.equal(JSON.stringify(event[2]), JSON.stringify({source_event:'whatsapp_click',cta_location:'payment_success',destination:'whatsapp'}));
-  assert.equal(site.calls.filter(c=>c[0]==='open').length,1);
+  const events = site.calls.filter(c=>c[0]==='posthog');
+  assert.deepEqual(events.map(event=>event[1]), ['post_payment_whatsapp','post_payment_whatsapp']);
+  assert.deepEqual(events.map(event=>event[2].cta_location), ['payment_success_auto','payment_success']);
+  assert.equal(site.calls.filter(c=>c[0]==='ga'&&c[2]==='post_payment_whatsapp').length,2);
+  assert.equal(site.calls.filter(c=>c[0]==='meta'&&c[2]==='Contact').length,0);
+  assert.equal(site.run("window.dataLayer.filter(entry=>entry.event==='whatsapp_click'||(entry[0]==='event'&&entry[1]==='whatsapp_click')).length"),0);
+  assert.equal(site.calls.filter(c=>c[0]==='open').length,2);
 });
 
 test('server quote mismatch or rejection never opens payment or clears retry identity',async()=>{
@@ -516,10 +523,30 @@ test('rapid repeated clicks on WhatsApp or Checkout are debounced to prevent dup
   const contactCalls = site.calls.filter(call => call[0] === 'meta' && call[2] === 'Contact');
   assert.equal(contactCalls.length, 1);
   assert.equal(site.run("window.dataLayer.filter(event=>event.event==='whatsapp_click').length"), 2);
+  assert.equal(site.run("window.dataLayer.filter(entry=>entry[0]==='event'&&entry[1]==='whatsapp_click').length"), 0);
 
   site.run("trackConversionEvent('begin_checkout', { content_ids: ['1'], value: 1999 }); trackConversionEvent('begin_checkout', { content_ids: ['1'], value: 1999 });");
   const checkoutCalls = site.calls.filter(call => call[0] === 'meta' && call[2] === 'InitiateCheckout');
   assert.equal(checkoutCalls.length, 1);
+});
+
+test('header, footer, floating, package, design and dynamic WhatsApp launches each emit one enquiry event', () => {
+  const cases = [
+    ["header", "({id:'',dataset:{},closest:selector=>selector==='header'?{}:null,getAttribute:()=>null,innerText:'Header WhatsApp'})"],
+    ["footer", "({id:'',dataset:{},closest:selector=>selector==='footer'?{}:null,getAttribute:()=>null,innerText:'Footer WhatsApp'})"],
+    ["dynamic", "({id:'',dataset:{ctaLocation:'toast_help'},closest:()=>null,getAttribute:()=>null,innerText:'Dynamic WhatsApp'})"]
+  ];
+  for (const [, linkSource] of cases) {
+    const site = website();
+    site.run(`const link=${linkSource}; trackWhatsAppLinkClick({target:{closest:()=>link}})`);
+    assert.equal(site.run("window.dataLayer.filter(entry=>entry.event==='whatsapp_click').length"),1);
+    assert.equal(site.run("window.dataLayer.filter(entry=>entry[0]==='event'&&entry[1]==='whatsapp_click').length"),0);
+  }
+  for (const action of ['trackConversionEvent("whatsapp_click",{cta_location:"floating_button"})','askPackageOnWhatsApp(2)','askTemplateOnWhatsApp(1)']) {
+    const site = website();site.run(action);
+    assert.equal(site.run("window.dataLayer.filter(entry=>entry.event==='whatsapp_click').length"),1,action);
+    assert.equal(site.run("window.dataLayer.filter(entry=>entry[0]==='event'&&entry[1]==='whatsapp_click').length"),0,action);
+  }
 });
 
 test('verified INR payments emit one purchase event while pending, failed and repeated callbacks emit none', () => {

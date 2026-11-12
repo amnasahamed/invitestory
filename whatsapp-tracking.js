@@ -17,14 +17,17 @@
       if (['localhost', '127.0.0.1', '::1', '[::1]'].includes(window.location.hostname)) return;
       const page = pages[window.location.pathname];
       if (!page) return;
-      const placement = link.id === 'ty-wa-btn' ? 'order_summary'
+      const isPostPayment = link.id === 'ty-wa-btn';
+      const placement = isPostPayment ? 'order_summary'
         : link.closest('header') ? 'header'
         : link.closest('footer') ? 'footer'
         : link.classList.contains('floating-wa') ? 'floating_button' : 'page_link';
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'whatsapp_click' });
-      window.posthog?.capture('whatsapp_cta_clicked', {
-        source_event: 'whatsapp_click', destination: 'whatsapp',
+      if (!isPostPayment) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ event: 'whatsapp_click' });
+      }
+      window.posthog?.capture(isPostPayment ? 'post_payment_whatsapp' : 'whatsapp_cta_clicked', {
+        source_event: isPostPayment ? 'post_payment_whatsapp' : 'whatsapp_click', destination: 'whatsapp',
         cta_location: `${page}_${placement}`
       });
     } catch (_) {

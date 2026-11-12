@@ -19,6 +19,7 @@ test('website code contains no direct Google Ads conversion call or legacy Ads c
   const source = [...htmlFiles.map(read), read('scripts.js')].join('\n');
   assert.doesNotMatch(source, /GOOGLE_ADS_(?:ID|CONVERSION_LABEL|PURCHASE_LABEL|WHATSAPP_LABEL)/);
   assert.doesNotMatch(source, /gtag\s*\(\s*["']event["']\s*,\s*["']conversion["']/);
+  assert.doesNotMatch(source, /gtag\s*\(\s*["']event["']\s*,\s*["']whatsapp_click["']/);
 });
 
 test('conversion data-layer events contain only the approved fields', () => {

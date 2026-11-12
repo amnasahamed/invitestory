@@ -106,6 +106,17 @@ function pushWhatsAppClickEvent() {
   pushDataLayerEvent({ event: "whatsapp_click" });
 }
 
+function trackPostPaymentWhatsAppAction(ctaLocation) {
+  const params = { cta_location: ctaLocation };
+  trackPostHogEvent("post_payment_whatsapp", params);
+  try {
+    // Keep fulfilment analytics separate from the pre-sales whatsapp_click conversion.
+    window.gtag?.("event", "post_payment_whatsapp", params);
+  } catch (_) {
+    // Analytics must never interrupt the customer's fulfilment flow.
+  }
+}
+
 function isRapidMetaDuplicate(key, windowMs = 500) {
   if (!key) return false;
   const now = Date.now();
@@ -170,7 +181,10 @@ function trackConversionEvent(eventName, params = {}) {
 
     // 1. Google Analytics 4 (GA4) Standard & Custom Events
     if (typeof window.gtag === "function") {
-      window.gtag("event", eventName, {
+      // The explicit dataLayer object above is the single GTM conversion event.
+      // Sending the same WhatsApp event through gtag would create a duplicate custom event.
+      const gaEventName = eventName === "whatsapp_click" ? "whatsapp_cta_clicked" : eventName;
+      window.gtag("event", gaEventName, {
         ...params,
         ...attr,
         currency: eventCurrency,
@@ -1913,7 +1927,7 @@ function handlePaidSuccess(details) {
   window.__lastPayment = receipt;
   showPaymentSuccess(receipt);
   const waMsg = InvitePaidOrder.message(receipt);
-  trackConversionEvent("whatsapp_click", { cta_location: "payment_success_auto" });
+  trackPostPaymentWhatsAppAction("payment_success_auto");
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
 }
 
@@ -1959,7 +1973,7 @@ function closePaymentSuccess() {
 
 /** Primary button inside the success panel — opens WhatsApp with the paid prefill. */
 function sendDetailsOnWhatsApp() {
-  trackConversionEvent("whatsapp_click", { cta_location: "payment_success" });
+  trackPostPaymentWhatsAppAction("payment_success");
   const d = window.__lastPayment;
   if (!d) {
     window.open("https://wa.me/918281583882?text=" + encodeURIComponent("Hi InviteStory! I just paid on the website — here are my wedding details:"), "_blank");

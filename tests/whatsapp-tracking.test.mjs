@@ -11,13 +11,20 @@ function setup(pathname, hostname='invitestory.in') {
   return {events,window,link,click:()=>listener({target:{closest:()=>link}})};
 }
 test('standalone page aliases capture only fixed metadata',()=>{
-  for(const path of ['/dearly','/dearly/','/dearly.html','/blog/','/blog/index.html','/privacy-policy.html','/terms.html','/refund-and-editing-policy.html','/thank-you.html']) {
+  for(const path of ['/dearly','/dearly/','/dearly.html','/blog/','/blog/index.html','/privacy-policy.html','/terms.html','/refund-and-editing-policy.html']) {
     const s=setup(path);s.click();assert.equal(s.events.length,1,path);
     assert.equal(s.events[0][0],'whatsapp_cta_clicked');
     assert.equal(JSON.stringify(s.window.dataLayer),'[{"event":"whatsapp_click"}]');
     assert.deepEqual(Object.keys(s.events[0][1]).sort(),['cta_location','destination','source_event']);
     assert.doesNotMatch(JSON.stringify([s.events,s.window.dataLayer]),/PRIVATE|123/);
   }
+});
+test('thank-you order summary is fulfilment analytics, not a pre-sales enquiry conversion',()=>{
+  const s=setup('/thank-you.html');s.link.id='ty-wa-btn';s.click();
+  assert.equal(s.window.dataLayer.length,0);
+  assert.equal(s.events.length,1);
+  assert.equal(s.events[0][0],'post_payment_whatsapp');
+  assert.equal(s.events[0][1].source_event,'post_payment_whatsapp');
 });
 test('standalone tracking excludes unrelated destinations, local hosts and unsupported pages, and tolerates SDK failures',()=>{
   const s=setup('/dearly/');s.link.href='https://example.com/?wa.me';s.click();assert.equal(s.events.length,0);assert.equal(s.window.dataLayer.length,0);
