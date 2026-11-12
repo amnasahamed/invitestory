@@ -21,7 +21,7 @@
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
-  <script src="paid-order.js?v=20261111-dearly-assets-1"></script>
+  <script src="paid-order.js?v=20261112-verified-conversions-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -180,113 +180,8 @@
       var msg = incompatibleReader ? 'Hello InviteStory, please confirm the purchased delivery promise for payment ' + pid + '. My receipt needs refreshing.' : InvitePaidOrder.message(details);
       var waBtn = document.getElementById("ty-wa-btn");
       waBtn.href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
-
-      // Track secondary conversion: whatsapp_click
-      waBtn.addEventListener("click", function () {
-        if (typeof gtag === "function") {
-          gtag("event", "whatsapp_click", {
-            cta_location: "thank_you_page",
-            package_name: pkg,
-            payment_id: pid,
-            utm_source: utmSource,
-            utm_campaign: utmCampaign,
-            utm_term: utmTerm,
-            gclid: gclid
-          });
-        }
-      });
-
-      // Primary conversion: purchase with deduplication by payment_id and order_id
-      var hasPaymentRef = (pid && pid !== "—") || Boolean(orderId);
-      if (hasPaymentRef) {
-        var storageKey = "tracked_purchase_" + (pid && pid !== "—" ? pid : orderId);
-        var resolvedOrderId = orderId || (pid && pid !== "—" && pid.startsWith("order_") ? pid : "");
-        var metaOrderId = resolvedOrderId || (pid && pid !== "—" ? pid : "");
-        var metaStorageKey = "tracked_meta_purchase_order:" + metaOrderId;
-
-        var alreadyTracked = false;
-        try {
-          alreadyTracked = Boolean(sessionStorage.getItem(storageKey) || sessionStorage.getItem(metaStorageKey));
-        } catch (_) {}
-
-        if (!alreadyTracked) {
-          try {
-            sessionStorage.setItem(storageKey, "1");
-            sessionStorage.setItem(metaStorageKey, "1");
-            if (pid && pid !== "—") sessionStorage.setItem("tracked_purchase_" + pid, "1");
-            if (orderId) sessionStorage.setItem("tracked_purchase_" + orderId, "1");
-          } catch (_) {}
-
-          // Parse numeric amount
-          var numericAmount = 1999;
-          var numMatch = amountStr.match(/[\d,.]+/);
-          if (numMatch) {
-            numericAmount = parseFloat(numMatch[0].replace(/,/g, "")) || 1999;
-          }
-          var currency = amountStr.indexOf("$") !== -1 ? "USD" : "INR";
-
-          // 1. Google Analytics 4 purchase event with full keyword & campaign attribution
-          if (typeof gtag === "function") {
-            var gaPayload = {
-              transaction_id: pid !== "—" ? pid : orderId,
-              value: numericAmount,
-              currency: currency,
-              items: [{
-                item_id: pkg,
-                item_name: pkg + " - Digital Wedding Invitation",
-                item_category: "Digital Wedding Invitation",
-                price: numericAmount,
-                quantity: 1
-              }]
-            };
-            if (utmSource) gaPayload.source = utmSource;
-            if (utmMedium) gaPayload.medium = utmMedium;
-            if (utmCampaign) gaPayload.campaign = utmCampaign;
-            if (utmTerm) gaPayload.term = utmTerm;
-            if (utmContent) gaPayload.content = utmContent;
-            if (gclid) gaPayload.gclid = gclid;
-            if (gbraid) gaPayload.gbraid = gbraid;
-            if (wbraid) gaPayload.wbraid = wbraid;
-
-            gtag("event", "purchase", gaPayload);
-
-            // Primary Google Ads conversion
-            var targetSendTo = window.GOOGLE_ADS_ID && window.GOOGLE_ADS_CONVERSION_LABEL
-              ? window.GOOGLE_ADS_ID + "/" + window.GOOGLE_ADS_CONVERSION_LABEL
-              : window.GOOGLE_ADS_ID || "";
-            if (targetSendTo) {
-              var adsData = {
-                send_to: targetSendTo,
-                value: numericAmount,
-                currency: currency,
-                transaction_id: pid !== "—" ? pid : orderId
-              };
-              if (gclid) adsData.gclid = gclid;
-              gtag("event", "conversion", adsData);
-            }
-          }
-
-          // 2. Meta Pixel Purchase (deduplicated with CAPI via stable eventID: order:{order_id})
-          if (typeof fbq === "function") {
-            var newPixelId = window.META_PIXEL_ID || "972146648686360";
-            var oldPixelId = window.META_PIXEL_MIGRATION_ID || "877558961848422"; // Temporary migration Pixel
-            var purchasePayload = {
-              value: numericAmount,
-              currency: currency,
-              content_name: pkg,
-              content_type: "product"
-            };
-            var eventOptions = metaOrderId ? { eventID: "order:" + metaOrderId } : undefined;
-
-            fbq("trackSingle", newPixelId, "Purchase", purchasePayload, eventOptions);
-            if (oldPixelId) {
-              fbq("trackSingle", oldPixelId, "Purchase", purchasePayload, eventOptions);
-            }
-          }
-        }
-      }
     })();
   </script>
-  <script src="/whatsapp-tracking.js" defer></script>
+  <script src="/whatsapp-tracking.js?v=20261112-verified-conversions-1" defer></script>
 </body>
 </html>

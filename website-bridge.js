@@ -1,5 +1,5 @@
 // Same-origin gateway. Credentials and provider calls stay on the server.
-const allowed = new Set(['config','capture','restore','activity','checkout']);
+const allowed = new Set(['config','capture','restore','activity','checkout','payment-status']);
 const json=(body,status=200)=>new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
 async function limitedBody(request) {
  if(Number(request.headers.get('Content-Length'))>8192)return null;

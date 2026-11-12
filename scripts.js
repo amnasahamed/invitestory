@@ -90,6 +90,21 @@ window.META_PIXEL_ID = window.META_PIXEL_ID || "972146648686360";
 window.META_PIXEL_MIGRATION_ID = window.META_PIXEL_MIGRATION_ID || "877558961848422"; // Temporary migration Pixel (to be retired)
 const recordedMetaPurchases = new Set();
 const recentMetaEvents = new Map();
+const verifiedPaymentStoragePrefix = "invitestory.verifiedPayment:";
+const pendingPaymentVerificationKey = "invitestory.pendingPaymentVerification";
+
+function pushDataLayerEvent(payload) {
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push(payload);
+  } catch (_) {
+    // Measurement must never interrupt navigation or checkout.
+  }
+}
+
+function pushWhatsAppClickEvent() {
+  pushDataLayerEvent({ event: "whatsapp_click" });
+}
 
 function isRapidMetaDuplicate(key, windowMs = 500) {
   if (!key) return false;
@@ -133,7 +148,7 @@ function trackPostHogEvent(eventName, params = {}) {
     if (eventName === "purchase") {
       if (!params.transaction_id || recordedPostHogPayments.has(params.transaction_id)) return;
       properties.transaction_id = params.transaction_id;
-      properties.payment_confirmation = "browser_callback";
+      properties.payment_confirmation = "server_verified";
     }
     window.posthog.capture(names[eventName] || eventName, properties);
     if (eventName === "purchase") recordedPostHogPayments.add(params.transaction_id);
@@ -143,6 +158,7 @@ function trackPostHogEvent(eventName, params = {}) {
 }
 
 function trackConversionEvent(eventName, params = {}) {
+  if (eventName === "whatsapp_click") pushWhatsAppClickEvent();
   trackPostHogEvent(eventName, params);
   try {
     const contentIds = (params.content_ids || (params.item_id ? [params.item_id] : [])).map(String);
@@ -162,32 +178,6 @@ function trackConversionEvent(eventName, params = {}) {
         ...(contentIds.length ? { items: contentIds.map(id => ({ item_id: id, item_name: params.item_name || params.content_name })) } : {})
       });
 
-      // Google Ads Conversion Optimization:
-      // Primary optimization: Only completed 'purchase' events count as primary conversion
-      if (eventName === "purchase" || eventName === "Purchase") {
-        const purchaseLabel = window.GOOGLE_ADS_PURCHASE_LABEL || window.GOOGLE_ADS_CONVERSION_LABEL || "";
-        const targetSendTo = window.GOOGLE_ADS_ID && purchaseLabel
-          ? `${window.GOOGLE_ADS_ID}/${purchaseLabel}`
-          : window.GOOGLE_ADS_ID || "";
-
-        const adsParams = {
-          value: eventValue || 1999,
-          currency: eventCurrency,
-          transaction_id: params.transaction_id || ""
-        };
-        if (attr.gclid) adsParams.gclid = attr.gclid;
-        if (targetSendTo) adsParams.send_to = targetSendTo;
-        window.gtag("event", "conversion", adsParams);
-      } else if (eventName === "whatsapp_click" && window.GOOGLE_ADS_WHATSAPP_LABEL) {
-        // Optional secondary conversion only if specifically configured
-        window.gtag("event", "conversion", {
-          send_to: `${window.GOOGLE_ADS_ID}/${window.GOOGLE_ADS_WHATSAPP_LABEL}`,
-          value: 0,
-          currency: eventCurrency,
-          event_category: "Engagement",
-          event_label: params.cta_location || "WhatsApp Enquiry"
-        });
-      }
     }
 
     // 2. Meta Pixel (fbq) Mapping (Dual-Pixel: New Dataset + Temporary Migration Dataset)
@@ -1846,6 +1836,68 @@ function askTemplateOnWhatsApp(id) {
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(msg)}`, "_blank");
 }
 
+function trackVerifiedPayment(verified, details = {}) {
+  if (!verified || verified.verified !== true || !Number.isSafeInteger(verified.amount) || verified.amount <= 0) return false;
+  if (!/^order_[a-zA-Z0-9]+$/.test(verified.transactionId || "")) return false;
+  if (!/^pay_[a-zA-Z0-9]+$/.test(verified.paymentId || "")) return false;
+  const storageKey = verifiedPaymentStoragePrefix + verified.transactionId;
+  try {
+    if (localStorage.getItem(storageKey)) return false;
+    localStorage.setItem(storageKey, "1");
+  } catch (_) {
+    if (recordedPostHogPayments.has(verified.transactionId)) return false;
+  }
+  const value = verified.amount / 100;
+  if (verified.currency === "INR") {
+    pushDataLayerEvent({
+      event: "payment_success",
+      payment_value: value,
+      transaction_id: verified.transactionId
+    });
+  }
+  trackConversionEvent("purchase", {
+    content_name: details.packageName || "Digital Wedding Invitation",
+    content_ids: Array.isArray(details.contentIds) ? details.contentIds.map(String) : [],
+    package_tier: details.packageTier,
+    value,
+    currency: verified.currency,
+    transaction_id: verified.transactionId,
+    order_id: verified.orderId,
+    payment_id: verified.paymentId
+  });
+  return true;
+}
+
+async function verifyAndTrackPayment(pending) {
+  if (!pending || typeof window.InviteWebsite?.paymentStatus !== "function") return false;
+  try { sessionStorage.setItem(pendingPaymentVerificationKey, JSON.stringify(pending)); } catch (_) {}
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    try {
+      const verified = await window.InviteWebsite.paymentStatus(pending.clientKey, {
+        paymentId: pending.paymentId,
+        orderId: pending.orderId
+      });
+      if (verified?.verified === true) {
+        trackVerifiedPayment(verified, pending);
+        window.InviteWebsite.paid(pending.clientKey);
+        try { sessionStorage.removeItem(pendingPaymentVerificationKey); } catch (_) {}
+        return true;
+      }
+    } catch (_) {
+      // A delayed webhook or temporary bridge failure stays pending and never becomes a conversion.
+    }
+    if (attempt < 19) await new Promise(resolve => setTimeout(resolve, 1000));
+  }
+  return false;
+}
+
+function resumePendingPaymentVerification() {
+  try {
+    const pending = JSON.parse(sessionStorage.getItem(pendingPaymentVerificationKey) || "null");
+    if (pending) void verifyAndTrackPayment(pending);
+  } catch (_) {}
+}
+
 /**
  * Shared post-payment handler: stores receipt, shows the in-page success
  * panel (works even if the user never opens WhatsApp), and auto-opens
@@ -1861,6 +1913,7 @@ function handlePaidSuccess(details) {
   window.__lastPayment = receipt;
   showPaymentSuccess(receipt);
   const waMsg = InvitePaidOrder.message(receipt);
+  trackConversionEvent("whatsapp_click", { cta_location: "payment_success_auto" });
   window.open(`https://wa.me/918281583882?text=${encodeURIComponent(waMsg)}`, "_blank");
 }
 
@@ -1906,7 +1959,7 @@ function closePaymentSuccess() {
 
 /** Primary button inside the success panel — opens WhatsApp with the paid prefill. */
 function sendDetailsOnWhatsApp() {
-  trackPostHogEvent("whatsapp_click", { cta_location: "payment_success" });
+  trackConversionEvent("whatsapp_click", { cta_location: "payment_success" });
   const d = window.__lastPayment;
   if (!d) {
     window.open("https://wa.me/918281583882?text=" + encodeURIComponent("Hi InviteStory! I just paid on the website — here are my wedding details:"), "_blank");
@@ -2280,18 +2333,8 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
     },
     handler: function (response) {
       window.__lastPaymentOk = true;
-      window.InviteWebsite?.paid(checkoutClientKey);
       const paidOrderId = response.razorpay_order_id || options.order_id || "";
-      trackMetaEvent("Purchase", {
-        content_name: name,
-        content_ids: selectedContentIds,
-        content_category: "Digital Wedding Invitation",
-        value: totalVal,
-        currency: currencyCode,
-        transaction_id: response.razorpay_payment_id,
-        order_id: paidOrderId
-      });
-      handlePaidSuccess({
+      const paidDetails = {
         packageName: packageName(tier),
         amountText: isINR ? `₹${totalVal.toLocaleString("en-IN")}` : `$${totalVal}`,
         totalVal,
@@ -2301,6 +2344,15 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
         designName: paidDesignName,
         addons: paidAddons, express: Boolean(expressChecked),
         ...(v2 ? {checkoutVersion:2,deliverySnapshot} : {})
+      };
+      handlePaidSuccess(paidDetails);
+      void verifyAndTrackPayment({
+        clientKey: checkoutClientKey,
+        paymentId: response.razorpay_payment_id,
+        orderId: paidOrderId,
+        packageName: paidDetails.packageName,
+        packageTier: tier,
+        contentIds: selectedContentIds
       });
     }
   };
@@ -4719,6 +4771,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTrustMarquee();
   setupResponsivePlaceholder();
   setupHeaderCtaHandlers();
+  resumePendingPaymentVerification();
   if (typeof IntersectionObserver !== "undefined") {
     const sections = new IntersectionObserver(entries => {
       entries.forEach(entry => {

@@ -21,6 +21,8 @@
         : link.closest('header') ? 'header'
         : link.closest('footer') ? 'footer'
         : link.classList.contains('floating-wa') ? 'floating_button' : 'page_link';
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'whatsapp_click' });
       window.posthog?.capture('whatsapp_cta_clicked', {
         source_event: 'whatsapp_click', destination: 'whatsapp',
         cta_location: `${page}_${placement}`

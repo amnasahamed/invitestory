@@ -16,7 +16,7 @@ const storageKey='invitestory.checkoutRetry';
 const selection={designId:1,tier:2,currency:'INR',express:false,emailRsvp:false};
 const uuid=/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/;
 function fixture({storage=new Map(),secure=true,noUUID=false,noCrypto=false,configStatus=200,config={enabled:true,checkoutEnabled:true,siteKey:'fixture-key'}}={}) {
- const state={storage,requests:[],verification:0,generated:0,mode:'',rejectCheckout:false,rejectVerification:false,hold:null,checkoutResult:null,checkoutStatus:200};
+ const state={storage,requests:[],verification:0,generated:0,mode:'',rejectCheckout:false,rejectVerification:false,hold:null,checkoutResult:null,checkoutStatus:200,paymentResult:{verified:false},paymentStatus:200};
  const crypto=noCrypto?undefined:{
   ...(noUUID?{}:{randomUUID(){state.generated++;return `00000000-0000-4000-8000-${String(state.generated).padStart(12,'0')}`;}}),
   getRandomValues(bytes){state.generated++;bytes.fill(state.generated);return bytes;}
@@ -28,6 +28,7 @@ function fixture({storage=new Map(),secure=true,noUUID=false,noCrypto=false,conf
   fetch:async(url,options)=>{
    state.requests.push({url,body:options.body?JSON.parse(options.body):undefined});
    if(url==='/api/website/config')return Response.json(config,{status:configStatus});
+   if(url==='/api/website/payment-status')return Response.json(state.paymentResult,{status:state.paymentStatus});
    assert.equal(url,'/api/website/checkout');
    if(state.hold)await state.hold;
    if(state.rejectCheckout)throw new TypeError('Fixture uncertain response');
@@ -41,6 +42,17 @@ test('native UUID is generated once and the checkout request/response contract i
  assert.equal(f.generated,1);assert.equal(a.clientKey,b.clientKey);assert.match(a.clientKey,uuid);
  assert.equal(a.orderId,'fixture-order');assert.equal(a.amount,199900);assert.equal(a.currency,'INR');
  assert.deepEqual(f.requests[1].body,{...selection,clientKey:a.clientKey,turnstileToken:'fixture-only'});
+});
+test('payment status sends only stable checkout references and validates them before the request',async()=>{
+ const f=fixture(),clientKey='00000000-0000-4000-8000-000000000009';
+ f.paymentResult={verified:true,amount:199900,currency:'INR',transactionId:'order_fixture123',orderId:'order_fixture123',paymentId:'pay_fixture123'};
+ const result=await f.api.paymentStatus(clientKey,{orderId:'order_fixture123',paymentId:'pay_fixture123'});
+ assert.equal(result.verified,true);assert.equal(result.amount,199900);
+ assert.deepEqual(f.requests.at(-1),{url:'/api/website/payment-status',body:{clientKey,paymentId:'pay_fixture123',orderId:'order_fixture123'}});
+ const before=f.requests.length;
+ await assert.rejects(f.api.paymentStatus(clientKey,{orderId:'bad',paymentId:'pay_fixture123'}),/Invalid payment reference/);
+ await assert.rejects(f.api.paymentStatus(clientKey,{orderId:'order_fixture123',paymentId:'bad'}),/Invalid payment reference/);
+ assert.equal(f.requests.length,before);
 });
 test('secure browser without randomUUID uses cryptographic bytes with UUID v4 bits',async()=>{
  const f=fixture({noUUID:true}),result=await f.api.checkout(selection);

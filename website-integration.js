@@ -162,6 +162,12 @@
    validateSelection(selection);
    return submitCheckout({...selection,token:token||undefined});
   },
+  async paymentStatus(clientKey,{paymentId,orderId}){
+   if(!uuidPattern.test(clientKey)||!/^pay_[a-zA-Z0-9]+$/.test(paymentId||'')||!/^order_[a-zA-Z0-9]+$/.test(orderId||''))throw new Error('Invalid payment reference.');
+   await ready;
+   if(!configuration.checkoutEnabled||configuration.unavailable)throw new Error('Payment verification is temporarily unavailable.');
+   return api('payment-status',{clientKey,paymentId,orderId});
+  },
   paid(clientKey){
    if(!uuidPattern.test(clientKey))return;
    try{

@@ -15,7 +15,7 @@ function website() {
     getElementById: id => elements.get(id) ?? null,
     querySelector: selector => elements.get(selector) ?? null, querySelectorAll: selector => Array.isArray(elements.get(selector)) ? elements.get(selector) : [], addEventListener() {},
   };
-  const window = { location, posthog: { capture: (...args) => calls.push(['posthog', ...args]) }, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
+  const window = { location, dataLayer: [], posthog: { capture: (...args) => calls.push(['posthog', ...args]) }, open: (...args) => calls.push(['open', ...args]), matchMedia: () => ({ matches: false }), history: { replaceState() {} }, gtag: (...args) => calls.push(['ga', ...args]), fbq: (...args) => calls.push(['meta', ...args]) };
   const context = vm.createContext({ document, window, location, history: window.history, navigator: { userAgent: 'test', maxTouchPoints: 0 }, localStorage: store, sessionStorage: store, URL, URLSearchParams, console, setTimeout, clearTimeout, queueMicrotask });
   vm.runInContext(readFileSync(new URL('../paid-order.js', import.meta.url), 'utf8'), context);
   vm.runInContext(readFileSync(new URL('../scripts.js', import.meta.url), 'utf8'), context);
@@ -27,19 +27,23 @@ function website() {
 test('concurrent Pay presses open one checkout and payment cleanup uses the captured attempt ID',async()=>{
  const site=website();
  site.run(`window.opens=0; window.checkouts=0;
-  window.InviteWebsite={deliveryV2Enabled:()=>true,checkout(){window.checkouts++;return new Promise(resolve=>window.resolveCheckout=resolve);},paid(key){window.paidKey=key;}};
+  window.InviteWebsite={deliveryV2Enabled:()=>true,checkout(){window.checkouts++;return new Promise(resolve=>window.resolveCheckout=resolve);},async paymentStatus(key,refs){return {verified:true,amount:199900,currency:'INR',transactionId:refs.orderId,orderId:refs.orderId,paymentId:refs.paymentId};},paid(key){window.paidKey=key;}};
   var Razorpay=class {constructor(options){window.checkoutOptions=options;}on(){}open(){window.opens++;}};
   handlePaidSuccess=()=>{};orderDrawerState.tier=2;orderDrawerState.total=1999;
  `);
  const pending=site.run('proceedFromOrderDrawerToCheckout()');
  await site.run('proceedFromOrderDrawerToCheckout()');
  assert.equal(site.run('window.checkouts'),1);
- site.run("window.resolveCheckout({clientKey:'00000000-0000-4000-8000-000000000009',orderId:'fixture-order',keyId:'fixture-key',amount:199900,currency:'INR',checkoutVersion:2,deliverySpeed:'standard_48h',deliverySnapshot:{speed:'standard_48h',firstDraftHours:48,surcharge:0,currency:'INR',startsAfter:'payment_and_complete_details'}})");
+ site.run("window.resolveCheckout({clientKey:'00000000-0000-4000-8000-000000000009',orderId:'order_fixture123',keyId:'fixture-key',amount:199900,currency:'INR',checkoutVersion:2,deliverySpeed:'standard_48h',deliverySnapshot:{speed:'standard_48h',firstDraftHours:48,surcharge:0,currency:'INR',startsAfter:'payment_and_complete_details'}})");
  await pending;assert.equal(site.run('window.opens'),1);
  assert.equal(site.run('window.checkoutOptions.amount'),199900);
- assert.equal(site.run('window.checkoutOptions.order_id'),'fixture-order');
- site.run("window.checkoutOptions.handler({razorpay_payment_id:'fixture-payment'})");
+ assert.equal(site.run('window.checkoutOptions.order_id'),'order_fixture123');
+ site.run("window.checkoutOptions.handler({razorpay_payment_id:'pay_fixture123'})");
+ await new Promise(setImmediate);
  assert.equal(site.run('window.paidKey'),'00000000-0000-4000-8000-000000000009');
+ assert.equal(site.run("window.dataLayer.filter(event=>event.event==='payment_success').length"),1);
+ assert.equal(site.run("window.dataLayer.find(event=>event.event==='payment_success').payment_value"),1999);
+ assert.equal(site.run("window.dataLayer.find(event=>event.event==='payment_success').transaction_id"),'order_fixture123');
 });
 
 test('checkout failure releases the Pay guard for a deliberate retry without opening the SDK',async()=>{
@@ -71,7 +75,7 @@ test('PostHog separates WhatsApp intent from checkout and deduplicates browser p
   site.run("trackConversionEvent('purchase', {value:4999}); trackConversionEvent('purchase', {content_ids:['35'], transaction_id:'payment_test', value:4999, currency:'INR'}); trackConversionEvent('purchase', {transaction_id:'payment_test', value:4999});");
   const payments = site.calls.filter(call => call[0] === 'posthog' && call[1] === 'payment_succeeded');
   assert.equal(payments.length, 1);
-  assert.equal(payments[0][2].payment_confirmation, 'browser_callback');
+  assert.equal(payments[0][2].payment_confirmation, 'server_verified');
   assert.equal(site.calls.some(call => call[0] === 'posthog' && call[1] === 'order_completed'), false);
 });
 
@@ -511,10 +515,23 @@ test('rapid repeated clicks on WhatsApp or Checkout are debounced to prevent dup
   site.run("trackConversionEvent('whatsapp_click'); trackConversionEvent('whatsapp_click');");
   const contactCalls = site.calls.filter(call => call[0] === 'meta' && call[2] === 'Contact');
   assert.equal(contactCalls.length, 1);
+  assert.equal(site.run("window.dataLayer.filter(event=>event.event==='whatsapp_click').length"), 2);
 
   site.run("trackConversionEvent('begin_checkout', { content_ids: ['1'], value: 1999 }); trackConversionEvent('begin_checkout', { content_ids: ['1'], value: 1999 });");
   const checkoutCalls = site.calls.filter(call => call[0] === 'meta' && call[2] === 'InitiateCheckout');
   assert.equal(checkoutCalls.length, 1);
+});
+
+test('verified INR payments emit one purchase event while pending, failed and repeated callbacks emit none', () => {
+  const site = website();
+  const verified = "{verified:true,amount:249900,currency:'INR',transactionId:'order_verified123',orderId:'order_verified123',paymentId:'pay_verified123'}";
+  assert.equal(site.run("trackVerifiedPayment({verified:false,amount:249900,currency:'INR',transactionId:'order_failed123',orderId:'order_failed123',paymentId:'pay_failed123'})"), false);
+  assert.equal(site.run(`trackVerifiedPayment(${verified},{packageName:'Premium',contentIds:['21']})`), true);
+  assert.equal(site.run(`trackVerifiedPayment(${verified},{packageName:'Premium',contentIds:['21']})`), false);
+  const events = JSON.parse(site.run("JSON.stringify(window.dataLayer.filter(event=>event.event==='payment_success'))"));
+  assert.deepEqual(events,[{event:'payment_success',payment_value:2499,transaction_id:'order_verified123'}]);
+  assert.equal(site.calls.filter(call=>call[0]==='posthog'&&call[1]==='payment_succeeded').length,1);
+  assert.equal(site.calls.filter(call=>call[0]==='meta'&&call[3]==='Purchase').length,2);
 });
 
 test('trackMetaEvent alias correctly formats Lead, Contact, and ViewContent', () => {
