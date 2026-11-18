@@ -489,32 +489,24 @@ test('old integration resolved secure capability preserves legacy checkout, but 
  }
 });
 
-test('dual Meta Pixel sends Purchase via trackSingle to both new dataset and migration pixel with order:order_id eventID', () => {
+test('Meta Purchase goes only to the business-owned Pixel 972146648686360 with an order:order_id eventID', () => {
   const site = website();
   assert.equal(site.run('window.META_PIXEL_ID'), '972146648686360');
-  assert.equal(site.run('window.META_PIXEL_MIGRATION_ID'), '877558961848422');
+  assert.equal(site.run('typeof window.META_PIXEL_MIGRATION_ID'), 'undefined');
 
   site.run("trackConversionEvent('purchase', { order_id: 'order_test_999', transaction_id: 'pay_test_999', value: 1999, currency: 'INR' });");
 
   const purchaseCalls = site.calls.filter(call => call[0] === 'meta' && call[1] === 'trackSingle' && call[3] === 'Purchase');
-  assert.equal(purchaseCalls.length, 2);
-
-  // First call to new business-owned dataset
+  assert.equal(purchaseCalls.length, 1);
   assert.equal(purchaseCalls[0][2], '972146648686360');
   assert.equal(purchaseCalls[0][4].value, 1999);
   assert.equal(purchaseCalls[0][4].currency, 'INR');
   assert.equal(purchaseCalls[0][5]?.eventID, 'order:order_test_999');
 
-  // Second call to temporary migration pixel
-  assert.equal(purchaseCalls[1][2], '877558961848422');
-  assert.equal(purchaseCalls[1][4].value, 1999);
-  assert.equal(purchaseCalls[1][4].currency, 'INR');
-  assert.equal(purchaseCalls[1][5]?.eventID, 'order:order_test_999');
-
   // Repeating the same purchase must be deduplicated
   site.run("trackConversionEvent('purchase', { order_id: 'order_test_999', transaction_id: 'pay_test_999', value: 1999, currency: 'INR' });");
   const purchaseCallsAfterRepeat = site.calls.filter(call => call[0] === 'meta' && call[1] === 'trackSingle' && call[3] === 'Purchase');
-  assert.equal(purchaseCallsAfterRepeat.length, 2);
+  assert.equal(purchaseCallsAfterRepeat.length, 1);
 });
 
 test('rapid repeated clicks on WhatsApp or Checkout are debounced to prevent duplicate Meta events', () => {
@@ -558,7 +550,7 @@ test('verified INR payments emit one purchase event while pending, failed and re
   const events = JSON.parse(site.run("JSON.stringify(window.dataLayer.filter(event=>event.event==='payment_success'))"));
   assert.deepEqual(events,[{event:'payment_success',payment_value:2499,transaction_id:'order_verified123'}]);
   assert.equal(site.calls.filter(call=>call[0]==='posthog'&&call[1]==='payment_succeeded').length,1);
-  assert.equal(site.calls.filter(call=>call[0]==='meta'&&call[3]==='Purchase').length,2);
+  assert.equal(site.calls.filter(call=>call[0]==='meta'&&call[3]==='Purchase').length,1);
 });
 
 test('trackMetaEvent alias correctly formats Lead, Contact, and ViewContent', () => {

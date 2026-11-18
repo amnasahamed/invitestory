@@ -21,7 +21,7 @@
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JS52597LF1"></script>
-  <script src="paid-order.js?v=20261118-fast-checkout-1"></script>
+  <script src="paid-order.js?v=20261118-single-pixel-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -33,8 +33,6 @@
   <script>
     // Primary business-owned Meta Pixel / Dataset ID
     window.META_PIXEL_ID = window.META_PIXEL_ID || '972146648686360';
-    // Temporary migration Meta Pixel ID (to be retired after new dataset transition)
-    window.META_PIXEL_MIGRATION_ID = window.META_PIXEL_MIGRATION_ID || '877558961848422';
 
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -45,17 +43,15 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
-    // Confirm pixels initialize only once, including during SPA navigation
+    // Confirm the pixel initializes only once, including during SPA navigation
     if (!window.__metaPixelsInitialized) {
       fbq('init', window.META_PIXEL_ID);
-      fbq('init', window.META_PIXEL_MIGRATION_ID);
       fbq('track', 'PageView');
       window.__metaPixelsInitialized = true;
     }
   </script>
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=972146648686360&ev=PageView&noscript=1" alt="" />
-    <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=877558961848422&ev=PageView&noscript=1" alt="" />
   </noscript>
   <!-- End Meta Pixel Code -->
 
@@ -182,6 +178,6 @@
       waBtn.href = "https://wa.me/918281583882?text=" + encodeURIComponent(msg);
     })();
   </script>
-  <script src="/whatsapp-tracking.js?v=20261118-fast-checkout-1" defer></script>
+  <script src="/whatsapp-tracking.js?v=20261118-single-pixel-1" defer></script>
 </body>
 </html>

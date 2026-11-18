@@ -11,19 +11,22 @@
  }
  const ready=api('config').then(c=>{configuration=c;return c;}).catch(error=>{if(error.status>=500)configuration={enabled:false,checkoutEnabled:true,unavailable:true};return configuration;});
  function verification(action) {
+  // Measures how often the Cloudflare check still interrupts people: checkout_verification_shown / _failed.
+  const kind=action==='capture'?'preview_save':'checkout';
+  const track=(event,reason)=>{try{if(typeof trackPostHogEvent==='function')trackPostHogEvent(`${kind}_${event}`,{reason});}catch{}};
   if(!configuration.siteKey)return Promise.reject(new Error('WhatsApp saving is unavailable'));
   if(!turnstileReady)turnstileReady=new Promise((resolve,reject)=>{
    if(window.turnstile){resolve();return;}
-   const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.onload=resolve;s.onerror=()=>reject(new Error('Verification could not load'));document.head.append(s);
+   const s=document.createElement('script');s.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';s.onload=resolve;s.onerror=()=>{turnstileReady=null;track('verification_failed','load_failed');reject(new Error('Verification could not load'));};document.head.append(s);
   });
   return turnstileReady.then(()=>new Promise((resolve,reject)=>{
    const box=document.createElement('div');box.className='website-verification';document.body.append(box);
-   const timer=setTimeout(()=>finish(new Error('Verification timed out. Please try again.')),120000);
+   const timer=setTimeout(()=>{track('verification_failed','timeout');finish(new Error('Verification timed out. Please try again.'));},120000);
    let widget;
    function finish(error,value){clearTimeout(timer);if(widget!==undefined)window.turnstile.remove(widget);box.remove();error?reject(error):resolve(value);}
    // Invisible unless Cloudflare needs the visitor to interact; only then show a labelled panel.
-   widget=window.turnstile.render(box,{sitekey:configuration.siteKey,action,appearance:'interaction-only',callback:value=>finish(null,value),'error-callback':()=>finish(new Error('Verification failed')),'expired-callback':()=>finish(new Error('Verification expired')),
-    'before-interactive-callback':()=>{box.classList?.add('is-interactive');box.setAttribute('aria-label','Quick security check before payment');}});
+   widget=window.turnstile.render(box,{sitekey:configuration.siteKey,action,appearance:'interaction-only',callback:value=>finish(null,value),'error-callback':()=>{track('verification_failed','error');finish(new Error('Verification failed'));},'expired-callback':()=>{track('verification_failed','expired');finish(new Error('Verification expired'));},
+    'before-interactive-callback':()=>{track('verification_shown','interactive');box.classList?.add('is-interactive');box.setAttribute('aria-label','Quick security check before payment');}});
   }));
  }
  // Checkout verification is solved in the background when the booking drawer opens, so tapping

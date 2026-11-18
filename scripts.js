@@ -85,9 +85,8 @@ getUtmCampaignParams();
  * - view_package: Package card impression / interaction
  */
 const recordedPostHogPayments = new Set();
-// Meta Pixel dataset configuration: new business-owned Pixel and temporary migration Pixel
+// Meta Pixel dataset: the single business-owned Pixel used everywhere.
 window.META_PIXEL_ID = window.META_PIXEL_ID || "972146648686360";
-window.META_PIXEL_MIGRATION_ID = window.META_PIXEL_MIGRATION_ID || "877558961848422"; // Temporary migration Pixel (to be retired)
 const recordedMetaPurchases = new Set();
 const recentMetaEvents = new Map();
 const verifiedPaymentStoragePrefix = "invitestory.verifiedPayment:";
@@ -194,10 +193,9 @@ function trackConversionEvent(eventName, params = {}) {
 
     }
 
-    // 2. Meta Pixel (fbq) Mapping (Dual-Pixel: New Dataset + Temporary Migration Dataset)
+    // 2. Meta Pixel (fbq) Mapping (single business-owned dataset)
     if (typeof window.fbq === "function") {
-      const newPixelId = window.META_PIXEL_ID || "972146648686360";
-      const oldPixelId = window.META_PIXEL_MIGRATION_ID || "877558961848422"; // Temporary migration Pixel (to be retired)
+      const pixelId = window.META_PIXEL_ID || "972146648686360";
 
       if (eventName === "purchase" || eventName === "Purchase") {
         const orderId = params.order_id || (params.transaction_id && String(params.transaction_id).startsWith("order_") ? params.transaction_id : "");
@@ -234,12 +232,7 @@ function trackConversionEvent(eventName, params = {}) {
           // CAPI alignment: exact stable event ID order:{order_id} matching staff portal Conversions API
           const eventOptions = resolvedId ? { eventID: `order:${resolvedId}` } : undefined;
 
-          // Track Purchase to new business-owned dataset
-          window.fbq("trackSingle", newPixelId, "Purchase", purchasePayload, eventOptions);
-          // Track Purchase to temporary migration dataset alongside new dataset
-          if (oldPixelId) {
-            window.fbq("trackSingle", oldPixelId, "Purchase", purchasePayload, eventOptions);
-          }
+          window.fbq("trackSingle", pixelId, "Purchase", purchasePayload, eventOptions);
         }
       } else if (eventName === "begin_checkout" || eventName === "InitiateCheckout") {
         const dedupeKey = `begin_checkout:${contentIds.join(",") || params.content_name || ""}`;
