@@ -202,7 +202,8 @@
     price.textContent = formatPrice(prices.priceINR, prices.priceUSD);
     const designUrl = new URL('/', 'https://invitestory.in');
     designUrl.searchParams.set('design', item.slug || item.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''));
-    document.getElementById('archive-book').href = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory, I'd like to book the ${item.name} invitation. Please help me with the next steps.\n\nDesign: ${designUrl.href}`)}`;
+    const ask = document.getElementById('archive-ask');
+    if (ask) ask.href = `https://wa.me/918281583882?text=${encodeURIComponent(`Hi InviteStory, I have a question about the ${item.name} invitation.\n\nDesign: ${designUrl.href}`)}`;
     swapText(title, items[index].name, direction || 1);
     swapText(subtitle, items[index].tags, direction || 1);
     cards.forEach((card, i) => card.setAttribute('aria-current', i === index ? 'true' : 'false'));
@@ -319,6 +320,12 @@
   document.querySelector('.archive-arrow-prev').addEventListener('click', () => step(-1));
   document.querySelector('.archive-arrow-next').addEventListener('click', () => step(1));
   document.getElementById('archive-open').addEventListener('click', openSelected);
+  // Book now opens the booking screen for the selected design; WhatsApp stays one tap away.
+  document.getElementById('archive-book').addEventListener('click', () => {
+    const item = items[active];
+    if (typeof openOrderDrawerForTemplate === 'function') { openOrderDrawerForTemplate(item.id); return; }
+    document.getElementById('archive-ask')?.click();
+  });
   ruler.addEventListener('click', event => {
     if (event.target.closest('.archive-tick')) return;
     const rect = ruler.getBoundingClientRect();

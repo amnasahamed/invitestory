@@ -27,11 +27,20 @@ function setupHomeShowroom() {
   if (floatingWhatsApp) {
     let promptSeen = false;
     try { promptSeen = sessionStorage.getItem('invitestory-whatsapp-prompt-seen') === '1'; } catch (_) {}
-    if (promptSeen) floatingWhatsApp.classList.add('is-collapsed');
-    else window.setTimeout(() => {
-      floatingWhatsApp.classList.add('is-collapsed');
+    // Starts collapsed so it never covers the hero's price and buttons. Expand once,
+    // after the visitor scrolls past the hero, then collapse again.
+    const hero = document.getElementById('invitation-archive');
+    const expandOnce = () => {
+      floatingWhatsApp.classList.remove('is-collapsed');
       try { sessionStorage.setItem('invitestory-whatsapp-prompt-seen', '1'); } catch (_) {}
-    }, 6500);
+      window.setTimeout(() => floatingWhatsApp.classList.add('is-collapsed'), 6500);
+    };
+    if (!promptSeen && hero && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(entries => {
+        if (entries.some(entry => !entry.isIntersecting && entry.boundingClientRect.bottom < 0)) { observer.disconnect(); expandOnce(); }
+      });
+      observer.observe(hero);
+    }
   }
   const currencyLayout = window.matchMedia('(max-width: 760px)');
   const setCurrencyLabels = () => {

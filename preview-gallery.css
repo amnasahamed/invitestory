@@ -100,3 +100,20 @@
   #preview-modal.preview-gallery .preview-gallery-actions { grid-template-columns:minmax(0,1fr); }
   #preview-modal.preview-gallery #preview-fullscreen-btn { top:auto; bottom:8px; }
 }
+
+/* Three actions: names, Ask on WhatsApp (labelled "WhatsApp"), and an icon-only Share. */
+#preview-modal.preview-gallery .preview-gallery-actions.has-ask { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 44px; gap:6px; }
+#preview-modal.preview-gallery .preview-gallery-actions.has-ask > * { padding-inline:6px; }
+#preview-modal.preview-gallery .preview-gallery-actions.has-ask #preview-footer-share-btn span { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+#preview-modal.preview-gallery .preview-gallery-actions.has-ask #preview-footer-share-btn { padding-inline:0; }
+#preview-modal.preview-gallery .preview-gallery-actions #preview-buy-btn { gap:6px; color:#1f6b47; font-weight:600; white-space:nowrap; }
+#preview-modal.preview-gallery .preview-gallery-actions #preview-buy-btn img { width:18px; height:18px; flex:none; }
+#preview-modal.preview-gallery .preview-gallery-actions.has-ask #preview-names-edit { white-space:nowrap; }
+@media(max-width:400px) { #preview-modal.preview-gallery .preview-gallery-actions.has-ask > * { font-size:13px !important; } }
+@media(max-width:350px) {
+  #preview-modal.preview-gallery .preview-gallery-actions.has-ask { grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) 40px; gap:5px; }
+  #preview-modal.preview-gallery .preview-gallery-actions.has-ask :is(#preview-names-edit,#preview-buy-btn) { font-size:12px !important; padding-inline:4px !important; letter-spacing:0; }
+  #preview-modal.preview-gallery .preview-gallery-actions.has-ask #preview-buy-btn img { width:16px; height:16px; }
+  #preview-modal.preview-gallery .preview-gallery-actions.has-ask #preview-names-edit::before { display:none; }
+}
+@media(orientation:landscape) and (max-height:500px) and (min-width:560px) { #preview-modal.preview-gallery .preview-gallery-actions.has-ask { grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) 44px; } }

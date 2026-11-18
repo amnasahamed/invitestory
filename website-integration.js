@@ -21,8 +21,24 @@
    const timer=setTimeout(()=>finish(new Error('Verification timed out. Please try again.')),120000);
    let widget;
    function finish(error,value){clearTimeout(timer);if(widget!==undefined)window.turnstile.remove(widget);box.remove();error?reject(error):resolve(value);}
-   widget=window.turnstile.render(box,{sitekey:configuration.siteKey,action,callback:value=>finish(null,value),'error-callback':()=>finish(new Error('Verification failed')),'expired-callback':()=>finish(new Error('Verification expired'))});
+   // Invisible unless Cloudflare needs the visitor to interact; only then show a labelled panel.
+   widget=window.turnstile.render(box,{sitekey:configuration.siteKey,action,appearance:'interaction-only',callback:value=>finish(null,value),'error-callback':()=>finish(new Error('Verification failed')),'expired-callback':()=>finish(new Error('Verification expired')),
+    'before-interactive-callback':()=>{box.classList?.add('is-interactive');box.setAttribute('aria-label','Quick security check before payment');}});
   }));
+ }
+ // Checkout verification is solved in the background when the booking drawer opens, so tapping
+ // Pay does not wait on Cloudflare. Tokens are single use and valid for 300s; reuse only fresh ones.
+ const preparedTtl=240000;let prepared=null;
+ function prepareVerification(action){
+  if(!configuration.siteKey)return;
+  if(prepared&&prepared.action===action&&Date.now()-prepared.at<preparedTtl)return;
+  const promise=verification(action);promise.catch(()=>{});
+  prepared={action,at:Date.now(),promise};
+ }
+ function takeVerification(action){
+  const p=prepared;prepared=null;
+  if(p&&p.action===action&&Date.now()-p.at<preparedTtl)return p.promise.catch(()=>verification(action));
+  return verification(action);
  }
  function selected(){return typeof previewState!=='undefined'?TEMPLATE_DATABASE[previewState.currentIndex]:null;}
  function storeToken(value){token=value;try{sessionStorage.setItem('invitestory.previewToken',value);}catch{}}
@@ -142,7 +158,7 @@
   const clientKey=checkoutKey(key);
   if(savedAttempt&&savedAttempt.clientKey!==clientKey)throw checkoutStorageError();
   const pending=(async()=>{
-   const result=await api('checkout',{...request,clientKey,turnstileToken:await verification('checkout')});
+   const result=await api('checkout',{...request,clientKey,turnstileToken:await takeVerification('checkout')});
    validateResponse(result,request);return {...result,clientKey,request};
   })();
   checkoutInFlight.set(key,pending);
@@ -150,6 +166,7 @@
  }
  window.InviteWebsite={
   ready,
+  prepareCheckout(){ready.then(()=>{if(configuration.checkoutEnabled===true&&!configuration.unavailable&&window.isSecureContext===true)prepareVerification('checkout');}).catch(()=>{});},
   deliveryV2Enabled:(currency='INR')=>v2Supported(currency)&&configuration.deliveryV2SalesEnabled===true,
   legacyCheckoutEnabled:()=>configuration.checkoutEnabled===true&&!configuration.unavailable,
   pendingCheckouts(){return readCheckoutAttempts().map(a=>{let request;try{request=JSON.parse(a.key);validateSelection(request);}catch{return null;}return {clientKey:a.clientKey,request};}).filter(Boolean);},
