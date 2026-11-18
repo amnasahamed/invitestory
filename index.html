@@ -14,8 +14,8 @@
   <meta name="facebook-domain-verification" content="yhfmhy9ctjhm92vsd305ur8dg31rhi" />
 
   <script>
-    // Keep measurement available without letting third-party SDK startup block
-    // the invitation visitors came to see. Their queues preserve early events.
+    // Defer only nonessential tools (Clarity, GA). The Meta Pixel and PostHog load
+    // immediately so ad optimization and funnels see short mobile visits.
     window.deferThirdParty = callback => {
       const schedule = () => setTimeout(callback, 5000);
       if (document.readyState === 'complete') schedule();
@@ -58,9 +58,9 @@
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];deferThirdParty(function(){t=b.createElement(e);t.async=!0;
+    n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)})}(window, document,'script',
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
 
     // Confirm pixels initialize only once, including during SPA navigation
@@ -239,8 +239,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Inter+Tight:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=Noto+Sans+Devanagari:wght@500;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=20261111-mobile-fixes-1">
-  <link rel="stylesheet" href="sales.css?v=20261112-whatsapp-dedupe-1" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="styles.css?v=20261118-fast-checkout-1">
+  <link rel="stylesheet" href="sales.css?v=20261118-fast-checkout-1" media="print" onload="this.media='all'">
   <link rel="stylesheet" href="home.css?v=20261111-whatsapp-prompt-1">
   <link rel="stylesheet" href="archive-mood.css?v=20261106-1">
   <link rel="stylesheet" href="interactions.css?v=20261009-shortlist-clarity-1" media="print" onload="this.media='all'">
@@ -250,14 +250,13 @@
   <!-- PostHog Analytics -->
   <script>
     !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],Object.defineProperty(u,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e}}),Object.defineProperty(u.people,"toString",{configurable:!0,enumerable:!0,writable:!0,value:function(){return u.toString(1)+".people (stub)"}}),o="gu mu yu bu ku init Qu Zu Wu Vu Yu el Gu ec zu lc uc cc hc dc vc capture getExtension Ju fu mc calculateEventProperties gc register register_once register_for_session unregister unregister_for_session wc Uu yc getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys onActiveMatchingSurveysChanged renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync kc identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset Sc shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty bc rc createPersonProfile setInternalOrTestUser Cu xu opt_in_capturing opt_out_capturing  has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing nc debug il Os getPageViewId captureTraceFeedback captureTraceMetric Nu".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-    deferThirdParty(() => {
-      posthog.init('phc_mE3wzy9se4dUkDt8vYMdMeCNHXTvcfW9vyGLdnz6NXFN', {
-          api_host: 'https://us.i.posthog.com',
-          defaults: '2026-05-30',
-          person_profiles: 'identified_only',
-          cross_subdomain_cookies: true,
-          opt_out_capturing_by_default: ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname),
-      });
+    // Load immediately (async): delaying it lost short and WhatsApp-bound visits.
+    posthog.init('phc_mE3wzy9se4dUkDt8vYMdMeCNHXTvcfW9vyGLdnz6NXFN', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only',
+        cross_subdomain_cookies: true,
+        opt_out_capturing_by_default: ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname),
     });
   </script>
 </head>
@@ -1459,18 +1458,18 @@
   <!-- WebMCP Agent Tools & JS Scripts -->
   <script src="webmcp.js"></script>
   <script src="preview-themes.js?v=20261111-new-invitations-1"></script>
-  <script src="paid-order.js?v=20261112-whatsapp-dedupe-1"></script>
+  <script src="paid-order.js?v=20261118-fast-checkout-1"></script>
   <script src="personalized-link.js?v=20261110-whatsapp-token-2"></script>
   <script src="preview-controller.js?v=20261106-catalogue-1"></script>
-  <script src="scripts.js?v=20261112-whatsapp-dedupe-1"></script>
-  <script src="sales.js?v=20261112-whatsapp-dedupe-1"></script>
+  <script src="scripts.js?v=20261118-fast-checkout-1"></script>
+  <script src="sales.js?v=20261118-fast-checkout-1"></script>
   <script src="home.js?v=20261111-whatsapp-prompt-1"></script>
   <script src="archive-hero.js?v=20261111-mobile-performance-1"></script>
   <script src="how-it-works.js?v=20261111-how-it-works-1"></script>
-  <script src="interactions.js?v=20261112-whatsapp-dedupe-1"></script>
+  <script src="interactions.js?v=20261118-fast-checkout-1"></script>
 <script src="country-codes.js?v=20261110-all-countries-1"></script>
 <script src="preview-names.js?v=20261111-country-labels-1"></script>
-<script src="website-integration.js?v=20261112-whatsapp-dedupe-1"></script>
+<script src="website-integration.js?v=20261118-fast-checkout-1"></script>
 <script src="preview-gallery.js?v=20261111-mobile-fixes-1"></script>
 </body>
 </html>

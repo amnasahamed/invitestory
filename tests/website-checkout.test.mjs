@@ -205,3 +205,23 @@ test('secure legacy compatibility stays available before and after v2 activation
   const f=fixture({config});await f.api.ready;assert.equal(f.api.legacyCheckoutEnabled(),false);
  }
 });
+
+test('booking drawer pre-solves checkout verification so Pay reuses it without a second challenge',async()=>{
+ const f=fixture();f.api.prepareCheckout();await f.api.ready;await new Promise(setImmediate);
+ assert.equal(f.verification,1);
+ await f.api.checkout(selection);
+ assert.equal(f.verification,1);assert.equal(f.requests.at(-1).body.turnstileToken,'fixture-only');
+ await f.api.checkout({...selection,tier:3});assert.equal(f.verification,2);
+});
+
+test('a failed background verification falls back to a fresh one at Pay',async()=>{
+ const f=fixture();f.rejectVerification=true;f.api.prepareCheckout();await f.api.ready;await new Promise(setImmediate);
+ f.rejectVerification=false;await f.api.checkout(selection);
+ assert.equal(f.verification,2);assert.equal(f.requests.at(-1).body.turnstileToken,'fixture-only');
+});
+
+test('checkout is not pre-verified when secure checkout is off',async()=>{
+ for(const config of [{checkoutEnabled:false,siteKey:'k'},{checkoutEnabled:true,unavailable:true,siteKey:'k'}]){
+  const f=fixture({config});f.api.prepareCheckout();await f.api.ready;await new Promise(setImmediate);assert.equal(f.verification,0);
+ }
+});
