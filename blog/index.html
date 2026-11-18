@@ -25,8 +25,6 @@
   <!-- Meta Pixel Code -->
   <script>
     window.META_PIXEL_ID = window.META_PIXEL_ID || '972146648686360';
-    // Temporary migration Pixel (to be retired after the new dataset collects sufficient data)
-    window.META_PIXEL_MIGRATION_ID = window.META_PIXEL_MIGRATION_ID || '877558961848422';
     if (!window.__metaPixelsInitialized) {
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -37,16 +35,12 @@
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', window.META_PIXEL_ID);
-      if (window.META_PIXEL_MIGRATION_ID && window.META_PIXEL_MIGRATION_ID !== window.META_PIXEL_ID) {
-        fbq('init', window.META_PIXEL_MIGRATION_ID);
-      }
       fbq('track', 'PageView');
       window.__metaPixelsInitialized = true;
     }
   </script>
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=972146648686360&ev=PageView&noscript=1" alt="" />
-    <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=877558961848422&ev=PageView&noscript=1" alt="" />
   </noscript>
   <!-- End Meta Pixel Code -->
 
@@ -1249,6 +1243,6 @@
     }
   </script>
 
-  <script src="/whatsapp-tracking.js?v=20261118-fast-checkout-1" defer></script>
+  <script src="/whatsapp-tracking.js?v=20261118-single-pixel-1" defer></script>
 </body>
 </html>

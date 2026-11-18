@@ -31,8 +31,6 @@
   <!-- Meta Pixel Code -->
   <script>
     window.META_PIXEL_ID = window.META_PIXEL_ID || '972146648686360';
-    // Temporary migration Pixel (to be retired after the new dataset collects sufficient data)
-    window.META_PIXEL_MIGRATION_ID = window.META_PIXEL_MIGRATION_ID || '877558961848422';
     if (!window.__metaPixelsInitialized) {
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -43,16 +41,12 @@
       s.parentNode.insertBefore(t,s)}(window, document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       fbq('init', window.META_PIXEL_ID);
-      if (window.META_PIXEL_MIGRATION_ID && window.META_PIXEL_MIGRATION_ID !== window.META_PIXEL_ID) {
-        fbq('init', window.META_PIXEL_MIGRATION_ID);
-      }
       fbq('track', 'PageView');
       window.__metaPixelsInitialized = true;
     }
   </script>
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=972146648686360&ev=PageView&noscript=1" alt="" />
-    <img height="1" width="1" style="display:none" src="https://www.facebook.net/tr?id=877558961848422&ev=PageView&noscript=1" alt="" />
   </noscript>
   <!-- End Meta Pixel Code -->
 
@@ -864,6 +858,6 @@
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.333 5.001L2 22l5.129-1.343c1.46.797 3.109 1.216 4.881 1.217h.004c5.505 0 9.988-4.478 9.989-9.985 0-2.667-1.037-5.176-2.922-7.062A9.925 9.925 0 0 0 12.012 2zm5.82 14.161c-.244.688-1.22 1.261-1.706 1.343-.457.078-1.047.112-1.696-.095-.394-.127-.905-.296-1.571-.582-2.775-1.196-4.577-4.004-4.717-4.19-.138-.184-1.127-1.498-1.127-2.855 0-1.358.706-2.024.957-2.298.243-.267.534-.334.712-.334.179 0 .356.002.51.009.162.008.381-.061.595.454.22.531.751 1.83.816 1.963.065.133.108.289.021.464-.086.175-.13.284-.258.435-.129.151-.271.338-.388.453-.13.129-.265.269-.115.526.15.257.667 1.101 1.43 1.78 1.008.897 1.859 1.176 2.124 1.307.265.13.418.109.574-.069.156-.178.667-.777.844-1.044.178-.266.356-.222.595-.133.239.089 1.517.715 1.776.844.259.13.432.195.497.306.065.111.065.644-.179 1.332z"/></svg>
   </a>
 
-  <script src="/whatsapp-tracking.js?v=20261118-fast-checkout-1" defer></script>
+  <script src="/whatsapp-tracking.js?v=20261118-single-pixel-1" defer></script>
 </body>
 </html>
