@@ -263,6 +263,13 @@
 .archive-book { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 48px; margin-top: 10px; padding: 13px 22px; border: 1px solid #315e4d; border-radius: 6px; background: #f7fcf8; color: #315e4d; font: 500 14px/1.2 "Inter Tight",sans-serif; text-decoration: none; transition: background .2s,transform .2s; }
 .archive-book:hover { background: #e1eee5; transform: translateY(-2px); }
 .archive-book:focus-visible { outline: 2px solid #83b699; outline-offset: 5px; }
+.archive-book { cursor: pointer; }
+.archive-ask { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; margin-top: 6px; padding: 8px 12px; color: #1f6b47; font: 600 14px/1.2 "Inter Tight",sans-serif; text-decoration: underline; text-underline-offset: 4px; }
+.archive-ask:hover { color: #174f35; }
+.archive-ask:focus-visible { outline: 2px solid #83b699; outline-offset: 3px; border-radius: 6px; }
+.archive-lede { max-width: 34em; margin: 12px auto 0; color: #3f5c4f; font: 400 15px/1.45 "Inter Tight",sans-serif; letter-spacing: 0; text-transform: none; }
+.archive-lede b { color: #203e34; font-weight: 600; }
+@media(max-width:560px) { .archive-lede { margin-top: 8px; font-size: 13.5px; line-height: 1.4; } }
 @media(max-width:420px) { .archive-design-actions { gap: 8px; } .studio-home .archive-play,.archive-book { padding-inline: 15px; gap: 12px; } }
 
 /* Editorial transition: pricing, an original customer note and quiet reassurance. */

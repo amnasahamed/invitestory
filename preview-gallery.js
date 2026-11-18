@@ -41,7 +41,11 @@
   const footer = modal.querySelector('.preview-modal-toolbar');
   const actions = document.createElement('div');
   actions.className = 'preview-gallery-actions';
-  actions.append(namesButton, byId('preview-footer-share-btn'));
+  // Keep the pre-payment question path inside the preview (the old secondary row is hidden here).
+  const askButton = byId('preview-buy-btn');
+  if (askButton) askButton.setAttribute('aria-label', 'Ask about this design on WhatsApp');
+  actions.append(...[namesButton, askButton, byId('preview-footer-share-btn')].filter(Boolean));
+  if (askButton) actions.classList.add('has-ask');
   footer.prepend(actions);
   shell.append(header, stage, navigation, footer);
   modal.append(shell);
