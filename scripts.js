@@ -1987,7 +1987,6 @@ let orderDrawerState = {
 
 function openOrderDrawerForTemplate(id) {
   orderDeliveryContract=usesNewDelivery();
-  window.InviteWebsite?.prepareCheckout?.();
   let templateId = id;
   if (!templateId && typeof previewState !== "undefined" && previewState.currentIndex >= 0) {
     templateId = TEMPLATE_DATABASE[previewState.currentIndex]?.id;
@@ -2075,7 +2074,6 @@ function openOrderDrawerForTemplate(id) {
 
 function openOrderDrawerForPackage(tier) {
   orderDeliveryContract=usesNewDelivery();
-  window.InviteWebsite?.prepareCheckout?.();
   const pTier = Number(tier) || 2;
   const name = packageName(pTier);
   const isDearly = pTier === 4;

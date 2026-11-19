@@ -11,8 +11,8 @@
  }
  const ready=api('config').then(c=>{configuration=c;return c;}).catch(error=>{if(error.status>=500)configuration={enabled:false,checkoutEnabled:true,unavailable:true};return configuration;});
  function verification(action) {
-  // Measures how often the Cloudflare check still interrupts people: checkout_verification_shown / _failed.
-  const kind=action==='capture'?'preview_save':'checkout';
+  // Only the WhatsApp preview-save form is verified; reports preview_save_verification_shown / _failed.
+  const kind=action==='capture'?'preview_save':action;
   const track=(event,reason)=>{try{if(typeof trackPostHogEvent==='function')trackPostHogEvent(`${kind}_${event}`,{reason});}catch{}};
   if(!configuration.siteKey)return Promise.reject(new Error('WhatsApp saving is unavailable'));
   if(!turnstileReady)turnstileReady=new Promise((resolve,reject)=>{
@@ -26,22 +26,8 @@
    function finish(error,value){clearTimeout(timer);if(widget!==undefined)window.turnstile.remove(widget);box.remove();error?reject(error):resolve(value);}
    // Invisible unless Cloudflare needs the visitor to interact; only then show a labelled panel.
    widget=window.turnstile.render(box,{sitekey:configuration.siteKey,action,appearance:'interaction-only',callback:value=>finish(null,value),'error-callback':()=>{track('verification_failed','error');finish(new Error('Verification failed'));},'expired-callback':()=>{track('verification_failed','expired');finish(new Error('Verification expired'));},
-    'before-interactive-callback':()=>{track('verification_shown','interactive');box.classList?.add('is-interactive');box.setAttribute('aria-label','Quick security check before payment');}});
+    'before-interactive-callback':()=>{track('verification_shown','interactive');box.classList?.add('is-interactive');box.setAttribute('aria-label','Quick security check');}});
   }));
- }
- // Checkout verification is solved in the background when the booking drawer opens, so tapping
- // Pay does not wait on Cloudflare. Tokens are single use and valid for 300s; reuse only fresh ones.
- const preparedTtl=240000;let prepared=null;
- function prepareVerification(action){
-  if(!configuration.siteKey)return;
-  if(prepared&&prepared.action===action&&Date.now()-prepared.at<preparedTtl)return;
-  const promise=verification(action);promise.catch(()=>{});
-  prepared={action,at:Date.now(),promise};
- }
- function takeVerification(action){
-  const p=prepared;prepared=null;
-  if(p&&p.action===action&&Date.now()-p.at<preparedTtl)return p.promise.catch(()=>verification(action));
-  return verification(action);
  }
  function selected(){return typeof previewState!=='undefined'?TEMPLATE_DATABASE[previewState.currentIndex]:null;}
  function storeToken(value){token=value;try{sessionStorage.setItem('invitestory.previewToken',value);}catch{}}
@@ -161,7 +147,8 @@
   const clientKey=checkoutKey(key);
   if(savedAttempt&&savedAttempt.clientKey!==clientKey)throw checkoutStorageError();
   const pending=(async()=>{
-   const result=await api('checkout',{...request,clientKey,turnstileToken:await takeVerification('checkout')});
+   // No bot check at checkout: every visitor goes straight to Razorpay.
+   const result=await api('checkout',{...request,clientKey});
    validateResponse(result,request);return {...result,clientKey,request};
   })();
   checkoutInFlight.set(key,pending);
@@ -169,7 +156,6 @@
  }
  window.InviteWebsite={
   ready,
-  prepareCheckout(){ready.then(()=>{if(configuration.checkoutEnabled===true&&!configuration.unavailable&&window.isSecureContext===true)prepareVerification('checkout');}).catch(()=>{});},
   deliveryV2Enabled:(currency='INR')=>v2Supported(currency)&&configuration.deliveryV2SalesEnabled===true,
   legacyCheckoutEnabled:()=>configuration.checkoutEnabled===true&&!configuration.unavailable,
   pendingCheckouts(){return readCheckoutAttempts().map(a=>{let request;try{request=JSON.parse(a.key);validateSelection(request);}catch{return null;}return {clientKey:a.clientKey,request};}).filter(Boolean);},
