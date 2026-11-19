@@ -21,18 +21,21 @@ async function forwardWebsiteRequest(request,env={},fetcher=fetch) {
  if(action!=='config') {
   const text=await limitedBody(request);if(text===null)return json({error:'Request too large'},413);
   try{payload=JSON.parse(text);}catch{return json({error:'Invalid request'},400);}
-  if(action==='capture'||action==='checkout') {
+  // Bot verification guards only the WhatsApp preview-save form, which sends messages.
+  // Checkout is deliberately open: Razorpay screens payments itself.
+  if(action==='capture') {
    if(!env.WEBSITE_TURNSTILE_SECRET)return json({error:'Verification is not configured'},503);
    const validation=await fetcher('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:new URLSearchParams({secret:env.WEBSITE_TURNSTILE_SECRET,response:payload.turnstileToken||'',remoteip:request.headers.get('CF-Connecting-IP')||''}),signal:AbortSignal.timeout(10000)});
    const result=await validation.json();
    if(!result.success||result.hostname!==url.hostname||result.action!==action)return json({error:'Please complete verification and try again'},403);
-   delete payload.turnstileToken;
   }
+  // Never forward a verification token (older cached pages still send one with checkout).
+  if(payload&&typeof payload==='object')delete payload.turnstileToken;
  }
  try {
   const response=await fetcher(new URL('/api/website/'+action,origin),{method:request.method,headers:{Authorization:'Bearer '+env.WEBSITE_BRIDGE_SECRET,'Content-Type':'application/json','X-Website-Client-IP':request.headers.get('CF-Connecting-IP')||'local'},body:payload?JSON.stringify(payload):undefined,signal:AbortSignal.timeout(20000)});
   const result=await response.json();
-  if(action==='config')return json({...result,enabled:Boolean(result.enabled&&env.WEBSITE_TURNSTILE_SITE_KEY),checkoutEnabled:Boolean(result.checkoutEnabled&&env.WEBSITE_TURNSTILE_SITE_KEY),siteKey:env.WEBSITE_TURNSTILE_SITE_KEY||''},response.status);
+  if(action==='config')return json({...result,enabled:Boolean(result.enabled&&env.WEBSITE_TURNSTILE_SITE_KEY),checkoutEnabled:Boolean(result.checkoutEnabled),siteKey:env.WEBSITE_TURNSTILE_SITE_KEY||''},response.status);
   return json(result,response.status);
  }catch{return json({error:'Connection unavailable. Please try again.'},503);}
 }

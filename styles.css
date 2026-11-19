@@ -10769,7 +10769,7 @@ a.template-card-wa-link {
 #preview-modal #preview-whatsapp-notice {font-size:13px;line-height:1.5;margin-top:12px;}
 .website-verification {position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:100000;}
 .website-verification.is-interactive {padding:12px;background:white;border-radius:12px;box-shadow:0 4px 24px #0003;}
-.website-verification.is-interactive::before {content:"Quick security check before payment";display:block;margin:0 0 8px;font:600 14px/1.3 system-ui,sans-serif;color:#2b2118;text-align:center;}
+.website-verification.is-interactive::before {content:"Quick security check";display:block;margin:0 0 8px;font:600 14px/1.3 system-ui,sans-serif;color:#2b2118;text-align:center;}
 
 #preview-modal .preview-whatsapp-fields summary {cursor:pointer;font-size:13px;font-weight:600;line-height:1.5;padding:8px 0;}
 #preview-modal .preview-whatsapp-fields summary span {font-weight:400;}

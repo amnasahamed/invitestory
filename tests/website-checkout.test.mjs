@@ -41,7 +41,7 @@ test('native UUID is generated once and the checkout request/response contract i
  const f=fixture(),a=await f.api.checkout(selection),b=await f.api.checkout(selection);
  assert.equal(f.generated,1);assert.equal(a.clientKey,b.clientKey);assert.match(a.clientKey,uuid);
  assert.equal(a.orderId,'fixture-order');assert.equal(a.amount,199900);assert.equal(a.currency,'INR');
- assert.deepEqual(f.requests[1].body,{...selection,clientKey:a.clientKey,turnstileToken:'fixture-only'});
+ assert.deepEqual(f.requests[1].body,{...selection,clientKey:a.clientKey});
 });
 test('payment status sends only stable checkout references and validates them before the request',async()=>{
  const f=fixture(),clientKey='00000000-0000-4000-8000-000000000009';
@@ -90,10 +90,10 @@ test('valid legacy retry migrates and uncertain A to B to A retries preserve bot
  assert.equal(a.clientKey,oldId);assert.notEqual(a.clientKey,b.clientKey);assert.equal(f.generated,1);
  const reloaded=fixture({storage});assert.equal((await reloaded.api.checkout(selection)).clientKey,oldId);assert.equal(reloaded.generated,0);
 });
-test('concurrent identical calls share one verification and request; different selections keep distinct keys',async()=>{
+test('concurrent identical calls share one request; different selections keep distinct keys',async()=>{
  const f=fixture();let release;f.hold=new Promise(resolve=>{release=resolve;});
  const a=f.api.checkout(selection),same=f.api.checkout(selection),b=f.api.checkout({...selection,designId:2});
- await new Promise(setImmediate);assert.equal(f.verification,2);assert.equal(f.requests.length,3);
+ await new Promise(setImmediate);assert.equal(f.verification,0);assert.equal(f.requests.length,3);
  release();const [first,second,other]=await Promise.all([a,same,b]);
  assert.equal(first.clientKey,second.clientKey);assert.notEqual(first.clientKey,other.clientKey);
  assert.equal(JSON.parse(f.storage.get(storageKey)).attempts.length,2);
@@ -112,10 +112,11 @@ test('config outage stays blocked for the page lifetime; a fresh successful conf
  assert.equal(failed.requests.length,1);assert.equal(failed.generated,0);assert.equal(failed.verification,0);
  assert.equal((await fixture({storage}).api.checkout(selection)).clientKey,a.clientKey);
 });
-test('verification failure retains the saved ID for retry without sending checkout',async()=>{
- const f=fixture();f.rejectVerification=true;await assert.rejects(f.api.checkout(selection),/Verification failed/);
- assert.equal(f.requests.length,1);const saved=JSON.parse(f.storage.get(storageKey)).attempts[0].clientKey;
- f.rejectVerification=false;assert.equal((await f.api.checkout(selection)).clientKey,saved);assert.equal(f.generated,1);
+test('checkout never asks for bot verification, even when the check would fail',async()=>{
+ const f=fixture();f.rejectVerification=true;
+ const result=await f.api.checkout(selection);
+ assert.equal(f.verification,0);assert.equal(result.orderId,'fixture-order');
+ assert.equal('turnstileToken' in f.requests.at(-1).body,false);
 });
 
 test('uncontracted delivery fields fail closed before configuration, fallback or retry mutation',async()=>{
@@ -187,7 +188,7 @@ test('USD v2 verifies cents, currency and stored promise, then resumes through s
 test('legacy USD Dearly retry remains original request and UUID after both-currency upgrade',async()=>{
  const clientKey='00000000-0000-4000-8000-000000000009',request={designId:35,tier:4,currency:'USD',express:true,emailRsvp:true};
  const storage=new Map([[storageKey,JSON.stringify({key:JSON.stringify(request),clientKey})]]),f=fixture({config:v2Config,storage});f.checkoutResult={orderId:'order_old',keyId:'mock',currency:'USD',amount:7500};
- const result=await f.api.resumeCheckout(clientKey);assert.equal(result.amount,7500);assert.equal(result.request.express,true);assert.equal(result.checkoutVersion,undefined);assert.equal(f.generated,0);assert.deepEqual(f.requests.at(-1).body,{...request,clientKey,turnstileToken:'fixture-only'});
+ const result=await f.api.resumeCheckout(clientKey);assert.equal(result.amount,7500);assert.equal(result.request.express,true);assert.equal(result.checkoutVersion,undefined);assert.equal(f.generated,0);assert.deepEqual(f.requests.at(-1).body,{...request,clientKey});
 });
 
 test('explicit currency capabilities are respected; only an absent list implies legacy INR v2',async()=>{
@@ -203,25 +204,5 @@ test('secure legacy compatibility stays available before and after v2 activation
  }
  for(const config of [{checkoutEnabled:false},{enabled:false},{checkoutEnabled:true,unavailable:true}]){
   const f=fixture({config});await f.api.ready;assert.equal(f.api.legacyCheckoutEnabled(),false);
- }
-});
-
-test('booking drawer pre-solves checkout verification so Pay reuses it without a second challenge',async()=>{
- const f=fixture();f.api.prepareCheckout();await f.api.ready;await new Promise(setImmediate);
- assert.equal(f.verification,1);
- await f.api.checkout(selection);
- assert.equal(f.verification,1);assert.equal(f.requests.at(-1).body.turnstileToken,'fixture-only');
- await f.api.checkout({...selection,tier:3});assert.equal(f.verification,2);
-});
-
-test('a failed background verification falls back to a fresh one at Pay',async()=>{
- const f=fixture();f.rejectVerification=true;f.api.prepareCheckout();await f.api.ready;await new Promise(setImmediate);
- f.rejectVerification=false;await f.api.checkout(selection);
- assert.equal(f.verification,2);assert.equal(f.requests.at(-1).body.turnstileToken,'fixture-only');
-});
-
-test('checkout is not pre-verified when secure checkout is off',async()=>{
- for(const config of [{checkoutEnabled:false,siteKey:'k'},{checkoutEnabled:true,unavailable:true,siteKey:'k'}]){
-  const f=fixture({config});f.api.prepareCheckout();await f.api.ready;await new Promise(setImmediate);assert.equal(f.verification,0);
  }
 });
