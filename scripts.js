@@ -1006,7 +1006,7 @@ const TEMPLATE_DATABASE = [
     id: 48,
     name: "Firdaus",
     slug: "firdaus",
-    isNew: true,
+    newUntil: "2026-12-05",
     image: "assets/preview/48.webp",
     tier: 3,
     priceINR: 2999,
@@ -1025,7 +1025,7 @@ const TEMPLATE_DATABASE = [
     id: 49,
     name: "Padharo Sa",
     slug: "padharo-sa",
-    isNew: true,
+    newUntil: "2026-12-05",
     image: "assets/preview/49.webp",
     tier: 3,
     priceINR: 2999,
@@ -1044,7 +1044,7 @@ const TEMPLATE_DATABASE = [
     id: 50,
     name: "Malligai Vaasal",
     slug: "malligai-vaasal",
-    isNew: true,
+    newUntil: "2026-12-05",
     image: "assets/preview/50.webp",
     tier: 3,
     priceINR: 2999,
@@ -1063,7 +1063,7 @@ const TEMPLATE_DATABASE = [
     id: 51,
     name: "Yaadein",
     slug: "yaadein",
-    isNew: true,
+    newUntil: "2026-12-05",
     image: "assets/preview/51.webp",
     tier: 3,
     priceINR: 2999,
@@ -1082,7 +1082,7 @@ const TEMPLATE_DATABASE = [
     id: 52,
     name: "Chapel Bells",
     slug: "chapel-bells",
-    isNew: true,
+    newUntil: "2026-12-05",
     image: "assets/preview/52.webp",
     tier: 3,
     priceINR: 2999,
@@ -1188,6 +1188,12 @@ if (isAdsLandingPage) {
     }
   }
 }
+
+// "New" lasts until midnight IST at the start of `newUntil`: listed first on the homepage, with a badge.
+function isNewDesign(item, now = Date.now()) {
+  return Boolean(item.newUntil) && now < Date.parse(`${item.newUntil}T00:00:00+05:30`);
+}
+TEMPLATE_DATABASE.forEach(item => { item.isNew = isNewDesign(item); });
 
 // Designs flagged `hidden` stay reachable by direct link (?design=slug) but are left out of browsing.
 function getListedDesigns() {
