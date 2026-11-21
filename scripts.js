@@ -2292,7 +2292,8 @@ function updateOrderDrawerTotal() {
   const v2=orderUsesNewDelivery();
   const speeds=document.getElementById('order-delivery-speeds');if(speeds)speeds.hidden=!v2;
   const legacy=document.getElementById('order-addon-express-label');if(legacy)legacy.hidden=v2;
-  const pay=document.getElementById('order-drawer-checkout-btn');if(pay)pay.disabled=false;
+  const pay=document.getElementById('order-drawer-checkout-btn');if(pay&&!orderDrawerCheckoutPending)pay.disabled=false;
+  if(!orderDrawerCheckoutPending)clearOrderCheckoutError();
   const modal=document.getElementById('order-drawer-modal');if(modal)modal.classList.remove('is-checkout-unavailable');
   const ctaText=document.getElementById('order-drawer-cta-text');if(ctaText)ctaText.textContent='Continue to payment';
   const ctaBadge=document.getElementById('order-drawer-cta-badge');if(ctaBadge)ctaBadge.hidden=false;
@@ -2374,9 +2375,53 @@ function ensureRazorpayLoaded() {
   }
   return razorpayLoader;
 }
+// The order sheet stays open while the secure payment is prepared, so a slow network or a
+// failure shows on the sheet itself instead of the sheet vanishing with nothing in its place.
+function setOrderCheckoutBusy(busy) {
+  const button = document.getElementById("order-drawer-checkout-btn");
+  const text = document.getElementById("order-drawer-cta-text");
+  if (!button) return;
+  button.disabled = busy;
+  button.classList.toggle("is-loading", busy);
+  button.setAttribute("aria-busy", busy ? "true" : "false");
+  if (text) text.textContent = busy ? "Opening secure payment…" : "Continue to payment";
+}
+function orderCheckoutWhatsAppUrl(designName, problem) {
+  const text = `Hi InviteStory! I tried to pay for "${designName}" on the website but ${problem}. Can you help me book it?`;
+  return `https://wa.me/918281583882?text=${encodeURIComponent(text)}`;
+}
+function showOrderCheckoutError(message, designName) {
+  const box = document.getElementById("order-drawer-checkout-error");
+  const waUrl = orderCheckoutWhatsAppUrl(designName || "my invitation", "the payment did not open");
+  if (box) {
+    box.replaceChildren();
+    const line = document.createElement("span");
+    line.textContent = `${message || "Payment could not open."} You can try again, or book with our team on WhatsApp.`;
+    const link = document.createElement("a");
+    link.href = waUrl;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = "Book on WhatsApp";
+    link.addEventListener("click", () => trackConversionEvent("whatsapp_click", { cta_location: "checkout_error" }));
+    box.append(line, link);
+    box.hidden = false;
+  }
+  showToast({ title: "Payment could not open", message: message || "Please try again or book with us on WhatsApp.", type: "error", action: { label: "Book on WhatsApp", url: waUrl } });
+}
+function clearOrderCheckoutError() {
+  const box = document.getElementById("order-drawer-checkout-error");
+  if (box) { box.hidden = true; box.replaceChildren(); }
+}
+
 async function proceedFromOrderDrawerToCheckout(savedPayment) {
   if (orderDrawerCheckoutPending) return;
   orderDrawerCheckoutPending = true;
+  clearOrderCheckoutError();
+  if (!savedPayment) {
+    setOrderCheckoutBusy(true);
+    trackPostHogEvent("checkout_continue_clicked", { content_ids: orderDrawerState.template ? [String(orderDrawerState.template.id)] : [], package_tier: orderDrawerState.tier, currency: currentCurrency, value: orderDrawerState.total, delivery_speed: typeof orderDeliverySpeed === "function" ? orderDeliverySpeed() : undefined });
+  }
+  let checkoutDesignName = orderDrawerState.template?.name || "";
   try {
   const displayedV2=orderUsesNewDelivery();
   legacyGatewayConfiguration=await window.InviteWebsite?.ready;
@@ -2400,8 +2445,8 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
   if (emailRsvpChecked) selectedAddons.push(tier === 4 ? "Email RSVP (included)" : "Email RSVP");
 
   const paidDesignName = paidTemplate?.name || "";
+  checkoutDesignName = paidDesignName || name;
   const paidAddons = selectedAddons.slice();
-  closeOrderDrawer(false);
 
   const selectedContentIds = designId ? [String(designId)] : [];
   let checkoutClientKey;
@@ -2482,14 +2527,16 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
         options.order_id=secure.orderId;options.key=secure.keyId;options.amount=secure.amount;options.currency=secure.currency;
       }
     } catch (error) {
-      trackPostHogEvent("checkout_unavailable", { content_ids: selectedContentIds, package_tier: tier, reason: "gateway_unavailable" });
-      showToast({title:"Checkout could not open",message:error.message||"Please try again or contact us on WhatsApp.",type:"error"});
+      trackPostHogEvent("checkout_unavailable", { content_ids: selectedContentIds, package_tier: tier, reason: "gateway_unavailable", message: String(error?.message || "").slice(0, 120) });
+      showOrderCheckoutError(error?.message, checkoutDesignName);
       return;
     }
   }
   await ensureRazorpayLoaded();
   if (typeof Razorpay !== "undefined") {
     trackConversionEvent("begin_checkout", { content_name: name, content_ids: selectedContentIds, package_tier: tier, content_type: "product", value: totalVal, currency: currencyCode });
+    // Close the order sheet only now that the payment window is ready to take over.
+    closeOrderDrawer(false);
     const rzp = new Razorpay(options);
     rzp.on("payment.failed", function () {
       trackPostHogEvent("payment_failed", { content_ids: selectedContentIds, package_tier: tier, currency: currencyCode, value: totalVal });
@@ -2504,16 +2551,14 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
     rzp.open();
   } else {
     trackPostHogEvent("checkout_unavailable", { content_ids: selectedContentIds, package_tier: tier, reason: "payment_sdk_unavailable" });
-    showToast({
-      title: "Opening checkout",
-      message: "Please wait a moment, then try again.",
-      type: "info"
-    });
+    showOrderCheckoutError("The payment window did not load. Please check your connection.", checkoutDesignName);
   }
   } catch(error) {
-    showToast({title:"Checkout could not open",message:error.message,type:"error"});
+    trackPostHogEvent("checkout_unavailable", { content_ids: orderDrawerState.template ? [String(orderDrawerState.template.id)] : [], package_tier: orderDrawerState.tier, reason: "checkout_error", message: String(error?.message || "").slice(0, 120) });
+    showOrderCheckoutError(error?.message, checkoutDesignName);
   } finally {
     orderDrawerCheckoutPending = false;
+    setOrderCheckoutBusy(false);
   }
 }
 
