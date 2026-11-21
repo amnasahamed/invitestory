@@ -14,7 +14,8 @@
 #preview-modal.preview-gallery .preview-modal-close svg { width:26px; height:26px; }
 #preview-modal.preview-gallery #preview-favourite-btn[aria-pressed=true] { color:var(--invitation-accent,#315c49); background:#f1f5f0; }
 #preview-modal.preview-gallery #preview-favourite-btn[aria-pressed=true] svg { fill:currentColor; }
-#preview-modal.preview-gallery .preview-gallery-stage { --preview-pill-space:0px; position:relative; flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding-bottom:var(--preview-pill-space); overflow:hidden; }
+#preview-modal.preview-gallery .preview-gallery-stage { --preview-pill-space:0px; position:relative; flex:1; min-height:0; display:flex; align-items:center; justify-content:center; padding-bottom:var(--preview-pill-space); overflow:hidden; overflow:clip; }
+/* clip, not hidden: a hidden-overflow box can still be scrolled by focus, which left the design off-centre after tapping a peek. */
 #preview-modal.preview-gallery .preview-gallery-card { position:relative; width:var(--preview-width,260px); height:var(--preview-height,563px); flex:none; overflow:hidden; border-radius:22px; background:var(--invitation-stage,#f5f2eb); isolation:isolate; }
 #preview-modal.preview-gallery .preview-gallery-peek { position:absolute; top:calc((100% - var(--preview-pill-space)) / 2 - var(--preview-height,563px) * .45); width:calc(var(--preview-width,260px) * .9); height:calc(var(--preview-height,563px) * .9); padding:0; border:1px solid var(--color-border-dark); border-radius:var(--radius-md); overflow:hidden; background:var(--paper-surface); cursor:pointer; }
 #preview-modal.preview-gallery .preview-gallery-peek.is-next { left:calc(100% - 44px); }
@@ -28,9 +29,11 @@
 #preview-modal.preview-gallery .preview-gallery-stage[aria-busy=true] :is(.preview-gallery-card,.preview-gallery-peek) { will-change:transform; }
 #preview-modal.preview-gallery #preview-modal-iframe-wrap { position:absolute; inset:0; width:100%; height:100%; margin:0; padding:0; border:0; border-radius:0; box-shadow:none; background:transparent; transform:none; overflow:hidden; }
 #preview-modal.preview-gallery #phone-screen-viewport { position:absolute; inset:0 auto auto 0; width:390px; height:844px; min-width:390px; min-height:844px; max-width:none; max-height:none; margin:0; padding:0; border:0; border-radius:0; transform-origin:0 0; overflow:hidden; }
-#preview-modal.preview-gallery #preview-modal-iframe { position:absolute; inset:0; width:390px; height:844px; min-width:390px; min-height:844px; max-width:none; max-height:none; border:0; border-radius:0; transform:none; }
+#preview-modal.preview-gallery #phone-screen-viewport .preview-modal-iframe, #preview-modal.preview-gallery #preview-modal-iframe { position:absolute; inset:0; width:390px; height:844px; min-width:390px; min-height:844px; max-width:none; max-height:none; border:0; border-radius:0; transform:none; }
 #preview-modal.preview-gallery #phone-screen-viewport { transform:scale(var(--preview-scale,1)) !important; }
-#preview-modal.preview-gallery #phone-screen-viewport iframe[hidden] { display:none !important; }
+/* Preloaded neighbours keep the real phone size while invisible, so showing one is a paint, not a
+   resize that makes the invitation lay itself out again during the tap. */
+#preview-modal.preview-gallery #phone-screen-viewport iframe[hidden] { display:block !important; visibility:hidden; pointer-events:none; }
 #preview-modal.preview-gallery #preview-modal-iframe-wrap :is(.phone-hardware-btn,.phone-antenna,.phone-notch-container,.phone-glare-layer,.phone-glare-edge) { display:none; }
 #preview-modal.preview-gallery #preview-fullscreen-btn { position:absolute; inset:var(--space-3) auto auto 50%; z-index:20; display:flex; align-items:center; justify-content:center; gap:6px; width:max-content; max-width:calc(100% - 32px); min-height:44px; padding:7px 12px; transform:translateX(-50%); border:1px solid var(--color-border-dark); border-radius:30px; background:var(--paper-surface); color:var(--ink-primary); box-shadow:0 2px 8px #173e3526; text-decoration:none; font:500 11px/1.2 var(--font-body); }
 #preview-modal.preview-gallery #preview-fullscreen-btn svg { width:14px; height:14px; }
@@ -192,3 +195,6 @@
   #preview-modal.preview-gallery .preview-gallery-promises, #preview-modal.preview-gallery .preview-gallery-handle { display:none; }
 }
 @media(prefers-reduced-transparency:reduce) { .studio-home #preview-modal.preview-gallery { -webkit-backdrop-filter:none; backdrop-filter:none; background:#1f332bd9; } }
+/* On phones a full-screen blur of the page behind is redrawn on every tap and swipe, which made
+   taps slow. The sheet covers that page anyway, so use an opaque tint instead. */
+@media (max-width:760px) { .studio-home #preview-modal.preview-gallery { -webkit-backdrop-filter:none; backdrop-filter:none; background:#1f332bf0; } }

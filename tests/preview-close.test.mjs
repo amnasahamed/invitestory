@@ -14,6 +14,8 @@ test('Close dismisses immediately, clears design URLs, and restores focus withou
     document: { activeElement: null, documentElement: { classList: classes }, body: { classList: classes } },
     window: { location: { href: 'https://invitestory.in/?design=toran-telugu&currency=INR' }, scrollTo: () => {}, history: { state: { modalOpen: true, storyOverlay: 'preview', templateId: 3 }, replaceState: (state, _, value) => { assert.equal(state.modalOpen, false); assert.equal(state.storyOverlay, null); url = value; } } },
     previewState: { currentIndex: 2, savedScrollY: 450, lastFocusedElement: { focus: () => focused++ } },
+    // Focus and share tags return once the page behind has painted.
+    afterNextPaint: run => run(),
     restoreDefaultMetaTags: () => {}, stopLoaderPulse: () => {}, phonePhysicsStop: () => {}, phonePhysicsDisableGyroscope: () => {}, closePreviewFaq: () => {},
   });
   vm.runInContext(closeSource + '\nclosePreview(); closePreview();', context);
