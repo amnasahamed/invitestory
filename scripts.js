@@ -1,7 +1,7 @@
 /* Catalogue, invitation previews, booking and payment flow. */
   const askIcon = `<img src="assets/whatsapp.svg" width="18" height="18" alt="" aria-hidden="true">`;
 // --- PAYMENT CONFIGURATION ---
-window.RAZORPAY_KEY_ID = "rzp_live_TPCjiGiPIeo7SN";
+window.RAZORPAY_KEY_ID = "rzp_live_U2rmAazupKndCJ";
 
 // Payment notifications belong in a server-side Razorpay payment.captured webhook.
 
