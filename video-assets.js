@@ -4,6 +4,51 @@ export const videoAssetSizes = {
   '/assets/video/how-it-works-horizontal-20261111.mp4': 3499176,
 };
 
+// Tap-to-open song clips (previews/music.js); iPhone Safari also expects byte ranges for audio.
+export const musicAssetSizes = {
+  '/previews/_music/aaja-nachle.mp3': 480384,
+  '/previews/_music/are-re-are.mp3': 480384,
+  '/previews/_music/bole-chudiyan.mp3': 480384,
+  '/previews/_music/chalte-chalte.mp3': 480384,
+  '/previews/_music/chammak-challo.mp3': 480384,
+  '/previews/_music/chand-sifarish.mp3': 480384,
+  '/previews/_music/chhote-chhote-bhaiyon.mp3': 480384,
+  '/previews/_music/d-se-dance.mp3': 480384,
+  '/previews/_music/deewani-mastani.mp3': 480384,
+  '/previews/_music/didi-tera-devar-deewana.mp3': 480384,
+  '/previews/_music/dil-laga-liya.mp3': 480384,
+  '/previews/_music/gerua.mp3': 480384,
+  '/previews/_music/har-dil-jo-pyaar-karega.mp3': 480384,
+  '/previews/_music/janam-janam.mp3': 480384,
+  '/previews/_music/jeena-jeena.mp3': 480384,
+  '/previews/_music/ladki-badi-anjani-hai.mp3': 480384,
+  '/previews/_music/lal-dupatta.mp3': 480384,
+  '/previews/_music/maahi-ve.mp3': 480384,
+  '/previews/_music/main-rang-sharbaton-ka.mp3': 480384,
+  '/previews/_music/maiyya-yashoda.mp3': 480384,
+  '/previews/_music/manwa-laage.mp3': 480384,
+  '/previews/_music/mehndi-laga-ke-rakhna.mp3': 480384,
+  '/previews/_music/mera-yaar-dildar.mp3': 480384,
+  '/previews/_music/mere-khwabon-mein.mp3': 480384,
+  '/previews/_music/pee-loon.mp3': 480384,
+  '/previews/_music/pinga.mp3': 480384,
+  '/previews/_music/piya-o-re-piya.mp3': 480384,
+  '/previews/_music/prem-ratan-dhan-payo.mp3': 480384,
+  '/previews/_music/pretty-woman.mp3': 480384,
+  '/previews/_music/saajanji-ghar-aaye.mp3': 480384,
+  '/previews/_music/saans.mp3': 480384,
+  '/previews/_music/sajan-tumse-pyar.mp3': 480384,
+  '/previews/_music/samjhawan-unplugged.mp3': 480384,
+  '/previews/_music/suraj-hua-maddham.mp3': 480384,
+  '/previews/_music/tenu-leke.mp3': 480384,
+  '/previews/_music/tere-bina.mp3': 480384,
+  '/previews/_music/tere-sang-yaara.mp3': 480384,
+  '/previews/_music/wah-wah-ramji.mp3': 480384,
+  '/previews/_music/yeh-ladka-hai-allah.mp3': 480384,
+  '/previews/_music/zaalima.mp3': 480384,
+  '/previews/_music/zara-sa-jhoom-loon-main.mp3': 480384,
+};
+
 // Static Assets ignores Range; Safari needs byte ranges for reliable video seeking.
 export async function serveVideoAsset(request, assets, size) {
   const upstream = new Request(request);

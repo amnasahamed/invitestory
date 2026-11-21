@@ -25,6 +25,7 @@
       "/api/website/*",
       "/api/preview-lead",
       "/assets/video/*.mp4",
+      "/previews/_music/*.mp3",
       "/",
       "/index.html",
       "/digital-wedding-invitations",
