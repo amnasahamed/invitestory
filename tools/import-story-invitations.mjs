@@ -16,6 +16,9 @@ export const STORY_DESIGNS = [
   ["where-love-comes-home-wedding", "chapel-bells", "Chapel Bells", "A Goan love letter", "garden", "#24406b", "#f8f4e9"]
 ];
 
+// Tap-to-open music playlist for each design (see previews/music.js).
+const musicPool = { Firdaus: "nikah", "Chapel Bells": "romantic" };
+
 // Archive wording written for a design review, not for a guest.
 const copyFixes = [
   ["AN INVITATION TO KEEP · CONCEPT 02", "AN INVITATION TO KEEP"],
@@ -37,7 +40,7 @@ function prepare(html, [, , name, line, variant, ink, paper]) {
   });
   html = html.replace(
     "</head>",
-    `<meta name="invitation-design" content="${name}"><link rel="stylesheet" href="../collection-branding.css?v=1"><script src="/previews/names.js"></script></head>`
+    `<meta name="invitation-design" content="${name}"><link rel="stylesheet" href="../collection-branding.css?v=1"><script src="/previews/names.js"></script><script src="/previews/music.js?v=1" data-pool="${musicPool[name] || "festive"}" defer></script></head>`
   );
   const signature = `<footer class="collection-signature collection-signature--${variant}" aria-label="${name} invitation design" style="--signature-ink:${ink};--signature-paper:${paper}"><span class="collection-signature__rule" aria-hidden="true"></span><span class="collection-signature__name">${name}</span><span class="collection-signature__line">${line}</span></footer>`;
   return html.replace(/<\/body>/, `${signature}</body>`);
