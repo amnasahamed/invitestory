@@ -3210,15 +3210,10 @@ function updatePreviewScale() {
   if (galleryStage) {
     const pillSpace = parseFloat(getComputedStyle(galleryStage).getPropertyValue("--preview-pill-space")) || 0;
     const room = Math.max(0, galleryStage.clientHeight - pillSpace - 8);
-    // A wide card with neighbours peeking either side. When the sheet is short, the invitation
-    // renders as a shorter phone (down to an iPhone SE-sized screen) instead of shrinking further.
-    let scale = Math.max(0, Math.min((galleryStage.clientWidth - 72) / 390, 0.84));
-    let viewportHeight = Math.min(844, room / (scale || 1));
-    if (viewportHeight < 600) {
-      viewportHeight = 600;
-      scale = Math.min(scale, room / 600);
-    }
-    viewportHeight = Math.round(viewportHeight);
+    // The invitation keeps its real 390×844 phone shape and fills whichever of the stage's width
+    // (leaving room for the neighbouring designs to peek) or height runs out first.
+    const scale = Math.max(0, Math.min((galleryStage.clientWidth - 72) / 390, room / 844));
+    const viewportHeight = 844;
     galleryStage.style.setProperty("--preview-width", `${390 * scale}px`);
     galleryStage.style.setProperty("--preview-height", `${viewportHeight * scale}px`);
     galleryStage.style.setProperty("--preview-viewport-height", `${viewportHeight}px`);
