@@ -163,7 +163,9 @@ test('homepage starts with a short mix of collections until the visitor asks for
   const site = website();
   site.run("document.body.classList = { contains: name => name === 'browse-home', add() {}, remove() {} };");
   const featured = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).map(item => item.tier))');
-  assert.deepEqual(JSON.parse(featured), [2, 2, 2, 2, 3, 3, 4, 4]);
+  assert.deepEqual(JSON.parse(featured), [3, 3, 3, 3, 3, 2, 2, 2, 2, 4, 4]);
+  const leading = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).slice(0, 5).map(item => item.slug))');
+  assert.deepEqual(JSON.parse(leading), ['firdaus', 'padharo-sa', 'malligai-vaasal', 'yaadein', 'chapel-bells']);
   site.run("activeTagFilter = 'royal';");
   assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 49);
   site.run("activeTagFilter = 'all'; catalogueExpanded = true;");
