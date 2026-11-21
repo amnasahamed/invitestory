@@ -8,7 +8,7 @@ const manifest = JSON.parse(readFileSync(new URL('../previews/manifest.json', im
 test('every catalogue cover exists in normal repository assets, including Dearly', () => {
   const catalogue = source.split('const TEMPLATE_DATABASE = [')[1].split('\n];')[0];
   const images = [...catalogue.matchAll(/image: "([^"]+)"/g)].map(match => match[1]);
-  assert.equal(images.length, manifest.designs.length);
+  assert.equal(images.length, manifest.designs.length + 1); // + the hidden Gateway Test, which has no preview of its own
   for (const image of images) {
     assert.ok(image.startsWith('assets/'), `cover depends on a separate checkout: ${image}`);
     assert.ok(existsSync(new URL(`../${image}`, import.meta.url)), `missing cover: ${image}`);
@@ -21,7 +21,8 @@ test('every catalogue cover exists in normal repository assets, including Dearly
 
 test('all 49 catalogue previews resolve to existing local entry points', () => {
   const urls = [...source.matchAll(/localDemoUrl: "([^"]+)"/g)].map(match => match[1]);
-  assert.equal(urls.length, 49);
+  // The hidden ₹100 Gateway Test design reuses Marigold Bhavan's preview.
+  assert.equal(urls.length, 50);
   assert.equal(new Set(urls).size, 49);
   assert.equal(manifest.designs.length, 49);
   for (const design of manifest.designs) {
