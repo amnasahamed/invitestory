@@ -1,7 +1,7 @@
 import { websiteBridge } from "./website-bridge.js";
 import { previewLeadBridge } from "./preview-lead.js";
 import designMeta from "./design-meta.js";
-import { serveVideoAsset, videoAssetSizes } from "./video-assets.js";
+import { musicAssetSizes, serveVideoAsset, videoAssetSizes } from "./video-assets.js";
 
 function injectOpenGraphTags(html, meta) {
   if (!meta) return html;
@@ -37,8 +37,9 @@ export default {
   async fetch(request, env) {
     try {
       const url = new URL(request.url);
-      if (videoAssetSizes[url.pathname] && env?.ASSETS) {
-        return await serveVideoAsset(request, env.ASSETS, videoAssetSizes[url.pathname]);
+      const mediaSize = videoAssetSizes[url.pathname] || musicAssetSizes[url.pathname];
+      if (mediaSize && env?.ASSETS) {
+        return await serveVideoAsset(request, env.ASSETS, mediaSize);
       }
 
       // Upgrade existing worker-first page routes before serving HTML or personalization.

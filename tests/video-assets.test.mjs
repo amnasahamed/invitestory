@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, statSync } from 'node:fs';
-import { serveVideoAsset, videoAssetSizes } from '../video-assets.js';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { musicAssetSizes, serveVideoAsset, videoAssetSizes } from '../video-assets.js';
 import worker from '../_worker.js';
 
 const bytes = Uint8Array.from({ length: 16 }, (_, i) => i);
@@ -56,7 +56,9 @@ test('HEAD, validators, normal requests and missing assets retain correct semant
 test('shipped video sizes and Worker routing match the real deployment assets', async () => {
   const config=JSON.parse(readFileSync(new URL('../wrangler.jsonc',import.meta.url),'utf8'));
   assert(config.assets.run_worker_first.includes('/assets/video/*.mp4'));
-  for (const [path,size] of Object.entries(videoAssetSizes)) {
+  assert(config.assets.run_worker_first.includes('/previews/_music/*.mp3'));
+  assert.equal(Object.keys(musicAssetSizes).length,readdirSync(new URL('../previews/_music/',import.meta.url)).length);
+  for (const [path,size] of Object.entries({...videoAssetSizes,...musicAssetSizes})) {
     assert.equal(statSync(new URL(`..${path}`,import.meta.url)).size,size);
     const r=await worker.fetch(new Request(`https://invitestory.in${path}`,{headers:{Range:'bytes=0-1'}}),{ASSETS:fixture()});
     assert.equal(r.status,206);assert.deepEqual(new Uint8Array(await r.arrayBuffer()),bytes.slice(0,2));
