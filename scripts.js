@@ -1006,6 +1006,7 @@ const TEMPLATE_DATABASE = [
     id: 48,
     name: "Firdaus",
     slug: "firdaus",
+    isNew: true,
     image: "assets/preview/48.webp",
     tier: 3,
     priceINR: 2999,
@@ -1024,6 +1025,7 @@ const TEMPLATE_DATABASE = [
     id: 49,
     name: "Padharo Sa",
     slug: "padharo-sa",
+    isNew: true,
     image: "assets/preview/49.webp",
     tier: 3,
     priceINR: 2999,
@@ -1042,6 +1044,7 @@ const TEMPLATE_DATABASE = [
     id: 50,
     name: "Malligai Vaasal",
     slug: "malligai-vaasal",
+    isNew: true,
     image: "assets/preview/50.webp",
     tier: 3,
     priceINR: 2999,
@@ -1060,6 +1063,7 @@ const TEMPLATE_DATABASE = [
     id: 51,
     name: "Yaadein",
     slug: "yaadein",
+    isNew: true,
     image: "assets/preview/51.webp",
     tier: 3,
     priceINR: 2999,
@@ -1078,6 +1082,7 @@ const TEMPLATE_DATABASE = [
     id: 52,
     name: "Chapel Bells",
     slug: "chapel-bells",
+    isNew: true,
     image: "assets/preview/52.webp",
     tier: 3,
     priceINR: 2999,
@@ -1749,6 +1754,7 @@ function renderCatalogue() {
         <div class="template-card-fallback-initial" style="display: none;">${initial}</div>
         <div class="template-card-overlay" aria-hidden="true"></div>
         <span class="template-preview-hint" aria-hidden="true">View invitation <span>↗</span></span>
+        ${item.isNew ? '<span class="template-new-badge">New</span>' : ''}
       </div>
       ${typeof salesSaveButton === "function" ? salesSaveButton(item) : ""}
 

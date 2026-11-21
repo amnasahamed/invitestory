@@ -31,10 +31,13 @@ function isShowingFeatured(count) {
   return document.body.classList.contains("browse-home") && !catalogueExpanded && isDefaultBrowse() && count > featuredCount;
 }
 
+// New designs lead the first look and count towards their collection's share.
 function getFeaturedDesigns(items) {
   if (!isShowingFeatured(items.length)) return items;
+  const fresh = items.filter(item => item.isNew);
   const shown = {};
-  return items.filter(item => (shown[item.tier] = (shown[item.tier] || 0) + 1) <= (FEATURED_PER_TIER[item.tier] || 0));
+  for (const item of fresh) shown[item.tier] = (shown[item.tier] || 0) + 1;
+  return [...fresh, ...items.filter(item => !item.isNew && (shown[item.tier] = (shown[item.tier] || 0) + 1) <= (FEATURED_PER_TIER[item.tier] || 0))];
 }
 
 function showAllDesigns() {
@@ -263,7 +266,7 @@ function renderDiscoveryStatus(count) {
   if (!footer || !status) return;
   status.textContent = discovery.savedOnly ? `${count} saved ${count === 1 ? "design" : "designs"}` : discovery.recommendations ? `${count} recommendations for your style` : discovery.shared ? `${count} designs in this shared shortlist` : `${count} ${count === 1 ? "design" : "designs"} to explore`;
   if (isShowingFeatured(count)) {
-    const shown = Object.values(FEATURED_PER_TIER).reduce((sum, n) => sum + n, 0);
+    const shown = getFeaturedDesigns(getListedDesigns()).length;
     status.textContent = `Showing ${shown} of ${count} designs · A selection from every collection`;
     footer.innerHTML = `<button type="button" class="sales-browse-all sales-see-all" onclick="showAllDesigns()">See all ${count} designs</button>`;
   } else {
