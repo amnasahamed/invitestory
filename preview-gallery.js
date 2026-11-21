@@ -123,6 +123,8 @@
     openPreview(next.id);
     dismissHint();
     stage.style.removeProperty('--drag-x');
+    // Focusing a tapped peek can scroll the stage sideways; keep the chosen design centred.
+    stage.scrollLeft = 0;
     const incoming = reducedMotion.matches ? [] : animate(direction * 32, 0, 220);
     await Promise.all(incoming.map(animation => animation.finished.catch(() => {})));
     incoming.forEach(animation => animation.cancel());

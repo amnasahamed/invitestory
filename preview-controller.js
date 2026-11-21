@@ -23,6 +23,9 @@ function createPreviewController(options) {
   let frame=options.frame;
   const {loader, modal, poster, baseURL, schedule=setTimeout, cancel=clearTimeout,
     reduced=()=>false, onResize=()=>{}, onStopLoading=()=>{},
+    // Browsers pass schedulers that wait for the next paint / an idle moment, so a tap repaints
+    // before invitation documents load or unload. Tests keep the synchronous defaults.
+    afterPaint=callback=>callback(), whenIdle=callback=>callback(),
     now=()=>globalThis.performance?.now() ?? Date.now(), onMetric=()=>{}}=options;
   const listeners=new Set(), timers=new Set();
   let current=null, version=0, phase='closed', collapsed=Boolean(options.toggle), checkTimer=null;
@@ -47,6 +50,8 @@ function createPreviewController(options) {
     timers.add(timer);return timer;
   }
   function clearTimers(){timers.forEach(cancel);timers.clear();checkTimer=null;}
+  function deferred(run,callback){const token=version;run(()=>{if(token===version)callback();});}
+  function warm(item){deferred(whenIdle,()=>options.frames?.warm(item));}
   function setPhase(value){phase=value;modal.dataset.previewStatus=value;}
   function renderControls(){
     const hidden=Boolean(options.mobile?.matches && collapsed);
@@ -93,7 +98,7 @@ function createPreviewController(options) {
     if(cached?.ready){
       reveal();
       if(poster)poster.hidden=true;
-      options.frames.warm(item);
+      warm(item);
       return;
     }
     frame.classList.remove('is-loaded');loader.classList.remove('is-hidden');
@@ -105,8 +110,8 @@ function createPreviewController(options) {
       poster.querySelector('button').hidden=true;
       const link=poster.querySelector('a');link.href=item.demoUrl;link.hidden=true;
     }
-    if(!cached)frame.src=demoURL(item);
-    options.frames?.warm(item);
+    if(!cached){const target=frame;deferred(afterPaint,()=>{target.src=demoURL(item);});}
+    warm(item);
     later(()=>{
       if(phase!=='loading')return;
       setPhase('waiting');
@@ -128,7 +133,8 @@ function createPreviewController(options) {
     endAttempt('close');
     clearTimers();version++;current=null;setPhase('closed');collapsed=Boolean(options.toggle && options.mobile?.matches);renderControls();
     if(poster)poster.hidden=true;
-    options.frames?.clear();
+    // Unloading the invitations waits for the closed preview to paint.
+    deferred(afterPaint,()=>options.frames?.clear());
     // Release animation/video memory promptly on phones; preserve the desktop
     // close transition. Reopening still invalidates this cleanup.
     later(()=>{frame.src='about:blank';frame.classList.remove('is-loaded');loader.classList.remove('is-hidden');},options.mobile?.matches?0:350);
@@ -146,7 +152,7 @@ function createPreviewController(options) {
 
 // Only adjacent invitations are retained; an opened invitation is discarded on exit
 // so audio and partially played reveals cannot continue in the background.
-function createPreviewFrameCache({catalogue,create,activate,dispose}) {
+function createPreviewFrameCache({catalogue,create,activate,dispose,afterPaint=callback=>callback()}) {
   const entries=new Map();
   let active=null;
   function ensure(item){
@@ -161,7 +167,7 @@ function createPreviewFrameCache({catalogue,create,activate,dispose}) {
       entries.delete(item.id);
       const previous=active;active=entry;
       activate(entry);
-      if(previous && previous!==entry)dispose(previous);
+      if(previous && previous!==entry)afterPaint(()=>dispose(previous));
       return entry;
     },
     warm(item){
@@ -188,6 +194,10 @@ const PreviewController = (()=>{
   const mobile=window.matchMedia('(max-width: 760px)'), toggle=document.getElementById('preview-details-toggle');
   const frameParent=frame.parentElement;
   let controller;
+  // Run after the next frame is painted, so the tap that caused the work shows its result first.
+  const afterPaint=callback=>requestAnimationFrame(()=>setTimeout(callback,0));
+  // Neighbouring invitations preload only when the phone is idle, never during a tap.
+  const whenIdle=callback=>typeof requestIdleCallback==='function'?requestIdleCallback(callback,{timeout:2500}):setTimeout(callback,600);
   const frames=createPreviewFrameCache({
     catalogue:()=>typeof TEMPLATE_DATABASE==='undefined'?[]:TEMPLATE_DATABASE.filter(item=>!item.hidden),
     create(item){
@@ -199,6 +209,7 @@ const PreviewController = (()=>{
       const entry={frame:node,ready:false};
       const url=item.collection==='dearly'?item.demoUrl:(item.localDemoUrl||item.demoUrl);
       node.addEventListener('load',()=>{
+        if(node.src==='about:blank')return;
         const ready=()=>{
           if(node.src==='about:blank')return;
           try{entry.ready=previewDocumentReady(node.contentDocument,new URL(url,location.href).pathname);}catch{}
@@ -216,7 +227,9 @@ const PreviewController = (()=>{
         }catch{}
         ready();
       });
-      node.src=url;frameParent.appendChild(node);
+      frameParent.appendChild(node);
+      // Start the document after the tap has painted; a frame disposed meanwhile stays blank.
+      afterPaint(()=>{if(node.isConnected)node.src=url;});
       return entry;
     },
     activate(entry){
@@ -229,9 +242,10 @@ const PreviewController = (()=>{
       document.dispatchEvent(new Event('previewframechange',{bubbles:true}));
       if(old===frame)frame.remove();
     },
-    dispose(entry){entry.frame.src='about:blank';entry.frame.remove();}
+    dispose(entry){entry.frame.src='about:blank';entry.frame.remove();},
+    afterPaint
   });
-  controller=createPreviewController({frame,modal,poster,mobile,toggle,frames,
+  controller=createPreviewController({frame,modal,poster,mobile,toggle,frames,afterPaint,whenIdle,
     onMetric:(event,properties)=>{if(typeof trackPostHogEvent==='function')trackPostHogEvent(event,properties);},
     loader:document.getElementById('preview-modal-loader'),baseURL:location.href,
     reduced:()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches,

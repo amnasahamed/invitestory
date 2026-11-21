@@ -3128,20 +3128,31 @@ function togglePreviewFavourite() {
 }
 
 // Open the in-page preview modal for a given template id.
+// Runs work just after the browser paints the result of the current tap.
+function afterNextPaint(callback) {
+  if (typeof requestAnimationFrame !== "function") return void setTimeout(callback, 0);
+  requestAnimationFrame(() => setTimeout(callback, 0));
+}
+
 function openPreview(id, updateUrl = true) {
   if (typeof InviteInteractions !== "undefined") InviteInteractions.beforePreview(id);
   const idx = TEMPLATE_DATABASE.findIndex(x => x.id === id);
   if (idx === -1) return;
 
   const item = TEMPLATE_DATABASE[idx];
-  if (typeof updateSelectedDesignNote === "function") updateSelectedDesignNote(item);
-  try { localStorage.setItem("invitestory_selected_design", JSON.stringify({ id: item.id, name: item.name })); } catch (e) {}
   previewState.currentIndex = idx;
-  if (typeof syncSalesPreview === "function") syncSalesPreview(item);
   previewState.lastDesignByTier[item.tier] = item.id;
-  if (!previewModal.classList.contains("is-open")) {
+  const wasOpen = previewModal.classList.contains("is-open");
+  if (!wasOpen) {
     previewState.lastFocusedElement = document.activeElement;
   }
+  // The page behind the preview catches up after the tapped design is on screen.
+  afterNextPaint(() => {
+    if (TEMPLATE_DATABASE[previewState.currentIndex] !== item) return;
+    if (typeof updateSelectedDesignNote === "function") updateSelectedDesignNote(item);
+    try { localStorage.setItem("invitestory_selected_design", JSON.stringify({ id: item.id, name: item.name })); } catch (e) {}
+    if (typeof syncSalesPreview === "function") syncSalesPreview(item);
+  });
 
   // Seamlessly update browser URL without refresh so user can share link directly
   if (updateUrl && window.history && window.history.replaceState) {
@@ -3153,11 +3164,8 @@ function openPreview(id, updateUrl = true) {
     if (!(typeof InviteInteractions !== "undefined" && document.body.classList.contains("browse-home") && InviteInteractions.previewHistory(item))) window.history.replaceState({ modalOpen: true, templateId: item.id }, "", url.toString());
   }
 
-  // Update Open Graph and Twitter card meta tags for this specific preview
-  updateMetaTagsForDesign(item);
-
   const prices = getItemPrices(item);
-  trackConversionEvent("select_design", {
+  const selectDesign = {
     item_id: String(item.id),
     item_name: item.name,
     content_name: item.name,
@@ -3166,6 +3174,11 @@ function openPreview(id, updateUrl = true) {
     content_category: item.style || "Digital Wedding Invitation",
     value: currentCurrency === "INR" ? prices.priceINR : prices.priceUSD,
     currency: currentCurrency
+  };
+  // Share tags and ad tracking wait until the tapped design is on screen, keeping taps responsive.
+  afterNextPaint(() => {
+    updateMetaTagsForDesign(item);
+    trackConversionEvent("select_design", selectDesign);
   });
 
   // Update header, tags, price & counter badges
@@ -3264,9 +3277,12 @@ function openPreview(id, updateUrl = true) {
   // Trigger cinematic entrance animation (spring from dramatic pose to rest)
   phonePhysicsTriggerEntrance();
 
-  // Move focus to the close button for keyboard users
+  // Move focus to the close button for keyboard users when the preview first opens.
   const closeBtn = previewModal.querySelector(".preview-modal-close");
-  if (closeBtn) closeBtn.focus({preventScroll:true});
+  // Focusing forces a full style pass; doing it after the first paint keeps the opening tap quick.
+  if (closeBtn && (!wasOpen || !previewModal.contains(document.activeElement))) afterNextPaint(() => {
+    if (previewModal.classList.contains("is-open") && !previewModal.contains(document.activeElement)) closeBtn.focus({preventScroll:true});
+  });
   if (typeof InviteInteractions !== "undefined") InviteInteractions.afterPreview(item);
 }
 
@@ -3326,14 +3342,10 @@ function closePreview(updateUrl = true) {
     document.activeElement.blur();
   }
 
-  // Restore default Open Graph tags
-  restoreDefaultMetaTags();
-
   previewModal.classList.remove("is-open");
   previewModal.setAttribute("aria-hidden", "true");
   document.documentElement.classList.remove("preview-modal-open");
   document.body.classList.remove("preview-modal-open");
-  if (typeof updateMobileBookingBar === "function") updateMobileBookingBar();
   if (typeof previewState.savedScrollY === "number" && previewState.savedScrollY >= 0) {
     window.scrollTo(0, previewState.savedScrollY);
     previewState.savedScrollY = -1;
@@ -3356,10 +3368,14 @@ function closePreview(updateUrl = true) {
   phonePhysicsStop();
   phonePhysicsDisableGyroscope();
 
-  // Restore focus to the originating trigger
-  if (previewState.lastFocusedElement && typeof previewState.lastFocusedElement.focus === "function") {
-    previewState.lastFocusedElement.focus({preventScroll:true});
-  }
+  // Share tags, the booking shortcut and focus catch up after the page behind has painted.
+  const returnFocus = previewState.lastFocusedElement;
+  afterNextPaint(() => {
+    if (previewModal.classList.contains("is-open")) return;
+    restoreDefaultMetaTags();
+    if (typeof updateMobileBookingBar === "function") updateMobileBookingBar();
+    if (returnFocus && typeof returnFocus.focus === "function") returnFocus.focus({preventScroll:true});
+  });
 
   // Close FAQ popup if open
   closePreviewFaq();
