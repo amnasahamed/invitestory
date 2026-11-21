@@ -19,11 +19,11 @@ test('every catalogue cover exists in normal repository assets, including Dearly
   }
 });
 
-test('all 44 catalogue previews resolve to existing local entry points', () => {
+test('all 49 catalogue previews resolve to existing local entry points', () => {
   const urls = [...source.matchAll(/localDemoUrl: "([^"]+)"/g)].map(match => match[1]);
-  assert.equal(urls.length, 44);
-  assert.equal(new Set(urls).size, 44);
-  assert.equal(manifest.designs.length, 44);
+  assert.equal(urls.length, 49);
+  assert.equal(new Set(urls).size, 49);
+  assert.equal(manifest.designs.length, 49);
   for (const design of manifest.designs) {
     assert.ok(urls.includes(design.url), `manifest mismatch: ${design.name}`);
     assert.ok(design.url.startsWith('/previews/') || design.url.startsWith('/dearly/'));

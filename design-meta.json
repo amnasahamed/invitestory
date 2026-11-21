@@ -389,6 +389,56 @@
     "desc": "Ivory jali palace invitation with cinematic doors, music, programme, directions and RSVP.",
     "url": "https://www.invitestory.in/?design=noor-mahal"
   },
+  "48": {
+    "id": 48,
+    "name": "Firdaus",
+    "slug": "firdaus",
+    "image": "assets/preview/48.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/48.png",
+    "title": "InviteStory – Firdaus Wedding Invitation",
+    "desc": "Garden Nikah invitation: a brass-clasped keepsake opens into a lantern-lit garden with Nikah, Walima, place card and RSVP.",
+    "url": "https://www.invitestory.in/?design=firdaus"
+  },
+  "49": {
+    "id": 49,
+    "name": "Padharo Sa",
+    "slug": "padharo-sa",
+    "image": "assets/preview/49.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/49.png",
+    "title": "InviteStory – Padharo Sa Wedding Invitation",
+    "desc": "Hand-painted Rajasthani wedding-home story: mehendi, a lamp-lit sangeet, marigold mandap and RSVP.",
+    "url": "https://www.invitestory.in/?design=padharo-sa"
+  },
+  "50": {
+    "id": 50,
+    "name": "Malligai Vaasal",
+    "slug": "malligai-vaasal",
+    "image": "assets/preview/50.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/50.png",
+    "title": "InviteStory – Malligai Vaasal Wedding Invitation",
+    "desc": "Tamil temple-door invitation: light the lamp to open a jasmine wedding morning with Oonjal, Muhurtham, Virundhu and RSVP.",
+    "url": "https://www.invitestory.in/?design=malligai-vaasal"
+  },
+  "51": {
+    "id": 51,
+    "name": "Yaadein",
+    "slug": "yaadein",
+    "image": "assets/preview/51.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/51.png",
+    "title": "InviteStory – Yaadein Wedding Invitation",
+    "desc": "Watercolour scrapbook invitation: a wax-sealed letter, your photo, three illustrated celebrations, a 3D diya and RSVP.",
+    "url": "https://www.invitestory.in/?design=yaadein"
+  },
+  "52": {
+    "id": 52,
+    "name": "Chapel Bells",
+    "slug": "chapel-bells",
+    "image": "assets/preview/52.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/52.png",
+    "title": "InviteStory – Chapel Bells Wedding Invitation",
+    "desc": "Goan Christian invitation: ring the bell to open a love letter with church, 3D rings, garden reception and RSVP.",
+    "url": "https://www.invitestory.in/?design=chapel-bells"
+  },
   "marigold-bhavan": {
     "id": 1,
     "name": "Marigold Bhavan",
@@ -778,5 +828,55 @@
     "title": "InviteStory – Noor Mahal Wedding Invitation",
     "desc": "Ivory jali palace invitation with cinematic doors, music, programme, directions and RSVP.",
     "url": "https://www.invitestory.in/?design=noor-mahal"
+  },
+  "firdaus": {
+    "id": 48,
+    "name": "Firdaus",
+    "slug": "firdaus",
+    "image": "assets/preview/48.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/48.png",
+    "title": "InviteStory – Firdaus Wedding Invitation",
+    "desc": "Garden Nikah invitation: a brass-clasped keepsake opens into a lantern-lit garden with Nikah, Walima, place card and RSVP.",
+    "url": "https://www.invitestory.in/?design=firdaus"
+  },
+  "padharo-sa": {
+    "id": 49,
+    "name": "Padharo Sa",
+    "slug": "padharo-sa",
+    "image": "assets/preview/49.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/49.png",
+    "title": "InviteStory – Padharo Sa Wedding Invitation",
+    "desc": "Hand-painted Rajasthani wedding-home story: mehendi, a lamp-lit sangeet, marigold mandap and RSVP.",
+    "url": "https://www.invitestory.in/?design=padharo-sa"
+  },
+  "malligai-vaasal": {
+    "id": 50,
+    "name": "Malligai Vaasal",
+    "slug": "malligai-vaasal",
+    "image": "assets/preview/50.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/50.png",
+    "title": "InviteStory – Malligai Vaasal Wedding Invitation",
+    "desc": "Tamil temple-door invitation: light the lamp to open a jasmine wedding morning with Oonjal, Muhurtham, Virundhu and RSVP.",
+    "url": "https://www.invitestory.in/?design=malligai-vaasal"
+  },
+  "yaadein": {
+    "id": 51,
+    "name": "Yaadein",
+    "slug": "yaadein",
+    "image": "assets/preview/51.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/51.png",
+    "title": "InviteStory – Yaadein Wedding Invitation",
+    "desc": "Watercolour scrapbook invitation: a wax-sealed letter, your photo, three illustrated celebrations, a 3D diya and RSVP.",
+    "url": "https://www.invitestory.in/?design=yaadein"
+  },
+  "chapel-bells": {
+    "id": 52,
+    "name": "Chapel Bells",
+    "slug": "chapel-bells",
+    "image": "assets/preview/52.png",
+    "imageUrl": "https://www.invitestory.in/assets/preview/52.png",
+    "title": "InviteStory – Chapel Bells Wedding Invitation",
+    "desc": "Goan Christian invitation: ring the bell to open a love letter with church, 3D rings, garden reception and RSVP.",
+    "url": "https://www.invitestory.in/?design=chapel-bells"
   }
 }

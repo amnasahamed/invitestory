@@ -45,7 +45,12 @@ const PreviewThemes = (() => {
     44:['cinematic','#e7dfd2','#fffaf3','#55443a','#9a6d3c','#c5a672'],
     45:['botanical','#8a8b68','#fffaf0','#424637','#65704a','#af9360'],
     46:['cinematic','#30040a','#fff3e8','#4b2727','#7a1320','#c19455'],
-    47:['cinematic','#cbb99d','#fffaf1','#4d4135','#795532','#c5a36b']
+    47:['cinematic','#cbb99d','#fffaf1','#4d4135','#795532','#c5a36b'],
+    48:['botanical','#263e33','#fbf6ea','#24382d','#2f5040','#b89a5e'],
+    49:['festive','#efcf96','#fff8ea','#4a2a1c','#8c3b22','#d08a3a'],
+    50:['festive','#691e24','#fff6ea','#3f1a1b','#7d2229','#c79a4b'],
+    51:['paper','#d9d3c1','#fbf8f0','#463b30','#5d6b4c','#b49b72'],
+    52:['paper','#dfe6ee','#fdfaf2','#1f3454','#24406b','#c3733f']
   };
   const neutral=['paper','#edf2ef','#ffffff','#173e35','#173e35','#547c6b'];
   const rgb=hex=>hex.slice(1).match(/../g).map(value=>parseInt(value,16));

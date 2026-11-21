@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" fill="none" role="img" aria-labelledby="title desc">
+<title id="title">Two interlocking gold wedding rings</title><desc id="desc">A warm gold pair of wedding bands, linked together.</desc>
+<defs>
+ <linearGradient id="goldA" x1="110" y1="115" x2="340" y2="320" gradientUnits="userSpaceOnUse"><stop stop-color="#77521f"/><stop offset=".18" stop-color="#e5bf73"/><stop offset=".32" stop-color="#fff0bb"/><stop offset=".49" stop-color="#ad792e"/><stop offset=".68" stop-color="#e6bc6c"/><stop offset=".84" stop-color="#80571f"/><stop offset="1" stop-color="#cf9c4a"/></linearGradient>
+ <linearGradient id="goldB" x1="295" y1="100" x2="435" y2="320" gradientUnits="userSpaceOnUse"><stop stop-color="#8a6126"/><stop offset=".2" stop-color="#ffe3a0"/><stop offset=".38" stop-color="#d8a64e"/><stop offset=".58" stop-color="#90602a"/><stop offset=".76" stop-color="#f6d897"/><stop offset="1" stop-color="#9b6e30"/></linearGradient>
+ <linearGradient id="glint" x1="160" y1="120" x2="240" y2="310" gradientUnits="userSpaceOnUse"><stop stop-color="#fff3ca"/><stop offset=".5" stop-color="#ebc97f" stop-opacity=".15"/><stop offset="1" stop-color="#fff1c0" stop-opacity=".7"/></linearGradient>
+</defs>
+<g transform="rotate(-19 215 210)"><ellipse cx="215" cy="210" rx="100" ry="130" stroke="#6b481c" stroke-width="26"/><ellipse cx="215" cy="210" rx="100" ry="130" stroke="url(#goldA)" stroke-width="23"/><ellipse cx="215" cy="210" rx="89" ry="119" stroke="url(#glint)" stroke-width="2"/><path d="M138 128C159 103 189 87 215 80" stroke="#fff2c7" stroke-opacity=".8" stroke-width="2" stroke-linecap="round"/></g>
+<g transform="rotate(31 345 215)"><ellipse cx="345" cy="215" rx="92" ry="126" stroke="#6b481c" stroke-width="26"/><ellipse cx="345" cy="215" rx="92" ry="126" stroke="url(#goldB)" stroke-width="23"/><ellipse cx="345" cy="215" rx="81" ry="115" stroke="#f9dca0" stroke-opacity=".5" stroke-width="1.5"/></g>
+<g transform="rotate(-19 215 210)"><path d="M315 210A100 130 0 0 1 215 340" stroke="#6b481c" stroke-width="26"/><path d="M315 210A100 130 0 0 1 215 340" stroke="url(#goldA)" stroke-width="23"/><path d="M304 210A89 119 0 0 1 215 329" stroke="url(#glint)" stroke-width="2"/></g>
+</svg>

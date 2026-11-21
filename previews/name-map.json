@@ -286,36 +286,74 @@
     ]
   },
   "/previews/amber/": {
-    "first": ["Arman", "Arman Cole"],
-    "second": ["Nina", "Nina Wells"]
+    "first": [
+      "Arman",
+      "Arman Cole"
+    ],
+    "second": [
+      "Nina",
+      "Nina Wells"
+    ]
   },
   "/previews/bahaar/": {
-    "first": ["Theo", "Theo Ashford"],
-    "second": ["Mira", "Mira Vale"]
+    "first": [
+      "Theo",
+      "Theo Ashford"
+    ],
+    "second": [
+      "Mira",
+      "Mira Vale"
+    ]
   },
   "/previews/bloom/": {
-    "first": ["Milan"],
-    "second": ["Zoe"]
+    "first": [
+      "Milan"
+    ],
+    "second": [
+      "Zoe"
+    ]
   },
   "/previews/exotic/": {
-    "first": ["Leo"],
-    "second": ["Isla"]
+    "first": [
+      "Leo"
+    ],
+    "second": [
+      "Isla"
+    ]
   },
   "/previews/mithril/": {
-    "first": ["Kian"],
-    "second": ["Aria"]
+    "first": [
+      "Kian"
+    ],
+    "second": [
+      "Aria"
+    ]
   },
   "/previews/olive/": {
-    "first": ["Rafael"],
-    "second": ["Ava"]
+    "first": [
+      "Rafael"
+    ],
+    "second": [
+      "Ava"
+    ]
   },
   "/previews/ruby/": {
-    "first": ["Julian", "Julian Hayes"],
-    "second": ["Clara", "Clara Rowe"]
+    "first": [
+      "Julian",
+      "Julian Hayes"
+    ],
+    "second": [
+      "Clara",
+      "Clara Rowe"
+    ]
   },
   "/previews/zareen/": {
-    "first": ["Kai"],
-    "second": ["Elena"]
+    "first": [
+      "Kai"
+    ],
+    "second": [
+      "Elena"
+    ]
   },
   "/dearly/aubergine-magnolia/": {
     "first": [
@@ -347,6 +385,46 @@
     ],
     "second": [
       "Jamie"
+    ]
+  },
+  "/previews/firdaus/": {
+    "first": [
+      "Zayd"
+    ],
+    "second": [
+      "Amina"
+    ]
+  },
+  "/previews/padharo-sa/": {
+    "first": [
+      "Ishaan"
+    ],
+    "second": [
+      "Aarohi"
+    ]
+  },
+  "/previews/malligai-vaasal/": {
+    "first": [
+      "Karthik"
+    ],
+    "second": [
+      "Meenakshi"
+    ]
+  },
+  "/previews/yaadein/": {
+    "first": [
+      "Ishaan"
+    ],
+    "second": [
+      "Aarohi"
+    ]
+  },
+  "/previews/chapel-bells/": {
+    "first": [
+      "Matthew"
+    ],
+    "second": [
+      "Anna"
     ]
   }
 }

@@ -1,0 +1,45 @@
+/* Only the opening dialog. The invitation after it is deliberately unchanged. */
+#welcome{background:#c6a67d;color:#473f32;padding:32px 24px;isolation:isolate;perspective:1800px}
+#welcome[open]{display:flex;align-items:flex-start;justify-content:center}
+#welcome::backdrop{background:#a88a63}
+#welcome .welcome-wash{position:fixed;inset:0;background:linear-gradient(135deg,#59402018,transparent 55%,#422b261a),url(assets/goa-veranda-still-life.webp) center/cover;opacity:1;transform:none}
+#welcome .welcome-sunlight{position:fixed;inset:0;pointer-events:none;background:linear-gradient(121deg,transparent 19%,#fff3ce24 20%,#fff0b800 31%,#ffebb72a 44%,transparent 55%);mix-blend-mode:screen;animation:opening-light 5s ease-out both}
+#welcome .welcome-folio{position:relative;width:min(530px,100%);margin:auto;perspective:1400px;transform:rotate(-1deg);filter:drop-shadow(12px 23px 15px #49391e55);isolation:isolate}
+#welcome .paper-wing{position:absolute;top:0;bottom:0;width:50.15%;min-height:100%;z-index:0;background:#e9dec5 url(assets/opener-pattern.svg) center/96px;box-shadow:inset 0 0 2px #5e472d70;backface-visibility:hidden;transition:transform 1.25s cubic-bezier(.4,0,.2,1),opacity 1.25s;border:0;clip-path:polygon(0 .4%,7% 0,19% .2%,35% 0,56% .25%,73% 0,88% .2%,100% 0,100% 100%,84% 99.8%,65% 100%,41% 99.8%,21% 100%,0 99.7%)}
+#welcome .wing-left{left:0;transform-origin:0 50%;border-radius:3px 0 0 3px}
+#welcome .wing-right{right:0;transform-origin:100% 50%;border-radius:0 3px 3px 0}
+#welcome .paper-wing:before{inset:17px 0 17px 17px;border:0;background:linear-gradient(90deg,#f4ebd8,#fff8e7 65%,#e5d9c1);box-shadow:inset 0 0 0 1px #b5945b4a;opacity:1}
+#welcome .wing-right:before{inset:17px 17px 17px 0;background:linear-gradient(90deg,#e7dcc7,#fff8e8 25%,#f3e9d3)}
+#welcome .paper-wing:after{inset:23px 0 23px 23px;width:auto;opacity:.6;border:1px solid #b4997040;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='.16'/%3E%3C/svg%3E");border-right:0}
+#welcome .wing-right:after{inset:23px 23px 23px 0;border-left:0;border-right:1px solid #b4997040}
+#welcome .welcome-inside{position:relative;z-index:2;padding:32px 42px 23px;min-height:0;transform:none;background:none;transition:opacity .45s,transform .6s}
+#welcome .welcome-postmark{width:108px;height:45px;margin:0 auto 22px;color:#7b4432;position:relative;transform:rotate(-3deg)}
+#welcome .welcome-postmark:before,#welcome .welcome-postmark:after{content:"";position:absolute;width:32px;height:5px;top:19px;border-top:1px solid #a88456;border-bottom:1px solid #a88456}
+#welcome .welcome-postmark:before{left:-42px}#welcome .welcome-postmark:after{right:-42px}
+#welcome .welcome-postmark span{display:block;font:32px/.9 var(--serif);letter-spacing:.1em}
+#welcome .welcome-postmark i{font-size:23px;font-weight:400}
+#welcome .welcome-postmark small{display:block;font:6px Arial,sans-serif;letter-spacing:.17em;margin-top:9px}
+#welcome .welcome-inside>.eyebrow{font-size:8px;letter-spacing:.19em;color:#5a6769;margin:0}
+#welcome .bell-stage{width:190px;height:188px;margin:6px auto 0;position:relative}
+#welcome .opening-bell{height:187px;width:160px;object-fit:contain;margin:auto;transform-origin:50% 9%;filter:drop-shadow(5px 10px 5px #59432230)}
+#welcome .ring{border-color:#b8873d;left:40px;top:31px;width:110px;height:110px}
+#welcome h2{font-size:62px;line-height:.98;letter-spacing:-.04em;font-weight:400;color:#384b48;margin:5px 0 20px;text-shadow:0 1px #fff9}
+#welcome #welcome-copy{font:14px/1.65 Georgia,serif;color:#5c5040;margin:0 0 23px}
+#welcome .button{background:linear-gradient(110deg,#335d61,#234d53);border:1px solid #244a4b;color:#fff9e9;box-shadow:inset 0 0 0 3px #ffffff0b,2px 3px 0 #a88a56,4px 7px 8px #4f3a2724;padding:16px 24px;min-height:52px;font-size:11px;letter-spacing:.01em;gap:22px;transform:none;border-radius:2px;position:relative}
+#welcome .button:before{content:"";position:absolute;inset:4px;border:1px solid #b4bb9e5c;border-radius:1px;pointer-events:none}
+#welcome .button:hover{background:#305e60;transform:translateY(-2px)}#welcome .button:active{transform:translateY(2px);box-shadow:inset 0 0 0 3px #ffffff0b,1px 1px 0 #a88a56,2px 3px 5px #4f3a2724}
+#welcome .button:focus-visible{outline-color:#9a4b32;outline-offset:7px}
+#welcome .opening-note{color:#a0583f;font:italic 25px/1.18 var(--serif);margin:21px 0 0;min-height:30px;max-width:360px}
+#welcome .sample-label{color:#756c5c;font-size:6px;letter-spacing:.17em;margin:24px 0 0}
+#welcome.is-unfolding .wing-left{transform:rotateY(-110deg);opacity:0}
+#welcome.is-unfolding .wing-right{transform:rotateY(110deg);opacity:0}
+#welcome.is-unfolding .welcome-inside{opacity:0;transform:translateY(-15px) scale(.98)}
+#welcome.is-leaving{opacity:0;transition:opacity .4s}
+@keyframes opening-light{from{opacity:.25}to{opacity:1}}
+@media(max-width:650px){#welcome{padding:27px 21px;background:#c8af8f}#welcome .welcome-wash{background-position:50% 50%}#welcome .welcome-folio{max-width:380px;transform:rotate(-.5deg)}#welcome .welcome-inside{padding:31px 25px 26px}#welcome .paper-wing{background-size:79px}#welcome .paper-wing:before{inset:12px 0 12px 12px}#welcome .wing-right:before{inset:12px 12px 12px 0}#welcome .paper-wing:after{inset:18px 0 18px 18px}#welcome .wing-right:after{inset:18px 18px 18px 0}#welcome .welcome-postmark{margin-bottom:20px}#welcome .welcome-inside>.eyebrow{font-size:6.5px;letter-spacing:.15em}#welcome .bell-stage{height:160px;width:160px;margin:6px auto 0}#welcome .opening-bell{height:159px;width:132px}#welcome .ring{left:32px;top:26px;width:95px;height:95px}#welcome h2{font-size:48px;margin:5px 0 18px;line-height:1}#welcome #welcome-copy{font-size:12px;line-height:1.65;margin-bottom:21px}#welcome .button{font-size:9px;min-height:49px;padding:14px 18px;gap:15px}#welcome .opening-note{font-size:23px;line-height:1.12;margin-top:22px;max-width:260px;min-height:26px}#welcome .sample-label{font-size:5px;margin-top:22px}}
+@media(max-width:350px){#welcome{padding:22px 16px}#welcome .welcome-inside{padding:27px 24px 24px}#welcome h2{font-size:40px}#welcome .welcome-postmark{margin-bottom:17px}#welcome .bell-stage{height:140px}#welcome .opening-bell{height:140px;width:116px}#welcome #welcome-copy{font-size:11px}#welcome .button{font-size:8px;gap:13px;padding:14px 16px}#welcome .opening-note{font-size:21px}}
+@media(max-height:730px){#welcome{padding-top:20px;padding-bottom:20px}#welcome .welcome-inside{padding-top:27px;padding-bottom:24px}#welcome .welcome-postmark{margin-bottom:13px;height:37px}#welcome .welcome-postmark span{font-size:27px}#welcome .welcome-postmark small{font-size:5px}#welcome .bell-stage{height:126px;margin-top:3px}#welcome .opening-bell{height:126px;width:110px}#welcome h2{font-size:48px;margin-bottom:15px}#welcome #welcome-copy{margin-bottom:18px;font-size:12px}#welcome .opening-note{font-size:22px;margin-top:19px}#welcome .sample-label{margin-top:18px}}
+@media(max-height:620px){#welcome .welcome-inside{padding-top:24px;padding-bottom:21px}#welcome .welcome-postmark{display:none}#welcome .bell-stage{height:103px}#welcome .opening-bell{height:104px;width:91px}#welcome h2{font-size:41px}#welcome .opening-note{font-size:20px}#welcome .sample-label{margin-top:16px}}
+@media(max-width:350px) and (max-height:730px){#welcome h2{font-size:39px}}
+@media(prefers-reduced-motion:reduce){#welcome *,#welcome *:before,#welcome *:after{animation:none!important;transition:none!important}}
+.reduced-motion #welcome *, .reduced-motion #welcome *:before,.reduced-motion #welcome *:after{animation:none!important;transition:none!important}
