@@ -2462,8 +2462,8 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
     key: window.RAZORPAY_KEY_ID || "rzp_live_YOUR_KEY_HERE",
     amount: Math.round(totalVal * 100),
     currency: currencyCode,
-    name: "InviteStory",
-    description: `${name} — Digital Wedding Invitation`,
+    name: "More Good Things LLP",
+    description: `InviteStory · ${name} — Digital Wedding Invitation`,
     image: "https://invitestory.in/logo/noappicon.png",
     notes: {
       package: packageName(tier),
