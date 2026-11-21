@@ -97,7 +97,7 @@
     },
     {
       "id": 21,
-      "name": "Rajwada Royale \u2013 Alt",
+      "name": "Rajwada Royale – Alt",
       "url": "/previews/rajwada-royale/"
     },
     {
@@ -199,6 +199,31 @@
       "id": 47,
       "name": "Noor Mahal",
       "url": "/previews/zareen/"
+    },
+    {
+      "id": 48,
+      "name": "Firdaus",
+      "url": "/previews/firdaus/"
+    },
+    {
+      "id": 49,
+      "name": "Padharo Sa",
+      "url": "/previews/padharo-sa/"
+    },
+    {
+      "id": 50,
+      "name": "Malligai Vaasal",
+      "url": "/previews/malligai-vaasal/"
+    },
+    {
+      "id": 51,
+      "name": "Yaadein",
+      "url": "/previews/yaadein/"
+    },
+    {
+      "id": 52,
+      "name": "Chapel Bells",
+      "url": "/previews/chapel-bells/"
     },
     {
       "id": 35,

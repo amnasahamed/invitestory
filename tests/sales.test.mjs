@@ -98,8 +98,8 @@ test('local development does not send custom events to the production PostHog pr
 
 test('catalogue result counts follow the same collection, style and search filters as the designs shown', () => {
   const site = website();
-  assert.equal(site.run('getFilteredTemplates().length'), 38);
-  assert.equal(site.run("activeTierFilter = 3; getFilteredTemplates().length"), 12);
+  assert.equal(site.run('getFilteredTemplates().length'), 43);
+  assert.equal(site.run("activeTierFilter = 3; getFilteredTemplates().length"), 17);
   assert.equal(site.run("activeTierFilter = 4; getFilteredTemplates().length"), 4);
   assert.equal(site.run("searchQuery = 'magnolia'; getFilteredTemplates().length"), 1);
   assert.equal(site.run("searchQuery = 'unmatched'; getFilteredTemplates().length"), 0);
@@ -112,6 +112,18 @@ test('new invitation collection is split evenly between Premium and Luxury prici
   assert.deepEqual(JSON.parse(pricing), [
     [40, 'Sunehri', 1999], [41, 'Gulistan', 1999], [42, 'Gulabi', 1999], [46, 'Gulnaar', 1999],
     [43, 'Raat Rani', 2999], [44, 'Aabha', 2999], [45, 'Aranya', 2999], [47, 'Noor Mahal', 2999]
+  ]);
+});
+
+test('story invitations are Luxury designs with their own previews', () => {
+  const site = website();
+  const designs = site.run(`JSON.stringify(TEMPLATE_DATABASE.filter(item => item.id >= 48 && item.id <= 52).map(item => [item.id, item.name, item.slug, item.tier, item.priceINR, item.priceUSD, item.localDemoUrl]))`);
+  assert.deepEqual(JSON.parse(designs), [
+    [48, 'Firdaus', 'firdaus', 3, 2999, 45, '/previews/firdaus/'],
+    [49, 'Padharo Sa', 'padharo-sa', 3, 2999, 45, '/previews/padharo-sa/'],
+    [50, 'Malligai Vaasal', 'malligai-vaasal', 3, 2999, 45, '/previews/malligai-vaasal/'],
+    [51, 'Yaadein', 'yaadein', 3, 2999, 45, '/previews/yaadein/'],
+    [52, 'Chapel Bells', 'chapel-bells', 3, 2999, 45, '/previews/chapel-bells/']
   ]);
 });
 
@@ -140,7 +152,7 @@ test('Premium and Luxury totals charge only selected extras; Dearly charges neit
 
 test('discovery defaults to the full catalogue and preserves shared shortlist order', () => {
   const site = website();
-  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 44);
+  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 49);
   site.run('discovery.shared = [35, 1, 999];');
   assert.equal(site.run('JSON.stringify(getDiscoveryDesigns(TEMPLATE_DATABASE).map(item => item.id))'), '[35,1]');
   site.run('discovery.savedOnly = true; previewFavourites.add(21);');
@@ -153,9 +165,9 @@ test('homepage starts with a short mix of collections until the visitor asks for
   const featured = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).map(item => item.tier))');
   assert.deepEqual(JSON.parse(featured), [2, 2, 2, 2, 3, 3, 4, 4]);
   site.run("activeTagFilter = 'royal';");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 44);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 49);
   site.run("activeTagFilter = 'all'; catalogueExpanded = true;");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 44);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 49);
 });
 
 test('hidden designs stay out of browsing but still open from a direct link', () => {
@@ -169,14 +181,14 @@ test('hidden designs stay out of browsing but still open from a direct link', ()
   assert.equal(site.run('visits.some(id => TEMPLATE_DATABASE.find(item => item.id === id).hidden)'), false);
 });
 
-test('preview arrows traverse all 38 listed designs across collections and wrap both ways', () => {
+test('preview arrows traverse all 43 listed designs across collections and wrap both ways', () => {
   const site = website();
   site.run('const visits=[]; openPreview=id=>{visits.push(id);previewState.currentIndex=TEMPLATE_DATABASE.findIndex(item=>item.id===id);};previewState.currentIndex=0;');
-  for (let i=0;i<38;i++) site.run('previewNext()');
-  assert.equal(site.run('new Set(visits).size'), 38);
+  for (let i=0;i<43;i++) site.run('previewNext()');
+  assert.equal(site.run('new Set(visits).size'), 43);
   assert.equal(site.run('previewState.currentIndex'), 0);
   site.run('previewPrev()');
-  assert.equal(site.run('previewState.currentIndex'), 43);
+  assert.equal(site.run('previewState.currentIndex'), 48);
   assert.equal(site.run('TEMPLATE_DATABASE[previewState.currentIndex].tier'), 4);
 });
 

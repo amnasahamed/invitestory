@@ -81,6 +81,24 @@
     }
     update(document.body);
     document.title=replace(document.title);
+    // Marked monograms ("A & Z") swap each sample initial for the chosen name's initial.
+    const map=maps[location.pathname.replace(/index\.html$/, '').replace(/\/?$/, '/')] || {};
+    const initials=new Map();
+    for(const role of ['first','second']) {
+      const from=Array.from(map[role]?.[0] || '')[0], to=Array.from(names[role] || '')[0];
+      if(from && to) initials.set(from.toLocaleLowerCase(), to);
+    }
+    if(initials.size) for(const mark of document.querySelectorAll('[data-preview-monogram]')) {
+      const walker=document.createTreeWalker(mark,NodeFilter.SHOW_TEXT);
+      while(walker.nextNode()) {
+        const node=walker.currentNode;
+        node.data=node.data.replace(/^(\s*)(\p{L})(\s*)$/u,(all,before,letter,after)=>{
+          const to=initials.get(letter.toLocaleLowerCase());
+          if(!to) return all;
+          return before+(letter===letter.toLocaleLowerCase() ? to.toLocaleLowerCase() : to.toLocaleUpperCase())+after;
+        });
+      }
+    }
     new MutationObserver(records=>{for(const record of records)if(record.type==='characterData')update(record.target);else for(const node of record.addedNodes)update(node);}).observe(document.body,{childList:true,characterData:true,subtree:true});
   },{once:true});
 })();

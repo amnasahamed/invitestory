@@ -1,0 +1,59 @@
+/* Stationery study. All folds share one plane; the closed flap overlaps the pocket. */
+.arrival-object{--envelope-top:112px;--envelope-bottom:20px;--flap-height:153px;width:min(600px,88vw);height:410px;margin-top:-12px;margin-bottom:8px;transform:rotate(-1.35deg)}
+.arrival-back{inset:var(--envelope-top) 0 var(--envelope-bottom);transform:none;border:1px solid #b9a58a;border-radius:2px;background:url('assets/handmade-paper.svg') repeat,linear-gradient(130deg,#f2e9d4,#e3d2b6);box-shadow:1px 2px 2px #76583630,4px 10px 15px #71563724,12px 23px 31px #71563719}
+.arrival-back:after{content:"";position:absolute;inset:3px;border:1px solid #fff8e288;border-radius:1px}
+.arrival-lining{inset:calc(var(--envelope-top) + 7px) 7px calc(var(--envelope-bottom) + 7px);transform:none;background:linear-gradient(#f4e9ce45,#e4d4b239),url('assets/watercolor-arch.webp') center 31% / cover;border:1px solid #bba98a;opacity:.9;box-shadow:inset 0 3px 4px #71563729}
+.arrival-flap{top:var(--envelope-top);height:var(--flap-height);transform:rotateX(0);clip-path:polygon(0 0,100% 0,52% 100%,48% 100%);background:url('assets/handmade-paper.svg') repeat,linear-gradient(170deg,#fbf4e4 0%,#f0e4cb 68%,#d6c3a4 100%);opacity:1;border-top:1px solid #fff9eb;filter:none;box-shadow:inset 0 3px 4px #af957625;transform-style:preserve-3d}
+.arrival-flap:after{content:"";position:absolute;inset:5px 10px 7px;clip-path:polygon(0 0,100% 0,52% 100%,48% 100%);background:linear-gradient(170deg,#fff9eb22,#e7d7bc00);border-top:1px solid #bb9d752b}
+.arrival-front{top:var(--envelope-top);bottom:var(--envelope-bottom);transform:none;clip-path:polygon(0 0,50% 46%,100% 0,100% 100%,0 100%);background:url('assets/handmade-paper.svg') repeat,#eee1c9;border:0;box-shadow:none;border-radius:0 0 2px 2px;overflow:hidden}
+.arrival-front:before{background:none;border:1px solid #b8a08070;z-index:3;pointer-events:none}
+.envelope-fold{position:absolute;inset:0;display:block;background-image:url('assets/handmade-paper.svg');pointer-events:none}
+.fold-left{clip-path:polygon(0 0,56% 53%,0 100%);background-color:#eadcc2;background-image:url('assets/handmade-paper.svg'),linear-gradient(25deg,#ddc9a957,#fbf2de80 70%)}
+.fold-right{clip-path:polygon(100% 0,44% 53%,100% 100%);background-color:#e7d8bd;background-image:url('assets/handmade-paper.svg'),linear-gradient(-25deg,#d2b99542,#f7eedb90 75%)}
+.fold-bottom{clip-path:polygon(0 100%,49% 44%,51% 44%,100% 100%);background-color:#f1e5cf;background-image:url('assets/handmade-paper.svg'),linear-gradient(#fbf4e6cc,#e9d9be40);filter:drop-shadow(0 -1px 1px #8a6b402a)}
+.arrival-address{z-index:4;bottom:15px;left:12%;right:12%;font-size:24px;line-height:1.08;letter-spacing:.1px;color:#755843;text-shadow:0 1px #fffae8b0}
+.arrival-address small{font-size:7.5px;letter-spacing:1.7px;margin-top:10px;color:#867457}
+.arrival-seal{left:calc(50% - 45px);top:219px;width:90px;height:90px;background:url('assets/wax-seal.svg') center/contain no-repeat;border:0;border-radius:48%;padding:0 3px 5px 0;box-shadow:none;filter:drop-shadow(2px 5px 3px #613c2c3d);font-size:29px;color:#753d2e;text-shadow:0 1px 0 #dca184c9,0 -1px 0 #6433247d;letter-spacing:-2.5px;transform:rotate(-8deg);pointer-events:auto}
+.arrival-seal:after{display:none}.arrival-seal span{transform:translateY(-1px)}
+.arrival-seal:hover{filter:drop-shadow(2px 6px 4px #613c2c55);transform:rotate(-5deg) translateY(-1px)}
+.arrival-seal:focus-visible{outline:2px solid #765b3e;outline-offset:5px}
+.arrival-letter{height:365px;left:12%;width:74%;top:35px;padding:28px 34px 24px;background:url('assets/handmade-paper.svg') repeat,linear-gradient(0deg,transparent 49.7%,#c6ad7c19 50%,#fffcf4b5 50.3%,transparent 50.7%),#fcf6e8;border:1px solid #d9c6a277;border-radius:1px;box-shadow:0 1px 0 #fffdf3,2px 4px 5px #7c643325,8px 13px 18px #7b613524;transform:translateY(140px) rotate(1.5deg)}
+.arrival-letter:before{content:"";position:absolute;inset:11px;border:1px solid #b7976340;pointer-events:none}
+.arrival-letter:after{content:"";position:absolute;inset:15px;border:1px solid #b797631a;pointer-events:none}
+.arrival-letter .letter-hush{font-size:6.8px;letter-spacing:1.4px;margin-bottom:16px;color:#897454;position:relative}
+.arrival-letter h3{font-weight:400;font-size:39px;line-height:1;margin-bottom:17px;position:relative}
+.arrival-letter .arrival-lines{font-size:23px;line-height:1.12;position:relative}
+.arrival-letter .arrival-lines em{margin-top:10px}.arrival-sign{font-size:21px;line-height:1.1;margin-top:19px;position:relative;color:#866a50}
+.letter-bloom{position:absolute;left:calc(50% - 24px);bottom:18px;width:48px;height:48px;color:#b9a37c;opacity:.07;pointer-events:none}
+.arrival-photo{background:url('assets/handmade-paper.svg') repeat,#fcf8ed;box-shadow:1px 2px 2px #4f442c20,5px 9px 12px #4f442c2e}
+.arrival-jasmine{width:135px;height:195px;left:-28px;bottom:0}
+.is-unsealed .arrival-flap{transform:rotateX(178deg);opacity:1;background:url('assets/handmade-paper.svg') repeat,linear-gradient(#f0e6cf60,#f6eddb80),url('assets/watercolor-arch.webp') center 44% / cover;box-shadow:inset 0 -5px 7px #6d583e1a}
+.is-unsealed .arrival-letter{transform:translateY(-74px) rotate(1.5deg)}
+.is-unsealed .arrival-seal,.is-unsealed .arrival-seal:hover{transform:translate(15px,37px) rotate(20deg) scale(.8);opacity:0;pointer-events:none}
+.is-leaving .arrival-letter{transform:translateY(-94px) rotate(0)}
+@media(max-width:600px){
+ .arrival-object{--envelope-top:100px;--envelope-bottom:14px;--flap-height:125px;width:min(430px,88vw);height:340px;margin-top:-15px;margin-bottom:12px}
+ .arrival-heading{font-size:35px}
+ .arrival-seal{top:187px;width:75px;height:75px;left:calc(50% - 37.5px);font-size:25px;letter-spacing:-2px}
+ .arrival-address{font-size:19px;bottom:12px;left:8%;right:8%}.arrival-address small{font-size:6px;letter-spacing:1.1px;margin-top:8px}
+ .arrival-jasmine{width:88px;height:135px;left:-14px;bottom:2px}
+ .arrival-letter{height:340px;left:7%;width:84%;top:15px;padding:26px 17px 20px;transform:translateY(123px) rotate(1.5deg)}
+ .arrival-letter:before{inset:8px}.arrival-letter:after{inset:11px}
+ .arrival-letter .letter-hush{font-size:5.6px;letter-spacing:.9px;margin-bottom:16px}
+ .arrival-letter h3{font-size:32px;line-height:1;margin-bottom:17px}
+ .arrival-letter .arrival-lines{font-size:21px;line-height:1.12}.arrival-sign{font-size:20px;margin-top:18px}
+ .is-unsealed .arrival-letter{transform:translateY(-65px) rotate(1.5deg)}
+ .is-leaving .arrival-letter{transform:translateY(-80px) rotate(0)}
+}
+@media(max-width:350px){
+ .arrival-letter{left:5%;width:90%;padding:25px 15px 20px}
+ .arrival-letter h3{font-size:29px}.arrival-letter .arrival-lines{font-size:20px}.arrival-sign{font-size:19px}
+ .arrival-address{font-size:17.5px}.arrival-address small{font-size:5.7px;letter-spacing:.7px}
+}
+@media(max-height:720px){.arrival-object{height:325px;--envelope-bottom:8px;margin-top:-14px}.arrival-object .arrival-jasmine{bottom:-1px}.arrival-actions{min-height:80px}}
+@media(min-width:601px) and (max-height:720px){.is-unsealed .arrival-letter{transform:translateY(-106px) rotate(1.5deg)}.arrival-address{font-size:20px;bottom:10px}.arrival-address small{font-size:6px;margin-top:7px}.arrival-seal{top:201px;width:76px;height:76px;left:calc(50% - 38px)}.arrival-object{--flap-height:130px}}
+@media(prefers-reduced-motion:reduce){.arrival-seal:hover{transform:rotate(-8deg)}}
+.reduced-motion .arrival-seal:hover{transform:rotate(-8deg)}
+/* Keep the seal above the address when the envelope compresses on short screens. */
+@media(min-width:601px) and (max-height:720px){.arrival-object{--flap-height:110px}.arrival-seal{top:185px;width:64px;height:64px;left:calc(50% - 32px);font-size:22px}.arrival-address{font-size:19px}}
+@media(max-width:600px) and (max-height:720px){.arrival-object{--flap-height:115px}.arrival-seal{top:177px}}

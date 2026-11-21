@@ -1,0 +1,85 @@
+{
+  "verified_on": "2026-11-12",
+  "usage_notice": "These are public sample photographs for a design preview, not photographs of the user or their couple. Label sample imagery visibly. Do not imply photographer or pictured people endorse the site. Only recommended assets have been selected for publication.",
+  "license_notes": "Link credits to each source and license. Wikimedia source pages offer full originals. CC BY-SA terms apply to the photos and adaptations, not automatically to independent website code merely displaying them. Do not apply a conflicting restriction to the images.",
+  "assets": [
+    {
+      "file": "sample-wedding-hands.jpg",
+      "recommended": true,
+      "role": "Hero: candid clasped hands, red bridal bangles and cream sleeve",
+      "title": "Indian Culture Wedding (5) 09",
+      "author": "Aman Agrahari (AmanAgrahari01)",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Indian_Culture_Wedding_(5)_09.jpg",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "credit": "Photo: Aman Agrahari / Wikimedia Commons, CC BY-SA 4.0.",
+      "edits": "Unmodified Wikimedia 1280 px thumbnail; no retouching. If displayed cropped or filtered, disclose that treatment and retain CC BY-SA 4.0 for the photo.",
+      "dimensions": [
+        1280,
+        854
+      ],
+      "bytes": 158688
+    },
+    {
+      "file": "sample-ritual.jpg",
+      "recommended": true,
+      "role": "Supporting candid ritual detail: hands cupping marigold petals",
+      "title": "Indian wedding ceremony ritual",
+      "author": "Wikilover90",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Indian_wedding_ceremony_ritual.jpg",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "credit": "Photo: Wikilover90 / Wikimedia Commons, CC BY-SA 4.0.",
+      "edits": "Unmodified Wikimedia 1280 px thumbnail; no retouching. If displayed cropped or filtered, disclose that treatment and retain CC BY-SA 4.0 for the photo.",
+      "dimensions": [
+        1280,
+        853
+      ],
+      "bytes": 222682
+    },
+    {
+      "file": "sample-marigolds.jpg",
+      "recommended": true,
+      "role": "Supporting flower texture: tightly framed orange marigold garlands",
+      "title": "Marigold Garland - Kolkata 2012-10-15 0760",
+      "author": "Biswarup Ganguly",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Marigold_Garland_-_Kolkata_2012-10-15_0760.JPG",
+      "license": "CC BY 3.0",
+      "license_url": "https://creativecommons.org/licenses/by/3.0/",
+      "credit": "Photo: Biswarup Ganguly / Wikimedia Commons, CC BY 3.0.",
+      "edits": "Unmodified Wikimedia 960 px thumbnail; no retouching.",
+      "dimensions": [
+        960,
+        1444
+      ],
+      "bytes": 570606
+    },
+    {
+      "file": "sample-couple.webp",
+      "original_file": "sample-couple-pexels-original.jpg",
+      "recommended": true,
+      "title": "Joyful Indian Couple Celebrating Wedding",
+      "description": "A South Indian couple in traditional attire embracing during their wedding in Chennai.",
+      "author": "T K DHAMU",
+      "source_url": "https://www.pexels.com/photo/joyful-indian-couple-celebrating-wedding-35441123/",
+      "download_url": "https://images.pexels.com/photos/35441123/pexels-photo-35441123.jpeg?cs=srgb&dl=pexels-tkdhamu-35441123.jpg&fm=jpg",
+      "license": "Pexels License",
+      "license_url": "https://www.pexels.com/license/",
+      "credit": "Photo by T K DHAMU on Pexels. Sample couple photography for design preview only.",
+      "dimensions": [
+        900,
+        1350
+      ],
+      "original_dimensions": [
+        4160,
+        6240
+      ],
+      "bytes": 346976,
+      "edits": "Resized to WebP; displayed with warm muted CSS color treatment and arched crop.",
+      "verified_on": "2026-11-12",
+      "license_verification": "Photo page identifies T K DHAMU and links its Free license. Pexels license states photos are free to use, modifications are allowed, and website, template and invitation use are allowed. Attribution is appreciated but not required. Do not imply endorsement or depict identifiable people offensively.",
+      "sample_notice": "This is not the user or the named sample couple. Show a sample-photo disclosure. No endorsement by the pictured people or photographer is implied.",
+      "mobile_file": "sample-couple-mobile.webp"
+    }
+  ]
+}
