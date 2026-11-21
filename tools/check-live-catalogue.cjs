@@ -17,7 +17,7 @@ const designs=[[40,'sunehri','amber',1999],[41,'gulistan','bahaar',1999],[42,'gu
   for(const [id,slug,folder,price] of designs){
    await page.goto(`${origin}/?design=${slug}`,{waitUntil:'domcontentloaded'});
    await page.waitForFunction(id=>typeof previewState!=='undefined' && TEMPLATE_DATABASE[previewState.currentIndex]?.id===id,id);
-   await page.waitForFunction(()=>document.querySelector('#preview-pay-label')?.textContent.includes('Choose design'));
+   await page.waitForFunction(()=>document.querySelector('#preview-pay-label')?.textContent.includes('Choose this design'));
    const preview=await page.evaluate(()=>({title:document.querySelector('#preview-sheet-title').textContent,price:document.querySelector('#preview-pay-label').textContent,frame:document.querySelector('#preview-modal-iframe')?.src}));
    if(!preview.price.includes(price.toLocaleString('en-IN'))||!preview.frame?.includes(`/previews/${folder}/`))throw Error(JSON.stringify(preview));
    await page.locator('#preview-instant-pay-btn').click({force:true});
