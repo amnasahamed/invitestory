@@ -2413,6 +2413,12 @@ function clearOrderCheckoutError() {
   if (box) { box.hidden = true; box.replaceChildren(); }
 }
 
+// A request or script that never answers must not leave the visitor waiting forever.
+function withCheckoutTimeout(promise, ms, message) {
+  let timer;
+  return Promise.race([promise, new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(message)), ms); })]).finally(() => clearTimeout(timer));
+}
+
 async function proceedFromOrderDrawerToCheckout(savedPayment) {
   if (orderDrawerCheckoutPending) return;
   orderDrawerCheckoutPending = true;
@@ -2424,7 +2430,8 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
   let checkoutDesignName = orderDrawerState.template?.name || "";
   try {
   const displayedV2=orderUsesNewDelivery();
-  legacyGatewayConfiguration=await window.InviteWebsite?.ready;
+  const gatewayReady=window.InviteWebsite?.ready;
+  legacyGatewayConfiguration=gatewayReady ? await withCheckoutTimeout(gatewayReady, 15000, "Secure payment is taking too long to load.") : gatewayReady;
   const resumed=savedPayment?.secure,request=savedPayment?.request;
   const isINR = (request?.currency || currentCurrency) === "INR";
   const currencyCode = isINR ? "INR" : "USD";
@@ -2513,9 +2520,9 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
 
   if (window.InviteWebsite) {
     try {
-      const secure = resumed || await window.InviteWebsite.checkout(v2
+      const secure = resumed || await withCheckoutTimeout(window.InviteWebsite.checkout(v2
         ? {checkoutVersion:2,deliverySpeed:speed,designId,tier,currency:currencyCode,emailRsvp:Boolean(emailRsvpChecked)}
-        : {designId,tier,currency:currencyCode,express:Boolean(expressChecked),emailRsvp:Boolean(emailRsvpChecked)});
+        : {designId,tier,currency:currencyCode,express:Boolean(expressChecked),emailRsvp:Boolean(emailRsvpChecked)}), 20000, "Secure payment is taking too long to respond.");
       if(!secure)throw new Error("Secure checkout is unavailable. Please contact our team before paying.");
       if(v2 && (!secure || secure.checkoutVersion!==2 || secure.deliverySpeed!==speed || secure.deliverySnapshot?.firstDraftHours!==DELIVERY_SPEEDS[speed].hours))throw new Error("The checkout delivery promise could not be verified. Please contact our team before paying.");
       if (secure) {
@@ -2532,7 +2539,7 @@ async function proceedFromOrderDrawerToCheckout(savedPayment) {
       return;
     }
   }
-  await ensureRazorpayLoaded();
+  await withCheckoutTimeout(ensureRazorpayLoaded(), 15000, "The payment window is taking too long to load. Please check your connection.");
   if (typeof Razorpay !== "undefined") {
     trackConversionEvent("begin_checkout", { content_name: name, content_ids: selectedContentIds, package_tier: tier, content_type: "product", value: totalVal, currency: currencyCode });
     // Close the order sheet only now that the payment window is ready to take over.
