@@ -2536,7 +2536,7 @@ function updatePaymentButtonsForCurrency() {
     const sheetPrice = document.getElementById("preview-sheet-price");
     const payLabel = document.getElementById("preview-pay-label");
     if (sheetPrice) sheetPrice.textContent = priceText;
-    if (payLabel) payLabel.textContent = `Choose design · ${priceText}`;
+    if (payLabel) payLabel.textContent = `Choose this design · ${priceText}`;
   }
   const rzpBtn = document.getElementById("preview-instant-pay-btn");
   if (rzpBtn) {
@@ -3108,7 +3108,7 @@ function openPreview(id, updateUrl = true) {
   // Dual CTA labels: primary Pay, secondary Ask
   const payLabel = document.getElementById("preview-pay-label");
   if (payLabel) {
-    payLabel.textContent = `Choose design · ${formatPrice(prices.priceINR, prices.priceUSD)}`;
+    payLabel.textContent = `Choose this design · ${formatPrice(prices.priceINR, prices.priceUSD)}`;
   }
   const askLabel = document.getElementById("preview-ask-label");
   if (askLabel) askLabel.textContent = "WhatsApp";
@@ -3208,10 +3208,20 @@ function updatePreviewScale() {
   if (!screen) return;
   const galleryStage = previewModal.querySelector(".preview-gallery-stage");
   if (galleryStage) {
-    const pillSpace = parseFloat(getComputedStyle(galleryStage).getPropertyValue("--preview-pill-space"));
-    const scale = Math.max(0, Math.min((galleryStage.clientWidth - 96) / 390, (galleryStage.clientHeight - pillSpace - 8) / 844));
+    const pillSpace = parseFloat(getComputedStyle(galleryStage).getPropertyValue("--preview-pill-space")) || 0;
+    const room = Math.max(0, galleryStage.clientHeight - pillSpace - 8);
+    // A wide card with neighbours peeking either side. When the sheet is short, the invitation
+    // renders as a shorter phone (down to an iPhone SE-sized screen) instead of shrinking further.
+    let scale = Math.max(0, Math.min((galleryStage.clientWidth - 72) / 390, 0.84));
+    let viewportHeight = Math.min(844, room / (scale || 1));
+    if (viewportHeight < 600) {
+      viewportHeight = 600;
+      scale = Math.min(scale, room / 600);
+    }
+    viewportHeight = Math.round(viewportHeight);
     galleryStage.style.setProperty("--preview-width", `${390 * scale}px`);
-    galleryStage.style.setProperty("--preview-height", `${844 * scale}px`);
+    galleryStage.style.setProperty("--preview-height", `${viewportHeight * scale}px`);
+    galleryStage.style.setProperty("--preview-viewport-height", `${viewportHeight}px`);
     galleryStage.style.setProperty("--preview-scale", scale);
     screen.style.transform = `scale(${scale})`;
     previewIframeWrap.style.transform = "none";

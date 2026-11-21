@@ -9,16 +9,19 @@
   const heading = document.createElement('div');
   heading.className = 'preview-gallery-heading';
   heading.append(byId('preview-sheet-title'), byId('preview-counter-badge'));
-  header.append(modal.querySelector('.preview-modal-close'), heading, byId('preview-favourite-btn'));
+  const handle = document.createElement('span');
+  handle.className = 'preview-gallery-handle';
+  handle.setAttribute('aria-hidden', 'true');
+  header.append(handle, modal.querySelector('.preview-modal-close'), heading, byId('preview-favourite-btn'));
   const stage = document.createElement('div');
   stage.className = 'preview-gallery-stage';
   const card = document.createElement('div');
   card.className = 'preview-gallery-card';
   const full = byId('preview-fullscreen-btn');
-  full.querySelector('span').textContent = 'Watch full preview';
-  card.append(byId('preview-modal-iframe-wrap'));
-  // Keep the link outside the scaled artwork so short screens cannot clip it.
-  stage.append(card, full);
+  full.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M10 8.2v7.6l6-3.8z" fill="#fff"/></svg><span>Watch full preview</span>';
+  // The link sits on the card, outside the scaled invitation, so it never scales or clips.
+  card.append(byId('preview-modal-iframe-wrap'), full);
+  stage.append(card);
   const peeks = [-1, 1].map(direction => {
     const peek = document.createElement('button');
     peek.type = 'button';
@@ -46,7 +49,23 @@
   if (askButton) askButton.setAttribute('aria-label', 'Ask about this design on WhatsApp');
   actions.append(...[namesButton, askButton, byId('preview-footer-share-btn')].filter(Boolean));
   if (askButton) actions.classList.add('has-ask');
-  footer.prepend(actions);
+  // What every order includes, between the artwork and the actions.
+  const promises = document.createElement('ul');
+  promises.className = 'preview-gallery-promises';
+  promises.setAttribute('aria-label', 'Included with this design');
+  const promise = (icon, text) => {
+    const row = document.createElement('li');
+    row.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icon}</svg>`;
+    const label = document.createElement('span');
+    label.textContent = text;
+    row.append(label);
+    promises.append(row);
+    return label;
+  };
+  const draftLabel = promise('<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>', '48h draft');
+  promise('<path d="M12 12c-2-2.7-3.6-4-5.5-4a4 4 0 0 0 0 8c1.9 0 3.5-1.3 5.5-4Zm0 0c2 2.7 3.6 4 5.5 4a4 4 0 0 0 0-8c-1.9 0-3.5 1.3-5.5 4Z"/>', 'Edits (24h)');
+  promise('<rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4m8-4v4M3.5 10h17m-11 4.6 1.9 1.9 3.7-3.8"/>', 'RSVP');
+  footer.prepend(promises, actions);
   shell.append(header, stage, navigation, footer);
   modal.append(shell);
   modal.classList.add('preview-gallery');
@@ -69,6 +88,9 @@
     const text = PreviewThemes.contrast(theme.accent, theme.onAccent) >= 4.5 ? theme.onAccent :
       (PreviewThemes.contrast(theme.accent, '#ffffff') >= 4.5 ? '#ffffff' : '#000000');
     byId('preview-instant-pay-btn').style.setProperty('--gallery-cta-text', text);
+    // Dearly's first draft follows the delivery terms currently on offer.
+    const fastDearly = item.tier === 4 && !(typeof usesNewDelivery === 'function' && usesNewDelivery());
+    draftLabel.textContent = fastDearly ? '24h draft' : '48h draft';
     const catalogue = TEMPLATE_DATABASE.filter(design => !design.hidden || design.id === item.id);
     const index = catalogue.indexOf(item);
     neighbours = [catalogue[index - 1], catalogue[index + 1]];
@@ -161,6 +183,17 @@
       if (drag?.horizontal && event.cancelable) event.preventDefault();
     }, { ...options, passive: false });
   }
+  // Pull the sheet down by its header to close it, as the handle suggests.
+  let pull = null;
+  header.addEventListener('pointerdown', event => {
+    if (event.target.closest('button,a')) return;
+    pull = { y: event.clientY };
+  });
+  header.addEventListener('pointerup', event => {
+    if (pull && event.clientY - pull.y > 70 && typeof closePreview === 'function') closePreview();
+    pull = null;
+  });
+  header.addEventListener('pointercancel', () => { pull = null; });
   bindGestures(stage);
   bindGestures(navigation);
   let frameGestures;

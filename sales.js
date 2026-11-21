@@ -534,7 +534,7 @@ function syncSalesPreview(item) {
   const share = document.getElementById("preview-footer-share-btn");
   if (share) {
     share.setAttribute("aria-label", "Share this design with your partner or family");
-    share.querySelector("span").textContent = "Share design";
+    share.querySelector("span").textContent = "Share";
   }
   const context = document.getElementById("sales-preview-context");
   if (context) context.textContent = `${item.tier === 4 ? "Email" : "WhatsApp"} RSVP included · One-time payment`;
