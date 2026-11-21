@@ -5,7 +5,7 @@ import vm from 'node:vm';
 const context=vm.createContext({});
 vm.runInContext(readFileSync(new URL('../preview-themes.js',import.meta.url),'utf8'),context);
 const themes=vm.runInContext('PreviewThemes',context);
-const ids=[...readFileSync(new URL('../scripts.js',import.meta.url),'utf8').matchAll(/id: (\d+),\s+name:/g)].map(match=>Number(match[1]));
+const ids=[...readFileSync(new URL('../scripts.js',import.meta.url),'utf8').matchAll(/id: (\d+),\s+name:/g)].map(match=>Number(match[1])).filter(id=>id!==53); // 53: hidden Gateway Test, not a design
 test('every catalogue design has a distinct art-directed palette with readable labels and actions',()=>{
  assert.equal(ids.length,49);
  const stages=new Set();

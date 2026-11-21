@@ -160,7 +160,7 @@ test('Premium and Luxury totals charge only selected extras; Dearly charges neit
 
 test('discovery defaults to the full catalogue and preserves shared shortlist order', () => {
   const site = website();
-  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 49);
+  assert.equal(site.run('getDiscoveryDesigns(TEMPLATE_DATABASE).length'), 50);
   site.run('discovery.shared = [35, 1, 999];');
   assert.equal(site.run('JSON.stringify(getDiscoveryDesigns(TEMPLATE_DATABASE).map(item => item.id))'), '[35,1]');
   site.run('discovery.savedOnly = true; previewFavourites.add(21);');
@@ -176,14 +176,14 @@ test('homepage starts with a short mix of collections until the visitor asks for
   const leading = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).slice(0, 5).map(item => item.slug))');
   assert.deepEqual(JSON.parse(leading), ['firdaus', 'padharo-sa', 'malligai-vaasal', 'yaadein', 'chapel-bells']);
   site.run("activeTagFilter = 'royal';");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 49);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 50);
   site.run("activeTagFilter = 'all'; catalogueExpanded = true;");
-  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 49);
+  assert.equal(site.run('getFeaturedDesigns(TEMPLATE_DATABASE).length'), 50);
 });
 
 test('hidden designs stay out of browsing but still open from a direct link', () => {
   const site = website();
-  const hidden = ['grand-line-voyage', 'lake-pichola-royal', 'lakeview-lanterns', 'moonlit-lotus-barge', 'petal-path-palace', 'slide-to-shaadi'];
+  const hidden = ['gateway-test', 'grand-line-voyage', 'lake-pichola-royal', 'lakeview-lanterns', 'moonlit-lotus-barge', 'petal-path-palace', 'slide-to-shaadi'];
   assert.equal(site.run('JSON.stringify(TEMPLATE_DATABASE.filter(item => item.hidden).map(item => item.slug).sort())'), JSON.stringify(hidden));
   assert.equal(site.run('getFilteredTemplates().some(item => item.hidden)'), false);
   for (const slug of hidden) assert.equal(site.run(`findTemplateByQuery(${JSON.stringify(slug)})?.slug`), slug);
@@ -199,7 +199,7 @@ test('preview arrows traverse all 43 listed designs across collections and wrap 
   assert.equal(site.run('new Set(visits).size'), 43);
   assert.equal(site.run('previewState.currentIndex'), 0);
   site.run('previewPrev()');
-  assert.equal(site.run('previewState.currentIndex'), 48);
+  assert.equal(site.run('previewState.currentIndex'), 49);
   assert.equal(site.run('TEMPLATE_DATABASE[previewState.currentIndex].tier'), 4);
 });
 
@@ -588,3 +588,13 @@ test('trackMetaEvent alias correctly formats Lead, Contact, and ViewContent', ()
   assert.equal(metaEvents.includes('ViewContent'), true);
 });
 
+
+test('the hidden ₹100 Gateway Test opens by link and never reaches analytics', () => {
+  const site = website();
+  assert.equal(site.run('findTemplateByQuery("gateway-test")?.priceINR'), 100);
+  assert.equal(site.run('getFilteredTemplates().some(item => item.slug === "gateway-test")'), false);
+  assert.equal(site.run('isTestDesignEvent({ content_ids: ["53"] })'), true);
+  assert.equal(site.run('isTestDesignEvent({ design_id: 53 })'), true);
+  assert.equal(site.run('isTestDesignEvent({ content_ids: ["1"] })'), false);
+  assert.equal(site.run('trackVerifiedPayment({ verified: true, amount: 10000, transactionId: "order_x", paymentId: "pay_x", currency: "INR" }, { contentIds: [53] })'), false);
+});

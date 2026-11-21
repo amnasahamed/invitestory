@@ -129,7 +129,14 @@ function isRapidMetaDuplicate(key, windowMs = 500) {
   return false;
 }
 
+// The hidden gateway-test design must never count as a view, lead or sale in any analytics.
+function isTestDesignEvent(params = {}) {
+  const ids = [params.design_id, params.item_id, ...(params.content_ids || [])].filter(id => id != null);
+  return ids.some(id => TEMPLATE_DATABASE.find(design => design.id === Number(id))?.testOnly);
+}
+
 function trackPostHogEvent(eventName, params = {}) {
+  if (isTestDesignEvent(params)) return;
   // Use product metadata only; never send form values, names or WhatsApp messages.
   if (["localhost", "127.0.0.1", "::1", "[::1]"].includes(window.location.hostname)) return;
   if (typeof window.posthog?.capture !== "function") return;
@@ -168,6 +175,7 @@ function trackPostHogEvent(eventName, params = {}) {
 }
 
 function trackConversionEvent(eventName, params = {}) {
+  if (isTestDesignEvent(params)) return;
   if (eventName === "whatsapp_click") pushWhatsAppClickEvent();
   trackPostHogEvent(eventName, params);
   try {
@@ -1097,6 +1105,28 @@ const TEMPLATE_DATABASE = [
     desc: "Ring the chapel bell to open a Goan love letter: a watercolour village and church, Goa postcards, 3D wedding rings guests can turn, a garden reception and RSVP.",
     promise: "Church vows and a Goan garden party in one warm letter."
   },
+  // Hidden ₹100 design for checking the live payment gateway end to end.
+  // Reachable only by direct link; never sent to Google Ads, Meta or PostHog.
+  {
+    id: 53,
+    name: "Gateway Test",
+    slug: "gateway-test",
+    hidden: true,
+    testOnly: true,
+    image: "assets/preview/1.webp",
+    tier: 2,
+    priceINR: 100,
+    priceUSD: 2,
+    originalPriceINR: 100,
+    originalPriceUSD: 2,
+    demoUrl: "https://www.invitestory.in/previews/marigold-bhavan/",
+    localDemoUrl: "/previews/marigold-bhavan/",
+    style: "Payment gateway test",
+    accentColor: "#c09559",
+    tags: ["test"],
+    desc: "Internal ₹100 test product for checking the payment gateway. Not a real invitation.",
+    promise: "Internal test only."
+  },
   // --- TIER 4: The Dearly Collection (Wax-seal collection / ₹4,999 / $75) ---
   {
     id: 35,
@@ -1956,6 +1986,7 @@ function trackVerifiedPayment(verified, details = {}) {
   } catch (_) {
     if (recordedPostHogPayments.has(verified.transactionId)) return false;
   }
+  if (isTestDesignEvent({ content_ids: details.contentIds })) return false;
   const value = verified.amount / 100;
   if (verified.currency === "INR") {
     pushDataLayerEvent({
