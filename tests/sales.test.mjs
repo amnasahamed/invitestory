@@ -127,6 +127,14 @@ test('story invitations are Luxury designs with their own previews', () => {
   ]);
 });
 
+test('new designs stay new for two weeks, ending at midnight IST on 5 December', () => {
+  const site = website();
+  const at = when => JSON.parse(site.run(`JSON.stringify(TEMPLATE_DATABASE.filter(item => isNewDesign(item, Date.parse(${JSON.stringify(when)}))).map(item => item.id))`));
+  assert.deepEqual(at('2026-11-21T09:00:00+05:30'), [48, 49, 50, 51, 52]);
+  assert.deepEqual(at('2026-12-04T23:59:00+05:30'), [48, 49, 50, 51, 52]);
+  assert.deepEqual(at('2026-12-05T00:00:00+05:30'), []);
+});
+
 test('Premium and Luxury totals charge only selected extras; Dearly charges neither included extra', () => {
   const site = website();
   const express = { checked: false };
@@ -161,6 +169,7 @@ test('discovery defaults to the full catalogue and preserves shared shortlist or
 
 test('homepage starts with a short mix of collections until the visitor asks for all', () => {
   const site = website();
+  site.run('TEMPLATE_DATABASE.forEach(item => { item.isNew = isNewDesign(item, Date.parse("2026-11-21T12:00:00+05:30")); });');
   site.run("document.body.classList = { contains: name => name === 'browse-home', add() {}, remove() {} };");
   const featured = site.run('JSON.stringify(getFeaturedDesigns(getDiscoveryDesigns(TEMPLATE_DATABASE)).map(item => item.tier))');
   assert.deepEqual(JSON.parse(featured), [3, 3, 3, 3, 3, 2, 2, 2, 2, 4, 4]);
