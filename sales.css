@@ -397,3 +397,13 @@
 
 /* Newly added designs, flagged with isNew in the catalogue. */
 .template-new-badge { position: absolute; top: 12px; left: 12px; z-index: 2; padding: 5px 10px; border-radius: 999px; background: #173e35; color: #fffaf2; font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; box-shadow: 0 2px 8px #0003; pointer-events: none; }
+
+/* Order sheet: payment is being prepared, or could not open (see proceedFromOrderDrawerToCheckout). */
+.order-drawer-checkout-btn.is-loading { cursor: progress; opacity: .92; }
+.order-drawer-checkout-btn.is-loading .order-drawer-cta-badge { display: none; }
+.order-drawer-checkout-btn.is-loading::before { content: ""; display: inline-block; width: 16px; height: 16px; margin-right: 8px; border: 2px solid currentColor; border-right-color: transparent; border-radius: 50%; animation: order-checkout-spin .8s linear infinite; }
+@keyframes order-checkout-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .order-drawer-checkout-btn.is-loading::before { animation: none; border-right-color: currentColor; opacity: .5; } }
+.order-drawer-checkout-error { margin: 8px 0 0; padding: 10px 12px; border: 1px solid #e8b9b4; border-radius: 12px; background: #fdf1ef; color: #7a2a22; font-size: 13px; line-height: 1.45; text-align: left; }
+.order-drawer-checkout-error[hidden] { display: none; }
+.order-drawer-checkout-error a { display: inline-block; margin-left: 4px; color: #1f6b47; font-weight: 700; text-decoration: underline; }
